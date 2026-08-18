@@ -1,6 +1,6 @@
 # Proposing Major Changes (ADR Process)
 
-This page explains how to propose major changes to NVDA using an Architecture Decision Record (ADR).
+This page explains how to propose major changes to Aslan using an Architecture Decision Record (ADR).
 
 Use this process when an issue has the `ADR-required` label, or when your change significantly affects architecture, APIs, UX behavior, compatibility, performance, or long-term maintenance.
 

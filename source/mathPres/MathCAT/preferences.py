@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited, Neil Soiffer, Ryan McCleary
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from enum import Enum
 import os
@@ -9,7 +9,7 @@ import os
 import config
 import languageHandler
 from logHandler import log
-from NVDAState import ReadPaths
+from AslanState import ReadPaths
 from mathPres.MathCAT import localization
 from utils.displayString import DisplayStringStrEnum
 
@@ -206,7 +206,7 @@ def getAutoBrailleCode(
 ) -> str:
 	"""
 	Determine the automatic MathCAT Braille code to use based on the current
-	or provided NVDA language.
+	or provided Aslan language.
 	"""
 	if not availableCodes:
 		availableCodes = getBrailleCodes()
@@ -256,9 +256,9 @@ def setEffectiveBrailleCode() -> None:
 		)
 
 
-def toNVDAConfigKey(key: str) -> str:
+def toAslanConfigKey(key: str) -> str:
 	"""Converts a key for MathCAT's preferences (UpperCamelCase) to a
-	key for NVDA's configobj-based configuration (lowerCamelCase).
+	key for Aslan's configobj-based configuration (lowerCamelCase).
 	Some special cases, such as 'LaTex' and 'UEB' are handled separately.
 	"""
 	# First, we handle special cases separately.
@@ -274,7 +274,7 @@ type PreferencesDict = dict[str, dict[str, int | str | bool]]
 def applyUserPreferences(prefs: PreferencesDict | None = None) -> None:
 	"""Apply user preferences to MathCAT's runtime preferences."""
 	if prefs is None:
-		prefs = MathCATUserPreferences.fromNVDAConfig()._prefs
+		prefs = MathCATUserPreferences.fromAslanConfig()._prefs
 	for categoryPrefs in prefs.values():
 		for k, v in categoryPrefs.items():
 			if k == "BrailleCode":
@@ -362,10 +362,10 @@ class MathCATUserPreferences:
 		config.conf["math"]["speech"][mathLang]["speechStyle"] = speechStyle
 
 	@staticmethod
-	def tryToGetNVDAConfigValue(key1: str, key2: str) -> int | str | bool:
+	def tryToGetAslanConfigValue(key1: str, key2: str) -> int | str | bool:
 		mathConf = config.conf["math"]
-		convertedKey1 = toNVDAConfigKey(key1)
-		convertedKey2 = toNVDAConfigKey(key2)
+		convertedKey1 = toAslanConfigKey(key1)
+		convertedKey2 = toAslanConfigKey(key2)
 		try:
 			return mathConf[convertedKey1][convertedKey2]
 		except Exception:
@@ -379,19 +379,19 @@ class MathCATUserPreferences:
 			return MathCATUserPreferences.defaults()[key1][key2]
 
 	@staticmethod
-	def fromNVDAConfig() -> "MathCATUserPreferences":
+	def fromAslanConfig() -> "MathCATUserPreferences":
 		prefs: PreferencesDict = MathCATUserPreferences.defaults()
 		mathConf = config.conf["math"]
 		for key1 in prefs:
 			for key2 in prefs[key1]:
 				match (key1, key2):
 					case ("Speech", "SpeechStyle"):
-						nvdaConfigValue = MathCATUserPreferences.getConfigForSpeechStyle(
+						aslanConfigValue = MathCATUserPreferences.getConfigForSpeechStyle(
 							mathConf["speech"]["language"],
 						)
 					case _:
-						nvdaConfigValue = MathCATUserPreferences.tryToGetNVDAConfigValue(key1, key2)
-				prefs[key1][key2] = nvdaConfigValue
+						aslanConfigValue = MathCATUserPreferences.tryToGetAslanConfigValue(key1, key2)
+				prefs[key1][key2] = aslanConfigValue
 		return MathCATUserPreferences(prefs)
 
 	def apply(self) -> None:

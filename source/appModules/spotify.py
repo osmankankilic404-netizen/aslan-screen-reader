@@ -1,5 +1,5 @@
 # appModules/spotify.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2013-2017 NV Access Limited, James Teh
@@ -8,12 +8,12 @@
 
 import appModuleHandler
 import controlTypes
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.IAccessible import IAccessible
 import eventHandler
 
 
 class AppModule(appModuleHandler.AppModule):
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		if (
 			obj.windowClassName == "Chrome_RenderWidgetHostHWND"
 			and isinstance(obj, IAccessible)

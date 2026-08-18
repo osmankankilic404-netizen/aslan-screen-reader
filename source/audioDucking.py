@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2025 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -41,13 +41,13 @@ class AudioDuckingMode(DisplayStringIntEnum):
 	@property
 	def _displayStringLabels(self) -> Dict[IntEnum, str]:
 		return {
-			# Translators: An audio ducking mode which specifies how NVDA affects the volume of other applications.
+			# Translators: An audio ducking mode which specifies how Aslan affects the volume of other applications.
 			# See the Audio Ducking Mode section of the User Guide for details.
 			AudioDuckingMode.NONE: _("No ducking"),
-			# Translators: An audio ducking mode which specifies how NVDA affects the volume of other applications.
+			# Translators: An audio ducking mode which specifies how Aslan affects the volume of other applications.
 			# See the Audio Ducking Mode section of the User Guide for details.
 			AudioDuckingMode.OUTPUTTING: _("Duck when outputting speech and sounds"),
-			# Translators: An audio ducking mode which specifies how NVDA affects the volume of other applications.
+			# Translators: An audio ducking mode which specifies how Aslan affects the volume of other applications.
 			# See the Audio Ducking Mode section of the User Guide for details.
 			AudioDuckingMode.ALWAYS: _("Always duck"),
 		}
@@ -89,7 +89,7 @@ def _setDuckingState(switch):
 					ANRUSDucking.AUDIO_ACTIVE_NODUCK,
 				)
 		except WindowsError as e:
-			# When the NVDA build is not signed, audio ducking fails with access denied.
+			# When the Aslan build is not signed, audio ducking fails with access denied.
 			# A developer built launcher is unlikely to be signed. Catching this error stops developers from looking into
 			# "expected" errors.
 			# ERROR_ACCESS_DENIED is 0x5
@@ -131,7 +131,7 @@ def _unensureDucked(delay=True):
 		try:
 			core.callLater(1000, _unensureDucked, False)
 			return
-		except core.NVDANotInitializedError:
+		except core.AslanNotInitializedError:
 			# If the wx.App has not been initialized, audio ducking callbacks
 			# will fail as they rely on wx.CallLater/wx.CallAfter
 			log.debugWarning("wx App not initialized, unducking immediately")
@@ -207,7 +207,7 @@ class AudioDucker(object):
 			self.disable()
 
 	def enable(self):
-		"""Tells NVDA that you require that background audio be ducked from now until you call disable.
+		"""Tells Aslan that you require that background audio be ducked from now until you call disable.
 		This method may block for a short time while background audio ducks to a suitable level.
 		It is safe to call this method more than once.
 		@returns: True if ducking was enabled,
@@ -229,9 +229,9 @@ class AudioDucker(object):
 				log.debug("whenWasDucked %s, deltaMS %s" % (whenWasDucked, deltaMS))
 			if deltaMS <= 0 or _audioDuckingMode == AudioDuckingMode.NONE:
 				return True
-		import NVDAHelper
+		import AslanHelper
 
-		if not NVDAHelper.localLib.audioDucking_shouldDelay():
+		if not AslanHelper.localLib.audioDucking_shouldDelay():
 			if debug:
 				log.debug("No background audio, not delaying")
 			return True
@@ -251,7 +251,7 @@ class AudioDucker(object):
 		return not wasCanceled
 
 	def disable(self):
-		"""Tells NVDA that you no longer require audio to be ducked.
+		"""Tells Aslan that you no longer require audio to be ducked.
 		while other AudioDucker objects are still enabled, audio will remain ducked.
 		It is safe to call this method more than once.
 		"""

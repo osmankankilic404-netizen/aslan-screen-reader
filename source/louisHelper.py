@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2018-2026 NV Access Limited, Babbage B.V., Julien Cochuyt, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Helper module to ease communication to and from liblouis."""
 
@@ -27,7 +27,7 @@ with os.add_dll_directory(globalVars.appDir):
 
 
 __all__ = [
-	"LOUIS_TO_NVDA_LOG_LEVELS",
+	"LOUIS_TO_Aslan_LOG_LEVELS",
 	"TranslationMode",
 	"Typeform",
 	"backTranslate",
@@ -40,7 +40,7 @@ __all__ = [
 ]
 
 
-LOUIS_TO_NVDA_LOG_LEVELS = {
+LOUIS_TO_Aslan_LOG_LEVELS = {
 	louis.LOG_ALL: log.DEBUG,
 	louis.LOG_DEBUG: log.DEBUG,
 	louis.LOG_INFO: log.INFO,
@@ -156,12 +156,12 @@ def _resolveTable(tablesList: bytes, base: bytes | None) -> int | None:
 def louis_log(level, message):
 	if not _isDebug():
 		return
-	NVDALevel = LOUIS_TO_NVDA_LOG_LEVELS.get(level, log.DEBUG)
-	if not log.isEnabledFor(NVDALevel):
+	AslanLevel = LOUIS_TO_Aslan_LOG_LEVELS.get(level, log.DEBUG)
+	if not log.isEnabledFor(AslanLevel):
 		return
 	message = message.decode("ASCII")
 	codepath = "liblouis at internal log level %d" % level
-	log._log(NVDALevel, message, [], codepath=codepath)
+	log._log(AslanLevel, message, [], codepath=codepath)
 
 
 def _isDebug():
@@ -172,7 +172,7 @@ def initialize():
 	# Register the liblouis logging callback.
 	louis.registerLogCallback(louis_log)
 	# Set the log level to debug.
-	# The NVDA logging callback will filter messages appropriately,
+	# The Aslan logging callback will filter messages appropriately,
 	# i.e. error messages will be logged at the error level.
 	louis.setLogLevel(louis.LOG_DEBUG)
 	# Register the liblouis table resolver

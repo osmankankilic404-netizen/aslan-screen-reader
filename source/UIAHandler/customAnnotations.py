@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2021-2022 NV Access Limited, Łukasz Golonka
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -6,8 +6,8 @@
 """
 This module provides helpers and a common format to define UIA custom annotation types.
 The common custom annotation types are defined here.
-Custom annotation types specific to an application should be defined within a NVDAObjects/UIA
-submodule specific to that application, E.G. 'NVDAObjects/UIA/excel.py'
+Custom annotation types specific to an application should be defined within a AslanObjects/UIA
+submodule specific to that application, E.G. 'AslanObjects/UIA/excel.py'
 
 UIA originally had hard coded 'static' ID's for annotation types.
 For an example see 'AnnotationType_SpellingError' in
@@ -53,9 +53,9 @@ class CustomAnnotationTypeInfo:
 
 		"""
 		if winVersion.getWinVer() >= winVersion.WIN11:
-			import NVDAHelper
+			import AslanHelper
 
-			return NVDAHelper.localLib.registerUIAAnnotationType(
+			return AslanHelper.localLib.registerUIAAnnotationType(
 				byref(self.guid),
 			)
 		return 0

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited, Selvas Healthcare
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -12,7 +12,7 @@ import winVersion
 IS_64_BIT_WINDOWS: bool = winVersion.getWinVer().processorArchitecture.endswith("64")
 """True if the Windows copy is 64bit"""
 
-IS_64_BIT_NVDA = os.environ.get("PROCESSOR_ARCHITECTURE") == "AMD64"
+IS_64_BIT_Aslan = os.environ.get("PROCESSOR_ARCHITECTURE") == "AMD64"
 
 
 class HResult(enum.IntEnum):

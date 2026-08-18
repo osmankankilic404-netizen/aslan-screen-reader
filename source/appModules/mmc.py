@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2023 NV Access Limited, David Parduhn, Bill Dengler, Leonard de Ruijter, Łukasz Golonka
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -7,9 +7,9 @@ import api
 import appModuleHandler
 import controlTypes
 import eventHandler
-from NVDAObjects.IAccessible import IAccessible
-from NVDAObjects.behaviors import ToolTip
-import NVDAObjects.window
+from AslanObjects.IAccessible import IAccessible
+from AslanObjects.behaviors import ToolTip
+import AslanObjects.window
 import winUser
 
 
@@ -56,7 +56,7 @@ class toolTipWithEmptyName(ToolTip):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if obj.windowClassName == "AfxWnd42u":
 			if obj.role == controlTypes.Role.TABLE:
 				clsList.insert(0, MMCTable)
@@ -70,7 +70,7 @@ class AppModule(appModuleHandler.AppModule):
 
 	def isBadUIAWindow(self, hwnd):
 		windowClassName = winUser.getClassName(hwnd)
-		normalizedClassName = NVDAObjects.window.Window.normalizeWindowClassName(windowClassName)
+		normalizedClassName = AslanObjects.window.Window.normalizeWindowClassName(windowClassName)
 		if normalizedClassName in (
 			# #15333: SysListView32 controls in mmc are known to have an incomplete UIA implementation.
 			# Revert back to the MSAA implementation instead.

@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025 NV Access Limited, Bill Dengler
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from robot.libraries.BuiltIn import BuiltIn
 from SystemTestSpy import _getLib
@@ -18,9 +18,9 @@ _UNTITLED_FILE_FORMAT = "Untitled-{number}"
 
 
 def status_line_is_available():
-	"""Ensure NVDA+end does not report "no status line found"."""
+	"""Ensure Aslan+end does not report "no status line found"."""
 	_vscode.start_vscode()
-	speech = _NvdaLib.getSpeechAfterKey("NVDA+end")
+	speech = _NvdaLib.getSpeechAfterKey("Aslan+end")
 	_builtIn.should_not_contain(speech, "no status line found")
 
 
@@ -116,7 +116,7 @@ def file_editor_operations():
 	_builtIn.should_contain(speech, "blank")
 	# jump to start of file
 	spy.emulateKeyPress("control+home")
-	speech = _NvdaLib.getSpeechAfterKey("NVDA+upArrow")
+	speech = _NvdaLib.getSpeechAfterKey("Aslan+upArrow")
 	_builtIn.should_contain(speech, "hello")
 	# jump to end of file
 	spy.emulateKeyPress("control+end")
@@ -151,11 +151,11 @@ def file_editor_operations():
 	_builtIn.should_contain(speech, "hello")
 	# undo
 	spy.emulateKeyPress("control+z")
-	speech = _NvdaLib.getSpeechAfterKey("NVDA+upArrow")
+	speech = _NvdaLib.getSpeechAfterKey("Aslan+upArrow")
 	_builtIn.should_contain(speech, "hello")
 	# redo
 	spy.emulateKeyPress("control+y")
-	speech = _NvdaLib.getSpeechAfterKey("NVDA+downArrow")
+	speech = _NvdaLib.getSpeechAfterKey("Aslan+downArrow")
 	_builtIn.should_contain(speech, "(a)")
 
 

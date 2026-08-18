@@ -1,5 +1,5 @@
 # vision/providerBase.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2018-2019 NV Access Limited, Babbage B.V.
@@ -85,7 +85,7 @@ class VisionEnhancementProvider(AutoPropertyObject):
 	- terminate:
 			How to shutdown the provider
 	- registerEventExtensionPoints:
-			Allows the provider to receive updates form NVDA
+			Allows the provider to receive updates form Aslan
 	- canStart:
 			Checks startup dependencies are satisfied
 	- getSettings:

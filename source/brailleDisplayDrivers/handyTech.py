@@ -1,8 +1,8 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, Bram Duvigneau, Babbage B.V.,
 # Felix Grützmacher (Handy Tech Elektronik GmbH), Leonard de Ruijter, Bill Dengler
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """
 Braille display driver for Handy Tech braille displays.
@@ -440,7 +440,7 @@ class StatusCellMixin(AutoPropertyObject):
 		"""Display braille on the display with empty status cells
 
 		Some displays (e.g. Modular series) have 4 status cells.
-		These cells need to be included in the braille data, but since NVDA doesn't
+		These cells need to be included in the braille data, but since Aslan doesn't
 		support status cells, we just send empty cells.
 		"""
 		cells = [0] * 4 + cells

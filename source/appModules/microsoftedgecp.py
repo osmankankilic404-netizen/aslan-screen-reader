@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2017 NV Access Limited
@@ -8,7 +8,7 @@
 import appModuleHandler
 import controlTypes
 import winUser
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.IAccessible import IAccessible
 
 
 class CoreComponentInputSourcePane(IAccessible):
@@ -16,7 +16,7 @@ class CoreComponentInputSourcePane(IAccessible):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		# #6948: Ignore MSAA focus event on CoreComponentInputSource pane
 		# as this happens on a broken object sometimes after getting a valid UIA focus event on the document
 		# This would cause "Web runtime component" to be spoken twice,

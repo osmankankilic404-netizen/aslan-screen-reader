@@ -1,6 +1,6 @@
 # Based on code from https://gist.github.com/luser/2ad32d290f224782fcfc
 
-"""Script to convert and upload appropriate NVDA debug symbols to Mozilla crash-stats.
+"""Script to convert and upload appropriate Aslan debug symbols to Mozilla crash-stats.
 This should just be run as a script with no arguments.
 It expects the crash-stats auth token to be placed in the mozillaSymsAuthToken environment variable.
 To update the list of symbols uploaded to Mozilla, see the DLL_NAMES constant below.
@@ -15,8 +15,8 @@ import requests
 SCRIPT_DIR = os.path.abspath(os.path.dirname(__file__))
 REPO_ROOT = os.path.dirname(os.path.dirname(SCRIPT_DIR))
 DUMP_SYMS = os.path.join(REPO_ROOT, "dump_syms.exe")
-NVDA_SOURCE = os.path.join(REPO_ROOT, "source")
-NVDA_LIB = os.path.join(NVDA_SOURCE, "lib")
+Aslan_SOURCE = os.path.join(REPO_ROOT, "source")
+Aslan_LIB = os.path.join(Aslan_SOURCE, "lib")
 ZIP_FILE = os.path.join(SCRIPT_DIR, "mozillaSyms.zip")
 URL = "https://symbols.mozilla.org/upload/"
 
@@ -25,10 +25,10 @@ URL = "https://symbols.mozilla.org/upload/"
 DLL_NAMES = [
 	"IAccessible2Proxy.dll",
 	"ISimpleDOM.dll",
-	"nvdaHelperRemote.dll",
+	"aslanHelperRemote.dll",
 ]
 DLL_FILES = [
-	os.path.join(NVDA_LIB, arch, dll)
+	os.path.join(Aslan_LIB, arch, dll)
 	for dll in DLL_NAMES
 	# We need symbols for all supported architectures.
 	for arch in ("x86", "x64", "arm64", "arm64ec")
@@ -65,7 +65,7 @@ def processFile(path):
 	if len(bits) != 5:
 		return None, None, None
 	_, platform, cpu_arch, debug_id, debug_file = bits
-	# debug_file will have a .pdb extension; e.g. nvdaHelperRemote.dll.pdb.
+	# debug_file will have a .pdb extension; e.g. aslanHelperRemote.dll.pdb.
 	# The output file format should have a .sym extension instead.
 	# Strip .pdb and add .sym.
 	sym_file = debug_file[:-4] + ".sym"

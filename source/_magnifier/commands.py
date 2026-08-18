@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025-2026 NV Access Limited, Antoine Haffreingue, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """
 Keyboard commands for the magnifier module.
@@ -93,7 +93,7 @@ def _speakStartError(message: str) -> None:
 
 
 def toggleMagnifier(onStartError: Callable[[str], None] = _speakStartError) -> None:
-	"""Toggle the NVDA magnifier on/off.
+	"""Toggle the Aslan magnifier on/off.
 
 	:param onStartError: Callback invoked with a user-facing message when the magnifier fails
 		to start. Defaults to speaking the message. GUI callers can pass a callback that shows
@@ -106,7 +106,7 @@ def toggleMagnifier(onStartError: Callable[[str], None] = _speakStartError) -> N
 		ui.message(
 			pgettext(
 				"magnifier",
-				# Translators: Message announced when stopping the NVDA magnifier.
+				# Translators: Message announced when stopping the Aslan magnifier.
 				"Magnifier disabled",
 			),
 		)
@@ -121,7 +121,7 @@ def toggleMagnifier(onStartError: Callable[[str], None] = _speakStartError) -> N
 		ui.message(
 			pgettext(
 				"magnifier",
-				# Translators: Message announced when starting the NVDA magnifier.
+				# Translators: Message announced when starting the Aslan magnifier.
 				"Magnifier enabled",
 			),
 		)

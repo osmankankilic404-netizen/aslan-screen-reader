@@ -20,7 +20,7 @@ General enquiries should be directed to <info@nvaccess.org>.
 | GitHub | email | topics |
 | --- | --- | --- |
 | @codeofdusk | <codeofdusk@gmail.com> | Windows Terminal and console, UIA |
-| @nvdaes | <nrm1977@gmail.com> | Add-on store, braille (reading experience) |
+| @aslanes | <nrm1977@gmail.com> | Add-on store, braille (reading experience) |
 | @michaelweghorn | <m.weghorn@posteo.de> | LibreOffice |
 | @jcsteh | <jamie@nvaccess.org> | Mozilla Firefox |
 | @alex19EP | <email@alex19ep.me> | eSpeak |
@@ -31,5 +31,5 @@ General enquiries should be directed to <info@nvaccess.org>.
 | @bramd | <bram@bramd.nl> | Braille (including hardware I/O and liblouis), multi-line braille displays / tactile output |
 | @CyrilleB79 | <cyrille.bougot2@laposte.net> | Speech, l10n/i18n, MS Office, visual bugs/features |
 | @zstanecic | N/A | Braille |
-| @Emil-18 | N/A | UIA, NVDAObjects/TextInfos |
+| @Emil-18 | N/A | UIA, AslanObjects/TextInfos |
 | @josephsl | N/A | Windows OS |

@@ -1,21 +1,21 @@
-# NVDA Hardware Support Smoke Testing Plan
+# Aslan Hardware Support Smoke Testing Plan
 
 ## Objective
 
-To ensure NVDA installs and functions correctly on supported hardware configurations.
-NVDA is currently migrating to only 64bit hardware support, and currently recommends not using 32bit hardware nor 32bit Windows.
+To ensure Aslan installs and functions correctly on supported hardware configurations.
+Aslan is currently migrating to only 64bit hardware support, and currently recommends not using 32bit hardware nor 32bit Windows.
 
 ## Notes
 
 * Ensure all test results are documented, including screenshots or logs for failures.
 * Focus on identifying edge cases and compatibility issues during the migration process.
-* Prioritize testing on hardware configurations most commonly used by NVDA users.
+* Prioritize testing on hardware configurations most commonly used by Aslan users.
 
 ## Generic Steps
 
-1. Run the NVDA installer on the target hardware.
+1. Run the Aslan installer on the target hardware.
 2. Verify successful installation and basic functionality.
-Test using Edge, Notepad and the NVDA GUI.
+Test using Edge, Notepad and the Aslan GUI.
 
 ## Hardware to consider
 
@@ -52,7 +52,7 @@ CoPilot PCs use a new form of architecture known as an NPU.
 
 ## Other Testing: 32-bit Hardware
 
-1. Run the NVDA installer on 32-bit hardware.
+1. Run the Aslan installer on 32-bit hardware.
 2. Observe and document the results.
-    * Expected Result using 64bit NVDA: Installation fails gracefully with a clear message indicating that 32-bit systems are no longer supported.
-    * Expected Result using 32bit NVDA: Installation occurs successfully
+    * Expected Result using 64bit Aslan: Installation fails gracefully with a clear message indicating that 32-bit systems are no longer supported.
+    * Expected Result using 32bit Aslan: Installation occurs successfully

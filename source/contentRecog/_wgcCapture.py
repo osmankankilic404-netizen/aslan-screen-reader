@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Cary-rowen
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -8,7 +8,7 @@
 import ctypes
 from ctypes import POINTER, cast
 
-from NVDAHelper.localWin10 import _wgcCapture_captureScreenRegion, _wgcCapture_isSupported
+from AslanHelper.localWin10 import _wgcCapture_captureScreenRegion, _wgcCapture_isSupported
 import watchdog
 from winBindings.gdi32 import RGBQUAD
 

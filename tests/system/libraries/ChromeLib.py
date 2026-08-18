@@ -1,10 +1,10 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020-2022 NV Access Limited, Cyrille Bougot
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
 
 """This module provides the ChromeLib Robot Framework Library which allows system tests to start
-Google Chrome with a HTML sample and assert NVDA interacts with it in the expected way.
+Google Chrome with a HTML sample and assert Aslan interacts with it in the expected way.
 """
 
 # imported methods start with underscore (_) so they don't get imported into robot files as keywords
@@ -133,7 +133,7 @@ class ChromeLib:
 			builtIn.fatal_error("Unable to get chrome window")
 		return ChromeLib._chromeWindow
 
-	_testCaseTitle = "NVDA Browser Test Case"
+	_testCaseTitle = "Aslan Browser Test Case"
 	_beforeMarker = "Before Test Case Marker"
 	_afterMarker = "After Test Case Marker"
 	_loadCompleteString = "Test page load complete"
@@ -149,7 +149,7 @@ class ChromeLib:
 	@staticmethod
 	def _writeTestFile(testCase) -> str:
 		"""
-		Creates a file for a HTML test case. The sample is written with a button before and after so that NVDA
+		Creates a file for a HTML test case. The sample is written with a button before and after so that Aslan
 		can tab to the sample from either direction.
 		@param testCase:  The HTML sample that is to be tested.
 		@return: path to the HTML file.
@@ -171,15 +171,15 @@ class ChromeLib:
 		return filePath
 
 	def _waitForStartMarker(self) -> bool:
-		"""Wait until the page loads and NVDA reads the start marker.
-		Depends on Chrome having focus, then tries to ensure that the document is focused and NVDA
+		"""Wait until the page loads and Aslan reads the start marker.
+		Depends on Chrome having focus, then tries to ensure that the document is focused and Aslan
 		virtual cursor is set to the "start marker"
 		@return: False on failure
 		"""
 		spy = _NvdaLib.getSpyLib()
 		spy.wait_for_speech_to_finish()
 		expectedAddressBarSpeech = "Address and search bar"
-		moveToAddressBarSpeech = _NvdaLib.getSpeechAfterKey("nvda+tab")  # report current focus.
+		moveToAddressBarSpeech = _NvdaLib.getSpeechAfterKey("aslan+tab")  # report current focus.
 		if expectedAddressBarSpeech not in moveToAddressBarSpeech:
 			moveToAddressBarSpeech = _NvdaLib.getSpeechAfterKey(
 				"alt+d",
@@ -187,7 +187,7 @@ class ChromeLib:
 			if expectedAddressBarSpeech not in moveToAddressBarSpeech:
 				# The "Ask Google about this page" button is sometimes spoken,
 				# which clobbers the expected output
-				moveToAddressBarSpeech = _NvdaLib.getSpeechAfterKey("nvda+tab")  # report current focus.
+				moveToAddressBarSpeech = _NvdaLib.getSpeechAfterKey("aslan+tab")  # report current focus.
 				if expectedAddressBarSpeech not in moveToAddressBarSpeech:
 					builtIn.log(
 						f"Didn't read '{expectedAddressBarSpeech}' after alt+d, instead got: {moveToAddressBarSpeech}",
@@ -222,7 +222,7 @@ class ChromeLib:
 		return True
 
 	def canChromeTitleBeReported(self, chromeTitleSpeechPattern: re.Pattern) -> bool:
-		speech = _NvdaLib.getSpeechAfterKey("NVDA+t")
+		speech = _NvdaLib.getSpeechAfterKey("Aslan+t")
 		return bool(
 			chromeTitleSpeechPattern.search(speech),
 		)
@@ -249,7 +249,7 @@ class ChromeLib:
 		windowsLib.logForegroundWindowTitle()
 
 		applicationTitle = ChromeLib.getUniqueTestCaseTitle(testCase)
-		# application title will be something like "NVDA Browser Test Case (499078752)"
+		# application title will be something like "Aslan Browser Test Case (499078752)"
 		# the parentheses could be escaped, instead we can just replace them with "match any char".
 		patternSafeTitleString = applicationTitle.replace("(", ".").replace(")", ".")
 		chromeTitleSpeechPattern = re.compile(patternSafeTitleString)
@@ -262,20 +262,20 @@ class ChromeLib:
 			windowsLib.logForegroundWindowTitle()
 
 			if not _chromeLib.canChromeTitleBeReported(chromeTitleSpeechPattern):
-				raise AssertionError("NVDA unable to report chrome title")
+				raise AssertionError("Aslan unable to report chrome title")
 
 		spy.wait_for_speech_to_finish()
 
 		if not self._waitForStartMarker():
 			builtIn.fail(
-				"Unable to locate 'before sample' marker. See NVDA log for full speech.",
+				"Unable to locate 'before sample' marker. See Aslan log for full speech.",
 			)
 		# Move to the loading status line, and wait for it to become complete
 		# the page has fully loaded.
 		spy.emulateKeyPress("downArrow")
 		for x in range(10):
 			builtIn.sleep("0.1 seconds")
-			actualSpeech = ChromeLib.getSpeechAfterKey("NVDA+UpArrow")
+			actualSpeech = ChromeLib.getSpeechAfterKey("Aslan+UpArrow")
 			if actualSpeech == self._loadCompleteString:
 				break
 		else:  # Exceeded the number of tries

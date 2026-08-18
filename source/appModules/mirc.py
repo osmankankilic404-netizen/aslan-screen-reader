@@ -1,5 +1,5 @@
 # appModules/mirc.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2010 James Teh <jamie@jantrid.net>
@@ -7,8 +7,8 @@
 """App module for mIRC"""
 
 import controlTypes
-from NVDAObjects.window import Window, DisplayModelLiveText
-from NVDAObjects.IAccessible import StaticText
+from AslanObjects.window import Window, DisplayModelLiveText
+from AslanObjects.IAccessible import StaticText
 import appModuleHandler
 
 
@@ -31,7 +31,7 @@ class Input(Window):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if obj.role == controlTypes.Role.WINDOW:
 			return
 		if obj.windowClassName == "Static" and obj.windowControlID == 32918:

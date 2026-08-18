@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Peter Vágner, Aleksey Sadovoy, gexgd0419, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from ctypes import (
 	HRESULT,
@@ -61,7 +61,7 @@ from speech.commands import (
 )
 from ._sonic import SonicStream, initialize as sonicInitialize
 
-import NVDAState
+import AslanState
 
 
 class _SPAudioState(IntEnum):
@@ -103,7 +103,7 @@ else:
 
 # The following types are deprecated and no longer used.
 # Definitions are kept here in order not to break static type checking.
-if TYPE_CHECKING and NVDAState._allowDeprecatedAPI():
+if TYPE_CHECKING and AslanState._allowDeprecatedAPI():
 	LP_c_ubyte = _Pointer[c_ubyte]
 	LP_c_ulong = _Pointer[c_ulong]
 	LP__ULARGE_INTEGER = _Pointer[_ULARGE_INTEGER]
@@ -117,7 +117,7 @@ _deprecatedTypes: dict[str, type] = {
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	if attrName in _deprecatedTypes and NVDAState._allowDeprecatedAPI():
+	if attrName in _deprecatedTypes and AslanState._allowDeprecatedAPI():
 		log.warning(
 			f"Importing {attrName} is deprecated for removal with no replacement. ",
 			stack_info=True,
@@ -882,7 +882,7 @@ class SynthDriver(SynthDriver):
 		textList = []
 		bookmarks: deque[int] = deque()
 
-		# NVDA SpeechCommands are linear, but XML is hierarchical.
+		# Aslan SpeechCommands are linear, but XML is hierarchical.
 		# Therefore, we track values for non-empty tags.
 		# When a tag changes, we close all previously opened tags and open new ones.
 		tags = {}
@@ -1083,7 +1083,7 @@ class SynthDriver(SynthDriver):
 
 	def __getattr__(self, attrName: str) -> Any:
 		"""This is used to reserve backward compatibility."""
-		if attrName == "isSpeaking" and NVDAState._allowDeprecatedAPI():
+		if attrName == "isSpeaking" and AslanState._allowDeprecatedAPI():
 			log.warning(
 				"The property isSpeaking is deprecated for removal with no replacement. ",
 				stack_info=True,

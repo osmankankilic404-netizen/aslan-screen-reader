@@ -1,12 +1,12 @@
 # Code Style
 
-In general, Python contributions to NVDA should follow the [PEP 8 style guide](https://peps.python.org/pep-0008/), except where it contradicts the specific guidance below.
+In general, Python contributions to Aslan should follow the [PEP 8 style guide](https://peps.python.org/pep-0008/), except where it contradicts the specific guidance below.
 
 Python code style is enforced with the Ruff linter, see [linting](../testing/automated.md#linting-your-changes) for more information.
 
-Authors should do their best to adhere to these standards in order to have the best chance of their contribution being accepted into NVDA.
+Authors should do their best to adhere to these standards in order to have the best chance of their contribution being accepted into Aslan.
 In limited circumstances, NV Access may accept contributions that do not follow these coding standards.
-If there is a reason you are unable to follow these standards in a contribution to NVDA, please make note of this when opening your PR.
+If there is a reason you are unable to follow these standards in a contribution to Aslan, please make note of this when opening your PR.
 
 ## Encoding
 
@@ -69,7 +69,7 @@ Files can be checked out locally using CRLF if needed for Windows development us
 For example:
 
 ```py
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_TEXTREVIEW = _("Text review")
 ```
 
@@ -126,8 +126,8 @@ Docstrings should use [Sphinx format without types](https://sphinx-rtd-tutorial.
 * Document class constructors in `__init__`, not at the top of the class.
 * Document class attributes and non-obvious public variables in a docstring immediately below the attribute being described.
 
-NVDA formerly used [epytext](https://epydoc.sourceforge.net/manual-epytext.html) syntax for docstrings, which means there is inconsistent syntax used in the NVDA code base.
-[#12971](https://github.com/nvaccess/nvda/issues/12971) exists to track converting epytext docstrings to Sphinx.
+Aslan formerly used [epytext](https://epydoc.sourceforge.net/manual-epytext.html) syntax for docstrings, which means there is inconsistent syntax used in the Aslan code base.
+[#12971](https://github.com/nvaccess/aslan/issues/12971) exists to track converting epytext docstrings to Sphinx.
 
 To learn more about reStructuredText, Sphinx and Python, check out the following links:
 
@@ -138,7 +138,7 @@ To learn more about reStructuredText, Sphinx and Python, check out the following
 
 ## Type hints
 
-All new code contributions to NVDA should use [PEP 484-style type hints](https://peps.python.org/pep-0484/).
+All new code contributions to Aslan should use [PEP 484-style type hints](https://peps.python.org/pep-0484/).
 Type hints make reasoning about code much easier, and allow static analysis tools to catch common errors.
 
 * All variables, attributes, properties, and function/method arguments and returns should have type hints.
@@ -148,18 +148,18 @@ Type hints make reasoning about code much easier, and allow static analysis tool
 
 ## Calling non-python code
 
-When using parts of the Windows API, or parts of NVDA implemented in C++, it is necessary to use the [ctypes](https://docs.python.org/3/library/ctypes.html) library.
+When using parts of the Windows API, or parts of Aslan implemented in C++, it is necessary to use the [ctypes](https://docs.python.org/3/library/ctypes.html) library.
 
 * When providing ctypes type information for foreign functions, structures and data types, prefer to use the same name as used in the external library.
   * E.g. `GetModuleFileName` not `getModuleFileName`, even though the latter is a more Pythonic function name.
   * Pythonic names should be reserved for wrappers that provide more pythonic access to functions.
 * All Windows API functions, types and data structures should be defined in the `winBindings` package, in modules named according to the DLL which exports the function.
   * E.g. `winBindings.kernel32`.
-* Ctypes code for nvdaHelper should be defined in the `NVDAHelper.localLib` module.
+* Ctypes code for aslanHelper should be defined in the `AslanHelper.localLib` module.
 
 ## Language choices
 
-The NVDA community is large and diverse, and we have a responsibility to make everyone feel welcome in it.
+The Aslan community is large and diverse, and we have a responsibility to make everyone feel welcome in it.
 As our [contributor code of conduct](../../CODE_OF_CONDUCT.md) says:
 
 > Communities mirror the societies in which they exist and positive action is essential to counteract the many forms of inequality and abuses of power that exist in society.

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2024 NV Access Limited, Babbage B.V., Julien Cochuyt, Leonard de Ruijter, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -15,7 +15,7 @@ import time
 import weakref
 import types
 import config
-import NVDAObjects
+import AslanObjects
 from speech import sayAll
 import api
 import queueHandler
@@ -31,7 +31,7 @@ _ScriptFunctionT = Callable[["inputCore.InputGesture"], None]
 _ScriptFilterT = Callable[
 	[
 		Optional[_ScriptFunctionT],
-		"NVDAObjects.NVDAObject",
+		"AslanObjects.AslanObject",
 		"inputCore.InputGesture",
 	],
 	Optional[_ScriptFunctionT],
@@ -58,7 +58,7 @@ def _makeKbEmulateScript(scriptName):
 
 
 def _getObjScript(
-	obj: "NVDAObjects.NVDAObject",
+	obj: "AslanObjects.AslanObject",
 	gesture: "inputCore.InputGesture",
 	globalMapScripts: List["inputCore.InputGestureScriptT"],
 ) -> Optional[_ScriptFunctionT]:
@@ -135,7 +135,7 @@ def _findScript(gesture: "inputCore.InputGesture") -> Optional[_ScriptFunctionT]
 
 def _getTreeModeInterceptorScript(
 	func: Optional[_ScriptFunctionT],
-	obj: "NVDAObjects.NVDAObject",
+	obj: "AslanObjects.AslanObject",
 	gesture: "inputCore.InputGesture",
 ) -> Optional[_ScriptFunctionT]:
 	"""
@@ -153,7 +153,7 @@ def _getTreeModeInterceptorScript(
 
 def _getFocusAncestorScript(
 	func: Optional[_ScriptFunctionT],
-	obj: "NVDAObjects.NVDAObject",
+	obj: "AslanObjects.AslanObject",
 	gesture: "inputCore.InputGesture",
 ) -> Optional[_ScriptFunctionT]:
 	"""
@@ -167,14 +167,14 @@ def _getFocusAncestorScript(
 
 def _yieldObjectsForFindScript(
 	gesture: "inputCore.InputGesture",
-) -> Generator[Tuple["NVDAObjects.NVDAObject", Optional[_ScriptFilterT]], None, None]:
+) -> Generator[Tuple["AslanObjects.AslanObject", Optional[_ScriptFilterT]], None, None]:
 	"""
-	This generator is used to determine which NVDAObject to perform an input gesture on,
+	This generator is used to determine which AslanObject to perform an input gesture on,
 	in order of priority.
 	For example, if the first yielded object has an associated script for the given gesture, findScript
 	will use that script.
 	@yields: A tuple, which includes
-	 - an NVDAObject, to check if there is an associated script
+	 - an AslanObject, to check if there is an associated script
 	 - an optional function to handle any further filtering required after checking for an associated script
 	"""
 	# Import late to avoid circular import.
@@ -206,7 +206,7 @@ def _yieldObjectsForFindScript(
 	if treeInterceptor and treeInterceptor.isReady:
 		yield treeInterceptor, _getTreeModeInterceptorScript
 
-	# NVDAObject
+	# AslanObject
 	yield focus, None
 
 	# Focus ancestors
@@ -361,10 +361,10 @@ def script(
 	:param gestures: A collection of gestures associated with this script
 	:param canPropagate: Whether this script should also apply when it belongs to a  focus ancestor object.
 	:param bypassInputHelp: Whether this script should run when input help is active.
-	:param allowInSleepMode: Whether this script should run when NVDA is in sleep mode.
+	:param allowInSleepMode: Whether this script should run when Aslan is in sleep mode.
 	:param resumeSayAllMode: The say all mode that should be resumed when active before executing this script.
 	One of the C{sayAll.CURSOR_*} constants.
-	:param speakOnDemand: Whether this script should speak when NVDA speech mode is "on-demand"
+	:param speakOnDemand: Whether this script should speak when Aslan speech mode is "on-demand"
 	"""
 	if gestures is None:
 		gestures: List[str] = []

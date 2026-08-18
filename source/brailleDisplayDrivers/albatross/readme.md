@@ -62,7 +62,7 @@ for status cells there are reserved the most right 4 bits. Limitation does
 not affect on 46 cells model because the most left bit of byte defines the
 length of display (0 for 46 and 1 for 80 cells model).
 
-Note: This driver ignores status cells related settings because NVDA does not
+Note: This driver ignores status cells related settings because Aslan does not
 use status cells at the moment.
 
 ## Driver requirements
@@ -92,7 +92,7 @@ operations during connection
 * `display`; prepares data to be displayed on the braille line
 
 In `gestures.py` numeric values of pressed buttons are interpreted as gestures
-so that they can be forwarded to NVDA input system.
+so that they can be forwarded to Aslan input system.
 
 `_threading.py` defines two threads. Thread called albatross_read calls
 `BrailleDisplayDriver` `_readHandling` function when it gets signaled that port

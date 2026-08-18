@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2011-2026 NV Access Limited, Joseph Lee, Babbage B.V., Łukasz Golonka, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from collections.abc import Iterable
 import json
@@ -19,7 +19,7 @@ import shellapi
 import globalVars
 import languageHandler
 import config
-from config.registry import NVDA_ADDON_PROG_ID, RegistryKey, _deleteKeyAndSubkeys
+from config.registry import Aslan_ADDON_PROG_ID, RegistryKey, _deleteKeyAndSubkeys
 import fileUtils
 import versionInfo
 import buildVersion
@@ -28,8 +28,8 @@ import addonHandler
 import easeOfAccess
 import COMRegistrationFixes
 import winKernel
-import NVDAState
-from NVDAState import WritePaths
+import AslanState
+from AslanState import WritePaths
 from utils.tempFile import _createEmptyTempFileForDeletingFile
 from utils._deprecate import handleDeprecations, MovedSymbol, RemovedSymbol
 
@@ -38,13 +38,13 @@ _wsh = None
 __getattr__ = handleDeprecations(
 	MovedSymbol(
 		"defaultStartMenuFolder",
-		"NVDAState",
+		"AslanState",
 		"WritePaths",
 		"defaultStartMenuFolder",
 	),
 	MovedSymbol(
 		"defaultInstallPath",
-		"NVDAState",
+		"AslanState",
 		"WritePaths",
 		"defaultInstallDir",
 	),
@@ -140,7 +140,7 @@ def _comparePreviousInstall() -> ComparisonState:
 
 def _comparePreviousCopy(previousCopyPath: str | None) -> ComparisonState:
 	"""
-	Compares the version of the currently running NVDA with the version of a previous installation of NVDA on this system, if any.
+	Compares the version of the currently running Aslan with the version of a previous installation of Aslan on this system, if any.
 	:return:
 		- ComparisonState.FRESH_INSTALL if no previous installation is found
 		- ComparisonState.DOWNGRADE if the previous installation is newer than the current one
@@ -152,18 +152,18 @@ def _comparePreviousCopy(previousCopyPath: str | None) -> ComparisonState:
 	if not previousCopyPathExists:
 		return ComparisonState.FRESH_INSTALL
 
-	oldSlavePath = os.path.join(previousCopyPath, "nvda_slave.exe")
+	oldSlavePath = os.path.join(previousCopyPath, "aslan_slave.exe")
 	try:
 		oldVersion = fileUtils.getFileVersionInfo(oldSlavePath, "FileVersion")
 	except (OSError, RuntimeError):
-		log.debug("Unable to get file version of nvda_slave.exe in previous copy.")
+		log.debug("Unable to get file version of aslan_slave.exe in previous copy.")
 		return ComparisonState.UNKNOWN
 
 	try:
-		newVersion = fileUtils.getFileVersionInfo("nvda_slave.exe", "FileVersion")
+		newVersion = fileUtils.getFileVersionInfo("aslan_slave.exe", "FileVersion")
 	except (OSError, RuntimeError):
 		# This should never happen.
-		log.exception("Unable to get file version of nvda_slave.exe in current process.")
+		log.exception("Unable to get file version of aslan_slave.exe in current process.")
 		return ComparisonState.UNKNOWN
 
 	try:
@@ -213,8 +213,8 @@ def copyProgramFiles(destPath: str):
 		if not os.path.isdir(curDestDir):
 			os.makedirs(curDestDir)
 		for f in files:
-			# Never copy nvda.exe as one of the other executables will be renamed later
-			if sourcePath == curSourceDir and f.lower() == "nvda.exe":
+			# Never copy aslan.exe as one of the other executables will be renamed later
+			if sourcePath == curSourceDir and f.lower() == "aslan.exe":
 				continue
 			sourceFilePath = os.path.join(curSourceDir, f)
 			destFilePath = os.path.join(destPath, os.path.relpath(sourceFilePath, sourcePath))
@@ -235,8 +235,8 @@ def copyUserConfig(destPath: str):
 
 def removeOldLibFiles(destPath: str, rebootOK: bool = False):
 	"""
-	Removes library files from previous versions of NVDA.
-	:param destPath: The path where NVDA is installed.
+	Removes library files from previous versions of Aslan.
+	:param destPath: The path where Aslan is installed.
 	:param rebootOK: If true then files can be removed on next reboot if trying to do so now fails.
 	"""
 	for topDir in ("lib", "lib64", "libArm64"):
@@ -294,7 +294,7 @@ def removeOldProgramFiles(destPath: str):
 
 	# #9960: If compiled python files from older versions aren't removed correctly,
 	# this could cause strange errors when Python tries to create tracebacks
-	# in a newer version of NVDA.
+	# in a newer version of Aslan.
 	#  However don't touch user and system config.
 	#  Also remove old .dll and .manifest files.
 	for curDestDir, subDirs, files in os.walk(destPath):
@@ -324,13 +324,13 @@ def removeOldProgramFiles(destPath: str):
 
 def getUninstallerRegInfo(installDir: str) -> dict[str, str | int]:
 	"""
-	Constructs a dictionary that is written to the registry for NVDA to show up
+	Constructs a dictionary that is written to the registry for Aslan to show up
 	in the Windows "Apps and Features" overview.
 	"""
 	return dict(
 		DisplayName=f"{buildVersion.name} {buildVersion.version}",
 		DisplayVersion=buildVersion.version_detailed,
-		DisplayIcon=os.path.join(installDir, "images", "nvda.ico"),
+		DisplayIcon=os.path.join(installDir, "images", "aslan.ico"),
 		# EstimatedSize is in KiB
 		EstimatedSize=getDirectorySize(installDir) // 1024,
 		InstallDir=installDir,
@@ -388,10 +388,10 @@ def registerInstallation(
 		0,
 		winreg.KEY_WRITE,
 	) as k:
-		winreg.SetValueEx(k, "", None, winreg.REG_SZ, os.path.join(installDir, "nvda.exe"))
+		winreg.SetValueEx(k, "", None, winreg.REG_SZ, os.path.join(installDir, "aslan.exe"))
 	with winreg.CreateKeyEx(
 		winreg.HKEY_LOCAL_MACHINE,
-		RegistryKey.NVDA.value,
+		RegistryKey.Aslan.value,
 		0,
 		winreg.KEY_WRITE,
 	) as k:
@@ -404,7 +404,7 @@ def registerInstallation(
 				winreg.REG_DWORD,
 				int(configInLocalAppData),
 			)
-		if NVDAState._forceSecureModeEnabled():
+		if AslanState._forceSecureModeEnabled():
 			winreg.SetValueEx(
 				k,
 				RegistryKey.FORCE_SECURE_MODE_SUBKEY.value,
@@ -415,10 +415,10 @@ def registerInstallation(
 	registerEaseOfAccess(installDir)
 	if startOnLogonScreen is not None:
 		config._setStartOnLogonScreen(startOnLogonScreen)
-	NVDAExe = os.path.join(installDir, "nvda.exe")
-	slaveExe = os.path.join(installDir, "nvda_slave.exe")
+	AslanExe = os.path.join(installDir, "aslan.exe")
+	slaveExe = os.path.join(installDir, "aslan_slave.exe")
 	try:
-		_updateShortcuts(NVDAExe, installDir, shouldCreateDesktopShortcut, slaveExe, startMenuFolder)
+		_updateShortcuts(AslanExe, installDir, shouldCreateDesktopShortcut, slaveExe, startMenuFolder)
 	except Exception:
 		log.error("Error while creating shortcuts", exc_info=True)
 	registerAddonFileAssociation(slaveExe)
@@ -484,14 +484,14 @@ def _createShortcutWithFallback(
 
 
 def _updateShortcuts(
-	NVDAExe: str,
+	AslanExe: str,
 	installDir: str,
 	shouldCreateDesktopShortcut: bool,
 	slaveExe: str,
 	startMenuFolder: str,
 ) -> None:
 	if shouldCreateDesktopShortcut:
-		# Translators: The shortcut key used to start NVDA.
+		# Translators: The shortcut key used to start Aslan.
 		# This should normally be left as is, but might be changed for some locales
 		# if the default key causes problems for the normal locale keyboard layout.
 		# The key must be formatted as described in this article:
@@ -500,11 +500,11 @@ def _updateShortcuts(
 
 		# #8320: -r|--replace is now the default. Nevertheless, keep creating
 		# the shortcut with the now superfluous argument in case a downgrade of
-		# NVDA is later performed.
+		# Aslan is later performed.
 		_createShortcutWithFallback(
-			path="NVDA.lnk",
+			path="Aslan.lnk",
 			targetPath=slaveExe,
-			arguments="launchNVDA -r",
+			arguments="launchAslan -r",
 			hotkey=hotkeyTranslated,
 			fallbackHotkey="CTRL+ALT+N",
 			workingDirectory=installDir,
@@ -512,43 +512,43 @@ def _updateShortcuts(
 		)
 
 	_createShortcutWithFallback(
-		path=os.path.join(startMenuFolder, "NVDA.lnk"),
-		targetPath=NVDAExe,
+		path=os.path.join(startMenuFolder, "Aslan.lnk"),
+		targetPath=AslanExe,
 		workingDirectory=installDir,
 		prependSpecialFolder="AllUsersPrograms",
 	)
 
-	# Translators: A label for a shortcut in start menu and a menu entry in NVDA menu (to go to NVDA website).
-	webSiteTranslated = _("NVDA web site")
+	# Translators: A label for a shortcut in start menu and a menu entry in Aslan menu (to go to Aslan website).
+	webSiteTranslated = _("Aslan web site")
 	_createShortcutWithFallback(
 		path=os.path.join(startMenuFolder, webSiteTranslated + ".lnk"),
-		fallbackPath=os.path.join(startMenuFolder, "NVDA web site.lnk"),
+		fallbackPath=os.path.join(startMenuFolder, "Aslan web site.lnk"),
 		targetPath=buildVersion.url,
 		prependSpecialFolder="AllUsersPrograms",
 	)
 
-	# Translators: A label for a shortcut item in start menu to uninstall NVDA from the computer.
-	uninstallTranslated = _("Uninstall NVDA")
+	# Translators: A label for a shortcut item in start menu to uninstall Aslan from the computer.
+	uninstallTranslated = _("Uninstall Aslan")
 	_createShortcutWithFallback(
 		path=os.path.join(startMenuFolder, uninstallTranslated + ".lnk"),
-		fallbackPath=os.path.join(startMenuFolder, "Uninstall NVDA.lnk"),
+		fallbackPath=os.path.join(startMenuFolder, "Uninstall Aslan.lnk"),
 		targetPath=os.path.join(installDir, "uninstall.exe"),
 		workingDirectory=installDir,
 		prependSpecialFolder="AllUsersPrograms",
 	)
 
-	# Translators: A label for a shortcut item in start menu to open current user's NVDA configuration directory.
-	exploreConfDirTranslated = _("Explore NVDA user configuration directory")
+	# Translators: A label for a shortcut item in start menu to open current user's Aslan configuration directory.
+	exploreConfDirTranslated = _("Explore Aslan user configuration directory")
 	_createShortcutWithFallback(
 		path=os.path.join(startMenuFolder, exploreConfDirTranslated + ".lnk"),
-		fallbackPath=os.path.join(startMenuFolder, "Explore NVDA user configuration directory.lnk"),
+		fallbackPath=os.path.join(startMenuFolder, "Explore Aslan user configuration directory.lnk"),
 		targetPath=slaveExe,
 		arguments="explore_userConfigPath",
 		workingDirectory=installDir,
 		prependSpecialFolder="AllUsersPrograms",
 	)
 
-	# Translators: The label of the NVDA Documentation menu in the Start Menu.
+	# Translators: The label of the Aslan Documentation menu in the Start Menu.
 	docFolder = os.path.join(startMenuFolder, _("Documentation"))
 
 	# Translators: The label of the Start Menu item to open the Commands Quick Reference document.
@@ -560,7 +560,7 @@ def _updateShortcuts(
 		prependSpecialFolder="AllUsersPrograms",
 	)
 
-	# Translators: A label for a shortcut in start menu to open NVDA user guide.
+	# Translators: A label for a shortcut in start menu to open Aslan user guide.
 	userGuideTranslated = _("User Guide")
 	_createShortcutWithFallback(
 		path=os.path.join(docFolder, userGuideTranslated + ".lnk"),
@@ -569,7 +569,7 @@ def _updateShortcuts(
 		prependSpecialFolder="AllUsersPrograms",
 	)
 
-	# Translators: A label for a shortcut in start menu to open NVDA what's new.
+	# Translators: A label for a shortcut in start menu to open Aslan what's new.
 	changesTranslated = _("What's new")
 	_createShortcutWithFallback(
 		path=os.path.join(docFolder, changesTranslated + ".lnk"),
@@ -582,7 +582,7 @@ def _updateShortcuts(
 def isDesktopShortcutInstalled():
 	wsh = _getWSH()
 	specialPath = wsh.SpecialFolders("allUsersDesktop")
-	shortcutPath = os.path.join(specialPath, "nvda.lnk")
+	shortcutPath = os.path.join(specialPath, "aslan.lnk")
 	return os.path.isfile(shortcutPath)
 
 
@@ -591,7 +591,7 @@ def _unregisterEaseOfAccessApp():
 		winreg.DeleteKeyEx(
 			winreg.HKEY_LOCAL_MACHINE,
 			RegistryKey.EASE_OF_ACCESS_APP.value,
-			# TODO: remove when NVDA is 64-bit only.
+			# TODO: remove when Aslan is 64-bit only.
 			access=winreg.KEY_WOW64_64KEY,
 		)
 	except WindowsError:
@@ -604,7 +604,7 @@ def _unregisterEaseOfAccessApp():
 
 def _unregisterDesktopShortcut(keepDesktopShortcut: bool):
 	wsh = _getWSH()
-	desktopPath = os.path.join(wsh.SpecialFolders("AllUsersDesktop"), "NVDA.lnk")
+	desktopPath = os.path.join(wsh.SpecialFolders("AllUsersDesktop"), "Aslan.lnk")
 	if not keepDesktopShortcut and os.path.isfile(desktopPath):
 		try:
 			os.remove(desktopPath)
@@ -637,7 +637,7 @@ def _unregisterFromUninstallRegistry() -> None:
 		winreg.DeleteKeyEx(
 			winreg.HKEY_LOCAL_MACHINE,
 			RegistryKey.INSTALLED_COPY.value,
-			# TODO: remove when NVDA is 64-bit only.
+			# TODO: remove when Aslan is 64-bit only.
 			access=winreg.KEY_WOW64_64KEY,
 		)
 	except WindowsError:
@@ -657,7 +657,7 @@ def _unregisterFromAppPathRegistry() -> None:
 		winreg.DeleteKeyEx(
 			winreg.HKEY_LOCAL_MACHINE,
 			RegistryKey.APP_PATH.value,
-			# TODO: remove when NVDA is 64-bit only.
+			# TODO: remove when Aslan is 64-bit only.
 			access=winreg.KEY_WOW64_64KEY,
 		)
 	except WindowsError:
@@ -676,20 +676,20 @@ def _unregisterFromSoftwareRegistry() -> None:
 	try:
 		winreg.DeleteKeyEx(
 			winreg.HKEY_LOCAL_MACHINE,
-			RegistryKey.NVDA.value,
-			# TODO: remove when NVDA is 64-bit only.
+			RegistryKey.Aslan.value,
+			# TODO: remove when Aslan is 64-bit only.
 			access=winreg.KEY_WOW64_64KEY,
 		)
 	except WindowsError:
-		log.debug("NVDA registry key not found for 64-bit, nothing to unregister.")
+		log.debug("Aslan registry key not found for 64-bit, nothing to unregister.")
 	try:
 		winreg.DeleteKeyEx(
 			winreg.HKEY_LOCAL_MACHINE,
-			RegistryKey.NVDA.value,
+			RegistryKey.Aslan.value,
 			access=winreg.KEY_WOW64_32KEY,
 		)
 	except WindowsError:
-		log.debug("NVDA registry key not found for 32-bit, nothing to unregister.")
+		log.debug("Aslan registry key not found for 32-bit, nothing to unregister.")
 
 
 def unregisterInstallation(keepDesktopShortcut: bool = False) -> None:
@@ -704,18 +704,18 @@ def unregisterInstallation(keepDesktopShortcut: bool = False) -> None:
 
 def registerAddonFileAssociation(slaveExe: str):
 	try:
-		# Create progID for NVDA ad-ons
+		# Create progID for Aslan ad-ons
 		with winreg.CreateKeyEx(
 			winreg.HKEY_LOCAL_MACHINE,
 			RegistryKey.ADDON_PROG.value,
 			0,
 			winreg.KEY_WRITE,
 		) as k:
-			# Translators: A file extension label for NVDA add-on package.
-			winreg.SetValueEx(k, None, 0, winreg.REG_SZ, _("NVDA add-on package"))
+			# Translators: A file extension label for Aslan add-on package.
+			winreg.SetValueEx(k, None, 0, winreg.REG_SZ, _("Aslan add-on package"))
 			with winreg.CreateKeyEx(k, "DefaultIcon", 0, winreg.KEY_WRITE) as k2:
 				winreg.SetValueEx(k2, None, 0, winreg.REG_SZ, "@{slaveExe},1".format(slaveExe=slaveExe))
-			# Point the open verb to nvda_slave addons_installAddonPackage action
+			# Point the open verb to aslan_slave addons_installAddonPackage action
 			with winreg.CreateKeyEx(k, "shell\\open\\command", 0, winreg.KEY_WRITE) as k2:
 				winreg.SetValueEx(
 					k2,
@@ -731,12 +731,12 @@ def registerAddonFileAssociation(slaveExe: str):
 			0,
 			winreg.KEY_WRITE,
 		) as k:
-			winreg.SetValueEx(k, None, 0, winreg.REG_SZ, NVDA_ADDON_PROG_ID)
+			winreg.SetValueEx(k, None, 0, winreg.REG_SZ, Aslan_ADDON_PROG_ID)
 			winreg.SetValueEx(k, "Content Type", 0, winreg.REG_SZ, addonHandler.BUNDLE_MIMETYPE)
-			# Add NVDA to the "open With" list
+			# Add Aslan to the "open With" list
 			k2 = winreg.CreateKeyEx(
 				k,
-				os.path.join("OpenWithProgids", NVDA_ADDON_PROG_ID),
+				os.path.join("OpenWithProgids", Aslan_ADDON_PROG_ID),
 				0,
 				winreg.KEY_WRITE,
 			)
@@ -754,7 +754,7 @@ def unregisterAddonFileAssociation() -> None:
 		_deleteKeyAndSubkeys(
 			winreg.HKEY_LOCAL_MACHINE,
 			RegistryKey.ADDON_PROG.value,
-			# TODO: remove when NVDA is 64-bit only.
+			# TODO: remove when Aslan is 64-bit only.
 			access=winreg.KEY_WOW64_64KEY,
 		)
 	except WindowsError:
@@ -845,12 +845,12 @@ def tryCopyFile(sourceFilePath: str, destFilePath: str):
 			)
 
 
-_nvdaExes = {
-	"nvda.exe",
-	"nvda_noUIAccess.exe",
-	"nvda_uiAccess.exe",
-	"nvda_dmp.exe",
-	"nvda_slave.exe",
+_aslanExes = {
+	"aslan.exe",
+	"aslan_noUIAccess.exe",
+	"aslan_uiAccess.exe",
+	"aslan_dmp.exe",
+	"aslan_slave.exe",
 }
 
 
@@ -927,29 +927,29 @@ def install(shouldCreateDesktopShortcut: bool = True, shouldRunAtLogon: bool = T
 	shouldCleanX86 = (
 		installDirX86 is not None and os.path.isdir(installDirX86) and installDirX86 != installDir
 	)
-	# Give some time for the installed NVDA (which may have been running on a secure screen)
+	# Give some time for the installed Aslan (which may have been running on a secure screen)
 	# to shut down before we start deleting files.
 	time.sleep(1)
 
 	# Remove all the main executables always.
 	# We do this for two reasons:
-	# 1. If this fails, it means another copy of NVDA is running elsewhere,
+	# 1. If this fails, it means another copy of Aslan is running elsewhere,
 	# so we shouldn't proceed.
-	# 2. The appropriate executable for nvda.exe will be determined by
+	# 2. The appropriate executable for aslan.exe will be determined by
 	# which executables exist after copying program files.
 	# Some exes are no longer used, but we remove them anyway from legacy copies.
-	# nvda_service.exe was removed in 2017.4 (#7625).
-	# nvda_eoaProxy.exe existed to support Windows 7 Ease of Access, and was removed in 2024.1 (#15577).
+	# aslan_service.exe was removed in 2017.4 (#7625).
+	# aslan_eoaProxy.exe existed to support Windows 7 Ease of Access, and was removed in 2024.1 (#15577).
 	_deleteFileGroupOrFail(
 		installDir,
-		_nvdaExes.union({"nvda_service.exe", "nvda_eoaProxy.exe"}),
+		_aslanExes.union({"aslan_service.exe", "aslan_eoaProxy.exe"}),
 		numTries=6,
 		retryWaitInterval=0.5,
 	)
 	if shouldCleanX86:
 		_deleteFileGroupOrFail(
 			installDirX86,
-			_nvdaExes.union({"nvda_service.exe", "nvda_eoaProxy.exe"}),
+			_aslanExes.union({"aslan_service.exe", "aslan_eoaProxy.exe"}),
 			numTries=6,
 			retryWaitInterval=0.5,
 		)
@@ -960,13 +960,13 @@ def install(shouldCreateDesktopShortcut: bool = True, shouldRunAtLogon: bool = T
 	if shouldCleanX86:
 		removeOldProgramFiles(installDirX86)
 	copyProgramFiles(installDir)
-	for f in ("nvda_UIAccess.exe", "nvda_noUIAccess.exe"):
+	for f in ("aslan_UIAccess.exe", "aslan_noUIAccess.exe"):
 		f = os.path.join(installDir, f)
 		if os.path.isfile(f):
-			tryCopyFile(f, os.path.join(installDir, "nvda.exe"))
+			tryCopyFile(f, os.path.join(installDir, "aslan.exe"))
 			break
 	else:
-		raise RuntimeError("No available executable to use as nvda.exe")
+		raise RuntimeError("No available executable to use as aslan.exe")
 	removeOldLibFiles(installDir, rebootOK=True)
 	if shouldCleanX86:
 		removeOldLibFiles(installDirX86, rebootOK=True)
@@ -975,7 +975,7 @@ def install(shouldCreateDesktopShortcut: bool = True, shouldRunAtLogon: bool = T
 		startMenuFolder,
 		shouldCreateDesktopShortcut,
 		shouldRunAtLogon,
-		NVDAState._configInLocalAppDataEnabled(),
+		AslanState._configInLocalAppDataEnabled(),
 	)
 	if shouldCleanX86:
 		oldSystemConfigPath = os.path.join(installDirX86, "systemConfig")
@@ -1037,10 +1037,10 @@ def _migratePickledAddonsStateToJson(configPath: str) -> None:
 def createPortableCopy(destPath: str, shouldCopyUserConfig: bool = True):
 	assert os.path.isabs(destPath), f"Destination path {destPath} is not absolute"
 	# Remove all the main executables always
-	_deleteFileGroupOrFail(destPath, {"nvda.exe", "nvda_noUIAccess.exe", "nvda_UIAccess.exe"})
+	_deleteFileGroupOrFail(destPath, {"aslan.exe", "aslan_noUIAccess.exe", "aslan_UIAccess.exe"})
 	removeOldProgramFiles(destPath)
 	copyProgramFiles(destPath)
-	tryCopyFile(os.path.join(destPath, "nvda_noUIAccess.exe"), os.path.join(destPath, "nvda.exe"))
+	tryCopyFile(os.path.join(destPath, "aslan_noUIAccess.exe"), os.path.join(destPath, "aslan.exe"))
 	if shouldCopyUserConfig:
 		copyUserConfig(os.path.join(destPath, "userConfig"))
 	removeOldLibFiles(destPath, rebootOK=True)
@@ -1086,14 +1086,14 @@ def registerEaseOfAccess(installDir: str):
 			"ATExe",
 			None,
 			winreg.REG_SZ,
-			"nvda.exe",
+			"aslan.exe",
 		)
 		winreg.SetValueEx(
 			appKey,
 			"StartExe",
 			None,
 			winreg.REG_SZ,
-			os.path.join(installDir, "nvda.exe"),
+			os.path.join(installDir, "aslan.exe"),
 		)
 		winreg.SetValueEx(
 			appKey,

@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025-2026 NV Access Limited, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Unit tests for the compoundDocuments module."""
 
@@ -10,7 +10,7 @@ import unittest
 import compoundDocuments
 import controlTypes
 import textInfos
-from .objectProvider import PlaceholderNVDAObject
+from .objectProvider import PlaceholderAslanObject
 from .textProvider import BasicTextInfo, BasicTextProvider
 
 
@@ -25,8 +25,8 @@ class BasicCompoundTextLeaf(BasicTextProvider):
 	flowsTo = None
 
 
-class CompoundTreePlaceholderObject(PlaceholderNVDAObject):
-	"""A placeholder NVDAObject for testing CompoundTextInfo implementations.
+class CompoundTreePlaceholderObject(PlaceholderAslanObject):
+	"""A placeholder AslanObject for testing CompoundTextInfo implementations.
 	This class represents a tree structure of text providers.
 	Note that it also mutates the text providers to link them in a flow."""
 

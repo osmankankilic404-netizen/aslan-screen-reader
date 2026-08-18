@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2018-2025 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -9,8 +9,8 @@ import re
 
 
 """
-This module contains add-on API version information for this build of NVDA. This file provides information on
-how the API has changed as well as the range of API versions supported by this build of NVDA
+This module contains add-on API version information for this build of Aslan. This file provides information on
+how the API has changed as well as the range of API versions supported by this build of Aslan
 """
 
 AddonApiVersionT = tuple[int, int, int]
@@ -54,7 +54,7 @@ See also: L{tests.unit.test_addonVersionCheck.TestGetAPIVersionTupleFromString}
 
 def getAPIVersionTupleFromString(version: str) -> AddonApiVersionT:
 	"""
-	Converts a string containing an NVDA version to a tuple of the form:
+	Converts a string containing an Aslan version to a tuple of the form:
 	(versionYear, versionMajor, versionMinor)
 	@raises: ValueError when unable to parse version string.
 	See also: L{tests.unit.test_addonVersionCheck.TestGetAPIVersionTupleFromString}

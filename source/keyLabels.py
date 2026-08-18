@@ -1,5 +1,5 @@
 # keyLabels.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2008-2016 NV Access Limited, Aleksey Sadovoy, Babbage B.v.

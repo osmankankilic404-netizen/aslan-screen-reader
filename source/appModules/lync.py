@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2017-2022 NV Access Limited, Cyrille Bougot
@@ -6,7 +6,7 @@
 """appModule for Microsoft Skype for business."""
 
 import ui
-from NVDAObjects.UIA import UIA
+from AslanObjects.UIA import UIA
 import appModuleHandler
 from logHandler import log
 
@@ -93,7 +93,7 @@ class AppModule(appModuleHandler.AppModule):
 	# data to store the last chat message (runtime ID,person,content lines)
 	_lastLiveChatMessageData = [], "", []
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if isinstance(obj, UIA) and obj.UIAElement.cachedClassName == "NetUIRicherLabel":
 			clsList.insert(0, NetUIRicherLabel)
 		return clsList

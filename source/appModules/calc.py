@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2023 NV Access Limited, Aleksey Sadovoy, Peter Vágner, Joseph Lee, Łukasz Golonka
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -7,13 +7,13 @@
 
 import appModuleHandler
 import config
-import NVDAObjects.IAccessible
+import AslanObjects.IAccessible
 import speech
 from config.configFlags import TypingEcho
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		windowClassName = obj.windowClassName
 		windowControlID = obj.windowControlID
 		if (windowClassName == "Edit" and windowControlID == 403) or (
@@ -22,7 +22,7 @@ class AppModule(appModuleHandler.AppModule):
 			clsList.insert(0, Display)
 
 
-class Display(NVDAObjects.IAccessible.IAccessible):
+class Display(AslanObjects.IAccessible.IAccessible):
 	shouldAllowIAccessibleFocusEvent = True
 	_nextNameIsCalculationResult: bool = False
 	"""Set to `True` by the gestures which cause the calculator expression to be calculated."""

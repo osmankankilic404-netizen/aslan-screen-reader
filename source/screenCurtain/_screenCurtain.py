@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2018-2025 NV Access Limited, Babbage B.V., Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import os
 from typing import Final, TypedDict, cast
@@ -13,10 +13,10 @@ import wx
 from core import postNvdaStartup
 from gui.guiHelper import BoxSizerHelper, ButtonHelper
 from gui.message import MessageDialog as ModernMessageDialog
-from gui.nvdaControls import MessageDialog
+from gui.aslanControls import MessageDialog
 from logHandler import log
-from NVDAHelper.localLib import isScreenFullyBlack
-from NVDAState import _TrackNVDAInitialization
+from AslanHelper.localLib import isScreenFullyBlack
+from AslanState import _TrackAslanInitialization
 from winBindings import magnification
 
 # homogeneous matrix for a 4-space transformation (red, green, blue, opacity).
@@ -41,7 +41,7 @@ ERROR_ENABLING_MESSAGE = _("Could not enable screen curtain")
 ERROR_ENABLING_AT_STARTUP_MESSAGE = pgettext(
 	"screenCurtain",
 	# Translators: Explanation shown when screen curtain is enabled in the user's configuration,
-	# but it failed to activate at NVDA startup
+	# but it failed to activate at Aslan startup
 	"There was a problem enabling Screen Curtain. "
 	"The contents of your screen are still visible. "
 	"You may attempt to enable Screen Curtain manually.",
@@ -169,7 +169,7 @@ class ScreenCurtain:
 				self.enable()
 			except RuntimeError:
 				log.error("Failed to enable Screen Curtain", exc_info=True)
-				if _TrackNVDAInitialization.isInitializationComplete():
+				if _TrackAslanInitialization.isInitializationComplete():
 					self._postInitialisationActivationFailureMessage()
 				else:
 					postNvdaStartup.register(self._postInitialisationActivationFailureMessage)

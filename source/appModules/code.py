@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020-2025 NV Access Limited, Leonard de Ruijter, Cary-Rowen, Bill Dengler
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -11,9 +11,9 @@ import controlTypes
 import re
 from collections import deque
 from logHandler import log
-from NVDAObjects.behaviors import EditableTextBase
-from NVDAObjects.IAccessible.chromium import Document
-from NVDAObjects import NVDAObject, NVDAObjectTextInfo
+from AslanObjects.behaviors import EditableTextBase
+from AslanObjects.IAccessible.chromium import Document
+from AslanObjects import AslanObject, AslanObjectTextInfo
 
 
 class VSCodeDocument(Document):
@@ -22,7 +22,7 @@ class VSCodeDocument(Document):
 	Therefore, forcefully block tree interceptor creation.
 	"""
 
-	_get_treeInterceptorClass = NVDAObject._get_treeInterceptorClass
+	_get_treeInterceptorClass = AslanObject._get_treeInterceptorClass
 
 
 DIGIT_EXPR = re.compile(r"\d+")
@@ -34,7 +34,7 @@ class AppModule(appModuleHandler.AppModule):
 		self._status = None
 
 	@staticmethod
-	def _search_for_statusbar(root: NVDAObject) -> NVDAObject | None:
+	def _search_for_statusbar(root: AslanObject) -> AslanObject | None:
 		seen = set()
 		t = deque((root,))
 		while t:
@@ -81,7 +81,7 @@ class AppModule(appModuleHandler.AppModule):
 			return False
 		return True
 
-	def _get_statusBar(self) -> NVDAObject:
+	def _get_statusBar(self) -> AslanObject:
 		cached = self._status
 		if cached:
 			return cached
@@ -94,11 +94,11 @@ class AppModule(appModuleHandler.AppModule):
 			return res
 		raise NotImplementedError
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if Document in clsList and obj.IA2Attributes.get("tag") == "#document":
 			clsList.insert(0, VSCodeDocument)
 
-	def getStatusBarText(self, obj: NVDAObject) -> str:
+	def getStatusBarText(self, obj: AslanObject) -> str:
 		parts: list[str] = [
 			chunk
 			for child in obj.children
@@ -115,13 +115,13 @@ class AppModule(appModuleHandler.AppModule):
 			parts.insert(0, parts.pop(pos_idx))
 		return " ".join(parts)
 
-	def event_NVDAObject_init(self, obj: NVDAObject):
+	def event_AslanObject_init(self, obj: AslanObject):
 		if isinstance(obj, EditableTextBase):
 			obj._supportsSentenceNavigation = False
 		# TODO: This is a specific fix for Visual Studio Code.
 		# Once the underlying issue is resolved, this workaround can be removed.
 		# See issue #15159 for more details.
 		if obj.role != controlTypes.Role.EDITABLETEXT and controlTypes.State.EDITABLE not in obj.states:
-			obj.TextInfo = NVDAObjectTextInfo
+			obj.TextInfo = AslanObjectTextInfo
 		if obj.role == controlTypes.Role.STATUSBAR:
 			self._status = obj

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2012-2025 NV Access Limited, Joseph Lee
@@ -34,7 +34,7 @@ def getAppNameFromHost(processId):
 	# App model is shown as familyName!appName,
 	# and importing files with the exclamation point in the middle of the name isn't supported.
 	# Therefore return only the app name portion.
-	# Convert this into lowercase to make the file name consistent with other NVDA app modules.
+	# Convert this into lowercase to make the file name consistent with other Aslan app modules.
 	return appModel.value.split("!")[-1].lower()
 
 

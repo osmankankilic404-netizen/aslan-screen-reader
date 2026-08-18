@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2018-2024 NV Access Limited, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -44,8 +44,8 @@ class SupportsVersionCheck(Protocol):
 	- addonStore.models.InstalledAddonStoreModel
 	"""
 
-	minimumNVDAVersion: addonAPIVersion.AddonApiVersionT
-	lastTestedNVDAVersion: addonAPIVersion.AddonApiVersionT
+	minimumAslanVersion: addonAPIVersion.AddonApiVersionT
+	lastTestedAslanVersion: addonAPIVersion.AddonApiVersionT
 	name: str
 
 	@property
@@ -61,7 +61,7 @@ class SupportsVersionCheck(Protocol):
 
 	@property
 	def overrideIncompatibility(self) -> bool:
-		"""If True, NVDA should enable this add-on where it would normally be blocked due to incompatibility."""
+		"""If True, Aslan should enable this add-on where it would normally be blocked due to incompatibility."""
 		from addonHandler import AddonStateCategory, state
 
 		return self.name in state[AddonStateCategory.OVERRIDE_COMPATIBILITY] and self.canOverrideCompatibility
@@ -113,25 +113,25 @@ class SupportsVersionCheck(Protocol):
 			return pgettext(
 				"addonStore",
 				# Translators: The reason an add-on is not compatible.
-				# A more recent version of NVDA is required for the add-on to work.
+				# A more recent version of Aslan is required for the add-on to work.
 				# The placeholder will be replaced with Year.Major.Minor (e.g. 2019.1).
-				"An updated version of NVDA is required. NVDA version {nvdaVersion} or later.",
+				"An updated version of Aslan is required. Aslan version {aslanVersion} or later.",
 			).format(
-				nvdaVersion=addonAPIVersion.formatForGUI(self.minimumNVDAVersion),
+				aslanVersion=addonAPIVersion.formatForGUI(self.minimumAslanVersion),
 			)
 		elif not isAddonTested(self, backwardsCompatToVersion):
 			return pgettext(
 				"addonStore",
 				# Translators: The reason an add-on is not compatible.
-				# The addon relies on older, removed features of NVDA, an updated add-on is required.
+				# The addon relies on older, removed features of Aslan, an updated add-on is required.
 				# The placeholder will be replaced with Year.Major.Minor (e.g. 2019.1).
 				"An updated version of this add-on is required. "
-				"This add-on was last tested with NVDA {lastTestedNVDAVersion}. "
-				"NVDA requires this add-on to be tested with NVDA {nvdaVersion} or higher. "
+				"This add-on was last tested with Aslan {lastTestedAslanVersion}. "
+				"Aslan requires this add-on to be tested with Aslan {aslanVersion} or higher. "
 				"You can enable this add-on at your own risk. ",
 			).format(
-				nvdaVersion=addonAPIVersion.formatForGUI(backwardsCompatToVersion),
-				lastTestedNVDAVersion=addonAPIVersion.formatForGUI(self.lastTestedNVDAVersion),
+				aslanVersion=addonAPIVersion.formatForGUI(backwardsCompatToVersion),
+				lastTestedAslanVersion=addonAPIVersion.formatForGUI(self.lastTestedAslanVersion),
 			)
 		else:
 			return None
@@ -142,7 +142,7 @@ def getAddonCompatibilityMessage() -> str:
 		"addonStore",
 		# Translators: A message indicating that some add-ons will be disabled
 		# unless reviewed before installation.
-		"Your NVDA configuration contains add-ons that are incompatible with this version of NVDA. "
+		"Your Aslan configuration contains add-ons that are incompatible with this version of Aslan. "
 		"These add-ons will be disabled after installation. "
 		"After installation, you will be able to manually re-enable these add-ons at your own risk. "
 		"If you rely on these add-ons, please review the list to decide whether to continue with the installation. ",

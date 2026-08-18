@@ -1,12 +1,12 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2018-2023 NV Access Limited, Derek Riemer
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 import appModuleHandler
-from NVDAObjects import NVDAObject
-from NVDAObjects.UIA import UIA
-from NVDAObjects.window import Window
+from AslanObjects import AslanObject
+from AslanObjects.UIA import UIA
+from AslanObjects.window import Window
 import winUser
 
 
@@ -24,11 +24,11 @@ def isChildOfRow(obj):
 
 class BrokenUIAChild(UIA):
 	# This is A child which is layout, but should be content.
-	presentationType = NVDAObject.presType_content
+	presentationType = AslanObject.presType_content
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if isinstance(obj, UIA) and obj.UIAAutomationId == "TmRowIcon":
 			# This is an icon and really is layout. Don't show it.
 			return

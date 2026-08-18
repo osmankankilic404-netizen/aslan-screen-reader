@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""Manages NVDA configuration.
+"""Manages Aslan configuration.
 Provides utility classes to make handling featureFlags easier.
 """
 
@@ -35,7 +35,7 @@ class FeatureFlag:
 	This change in default behavior should not have any impact on users who have already tried the feature,
 	and perhaps disagreed in principle with it (I.E. wished to disable the feature, not because it is buggy,
 	but because even if it works perfectly it is not their preference).
-	The default option allows users to explicitly defer to the NVDA default behaviour.
+	The default option allows users to explicitly defer to the Aslan default behaviour.
 	The default behaviour can change, without affecting a user's preference.
 	"""
 

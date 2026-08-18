@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Noelia Ruiz Martínez
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 
 import yaml
@@ -9,7 +9,7 @@ from typing import Any
 
 from .configSpec import confspec
 from logHandler import log
-from NVDAState import shouldWriteToDisk, WritePaths
+from AslanState import shouldWriteToDisk, WritePaths
 
 
 _customSections: dict[str, dict[str, Any]] = {}
@@ -17,7 +17,7 @@ _customSections: dict[str, dict[str, Any]] = {}
 
 def _loadCustomSections() -> None:
 	"""Add registered customSections to the configuration."""
-	path = WritePaths.nvdaCustomSectionsFile
+	path = WritePaths.aslanCustomSectionsFile
 	try:
 		with open(path, encoding="utf-8") as _f:
 			sections = yaml.safe_load(_f)
@@ -101,7 +101,7 @@ def _saveCustomSections() -> None:
 	"""Write all registered custom sections to disk."""
 	if not shouldWriteToDisk():
 		return
-	path = WritePaths.nvdaCustomSectionsFile
+	path = WritePaths.aslanCustomSectionsFile
 	try:
 		with open(path, "w", encoding="utf-8") as f:
 			yaml.safe_dump(_customSections, f, allow_unicode=True, default_flow_style=False)

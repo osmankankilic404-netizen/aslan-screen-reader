@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Leonard de Ruijter, Joseph Lee, Renaud Paquay, pvagner, hwf1324
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -14,14 +14,14 @@ import JABHandler
 import controlTypes
 import textUtils
 from controlTypes import TextPosition
-from .. import NVDAObject, InvalidNVDAObject
+from .. import AslanObject, InvalidAslanObject
 from ..window import Window
 from ..behaviors import ProgressBar, EditableTextWithoutAutoSelectDetection, Dialog
 import textInfos.offsets
 from logHandler import log
 from locationHelper import RectLTWH
 
-JABRolesToNVDARoles: dict[str, controlTypes.Role] = {
+JABRolesToAslanRoles: dict[str, controlTypes.Role] = {
 	"alert": controlTypes.Role.DIALOG,
 	"column header": controlTypes.Role.TABLECOLUMNHEADER,
 	"canvas": controlTypes.Role.CANVAS,
@@ -84,7 +84,7 @@ JABRolesToNVDARoles: dict[str, controlTypes.Role] = {
 	"edit bar": controlTypes.Role.EDITBAR,
 }
 
-JABStatesToNVDAStates = {
+JABStatesToAslanStates = {
 	"busy": controlTypes.State.BUSY,
 	"checked": controlTypes.State.CHECKED,
 	"focused": controlTypes.State.FOCUSED,
@@ -232,7 +232,7 @@ class JABTextInfo(textInfos.offsets.OffsetsTextInfo):
 
 
 class JAB(Window):
-	def findOverlayClasses(self, clsList: list[NVDAObject]) -> None:
+	def findOverlayClasses(self, clsList: list[AslanObject]) -> None:
 		role = self.JABRole
 		if self._JABAccContextInfo.accessibleText and role in (
 			"text",
@@ -258,7 +258,7 @@ class JAB(Window):
 	def _hasTableParent(self) -> bool:
 		"""Lightweight check if the immediate parent is a Table.
 
-		Avoids the expensive recursive parent-NVDAObject construction that
+		Avoids the expensive recursive parent-AslanObject construction that
 		``isinstance(self.parent, Table)`` would otherwise perform via
 		``findOverlayClasses``.
 
@@ -267,8 +267,8 @@ class JAB(Window):
 		``getAccessibleTableInfo`` bridge call through ``parent._jabTableInfo``.
 		On the first call, queries the parent's role via a lightweight
 		``getAccessibleContextInfo`` bridge call and only materialises the
-		full NVDAObject when the role is ``"table"``; in that case it also
-		caches the NVDAObject in ``self._parent`` as a side effect, so a
+		full AslanObject when the role is ``"table"``; in that case it also
+		caches the AslanObject in ``self._parent`` as a side effect, so a
 		subsequent ``_get_parent`` call does not repeat the bridge work.
 		"""
 		if hasattr(self, "_parent"):
@@ -331,7 +331,7 @@ class JAB(Window):
 		try:
 			self._JABAccContextInfo
 		except RuntimeError:
-			raise InvalidNVDAObject("Could not get accessible context info")
+			raise InvalidAslanObject("Could not get accessible context info")
 
 	def _get__JABAccContextInfo(self):
 		return self.jabContext.getAccessibleContextInfo()
@@ -387,7 +387,7 @@ class JAB(Window):
 		return self._JABAccContextInfo.role_en_US
 
 	def _get_role(self):
-		role = JABRolesToNVDARoles.get(self.JABRole, controlTypes.Role.UNKNOWN)
+		role = JABRolesToAslanRoles.get(self.JABRole, controlTypes.Role.UNKNOWN)
 		if (
 			role in (controlTypes.Role.LABEL, controlTypes.Role.PANEL, controlTypes.Role.UNKNOWN)
 			and self.parent
@@ -412,8 +412,8 @@ class JAB(Window):
 		stateString = self.JABStates
 		stateStrings = stateString.split(",")
 		for state in stateStrings:
-			if state in JABStatesToNVDAStates:
-				stateSet.add(JABStatesToNVDAStates[state])
+			if state in JABStatesToAslanStates:
+				stateSet.add(JABStatesToAslanStates[state])
 		if self.role is controlTypes.Role.TOGGLEBUTTON and controlTypes.State.CHECKED in stateSet:
 			stateSet.discard(controlTypes.State.CHECKED)
 			stateSet.add(controlTypes.State.PRESSED)

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -20,7 +20,7 @@ from typing import (
 
 if TYPE_CHECKING:
 	import controlTypes
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 
 __all__ = [
 	"AnnotationTarget",
@@ -44,7 +44,7 @@ class AnnotationTarget:
 		raise NotImplementedError
 
 	@property
-	def targetObject(self) -> "NVDAObject":
+	def targetObject(self) -> "AslanObject":
 		raise NotImplementedError
 
 	@property
@@ -61,8 +61,8 @@ class AnnotationOrigin:
 	This class encapsulates the relation.
 	"""
 
-	def __init__(self, originObj: "NVDAObject"):
-		self._originObj: "NVDAObject" = originObj
+	def __init__(self, originObj: "AslanObject"):
+		self._originObj: "AslanObject" = originObj
 
 	def __bool__(self):
 		"""Performant implementation required to test for annotations"""
@@ -82,7 +82,7 @@ class _AnnotationNavigationNode:
 	"""Node used in _AnnotationNavigation, for navigating between annotations."""
 
 	_TargetIndex = int  # Type for target index
-	origin: "NVDAObject"  # this is the last known location
+	origin: "AslanObject"  # this is the last known location
 	indexOfLastReportedSummary: Optional[_TargetIndex] = None  # this would be the next destination
 
 
@@ -93,4 +93,4 @@ class _AnnotationNavigation:
 	"""
 
 	lastReported: Optional[_AnnotationNavigationNode] = None
-	priorOrigins: List["NVDAObject"] = []
+	priorOrigins: List["AslanObject"] = []

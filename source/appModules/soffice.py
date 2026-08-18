@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Bill Dengler, Leonard de Ruijter, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from typing import (
 	Optional,
@@ -19,9 +19,9 @@ from controlTypes import TextPosition
 import textInfos
 import colors
 from compoundDocuments import CompoundDocument, TreeCompoundTextInfo, CompoundTextLeafTextInfo
-from NVDAObjects import NVDAObject
-from NVDAObjects.IAccessible import IAccessible, IA2TextTextInfo
-from NVDAObjects.behaviors import EditableText
+from AslanObjects import AslanObject
+from AslanObjects.IAccessible import IAccessible, IA2TextTextInfo
+from AslanObjects.behaviors import EditableText
 from logHandler import log
 from scriptHandler import script
 import speech
@@ -38,7 +38,7 @@ class SymphonyUtils:
 	"""Helper class providing utility methods."""
 
 	@staticmethod
-	def is_toolbar_item(obj: NVDAObject) -> bool:
+	def is_toolbar_item(obj: AslanObject) -> bool:
 		"""Whether the given object is part of a toolbar."""
 		parent = obj.parent
 		while parent:
@@ -48,7 +48,7 @@ class SymphonyUtils:
 		return False
 
 	@staticmethod
-	def get_id(obj: NVDAObject) -> str | None:
+	def get_id(obj: AslanObject) -> str | None:
 		"""Get value of the "id" object attribute, if set."""
 		if not hasattr(obj, "IA2Attributes"):
 			return None
@@ -216,7 +216,7 @@ class SymphonyTextInfo(IA2TextTextInfo, CompoundTextLeafTextInfo):
 			# Symphony exposes some information for the caret position as attributes on the document object.
 			# optimisation: Use the tree interceptor to get the document.
 			try:
-				docAttribs = obj.treeInterceptor.rootNVDAObject.IA2Attributes
+				docAttribs = obj.treeInterceptor.rootAslanObject.IA2Attributes
 			except AttributeError:
 				# No tree interceptor, so we can't efficiently fetch this info.
 				pass
@@ -439,7 +439,7 @@ class SymphonyDocumentTextInfo(TreeCompoundTextInfo):
 	def _get_locationText(self):
 		try:
 			# if present, use document attributes to get cursor position relative to page
-			docAttribs = self.obj.rootNVDAObject.IA2Attributes
+			docAttribs = self.obj.rootAslanObject.IA2Attributes
 			horizontalPos = int(docAttribs["cursor-position-in-page-horizontal"])
 			horizontalDistanceText = getDistanceTextForTwips(horizontalPos)
 			verticalPos = int(docAttribs["cursor-position-in-page-vertical"])
@@ -462,7 +462,7 @@ class SymphonyDocument(CompoundDocument):
 	lastFormattingGestureEventTime: float = 0
 
 	@staticmethod
-	def isFormattingChangeAnnouncementEnabled(obj: NVDAObject) -> bool:
+	def isFormattingChangeAnnouncementEnabled(obj: AslanObject) -> bool:
 		if not SymphonyDocument.announceFormattingGestureChange:
 			return False
 
@@ -588,7 +588,7 @@ class SymphonyDocument(CompoundDocument):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		role = obj.role
 		windowClassName = obj.windowClassName
 		if isinstance(obj, IAccessible) and windowClassName in ("SALTMPSUBFRAME", "SALSUBFRAME", "SALFRAME"):
@@ -611,7 +611,7 @@ class AppModule(appModuleHandler.AppModule):
 			if role in {controlTypes.Role.BLOCKQUOTE, controlTypes.Role.PARAGRAPH}:
 				clsList.insert(0, SymphonyParagraph)
 
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		windowClass = obj.windowClassName
 		if (
 			windowClass in ("SALTMPSUBFRAME", "SALFRAME")
@@ -622,7 +622,7 @@ class AppModule(appModuleHandler.AppModule):
 			obj.description = None
 			obj.treeInterceptorClass = SymphonyDocument
 
-	def searchStatusBar(self, obj: NVDAObject, max_depth: int = 5) -> Optional[NVDAObject]:
+	def searchStatusBar(self, obj: AslanObject, max_depth: int = 5) -> Optional[AslanObject]:
 		"""Searches for and returns the status bar object
 		if either the object itself or one of its recursive children
 		(up to the given depth) has the corresponding role."""
@@ -642,10 +642,10 @@ class AppModule(appModuleHandler.AppModule):
 				return status_bar
 		return None
 
-	def _get_statusBar(self) -> Optional[NVDAObject]:
+	def _get_statusBar(self) -> Optional[AslanObject]:
 		return self.searchStatusBar(api.getForegroundObject())
 
-	def getStatusBarText(self, obj: NVDAObject) -> str:
+	def getStatusBarText(self, obj: AslanObject) -> str:
 		text = ""
 		for child in obj.children:
 			if hasattr(child, "IAccessibleTextObject"):

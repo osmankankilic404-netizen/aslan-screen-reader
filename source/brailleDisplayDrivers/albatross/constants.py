@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2023 NV Access Limited, Burman's Computer and Education Ltd.
@@ -197,7 +197,7 @@ See L{KeyLayout}.
 class KeyLayout(IntEnum):
 	"""Defines possible key layouts.
 	From settings byte bits 1 - 3 (MSB 0 scheme) are extracted and bit 2 is
-	set to 0 (it represents side of status cells which NVDA does not use).
+	set to 0 (it represents side of status cells which Aslan does not use).
 	The result is then compared with variables below to determine what key
 	layout should be used.
 
@@ -266,7 +266,7 @@ varies
 Settings byte limitation causes maximum number of status cells to be 14
 (with \xff 15) in 80 model. Limitation is applied only if other settings
 would make settings byte to be \xff. These are very big values (5 could be
-normal maximum value), and NVDA does not utilize status cells.
+normal maximum value), and Aslan does not utilize status cells.
 
 Although settings like number of status cells are adjusted in display
 menu, display itself does not use them. They are just notes for screenreaders.

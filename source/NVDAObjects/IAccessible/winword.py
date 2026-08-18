@@ -1,5 +1,5 @@
-# A part of NonVisual Desktop Access (NVDA)
-# Copyright (C) 2006-2025 NV Access, Cyrille Bougot and other NVDA Contributors
+# A part of NonVisual Desktop Access (Aslan)
+# Copyright (C) 2006-2025 NV Access, Cyrille Bougot and other Aslan Contributors
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
@@ -21,7 +21,7 @@ import ui
 from . import IAccessible
 from displayModel import EditableTextDisplayModelTextInfo
 from ..behaviors import EditableTextWithoutAutoSelectDetection
-import NVDAObjects.window.winword as winWordWindowModule
+import AslanObjects.window.winword as winWordWindowModule
 from speech import sayAll
 import inputCore
 from globalCommands import SCRCAT_SYSTEMCARET
@@ -236,9 +236,9 @@ class WordDocument(IAccessible, EditableTextWithoutAutoSelectDetection, winWordW
 				return text
 
 	@script(
-		gesture="kb:NVDA+shift+c",
+		gesture="kb:Aslan+shift+c",
 		description=_(
-			# Translators: The label of a shortcut of NVDA.
+			# Translators: The label of a shortcut of Aslan.
 			"Set column header. Pressing once will set this cell as the first column header for any cell lower and "
 			"to the right of it within this table. Pressing twice will forget the current column header for this "
 			"cell.",
@@ -289,9 +289,9 @@ class WordDocument(IAccessible, EditableTextWithoutAutoSelectDetection, winWordW
 				)
 
 	@script(
-		gesture="kb:NVDA+shift+r",
+		gesture="kb:Aslan+shift+r",
 		description=_(
-			# Translators: The label of a shortcut of NVDA.
+			# Translators: The label of a shortcut of Aslan.
 			"Set row header. Pressing once will set this cell as the first row header for any cell lower and to the "
 			"right of it within this table. Pressing twice will forget the current row header for this cell.",
 		),
@@ -346,7 +346,7 @@ class WordDocument(IAccessible, EditableTextWithoutAutoSelectDetection, winWordW
 			"Reports the text of the comment where the system caret is located."
 			"If pressed twice, presents the information in browse mode.",
 		),
-		gesture="kb:NVDA+alt+c",
+		gesture="kb:Aslan+alt+c",
 		category=SCRCAT_SYSTEMCARET,
 		speakOnDemand=True,
 	)

@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Babbage B.V., Cyrille Bougot, Leonard de Ruijter, Wang Chong
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import ctypes
 from comtypes import BSTR, COMError
@@ -27,7 +27,7 @@ import watchdog
 import locationHelper
 import textUtils
 from textUtils.segFlag import CharSegFlag, WordSegFlag
-import NVDAHelper.localLib
+import AslanHelper.localLib
 
 
 selOffsetsAtLastCaretEvent = None
@@ -380,7 +380,7 @@ class EditTextInfo(textInfos.offsets.OffsetsTextInfo):
 	) -> None:
 		if charFormat.dwEffects & CFE_AUTOCOLOR:
 			rgb = GetSysColor(SysColorIndex.WINDOW_TEXT)
-			# Translators: The text color as reported in Wordpad (Automatic) or NVDA log viewer.
+			# Translators: The text color as reported in Wordpad (Automatic) or Aslan log viewer.
 			formatField["color"] = _("{color} (default color)").format(
 				color=colors.RGB.fromCOLORREF(rgb).name,
 			)
@@ -389,7 +389,7 @@ class EditTextInfo(textInfos.offsets.OffsetsTextInfo):
 			formatField["color"] = colors.RGB.fromCOLORREF(rgb)
 		if charFormat.dwEffects & CFE_AUTOBACKCOLOR:
 			rgb = GetSysColor(SysColorIndex.WINDOW)
-			# Translators: The background color as reported in Wordpad (Automatic) or NVDA log viewer.
+			# Translators: The background color as reported in Wordpad (Automatic) or Aslan log viewer.
 			formatField["background-color"] = _("{color} (default color)").format(
 				color=colors.RGB.fromCOLORREF(rgb).name,
 			)
@@ -647,7 +647,7 @@ class EditTextInfo(textInfos.offsets.OffsetsTextInfo):
 		return self._getLineOffsets(offset)
 
 
-ITextDocumentUnitsToNVDAUnits = {
+ITextDocumentUnitsToAslanUnits = {
 	comInterfaces.tom.tomCharacter: textInfos.UNIT_CHARACTER,
 	comInterfaces.tom.tomWord: textInfos.UNIT_WORD,
 	comInterfaces.tom.tomLine: textInfos.UNIT_LINE,
@@ -656,7 +656,7 @@ ITextDocumentUnitsToNVDAUnits = {
 	comInterfaces.tom.tomStory: textInfos.UNIT_STORY,
 }
 
-NVDAUnitsToITextDocumentUnits: dict[str, int] = {
+AslanUnitsToITextDocumentUnits: dict[str, int] = {
 	textInfos.UNIT_CHARACTER: comInterfaces.tom.tomCharacter,
 	textInfos.UNIT_WORD: comInterfaces.tom.tomWord,
 	textInfos.UNIT_LINE: comInterfaces.tom.tomLine,
@@ -749,7 +749,7 @@ class ITextDocumentTextInfo(textInfos.TextInfo):
 	) -> None:
 		fgColor = fontObj.foreColor
 		if fgColor == comInterfaces.tom.tomAutoColor:
-			# Translators: The text color as reported in Wordpad (Automatic) or NVDA log viewer.
+			# Translators: The text color as reported in Wordpad (Automatic) or Aslan log viewer.
 			formatField["color"] = _("{color} (default color)").format(
 				color=colors.RGB.fromCOLORREF(GetSysColor(SysColorIndex.WINDOW_TEXT)).name,
 			)
@@ -761,7 +761,7 @@ class ITextDocumentTextInfo(textInfos.TextInfo):
 			formatField["color"] = colors.RGB.fromCOLORREF(fgColor)
 		bkColor = fontObj.backColor
 		if bkColor == comInterfaces.tom.tomAutoColor:
-			# Translators: The background color as reported in Wordpad (Automatic) or NVDA log viewer.
+			# Translators: The background color as reported in Wordpad (Automatic) or Aslan log viewer.
 			formatField["background-color"] = _("{color} (default color)").format(
 				color=colors.RGB.fromCOLORREF(GetSysColor(SysColorIndex.WINDOW)).name,
 			)
@@ -829,7 +829,7 @@ class ITextDocumentTextInfo(textInfos.TextInfo):
 		# Windows Live Mail exposes the label via the embedded object's data (IDataObject)
 		text = BSTR()
 		try:
-			NVDAHelper.localLib.getOleClipboardText(o, ctypes.byref(text))
+			AslanHelper.localLib.getOleClipboardText(o, ctypes.byref(text))
 		except WindowsError:
 			pass
 		else:
@@ -839,7 +839,7 @@ class ITextDocumentTextInfo(textInfos.TextInfo):
 		# As a final fallback (e.g. could not get display model text for Outlook Express), use the embedded object's user type (e.g. "recipient").
 		userType = BSTR()
 		try:
-			NVDAHelper.localLib.getOleUserType(o, 0, ctypes.byref(userType))
+			AslanHelper.localLib.getOleUserType(o, 0, ctypes.byref(userType))
 		except WindowsError:
 			pass
 		else:
@@ -940,8 +940,8 @@ class ITextDocumentTextInfo(textInfos.TextInfo):
 
 	def expand(self, unit):
 		unit = self._resolveReadingChunkUnit(unit)
-		if unit in NVDAUnitsToITextDocumentUnits:
-			self._rangeObj.Expand(NVDAUnitsToITextDocumentUnits[unit])
+		if unit in AslanUnitsToITextDocumentUnits:
+			self._rangeObj.Expand(AslanUnitsToITextDocumentUnits[unit])
 		else:
 			raise NotImplementedError("unit: %s" % unit)
 
@@ -999,8 +999,8 @@ class ITextDocumentTextInfo(textInfos.TextInfo):
 
 	def move(self, unit, direction, endPoint=None):
 		unit = self._resolveReadingChunkUnit(unit)
-		if unit in NVDAUnitsToITextDocumentUnits:
-			unit = NVDAUnitsToITextDocumentUnits[unit]
+		if unit in AslanUnitsToITextDocumentUnits:
+			unit = AslanUnitsToITextDocumentUnits[unit]
 		else:
 			raise NotImplementedError("unit: %s" % unit)
 		if endPoint == "start":

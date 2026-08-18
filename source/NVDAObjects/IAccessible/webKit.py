@@ -1,5 +1,5 @@
-# NVDAObjects/IAccessible/webKit.py
-# A part of NonVisual Desktop Access (NVDA)
+# AslanObjects/IAccessible/webKit.py
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2011 NV Access Inc
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -9,7 +9,7 @@ import controlTypes
 import braille
 from . import IAccessible
 
-"""NVDAObjects for WebKit.
+"""AslanObjects for WebKit.
 """
 
 
@@ -40,7 +40,7 @@ class EditableText(Node):
 
 def findExtraOverlayClasses(obj, clsList):
 	"""Determine the most appropriate class(es) for WebKit objects.
-	This works similarly to L{NVDAObjects.NVDAObject.findOverlayClasses} except that it never calls any other findOverlayClasses method.
+	This works similarly to L{AslanObjects.AslanObject.findOverlayClasses} except that it never calls any other findOverlayClasses method.
 	"""
 	role = obj.role
 	if role == controlTypes.Role.WINDOW:

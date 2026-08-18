@@ -1,12 +1,12 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2010-2024 NV Access Limited, Cyrille Bougot
 
 import controlTypes
 import appModuleHandler
-from NVDAObjects.IAccessible import IAccessible
-from NVDAObjects.behaviors import EditableTextWithSuggestions
+from AslanObjects.IAccessible import IAccessible
+from AslanObjects.behaviors import EditableTextWithSuggestions
 import speech
 import braille
 import braille.regions.properties
@@ -16,7 +16,7 @@ from speech import sayAll
 import keyboardHandler
 from scriptHandler import script
 
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_ECLIPSE = _("Eclipse")
 
 
@@ -56,7 +56,7 @@ class EclipseTextArea(EditableTextWithSuggestions, IAccessible):
 	@script(
 		# Translators: Input help mode message for the 'read documentation script
 		description=_("Tries to read documentation for the selected autocompletion item."),
-		gesture="kb:nvda+d",
+		gesture="kb:aslan+d",
 		category=SCRCAT_ECLIPSE,
 		speakOnDemand=True,
 	)
@@ -174,7 +174,7 @@ class AppModule(appModuleHandler.AppModule):
 	def __init__(self, processID, appName=None):
 		super(AppModule, self).__init__(processID, appName)
 
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		if (
 			obj.windowClassName == "SysTreeView32"
 			and obj.role in (controlTypes.Role.TREEVIEWITEM, controlTypes.Role.CHECKBOX)
@@ -184,7 +184,7 @@ class AppModule(appModuleHandler.AppModule):
 			# Try to filter this out.
 			obj.shouldAllowIAccessibleFocusEvent = False
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if obj.windowClassName == "SWT_Window0" and obj.role == controlTypes.Role.EDITABLETEXT:
 			clsList.insert(0, EclipseTextArea)
 

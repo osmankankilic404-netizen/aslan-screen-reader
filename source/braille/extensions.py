@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Extension points for the braille package."""
 
@@ -30,7 +30,7 @@ filter_displaySize = extensionPoints.Filter[int](
 )
 """
 Note: filter_displayDimensions should now be used in place of this filter.
-If this filter is used, NVDA will assume that the display has 1 row of `displaySize` cells.
+If this filter is used, Aslan will assume that the display has 1 row of `displaySize` cells.
 
 Filter that allows components or add-ons to change the display size used for braille output.
 For example, when a system has an 80 cell display, but is being controlled by a remote system with a 40 cell

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2019-2025 NV Access Limited, Cyrille Bougot
@@ -14,9 +14,9 @@ from scriptHandler import script
 import ui
 from logHandler import log
 import mathPres
-from NVDAObjects.IAccessible.winword import WordDocument as IAccessibleWordDocument
-from NVDAObjects.UIA.wordDocument import WordDocument as UIAWordDocument
-from NVDAObjects.window.winword import (
+from AslanObjects.IAccessible.winword import WordDocument as IAccessibleWordDocument
+from AslanObjects.UIA.wordDocument import WordDocument as UIAWordDocument
+from AslanObjects.window.winword import (
 	WordDocument,
 	WdOutlineLevel,
 )
@@ -55,7 +55,7 @@ class ViewType(DisplayStringIntEnum):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if UIAWordDocument in clsList or IAccessibleWordDocument in clsList:
 			clsList.insert(0, WinwordWordDocument)
 

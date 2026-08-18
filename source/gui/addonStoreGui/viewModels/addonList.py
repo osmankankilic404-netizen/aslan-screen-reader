@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -117,14 +117,14 @@ class AddonListField(_AddonListFieldData, Enum):
 		50,
 		frozenset({_StatusFilterKey.AVAILABLE, _StatusFilterKey.UPDATE}),
 	)
-	minimumNVDAVersion = (
-		# Translators: The name of the column that contains the minimum version of NVDA required for this add-on.
-		pgettext("addonStore", "Minimum NVDA version"),
+	minimumAslanVersion = (
+		# Translators: The name of the column that contains the minimum version of Aslan required for this add-on.
+		pgettext("addonStore", "Minimum Aslan version"),
 		50,
 	)
 	lastTestedVersion = (
-		# Translators: The name of the column that contains the last version of NVDA tested with this add-on.
-		pgettext("addonStore", "Last tested NVDA version"),
+		# Translators: The name of the column that contains the last version of Aslan tested with this add-on.
+		pgettext("addonStore", "Last tested Aslan version"),
 		50,
 	)
 
@@ -382,8 +382,8 @@ class AddonListVM:
 				return ""
 			else:
 				return listItemVM.model.installDate.strftime("%x")
-		if field is AddonListField.minimumNVDAVersion:
-			return formatVersionForGUI(*listItemVM.model.minimumNVDAVersion)
+		if field is AddonListField.minimumAslanVersion:
+			return formatVersionForGUI(*listItemVM.model.minimumAslanVersion)
 		if field is AddonListField.lastTestedVersion:
 			return formatVersionForGUI(*listItemVM.model.lastTestedVersion)
 		return getattr(listItemVM.model, field.name, "")

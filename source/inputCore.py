@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2010-2025 NV Access Limited, Babbage B.V., Mozilla Corporation, Cyrille Bougot,
@@ -43,7 +43,7 @@ import globalVars
 import languageHandler
 import controlTypes
 import extensionPoints
-from NVDAState import WritePaths, shouldWriteToDisk
+from AslanState import WritePaths, shouldWriteToDisk
 
 
 InputGestureBindingClassT = TypeVar("InputGestureBindingClassT")
@@ -56,13 +56,13 @@ the script name may be C{None} indicating that the gesture should be unbound for
 """
 
 #: Script category for emulated keyboard keys.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_KBEMU = _("Emulated system keyboard keys")
 #: Script category for miscellaneous commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_MISC = _("Miscellaneous")
 #: Script category for Browse Mode  commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_BROWSEMODE = _("Browse mode")
 _INPUT_HELP_SPEECH_SYMBOL_LEVEL = characterProcessing.SymbolLevel.ALL
 
@@ -133,14 +133,14 @@ class InputGesture(baseObject.AutoPropertyObject):
 		A single identifier should take the form: C{source:id}
 		where C{source} is a few characters representing the source of this gesture
 		and C{id} is the specific gesture.
-		An example identifier is: C{kb(desktop):NVDA+1}
+		An example identifier is: C{kb(desktop):Aslan+1}
 
 		This property should not perform normalization itself.
 		However, please note the following regarding normalization.
 		If C{id} contains multiple chunks separated by a + sign, they are considered to be ordered arbitrarily
 		and may be reordered when normalized.
 		Normalization also ensures that the entire identifier is lower case.
-		For example, NVDA+control+f1 and control+nvda+f1 will match when normalized.
+		For example, Aslan+control+f1 and control+aslan+f1 will match when normalized.
 		See L{normalizeGestureIdentifier} for more details.
 
 		Subclasses must implement this method.
@@ -284,7 +284,7 @@ _InternalGestureMapT = Dict[
 
 
 class GlobalGestureMap:
-	"""Maps gestures to scripts anywhere in NVDA.
+	"""Maps gestures to scripts anywhere in Aslan.
 	This is used to allow users and locales to bind gestures in addition to those bound by
 	individual scriptable objects.
 	Map entries will most often be loaded from a file using the L{load} method.
@@ -493,8 +493,8 @@ class GlobalGestureMap:
 
 decide_handleRawKey = extensionPoints.Decider()
 """
-Notifies when a raw keyboard event is received, before any NVDA processing.
-Handlers can decide whether the key should be processed by NVDA and/or passed to the OS.
+Notifies when a raw keyboard event is received, before any Aslan processing.
+Handlers can decide whether the key should be processed by Aslan and/or passed to the OS.
 :param vkCode: The virtual key code
 :type vkCode: int
 :param scanCode: The scan code
@@ -533,7 +533,7 @@ class InputManager(baseObject.AutoPropertyObject):
 		#: If it returns C{False}, normal execution will be prevented.
 		#: @type: callable
 		self._captureFunc = None
-		#: The gestures mapped for the NVDA locale.
+		#: The gestures mapped for the Aslan locale.
 		#: @type: L{GlobalGestureMap}
 		self.localeGestureMap = GlobalGestureMap()
 		#: The gestures mapped by the user.
@@ -840,7 +840,7 @@ class _AllGestureMappingsRetriever(object):
 		if ti:
 			self.addObj(ti)
 
-		# NVDAObject.
+		# AslanObject.
 		self.addObj(obj)
 		for anc in reversed(ancestors):
 			self.addObj(anc, isAncestor=True)

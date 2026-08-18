@@ -1,11 +1,11 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2025 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton and others.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""Network transport layer for NVDA Remote.
+"""Network transport layer for Aslan Remote.
 
-This module provides the core networking functionality for NVDA Remote.
+This module provides the core networking functionality for Aslan Remote.
 
 Classes:
 	Transport: Base class defining the transport interface
@@ -50,7 +50,7 @@ from .serializer import Serializer
 class RemoteExtensionPoint:
 	"""Bridges local extension points to remote message sending.
 
-	This class connects local NVDA extension points to the remote transport layer,
+	This class connects local Aslan extension points to the remote transport layer,
 	allowing local events to trigger remote messages with optional argument transformation.
 
 	:note: The filter function, if provided, should take (*args, **kwargs) and return
@@ -58,7 +58,7 @@ class RemoteExtensionPoint:
 	"""
 
 	extensionPoint: HandlerRegistrar
-	"""The NVDA extension point to bridge"""
+	"""The Aslan extension point to bridge"""
 
 	messageType: RemoteMessageType
 	"""The remote message type to send"""
@@ -96,11 +96,11 @@ class RemoteExtensionPoint:
 
 
 class Transport(ABC):
-	"""Base class defining the network transport interface for NVDA Remote.
+	"""Base class defining the network transport interface for Aslan Remote.
 
 	This abstract base class defines the interface that all network transports must implement.
 	It provides core functionality for secure message passing, connection management,
-	and event handling between NVDA instances.
+	and event handling between Aslan instances.
 
 	The Transport class handles:
 

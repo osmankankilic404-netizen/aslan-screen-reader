@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -266,7 +266,7 @@ class TestRemoteClient(unittest.TestCase):
 			self.client.leaderTransport.connected = True
 			self.client.leaderSession.followers = [""]
 			self.assertFalse(self.client.sendingKeys, "We should initially not be sending keys")
-			self.client.toggleRemoteKeyControl(KeyboardInputGesture.fromName("NVDA+alt+tab"))
+			self.client.toggleRemoteKeyControl(KeyboardInputGesture.fromName("Aslan+alt+tab"))
 			self.assertTrue(self.client.sendingKeys, "We just explicitly switched to sending keys")
 			post_sessionLockStateChanged.notify(isNowLocked=True)
 			self.assertFalse(
@@ -279,11 +279,11 @@ class TestRemoteClient(unittest.TestCase):
 				"We should resume sending keys after returning from the lock screen",
 			)
 			# When returning control, Remote Access queries `inputCore.manager`
-			# since NVDA isn't running, this is `None`,
+			# since Aslan isn't running, this is `None`,
 			# but we don't care about these checks in this case.
 			# Thus, simply patch it out.
 			with patch("inputCore.manager"):
-				self.client.toggleRemoteKeyControl(KeyboardInputGesture.fromName("NVDA+alt+tab"))
+				self.client.toggleRemoteKeyControl(KeyboardInputGesture.fromName("Aslan+alt+tab"))
 			self.assertFalse(self.client.sendingKeys, "We just explicitly stopped sending keys")
 			post_sessionLockStateChanged.notify(isNowLocked=True)
 			self.assertFalse(

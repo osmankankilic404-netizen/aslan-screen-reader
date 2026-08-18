@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2022 NV Access Limited, Christopher Toth, Babbage B.V., Julien Cochuyt
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""Contains the base classes that many of NVDA's classes such as NVDAObjects, virtualBuffers, appModules, synthDrivers inherit from. These base classes provide such things as auto properties, and methods and properties for scripting and key binding."""
+"""Contains the base classes that many of Aslan's classes such as AslanObjects, virtualBuffers, appModules, synthDrivers inherit from. These base classes provide such things as auto properties, and methods and properties for scripting and key binding."""
 
 from typing import (
 	Any,
@@ -128,7 +128,7 @@ class AutoPropertyObject(garbageHandler.TrackedObject, metaclass=AutoPropertyTyp
 	If there is a _get_x but no _set_x then setting x will override the property completely.
 	Properties can also be cached for the duration of one core pump cycle.
 	This is useful if the same property is likely to be fetched multiple times in one cycle.
-	For example, several NVDAObject properties are fetched by both braille and speech.
+	For example, several AslanObject properties are fetched by both braille and speech.
 	Setting _cache_x to C{True} specifies that x should be cached.
 	Setting it to C{False} specifies that it should not be cached.
 	If _cache_x is not set, L{cachePropertiesByDefault} is used.
@@ -206,7 +206,7 @@ class ScriptableType(AutoPropertyType):
 
 
 class ScriptableObject(AutoPropertyObject, metaclass=ScriptableType):
-	"""A class that implements NVDA's scripting interface.
+	"""A class that implements Aslan's scripting interface.
 	Input gestures are bound to scripts such that the script will be executed when the appropriate input gesture is received.
 	Scripts are methods named with a prefix of C{script_}; e.g. C{script_foo}.
 	They accept an L{inputCore.InputGesture} as their single argument.
@@ -226,7 +226,7 @@ class ScriptableObject(AutoPropertyObject, metaclass=ScriptableType):
 		self._gestureMap = {}
 		# Bind gestures specified on the class.
 		# This includes gestures specified on decorated scripts.
-		# This does not include the gestures that are added when creating a DynamicNVDAObjectType.
+		# This does not include the gestures that are added when creating a DynamicAslanObjectType.
 		for cls in reversed(self.__class__.__mro__):
 			try:
 				self.bindGestures(getattr(cls, "_%s__gestures" % cls.__name__))
@@ -320,6 +320,6 @@ class ScriptableObject(AutoPropertyObject, metaclass=ScriptableType):
 		else:
 			return None
 
-	#: A value for sleepMode which indicates that NVDA should fully sleep for this object;
-	#: i.e. braille and speech via NVDA controller client is disabled and the user cannot disable sleep mode.
+	#: A value for sleepMode which indicates that Aslan should fully sleep for this object;
+	#: i.e. braille and speech via Aslan controller client is disabled and the user cannot disable sleep mode.
 	SLEEP_FULL = "full"

@@ -1,5 +1,5 @@
 # appModules/digitaleditions.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2011-2012 NV Access Limited
@@ -9,7 +9,7 @@
 import appModuleHandler
 import controlTypes
 from textInfos import DocumentWithPageTurns
-from NVDAObjects.UIA import UIA, UIATextInfo
+from AslanObjects.UIA import UIA, UIATextInfo
 from keyboardHandler import KeyboardInputGesture
 import UIAHandler
 
@@ -48,6 +48,6 @@ class BookContent(DocumentWithPageTurns, UIA):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if isinstance(obj, UIA) and obj.role == controlTypes.Role.DOCUMENT:
 			clsList.insert(0, BookContent)

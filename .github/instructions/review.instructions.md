@@ -19,7 +19,7 @@ Use these instructions when reviewing pull requests in this repository.
 
 ## PR checklist expectations
 
-Ensure the PR content supports NVDA’s review checklist:
+Ensure the PR content supports Aslan’s review checklist:
 
 * Documentation impact considered:
   * changelog entry when required

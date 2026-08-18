@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2007-2020 NV Access Limited
@@ -9,7 +9,7 @@ import speech
 import UIAHandler
 from . import IAccessible
 from ..UIA import UIA
-from .. import NVDAObject
+from .. import AslanObject
 from logHandler import log
 import watchdog
 
@@ -229,7 +229,7 @@ class TreeViewItem(IAccessible):
 class BrokenCommctrl5Item(IAccessible):
 	"""Handle broken CommCtrl v5 SysTreeView32 items in 64 bit applications.
 	In these controls, IAccessible fails to retrieve any info, so we must retrieve it using UIA.
-	We do this by obtaining a UIA NVDAObject and redirecting properties to it.
+	We do this by obtaining a UIA AslanObject and redirecting properties to it.
 	We can't simply use UIA objects alone for these controls because UIA events are also broken.
 	"""
 
@@ -306,7 +306,7 @@ class BrokenCommctrl5Item(IAccessible):
 
 	def _get_children(self):
 		# Use the base algorithm, which uses firstChild and next.
-		return NVDAObject._get_children(self)
+		return AslanObject._get_children(self)
 
 	@classmethod
 	def getFirstItem(cls, treeObj):

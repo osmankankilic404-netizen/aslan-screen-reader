@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Peter Vágner, Aleksey Sadovoy, Mesar Hameed, Joseph Lee,
 # Thomas Stivers, Babbage B.V., Accessolutions, Julien Cochuyt, Cyrille Bougot
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
@@ -75,8 +75,8 @@ class ExitDialog(wx.Dialog):
 			return
 		# Use a weakref so the instance can die.
 		ExitDialog._instance = weakref.ref(self)
-		# Translators: The title of the dialog to exit NVDA
-		super().__init__(parent, title=_("Exit NVDA"))
+		# Translators: The title of the dialog to exit Aslan
+		super().__init__(parent, title=_("Exit Aslan"))
 		mainSizer = wx.BoxSizer(wx.VERTICAL)
 
 		warningMessages = []
@@ -91,10 +91,10 @@ class ExitDialog(wx.Dialog):
 			warningMessages.append(addonsDisabledText)
 		if languageHandler.isLanguageForced():
 			langForcedMsg = _(
-				# Translators: A message in the exit Dialog shown when NVDA language has been
+				# Translators: A message in the exit Dialog shown when Aslan language has been
 				# overwritten from the command line.
-				"NVDA's interface language is now forced from the command line."
-				" On the next restart, the language  saved in NVDA's configuration will be used instead.",
+				"Aslan's interface language is now forced from the command line."
+				" On the next restart, the language  saved in Aslan's configuration will be used instead.",
 			)
 			warningMessages.append(langForcedMsg)
 		if warningMessages:
@@ -103,7 +103,7 @@ class ExitDialog(wx.Dialog):
 		# Translators: The label for actions list in the Exit dialog.
 		labelText = _("What would you like to &do?")
 		allowedActions = list(_ExitAction)
-		# Windows Store version of NVDA does not support add-ons yet.
+		# Windows Store version of Aslan does not support add-ons yet.
 		if config.isAppX:
 			allowedActions.remove(_ExitAction.RESTART_WITH_ADDONS_DISABLED_AND_DEBUG_LOGGING_ENABLED)
 		# Changing debug level on secure screen is not allowed.
@@ -138,11 +138,11 @@ class ExitDialog(wx.Dialog):
 		action = [a for a in _ExitAction if a.displayString == self.actionsList.GetStringSelection()][0]
 		if action == _ExitAction.EXIT:
 			WelcomeDialog.closeInstances()
-			if core.triggerNVDAExit():
-				# there's no need to destroy ExitDialog in this instance as triggerNVDAExit will do this
+			if core.triggerAslanExit():
+				# there's no need to destroy ExitDialog in this instance as triggerAslanExit will do this
 				return
 			else:
-				log.error("NVDA already in process of exiting, this indicates a logic error.")
+				log.error("Aslan already in process of exiting, this indicates a logic error.")
 				return
 		elif action == _ExitAction.RESTART:
 			queueHandler.queueFunction(queueHandler.eventQueue, core.restart)

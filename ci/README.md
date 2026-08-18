@@ -1,13 +1,13 @@
 # Continuous Integration with GitHub Actions
 
-Information in this file pertains both to NV Access, and to forks of NVDA that wish to enable automated builds.
+Information in this file pertains both to NV Access, and to forks of Aslan that wish to enable automated builds.
 
 ## Background
 
-GitHub Actions builds the following types of NVDA installers through a CI/CD pipeline:
+GitHub Actions builds the following types of Aslan installers through a CI/CD pipeline:
 
 * Pull Request builds: Generated from pull requests.
-Pull requests initiated from `nvaccess/nvda` rather than a fork have greater permissions than standard PRs.
+Pull requests initiated from `nvaccess/aslan` rather than a fork have greater permissions than standard PRs.
 * Snapshot builds: Generated from pushes to master/beta/rc or branch names prefixed with `try-`.
 These are signed and deployed to the NV Access server.
 * Tagged builds: Generated from pushes to tags prefixed with `release-`.
@@ -21,14 +21,14 @@ The build process is non-linear.
 Some of these steps run concurrently.
 
 * Prepare source code and cache:
-  * Checkout NVDA repository with submodules.
+  * Checkout Aslan repository with submodules.
   * Install dependencies (or use cache).
   * Set version and scons variables.
-  * Build NVDA source.
+  * Build Aslan source.
 * Build and test:
   * Run static tests
   * Build launcher
-  * Install NVDA
+  * Install Aslan
   * Run system tests
 * Deploy:
   * On tagged/snapshot builds, upload symbols to Mozilla
@@ -51,9 +51,9 @@ To do this, go to `https://github.com/YOUR_USER_NAME/YOUR_FORK_REPO/actions`.
 Select "I understand my workflows, go ahead and enable them".
 
 You should check which workflows are enabled, and which are disabled; they may not all be enabled by default when you perform the above step.
-At least initially, the only workflows a fork is likely to want enabled for standard building of NVDA, are: `codeql.yml`, `clearCaches.yml`, and `testAndPublish.yml`.
+At least initially, the only workflows a fork is likely to want enabled for standard building of Aslan, are: `codeql.yml`, `clearCaches.yml`, and `testAndPublish.yml`.
 
-If you are using the GitHub CLI, and you plan to use PRs to trigger NVDA to build instead of pushing to master/beta/rc, you may want those PRs to target your fork instead of nvaccess/nvda.
+If you are using the GitHub CLI, and you plan to use PRs to trigger Aslan to build instead of pushing to master/beta/rc, you may want those PRs to target your fork instead of nvaccess/aslan.
 To do this by default, run the following:
 
 ```sh
@@ -90,7 +90,7 @@ It currently defaults to 0.
 
 ### Crowdin
 
-NVDA translations are synced with Crowdin on the beta branch.
+Aslan translations are synced with Crowdin on the beta branch.
 
 To enable, set:
 
@@ -107,7 +107,7 @@ To enable, set:
 
 ### Uploading symbols
 
-NVDA uploads its build symbols to Mozilla to help them with debugging on snapshot/tagged builds.
+Aslan uploads its build symbols to Mozilla to help them with debugging on snapshot/tagged builds.
 
 To enable, set:
 
@@ -151,7 +151,7 @@ Create two GitHub Environments, one called `production`, the other `snapshot`.
 
 #### production
 
-Used for tagged releases of NVDA.
+Used for tagged releases of Aslan.
 It's recommended to enable deployment protection rules so that a human can confirm the deployment of a built tagged release staged for deployment.
 This is so any desired testing can get manually confirmed, and communications for the release can be prepared.
 
@@ -175,7 +175,7 @@ Configuration:
 
 ### Deployment webhook
 
-Create a GitHub webhook to subscribe to snapshot/tagged builds of NVDA, and use it to deploy to a server.
+Create a GitHub webhook to subscribe to snapshot/tagged builds of Aslan, and use it to deploy to a server.
 
 Under events, only subscribe to the Deployments event.
 

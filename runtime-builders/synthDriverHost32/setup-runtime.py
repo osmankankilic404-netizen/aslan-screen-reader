@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Peter Vágner, Joseph Lee
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -17,13 +17,13 @@ parser.add_argument("--version")
 parser.add_argument("--publisher")
 args = parser.parse_args()
 
-nvdaSourceDir = os.path.join("..", "..", "source")
-runtimeSourceDir = os.path.join(nvdaSourceDir, "_bridge", "runtimes", "synthDriverHost")
+aslanSourceDir = os.path.join("..", "..", "source")
+runtimeSourceDir = os.path.join(aslanSourceDir, "_bridge", "runtimes", "synthDriverHost")
 runtimeName = "synthDriverHost"
 runtimeDestDir = args.dest_dir
 
 
-sys.path.insert(0, nvdaSourceDir)
+sys.path.insert(0, aslanSourceDir)
 
 import gettext  # noqa: E402
 from buildVersion import (  # noqa: E402
@@ -39,12 +39,12 @@ if args.publisher is not None:
 	publisher = args.publisher
 
 
-gettext.install("nvda")
+gettext.install("aslan")
 
 # versionInfo names must be imported after Gettext
 # Suppress E402 (module level import not at top of file)
 from versionInfo import (  # noqa: E402
-	copyright as NVDAcopyright,  # copyright is a reserved python keyword
+	copyright as Aslancopyright,  # copyright is a reserved python keyword
 	description,
 )
 
@@ -53,7 +53,7 @@ from py2exe import freeze  # noqa: E402
 from py2exe.dllfinder import DllFinder  # noqa: E402
 
 RT_MANIFEST = 24
-manifestTemplateFilePath = os.path.join(nvdaSourceDir, "manifest.template.xml")
+manifestTemplateFilePath = os.path.join(aslanSourceDir, "manifest.template.xml")
 
 with open(manifestTemplateFilePath, "r", encoding="utf-8") as manifestTemplateFile:
 	_manifestTemplate = manifestTemplateFile.read()
@@ -108,21 +108,21 @@ freeze(
 		"description": description,
 		"product_name": name,
 		"product_version": version,
-		"copyright": NVDAcopyright,
+		"copyright": Aslancopyright,
 		"company_name": publisher,
 	},
 	console=[
 		{
 			"script": f"{runtimeSourceDir}/main.pyw",
-			"dest_base": f"nvda_{runtimeName}",
-			"icon_resources": [(1, f"{nvdaSourceDir}/images/nvda.ico")],
+			"dest_base": f"aslan_{runtimeName}",
+			"icon_resources": [(1, f"{aslanSourceDir}/images/aslan.ico")],
 			"other_resources": [_genManifestTemplate(shouldHaveUIAccess=False)],
 			"version_info": {
 				"version": formatBuildVersionString(),
-				"description": "32 bit NVDA synthDriver host runtime",
-				"product_name": "NVDA",
+				"description": "32 bit Aslan synthDriver host runtime",
+				"product_name": "Aslan",
 				"product_version": version,
-				"copyright": NVDAcopyright,
+				"copyright": Aslancopyright,
 				"company_name": publisher,
 			},
 		},
@@ -153,8 +153,8 @@ freeze(
 			"IAccessibleHandler",
 			"louis",
 			"mathPres",
-			"NVDAHelper",
-			"NVDAObjects",
+			"AslanHelper",
+			"AslanObjects",
 			"screenCurtain",
 			"textInfos",
 			"textUtils",

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2017-2023 NV Access Limited, Babbage B.V., Leonard de Ruijter
@@ -12,7 +12,7 @@ import braille.regions.focus
 import controlTypes
 import globalVars
 from config import conf
-from ..objectProvider import NVDAObjectWithRole
+from ..objectProvider import AslanObjectWithRole
 import unittest
 
 
@@ -25,14 +25,14 @@ class TestFocusContextPresentation(unittest.TestCase):
 
 	def setUp(self):
 		"""Set up a fake focus object and give it some ancestry."""
-		self.obj = NVDAObjectWithRole(role=controlTypes.Role.LISTITEM)
+		self.obj = AslanObjectWithRole(role=controlTypes.Role.LISTITEM)
 		# Forcefully create a fake focus ancestry
 		# Note that the braille code excludes the desktop object when getting regions for focus ancestry
 		# The resulting focus object including ancestry will look like: "dialog dlg list lst list item"
 		globalVars.focusAncestors = [
 			api.getDesktopObject(),
-			NVDAObjectWithRole(role=controlTypes.Role.DIALOG),
-			NVDAObjectWithRole(role=controlTypes.Role.LIST),
+			AslanObjectWithRole(role=controlTypes.Role.DIALOG),
+			AslanObjectWithRole(role=controlTypes.Role.LIST),
 		]
 		braille.handler.handleGainFocus(self.obj)
 		# Make sure that we are testing with three regions

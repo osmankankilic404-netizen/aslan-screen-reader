@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025 NV Access Limited, Derek Riemer, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""Crash handling helpers shared by watchdog and the rest of NVDA."""
+"""Crash handling helpers shared by watchdog and the rest of Aslan."""
 
 import ctypes
 import json
@@ -11,17 +11,17 @@ import os
 import time
 from dataclasses import asdict, dataclass
 
-import NVDAState
+import AslanState
 from logHandler import log, getFormattedStacksForAllThreads
 import core
 import globalVars
-import NVDAHelper
+import AslanHelper
 from winBindings.kernel32 import UnhandledExceptionFilter, GetCurrentThreadId
 
 
 @dataclass(frozen=True)
 class CrashStats:
-	fileName: str = "nvda_crash_stats.txt"
+	fileName: str = "aslan_crash_stats.txt"
 	timeout: int = 120
 	maxCount: int = 3
 
@@ -73,7 +73,7 @@ def _getCurrentCrashFingerprint() -> tuple[str, str]:
 
 		version = buildVersion.version
 	except Exception:
-		log.debugWarning("Failed to determine NVDA version for crash stats", exc_info=True)
+		log.debugWarning("Failed to determine Aslan version for crash stats", exc_info=True)
 		version = "unknown"
 
 	installType = "unknown"
@@ -98,7 +98,7 @@ def _buildCrashEvent(timestamp: float, version: str, installType: str) -> CrashE
 
 
 def _writeCrashStats(path: str, events: list[CrashEvent]) -> None:
-	if not NVDAState.shouldWriteToDisk():
+	if not AslanState.shouldWriteToDisk():
 		log.debugWarning("Not writing crash stats, as shouldWriteToDisk returned False.")
 		return
 	try:
@@ -148,7 +148,7 @@ def loadRecentCrashTimestamps(now: float) -> list[float]:
 
 
 def _recordCrashTimestamp() -> None:
-	if not NVDAState.shouldWriteToDisk():
+	if not AslanState.shouldWriteToDisk():
 		log.debugWarning("Not recording crash timestamp, as shouldWriteToDisk returned False.")
 		return
 	path = CRASH_STATS.crashStatsPath
@@ -161,7 +161,7 @@ def _recordCrashTimestamp() -> None:
 	try:
 		with open(path, "a", encoding="utf-8") as f:
 			event = _buildCrashEvent(time.time(), version, installType)
-			# Append JSON lines instead of writing a list; NVDA is crashing, keep work minimal
+			# Append JSON lines instead of writing a list; Aslan is crashing, keep work minimal
 			f.write(f"{event.json()}\n")
 	except OSError:
 		log.debugWarning("Failed to append crash stats", exc_info=True)
@@ -175,16 +175,16 @@ def crashHandler(exceptionInfo):
 	ctypes.pythonapi.PyThreadState_SetAsyncExc(threadId, None)
 
 	# Write a minidump.
-	if not NVDAState.shouldWriteToDisk():
-		log.critical("NVDA crashed! Not writing minidump, as shouldWriteToDisk returned False.")
+	if not AslanState.shouldWriteToDisk():
+		log.critical("Aslan crashed! Not writing minidump, as shouldWriteToDisk returned False.")
 	elif (logFileName := globalVars.appArgs.logFileName) is not None:
-		dumpPath = os.path.join(os.path.dirname(logFileName), "nvda_crash.dmp")
-		if not NVDAHelper.localLib.writeCrashDump(dumpPath, exceptionInfo):
-			log.critical("NVDA crashed! Error writing minidump", exc_info=True)
+		dumpPath = os.path.join(os.path.dirname(logFileName), "aslan_crash.dmp")
+		if not AslanHelper.localLib.writeCrashDump(dumpPath, exceptionInfo):
+			log.critical("Aslan crashed! Error writing minidump", exc_info=True)
 		else:
-			log.critical(f"NVDA crashed! Minidump written to {dumpPath}")
+			log.critical(f"Aslan crashed! Minidump written to {dumpPath}")
 	else:
-		log.critical("NVDA crashed! Not writing minidump as logFileName is None")
+		log.critical("Aslan crashed! Not writing minidump as logFileName is None")
 
 	# Log Python stacks for every thread.
 	stacks = getFormattedStacksForAllThreads()
@@ -197,6 +197,6 @@ def crashHandler(exceptionInfo):
 		log.info("Not restarting due to running in secure mode.")
 	else:
 		log.info("Restarting due to crash")
-		# if NVDA has crashed we cannot rely on the queue handler to start the new NVDA instance
+		# if Aslan has crashed we cannot rely on the queue handler to start the new Aslan instance
 		core.restartUnsafely()
 	return 1  # EXCEPTION_EXECUTE_HANDLER

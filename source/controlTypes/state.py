@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2007-2021 NV Access Limited, Babbage B.V.
@@ -89,7 +89,7 @@ class State(DisplayStringIntEnum):
 	OVERFLOWING = setBit(40)
 	UNLOCKED = setBit(41)
 	# HAS_ARIA_DETAILS is not used internally.
-	# See instead refer to NVDAObject.annotations
+	# See instead refer to AslanObject.annotations
 	# This enum value was initially added to controlTypes.py in commit d6787b8f47861f5e76aba68da7a13a217404196f
 	HAS_ARIA_DETAILS = setBit(42)  # Restored for backwards compat only.
 	HASNOTE = setBit(43)

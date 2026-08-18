@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2020-2021 NV Access limited, Leonard de Ruijter
@@ -19,7 +19,7 @@ class ChromiumUIATextInfo(web.UIAWebTextInfo):
 	def expand(self, unit):
 		# #12474: Expanding to line breaks when the underlying text range is empty.
 		if (
-			UIAHandler.NVDAUnitsToUIAUnits.get(unit) == UIAHandler.UIA.TextUnit_Line
+			UIAHandler.AslanUnitsToUIAUnits.get(unit) == UIAHandler.UIA.TextUnit_Line
 			and self.obj.UIATextPattern.documentRange.GetText(1) == ""
 		):
 			return
@@ -76,10 +76,10 @@ class ChromiumUIA(web.UIAWeb):
 
 class ChromiumUIATreeInterceptor(web.UIAWebTreeInterceptor):
 	def _get_documentConstantIdentifier(self):
-		return self.rootNVDAObject.parent._getUIACacheablePropertyValue(UIAHandler.UIA_AutomationIdPropertyId)
+		return self.rootAslanObject.parent._getUIACacheablePropertyValue(UIAHandler.UIA_AutomationIdPropertyId)
 
 	def _get_documentURL(self) -> str | None:
-		return self.rootNVDAObject.value
+		return self.rootAslanObject.value
 
 
 class ChromiumUIADocument(ChromiumUIA):

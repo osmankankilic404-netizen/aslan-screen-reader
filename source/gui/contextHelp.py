@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2022 NV Access Limited, Thomas Stivers
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -26,7 +26,7 @@ def writeRedirect(helpId: str, helpFilePath: str, contextHelpPath: str):
 
 def showHelp(helpId: str):
 	"""Display the corresponding section of the user guide when either the Help
-	button in an NVDA dialog is pressed or the F1 key is pressed on a
+	button in an Aslan dialog is pressed or the F1 key is pressed on a
 	recognized control.
 	"""
 
@@ -44,11 +44,11 @@ def showHelp(helpId: str):
 		return
 	log.debug(f"Opening help: helpId = {helpId}, userGuidePath: {helpFile}")
 
-	nvdaTempDir = os.path.join(tempfile.gettempdir(), "nvda")
-	if not os.path.exists(nvdaTempDir):
-		os.mkdir(nvdaTempDir)
+	aslanTempDir = os.path.join(tempfile.gettempdir(), "aslan")
+	if not os.path.exists(aslanTempDir):
+		os.mkdir(aslanTempDir)
 
-	contextHelpRedirect = os.path.join(nvdaTempDir, "contextHelp.html")
+	contextHelpRedirect = os.path.join(aslanTempDir, "contextHelp.html")
 	try:
 		# a redirect is necessary because not all browsers support opening a fragment URL from the command line.
 		writeRedirect(helpId, helpFile, contextHelpRedirect)
@@ -79,7 +79,7 @@ def _onEvtHelp(helpId: str, evt: wx.HelpEvent):
 
 
 class ContextHelpMixin:
-	#: The name of the appropriate anchor in NVDA help that provides help for the wx.Window this mixin is
+	#: The name of the appropriate anchor in Aslan help that provides help for the wx.Window this mixin is
 	# used with.
 	helpId = ""
 

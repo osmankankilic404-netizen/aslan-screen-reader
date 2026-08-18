@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2026 NV Access Limited, Babbage B.V., Eurobraille, Cyrille Bougot, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from typing import TYPE_CHECKING
 import braille
@@ -137,7 +137,7 @@ GestureMapEntries = {
 			"br(eurobraille):l6",
 		),
 		"kb:alt": ("br(eurobraille):dot8+space"),
-		"braille_toggleNVDAKey": ("br(eurobraille):l7", "br(eurobraille):dot3+dot5+space"),
+		"braille_toggleAslanKey": ("br(eurobraille):l7", "br(eurobraille):dot3+dot5+space"),
 		"kb:control+home": (
 			"br(eurobraille):joystick2left+joystick2up",
 			"br(eurobraille):l1+l2+l3",

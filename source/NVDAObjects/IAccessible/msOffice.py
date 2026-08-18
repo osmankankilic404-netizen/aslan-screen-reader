@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2020 NV Access Limited, Manish Agrawal, Łukasz Golonka
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -8,7 +8,7 @@ import oleacc
 import IAccessibleHandler
 import controlTypes
 import winUser
-from . import IAccessible, getNVDAObjectFromEvent
+from . import IAccessible, getAslanObjectFromEvent
 import eventHandler
 import re
 
@@ -43,7 +43,7 @@ class SDM(IAccessible):
 		):
 			# SDM child IAccessible objects have a broken accParent.
 			# The parent should be the dialog.
-			return getNVDAObjectFromEvent(self.windowHandle, winUser.OBJID_CLIENT, 0)
+			return getAslanObjectFromEvent(self.windowHandle, winUser.OBJID_CLIENT, 0)
 		return super(SDM, self).parent
 
 	def _get_presentationType(self):
@@ -73,7 +73,7 @@ class SDM(IAccessible):
 				and winUser.isDescendantWindow(self.windowHandle, hwndFocus)
 				and not winUser.getClassName(hwndFocus).startswith("bosa_sdm")
 			):
-				obj = getNVDAObjectFromEvent(hwndFocus, winUser.OBJID_CLIENT, 0)
+				obj = getAslanObjectFromEvent(hwndFocus, winUser.OBJID_CLIENT, 0)
 				if not obj:
 					return None
 				if getattr(obj, "parentSDMCanOverrideName", True):

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2009-2022 NV Access Limited, Aleksey Sadovoy
@@ -6,8 +6,8 @@
 from . import VirtualBuffer, VirtualBufferTextInfo
 import browseMode
 import controlTypes
-import NVDAObjects.IAccessible
-from NVDAObjects.IAccessible.adobeAcrobat import normalizeStdName, AcrobatNode
+import AslanObjects.IAccessible
+from AslanObjects.IAccessible.adobeAcrobat import normalizeStdName, AcrobatNode
 import winUser
 import IAccessibleHandler
 import oleacc
@@ -28,7 +28,7 @@ class AdobeAcrobat_TextInfo(VirtualBufferTextInfo):
 			if indexInParent is None:
 				continue
 			try:
-				obj = self._getNVDAObjectFromOffset(offset).getChild(indexInParent)
+				obj = self._getAslanObjectFromOffset(offset).getChild(indexInParent)
 			except IndexError:
 				obj = None
 			if not obj:
@@ -47,7 +47,7 @@ class AdobeAcrobat_TextInfo(VirtualBufferTextInfo):
 			role, level = None, None
 
 		if not role:
-			role = IAccessibleHandler.NVDARoleFromAttr(attrs["IAccessible::role"])
+			role = IAccessibleHandler.AslanRoleFromAttr(attrs["IAccessible::role"])
 		states = IAccessibleHandler.getStatesSetFromIAccessibleAttrs(attrs)
 		role, states = controlTypes.transformRoleStates(role, states)
 
@@ -88,26 +88,26 @@ class AdobeAcrobat(VirtualBuffer):
 	TextInfo = AdobeAcrobat_TextInfo
 	programmaticScrollMayFireEvent = True
 
-	def __init__(self, rootNVDAObject):
-		super(AdobeAcrobat, self).__init__(rootNVDAObject, backendName="adobeAcrobat")
+	def __init__(self, rootAslanObject):
+		super(AdobeAcrobat, self).__init__(rootAslanObject, backendName="adobeAcrobat")
 
 	def __contains__(self, obj):
-		return winUser.isDescendantWindow(self.rootNVDAObject.windowHandle, obj.windowHandle)
+		return winUser.isDescendantWindow(self.rootAslanObject.windowHandle, obj.windowHandle)
 
 	def _get_isAlive(self):
 		if self.isLoading:
 			return True
-		root = self.rootNVDAObject
+		root = self.rootAslanObject
 		if not root:
 			return False
 		if not winUser.isWindow(root.windowHandle) or root.role == controlTypes.Role.UNKNOWN:
 			return False
 		return True
 
-	def getNVDAObjectFromIdentifier(self, docHandle, ID):
-		return NVDAObjects.IAccessible.getNVDAObjectFromEvent(docHandle, winUser.OBJID_CLIENT, ID)
+	def getAslanObjectFromIdentifier(self, docHandle, ID):
+		return AslanObjects.IAccessible.getAslanObjectFromEvent(docHandle, winUser.OBJID_CLIENT, ID)
 
-	def getIdentifierFromNVDAObject(self, obj):
+	def getIdentifierFromAslanObject(self, obj):
 		if not isinstance(obj, AcrobatNode):
 			raise LookupError
 		return obj.windowHandle, obj.accID

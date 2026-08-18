@@ -1,20 +1,20 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2025 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton and others.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""Local machine interface for NVDA Remote.
+"""Local machine interface for Aslan Remote.
 
-This module provides functionality for controlling the local NVDA instance
+This module provides functionality for controlling the local Aslan instance
 in response to commands received from remote connections.
 
 The main class :class:`LocalMachine` implements all local control operations
-that can be triggered by remote NVDA instances. It includes safety features like
+that can be triggered by remote Aslan instances. It includes safety features like
 muting and uses wxPython's CallAfter for thread synchronization.
 
 .. note::
 
-	This module is part of the NVDA Remote protocol implementation and should
+	This module is part of the Aslan Remote protocol implementation and should
 	not be used directly outside of the remote connection infrastructure.
 """
 
@@ -75,21 +75,21 @@ class SoftwareSASGeneration(IntEnum):
 def setSpeechCancelledToFalse() -> None:
 	"""Reset the speech cancellation flag to allow new speech.
 
-	:note: Updates NVDA's internal speech state to ensure future speech will not be cancelled.
+	:note: Updates Aslan's internal speech state to ensure future speech will not be cancelled.
 	    Required when receiving remote speech commands.
-	:warning: This is a temporary workaround that modifies internal NVDA state.
-	    May break in future NVDA versions if the speech subsystem changes.
+	:warning: This is a temporary workaround that modifies internal Aslan state.
+	    May break in future Aslan versions if the speech subsystem changes.
 	:seealso: :meth:`LocalMachine.speak`
 	"""
-	# workaround as beenCanceled is readonly as of NVDA#12395
+	# workaround as beenCanceled is readonly as of Aslan#12395
 	speech.speech._speechState.beenCanceled = False
 
 
 class LocalMachine:
-	"""Controls the local NVDA instance based on remote commands.
+	"""Controls the local Aslan instance based on remote commands.
 
 	This class implements the local side of remote control functionality,
-	serving as the bridge between network commands and local NVDA operations.
+	serving as the bridge between network commands and local Aslan operations.
 	It ensures thread-safe execution and proper state management.
 
 	:note: This class is instantiated by the remote session manager and should not
@@ -213,7 +213,7 @@ class LocalMachine:
 	) -> None:
 		"""Process a speech sequence from a remote machine.
 
-		Safely queues speech from remote NVDA instances into the local speech
+		Safely queues speech from remote Aslan instances into the local speech
 		subsystem, handling priority and ensuring proper cancellation state.
 
 		:param sequence: List of speech sequences (text and commands) to speak
@@ -257,7 +257,7 @@ class LocalMachine:
 	def brailleInput(self, **kwargs: dict[str, Any]) -> None:
 		"""Process braille input gestures from a remote machine.
 
-		Executes braille input commands locally using NVDA's input gesture system.
+		Executes braille input commands locally using Aslan's input gesture system.
 		Handles both display routing and braille keyboard input.
 
 		:param kwargs: Gesture parameters passed to BrailleInputGesture
@@ -375,7 +375,7 @@ class LocalMachine:
 		:return: True if simulating an SAS should succeed, false otherwise.
 		"""
 		if not hasUiAccess():
-			log.debug("Unable to simulate the SAS as NVDA does not have UI Access.")
+			log.debug("Unable to simulate the SAS as Aslan does not have UI Access.")
 			return False
 		# If we have UI Access, whether we can simulate the SAS depends on the Software SAS Generation group policy.
 		try:
@@ -393,7 +393,7 @@ class LocalMachine:
 					# and both means services and ease of access applications can simulate the SAS.
 					# Since it's neither of these values, we can't simulate an SAS.
 					log.debug(
-						f"The setting of {SoftwareSASGeneration.DISPLAY_PATH} does not allow NVDA to simulate the SAS. Got {valueData=}",
+						f"The setting of {SoftwareSASGeneration.DISPLAY_PATH} does not allow Aslan to simulate the SAS. Got {valueData=}",
 					)
 					return False
 		except FileNotFoundError:
@@ -401,7 +401,7 @@ class LocalMachine:
 			# which means that ATs can only simulate the SAS on secure desktops.
 			if not isRunningOnSecureDesktop():
 				log.debug(
-					f"Unable to simulate the SAS as {SoftwareSASGeneration.DISPLAY_PATH} is not set and NVDA is not running on the secure desktop.",
+					f"Unable to simulate the SAS as {SoftwareSASGeneration.DISPLAY_PATH} is not set and Aslan is not running on the secure desktop.",
 				)
 				return False
 		except OSError:

@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
 
-"""Utilities for handling deprecations in NVDA's public API."""
+"""Utilities for handling deprecations in Aslan's public API."""
 
 import inspect
 import sys
@@ -13,7 +13,7 @@ from importlib import import_module
 from types import ModuleType
 from typing import Any
 
-import NVDAState
+import AslanState
 
 
 class DeprecatedSymbol(ABC):
@@ -164,13 +164,13 @@ def handleDeprecations(
 	deprecatedSymbols = {symbol.name: symbol for symbol in deprecated}
 
 	def module_getattr(attrName: str) -> Any:
-		if NVDAState._allowDeprecatedAPI():
+		if AslanState._allowDeprecatedAPI():
 			if attrName in deprecatedSymbols:
 				# Import late to avoid circular import
 				from logHandler import log
 
 				deprecatedSymbol = deprecatedSymbols[attrName]
-				# TODO: #17783: switch to using warnings.warn when NVDA's support for it matures.
+				# TODO: #17783: switch to using warnings.warn when Aslan's support for it matures.
 				log.warning(
 					deprecatedSymbol.getLogMessage(modName),
 					stack_info=True,

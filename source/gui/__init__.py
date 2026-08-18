@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Peter Vágner, Aleksey Sadovoy, Mesar Hameed, Joseph Lee,
 # Thomas Stivers, Babbage B.V., Accessolutions, Julien Cochuyt, Cyrille Bougot, Luke Davis
 # This file is covered by the GNU General Public License.
@@ -28,7 +28,7 @@ import systemUtils
 from .message import (
 	Button,
 	Payload,
-	# messageBox is accessed through `gui.messageBox` as opposed to `gui.message.messageBox` throughout NVDA,
+	# messageBox is accessed through `gui.messageBox` as opposed to `gui.message.messageBox` throughout Aslan,
 	# be cautious when removing
 	messageBox,
 	MessageDialog,
@@ -40,7 +40,7 @@ from .speechDict import (
 	VoiceDictionaryDialog,
 	TemporaryDictionaryDialog,
 )
-from .nvdaControls import _ContinueCancelDialog
+from .aslanControls import _ContinueCancelDialog
 
 # ExitDialog is accessed through `import gui.ExitDialog` as opposed to `gui.exit.ExitDialog`.
 # Be careful when removing, and only do in a compatibility breaking release.
@@ -59,7 +59,7 @@ from .settingsDialogs import (
 	MagnifierPanel,
 	MouseSettingsPanel,
 	MultiCategorySettingsDialog,
-	NVDASettingsDialog,
+	AslanSettingsDialog,
 	ObjectPresentationPanel,
 	PrivacyAndSecuritySettingsPanel,
 	RemoteSettingsPanel,
@@ -78,10 +78,10 @@ from . import logViewer
 import speechViewer
 import winUser
 import api
-import NVDAState
+import AslanState
 
 
-if NVDAState._allowDeprecatedAPI():
+if AslanState._allowDeprecatedAPI():
 
 	def quit():
 		"""
@@ -97,8 +97,8 @@ except RuntimeError:
 	updateCheck = None
 
 ### Constants
-NVDA_PATH = globalVars.appDir
-ICON_PATH = os.path.join(NVDA_PATH, "images", "nvda.ico")
+Aslan_PATH = globalVars.appDir
+ICON_PATH = os.path.join(Aslan_PATH, "images", "aslan.ico")
 DONATE_URL = f"{buildVersion.url}/donate/"
 
 ### Globals
@@ -111,7 +111,7 @@ def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
 	from gui.settingsDialogs import AutoSettingsMixin, SettingsPanel
 
-	if attrName == "AutoSettingsMixin" and NVDAState._allowDeprecatedAPI():
+	if attrName == "AutoSettingsMixin" and AslanState._allowDeprecatedAPI():
 		log.warning(
 			"Importing AutoSettingsMixin from here is deprecated. "
 			"Import AutoSettingsMixin from gui.settingsDialogs instead. ",
@@ -119,7 +119,7 @@ def __getattr__(attrName: str) -> Any:
 			stack_info=True,
 		)
 		return AutoSettingsMixin
-	if attrName == "SettingsPanel" and NVDAState._allowDeprecatedAPI():
+	if attrName == "SettingsPanel" and AslanState._allowDeprecatedAPI():
 		log.warning(
 			"Importing SettingsPanel from here is deprecated. "
 			"Import SettingsPanel from gui.settingsDialogs instead. ",
@@ -127,7 +127,7 @@ def __getattr__(attrName: str) -> Any:
 			stack_info=True,
 		)
 		return SettingsPanel
-	if attrName == "ExecAndPump" and NVDAState._allowDeprecatedAPI():
+	if attrName == "ExecAndPump" and AslanState._allowDeprecatedAPI():
 		log.warning(
 			"Importing ExecAndPump from here is deprecated. Import ExecAndPump from systemUtils instead. ",
 			# Include stack info so testers can report warning to add-on author.
@@ -150,14 +150,14 @@ class MainFrame(wx.Frame):
 		#: The focus before the last popup or C{None} if unknown.
 		#: This is only valid before L{prePopup} is called,
 		#: so it should be used as early as possible in any popup that needs it.
-		#: @type: L{NVDAObject}
+		#: @type: L{AslanObject}
 		self.prevFocus = None
 		#: The focus ancestors before the last popup or C{None} if unknown.
-		#: @type: list of L{NVDAObject}
+		#: @type: list of L{AslanObject}
 		self.prevFocusAncestors = None
-		# If NVDA has the uiAccess privilege, it can always set the foreground window.
+		# If Aslan has the uiAccess privilege, it can always set the foreground window.
 		if not systemUtils.hasUiAccess():
-			# This makes Windows return to the previous foreground window and also seems to allow NVDA to be brought to the foreground.
+			# This makes Windows return to the previous foreground window and also seems to allow Aslan to be brought to the foreground.
 			self.Show()
 			self.Hide()
 			if winUser.isWindowVisible(self.Handle):
@@ -174,12 +174,12 @@ class MainFrame(wx.Frame):
 		@postcondition: A dialog or menu may be shown.
 		"""
 		focus = api.getFocusObject()
-		# Do not set prevFocus if the focus is on a control rendered by NVDA itself, such as the NVDA menu.
-		# This allows to refer to the control that had focus before opening the menu while still using NVDA
+		# Do not set prevFocus if the focus is on a control rendered by Aslan itself, such as the Aslan menu.
+		# This allows to refer to the control that had focus before opening the menu while still using Aslan
 		# on its own controls.
-		# The check for NVDA process ID can be bypassed by setting the optional attribute
-		# L{isPrevFocusOnNvdaPopup} to L{True} when a NVDA dialog offers customizable bound gestures,
-		# eg. the NVDA Python Console.
+		# The check for Aslan process ID can be bypassed by setting the optional attribute
+		# L{isPrevFocusOnNvdaPopup} to L{True} when a Aslan dialog offers customizable bound gestures,
+		# eg. the Aslan Python Console.
 		if focus.processID != globalVars.appPid or getattr(focus, "isPrevFocusOnNvdaPopup", False):
 			self.prevFocus = focus
 			self.prevFocusAncestors = api.getFocusAncestors()
@@ -208,13 +208,13 @@ class MainFrame(wx.Frame):
 
 	def onRevertToSavedConfigurationCommand(self, evt):
 		queueHandler.queueFunction(queueHandler.eventQueue, core.resetConfiguration)
-		# Translators: Reported when last saved configuration has been applied by using revert to saved configuration option in NVDA menu.
+		# Translators: Reported when last saved configuration has been applied by using revert to saved configuration option in Aslan menu.
 		queueHandler.queueFunction(queueHandler.eventQueue, ui.message, _("Configuration applied"))
 
 	@blockAction.when(blockAction.Context.MODAL_DIALOG_OPEN)
 	def _confirmRevertToDefaultConfiguration(self, evt):
 		"""Reset config to factory defaults, then show a dialog allowing the user to undo the reset.
-		This is used when triggered from the NVDA menu.
+		This is used when triggered from the Aslan menu.
 		"""
 		from .configManagement import confirmRevertToDefaultConfiguration
 
@@ -230,7 +230,7 @@ class MainFrame(wx.Frame):
 			queueHandler.eventQueue,
 			ui.message,
 			# Translators: Reported when configuration has been restored to defaults,
-			# by using restore configuration to factory defaults item in NVDA menu.
+			# by using restore configuration to factory defaults item in Aslan menu.
 			_("Configuration restored to factory defaults"),
 		)
 
@@ -246,7 +246,7 @@ class MainFrame(wx.Frame):
 		except PermissionError:
 			messageBox(
 				# Translators: Message shown when current configuration cannot be saved,
-				# such as when running NVDA from a CD.
+				# such as when running Aslan from a CD.
 				_("Could not save configuration - probably read only file system"),
 				# Translators: the title of an error message dialog
 				_("Error"),
@@ -280,7 +280,7 @@ class MainFrame(wx.Frame):
 
 		self.postPopup()
 
-	if NVDAState._allowDeprecatedAPI():
+	if AslanState._allowDeprecatedAPI():
 
 		def _popupSettingsDialog(self, dialog: type[SettingsDialog], *args, **kwargs):
 			log.warning(
@@ -336,74 +336,74 @@ class MainFrame(wx.Frame):
 			d.Show()
 			self.postPopup()
 		else:
-			if not core.triggerNVDAExit():
-				log.error("NVDA already in process of exiting, this indicates a logic error.")
+			if not core.triggerAslanExit():
+				log.error("Aslan already in process of exiting, this indicates a logic error.")
 
-	def onNVDASettingsCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog)
+	def onAslanSettingsCommand(self, evt):
+		self.popupSettingsDialog(AslanSettingsDialog)
 
 	def onGeneralSettingsCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, GeneralSettingsPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, GeneralSettingsPanel)
 
 	def onSelectSynthesizerCommand(self, evt):
 		self.popupSettingsDialog(SynthesizerSelectionDialog)
 
 	def onSpeechSettingsCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, SpeechSettingsPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, SpeechSettingsPanel)
 
 	def onSelectBrailleDisplayCommand(self, evt):
 		self.popupSettingsDialog(BrailleDisplaySelectionDialog)
 
 	def onBrailleSettingsCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, BrailleSettingsPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, BrailleSettingsPanel)
 
 	def onAudioSettingsCommand(self, evt: wx.CommandEvent):
-		self.popupSettingsDialog(NVDASettingsDialog, AudioPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, AudioPanel)
 
 	def onPrivacyAndSecuritySettingsCommand(self, evt: wx.CommandEvent):
-		self.popupSettingsDialog(NVDASettingsDialog, PrivacyAndSecuritySettingsPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, PrivacyAndSecuritySettingsPanel)
 
 	def onVisionSettingsCommand(self, evt: wx.CommandEvent):
-		self.popupSettingsDialog(NVDASettingsDialog, VisionSettingsPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, VisionSettingsPanel)
 
 	def onKeyboardSettingsCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, KeyboardSettingsPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, KeyboardSettingsPanel)
 
 	def onMouseSettingsCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, MouseSettingsPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, MouseSettingsPanel)
 
 	def onTouchInteractionCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, TouchInteractionPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, TouchInteractionPanel)
 
 	def onReviewCursorCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, ReviewCursorPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, ReviewCursorPanel)
 
 	def onInputCompositionCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, InputCompositionPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, InputCompositionPanel)
 
 	def onObjectPresentationCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, ObjectPresentationPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, ObjectPresentationPanel)
 
 	def onBrowseModeCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, BrowseModePanel)
+		self.popupSettingsDialog(AslanSettingsDialog, BrowseModePanel)
 
 	def onDocumentFormattingCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, DocumentFormattingPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, DocumentFormattingPanel)
 
 	@blockAction.when(blockAction.Context.SECURE_MODE)
 	def onAddonStoreSettingsCommand(self, evt: wx.CommandEvent):
-		self.popupSettingsDialog(NVDASettingsDialog, AddonStorePanel)
+		self.popupSettingsDialog(AslanSettingsDialog, AddonStorePanel)
 
 	def onUwpOcrCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, UwpOcrPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, UwpOcrPanel)
 
 	@blockAction.when(blockAction.Context.SECURE_MODE)
 	def onRemoteAccessSettingsCommand(self, evt):
-		self.popupSettingsDialog(NVDASettingsDialog, RemoteSettingsPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, RemoteSettingsPanel)
 
 	@blockAction.when(blockAction.Context.SECURE_MODE)
 	def onAdvancedSettingsCommand(self, evt: wx.CommandEvent):
-		self.popupSettingsDialog(NVDASettingsDialog, AdvancedPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, AdvancedPanel)
 
 	@blockAction.when(blockAction.Context.SECURE_MODE)
 	def onSpeechSymbolsCommand(self, evt):
@@ -414,7 +414,7 @@ class MainFrame(wx.Frame):
 		self.popupSettingsDialog(InputGesturesDialog)
 
 	def onMagnifierSettingsCommand(self, evt: wx.CommandEvent):
-		self.popupSettingsDialog(NVDASettingsDialog, MagnifierPanel)
+		self.popupSettingsDialog(AslanSettingsDialog, MagnifierPanel)
 
 	@staticmethod
 	def _copyVersionToClipboard(p: Payload):
@@ -427,13 +427,13 @@ class MainFrame(wx.Frame):
 	def onAboutCommand(self, evt: wx.CommandEvent):
 		copyButton = Button(
 			id=wx.ID_COPY,
-			# Translators: The label for a button to copy the NVDA version number from the about dialog.
+			# Translators: The label for a button to copy the Aslan version number from the about dialog.
 			label=_("&Copy version number"),
 			callback=self._copyVersionToClipboard,
 			closesDialog=False,
 		)
-		# Translators: The title of the dialog to show about info for NVDA.
-		aboutDialog = MessageDialog(None, versionInfo.aboutMessage, _("About NVDA"))
+		# Translators: The title of the dialog to show about info for Aslan.
+		aboutDialog = MessageDialog(None, versionInfo.aboutMessage, _("About Aslan"))
 		aboutDialog.addButton(copyButton)
 		if globalVars.appArgs.secure:
 			button = next(c for c in aboutDialog.GetChildren() if c.GetId() == copyButton.id)
@@ -448,7 +448,7 @@ class MainFrame(wx.Frame):
 		logViewer.activate()
 
 	def onSpeechViewerEnabled(self, isEnabled):
-		# its possible for this to be called after the sysTrayIcon is destroyed if we are exiting NVDA
+		# its possible for this to be called after the sysTrayIcon is destroyed if we are exiting Aslan
 		if self.sysTrayIcon and self.sysTrayIcon.menu_tools_toggleSpeechViewer:
 			self.sysTrayIcon.menu_tools_toggleSpeechViewer.Check(isEnabled)
 
@@ -460,7 +460,7 @@ class MainFrame(wx.Frame):
 			speechViewer.deactivate()
 
 	def onBrailleViewerChangedState(self, created):
-		# its possible for this to be called after the sysTrayIcon is destroyed if we are exiting NVDA
+		# its possible for this to be called after the sysTrayIcon is destroyed if we are exiting Aslan
 		if self.sysTrayIcon and self.sysTrayIcon.menu_tools_toggleBrailleViewer:
 			self.sysTrayIcon.menu_tools_toggleBrailleViewer.Check(created)
 
@@ -481,7 +481,7 @@ class MainFrame(wx.Frame):
 			pythonConsole.initialize()
 		pythonConsole.activate()
 
-	if NVDAState._allowDeprecatedAPI():
+	if AslanState._allowDeprecatedAPI():
 
 		def onAddonsManagerCommand(self, evt: wx.MenuEvent):
 			log.warning(
@@ -524,11 +524,11 @@ class MainFrame(wx.Frame):
 	def onReloadPluginsCommand(self, evt):
 		import appModuleHandler
 		import globalPluginHandler
-		from NVDAObjects import NVDAObject
+		from AslanObjects import AslanObject
 
 		appModuleHandler.reloadAppModules()
 		globalPluginHandler.reloadGlobalPlugins()
-		NVDAObject.clearDynamicClassCache()
+		AslanObject.clearDynamicClassCache()
 
 	@blockAction.when(
 		blockAction.Context.SECURE_MODE,
@@ -592,8 +592,8 @@ class MainFrame(wx.Frame):
 		progressDialog = IndeterminateProgressDialog(
 			mainFrame,
 			genericTitle,
-			# Translators: The message displayed while NVDA is running the System Accessibility Repair Tool
-			_("Please wait while NVDA attempts to repair your system's accessibility registrations..."),
+			# Translators: The message displayed while Aslan is running the System Accessibility Repair Tool
+			_("Please wait while Aslan attempts to repair your system's accessibility registrations..."),
 		)
 		error: str | None = None
 		try:
@@ -657,12 +657,12 @@ class SysTrayIcon(wx.adv.TaskBarIcon):
 		menu_preferences = self.preferencesMenu = wx.Menu()
 		item = menu_preferences.Append(
 			wx.ID_ANY,
-			# Translators: The label for the menu item to open NVDA Settings dialog.
+			# Translators: The label for the menu item to open Aslan Settings dialog.
 			_("&Settings..."),
-			# Translators: The description for the menu item to open NVDA Settings dialog.
-			_("NVDA settings"),
+			# Translators: The description for the menu item to open Aslan Settings dialog.
+			_("Aslan settings"),
 		)
-		self.Bind(wx.EVT_MENU, frame.onNVDASettingsCommand, item)
+		self.Bind(wx.EVT_MENU, frame.onAslanSettingsCommand, item)
 		if not globalVars.appArgs.secure:
 			# Translators: The label for a submenu under NvDA Preferences menu to select speech dictionaries.
 			menu_preferences.AppendSubMenu(self._createSpeechDictsSubMenu(frame), _("Speech &dictionaries"))
@@ -672,12 +672,12 @@ class SysTrayIcon(wx.adv.TaskBarIcon):
 			# Translators: The label for the menu item to open the Input Gestures dialog.
 			item = menu_preferences.Append(wx.ID_ANY, _("I&nput gestures..."))
 			self.Bind(wx.EVT_MENU, frame.onInputGesturesCommand, item)
-		# Translators: The label for Preferences submenu in NVDA menu.
+		# Translators: The label for Preferences submenu in Aslan menu.
 		self.menu.AppendSubMenu(menu_preferences, _("&Preferences"))
 
 		menu_tools = self.toolsMenu = wx.Menu()
 		if not globalVars.appArgs.secure:
-			# Translators: The label for the menu item to open NVDA Log Viewer.
+			# Translators: The label for the menu item to open Aslan Log Viewer.
 			item = menu_tools.Append(wx.ID_ANY, _("View &log"))
 			self.Bind(wx.EVT_MENU, frame.onViewLogCommand, item)
 
@@ -702,23 +702,23 @@ class SysTrayIcon(wx.adv.TaskBarIcon):
 			self.menu_tools_toggleBrailleViewer.Check(brailleViewer.isBrailleViewerActive())
 			brailleViewer.postBrailleViewerToolToggledAction.register(frame.onBrailleViewerChangedState)
 
-		if not config.isAppX and NVDAState.shouldWriteToDisk():
+		if not config.isAppX and AslanState.shouldWriteToDisk():
 			# Translators: The label of a menu item to open the Add-on store
 			item = menu_tools.Append(wx.ID_ANY, _("&Add-on store..."))
 			self.Bind(wx.EVT_MENU, frame.onAddonStoreCommand, item)
 
 		if not globalVars.appArgs.secure and not config.isAppX:
-			# Translators: The label for the menu item to open NVDA Python Console.
+			# Translators: The label for the menu item to open Aslan Python Console.
 			item = menu_tools.Append(wx.ID_ANY, _("&Python console"))
 			self.Bind(wx.EVT_MENU, frame.onPythonConsoleCommand, item)
 
-		if not globalVars.appArgs.secure and not config.isAppX and not NVDAState.isRunningAsSource():
-			# Translators: The label for the menu item to create a portable copy of NVDA from an installed or another portable version.
+		if not globalVars.appArgs.secure and not config.isAppX and not AslanState.isRunningAsSource():
+			# Translators: The label for the menu item to create a portable copy of Aslan from an installed or another portable version.
 			item = menu_tools.Append(wx.ID_ANY, _("&Create portable copy..."))
 			self.Bind(wx.EVT_MENU, frame.onCreatePortableCopyCommand, item)
 			if not config.isInstalledCopy():
-				# Translators: The label for the menu item to install NVDA on the computer.
-				item = menu_tools.Append(wx.ID_ANY, _("&Install NVDA..."))
+				# Translators: The label for the menu item to install Aslan on the computer.
+				item = menu_tools.Append(wx.ID_ANY, _("&Install Aslan..."))
 				self.Bind(wx.EVT_MENU, frame.onInstallCommand, item)
 			# Translators: The label for the menu item to run the System Accessibility Repair Tool
 			item = menu_tools.Append(wx.ID_ANY, _("Run System Accessibility Repair Tool..."))
@@ -727,7 +727,7 @@ class SysTrayIcon(wx.adv.TaskBarIcon):
 			# Translators: The label for the menu item to reload plugins.
 			item = menu_tools.Append(wx.ID_ANY, _("Reload plugins"))
 			self.Bind(wx.EVT_MENU, frame.onReloadPluginsCommand, item)
-		# Translators: The label for the Tools submenu in NVDA menu.
+		# Translators: The label for the Tools submenu in Aslan menu.
 		self.menu.AppendSubMenu(menu_tools, _("&Tools"))
 
 		self._appendHelpSubMenu(frame)
@@ -745,10 +745,10 @@ class SysTrayIcon(wx.adv.TaskBarIcon):
 		self.menu.AppendSeparator()
 		item = self.menu.Append(
 			wx.ID_EXIT,
-			# Translators: The label for the menu item to exit NVDA
+			# Translators: The label for the menu item to exit Aslan
 			_("E&xit"),
-			# Translators: The help string for the menu item to exit NVDA
-			_("Exit NVDA"),
+			# Translators: The help string for the menu item to exit Aslan
+			_("Exit Aslan"),
 		)
 		self.Bind(wx.EVT_MENU, frame.onExitCommand, item)
 
@@ -766,16 +766,16 @@ class SysTrayIcon(wx.adv.TaskBarIcon):
 	def onActivate(self, evt):
 		self.evaluateUpdatePendingUpdateMenuItemCommand()
 		mainFrame.prePopup()
-		import appModules.nvda
+		import appModules.aslan
 
-		if not appModules.nvda.nvdaMenuIaIdentity:
-			# The NVDA app module doesn't know how to identify the NVDA menu yet.
-			# Signal that the NVDA menu has just been opened.
-			appModules.nvda.nvdaMenuIaIdentity = True
+		if not appModules.aslan.aslanMenuIaIdentity:
+			# The Aslan app module doesn't know how to identify the Aslan menu yet.
+			# Signal that the Aslan menu has just been opened.
+			appModules.aslan.aslanMenuIaIdentity = True
 		self.PopupMenu(self.menu)
-		if appModules.nvda.nvdaMenuIaIdentity is True:
-			# The NVDA menu didn't actually appear for some reason.
-			appModules.nvda.nvdaMenuIaIdentity = None
+		if appModules.aslan.aslanMenuIaIdentity is True:
+			# The Aslan menu didn't actually appear for some reason.
+			appModules.aslan.aslanMenuIaIdentity = None
 		mainFrame.postPopup()
 
 	def _createSpeechDictsSubMenu(self, frame: MainFrame) -> wx.Menu:
@@ -826,20 +826,20 @@ class SysTrayIcon(wx.adv.TaskBarIcon):
 		item = self.menu.Append(
 			wx.ID_ANY,
 			# Translators: The label for the menu item to reset settings to default settings.
-			# Here, default settings means settings that were there when the user first used NVDA.
+			# Here, default settings means settings that were there when the user first used Aslan.
 			_("Reset configuration to &factory defaults"),
 			# Translators: The help text for the menu item to reset settings to default settings.
-			# Here, default settings means settings that were there when the user first used NVDA.
+			# Here, default settings means settings that were there when the user first used Aslan.
 			_("Reset all settings to default state"),
 		)
 		self.Bind(wx.EVT_MENU, frame._confirmRevertToDefaultConfiguration, item)
-		if NVDAState.shouldWriteToDisk():
+		if AslanState.shouldWriteToDisk():
 			item = self.menu.Append(
 				wx.ID_SAVE,
 				# Translators: The label for the menu item to save current settings.
 				_("&Save configuration"),
 				# Translators: The help text for the menu item to save current settings.
-				_("Write the current configuration to nvda.ini"),
+				_("Write the current configuration to aslan.ini"),
 			)
 			self.Bind(wx.EVT_MENU, frame.onSaveConfigurationCommand, item)
 
@@ -847,7 +847,7 @@ class SysTrayIcon(wx.adv.TaskBarIcon):
 		self.helpMenu = wx.Menu()
 
 		if not globalVars.appArgs.secure:
-			# Translators: The label of a menu item to open NVDA user guide.
+			# Translators: The label of a menu item to open Aslan user guide.
 			item = self.helpMenu.Append(wx.ID_ANY, _("&User Guide"))
 			self.Bind(wx.EVT_MENU, lambda evt: self._openDocumentationFile("userGuide.html"), item)
 			# Translators: The label of a menu item to open the Commands Quick Reference document.
@@ -859,36 +859,36 @@ class SysTrayIcon(wx.adv.TaskBarIcon):
 
 			self.helpMenu.AppendSeparator()
 
-			# Translators: The label for the menu item to view the NVDA website
+			# Translators: The label for the menu item to view the Aslan website
 			item = self.helpMenu.Append(wx.ID_ANY, _("NV Access &web site"))
 			self.Bind(wx.EVT_MENU, lambda evt: os.startfile(buildVersion.url), item)
-			# Translators: The label for the menu item to view the NVDA website's get help section
+			# Translators: The label for the menu item to view the Aslan website's get help section
 			item = self.helpMenu.Append(wx.ID_ANY, _("&Help, training and support"))
 			self.Bind(wx.EVT_MENU, lambda evt: os.startfile(f"{buildVersion.url}/get-help/"), item)
-			# Translators: The label for the menu item to view the NVDA website's get help section
+			# Translators: The label for the menu item to view the Aslan website's get help section
 			item = self.helpMenu.Append(wx.ID_ANY, _("NV Access &shop"))
 			self.Bind(wx.EVT_MENU, lambda evt: os.startfile(f"{buildVersion.url}/shop/"), item)
 
 			self.helpMenu.AppendSeparator()
 
-			# Translators: The label for the menu item to view the NVDA License.
+			# Translators: The label for the menu item to view the Aslan License.
 			item = self.helpMenu.Append(wx.ID_ANY, _("L&icense"))
 			self.Bind(wx.EVT_MENU, lambda evt: displayLicense(), item)
 
-			# Translators: The label for the menu item to open NVDA Welcome Dialog.
+			# Translators: The label for the menu item to open Aslan Welcome Dialog.
 			item = self.helpMenu.Append(wx.ID_ANY, _("We&lcome dialog..."))
 			self.Bind(wx.EVT_MENU, lambda evt: WelcomeDialog.run(), item)
 
 			if updateCheck:
-				# Translators: The label of a menu item to manually check for an updated version of NVDA.
+				# Translators: The label of a menu item to manually check for an updated version of Aslan.
 				item = self.helpMenu.Append(wx.ID_ANY, _("&Check for update..."))
 				self.Bind(wx.EVT_MENU, frame.onCheckForUpdateCommand, item)
 
-		# Translators: The label for the menu item to open About dialog to get information about NVDA.
-		item = self.helpMenu.Append(wx.ID_ABOUT, _("&About..."), _("About NVDA"))
+		# Translators: The label for the menu item to open About dialog to get information about Aslan.
+		item = self.helpMenu.Append(wx.ID_ABOUT, _("&About..."), _("About Aslan"))
 		self.Bind(wx.EVT_MENU, frame.onAboutCommand, item)
 
-		# Translators: The label for the Help submenu in NVDA menu.
+		# Translators: The label for the Help submenu in Aslan menu.
 		self.menu.AppendSubMenu(self.helpMenu, _("&Help"))
 
 	def _openDocumentationFile(self, fileName: str) -> None:
@@ -907,7 +907,7 @@ class SysTrayIcon(wx.adv.TaskBarIcon):
 				# Translators: The label for the menu item to run a pending update.
 				_("Install pending &update"),
 				# Translators: The description for the menu item to run a pending update.
-				_("Execute a previously downloaded NVDA update"),
+				_("Execute a previously downloaded Aslan update"),
 			)
 			self.Bind(wx.EVT_MENU, frame.onExecuteUpdateCommand, item)
 
@@ -928,8 +928,8 @@ def initialize():
 
 	# Set up GUI persistence
 	persistenceManager = wx.lib.agw.persist.PersistenceManager.Get()
-	persistenceManager.SetPersistenceFile(NVDAState.WritePaths.guiStateFile)
-	if not NVDAState.shouldWriteToDisk():
+	persistenceManager.SetPersistenceFile(AslanState.WritePaths.guiStateFile)
+	if not AslanState.shouldWriteToDisk():
 		persistenceManager.DisableSaving()
 
 
@@ -1009,14 +1009,14 @@ class IndeterminateProgressDialog(wx.ProgressDialog):
 
 
 def shouldConfigProfileTriggersBeSuspended():
-	"""Determine whether configuration profile triggers should be suspended in relation to NVDA's GUI.
-	For NVDA configuration dialogs, the configuration should remain the same as it was before the GUI was popped up
+	"""Determine whether configuration profile triggers should be suspended in relation to Aslan's GUI.
+	For Aslan configuration dialogs, the configuration should remain the same as it was before the GUI was popped up
 	so the user can change settings in the correct profile.
 	Top-level windows that require this behavior should have a C{shouldSuspendConfigProfileTriggers} attribute set to C{True}.
-	Because these dialogs are often opened via the NVDA menu, this applies to the NVDA menu as well.
+	Because these dialogs are often opened via the Aslan menu, this applies to the Aslan menu as well.
 	"""
 	if winUser.getGUIThreadInfo(winBindings.kernel32.GetCurrentThreadId()).flags & 0x00000010:
-		# The NVDA menu is active.
+		# The Aslan menu is active.
 		return True
 	for window in wx.GetTopLevelWindows():
 		if window.IsShown() and getattr(window, "shouldSuspendConfigProfileTriggers", False):
@@ -1030,9 +1030,9 @@ class NonReEntrantTimer(wx.Timer):
 	meaning that if code within its callback pumped messages (E.g. called wx.Yield) and this timer was ready to fire again,
 	the timer would not fire until the first callback had completed.
 	However, in WXPython 4, wx.Timer is now re-entrant.
-	Code in NVDA is not written to handle re-entrant timers, so this class provides a Timer with the old behaviour.
+	Code in Aslan is not written to handle re-entrant timers, so this class provides a Timer with the old behaviour.
 	This should be used in place of wx.Timer and wx.PyTimer where the callback will directly or indirectly call wx.Yield or some how process the Windows window message queue.
-	For example, NVDA's core pump or other timers that run in NVDA's main thread.
+	For example, Aslan's core pump or other timers that run in Aslan's main thread.
 	Timers on braille display drivers for key detection don't need to use this as they only queue gestures rather than actually executing them.
 	"""
 

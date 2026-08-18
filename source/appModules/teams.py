@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020 NV Access Limited, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -6,7 +6,7 @@
 """App module for Microsoft Teams."""
 
 import appModuleHandler
-from NVDAObjects.IAccessible.ia2Web import Ia2Web
+from AslanObjects.IAccessible.ia2Web import Ia2Web
 
 
 class PopOverMenu(Ia2Web):
@@ -14,14 +14,14 @@ class PopOverMenu(Ia2Web):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		# #11821, #14355
 		# Teams will sometimes create an element with an ARIA role of menu
 		# at the same time another element gets focus,
 		# E.g. an emoji menu appears every time a conversation message is focused.
 		# Web frameworks such as Chromium will tend to fire a menu_popupStart event
 		# when a node with a role of menu is added to the DOM.
-		# NVDA's default behaviour for handling menu_popupStart is to set NVDA's focus to the menu
+		# Aslan's default behaviour for handling menu_popupStart is to set Aslan's focus to the menu
 		# and cancel speech.
 		# We should deliberately suppress this in Teams however,
 		# Otherwise the focused message cannot be read.

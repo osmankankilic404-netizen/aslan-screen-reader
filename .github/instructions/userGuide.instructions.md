@@ -3,14 +3,14 @@ applyTo: user_docs/en/userGuide.md
 description: This file describes the standards for writing documentation in the User Guide
 ---
 
-# User Guide standards for NVDA
+# User Guide standards for Aslan
 
 ## General standards
 
-* Key commands (e.g. `NVDA+control+upArrow`):
+* Key commands (e.g. `Aslan+control+upArrow`):
   * should be written in lowerCamelCase
   * encapsulated in monospace code-block formatting
-  * NVDA should be capitalized
+  * Aslan should be capitalized
 * When referring to Windows terminology, follow the Windows style guide.
   * For instance, instead of "system tray" refer to "notification area"
 
@@ -32,7 +32,7 @@ If necessary, a description of a common use case that is supported by each optio
 |---|---|
 |Options |Default (Enabled), Disabled, Enabled |
 |Default |Enabled |
-|Toggle command |`NVDA+shift+e` |
+|Toggle command |`Aslan+shift+e` |
 
 |Option |Behaviour |
 |---|---|
@@ -61,7 +61,7 @@ The `KC:title` command must appear first and specifies the title of the Key Comm
 For example:
 
 ```md
-<!-- KC:title: NVDA Key Commands -->
+<!-- KC:title: Aslan Key Commands -->
 ```
 
 ### Selecting blocks
@@ -109,8 +109,8 @@ For example:
 
 | . {.hideHeaderRow} |.|
 |---|---|
-| Desktop key | `NVDA+control+t` |
-| Laptop key | `NVDA+control+t` |
+| Desktop key | `Aslan+control+t` |
+| Laptop key | `Aslan+control+t` |
 
 This option allows you to choose whether the braille display will follow the system focus, or whether it follows the navigator object / review cursor.
 ```

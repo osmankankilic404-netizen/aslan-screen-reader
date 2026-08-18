@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2010-2024 NV Access Limited, Mesar Hameed, Takuya Nishimoto
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -10,7 +10,7 @@ Works as a Python Markdown Extension:
 https://python-markdown.github.io/extensions/
 
 Refer to user guide standards for more information on syntax rules:
-https://github.com/nvaccess/nvda/blob/master/projectDocs/dev/userGuideStandards.md
+https://github.com/nvaccess/aslan/blob/master/projectDocs/dev/userGuideStandards.md
 """
 
 from enum import auto, Enum, IntEnum, StrEnum

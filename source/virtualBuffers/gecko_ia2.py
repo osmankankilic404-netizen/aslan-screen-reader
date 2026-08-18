@@ -1,8 +1,8 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, Babbage B.V., Mozilla Corporation, Accessolutions,
 # Julien Cochuyt, Noelia Ruiz Martínez, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from dataclasses import dataclass
 from typing import (
@@ -14,8 +14,8 @@ from ctypes import byref
 from . import VirtualBuffer, VirtualBufferTextInfo, VBufStorage_findMatch_word, VBufStorage_findMatch_notEmpty
 import treeInterceptorHandler
 import controlTypes
-import NVDAObjects.IAccessible.mozilla
-import NVDAObjects.behaviors
+import AslanObjects.IAccessible.mozilla
+import AslanObjects.behaviors
 import winUser
 import IAccessibleHandler
 import oleacc
@@ -28,7 +28,7 @@ from comtypes import COMError
 from comtypes.hresult import E_INVALIDARG
 import aria
 import config
-from NVDAObjects.IAccessible import normalizeIA2TextFormatField, IA2TextTextInfo
+from AslanObjects.IAccessible import normalizeIA2TextFormatField, IA2TextTextInfo
 import documentBase
 import locationHelper
 
@@ -72,7 +72,7 @@ class Gecko_ia2_TextInfo(VirtualBufferTextInfo):
 				continue
 			ia2TextStartOffset += attrs.get("strippedCharsFromStart", 0)
 			relOffset = offset - formatFieldStart + ia2TextStartOffset
-			obj = self._getNVDAObjectFromOffset(offset)
+			obj = self._getAslanObjectFromOffset(offset)
 			if not hasattr(obj, "IAccessibleTextObject"):
 				raise LookupError("Object doesn't have an IAccessibleTextObject")
 			return IA2TextTextInfo._getBoundingRectFromOffsetInObject(obj, relOffset)
@@ -80,7 +80,7 @@ class Gecko_ia2_TextInfo(VirtualBufferTextInfo):
 
 	def _calculateDescriptionFrom(self, attrs: textInfos.ControlField) -> controlTypes.DescriptionFrom:
 		"""Overridable calculation of DescriptionFrom
-		Match behaviour of NVDAObjects.IAccessible.mozilla.Mozilla._get_descriptionFrom
+		Match behaviour of AslanObjects.IAccessible.mozilla.Mozilla._get_descriptionFrom
 		@param attrs: source attributes for the TextInfo
 		@return: the origin for accDescription.
 		@remarks: Firefox does not yet have a 'IAccessible2::attribute_description-from'
@@ -130,7 +130,7 @@ class Gecko_ia2_TextInfo(VirtualBufferTextInfo):
 		if placeholder is not None:
 			attrs["placeholder"] = placeholder
 
-		role = IAccessibleHandler.NVDARoleFromAttr(attrs["IAccessible::role"])
+		role = IAccessibleHandler.AslanRoleFromAttr(attrs["IAccessible::role"])
 		if attrs.get("IAccessible2::attribute_tag", "").lower() == "blockquote":
 			role = controlTypes.Role.BLOCKQUOTE
 
@@ -144,7 +144,7 @@ class Gecko_ia2_TextInfo(VirtualBufferTextInfo):
 			or controlTypes.State.EDITABLE in states
 		):
 			# This is a text leaf.
-			# See NVDAObjects.Iaccessible.mozilla.findOverlayClasses for an explanation of these checks.
+			# See AslanObjects.Iaccessible.mozilla.findOverlayClasses for an explanation of these checks.
 			role = controlTypes.Role.STATICTEXT
 		if attrs.get("IAccessibleAction_showlongdesc") is not None:
 			states.add(controlTypes.State.HASLONGDESC)
@@ -200,7 +200,7 @@ class Gecko_ia2_TextInfo(VirtualBufferTextInfo):
 			if controlTypes.State.CHECKED in states:
 				states.discard(controlTypes.State.CHECKED)
 				states.add(controlTypes.State.ON)
-		popupState = aria.ariaHaspopupValuesToNVDAStates.get(
+		popupState = aria.ariaHaspopupValuesToAslanStates.get(
 			attrs.get("IAccessible2::attribute_haspopup"),
 		)
 		if popupState:
@@ -220,7 +220,7 @@ class Gecko_ia2_TextInfo(VirtualBufferTextInfo):
 				log.debug(f"detailsRoles: {attrs['detailsRoles']}")
 		attrs = super()._normalizeControlField(attrs)
 		# #17750: The table-id attribute from the buffer is just a unique id.
-		# However, the IAccessible NVDAObject specifies the tableID as
+		# However, the IAccessible AslanObject specifies the tableID as
 		# (windowHandle, uniqueId). These need to be compatible for speech cache
 		# comparison lest we break row/column change detection.
 		tableID = attrs.get("table-id")
@@ -238,7 +238,7 @@ class Gecko_ia2_TextInfo(VirtualBufferTextInfo):
 		Braille and speech needs consistent normalization for translation and reporting.
 		"""
 		# Can't import at module level as chromium imports from this module
-		from NVDAObjects.IAccessible.chromium import supportedAriaDetailsRoles
+		from AslanObjects.IAccessible.chromium import supportedAriaDetailsRoles
 
 		if config.conf["debugLog"]["annotations"]:
 			log.debug(f"detailsRoles: {repr(detailsRoles)}")
@@ -247,7 +247,7 @@ class Gecko_ia2_TextInfo(VirtualBufferTextInfo):
 			if detailsRole.isdigit():
 				detailsRoleInt = int(detailsRole)
 				# get a role, but it may be unsupported
-				detailsRole = IAccessibleHandler.IAccessibleRolesToNVDARoles.get(detailsRoleInt)
+				detailsRole = IAccessibleHandler.IAccessibleRolesToAslanRoles.get(detailsRoleInt)
 				# return a supported details role
 				if detailsRole in supportedAriaDetailsRoles.values():
 					yield detailsRole
@@ -275,7 +275,7 @@ class Gecko_ia2_TextInfo(VirtualBufferTextInfo):
 		return super(Gecko_ia2_TextInfo, self)._normalizeFormatField(attrs)
 
 	def _get_location(self) -> locationHelper.RectLTWH:
-		document = self.obj.rootNVDAObject.IAccessibleObject
+		document = self.obj.rootAslanObject.IAccessibleObject
 		docHandle, ID = self._getFieldIdentifierFromOffset(self._startOffset)
 		location = document.accLocation(ID)
 		return locationHelper.RectLTWH(*location)
@@ -285,25 +285,25 @@ class Gecko_ia2(VirtualBuffer):
 	TextInfo = Gecko_ia2_TextInfo
 	_nativeAppSelectionModeSupported = True
 
-	def __init__(self, rootNVDAObject):
-		super(Gecko_ia2, self).__init__(rootNVDAObject, backendName="gecko_ia2")
+	def __init__(self, rootAslanObject):
+		super(Gecko_ia2, self).__init__(rootAslanObject, backendName="gecko_ia2")
 		self._initialScrollObj = None
 
 	def __contains__(self, obj):
 		if (
 			not (
-				isinstance(obj, NVDAObjects.IAccessible.IAccessible)
+				isinstance(obj, AslanObjects.IAccessible.IAccessible)
 				and isinstance(obj.IAccessibleObject, IA2.IAccessible2)
 			)
 			or not obj.windowClassName.startswith("Mozilla")
-			or not winUser.isDescendantWindow(self.rootNVDAObject.windowHandle, obj.windowHandle)
+			or not winUser.isDescendantWindow(self.rootAslanObject.windowHandle, obj.windowHandle)
 		):
 			return False
 		accId = obj.IA2UniqueID
 		if accId == self.rootID:
 			return True
 		try:
-			self.rootNVDAObject.IAccessibleObject.accChild(accId)
+			self.rootAslanObject.IAccessibleObject.accChild(accId)
 		except COMError as e:
 			if e.hresult == E_INVALIDARG:
 				# This indicates that this id is not a child of this document. We should
@@ -314,12 +314,12 @@ class Gecko_ia2(VirtualBuffer):
 			# this object just isn't in this buffer.
 			log.exception("Error checking if obj in buffer")
 			return False
-		return not self._isNVDAObjectInApplication(obj)
+		return not self._isAslanObjectInApplication(obj)
 
 	def _get_isAlive(self):
 		if self.isLoading:
 			return True
-		root = self.rootNVDAObject
+		root = self.rootAslanObject
 		if not root:
 			return False
 		if not winUser.isWindow(root.windowHandle):
@@ -341,22 +341,22 @@ class Gecko_ia2(VirtualBuffer):
 	def _get_documentURL(self) -> str:
 		return self.documentConstantIdentifier
 
-	def getNVDAObjectFromIdentifier(
+	def getAslanObjectFromIdentifier(
 		self,
 		docHandle: int,
 		ID: int,
-	) -> NVDAObjects.IAccessible.IAccessible:
+	) -> AslanObjects.IAccessible.IAccessible:
 		try:
-			pacc = self.rootNVDAObject.IAccessibleObject.accChild(ID)
+			pacc = self.rootAslanObject.IAccessibleObject.accChild(ID)
 		except COMError:
 			return None
-		return NVDAObjects.IAccessible.IAccessible(
+		return AslanObjects.IAccessible.IAccessible(
 			windowHandle=docHandle,
 			IAccessibleObject=IAccessibleHandler.normalizeIAccessible(pacc),
 			IAccessibleChildID=0,
 		)
 
-	def getIdentifierFromNVDAObject(self, obj):
+	def getIdentifierFromAslanObject(self, obj):
 		docHandle = obj.windowHandle
 		ID = obj.IA2UniqueID
 		return docHandle, ID
@@ -367,8 +367,8 @@ class Gecko_ia2(VirtualBuffer):
 		return super(Gecko_ia2, self)._shouldIgnoreFocus(obj)
 
 	def _postGainFocus(self, obj):
-		if isinstance(obj, NVDAObjects.behaviors.EditableText):
-			# We aren't passing this event to the NVDAObject, so we need to do this ourselves.
+		if isinstance(obj, AslanObjects.behaviors.EditableText):
+			# We aren't passing this event to the AslanObject, so we need to do this ourselves.
 			obj.initAutoSelectDetection()
 		super(Gecko_ia2, self)._postGainFocus(obj)
 
@@ -381,7 +381,7 @@ class Gecko_ia2(VirtualBuffer):
 		index = int(controlField["IAccessibleAction_showlongdesc"])
 		docHandle = int(controlField["controlIdentifier_docHandle"])
 		ID = int(controlField["controlIdentifier_ID"])
-		obj = self.getNVDAObjectFromIdentifier(docHandle, ID)
+		obj = self.getAslanObjectFromIdentifier(docHandle, ID)
 		obj.doAction(index)
 
 	def _searchableTagValues(self, values):
@@ -591,7 +591,7 @@ class Gecko_ia2(VirtualBuffer):
 	event_scrollingStart.ignoreIsReady = True
 
 	def _getTableCellAt(self, tableID, startPos, destRow, destCol):
-		table = self.getNVDAObjectFromIdentifier(*tableID)
+		table = self.getAslanObjectFromIdentifier(*tableID)
 		try:
 			try:
 				cell = table.IAccessibleTable2Object.cellAt(destRow - 1, destCol - 1).QueryInterface(
@@ -601,7 +601,7 @@ class Gecko_ia2(VirtualBuffer):
 				cell = table.IAccessibleTableObject.accessibleAt(destRow - 1, destCol - 1).QueryInterface(
 					IAccessible2,
 				)
-			cell = NVDAObjects.IAccessible.IAccessible(IAccessibleObject=cell, IAccessibleChildID=0)
+			cell = AslanObjects.IAccessible.IAccessible(IAccessibleObject=cell, IAccessibleChildID=0)
 			if cell.IA2Attributes.get("hidden"):
 				raise LookupError("Found hidden cell")
 			return self.makeTextInfo(cell)
@@ -620,7 +620,7 @@ class Gecko_ia2(VirtualBuffer):
 
 	def _get_documentConstantIdentifier(self):
 		try:
-			return self.rootNVDAObject.IAccessibleObject.accValue(0)
+			return self.rootAslanObject.IAccessibleObject.accValue(0)
 		except COMError:
 			return None
 
@@ -733,7 +733,7 @@ class Gecko_ia2(VirtualBuffer):
 			or the start or end of a non collapsed range could not be found.
 		"""
 		try:
-			paccTextSelectionContainer = self.rootNVDAObject.IAccessibleObject.QueryInterface(
+			paccTextSelectionContainer = self.rootAslanObject.IAccessibleObject.QueryInterface(
 				IAccessibleTextSelectionContainer,
 			)
 		except COMError as e:
@@ -775,7 +775,7 @@ class Gecko_ia2(VirtualBuffer):
 
 	def clearAppSelection(self):
 		try:
-			paccTextSelectionContainer = self.rootNVDAObject.IAccessibleObject.QueryInterface(
+			paccTextSelectionContainer = self.rootAslanObject.IAccessibleObject.QueryInterface(
 				IAccessibleTextSelectionContainer,
 			)
 		except COMError as e:

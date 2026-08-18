@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2024 NV Access Limited, Joseph Lee
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -9,8 +9,8 @@ In Windows 11 24H2 (2024 Update and Server 2025), quick settings component is pa
 """
 
 import appModuleHandler
-from NVDAObjects.IAccessible import IAccessible, ContentGenericClient
-from NVDAObjects.UIA import UIA
+from AslanObjects.IAccessible import IAccessible, ContentGenericClient
+from AslanObjects.UIA import UIA
 from UIAHandler import IUIAutomationElement, UIA_NamePropertyId
 import controlTypes
 import ui
@@ -47,7 +47,7 @@ class ActionCenterToggleButton(UIA):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		if isinstance(obj, UIA):
 			# #8845: Brightness button in Action Center is a button, not a toggle button.
 			# Brightness control is now a slider in build 18277.
@@ -55,7 +55,7 @@ class AppModule(appModuleHandler.AppModule):
 				obj.role = controlTypes.Role.BUTTON
 				obj.states.discard(controlTypes.State.CHECKABLE)
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if isinstance(obj, IAccessible):
 			try:
 				# #5288: Never use ContentGenericClient, as this uses displayModel

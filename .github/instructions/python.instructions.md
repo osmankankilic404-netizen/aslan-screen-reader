@@ -3,11 +3,11 @@ applyTo: **/*.py, **/*.pyw
 description: This file describes the Python code style for the project.
 ---
 
-# Python code guidelines for NVDA
+# Python code guidelines for Aslan
 
 ## Code Style
 
-In general, Python contributions to NVDA should follow the PEP 8 style guide, except where it contradicts the specific guidance below.
+In general, Python contributions to Aslan should follow the PEP 8 style guide, except where it contradicts the specific guidance below.
 
 ## Indentation
 
@@ -64,7 +64,7 @@ Indentation must be done with tabs (one per level), not spaces.
 For example:
 
 ```py
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_TEXTREVIEW = _("Text review")
 ```
 
@@ -110,7 +110,7 @@ Instead use initializer functions.
 
 ### Deprecating module attributes
 
-Where possible, ensure the NVDA API maintains backwards compatibility.
+Where possible, ensure the Aslan API maintains backwards compatibility.
 To assist with a uniform approach, the `utils._deprecate` module provides a factory function, `handleDeprecations`, which returns a function suitable for use as a module's `__getattr__`.
 Call `handleDeprecations` with any number of concrete `DeprecatedSymbol` objects to handle the logic for emitting a deprecation warning and returning the deprecated symbol.
 The following `DeprecatedSymbol` subclasses are currently available:
@@ -155,7 +155,7 @@ filter_something = extensionPoints.Filter[int](
 ```
 
 The deprecation message is logged at the warning level when calling `register` on a `HandlerRegistrar`.
-When `NVDAState._allowDeprecatedAPI()` returns `False`, a `RuntimeError` is raised instead.
+When `AslanState._allowDeprecatedAPI()` returns `False`, a `RuntimeError` is raised instead.
 
 ## Docstrings
 
@@ -169,12 +169,12 @@ Docstrings should use Sphinx format without types, and follow PEP 257 convention
 * Document class constructors in `__init__`, not at the top of the class.
 * Document class attributes and non-obvious public variables in a docstring immediately below the attribute being described.
 
-NVDA formerly used epytext syntax for docstrings, which means there is inconsistent syntax used in the NVDA code base.
+Aslan formerly used epytext syntax for docstrings, which means there is inconsistent syntax used in the Aslan code base.
 When updating docstrings, ensure the changed docstring uses Sphinx.
 
 ## Type hints
 
-All new code contributions to NVDA should use PEP 484-style type hints.
+All new code contributions to Aslan should use PEP 484-style type hints.
 Type hints make reasoning about code much easier, and allow static analysis tools to catch common errors.
 
 * All variables, attributes, properties, and function/method arguments and returns should have type hints.
@@ -184,18 +184,18 @@ Type hints make reasoning about code much easier, and allow static analysis tool
 
 ## Calling non-python code
 
-When using parts of the Windows API, or parts of NVDA implemented in C++, it is necessary to use the ctypes library.
+When using parts of the Windows API, or parts of Aslan implemented in C++, it is necessary to use the ctypes library.
 
 * When providing ctypes type information for foreign functions, structures and data types, prefer to use the same name as used in the external library.
   * E.g. `GetModuleFileName` not `getModuleFileName`, even though the latter is a more Pythonic function name.
   * Pythonic names should be reserved for wrappers that provide more pythonic access to functions.
 * All Windows API functions, types and data structures should be defined in the `winBindings` package, in modules named according to the DLL which exports the function.
   * E.g. `winBindings.kernel32`.
-* Ctypes code for nvdaHelper should be defined in the `NVDAHelper.localLib` module.
+* Ctypes code for aslanHelper should be defined in the `AslanHelper.localLib` module.
 
 ## Language choices
 
-The NVDA community is large and diverse, and we have a responsibility to make everyone feel welcome in it.
+The Aslan community is large and diverse, and we have a responsibility to make everyone feel welcome in it.
 As our contributor code of conduct says:
 
 > Communities mirror the societies in which they exist and positive action is essential to counteract the many forms of inequality and abuses of power that exist in society.
@@ -212,17 +212,17 @@ For example:
 
 ## Security-specific review checks
 
-NVDA operates with `UIAccess` privileges, injects code into other processes and handles untrusted data.
+Aslan operates with `UIAccess` privileges, injects code into other processes and handles untrusted data.
 Scrutinize code for privilege escalation and data leaks.
 
 * Secure mode, lock screens & installer limitations:
   * Check lock-screen object handling safeguards (e.g., secure object filtering).
   * Ensure `globalVars.appArgs.secure` is respected and blocked actions fail gracefully.
-  * Check `NVDAState.shouldWriteToDisk`; do not write to disk/config if running securely or from the launcher.
+  * Check `AslanState.shouldWriteToDisk`; do not write to disk/config if running securely or from the launcher.
   * Ensure no system or personal information is unintentionally exposed in secure screens or the lock screen.
 * Subprocesses & file execution:
   * Flag any use of `subprocess`, `os.system`, or `os.startfile`.
-  Because NVDA has UIAccess, these must use strictly sanitized arguments and absolute paths to prevent path/binary hijacking.
+  Because Aslan has UIAccess, these must use strictly sanitized arguments and absolute paths to prevent path/binary hijacking.
 * Sensitive Data Logging:
   * Ensure new logging statements that are INFO level or higher do not capture sensitive user data, particularly from `protected` or password text fields, API keys, or secure desktop states.
   DEBUG level logging may include sensitive information such as the speech passed to a synthesizer.

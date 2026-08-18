@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2021-2022 NV Access Limited, Łukasz Golonka
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -6,8 +6,8 @@
 """
 This module provides helpers and a common format to define UIA custom properties.
 The common custom properties are defined here.
-Custom properties specific to an application should be defined within a NVDAObjects/UIA
-submodule specific to that application, E.G. 'NVDAObjects/UIA/excel.py'
+Custom properties specific to an application should be defined within a AslanObjects/UIA
+submodule specific to that application, E.G. 'AslanObjects/UIA/excel.py'
 
 UIA originally had hard coded 'static' ID's for properties.
 For an example see 'UIA_SelectionPatternId' in
@@ -52,9 +52,9 @@ class CustomPropertyInfo:
 		Any application can be first to register a custom property, subsequent applications
 		will be given the same id.
 		"""
-		import NVDAHelper
+		import AslanHelper
 
-		return NVDAHelper.localLib.registerUIAProperty(
+		return AslanHelper.localLib.registerUIAProperty(
 			byref(self.guid),
 			self.programmaticName,
 			self.uiaType,

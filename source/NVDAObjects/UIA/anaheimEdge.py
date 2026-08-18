@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2020 NV Access Limited
@@ -9,6 +9,6 @@ Note that the UIA.chromium module provides base behaviour for all Chromium based
 (anaheim_edge) module is only concerned with the window chrome / widgets that are specific to the browser.
 
 This file is currently a placeholder, this line can be deleted when this file is populated. Normally blank
-files would not be included in NVDA's repository, however in this case it has been in order to head off any
+files would not be included in Aslan's repository, however in this case it has been in order to head off any
 confusion between the two very different implementations of Edge.
 """

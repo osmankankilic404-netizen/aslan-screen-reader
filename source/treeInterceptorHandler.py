@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2024 NV Access Limited, Davy Kager, Accessolutions, Julien Cochuyt, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -23,7 +23,7 @@ from controlTypes import OutputReason
 import extensionPoints
 
 if TYPE_CHECKING:
-	import NVDAObjects
+	import AslanObjects
 	from utils.urlUtils import _LinkData
 
 post_browseModeStateChange = extensionPoints.Action()
@@ -46,7 +46,7 @@ def getTreeInterceptor(obj):
 
 
 def update(obj, force=False):
-	# Don't create treeInterceptors for objects for which NVDA should sleep.
+	# Don't create treeInterceptors for objects for which Aslan should sleep.
 	if obj.sleepMode:
 		return None
 	# If this object already has a treeInterceptor, just return that and don't bother trying to create one
@@ -101,19 +101,19 @@ def terminate():
 
 
 class TreeInterceptor(baseObject.ScriptableObject):
-	"""Intercepts events and scripts for a tree of NVDAObjects.
-	When an NVDAObject is encompassed by this interceptor (i.e. it is beneath the root object or it is the root object itself),
+	"""Intercepts events and scripts for a tree of AslanObjects.
+	When an AslanObject is encompassed by this interceptor (i.e. it is beneath the root object or it is the root object itself),
 	events will first be executed on this interceptor if implemented.
 	Similarly, scripts on this interceptor take precedence over those of encompassed objects.
 	"""
 
 	shouldTrapNonCommandGestures = False  #: If true then gestures that do not have a script and are not a command gesture should be trapped from going through to Windows.
 
-	def __init__(self, rootNVDAObject: "NVDAObjects.NVDAObject"):
+	def __init__(self, rootAslanObject: "AslanObjects.AslanObject"):
 		super(TreeInterceptor, self).__init__()
 		self._passThrough = False
 		#: The root object of the tree wherein events and scripts are intercepted.
-		self.rootNVDAObject: "NVDAObjects.NVDAObject" = rootNVDAObject
+		self.rootAslanObject: "AslanObjects.AslanObject" = rootAslanObject
 
 	def terminate(self):
 		"""Terminate this interceptor.
@@ -133,7 +133,7 @@ class TreeInterceptor(baseObject.ScriptableObject):
 	def __contains__(self, obj):
 		"""Determine whether an object is encompassed by this interceptor.
 		@param obj: The object in question.
-		@type obj: L{NVDAObjects.NVDAObject}
+		@type obj: L{AslanObjects.AslanObject}
 		@return: C{True} if the object is encompassed by this interceptor.
 		@rtype: bool
 		"""
@@ -202,10 +202,10 @@ class RootProxyTextInfo(textInfos.TextInfo):
 		if isinstance(position, self.InnerTextInfoClass):
 			self.innerTextInfo = position
 		else:
-			self.innerTextInfo = self.InnerTextInfoClass(obj.rootNVDAObject, position, **kwargs)
+			self.innerTextInfo = self.InnerTextInfoClass(obj.rootAslanObject, position, **kwargs)
 
 	def _get_InnerTextInfoClass(self):
-		return self.obj.rootNVDAObject.TextInfo
+		return self.obj.rootAslanObject.TextInfo
 
 	def copy(self):
 		innerCopy = self.innerTextInfo.copy()
@@ -271,11 +271,11 @@ class RootProxyTextInfo(textInfos.TextInfo):
 	def getMathMl(self, field):
 		return self.innerTextInfo.getMathMl(field)
 
-	def _get_NVDAObjectAtStart(self):
-		return self.innerTextInfo.NVDAObjectAtStart
+	def _get_AslanObjectAtStart(self):
+		return self.innerTextInfo.AslanObjectAtStart
 
-	def _get_focusableNVDAObjectAtStart(self):
-		return self.innerTextInfo.focusableNVDAObjectAtStart
+	def _get_focusableAslanObjectAtStart(self):
+		return self.innerTextInfo.focusableAslanObjectAtStart
 
 	def getFormatFieldSpeech(
 		self,

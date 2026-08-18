@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2012-2022 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -55,7 +55,7 @@ class ScreenExplorer(object):
 			except LookupError:
 				pos = None
 			if pos:
-				obj = obj.treeInterceptor.rootNVDAObject
+				obj = obj.treeInterceptor.rootAslanObject
 				if hasNewObj and self._obj and obj.treeInterceptor is self._obj.treeInterceptor:
 					hasNewObj = False
 		if not pos:

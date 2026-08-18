@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Rui Batista, Aleksey Sadovoy, Peter Vagner,
 # Mozilla Corporation, Babbage B.V., Joseph Lee, Łukasz Golonka
 # This file is covered by the GNU General Public License.
@@ -586,7 +586,7 @@ def SetThreadExecutionState(esFlags):
 
 
 def LCIDToLocaleName(windowsLCID: LCID) -> Optional[str]:
-	# NVDA cannot run with this imported at module level
+	# Aslan cannot run with this imported at module level
 	from logHandler import log
 
 	dwFlags = 0

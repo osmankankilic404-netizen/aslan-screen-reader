@@ -45,7 +45,7 @@ class IntelliSenseLiveRegion(UIA):
 	"""
 	Visual Studio uses both Intellisense menu item objects and a live region
 	to communicate Intellisense selections.
-	NVDA uses the menu item approach and therefore the live region provides doubled information
+	Aslan uses the menu item approach and therefore the live region provides doubled information
 	and is disabled.
 	"""
 

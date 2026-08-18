@@ -1,12 +1,12 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Aleksey Sadovoy, Peter Vágner, Rui Batista, Zahari Yurukov,
 # Joseph Lee, Babbage B.V., Łukasz Golonka, Julien Cochuyt, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""Manages NVDA configuration.
-The heart of NVDA's configuration is Configuration Manager, which records current options, profile information and functions to load, save, and switch amongst configuration profiles.
-In addition, this module provides three actions: profile switch notifier, an action to be performed when NVDA saves settings, and action to be performed when NVDA is asked to reload configuration from disk or reset settings to factory defaults.
+"""Manages Aslan configuration.
+The heart of Aslan's configuration is Configuration Manager, which records current options, profile information and functions to load, save, and switch amongst configuration profiles.
+In addition, this module provides three actions: profile switch notifier, an action to be performed when Aslan saves settings, and action to be performed when Aslan is asked to reload configuration from disk or reset settings to factory defaults.
 For the latter two actions, one can perform actions prior to and/or after they take place.
 """
 
@@ -47,10 +47,10 @@ from .featureFlag import (
 	_validateConfig_featureFlag,
 )
 from .registry import RegistryKey as _RegistryKey
-import NVDAState
-from NVDAState import WritePaths
+import AslanState
+from AslanState import WritePaths
 
-#: True if NVDA is running as a Windows Store Desktop Bridge application
+#: True if Aslan is running as a Windows Store Desktop Bridge application
 isAppX = False
 
 #: The active configuration, C{None} if it has not yet been loaded.
@@ -62,13 +62,13 @@ conf = None
 #: For example, braille switches braille displays if necessary.
 #: Handlers are called with no arguments.
 post_configProfileSwitch = extensionPoints.Action()
-#: Notifies when NVDA is saving current configuration.
-#: Handlers can listen to "pre" and/or "post" action to perform tasks prior to and/or after NVDA's own configuration is saved.
+#: Notifies when Aslan is saving current configuration.
+#: Handlers can listen to "pre" and/or "post" action to perform tasks prior to and/or after Aslan's own configuration is saved.
 #: Handlers are called with no arguments.
 pre_configSave = extensionPoints.Action()
 post_configSave = extensionPoints.Action()
 #: Notifies when configuration is reloaded from disk or factory defaults are applied.
-#: Handlers can listen to "pre" and/or "post" action to perform tasks prior to and/or after NVDA's own configuration is reloaded.
+#: Handlers can listen to "pre" and/or "post" action to perform tasks prior to and/or after Aslan's own configuration is reloaded.
 #: Handlers are called with a boolean argument indicating whether this is a factory reset (True) or just reloading from disk (False).
 pre_configReset = extensionPoints.Action()
 post_configReset = extensionPoints.Action()
@@ -76,16 +76,16 @@ post_configReset = extensionPoints.Action()
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	if attrName == "RegistryKey" and NVDAState._allowDeprecatedAPI():
+	if attrName == "RegistryKey" and AslanState._allowDeprecatedAPI():
 		log.warning("Importing RegistryKey from here is deprecated, use config.registry.RegistryKey instead.")
 		return _RegistryKey
-	if attrName == "NVDA_REGKEY" and NVDAState._allowDeprecatedAPI():
-		log.warning("NVDA_REGKEY is deprecated, use RegistryKey.NVDA instead.")
-		return _RegistryKey.NVDA.value
-	if attrName == "RUN_REGKEY" and NVDAState._allowDeprecatedAPI():
+	if attrName == "Aslan_REGKEY" and AslanState._allowDeprecatedAPI():
+		log.warning("Aslan_REGKEY is deprecated, use RegistryKey.Aslan instead.")
+		return _RegistryKey.Aslan.value
+	if attrName == "RUN_REGKEY" and AslanState._allowDeprecatedAPI():
 		log.warning("RUN_REGKEY is deprecated, use RegistryKey.RUN instead.")
 		return _RegistryKey.RUN.value
-	if attrName == "addConfigDirsToPythonPackagePath" and NVDAState._allowDeprecatedAPI():
+	if attrName == "addConfigDirsToPythonPackagePath" and AslanState._allowDeprecatedAPI():
 		log.warning(
 			"addConfigDirsToPythonPackagePath is deprecated, "
 			"use addonHandler.packaging.addDirsToPythonPackagePath instead.",
@@ -93,7 +93,7 @@ def __getattr__(attrName: str) -> Any:
 		from addonHandler.packaging import addDirsToPythonPackagePath
 
 		return addDirsToPythonPackagePath
-	if attrName == "CONFIG_IN_LOCAL_APPDATA_SUBKEY" and NVDAState._allowDeprecatedAPI():
+	if attrName == "CONFIG_IN_LOCAL_APPDATA_SUBKEY" and AslanState._allowDeprecatedAPI():
 		# Note: this should only log in situations where it will not be excessively noisy.
 		log.warning(
 			"CONFIG_IN_LOCAL_APPDATA_SUBKEY is deprecated. "
@@ -112,7 +112,7 @@ def initialize():
 
 def saveOnExit():
 	"""Save the configuration if configured to save on exit.
-	This should only be called if NVDA is about to exit.
+	This should only be called if Aslan is about to exit.
 	Errors are ignored.
 	"""
 	if conf["general"]["saveConfigurationOnExit"]:
@@ -123,7 +123,7 @@ def saveOnExit():
 
 
 def isInstalledCopy() -> bool:
-	"""Checks to see if this running copy of NVDA is installed on the system"""
+	"""Checks to see if this running copy of Aslan is installed on the system"""
 	try:
 		k = winreg.OpenKey(
 			winreg.HKEY_LOCAL_MACHINE,
@@ -159,8 +159,8 @@ def isInstalledCopy() -> bool:
 		return os.stat(instDir) == os.stat(globalVars.appDir)
 	except (WindowsError, FileNotFoundError):
 		log.error(
-			"Failed to access the installed NVDA directory,"
-			"or, a portable copy failed to access the current NVDA app directory",
+			"Failed to access the installed Aslan directory,"
+			"or, a portable copy failed to access the current Aslan app directory",
 			exc_info=True,
 		)
 		return False
@@ -168,22 +168,22 @@ def isInstalledCopy() -> bool:
 
 def getInstalledUserConfigPath() -> str | None:
 	try:
-		winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, _RegistryKey.NVDA.value)
+		winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, _RegistryKey.Aslan.value)
 	except FileNotFoundError:
-		log.debug("Could not find nvda registry key, NVDA is not currently installed")
+		log.debug("Could not find aslan registry key, Aslan is not currently installed")
 		return None
 	except WindowsError:
-		log.error("Could not open nvda registry key", exc_info=True)
+		log.error("Could not open aslan registry key", exc_info=True)
 		return None
 
-	if NVDAState._configInLocalAppDataEnabled():
+	if AslanState._configInLocalAppDataEnabled():
 		configFolder = FolderId.LOCAL_APP_DATA
 	else:
 		configFolder = FolderId.ROAMING_APP_DATA
 
 	configParent = SHGetKnownFolderPath(configFolder)
 	try:
-		return os.path.join(configParent, "nvda")
+		return os.path.join(configParent, "aslan")
 	except WindowsError:
 		# (#13242) There is some uncertainty as to how this could be caused
 		log.debugWarning("Installed user config is not in local app data", exc_info=True)
@@ -194,17 +194,17 @@ def getUserDefaultConfigPath(useInstalledPathIfExists=False):
 	"""Get the default path for the user configuration directory.
 	This is the default path and doesn't reflect overriding from the command line,
 	which includes temporary copies.
-	Most callers will want the C{NVDAState.WritePaths.configDir variable} instead.
+	Most callers will want the C{AslanState.WritePaths.configDir variable} instead.
 	"""
 	installedUserConfigPath = getInstalledUserConfigPath()
 	if installedUserConfigPath and (
 		isInstalledCopy() or isAppX or (useInstalledPathIfExists and os.path.isdir(installedUserConfigPath))
 	):
 		if isAppX:
-			# NVDA is running as a Windows Store application.
+			# Aslan is running as a Windows Store application.
 			# Although Windows will redirect %APPDATA% to a user directory specific to the Windows Store application,
 			# It also makes existing %APPDATA% files available here.
-			# We cannot share NVDA user config directories  with other copies of NVDA as their config may be using add-ons
+			# We cannot share Aslan user config directories  with other copies of Aslan as their config may be using add-ons
 			# Therefore add a suffix to the directory to make it specific to Windows Store application versions.
 			installedUserConfigPath += "_appx"
 		return installedUserConfigPath
@@ -237,7 +237,7 @@ def getScratchpadDir(ensureExists: bool = False) -> str:
 def initConfigPath(configPath: str | None = None) -> None:
 	"""
 	Creates the current configuration path if it doesn't exist. Also makes sure that various sub directories also exist.
-	:param configPath: an optional path which should be used instead (only useful when being called from outside of NVDA)
+	:param configPath: an optional path which should be used instead (only useful when being called from outside of Aslan)
 	"""
 	if not configPath:
 		configPath = WritePaths.configDir
@@ -268,7 +268,7 @@ def initConfigPath(configPath: str | None = None) -> None:
 def getStartAfterLogon() -> bool:
 	"""Not to be confused with getStartOnLogonScreen.
 
-	Checks if NVDA is set to start after a logon.
+	Checks if Aslan is set to start after a logon.
 	Checks related easeOfAccess current user registry keys.
 	"""
 	return easeOfAccess.willAutoStart(easeOfAccess.AutoStartContext.AFTER_LOGON)
@@ -277,7 +277,7 @@ def getStartAfterLogon() -> bool:
 def setStartAfterLogon(enable: bool) -> None:
 	"""Not to be confused with setStartOnLogonScreen.
 
-	Toggle if NVDA automatically starts after a logon.
+	Toggle if Aslan automatically starts after a logon.
 	Sets easeOfAccess related registry keys.
 	"""
 	if getStartAfterLogon() == enable:
@@ -285,13 +285,13 @@ def setStartAfterLogon(enable: bool) -> None:
 	easeOfAccess.setAutoStart(easeOfAccess.AutoStartContext.AFTER_LOGON, enable)
 
 
-SLAVE_FILENAME = os.path.join(globalVars.appDir, "nvda_slave.exe")
+SLAVE_FILENAME = os.path.join(globalVars.appDir, "aslan_slave.exe")
 
 
 def getStartOnLogonScreen() -> bool:
 	"""Not to be confused with getStartAfterLogon.
 
-	Checks if NVDA is set to start on the logon screen.
+	Checks if Aslan is set to start on the logon screen.
 
 	Checks related easeOfAccess local machine registry keys.
 	"""
@@ -312,7 +312,7 @@ def setSystemConfigToCurrentConfig(*, addonsToCopy: Collection[str] = ()):
 			Providing IDs of add-ons that are disabled may cause unexpected results,
 			especially for add-ons that are not compatible with the current API version.
 	:raises installer.RetriableFailure: If copying the user to the system config fails.
-	:raises RuntimeError: If calling ``nvda_slave`` fails for some other reason.
+	:raises RuntimeError: If calling ``aslan_slave`` fails for some other reason.
 	"""
 	fromPath = WritePaths.configDir
 	if winBindings.shell32.IsUserAnAdmin():
@@ -435,7 +435,7 @@ def setStartOnLogonScreen(enable: bool) -> None:
 	"""
 	Not to be confused with setStartAfterLogon.
 
-	Toggle whether NVDA starts on the logon screen automatically.
+	Toggle whether Aslan starts on the logon screen automatically.
 	On failure to set, retries with escalated permissions.
 
 	Raises a RuntimeError on failure.
@@ -545,7 +545,7 @@ class ConfigManager:
 			post_configProfileSwitch.notify(prevConf=currentRootSection.dict())
 
 	def _initBaseConf(self, factoryDefaults=False):
-		fn = WritePaths.nvdaConfigFile
+		fn = WritePaths.aslanConfigFile
 		if factoryDefaults:
 			profile = self._loadConfig(None)
 			profile.filename = fn
@@ -619,7 +619,7 @@ class ConfigManager:
 		# Python converts \r\n to \n when reading files in Windows, so ConfigObj can't determine the true line ending.
 		profile.newlines = "\r\n"
 		profileCopy = deepcopy(profile)
-		if NVDAState.shouldWriteToDisk() and profile.filename is not None:
+		if AslanState.shouldWriteToDisk() and profile.filename is not None:
 			writeProfileFunc = self._writeProfileToFile
 		else:
 			writeProfileFunc = None
@@ -634,7 +634,7 @@ class ConfigManager:
 		if self._shouldLogConfigAtStartup(profile):
 			# We must log at info level here as the logHandler hasn't been set to log at debug level yet.
 			log.info(
-				f"Config loaded (after upgrade, and in the state it will be used by NVDA):\n{profile}",
+				f"Config loaded (after upgrade, and in the state it will be used by Aslan):\n{profile}",
 				redactSecrets=True,
 			)
 		return profile
@@ -730,7 +730,7 @@ class ConfigManager:
 		"""Save all modified profiles and the base configuration to disk."""
 		# #7598: give others a chance to either save settings early or terminate tasks.
 		pre_configSave.notify()
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			log.info("Not writing profile, either --secure or --launcher args present")
 			return
 		try:
@@ -768,7 +768,7 @@ class ConfigManager:
 		@type name: str
 		@raise ValueError: If a profile with this name already exists.
 		"""
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			log.debug("Not creating configuration profile, as shouldWriteToDisk returned False.")
 			return
 		if not name:
@@ -790,7 +790,7 @@ class ConfigManager:
 		@type name: str
 		@raise LookupError: If the profile doesn't exist.
 		"""
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			log.debug("Not deleting profile, as shouldSaveToDisk returned False.")
 			return
 		fn = self._getProfileFn(name)
@@ -847,7 +847,7 @@ class ConfigManager:
 		@raise LookupError: If the profile doesn't exist.
 		@raise ValueError: If a profile with the new name already exists.
 		"""
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			log.debug("Not renaming profile, as shouldWriteToDisk returned False.")
 			return
 		if newName == oldName:
@@ -1025,7 +1025,7 @@ class ConfigManager:
 		"""Save profile trigger information to disk.
 		This should be called whenever L{profilesToTriggers} is modified.
 		"""
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			# Never save if running securely.
 			log.debug("Not saving profile triggers, as shouldWriteToDisk returned False.")
 			return
@@ -1385,7 +1385,7 @@ class AggregatedSection:
 
 		# Alias old config items to their new counterparts for backwards compatibility.
 		# Uncomment when there are new links that need to be made.
-		if BACK_COMPAT_TO < (2027, 1, 0) and NVDAState._allowDeprecatedAPI():
+		if BACK_COMPAT_TO < (2027, 1, 0) and AslanState._allowDeprecatedAPI():
 			self._linkDeprecatedValues(key, val)
 
 	def _linkDeprecatedValues(self, key: aggregatedSection._cacheKeyT, val: aggregatedSection._cacheValueT):

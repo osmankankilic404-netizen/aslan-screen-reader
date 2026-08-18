@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2022 NV Access Limited
@@ -6,7 +6,7 @@
 """Unit tests for the excel module."""
 
 import unittest
-import NVDAObjects.window.excel as excel
+import AslanObjects.window.excel as excel
 
 
 class TestCellStates(unittest.TestCase):

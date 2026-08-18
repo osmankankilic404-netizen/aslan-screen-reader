@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2022-2026 NV Access Limited, American Printing House for the Blind
@@ -9,7 +9,7 @@ import queue
 import unittest
 from unittest.mock import call, MagicMock, patch
 
-from NVDAObjects import JAB
+from AslanObjects import JAB
 import JABHandler
 from JABHandler import AccessibleKeystroke
 

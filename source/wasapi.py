@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2025 NV Access Limited, Peter Vagner, Davy Kager, Mozilla Corporation, Google LLC,
 # Leonard de Ruijter
 # This file is covered by the GNU General Public License.
@@ -22,11 +22,11 @@ from ctypes.wintypes import (
 from comtypes import (
 	HRESULT,
 )
-import NVDAState
+import AslanState
 from winBindings.mmeapi import WAVEFORMATEX
 
 
-dll = cdll.LoadLibrary(NVDAState.ReadPaths.nvdaHelperLocalDll)
+dll = cdll.LoadLibrary(AslanState.ReadPaths.aslanHelperLocalDll)
 
 HWasapiPlayer = HANDLE
 

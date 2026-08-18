@@ -1,11 +1,11 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2025 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton and others.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""Server implementation for NVDA Remote relay functionality.
+"""Server implementation for Aslan Remote relay functionality.
 
-This module implements a relay server that enables NVDA Remote connections between
+This module implements a relay server that enables Aslan Remote connections between
 multiple clients. It provides:
 
 - A secure SSL/TLS encrypted relay server
@@ -41,7 +41,7 @@ from cryptography import x509
 from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.x509.oid import NameOID
-from NVDAState import WritePaths, shouldWriteToDisk
+from AslanState import WritePaths, shouldWriteToDisk
 from logHandler import log
 
 from . import configuration
@@ -50,7 +50,7 @@ from .serializer import JSONSerializer
 
 
 class RemoteCertificateManager:
-	"""Manages SSL certificates for the NVDA Remote relay server.
+	"""Manages SSL certificates for the Aslan Remote relay server.
 
 	:ivar certDir: Directory where certificates and keys are stored
 	:ivar certPath: Path to the certificate file
@@ -145,7 +145,7 @@ class RemoteCertificateManager:
 
 		subject = issuer = x509.Name(
 			[
-				x509.NameAttribute(NameOID.COMMON_NAME, "NVDA Remote Access Service"),
+				x509.NameAttribute(NameOID.COMMON_NAME, "Aslan Remote Access Service"),
 				x509.NameAttribute(NameOID.ORGANIZATION_NAME, "NV Access"),
 			],
 		)
@@ -211,7 +211,7 @@ class RemoteCertificateManager:
 		config["trustedCertificates"]["localhost"] = fingerprint
 		config["trustedCertificates"]["127.0.0.1"] = fingerprint
 
-		log.info(f"Generated new self-signed certificate for NVDA Remote. Fingerprint: {fingerprint}")
+		log.info(f"Generated new self-signed certificate for Aslan Remote. Fingerprint: {fingerprint}")
 
 	def _persistCertificate(self) -> None:
 		if self.__key is None or self.__cert is None or self.__fingerprint is None:
@@ -274,9 +274,9 @@ class RemoteCertificateManager:
 
 
 class LocalRelayServer:
-	"""Secure relay server for NVDA Remote connections.
+	"""Secure relay server for Aslan Remote connections.
 
-	Accepts encrypted connections from NVDA Remote clients and routes messages between them.
+	Accepts encrypted connections from Aslan Remote clients and routes messages between them.
 	Creates IPv4 and IPv6 listening sockets using SSL/TLS encryption.
 	Uses select() for non-blocking I/O and monitors connection health with periodic pings.
 
@@ -356,7 +356,7 @@ class LocalRelayServer:
 
 		:raises socket.error: If there are socket communication errors
 		"""
-		log.info(f"Starting NVDA Remote relay server on port {self.port}")
+		log.info(f"Starting Aslan Remote relay server on port {self.port}")
 		self._running = True
 		self.lastPingTime = time.time()
 		while self._running:
@@ -415,7 +415,7 @@ class LocalRelayServer:
 
 	def close(self) -> None:
 		"""Shut down the server and close all connections."""
-		log.info("Shutting down NVDA Remote relay server")
+		log.info("Shutting down Aslan Remote relay server")
 		self._running = False
 		self.serverSocket.close()
 		self.serverSocket6.close()
@@ -423,7 +423,7 @@ class LocalRelayServer:
 
 
 class Client:
-	"""Handles a single connected NVDA Remote client.
+	"""Handles a single connected Aslan Remote client.
 
 	Processes incoming messages, handles authentication via channel password,
 	records client protocol version, and routes messages to other connected clients.

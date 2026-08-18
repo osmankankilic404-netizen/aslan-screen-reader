@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2018-2019 NV Access Limited, Łukasz Golonka
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -11,12 +11,12 @@ This simply imports a proper class from the explorer app module, and maps it to 
 
 import appModuleHandler
 import controlTypes
-from NVDAObjects.window.edit import Edit
+from AslanObjects.window.edit import Edit
 from .explorer import ReadOnlyEditBox
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		windowClass = obj.windowClassName
 		if windowClass == "Edit" and Edit in clsList and controlTypes.State.READONLY in obj.states:
 			clsList.insert(0, ReadOnlyEditBox)

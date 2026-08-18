@@ -1,13 +1,13 @@
 # Running Automated Tests
 
-If you make a change to the NVDA code, you should run NVDA's automated tests.
+If you make a change to the Aslan code, you should run Aslan's automated tests.
 These tests help to ensure that code changes do not unintentionally break functionality that was previously working.
 
 ## Git hooks (prek)
 
 Git hooks can be used to automatically run linting, translatable string checks and unit tests on files staged for commit.
 This will automatically apply lint fixes where possible, and will cancel the commit on lint issues and other test failures.
-NVDA uses [prek](https://prek.j178.dev/), a faster, drop-in compatible alternative to [pre-commit](https://pre-commit.com/).
+Aslan uses [prek](https://prek.j178.dev/), a faster, drop-in compatible alternative to [pre-commit](https://pre-commit.com/).
 
 There are two ways to run prek, and the examples below use both:
 
@@ -16,7 +16,7 @@ There are two ways to run prek, and the examples below use both:
 * Via a global install, calling `prek` directly (e.g. `prek install`).
   Install it once with `uv tool install prek`.
 
-From a shell, [set up the Git hooks](https://prek.j178.dev/reference/cli/#prek-install) for your NVDA python environment:
+From a shell, [set up the Git hooks](https://prek.j178.dev/reference/cli/#prek-install) for your Aslan python environment:
 
 `uv run prek install`
 
@@ -83,14 +83,14 @@ Please refer to [unittest's documentation](https://docs.python.org/3/library/uni
 ## System Tests
 
 System tests can be run with the `runsystemtests.bat --include <TAG>` script.
-To run all tests standard tests for developers use `runsystemtests.bat --include NVDA`.
+To run all tests standard tests for developers use `runsystemtests.bat --include Aslan`.
 Internally this script uses the Robot test framework to execute the tests.
 Any arguments given to `runsystemtests.bat` are forwarded onto Robot.
 For more details (including filtering and exclusion of tests) see `tests/system/readme.md`.
 
 ## License checks
 
-NVDA uses GPLv2 which is incompatible with certain licenses like Apache.
+Aslan uses GPLv2 which is incompatible with certain licenses like Apache.
 Run `runlicensecheck.bat` to check that you don't introduce any new python dependencies with incompatible licenses.
 
 This is configured in [pyproject.toml](../../pyproject.toml) using the [licensecheck pip package](https://github.com/FHPythonUtils/LicenseCheck).

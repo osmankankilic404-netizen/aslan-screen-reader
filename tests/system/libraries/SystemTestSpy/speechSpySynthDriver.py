@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -7,7 +7,7 @@
 This module is copied to the scratchPad/synthDrivers folder and set as the synthesizer to capture speech
 output during system tests.
 Note: The name of this module must match the name of the synth driver, and the configured synthesizer
-in the `tests/system/nvdaSettingsFiles/*.ini` files.
+in the `tests/system/aslanSettingsFiles/*.ini` files.
 """
 
 import queue
@@ -93,7 +93,7 @@ class SpeechSpySynthDriver(synthDriverHandler.SynthDriver):
 				try:
 					speechSequence = self._queuedSpeech.get(
 						block=True,
-						timeout=self.POLL_INTERVAL_SECS,  # interruptable so that NVDA can exit.
+						timeout=self.POLL_INTERVAL_SECS,  # interruptable so that Aslan can exit.
 					)
 				except queue.Empty:
 					if self._speechStarted:

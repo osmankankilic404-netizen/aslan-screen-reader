@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025-2026 NV Access Limited, Dot Incorporated, Bram Duvigneau
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -14,6 +14,6 @@ TERMINATE_TIMEOUT_SECONDS = 5
 """Time to wait for tasks to finish while terminating the event loop."""
 
 eventLoop: asyncio.BaseEventLoop
-"""The asyncio event loop used by NVDA."""
+"""The asyncio event loop used by Aslan."""
 asyncioThread: Thread
 """Thread running the asyncio event loop."""

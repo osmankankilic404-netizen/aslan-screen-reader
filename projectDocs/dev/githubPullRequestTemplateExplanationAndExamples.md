@@ -1,7 +1,7 @@
-# Creating PRs on the NVDA project
+# Creating PRs on the Aslan project
 
 This page is meant to serve as an explanation for how to fill out
-[our Github pull request template](https://github.com/nvaccess/nvda/blob/master/.github/PULL_REQUEST_TEMPLATE.md)
+[our Github pull request template](https://github.com/nvaccess/aslan/blob/master/.github/PULL_REQUEST_TEMPLATE.md)
 
 ## The title
 
@@ -64,11 +64,11 @@ Please use this section as an opportunity to try to convince us (and yourself) t
 
 Often in face to face development it's useful to demonstrate a change, quite often bugs are noticed at this point when the new person asks for some variation in testing approach.
 Since we are unlikely to be able to demonstrate a feature in an interactive way, an easy-to-follow list of steps for a "demo" allows others to check for themselves without having to work out all the details.
-It also serves as a starting point for members of the community who are testing the changes that go into NVDA.
+It also serves as a starting point for members of the community who are testing the changes that go into Aslan.
 
 Example:
 
-> In NVDA settings ensure that:
+> In Aslan settings ensure that:
 >
 > * Keyboard category
 >   * "speak typed characters" is unchecked
@@ -80,7 +80,7 @@ Example:
 >
 > Expect "hello" to be announced.
 
-* If many NVDA settings are required, consider attaching a sample `nvda.ini` file to the PR.
+* If many Aslan settings are required, consider attaching a sample `aslan.ini` file to the PR.
 * If a complicated document is required to test with a 3rd party application, consider attaching it to the PR for others to test with.
 
 ### Known issues with pull request:
@@ -118,7 +118,7 @@ Discuss under "testing strategy" heading:
   * How did you manually test the change?
     * Be clear on steps another user can take to replicate your testing.
     * Clearly describing this helps alpha testers, and future developers.
-  * Is this a commonly tested part of NVDA?
+  * Is this a commonly tested part of Aslan?
   If so, please add your manual test steps to [the manual test documentation](../../tests/manual/README.md).
   * As a reviewer, please use this description to replicate the testing (if possible).
 
@@ -141,7 +141,7 @@ Discuss under "testing strategy" heading:
 
 ### UX of all users considered
 
-* Users of NVDA are diverse, and rely on different parts of NVDA.
+* Users of Aslan are diverse, and rely on different parts of Aslan.
   Ensure the change caters to users of the following:
   * Speech
   * Braille
@@ -152,10 +152,10 @@ Discuss under "testing strategy" heading:
 
 ### Security precautions taken
 
-Windows allows NVDA to access secure information from a user's desktop while the lock screen is activated.
-When handling NVDAObjects, code should check if an object should be available while the lock screen is activated.
+Windows allows Aslan to access secure information from a user's desktop while the lock screen is activated.
+When handling AslanObjects, code should check if an object should be available while the lock screen is activated.
 This can be done checking `utils.security._isSecureObjectWhileLockScreenActivated`.
-If this function returns `True`, code should not process the NVDAObject any further, and return gracefully.
+If this function returns `True`, code should not process the AslanObject any further, and return gracefully.
 It is important that information from the object does not reach the user.
 
 Any code which should not be performed on [secure screens](https://download.nvaccess.org/documentation/userGuide.html#SecureScreens) should check `globalVars.appArgs.secure` and return gracefully.

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2025 NV Access Limited, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -28,13 +28,13 @@ from utils._crashHandler import (
 )
 import core
 import exceptions
-import NVDAHelper
-import NVDAState
+import AslanHelper
+import AslanState
 
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	if attrName == "getFormattedStacksForAllThreads" and NVDAState._allowDeprecatedAPI():
+	if attrName == "getFormattedStacksForAllThreads" and AslanState._allowDeprecatedAPI():
 		log.warning(
 			"Importing getFormattedStacksForAllThreads from here is deprecated. "
 			"getFormattedStacksForAllThreads should be imported from logHandler instead.",
@@ -155,7 +155,7 @@ def _watcher():
 		winKernel.waitForSingleObject(_coreDeadTimer, winKernel.INFINITE)
 
 		if not isRunning:
-			# NVDA has shutdown, exit the watcher.
+			# Aslan has shutdown, exit the watcher.
 			return
 
 		# The core hasn't reported alive for MIN_CORE_ALIVE_TIMEOUT.
@@ -210,9 +210,9 @@ def _shouldRecoverAfterMinTimeout():
 		return True
 	# Import late to avoid circular import.
 	import api
-	from NVDAObjects.window import Window
+	from AslanObjects.window import Window
 
-	# If a system menu has been activated but NVDA's focus is not yet in the menu then use min timeout
+	# If a system menu has been activated but Aslan's focus is not yet in the menu then use min timeout
 	if (
 		info.flags & winUser.GUI_SYSTEMMENUMODE
 		and info.hwndMenuOwner
@@ -272,16 +272,16 @@ def initialize():
 			# Catch application crashes if the handler is enabled.
 			winBindings.kernel32.SetUnhandledExceptionFilter(crashHandler)
 	else:
-		log.debug("Not enabling crash recovery as NVDA is running in secure mode.")
+		log.debug("Not enabling crash recovery as Aslan is running in secure mode.")
 	winBindings.ole32.CoEnableCallCancellation(None)
 	# Cache cancelCallEvent.
 	_cancelCallEvent = ctypes.wintypes.HANDLE.in_dll(
-		NVDAHelper.localLib.dll,
+		AslanHelper.localLib.dll,
 		"cancelCallEvent",
 	)
 	# Handle cancelled SendMessage calls.
-	NVDAHelper._setDllFuncPointer(
-		NVDAHelper.localLib.dll,
+	AslanHelper._setDllFuncPointer(
+		AslanHelper.localLib.dll,
 		"_notifySendMessageCancelled",
 		_notifySendMessageCancelled,
 	)
@@ -432,8 +432,8 @@ def cancellableSendMessage(hwnd, msg, wParam, lParam, flags=0, timeout=60000):
 	The call will still be cancelled if appropriate even if the specified timeout has not yet been reached.
 	@raise CallCancelled: If the call was cancelled.
 	"""
-	result = NVDAHelper.localLib.DWORD_PTR()
-	NVDAHelper.localLib.cancellableSendMessageTimeout(
+	result = AslanHelper.localLib.DWORD_PTR()
+	AslanHelper.localLib.cancellableSendMessageTimeout(
 		hwnd,
 		msg,
 		wParam or 0,

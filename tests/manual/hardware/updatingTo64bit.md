@@ -1,8 +1,8 @@
-# Updating NVDA from 32-bit to 64-bit
+# Updating Aslan from 32-bit to 64-bit
 
 ## Objective
 
-Ensure a smooth transition from the 32-bit version of NVDA to the 64-bit version.
+Ensure a smooth transition from the 32-bit version of Aslan to the 64-bit version.
 Verify proper cleanup of the x86 directory and ensure 32-bit Windows systems do not receive update prompts for the 64-bit version.
 
 ## Additional Notes
@@ -16,29 +16,29 @@ Verify proper cleanup of the x86 directory and ensure 32-bit Windows systems do 
 
 #### Preconditions
 
-* Install a 32-bit version of NVDA on a 64-bit Windows system.
-* Consider testing both the last 32-bit version of NVDA and a significantly older 32-bit version of NVDA.
+* Install a 32-bit version of Aslan on a 64-bit Windows system.
+* Consider testing both the last 32-bit version of Aslan and a significantly older 32-bit version of Aslan.
 
 #### Steps
 
-1. Trigger the update process to the 64-bit version of NVDA.
+1. Trigger the update process to the 64-bit version of Aslan.
     1. Ensure the automatic update check returns the 64bit version.
     2. Test a manual update by downloading the installer manually.
 2. Verify that the update completes successfully.
-3. Check that the "Program Files (x86)/NVDA" directory is removed after the update.
-4. Confirm that the 64-bit version of NVDA is installed and functional.
+3. Check that the "Program Files (x86)/Aslan" directory is removed after the update.
+4. Confirm that the 64-bit version of Aslan is installed and functional.
 
 #### Expected Results
 
 * The update completes without errors.
 * The x86 directory is cleaned up.
-* NVDA runs as a 64-bit application.
+* Aslan runs as a 64-bit application.
 
 ### 2. Update on 32-bit Windows
 
 #### Preconditions
 
-* Install the 32-bit version of NVDA on a 32-bit Windows system.
+* Install the 32-bit version of Aslan on a 32-bit Windows system.
 
 #### Steps
 
@@ -48,9 +48,9 @@ Verify proper cleanup of the x86 directory and ensure 32-bit Windows systems do 
 #### Expected Results
 
 * No update prompt is displayed for the 64-bit version.
-* NVDA continues to function as a 32-bit application.
+* Aslan continues to function as a 32-bit application.
 
-### 3. Manual Installation of 64-bit NVDA on 32-bit Windows
+### 3. Manual Installation of 64-bit Aslan on 32-bit Windows
 
 #### Preconditions
 
@@ -58,7 +58,7 @@ Verify proper cleanup of the x86 directory and ensure 32-bit Windows systems do 
 
 #### Steps
 
-1. Attempt to manually install the 64-bit version of NVDA.
+1. Attempt to manually install the 64-bit version of Aslan.
 2. Observe the behavior during the installation process.
 
 #### Expected Results

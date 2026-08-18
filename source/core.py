@@ -1,11 +1,11 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Aleksey Sadovoy, Christopher Toth, Joseph Lee, Peter Vágner,
 # Derek Riemer, Babbage B.V., Zahari Yurukov, Łukasz Golonka, Cyrille Bougot, Julien Cochuyt, Wang Chong,
 # Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
-"""NVDA core"""
+"""Aslan core"""
 
 from dataclasses import dataclass
 from typing import (
@@ -30,8 +30,8 @@ from logHandler import log
 import addonHandler
 import extensionPoints
 import garbageHandler
-import NVDAState
-from NVDAState import WritePaths
+import AslanState
+from AslanState import WritePaths
 
 if TYPE_CHECKING:
 	import wx
@@ -39,7 +39,7 @@ if TYPE_CHECKING:
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	if attrName == "post_windowMessageReceipt" and NVDAState._allowDeprecatedAPI():
+	if attrName == "post_windowMessageReceipt" and AslanState._allowDeprecatedAPI():
 		from winAPI.messageWindow import pre_handleWindowMessage
 
 		log.warning(
@@ -50,7 +50,7 @@ def __getattr__(attrName: str) -> Any:
 	raise AttributeError(f"module {repr(__name__)} has no attribute {repr(attrName)}")
 
 
-# Inform those who want to know that NVDA has finished starting up.
+# Inform those who want to know that Aslan has finished starting up.
 postNvdaStartup = extensionPoints.Action()
 
 PUMP_MAX_DELAY = 10
@@ -128,10 +128,10 @@ def doStartupDialogs():
 	import gui
 
 	def handleReplaceCLIArg(cliArgument: str) -> bool:
-		"""Since #9827 NVDA replaces a currently running instance
+		"""Since #9827 Aslan replaces a currently running instance
 		and therefore `--replace` command line argument is redundant and no longer supported.
 		However for backwards compatibility the desktop shortcut created by installer
-		still starts NVDA with the now redundant switch.
+		still starts Aslan with the now redundant switch.
 		Its presence in command line arguments should not cause a warning on startup."""
 		return cliArgument in ("-r", "--replace")
 
@@ -145,8 +145,8 @@ def doStartupDialogs():
 		import wx
 
 		gui.messageBox(
-			# Translators: Shown when NVDA has been started with unknown command line parameters.
-			_("The following command line parameters are unknown to NVDA: {params}").format(
+			# Translators: Shown when Aslan has been started with unknown command line parameters.
+			_("The following command line parameters are unknown to Aslan: {params}").format(
 				params=", ".join(unknownCLIParams),
 			),
 			# Translators: Title of the dialog letting user know
@@ -211,7 +211,7 @@ def doStartupDialogs():
 
 
 @dataclass
-class NewNVDAInstance:
+class NewAslanInstance:
 	filePath: str
 	parameters: Optional[str] = None
 	directory: Optional[str] = None
@@ -240,14 +240,14 @@ def computeRestartCLIArgs(removeArgsList: list[str] | None = None) -> list[str]:
 
 
 def restartUnsafely():
-	"""Start a new copy of NVDA immediately.
-	Used as a last resort, in the event of a serious error to immediately restart NVDA without running any
+	"""Start a new copy of Aslan immediately.
+	Used as a last resort, in the event of a serious error to immediately restart Aslan without running any
 	cleanup / exit code.
-	There is no dependency on NVDA currently functioning correctly, which is in contrast with L{restart} which
+	There is no dependency on Aslan currently functioning correctly, which is in contrast with L{restart} which
 	depends on the internal queue processing (queueHandler).
-	Because none of NVDA's shutdown code is run, NVDA is likely to be left in an unclean state.
+	Because none of Aslan's shutdown code is run, Aslan is likely to be left in an unclean state.
 	Some examples of clean up that may be skipped.
-	- Free NVDA's mutex (mutex prevents multiple NVDA instances), leaving it abandoned when this process ends.
+	- Free Aslan's mutex (mutex prevents multiple Aslan instances), leaving it abandoned when this process ends.
 	  - However, this situation is handled during mutex acquisition.
 	- Remove icons (systray)
 	- Saving settings
@@ -268,10 +268,10 @@ def restartUnsafely():
 		removeArgsList=["easeOfAccess"],
 	)
 	options = []
-	if NVDAState.isRunningAsSource():
+	if AslanState.isRunningAsSource():
 		options.append(os.path.basename(sys.argv[0]))
 	_startNewInstance(
-		NewNVDAInstance(
+		NewAslanInstance(
 			sys.executable,
 			subprocess.list2cmdline(options + restartCLIArgs),
 			globalVars.appDir,
@@ -280,11 +280,11 @@ def restartUnsafely():
 
 
 def restart(disableAddons=False, debugLogging=False):
-	"""Restarts NVDA by starting a new copy."""
+	"""Restarts Aslan by starting a new copy."""
 	if globalVars.appArgs.launcher:
-		NVDAState._setExitCode(3)
-		if not triggerNVDAExit():
-			log.error("NVDA already in process of exiting, this indicates a logic error.")
+		AslanState._setExitCode(3)
+		if not triggerAslanExit():
+			log.error("Aslan already in process of exiting, this indicates a logic error.")
 		return
 	import subprocess
 
@@ -292,21 +292,21 @@ def restart(disableAddons=False, debugLogging=False):
 		removeArgsList=["disableAddons", "debugLogging", "language", "easeOfAccess"],
 	)
 	options = []
-	if NVDAState.isRunningAsSource():
+	if AslanState.isRunningAsSource():
 		options.append(os.path.basename(sys.argv[0]))
 	if disableAddons:
 		options.append("--disable-addons")
 	if debugLogging:
 		options.append("--debug-logging")
 
-	if not triggerNVDAExit(
-		NewNVDAInstance(
+	if not triggerAslanExit(
+		NewAslanInstance(
 			sys.executable,
 			subprocess.list2cmdline(options + restartCLIArgs),
 			globalVars.appDir,
 		),
 	):
-		log.error("NVDA already in process of exiting, this indicates a logic error.")
+		log.error("Aslan already in process of exiting, this indicates a logic error.")
 
 
 def resetConfiguration(factoryDefaults=False):
@@ -452,38 +452,38 @@ def getWxLangOrNone() -> Optional["wx.LanguageInfo"]:
 	return wxLang
 
 
-def _startNewInstance(newNVDA: NewNVDAInstance):
+def _startNewInstance(newAslan: NewAslanInstance):
 	"""
-	If something (eg the installer or exit dialog) has requested a new NVDA instance to start, start it.
-	Should only be used by calling triggerNVDAExit and after handleNVDAModuleCleanupBeforeGUIExit and
+	If something (eg the installer or exit dialog) has requested a new Aslan instance to start, start it.
+	Should only be used by calling triggerAslanExit and after handleAslanModuleCleanupBeforeGUIExit and
 	_closeAllWindows.
 	"""
 	import shellapi
 	from winUser import SW_SHOWNORMAL
 
-	log.debug(f"Starting new NVDA instance: {newNVDA}")
+	log.debug(f"Starting new Aslan instance: {newAslan}")
 	shellapi.ShellExecute(
 		hwnd=None,
 		operation=None,
-		file=newNVDA.filePath,
-		parameters=newNVDA.parameters,
-		directory=newNVDA.directory,
+		file=newAslan.filePath,
+		parameters=newAslan.parameters,
+		directory=newAslan.directory,
 		# #4475: ensure that the first window of the new process is not hidden by providing SW_SHOWNORMAL
 		showCmd=SW_SHOWNORMAL,
 	)
 
 
-def _doShutdown(newNVDA: Optional[NewNVDAInstance]):
-	_handleNVDAModuleCleanupBeforeGUIExit()
+def _doShutdown(newAslan: Optional[NewAslanInstance]):
+	_handleAslanModuleCleanupBeforeGUIExit()
 	_closeAllWindows()
-	if newNVDA is not None:
-		_startNewInstance(newNVDA)
+	if newAslan is not None:
+		_startNewInstance(newAslan)
 
 
-def triggerNVDAExit(newNVDA: Optional[NewNVDAInstance] = None) -> bool:
+def triggerAslanExit(newAslan: Optional[NewAslanInstance] = None) -> bool:
 	"""
-	Used to safely exit NVDA. If a new instance is required to start after exit, queue one by specifying
-	instance information with `newNVDA`.
+	Used to safely exit Aslan. If a new instance is required to start after exit, queue one by specifying
+	instance information with `newAslan`.
 	@return: True if this is the first call to trigger the exit, and the shutdown event was queued.
 	"""
 	from gui.message import isModalMessageBoxActive
@@ -493,14 +493,14 @@ def triggerNVDAExit(newNVDA: Optional[NewNVDAInstance] = None) -> bool:
 	with _shuttingDownFlagLock:
 		safeToExit = not isModalMessageBoxActive()
 		if not safeToExit:
-			log.error("NVDA cannot exit safely, ensure open dialogs are closed")
+			log.error("Aslan cannot exit safely, ensure open dialogs are closed")
 			return False
 		elif _hasShutdownBeenTriggered:
-			log.debug("NVDA has already been triggered to exit safely.")
+			log.debug("Aslan has already been triggered to exit safely.")
 			return False
 		else:
 			# queue this so that the calling process can exit safely (eg a Popup menu)
-			queueHandler.queueFunction(queueHandler.eventQueue, _doShutdown, newNVDA)
+			queueHandler.queueFunction(queueHandler.eventQueue, _doShutdown, newAslan)
 			_hasShutdownBeenTriggered = True
 			log.debug("_doShutdown has been queued")
 			return True
@@ -508,7 +508,7 @@ def triggerNVDAExit(newNVDA: Optional[NewNVDAInstance] = None) -> bool:
 
 def _closeAllWindows():
 	"""
-	Should only be used by calling triggerNVDAExit and after _handleNVDAModuleCleanupBeforeGUIExit.
+	Should only be used by calling triggerAslanExit and after _handleAslanModuleCleanupBeforeGUIExit.
 	Ensures the wx mainloop is exited by all the top windows being destroyed.
 	wx objects that don't inherit from wx.Window (eg sysTrayIcon, Menu) need to be manually destroyed.
 	"""
@@ -531,7 +531,7 @@ def _closeAllWindows():
 				f": {instance.title} - {instance.__class__.__qualname__} - {instance}",
 			)
 		else:
-			log.debug("Exiting NVDA with an open settings dialog: {!r}".format(instance))
+			log.debug("Exiting Aslan with an open settings dialog: {!r}".format(instance))
 
 	# wx.Windows destroy child Windows automatically but wx.Menu and TaskBarIcon don't inherit from wx.Window.
 	# They must be manually destroyed when exiting the app.
@@ -560,7 +560,7 @@ def _closeAllWindows():
 	app.ScheduleForDestruction(gui.mainFrame)
 
 
-def _handleNVDAModuleCleanupBeforeGUIExit():
+def _handleAslanModuleCleanupBeforeGUIExit():
 	"""Terminates various modules that rely on the GUI. This should be used before closing all windows
 	and terminating the GUI.
 	"""
@@ -595,15 +595,15 @@ def _initializeObjectCaches():
 
 	The desktop object must be used, as setting the object caches has side effects,
 	such as focus events.
-	Side effects from events generated while setting these objects may require NVDA to be finished initializing.
+	Side effects from events generated while setting these objects may require Aslan to be finished initializing.
 	E.G. An app module for a lockScreen window.
-	The desktop object is an NVDA object without event handlers associated with it.
+	The desktop object is an Aslan object without event handlers associated with it.
 	"""
 	import api
-	import NVDAObjects
+	import AslanObjects
 	import winUser
 
-	desktopObject = NVDAObjects.window.Window(windowHandle=winUser.getDesktopWindow())
+	desktopObject = AslanObjects.window.Window(windowHandle=winUser.getDesktopWindow())
 	api.setDesktopObject(desktopObject)
 	api.setForegroundObject(desktopObject)
 	api.setFocusObject(desktopObject)
@@ -647,7 +647,7 @@ def _setUpWxApp() -> "wx.App":
 			The current wx implementation (as of wxPython 4.1.1) sets Python locale to an invalid one
 			which triggers Python issue 36792 (#12160).
 			The new implementation (wxPython 4.1.2) sets locale to "C" (basic Unicode locale).
-			While this is not wrong as such NVDA manages locale themselves using `languageHandler`
+			While this is not wrong as such Aslan manages locale themselves using `languageHandler`
 			and it is better to remove wx from the equation so this method is a No-op.
 			This code may need to be revisited when we update Python / wxPython.
 			"""
@@ -659,7 +659,7 @@ def _setUpWxApp() -> "wx.App":
 	# However, when running as a Windows Store application, we do want to request to be restarted for updates
 	def onQueryEndSession(evt):
 		if config.isAppX:
-			# Automatically restart NVDA on Windows Store update
+			# Automatically restart Aslan on Windows Store update
 			winBindings.kernel32.RegisterApplicationRestart(None, 0)
 
 	app.Bind(wx.EVT_QUERY_END_SESSION, onQueryEndSession)
@@ -668,7 +668,7 @@ def _setUpWxApp() -> "wx.App":
 		return False
 
 	def onEndSession(evt):
-		# NVDA will be terminated as soon as this function returns, so save configuration if appropriate.
+		# Aslan will be terminated as soon as this function returns, so save configuration if appropriate.
 		config.saveOnExit()
 		speech.cancelSpeech()
 		braille.extensions.decide_enabled.register(returnFalse)
@@ -690,14 +690,14 @@ def _setUpWxApp() -> "wx.App":
 
 
 def main():
-	"""NVDA's core main loop.
+	"""Aslan's core main loop.
 	This initializes all modules such as audio, IAccessible, keyboard, mouse, and GUI.
 	Then it initialises the wx application object and sets up the core pump,
 	which checks the queues and executes functions when requested.
 	Finally, it starts the wx main loop.
 	"""
 	log.debug("Core starting")
-	if NVDAState.isRunningAsSource():
+	if AslanState.isRunningAsSource():
 		# When running as packaged version, DPI awareness is set via the app manifest.
 		from winAPI.dpiAwareness import setDPIAwareness
 
@@ -734,10 +734,10 @@ def main():
 		lang = config.conf["general"]["language"]
 	log.debug(f"setting language to {lang}")
 	languageHandler.setLanguage(lang)
-	import NVDAHelper
+	import AslanHelper
 
-	log.debug("Initializing NVDAHelper")
-	NVDAHelper.initialize()
+	log.debug("Initializing AslanHelper")
+	AslanHelper.initialize()
 	import nvwave
 
 	log.debug("initializing nvwave")
@@ -760,7 +760,7 @@ def main():
 		"Using configobj version %s with validate version %s"
 		% (configobj.__version__, configobj.validate.__version__),
 	)
-	# Set a reasonable timeout for any socket connections NVDA makes.
+	# Set a reasonable timeout for any socket connections Aslan makes.
 	import socket
 
 	socket.setdefaulttimeout(10)
@@ -773,7 +773,7 @@ def main():
 
 	addonStoreGui.initialize()
 	if globalVars.appArgs.disableAddons:
-		log.info("Add-ons are disabled. Restart NVDA to enable them.")
+		log.info("Add-ons are disabled. Restart Aslan to enable them.")
 	import appModuleHandler
 
 	log.debug("Initializing appModule Handler")
@@ -814,11 +814,11 @@ def main():
 
 	log.debug("Initializing math presentation")
 	mathPres.initialize()
-	timeSinceStart = time.time() - NVDAState.getStartTime()
+	timeSinceStart = time.time() - AslanState.getStartTime()
 	if not globalVars.appArgs.minimal and timeSinceStart > 5:
 		log.debugWarning("Slow starting core (%.2f sec)" % timeSinceStart)
-		# Translators: This is spoken when NVDA is starting.
-		speech.speakMessage(_("Loading NVDA. Please wait..."))
+		# Translators: This is spoken when Aslan is starting.
+		speech.speakMessage(_("Loading Aslan. Please wait..."))
 
 	import wx
 
@@ -867,7 +867,7 @@ def main():
 	# initialize wxpython localization support
 	wxLocaleObj = wx.Locale()
 	wxLang = getWxLangOrNone()
-	if not NVDAState.isRunningAsSource():
+	if not AslanState.isRunningAsSource():
 		wxLocaleObj.AddCatalogLookupPathPrefix(os.path.join(globalVars.appDir, "locale"))
 	if wxLang:
 		try:
@@ -956,7 +956,7 @@ def main():
 	):
 		import gui.installerGui
 
-		isUpdate = gui.installerGui._nvdaExistsInDir(globalVars.appArgs.portablePath)
+		isUpdate = gui.installerGui._aslanExistsInDir(globalVars.appArgs.portablePath)
 		# If we are updating, we don't want to warn for non-empty directory.
 		warnForNonEmptyDirectory = not isUpdate and not globalVars.appArgs.createPortableSilent
 		wx.CallAfter(
@@ -968,11 +968,11 @@ def main():
 		)
 	elif not globalVars.appArgs.minimal:
 		if screenCurtain.screenCurtain.enabled:
-			# Translators: This is shown on a braille display (if one is connected) when NVDA starts with the screen curtain enabled.
-			initialMessage = _("NVDA started with screen curtain enabled")
+			# Translators: This is shown on a braille display (if one is connected) when Aslan starts with the screen curtain enabled.
+			initialMessage = _("Aslan started with screen curtain enabled")
 		else:
-			# Translators: This is shown on a braille display (if one is connected) when NVDA starts.
-			initialMessage = _("NVDA started")
+			# Translators: This is shown on a braille display (if one is connected) when Aslan starts.
+			initialMessage = _("Aslan started")
 		try:
 			braille.handler.message(initialMessage)
 		except:  # noqa: E722
@@ -1069,7 +1069,7 @@ def main():
 	else:
 		log.debug("initializing updateCheck")
 		updateCheck.initialize()
-		log.debug(f"NVDA user ID {updateCheck.state['id']}")
+		log.debug(f"Aslan user ID {updateCheck.state['id']}")
 
 	from winAPI import sessionTracking
 
@@ -1079,11 +1079,11 @@ def main():
 
 	magnifier.initialize()
 
-	NVDAState._TrackNVDAInitialization.markInitializationComplete()
+	AslanState._TrackAslanInitialization.markInitializationComplete()
 
-	log.info("NVDA initialized")
+	log.info("Aslan initialized")
 
-	# Queue the firing of the postNVDAStartup notification.
+	# Queue the firing of the postAslanStartup notification.
 	# This is queued so that it will run from within the core loop,
 	# and initial focus has been reported.
 	def _doPostNvdaStartupAction():
@@ -1096,12 +1096,12 @@ def main():
 	app.MainLoop()
 
 	log.info("Exiting")
-	# If MainLoop is terminated through WM_QUIT, such as starting an NVDA instance older than 2021.1,
-	# triggerNVDAExit has not been called yet
-	if triggerNVDAExit():
+	# If MainLoop is terminated through WM_QUIT, such as starting an Aslan instance older than 2021.1,
+	# triggerAslanExit has not been called yet
+	if triggerAslanExit():
 		log.debug(
-			"NVDA not already exiting, hit catch-all exit trigger."
-			" This likely indicates NVDA is exiting due to WM_QUIT.",
+			"Aslan not already exiting, hit catch-all exit trigger."
+			" This likely indicates Aslan is exiting due to WM_QUIT.",
 		)
 		queueHandler.pumpAll()
 	_terminate(gui)
@@ -1153,12 +1153,12 @@ def main():
 			pass
 	# We cannot terminate nvwave until after we perform nvwave.playWaveFile
 	_terminate(nvwave)
-	_terminate(NVDAHelper)
+	_terminate(AslanHelper)
 	# Log and join any remaining non-daemon threads here,
 	# before releasing our mutex and exiting.
 	# In a perfect world there should be none.
 	# If we don't do this, the NvDA process may stay alive after the mutex is released,
-	# which would cause issues for rpc / nvdaHelper.
+	# which would cause issues for rpc / aslanHelper.
 	# See issue #16933.
 	for thr in threading.enumerate():
 		if not thr.daemon and thr is not threading.current_thread():
@@ -1166,7 +1166,7 @@ def main():
 			thr.join()
 			log.info(f"Thread {thr.name} complete")
 	# #5189: Destroy the message window as the very last action
-	# so new instances of NVDA can find this one even if it freezes during exit.
+	# so new instances of Aslan can find this one even if it freezes during exit.
 	messageWindow.destroy()
 	log.debug("core done")
 
@@ -1207,22 +1207,22 @@ def requestPump(immediate: bool = False):
 		_pump.queueRequest()
 
 
-class NVDANotInitializedError(Exception):
+class AslanNotInitializedError(Exception):
 	pass
 
 
 def callLater(delay, callable, *args, **kwargs):
 	"""Call a callable once after the specified number of milliseconds.
-	As the call is executed within NVDA's core queue, it is possible that execution will take place slightly after the requested time.
-	This function should never be used to execute code that brings up a modal UI as it will cause NVDA's core to block.
-	This function can be safely called from any thread once NVDA has been initialized.
+	As the call is executed within Aslan's core queue, it is possible that execution will take place slightly after the requested time.
+	This function should never be used to execute code that brings up a modal UI as it will cause Aslan's core to block.
+	This function can be safely called from any thread once Aslan has been initialized.
 	"""
 	import wx
 
 	if wx.GetApp() is None:
-		# If NVDA has not fully initialized yet, the wxApp may not be initialized.
+		# If Aslan has not fully initialized yet, the wxApp may not be initialized.
 		# wx.CallLater and wx.CallAfter requires the wxApp to be initialized.
-		raise NVDANotInitializedError("Cannot schedule callable, wx.App is not initialized")
+		raise AslanNotInitializedError("Cannot schedule callable, wx.App is not initialized")
 	if isMainThread():
 		return wx.CallLater(delay, _callLaterExec, callable, args, kwargs)
 	else:

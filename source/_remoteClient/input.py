@@ -1,8 +1,8 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2026 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton,
 # Leonard de Ruijter and others.
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import ctypes
 from enum import IntEnum
@@ -58,7 +58,7 @@ class BrailleInputGesture(
 		    * App modules
 		    * Vision enhancement providers
 		    * Tree interceptors
-		    * NVDA objects
+		    * Aslan objects
 		    * Global commands
 
 		Returns:
@@ -110,7 +110,7 @@ class BrailleInputGesture(
 			if func:
 				return func
 
-		# NVDAObject level.
+		# AslanObject level.
 		func = getattr(focus, f"script_{scriptName}", None)
 		if func:
 			return func

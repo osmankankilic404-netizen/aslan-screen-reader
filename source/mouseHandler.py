@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2016-2025 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -128,7 +128,7 @@ def internal_mouseEvent(msg, x, y, injected):
 
 def executeMouseEvent(flags: int, x: int, y: int, data: int = 0) -> None:
 	"""
-	Generates mouse events that will be ignored by NVDA.
+	Generates mouse events that will be ignored by Aslan.
 
 	.. seealso::
 		https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-mouse_event
@@ -347,7 +347,7 @@ def doPrimaryClick(releaseDelay: float | None = None):
 	The primary button is the one that usually activates or selects an item.
 	This function honors the Windows user setting
 	for which button (left or right) is classed as the primary button.
-	@ param releaseDelay: optional float in seconds of how long NVDA should sleep
+	@ param releaseDelay: optional float in seconds of how long Aslan should sleep
 	between pressing down and then releasing up the primary button.
 	"""
 	buttonFlags = getLogicalButtonFlags()
@@ -360,7 +360,7 @@ def doSecondaryClick(releaseDelay: float | None = None):
 	The secondary button is the one that usually displays a context menu for an item when clicked.
 	This function honors the Windows user setting
 	for which button (left or right) is classed as the secondary button.
-	@ param releaseDelay: optional float in seconds of how long NVDA should sleep
+	@ param releaseDelay: optional float in seconds of how long Aslan should sleep
 	between pressing down and then releasing up the primary button.
 	"""
 	buttonFlags = getLogicalButtonFlags()

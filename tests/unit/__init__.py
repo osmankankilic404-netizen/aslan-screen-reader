@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2026 NV Access Limited, Babbage B.V., Cyrille Bougot, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
-"""NVDA unit testing.
+"""Aslan unit testing.
 All unit tests should reside within this package and should be
 divided into modules and packages similar to the code they are testing.
 Test modules must have a C{test_} prefix
@@ -19,7 +19,7 @@ import os
 UNIT_DIR = os.path.dirname(os.path.abspath(__file__))
 # The path to the top of the repo.
 TOP_DIR = os.path.dirname(os.path.dirname(UNIT_DIR))
-# The path to the NVDA "source" directory.
+# The path to the Aslan "source" directory.
 SOURCE_DIR = os.path.join(TOP_DIR, "source")
 
 # Apply several monkey patches to comtypes to make sure that it would search for generated interfaces
@@ -70,7 +70,7 @@ config.initialize()
 import languageHandler  # noqa: E402
 
 languageHandler.setLanguage("en")
-# NVDAObjects need appModuleHandler to be initialized.
+# AslanObjects need appModuleHandler to be initialized.
 import appModuleHandler  # noqa: E402
 
 appModuleHandler.initialize()
@@ -133,16 +133,16 @@ braille.input.initialize()
 # Make sure there's no blinking cursor as that relies on wx
 config.conf["braille"]["cursorBlink"] = False
 
-# textutils tests need uniscribe in NVDAHelper local lib
+# textutils tests need uniscribe in AslanHelper local lib
 import ctypes  # noqa: E402
-import NVDAHelper  # noqa: E402
-import NVDAState  # noqa: E402
+import AslanHelper  # noqa: E402
+import AslanState  # noqa: E402
 
-NVDAHelper.localLib = ctypes.cdll.LoadLibrary(NVDAState.ReadPaths.nvdaHelperLocalDll)
+AslanHelper.localLib = ctypes.cdll.LoadLibrary(AslanState.ReadPaths.aslanHelperLocalDll)
 # The focus and navigator objects need to be initialized to something.
-from .objectProvider import PlaceholderNVDAObject, NVDAObjectWithRole  # noqa: E402, F401
+from .objectProvider import PlaceholderAslanObject, AslanObjectWithRole  # noqa: E402, F401
 
-phObj = PlaceholderNVDAObject()
+phObj = PlaceholderAslanObject()
 import api  # noqa: E402
 
 api.setFocusObject(phObj)

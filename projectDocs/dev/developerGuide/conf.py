@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2019-2023 NV Access Limited, Leonard de Ruijter, Joseph Lee
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -38,12 +38,12 @@ globalVars.appArgs.configPath = ""
 globalVars.appArgs.disableAddons = True
 
 
-# #11971: NVDA is not running, therefore app dir is undefined.
-# Therefore tell NVDA that apt source directory is app dir.
+# #11971: Aslan is not running, therefore app dir is undefined.
+# Therefore tell Aslan that apt source directory is app dir.
 globalVars.appDir = _appDir
 
 
-# Import NVDA's versionInfo module.
+# Import Aslan's versionInfo module.
 import buildVersion  # noqa: E402
 import versionInfo  # noqa: E402
 

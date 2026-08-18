@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020-2022 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -24,7 +24,7 @@ DEFAULT_INTERVAL_BETWEEN_EVAL_SECONDS = 0.1
 
 _MIN_INTERVAL_BETWEEN_EVAL_SECONDS = 0.01
 """The minimum interval (in seconds) between calls to the evaluator.
-Small values for the interval can starve NVDA core, preventing it
+Small values for the interval can starve Aslan core, preventing it
 from being able to process queued events.
 """
 
@@ -47,7 +47,7 @@ def blockUntilConditionMet(
 	@param shouldStopEvaluator: Given the last value from getValue, is the condition met?
 	When True is returned, stop blocking.
 	@param intervalBetweenSeconds: The approximate period (seconds) between each test of getValue.
-	Small values can starve NVDA core preventing it from being able to process queued events.
+	Small values can starve Aslan core preventing it from being able to process queued events.
 	Must be greater than _MIN_INTERVAL_BETWEEN_EVAL_SECONDS, higher is recommended.
 	@return: A tuple, (True, value) if evaluator condition is met, otherwise (False, None)
 	"""

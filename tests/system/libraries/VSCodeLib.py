@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025 Bill Dengler
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -63,7 +63,7 @@ class VSCodeLib:
 		"""
 		launcher = self._findCodeLauncher()
 		if VSCodeLib._testTempDir is None:
-			VSCodeLib._testTempDir = _tempfile.mkdtemp(prefix="nvdatest")
+			VSCodeLib._testTempDir = _tempfile.mkdtemp(prefix="aslantest")
 		userDataDir = _os.path.join(VSCodeLib._testTempDir, "vscodeUserData")
 		_os.makedirs(userDataDir, exist_ok=True)
 

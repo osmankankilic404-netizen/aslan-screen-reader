@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2024, NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -101,12 +101,12 @@ class _SetURLDialog(SettingsDialog):
 		elif self._url and self._testStatus != _SetURLDialog._URLTestStatus.PASSED:
 			ret = gui.messageBox(
 				_(
-					# Translators: Message shown to users when saving a potentially invalid URL to NVDA's settings.
+					# Translators: Message shown to users when saving a potentially invalid URL to Aslan's settings.
 					"The URL you have entered failed the connection test. Are you sure you want to save it anyway?",
 				)
 				if self._testStatus == _SetURLDialog._URLTestStatus.FAILED
 				else _(
-					# Translators: Message shown to users when saving an untested URL to NVDA's settings.
+					# Translators: Message shown to users when saving an untested URL to Aslan's settings.
 					"The URL you have entered has not been tested. Are you sure you want to save it without attempting to connect to it first?",
 				),
 				# Translators: The title of a dialog.
@@ -126,7 +126,7 @@ class _SetURLDialog(SettingsDialog):
 		if shouldSave:
 			self._saveToConfig()
 			# Hack: Update the mirror URL in the parent window before closing.
-			# Otherwise, if focus is immediately returned to the mirror URL text control, NVDA will report the old value even though the new one is reflected visually.
+			# Otherwise, if focus is immediately returned to the mirror URL text control, Aslan will report the old value even though the new one is reflected visually.
 			self.Parent._updateCurrentMirrorURL()
 		super().onOk(evt)
 

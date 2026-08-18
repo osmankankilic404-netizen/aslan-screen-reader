@@ -1,13 +1,13 @@
 # appModules/soffice.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2006-2010 Michael Curran <mick@kulgan.net>
 
 import appModuleHandler
 import controlTypes
-from NVDAObjects.window import Window
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.window import Window
+from AslanObjects.IAccessible import IAccessible
 
 
 class AppModule(appModuleHandler.AppModule):

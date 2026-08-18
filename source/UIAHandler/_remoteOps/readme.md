@@ -1,4 +1,4 @@
-# UI Automation Remote Operations for NVDA
+# UI Automation Remote Operations for Aslan
 
 ## Introduction
 
@@ -15,7 +15,7 @@ from UIAHandler import UIA
 from UIAHandler._remoteOps.operation import Operation
 from UIAHandler._remoteOps.remoteAPI import RemoteAPI
 
-# Fetch the UI Automation element for the current focus in NVDA
+# Fetch the UI Automation element for the current focus in Aslan
 focusElement = api.getFocusObject().UIAElement
 
 # Create a new Remote Operation
@@ -41,7 +41,7 @@ def code(ra: RemoteAPI):
 	ra.Return(names)
 # Now the operation is built.
 
-# Actually execute the remote operation, which will return the names array to NVDA.
+# Actually execute the remote operation, which will return the names array to Aslan.
 names = op.execute()
 # Print the names we got back.
 print(f"{names=}")
@@ -488,7 +488,7 @@ with ra.forEachItemInArray(array) as item:
 Once an operation is built, you will want to actually execute it on the remote provider.
 To execute the operation, call `Operation.execute`.
 This method takes no arguments, and returns any values previously returned with `ra.Return`.
-These values are brought back to NVDA and converted to real Python types.
+These values are brought back to Aslan and converted to real Python types.
 
 ### Instruction limits
 
@@ -562,8 +562,8 @@ Therefore the library contains several features which can help.
 
 ### Dumping instructions
 
-The library can dump all the instructions to NVDA's log each time an operation is built, by setting the Operation's `enableCompiletimeLogging` keyword argument to True.
-Even if left as False, instructions will still be automatically dumped to NVDA's log if there is an uncaught error while executing, or the instruction limit is reached and it has run out of tries.
+The library can dump all the instructions to Aslan's log each time an operation is built, by setting the Operation's `enableCompiletimeLogging` keyword argument to True.
+Even if left as False, instructions will still be automatically dumped to Aslan's log if there is an uncaught error while executing, or the instruction limit is reached and it has run out of tries.
 Following is code for a simple remote operation, followed by a dump of its instructions.
 
 ```py

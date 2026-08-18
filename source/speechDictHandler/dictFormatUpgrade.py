@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2026 NV Access Limited, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Upgrade speech dict files"""
 
@@ -12,18 +12,18 @@ from typing import Any
 import api
 import globalVars
 from logHandler import log
-from NVDAState import WritePaths
+from AslanState import WritePaths
 
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	import NVDAState
+	import AslanState
 
-	if NVDAState._allowDeprecatedAPI():
+	if AslanState._allowDeprecatedAPI():
 		if attrName == "speechDictsPath":
 			log.warning(
 				"speechDictHandler.dictFormatUpgrade.speechDictsPath is deprecated, "
-				"instead use NVDAState.WritePaths.speechDictsDir",
+				"instead use AslanState.WritePaths.speechDictsDir",
 				stack_info=True,
 			)
 			return WritePaths.speechDictsDir
@@ -31,7 +31,7 @@ def __getattr__(attrName: str) -> Any:
 		if attrName == "voiceDictsPath":
 			log.warning(
 				"speechDictHandler.dictFormatUpgrade.voiceDictsPath is deprecated, "
-				"instead use NVDAState.WritePaths.voiceDictsDir",
+				"instead use AslanState.WritePaths.voiceDictsDir",
 				stack_info=True,
 			)
 			return WritePaths.voiceDictsDir
@@ -39,7 +39,7 @@ def __getattr__(attrName: str) -> Any:
 		if attrName == "voiceDictsBackupPath":
 			log.warning(
 				"speechDictHandler.dictFormatUpgrade.voiceDictsBackupPath is deprecated, "
-				"instead use NVDAState.WritePaths.voiceDictsBackupDir",
+				"instead use AslanState.WritePaths.voiceDictsBackupDir",
 				stack_info=True,
 			)
 			return WritePaths.voiceDictsBackupDir
@@ -142,7 +142,7 @@ def _doEspeakDictUpgrade():
 
 
 # the ID maped to old and new names for voices in espeak-ng
-# "old" used in NVDA 2017.3 "new" in NVDA 2017.4
+# "old" used in Aslan 2017.3 "new" in Aslan 2017.4
 espeakNameChanges = {
 	"af": ["afrikaans", "Afrikaans"],
 	"am": ["amharic", "Amharic"],

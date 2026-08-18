@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2015-2020 NV Access Limited, Babbage B.V., Accessolutions, Julien Cochuyt
@@ -23,7 +23,7 @@ import treeInterceptorHandler
 import textInfos
 import browseMode
 from logHandler import log
-from NVDAObjects.UIA import UIA, UIATextInfo
+from AslanObjects.UIA import UIA, UIATextInfo
 
 
 class UIADocumentWithTableNavigation(documentBase.DocumentWithTableNavigation):
@@ -65,7 +65,7 @@ class UIADocumentWithTableNavigation(documentBase.DocumentWithTableNavigation):
 class UIATextRangeQuickNavItem(browseMode.TextInfoQuickNavItem):
 	def __init__(self, itemType, document, UIAElementOrRange):
 		if isinstance(UIAElementOrRange, UIAHandler.IUIAutomationElement):
-			UIATextRange = document.rootNVDAObject.getNormalizedUIATextRangeFromElement(UIAElementOrRange)
+			UIATextRange = document.rootAslanObject.getNormalizedUIATextRangeFromElement(UIAElementOrRange)
 			if not UIATextRange:
 				raise ValueError("Could not get text range for UIA element")
 			self._UIAElement = UIAElementOrRange
@@ -82,7 +82,7 @@ class UIATextRangeQuickNavItem(browseMode.TextInfoQuickNavItem):
 		if self._UIAElement:
 			UIAElement = self._UIAElement.buildUpdatedCache(UIAHandler.handler.baseCacheRequest)
 			return UIA(UIAElement=UIAElement)
-		return self.textInfo.NVDAObjectAtStart
+		return self.textInfo.AslanObjectAtStart
 
 	@property
 	def label(self):
@@ -108,15 +108,15 @@ class ErrorUIATextInfoQuickNavItem(TextAttribUIATextInfoQuickNavItem):
 		if (UIAHandler.AnnotationType_SpellingError in self.attribValues) and (
 			UIAHandler.AnnotationType_GrammarError in self.attribValues
 		):
-			# Translators: The label shown for a spelling and grammar error in the NVDA Elements List dialog in Microsoft Word.
+			# Translators: The label shown for a spelling and grammar error in the Aslan Elements List dialog in Microsoft Word.
 			# {text} will be replaced with the text of the spelling error.
 			return _("spelling and grammar: {text}").format(text=text)
 		elif UIAHandler.AnnotationType_SpellingError in self.attribValues:
-			# Translators: The label shown for a spelling error in the NVDA Elements List dialog in Microsoft Word.
+			# Translators: The label shown for a spelling error in the Aslan Elements List dialog in Microsoft Word.
 			# {text} will be replaced with the text of the spelling error.
 			return _("spelling: {text}").format(text=text)
 		elif UIAHandler.AnnotationType_GrammarError in self.attribValues:
-			# Translators: The label shown for a grammar error in the NVDA Elements List dialog in Microsoft Word.
+			# Translators: The label shown for a grammar error in the Aslan Elements List dialog in Microsoft Word.
 			# {text} will be replaced with the text of the spelling error.
 			return _("grammar: {text}").format(text=text)
 		else:
@@ -240,7 +240,7 @@ def UIAControlQuicknavIterator(
 ):
 	# A part from the condition given, we must always match on the root of the document so we know when to stop walking
 	runtimeID = VARIANT()
-	document.rootNVDAObject.UIAElement._IUIAutomationElement__com_GetCurrentPropertyValue(
+	document.rootAslanObject.UIAElement._IUIAutomationElement__com_GetCurrentPropertyValue(
 		UIAHandler.UIA_RuntimeIdPropertyId,
 		byref(runtimeID),
 	)
@@ -253,12 +253,12 @@ def UIAControlQuicknavIterator(
 	)
 	if not position:
 		# All items are requested (such as for elements list)
-		elements = document.rootNVDAObject.UIAElement.findAll(UIAHandler.TreeScope_Descendants, UIACondition)
+		elements = document.rootAslanObject.UIAElement.findAll(UIAHandler.TreeScope_Descendants, UIACondition)
 		if elements:
 			for index in range(elements.length):
 				element = elements.getElement(index)
 				try:
-					elementRange = document.rootNVDAObject.UIATextPattern.rangeFromChild(element)
+					elementRange = document.rootAslanObject.UIATextPattern.rangeFromChild(element)
 				except COMError:
 					elementRange = None
 				if elementRange:
@@ -273,7 +273,7 @@ def UIAControlQuicknavIterator(
 				not element
 				or UIAHandler.handler.clientObject.compareElements(
 					element,
-					document.rootNVDAObject.UIAElement,
+					document.rootAslanObject.UIAElement,
 				)
 				or UIAHandler.handler.clientObject.compareElements(element, UIAHandler.handler.rootElement)
 			):
@@ -291,7 +291,7 @@ def UIAControlQuicknavIterator(
 		toPosition = position._rangeObj.clone()
 		toPosition.move(UIAHandler.TextUnit_Character, -1)
 		child = toPosition.getEnclosingElement()
-		childRange = document.rootNVDAObject.UIATextPattern.rangeFromChild(child)
+		childRange = document.rootAslanObject.UIATextPattern.rangeFromChild(child)
 		toPosition.MoveEndpointByRange(
 			UIAHandler.TextPatternRangeEndpoint_Start,
 			childRange,
@@ -312,7 +312,7 @@ def UIAControlQuicknavIterator(
 				break
 			child = children.getElement(length - 1)
 			try:
-				childRange = document.rootNVDAObject.UIATextPattern.rangeFromChild(child)
+				childRange = document.rootAslanObject.UIATextPattern.rangeFromChild(child)
 			except COMError:
 				return
 			if (
@@ -339,14 +339,14 @@ def UIAControlQuicknavIterator(
 			break
 		if not child or UIAHandler.handler.clientObject.compareElements(
 			child,
-			document.rootNVDAObject.UIAElement,
+			document.rootAslanObject.UIAElement,
 		):
 			# We're on the document itself -- probably nothing in it.
 			return
 		# Work out if this child is previous to our position or not.
 		# If it isn't, then we know we still need to move parent or previous before it is safe to emit an item.
 		try:
-			childRange = document.rootNVDAObject.UIATextPattern.rangeFromChild(child)
+			childRange = document.rootAslanObject.UIATextPattern.rangeFromChild(child)
 		except COMError:
 			return
 		gonePreviousOnce = (
@@ -381,7 +381,7 @@ def UIAControlQuicknavIterator(
 				continue
 			parent = walker.getParentElement(curElement)
 			if parent and not UIAHandler.handler.clientObject.compareElements(
-				document.rootNVDAObject.UIAElement,
+				document.rootAslanObject.UIAElement,
 				parent,
 			):
 				curElement = parent
@@ -400,7 +400,7 @@ def UIAControlQuicknavIterator(
 		# And therefore we Limit our children fetching range to the end of this child,
 		# And fetch the first child again.
 		child = position._rangeObj.getEnclosingElement()
-		childRange = document.rootNVDAObject.UIATextPattern.rangeFromChild(child)
+		childRange = document.rootAslanObject.UIATextPattern.rangeFromChild(child)
 		toPosition = position._rangeObj.clone()
 		toPosition.MoveEndpointByRange(
 			UIAHandler.TextPatternRangeEndpoint_End,
@@ -417,7 +417,7 @@ def UIAControlQuicknavIterator(
 				break
 			child = children.getElement(0)
 			try:
-				childRange = document.rootNVDAObject.UIATextPattern.rangeFromChild(child)
+				childRange = document.rootAslanObject.UIATextPattern.rangeFromChild(child)
 			except COMError:
 				return
 			if (
@@ -445,12 +445,12 @@ def UIAControlQuicknavIterator(
 		# Work out if this child is after our position or not.
 		if not child or UIAHandler.handler.clientObject.compareElements(
 			child,
-			document.rootNVDAObject.UIAElement,
+			document.rootAslanObject.UIAElement,
 		):
 			# We're on the document itself -- probably nothing in it.
 			return
 		try:
-			childRange = document.rootNVDAObject.UIATextPattern.rangeFromChild(child)
+			childRange = document.rootAslanObject.UIATextPattern.rangeFromChild(child)
 		except COMError:
 			return
 		goneNextOnce = (
@@ -480,7 +480,7 @@ def UIAControlQuicknavIterator(
 					if not nextSibling:
 						parent = walker.getParentElement(curElement)
 						if parent and not UIAHandler.handler.clientObject.compareElements(
-							document.rootNVDAObject.UIAElement,
+							document.rootAslanObject.UIAElement,
 							parent,
 						):
 							curElement = parent
@@ -725,10 +725,10 @@ class UIABrowseModeDocument(UIADocumentWithTableNavigation, browseMode.BrowseMod
 		raise NotImplementedError
 
 	def _get_isAlive(self):
-		if not winUser.isWindow(self.rootNVDAObject.windowHandle):
+		if not winUser.isWindow(self.rootAslanObject.windowHandle):
 			return False
 		try:
-			self.rootNVDAObject.UIAElement.currentProviderDescription
+			self.rootAslanObject.UIAElement.currentProviderDescription
 		except COMError:
 			return False
 		return True
@@ -739,7 +739,7 @@ class UIABrowseModeDocument(UIADocumentWithTableNavigation, browseMode.BrowseMod
 		# Ensure that this object is a descendant of the document or is the document itself.
 		runtimeID = VARIANT()
 		try:
-			self.rootNVDAObject.UIAElement._IUIAutomationElement__com_GetCurrentPropertyValue(
+			self.rootAslanObject.UIAElement._IUIAutomationElement__com_GetCurrentPropertyValue(
 				UIAHandler.UIA_RuntimeIdPropertyId,
 				byref(runtimeID),
 			)
@@ -763,7 +763,7 @@ class UIABrowseModeDocument(UIADocumentWithTableNavigation, browseMode.BrowseMod
 			return False
 		# Ensure that this object also can be reached by the document's text pattern.
 		try:
-			self.rootNVDAObject.makeTextInfo(obj)
+			self.rootAslanObject.makeTextInfo(obj)
 		except LookupError:
 			return False
 		return True

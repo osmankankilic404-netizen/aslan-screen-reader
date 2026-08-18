@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2010-2022 NV Access Limited
 
-"""NVDAObjects for the Chromium browser project"""
+"""AslanObjects for the Chromium browser project"""
 
 import typing
 from typing import Dict, Optional
@@ -11,7 +11,7 @@ from comtypes import COMError
 
 import config
 import controlTypes
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.IAccessible import IAccessible
 from virtualBuffers.gecko_ia2 import Gecko_ia2 as GeckoVBuf, Gecko_ia2_TextInfo as GeckoVBufTextInfo
 from . import ia2Web
 from logHandler import log
@@ -26,7 +26,7 @@ supportedAriaDetailsRoles: Dict[str, Optional[controlTypes.Role]] = {
 	"comment": controlTypes.Role.COMMENT,
 	"doc-footnote": controlTypes.Role.FOOTNOTE,
 	# These roles are current unsupported by IAccessible2,
-	# and as such, have not been fully implemented in NVDA.
+	# and as such, have not been fully implemented in Aslan.
 	# They can only be fetched via the IA2Attribute "details-roles",
 	# which is only supported in Chrome.
 	# Currently maps to the IA2 role ROLE_LIST_ITEM
@@ -81,19 +81,19 @@ class ChromeVBuf(GeckoVBuf):
 	TextInfo = ChromeVBufTextInfo
 
 	def __contains__(self, obj):
-		if obj.windowHandle != self.rootNVDAObject.windowHandle:
+		if obj.windowHandle != self.rootAslanObject.windowHandle:
 			return False
 		if not isinstance(obj, ia2Web.Ia2Web):
-			# #4080: Input composition NVDAObjects are the same window but not IAccessible2!
+			# #4080: Input composition AslanObjects are the same window but not IAccessible2!
 			return False
 		accId = obj.IA2UniqueID
 		if accId == self.rootID:
 			return True
 		try:
-			self.rootNVDAObject.IAccessibleObject.accChild(accId)
+			self.rootAslanObject.IAccessibleObject.accChild(accId)
 		except COMError:
 			return False
-		return not self._isNVDAObjectInApplication(obj)
+		return not self._isAslanObjectInApplication(obj)
 
 
 class Document(ia2Web.Document):
@@ -175,14 +175,14 @@ class EditorTextInfo(ia2Web.MozillaCompoundTextInfo):
 
 
 class Editor(ia2Web.Editor):
-	"""The NVDAObject for edit areas such as edit fields and documents in Chromium."""
+	"""The AslanObject for edit areas such as edit fields and documents in Chromium."""
 
 	TextInfo = EditorTextInfo
 
 
 def findExtraOverlayClasses(obj, clsList):
 	"""Determine the most appropriate class(es) for Chromium objects.
-	This works similarly to L{NVDAObjects.NVDAObject.findOverlayClasses} except that it never calls any other findOverlayClasses method.
+	This works similarly to L{AslanObjects.AslanObject.findOverlayClasses} except that it never calls any other findOverlayClasses method.
 	"""
 	if (
 		obj.role == controlTypes.Role.LISTITEM

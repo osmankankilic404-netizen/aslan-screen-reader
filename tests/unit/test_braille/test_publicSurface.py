@@ -1,12 +1,12 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Regression tests guarding the public attribute surface of the braille package.
 
 Splitting braille.py into a package must not drop or hide any symbol that external
-code (add-ons, drivers, other NVDA modules, tests) reaches as ``braille.X``.
+code (add-ons, drivers, other Aslan modules, tests) reaches as ``braille.X``.
 After the facade rewrite, resident names are directly on the module, deprecated names
 are served via ``__getattr__`` with a log warning.
 The same applies to the ``brailleInput`` module, which became the ``braille.input`` package.
@@ -30,7 +30,7 @@ import braille.input.gesture
 import braille.input.inputHandler
 import braille.labels
 import braille.regions.base
-import braille.regions.NVDAObject
+import braille.regions.AslanObject
 import braille.regions.focus
 import braille.regions.properties
 import braille.regions.textInfo
@@ -57,10 +57,10 @@ DEPRECATED = {
 	"RegionWithPositions": braille.regions.base.RegionWithPositions,
 	"TextRegion": braille.regions.base.TextRegion,
 	"rindex": braille.regions.base.rindex,
-	# regions.NVDAObject
-	"NVDAObjectRegion": braille.regions.NVDAObject.NVDAObjectRegion,
-	"ReviewNVDAObjectRegion": braille.regions.NVDAObject.ReviewNVDAObjectRegion,
-	"NVDAObjectHasUsefulText": braille.regions.NVDAObject.NVDAObjectHasUsefulText,
+	# regions.AslanObject
+	"AslanObjectRegion": braille.regions.AslanObject.AslanObjectRegion,
+	"ReviewAslanObjectRegion": braille.regions.AslanObject.ReviewAslanObjectRegion,
+	"AslanObjectHasUsefulText": braille.regions.AslanObject.AslanObjectHasUsefulText,
 	# regions.textInfo
 	"TextInfoRegion": braille.regions.textInfo.TextInfoRegion,
 	"CursorManagerRegion": braille.regions.textInfo.CursorManagerRegion,

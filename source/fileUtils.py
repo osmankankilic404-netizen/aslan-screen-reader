@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2026 NV Access Limited, Bram Duvigneau, Łukasz Golonka
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -47,9 +47,9 @@ def _suspendWow64RedirectionForFileInfoRetrieval(func):
 	"""
 	This decorator checks if the file provided as a `filePath`
 	is placed in a system32 directory, and if for the current system system32
-	redirects 32-bit processes such as NVDA to a different syswow64 directory
+	redirects 32-bit processes such as Aslan to a different syswow64 directory
 	disables redirection for the duration of the function call.
-	This is necessary when fetching file version info since NVDA is a 32-bit application
+	This is necessary when fetching file version info since Aslan is a 32-bit application
 	and without redirection disabled we would either access a wrong file or not be able to access it at all.
 	"""
 

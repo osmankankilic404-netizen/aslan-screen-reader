@@ -1,10 +1,10 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2016-2026 NV Access Limited, Bill Dengler, Cyrille Bougot, Łukasz Golonka, Leonard de Ruijter, Cary-rowen
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 """
-Contains upgrade steps for the NVDA configuration files. These steps are run to ensure that a configuration file
+Contains upgrade steps for the Aslan configuration files. These steps are run to ensure that a configuration file
 complies with the latest schema (@see configSpec.py).
 
 To add a new step (after modifying the schema and incrementing the schema version number) add a new method to this
@@ -20,7 +20,7 @@ from configobj import ConfigObj
 from logHandler import log
 
 from config.configFlags import (
-	NVDAKey,
+	AslanKey,
 	OutputMode,
 	ReportCellBorders,
 	ReportLineIndentation,
@@ -150,7 +150,7 @@ def upgradeConfigFrom_7_to_8(profile: ConfigObj) -> None:
 
 def upgradeConfigFrom_8_to_9(profile: ConfigObj) -> None:
 	"""
-	In NVDA config, when various values were controlling a single combobox in the settings window, these values
+	In Aslan config, when various values were controlling a single combobox in the settings window, these values
 	have been replaced by a single value.
 	The following settings are upgraded:
 	- Line indentation (in Document formatting settings)
@@ -310,55 +310,55 @@ def _upgradeConfigFrom_8_to_9_tetherTo(profile: ConfigObj) -> None:
 
 
 def upgradeConfigFrom_9_to_10(profile: ConfigObj) -> None:
-	"""In NVDA config, use only one value to store NVDA keys rather than 3 distinct values."""
+	"""In Aslan config, use only one value to store Aslan keys rather than 3 distinct values."""
 
 	anySettingInConfig = False
 	try:
-		capsLock: str = profile["keyboard"]["useCapsLockAsNVDAModifierKey"]
-		del profile["keyboard"]["useCapsLockAsNVDAModifierKey"]
+		capsLock: str = profile["keyboard"]["useCapsLockAsAslanModifierKey"]
+		del profile["keyboard"]["useCapsLockAsAslanModifierKey"]
 		anySettingInConfig = True
 	except KeyError:
 		capsLock = False
 	try:
-		numpadInsert: str = profile["keyboard"]["useNumpadInsertAsNVDAModifierKey"]
-		del profile["keyboard"]["useNumpadInsertAsNVDAModifierKey"]
+		numpadInsert: str = profile["keyboard"]["useNumpadInsertAsAslanModifierKey"]
+		del profile["keyboard"]["useNumpadInsertAsAslanModifierKey"]
 		anySettingInConfig = True
 	except KeyError:
 		numpadInsert = True
 	try:
-		extendedInsert: str = profile["keyboard"]["useExtendedInsertAsNVDAModifierKey"]
-		del profile["keyboard"]["useExtendedInsertAsNVDAModifierKey"]
+		extendedInsert: str = profile["keyboard"]["useExtendedInsertAsAslanModifierKey"]
+		del profile["keyboard"]["useExtendedInsertAsAslanModifierKey"]
 		anySettingInConfig = True
 	except KeyError:
 		extendedInsert = True
 	if anySettingInConfig:
 		val = 0
 		if configobj.validate.is_boolean(capsLock):
-			val |= NVDAKey.CAPS_LOCK.value
+			val |= AslanKey.CAPS_LOCK.value
 		if configobj.validate.is_boolean(numpadInsert):
-			val |= NVDAKey.NUMPAD_INSERT.value
+			val |= AslanKey.NUMPAD_INSERT.value
 		if configobj.validate.is_boolean(extendedInsert):
-			val |= NVDAKey.EXTENDED_INSERT.value
+			val |= AslanKey.EXTENDED_INSERT.value
 		if val == 0:
 			# val may be 0 if:
 			# 1: The default profile has caps lock enabled and the currently upgraded profile has ext insert and
 			# numpad insert disabled. In the current profile's config this leads to:
-			# - useNumpadInsertAsNVDAModifierKey = False
-			# - useExtendedInsertAsNVDAModifierKey = False
-			# - useCapsLockAsNVDAModifierKey not present (True inherited from default config)
+			# - useNumpadInsertAsAslanModifierKey = False
+			# - useExtendedInsertAsAslanModifierKey = False
+			# - useCapsLockAsAslanModifierKey not present (True inherited from default config)
 			# (see issue #14527 for full description)
 			# or
-			# 2: Someone did disabled all 3 possible NVDA key in config manually, e.g. modifying nvda.ini or via the
+			# 2: Someone did disabled all 3 possible Aslan key in config manually, e.g. modifying aslan.ini or via the
 			# Python console.
-			# Thus we consider case 1 which is the only use case reachable by the user via NVDA's GUI.
+			# Thus we consider case 1 which is the only use case reachable by the user via Aslan's GUI.
 			log.debug(
-				"No True value for any of 'use*AsNVDAModifierKey',"
-				" restore caps lock (only possible case via NVDA's GUI).",
+				"No True value for any of 'use*AsAslanModifierKey',"
+				" restore caps lock (only possible case via Aslan's GUI).",
 			)
-			val = NVDAKey.CAPS_LOCK.value
-		profile["keyboard"]["NVDAModifierKeys"] = val
+			val = AslanKey.CAPS_LOCK.value
+		profile["keyboard"]["AslanModifierKeys"] = val
 	else:
-		log.debug("use*AsNVDAModifierKey values not present, no action taken.")
+		log.debug("use*AsAslanModifierKey values not present, no action taken.")
 
 
 def upgradeConfigFrom_10_to_11(profile: ConfigObj) -> None:
@@ -489,7 +489,7 @@ def _convertTypingEcho(profile: ConfigObj, key: str) -> None:
 	"""
 	Convert a keyboard typing echo configuration from boolean to integer values.
 
-	:param profile: The `ConfigObj` instance representing the user's NVDA configuration file.
+	:param profile: The `ConfigObj` instance representing the user's Aslan configuration file.
 	:param key: The configuration key to convert.
 	"""
 	try:

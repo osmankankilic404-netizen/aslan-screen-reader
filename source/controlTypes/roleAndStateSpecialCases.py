@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2022 NV Access Limited
@@ -14,13 +14,13 @@ from typing import (
 
 
 def transformRoleStates(role: Role, states: Set[State]) -> Tuple[Role, Set[State]]:
-	"""Map NVDA Role-State combinations to adjusted NVDA Role-State combinations.
+	"""Map Aslan Role-State combinations to adjusted Aslan Role-State combinations.
 	Some combinations of roles and states may be better represented with some alternative combination.
 	As an example:
 	Role.PROGRESSBAR with State.INDETERMINATE should be represented by only the Role.BUSY_INDICATOR, with
 	no State.INDETERMINATE, or State.HALFCHECKED.
-	@param role: NVDA Role to consider
-	@param states: NVDA States to consider
+	@param role: Aslan Role to consider
+	@param states: Aslan States to consider
 	@return: A tuple with the new Role and modified States set.
 	"""
 	if role in [Role.PROGRESSBAR, Role.BUSY_INDICATOR] and states.intersection(

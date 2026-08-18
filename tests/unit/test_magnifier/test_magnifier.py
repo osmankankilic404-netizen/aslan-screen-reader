@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025-2026 NV Access Limited, Antoine Haffreingue, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from _magnifier.config import ZoomLevel
 from _magnifier.magnifier import Magnifier
@@ -556,16 +556,16 @@ class TestMagnifier(_TestMagnifier):
 	def testStartBlockedByScreenCurtain(self):
 		"""After startup, screen curtain active makes _startMagnifier raise and not set _isActive."""
 		self._mockScreenCurtain(enabled=True)
-		with patch("NVDAState._TrackNVDAInitialization.isInitializationComplete", return_value=True):
+		with patch("AslanState._TrackAslanInitialization.isInitializationComplete", return_value=True):
 			with self.assertRaises(MagnifierStartError):
 				self.magnifier._startMagnifier()
 
 		self.assertFalse(self.magnifier._isActive)
 
 	def testStartBlockedAtStartupSetsFlag(self):
-		"""At NVDA startup, screen curtain blocks silently and sets _screenCurtainIsActive."""
+		"""At Aslan startup, screen curtain blocks silently and sets _screenCurtainIsActive."""
 		self._mockScreenCurtain(enabled=True)
-		with patch("NVDAState._TrackNVDAInitialization.isInitializationComplete", return_value=False):
+		with patch("AslanState._TrackAslanInitialization.isInitializationComplete", return_value=False):
 			with patch("_magnifier.magnifier.ui.message") as mock_message:
 				self.magnifier._startMagnifier()
 

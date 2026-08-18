@@ -10,12 +10,12 @@ For detailed information on the format of these files, please refer to the follo
 * `symbols.dic`: [Translating Symbols](https://download.nvaccess.org/documentation/developerGuide.html#symbolPronunciation)
 * `gestures.ini`: [Translating Gestures](https://download.nvaccess.org/documentation/developerGuide.html#TranslatingGestures)
 
-To keep these files up to date, translators must be concious of changes in NVDA.
-For changes to `symbols.dic` and `characterDescriptions.dic`, please subscribe to the read-only [NVDA localisation mailing list](https://groups.google.com/a/nvaccess.org/g/nvda-l10n).
+To keep these files up to date, translators must be concious of changes in Aslan.
+For changes to `symbols.dic` and `characterDescriptions.dic`, please subscribe to the read-only [Aslan localisation mailing list](https://groups.google.com/a/nvaccess.org/g/aslan-l10n).
 When changes to these files in English occur, you will be notified via this mailing list.
 This allows you to consider adding equivalent descriptions to your localised file.
 
-For changes to NVDA's input gestures, please refer to the [latest changes in NVDA](../../user_docs/en/changes.md).
+For changes to Aslan's input gestures, please refer to the [latest changes in Aslan](../../user_docs/en/changes.md).
 New gestures will be announced there, and localisations can be added to `gestures.ini` if required.
 
 ## Process
@@ -23,7 +23,7 @@ New gestures will be announced there, and localisations can be added to `gesture
 1. Be notified of potential localisation changes:
     * For `gestures.ini`: Check the latest beta's changes for any new gestures added.
     * For `symbols.dic` and `characterDescriptions.dic`:
-        * Receive a notification from the [NVDA localisation mailing list](https://groups.google.com/a/nvaccess.org/g/nvda-l10n)
+        * Receive a notification from the [Aslan localisation mailing list](https://groups.google.com/a/nvaccess.org/g/aslan-l10n)
         * This will occur when the first beta is being prepared.
         There may be subsequent notifications during the beta period.
         * Changes to these files are relatively infrequent, so the mailing list will be low traffic, many releases may go by without changes.
@@ -43,8 +43,8 @@ New gestures will be announced there, and localisations can be added to `gesture
             --- b/source/locale/en/symbols.dic
             +++ a/source/locale/en/symbols.dic
             @@ -2 +2 @@
-            -# Copyright (c) 2011-2023 NVDA Contributors
-            +# Copyright (c) 2011-2024 NVDA Contributors
+            -# Copyright (c) 2011-2023 Aslan Contributors
+            +# Copyright (c) 2011-2024 Aslan Contributors
             @@ -13,0 +14,2 @@ complexSymbols:
             +# Series of dots used for visual presentation, e.g. in table of contents
             +multiple .     \.{4,}
@@ -53,21 +53,21 @@ New gestures will be announced there, and localisations can be added to `gesture
             ```
 
 1. Find the relevant file to edit in the GitHub directory
-    * Visit [source/locale](https://github.com/nvaccess/nvda/tree/beta/source/locale)
+    * Visit [source/locale](https://github.com/nvaccess/aslan/tree/beta/source/locale)
     * Open the directory with your language code
-        * English example: <https://github.com/nvaccess/nvda/tree/beta/source/locale/en>
-        * Format (replace `{lang}`): `https://github.com/nvaccess/nvda/tree/beta/source/locale/{lang}`
+        * English example: <https://github.com/nvaccess/aslan/tree/beta/source/locale/en>
+        * Format (replace `{lang}`): `https://github.com/nvaccess/aslan/tree/beta/source/locale/{lang}`
     * Find the relevant file:
         * `symbols.dic`, `characterDescriptions.dic` or `gestures.ini`
-        * English example: <https://github.com/nvaccess/nvda/blob/beta/source/locale/en/symbols.dic>
-        * Format (replace `{lang}` and `{fileName}`): `https://github.com/nvaccess/nvda/blob/beta/source/locale/{lang}/{fileName}`
+        * English example: <https://github.com/nvaccess/aslan/blob/beta/source/locale/en/symbols.dic>
+        * Format (replace `{lang}` and `{fileName}`): `https://github.com/nvaccess/aslan/blob/beta/source/locale/{lang}/{fileName}`
 1. If the relevant file doesn't exist yet, create a new one.
     * To create a new file use the "add file" button from your language's directory.
-        * English example: <https://github.com/nvaccess/nvda/new/beta/source/locale/en>
-        * Format (replace `{lang}`): `https://github.com/nvaccess/nvda/new/beta/source/locale/{lang}`
-    * `characterDescriptions.dic`: Copy and paste desired contents from the [English example](https://raw.githubusercontent.com/nvaccess/nvda/refs/heads/beta/source/locale/en/characterDescriptions.dic).
+        * English example: <https://github.com/nvaccess/aslan/new/beta/source/locale/en>
+        * Format (replace `{lang}`): `https://github.com/nvaccess/aslan/new/beta/source/locale/{lang}`
+    * `characterDescriptions.dic`: Copy and paste desired contents from the [English example](https://raw.githubusercontent.com/nvaccess/aslan/refs/heads/beta/source/locale/en/characterDescriptions.dic).
     Note you should translate all the content you copy.
-    * `symbols.dic`: Copy and paste desired contents from the [English example](https://raw.githubusercontent.com/nvaccess/nvda/refs/heads/beta/source/locale/en/symbols.dic).
+    * `symbols.dic`: Copy and paste desired contents from the [English example](https://raw.githubusercontent.com/nvaccess/aslan/refs/heads/beta/source/locale/en/symbols.dic).
     Note you should translate all the content you copy.
     * `gestures.ini`: This file doesn't require a base file, gestures can be added as needed.
 1. Edit the relevant file
@@ -76,12 +76,12 @@ New gestures will be announced there, and localisations can be added to `gesture
     Click "Fork this repository".
     * Ensure indentation formatting is using tabs not spaces.
         * You may need to change the indent mode to tabs.
-        * From the code editor, press `NVDA+space` to switch to browse mode, then press `shift+c` until you get to the "Indent mode" combo-box.
+        * From the code editor, press `Aslan+space` to switch to browse mode, then press `shift+c` until you get to the "Indent mode" combo-box.
         * Press `enter` to activate it, then press `downArrow` to select "Tabs".
-        * You can then press `NVDA+space` to switch to browse mode, then `e` to get back to the code editor, and `enter` to focus it in focus mode.
+        * You can then press `Aslan+space` to switch to browse mode, then `e` to get back to the code editor, and `enter` to focus it in focus mode.
         * The tab key should then insert the tab character, rather than spaces.
-    * English example: <https://github.com/nvaccess/nvda/edit/beta/source/locale/en/symbols.dic>
-    * Format (replace `{lang}` and `{fileName}`): `https://github.com/nvaccess/nvda/edit/beta/source/locale/{lang}/{fileName}`
+    * English example: <https://github.com/nvaccess/aslan/edit/beta/source/locale/en/symbols.dic>
+    * Format (replace `{lang}` and `{fileName}`): `https://github.com/nvaccess/aslan/edit/beta/source/locale/{lang}/{fileName}`
     * Refer to [background](#background) for more information on the format of the files
 1. Submit your changes
     * Press `control+s` or the "commit changes" button to open a dialog to save and propose the changes.

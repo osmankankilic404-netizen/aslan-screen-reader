@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Ryan McCleary
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Map MathCAT NavNode ids to source MathML rectangles."""
 
@@ -19,12 +19,12 @@ from logHandler import log
 
 if TYPE_CHECKING:
 	from locationHelper import RectLTRB
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 
 
 _MATHML_NAMESPACE = "http://www.w3.org/1998/Math/MathML"
-_NAV_NODE_ID_PREFIX = "nvda-math-node-"
-_NAV_NODE_ID_ADDED_ATTR = "data-nvda-math-id-added"
+_NAV_NODE_ID_PREFIX = "aslan-math-node-"
+_NAV_NODE_ID_ADDED_ATTR = "data-aslan-math-id-added"
 _MATHCAT_ID_ADDED_ATTR = "data-id-added"
 
 
@@ -115,13 +115,13 @@ def removeSyntheticIdsFromMathMl(mathml: str) -> str:
 
 def prepareMathMlForNavigation(
 	mathml: str,
-	sourceObj: "NVDAObject | None",
+	sourceObj: "AslanObject | None",
 ) -> tuple[str, dict[MathMlNodeId, "RectLTRB"]]:
 	"""Add missing ids to MathML and map node ids to IA2 rectangles."""
 	if not sourceObj:
 		return mathml, {}
 	# Avoid importing ia2Web at startup.
-	from NVDAObjects.IAccessible.ia2Web import Math as Ia2WebMath
+	from AslanObjects.IAccessible.ia2Web import Math as Ia2WebMath
 
 	if not isinstance(sourceObj, Ia2WebMath):
 		return mathml, {}

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2023 NV Access Limited, Thomas Stivers, Accessolutions, Julien Cochuyt
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -41,7 +41,7 @@ class SpeechViewerFrame(
 		dialogSize, dialogPos = self._getDialogSizeAndPosition()
 		super().__init__(
 			gui.mainFrame,
-			title=_("NVDA Speech Viewer"),
+			title=_("Aslan Speech Viewer"),
 			size=dialogSize,
 			pos=dialogPos,
 			style=wx.CAPTION | wx.CLOSE_BOX | wx.RESIZE_BORDER | wx.STAY_ON_TOP,
@@ -107,8 +107,8 @@ class SpeechViewerFrame(
 			self.shouldShowOnStartupCheckBox.Disable()
 
 	def _onDialogActivated(self, evt):
-		# Check for destruction, if the speechviewer window has focus when we exit NVDA it regains focus briefly
-		# when the quit NVDA dialog disappears. Then shouldShowOnStartupCheckBox is a deleted window when we
+		# Check for destruction, if the speechviewer window has focus when we exit Aslan it regains focus briefly
+		# when the quit Aslan dialog disappears. Then shouldShowOnStartupCheckBox is a deleted window when we
 		# try to setFocus
 		if not self._isDestroyed:
 			# focus is normally set to the first child, however,

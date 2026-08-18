@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited, Cyrille Bougot, Christopher Proß
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -59,7 +59,7 @@ class AddonDetails(
 	"""
 	Debounce delay in milliseconds before refreshing the details view after the selection changes.
 	Rebuilding the details controls emits a burst of accessibility events, so debouncing avoids
-	flooding NVDA while navigating the list quickly, for example when holding an arrow key.
+	flooding Aslan while navigating the list quickly, for example when holding an arrow key.
 	See #17351.
 	"""
 
@@ -203,8 +203,8 @@ class AddonDetails(
 		addonNameFont.SetFaceName(_fontFaceName)
 		self.addonNameCtrl.SetFont(addonNameFont)
 		self.addonNameCtrl.SetForegroundColour("white")
-		nvdaPurple = wx.Colour((71, 47, 95))
-		self.addonNameCtrl.SetBackgroundColour(nvdaPurple)
+		aslanPurple = wx.Colour((71, 47, 95))
+		self.addonNameCtrl.SetBackgroundColour(aslanPurple)
 
 	def updateAddonName(self, displayName: str):
 		self.addonNameCtrl.SetLabelText(displayName)
@@ -321,14 +321,14 @@ class AddonDetails(
 
 				self._appendDetailsLabelValue(
 					# Translators: Label for an extra detail field for the selected add-on. In the add-on store dialog.
-					pgettext("addonStore", "Minimum NVDA version:"),
-					formatVersionForGUI(*details.minimumNVDAVersion),
+					pgettext("addonStore", "Minimum Aslan version:"),
+					formatVersionForGUI(*details.minimumAslanVersion),
 				)
 
 				self._appendDetailsLabelValue(
 					# Translators: Label for an extra detail field for the selected add-on. In the add-on store dialog.
-					pgettext("addonStore", "Last tested NVDA version:"),
-					formatVersionForGUI(*details.lastTestedNVDAVersion),
+					pgettext("addonStore", "Last tested Aslan version:"),
+					formatVersionForGUI(*details.lastTestedAslanVersion),
 				)
 
 				if currentStatusKey not in AddonListField.availableAddonVersionName.hideStatuses:
@@ -442,7 +442,7 @@ class AddonDetails(
 				self.otherDetailsTextCtrl.Show()
 
 		self.Layout()
-		# Set caret/insertion point at the beginning so that NVDA users can more easily read from the start.
+		# Set caret/insertion point at the beginning so that Aslan users can more easily read from the start.
 		self.otherDetailsTextCtrl.SetInsertionPoint(0)
 
 	def _addDetailsLabel(self, label: str):

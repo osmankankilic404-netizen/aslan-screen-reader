@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2026 NV Access Limited, Peter Vágner, Aleksey Sadovoy, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.

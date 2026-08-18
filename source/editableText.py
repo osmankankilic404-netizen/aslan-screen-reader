@@ -1,11 +1,11 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2006-2025 NV Access Limited, Davy Kager, Julien Cochuyt, Rob Meredith, Leonard de Ruijter
 
 """Common support for editable text.
-@note: If you want editable text functionality for an NVDAObject,
-	you should use the EditableText classes in L{NVDAObjects.behaviors}.
+@note: If you want editable text functionality for an AslanObject,
+	you should use the EditableText classes in L{AslanObjects.behaviors}.
 """
 
 import time

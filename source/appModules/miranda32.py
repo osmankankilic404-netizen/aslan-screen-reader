@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2023 NV Access Limited, Aleksey Sadovoy, Peter Vágner, Joseph Lee, Bill Dengler,
 # Cyrille Bougot
 # This file is covered by the GNU General Public License.
@@ -9,8 +9,8 @@ import config
 from ctypes import *  # noqa: F403
 from ctypes.wintypes import *  # noqa: F403
 import winKernel
-from NVDAObjects.IAccessible import IAccessible, ContentGenericClient
-from NVDAObjects.behaviors import Dialog
+from AslanObjects.IAccessible import IAccessible, ContentGenericClient
+from AslanObjects.behaviors import Dialog
 import appModuleHandler
 import speech
 import braille
@@ -21,7 +21,7 @@ import oleacc
 from keyboardHandler import KeyboardInputGesture
 import watchdog
 
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_MIRANDA = _("Miranda NG")
 
 # contact list window messages
@@ -89,7 +89,7 @@ class AppModule(appModuleHandler.AppModule):
 	# Must not be > 9.
 	MessageHistoryLength = 3
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if obj.role == controlTypes.Role.WINDOW:
 			return
 		windowClass = obj.windowClassName
@@ -114,16 +114,16 @@ class AppModule(appModuleHandler.AppModule):
 		elif windowClass == "ListBox" and obj.windowControlID == 0:
 			clsList.insert(0, DuplicateFocusListBox)
 
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		if obj.windowClassName == "ColourPicker":
 			obj.role = controlTypes.Role.COLORCHOOSER
 		elif (obj.windowControlID in ANSILOGS) and (obj.windowClassName == "RichEdit20A"):
 			obj._isWindowUnicode = False
 
 	@script(
-		# Translators: The description of an NVDA command to view one of the recent messages.
+		# Translators: The description of an Aslan command to view one of the recent messages.
 		description=_("Displays one of the recent messages"),
-		gestures=[f"kb:NVDA+control+{n}" for n in range(1, MessageHistoryLength + 1)],
+		gestures=[f"kb:Aslan+control+{n}" for n in range(1, MessageHistoryLength + 1)],
 		category=SCRCAT_MIRANDA,
 		speakOnDemand=True,
 	)
@@ -203,7 +203,7 @@ class mirandaIMContactList(IAccessible):
 
 class mirandaIMButton(IAccessible):
 	def _get_name(self):
-		api.moveMouseToNVDAObject(self)
+		api.moveMouseToAslanObject(self)
 		return super(mirandaIMButton, self)._get_name()
 
 	def _get_role(self):

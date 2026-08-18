@@ -1,12 +1,12 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Babbage B.V., Joseph Lee, Cyrille Bougot, Wang Chong
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from ctypes import byref, c_short, c_long
 import unicodedata
 import math
-from NVDAHelper import localLib
+from AslanHelper import localLib
 import colors
 import XMLFormatting
 import api
@@ -14,7 +14,7 @@ import winUser
 from winAPI.winUser.functions import GetSysColor
 from winAPI.winUser.constants import SysColorIndex
 import mouseHandler
-import NVDAHelper
+import AslanHelper
 import textInfos
 from textInfos.offsets import OffsetsTextInfo
 import watchdog
@@ -208,7 +208,7 @@ _textChangeNotificationObjs = []
 def initialize():
 	global _requestTextChangeNotificationsForWindow
 	_requestTextChangeNotificationsForWindow = (
-		NVDAHelper.localLib.displayModel_requestTextChangeNotificationsForWindow
+		AslanHelper.localLib.displayModel_requestTextChangeNotificationsForWindow
 	)
 
 
@@ -218,7 +218,7 @@ def getCaretRect(obj):
 	right = c_long()
 	bottom = c_long()
 	res = watchdog.cancellableExecute(
-		NVDAHelper.localLib.displayModel_getCaretRect,
+		AslanHelper.localLib.displayModel_getCaretRect,
 		obj.appModule.helperLocalBindingHandle,
 		obj.windowThreadID,
 		byref(left),
@@ -285,7 +285,7 @@ def getFocusRect(obj):
 	right = c_long()  # noqa: F405
 	bottom = c_long()  # noqa: F405
 	if (
-		NVDAHelper.localLib.displayModel_getFocusRect(
+		AslanHelper.localLib.displayModel_getFocusRect(
 			obj.appModule.helperLocalBindingHandle,
 			obj.windowHandle,
 			byref(left),  # noqa: F405
@@ -300,13 +300,13 @@ def getFocusRect(obj):
 
 
 def requestTextChangeNotifications(obj, enable):
-	"""Request or cancel notifications for when the display text changes in an NVDAObject.
+	"""Request or cancel notifications for when the display text changes in an AslanObject.
 	A textChange event (event_textChange) will be fired on the object when its text changes.
 	Note that this event does not provide any information about the changed text itself.
 	It is important to request that notifications be cancelled when you no longer require them or when the object is no longer in use,
 	as otherwise, resources will not be released.
-	@param obj: The NVDAObject for which text change notifications are desired.
-	@type obj: NVDAObject
+	@param obj: The AslanObject for which text change notifications are desired.
+	@type obj: AslanObject
 	@param enable: C{True} to enable notifications, C{False} to disable them.
 	@type enable: bool
 	"""
@@ -594,13 +594,13 @@ class DisplayModelTextInfo(OffsetsTextInfo):
 			raise LookupError
 		return rects[offset].toPhysical(self.obj.windowHandle).toLTWH()
 
-	def _getNVDAObjectFromOffset(self, offset):
+	def _getAslanObjectFromOffset(self, offset):
 		try:
 			p = self._getPointFromOffset(offset)
 		except (NotImplementedError, LookupError):
 			return self.obj
 		obj = api.getDesktopObject().objectFromPoint(p.x, p.y)
-		from NVDAObjects.window import Window
+		from AslanObjects.window import Window
 
 		if (
 			not obj
@@ -610,7 +610,7 @@ class DisplayModelTextInfo(OffsetsTextInfo):
 			return self.obj
 		return obj
 
-	def _getOffsetsFromNVDAObject(self, obj):
+	def _getOffsetsFromAslanObject(self, obj):
 		l = obj.location  # noqa: E741
 		if not l:
 			log.debugWarning("object has no location")

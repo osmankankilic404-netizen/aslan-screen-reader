@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Łukasz Golonka, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -51,8 +51,8 @@ import core
 import eventHandler
 from logHandler import log
 import mouseHandler
-import NVDAObjects.IAccessible
-import NVDAObjects.window
+import AslanObjects.IAccessible
+import AslanObjects.window
 import winUser
 
 from . import internalWinEventHandler
@@ -68,11 +68,11 @@ NAVRELATION_LABELLED_BY = 0x1003
 NAVRELATION_NODE_CHILD_OF = 0x1005
 NAVRELATION_EMBEDS = 0x1009
 
-# A place to store live IAccessible NVDAObjects, that can be looked up by their window,objectID,
+# A place to store live IAccessible AslanObjects, that can be looked up by their window,objectID,
 # childID event params.
-liveNVDAObjectTable = weakref.WeakValueDictionary()
+liveAslanObjectTable = weakref.WeakValueDictionary()
 
-IAccessibleRolesToNVDARoles: Dict[Union[int, str], controlTypes.Role] = {
+IAccessibleRolesToAslanRoles: Dict[Union[int, str], controlTypes.Role] = {
 	oleacc.ROLE_SYSTEM_WINDOW: controlTypes.Role.WINDOW,
 	oleacc.ROLE_SYSTEM_CLIENT: controlTypes.Role.PANE,
 	oleacc.ROLE_SYSTEM_TITLEBAR: controlTypes.Role.TITLEBAR,
@@ -212,7 +212,7 @@ IAccessibleRolesToNVDARoles: Dict[Union[int, str], controlTypes.Role] = {
 	"applet": controlTypes.Role.EMBEDDEDOBJECT,
 }
 
-IAccessibleStatesToNVDAStates = {
+IAccessibleStatesToAslanStates = {
 	oleacc.STATE_SYSTEM_TRAVERSED: controlTypes.State.VISITED,
 	oleacc.STATE_SYSTEM_UNAVAILABLE: controlTypes.State.UNAVAILABLE,
 	oleacc.STATE_SYSTEM_FOCUSED: controlTypes.State.FOCUSED,
@@ -234,7 +234,7 @@ IAccessibleStatesToNVDAStates = {
 	oleacc.STATE_SYSTEM_MULTISELECTABLE: controlTypes.State.MULTISELECTABLE,
 }
 
-IAccessible2StatesToNVDAStates = {
+IAccessible2StatesToAslanStates = {
 	IA2.IA2_STATE_REQUIRED: controlTypes.State.REQUIRED,
 	IA2.IA2_STATE_DEFUNCT: controlTypes.State.DEFUNCT,
 	# IA2.IA2_STATE_STALE:controlTypes.State.DEFUNCT,
@@ -256,16 +256,16 @@ def _getStatesSetFromIAccessibleStates(
 	IAccessibleStates: int,
 ) -> Set[controlTypes.State]:
 	return set(
-		IAccessibleStatesToNVDAStates[IAState]
-		for IAState in IAccessibleStatesToNVDAStates.keys()
+		IAccessibleStatesToAslanStates[IAState]
+		for IAState in IAccessibleStatesToAslanStates.keys()
 		if IAState & IAccessibleStates
 	)
 
 
 def getStatesSetFromIAccessible2States(IAccessible2States: int) -> Set[State]:
 	return set(
-		IAccessible2StatesToNVDAStates[IA2State]
-		for IA2State in IAccessible2StatesToNVDAStates.keys()
+		IAccessible2StatesToAslanStates[IA2State]
+		for IA2State in IAccessible2StatesToAslanStates.keys()
 		if IA2State & IAccessible2States
 	)
 
@@ -277,8 +277,8 @@ def getStatesSetFromIAccessibleAttrs(attrs: "textInfos.ControlField") -> Set[Sta
 	# EG IAccessible::state_40="1"
 	IAccessibleStateAttrName = "IAccessible::state_{}"
 	return set(
-		IAccessibleStatesToNVDAStates[IAState]
-		for IAState in IAccessibleStatesToNVDAStates.keys()
+		IAccessibleStatesToAslanStates[IAState]
+		for IAState in IAccessibleStatesToAslanStates.keys()
 		if int(attrs.get(IAccessibleStateAttrName.format(IAState), 0))
 	)
 
@@ -290,29 +290,29 @@ def getStatesSetFromIAccessible2Attrs(attrs: "textInfos.ControlField") -> Set[St
 	# EG IAccessible2::state_40="1"
 	IAccessible2StateAttrName = "IAccessible2::state_{}"
 	return set(
-		IAccessible2StatesToNVDAStates[IA2State]
-		for IA2State in IAccessible2StatesToNVDAStates.keys()
+		IAccessible2StatesToAslanStates[IA2State]
+		for IA2State in IAccessible2StatesToAslanStates.keys()
 		if int(attrs.get(IAccessible2StateAttrName.format(IA2State), 0))
 	)
 
 
 def calculateNvdaRole(IARole: int, IAStates: int) -> Role:
-	"""Convert IARole value into an NVDA role, and apply any required transformations."""
-	role = IAccessibleRolesToNVDARoles.get(IARole, Role.UNKNOWN)
+	"""Convert IARole value into an Aslan role, and apply any required transformations."""
+	role = IAccessibleRolesToAslanRoles.get(IARole, Role.UNKNOWN)
 	states = _getStatesSetFromIAccessibleStates(IAStates)
 	role, states = controlTypes.transformRoleStates(role, states)
 	return role
 
 
 def calculateNvdaStates(IARole: int, IAStates: int) -> Set[State]:
-	"""Convert IAStates bit set into a Set of NVDA States and apply any required transformations."""
-	role = IAccessibleRolesToNVDARoles.get(IARole, Role.UNKNOWN)
+	"""Convert IAStates bit set into a Set of Aslan States and apply any required transformations."""
+	role = IAccessibleRolesToAslanRoles.get(IARole, Role.UNKNOWN)
 	states = _getStatesSetFromIAccessibleStates(IAStates)
 	role, states = controlTypes.transformRoleStates(role, states)
 	return states
 
 
-def NVDARoleFromAttr(accRole: Optional[str]) -> Role:
+def AslanRoleFromAttr(accRole: Optional[str]) -> Role:
 	if not accRole:  # empty string or None
 		return controlTypes.Role.UNKNOWN
 	assert isinstance(accRole, str)
@@ -320,7 +320,7 @@ def NVDARoleFromAttr(accRole: Optional[str]) -> Role:
 		accRole = int(accRole)
 	else:
 		accRole = accRole.lower()
-	return IAccessibleRolesToNVDARoles.get(accRole, controlTypes.Role.UNKNOWN)
+	return IAccessibleRolesToAslanRoles.get(accRole, controlTypes.Role.UNKNOWN)
 
 
 def normalizeIAccessible(
@@ -515,37 +515,37 @@ def accNavigate(pacc, childID, direction):
 		return None
 
 
-# C901 'winEventToNVDAEvent' is too complex
-# Note: when working on winEventToNVDAEvent, look for opportunities to simplify
+# C901 'winEventToAslanEvent' is too complex
+# Note: when working on winEventToAslanEvent, look for opportunities to simplify
 # and move logic out into smaller helper functions.
-def winEventToNVDAEvent(  # noqa: C901
+def winEventToAslanEvent(  # noqa: C901
 	eventID: int,
 	window: int,
 	objectID: int,
 	childID: int,
 	useCache: bool = True,
-) -> Optional[Tuple[str, NVDAObjects.IAccessible.IAccessible]]:
-	"""Tries to convert a win event ID to an NVDA event name, and instantiate or fetch an NVDAObject for
+) -> Optional[Tuple[str, AslanObjects.IAccessible.IAccessible]]:
+	"""Tries to convert a win event ID to an Aslan event name, and instantiate or fetch an AslanObject for
 	 the win event parameters.
 	@param eventID: the win event ID (type)
 	@param window: the win event's window handle
 	@param objectID: the win event's object ID
 	@param childID: the win event's childID
-	@param useCache: C{True} to use the L{liveNVDAObjectTable} cache when
-	 retrieving an NVDAObject, C{False} if the cache should not be used.
-	@returns: the NVDA event name and the NVDAObject the event is for
+	@param useCache: C{True} to use the L{liveAslanObjectTable} cache when
+	 retrieving an AslanObject, C{False} if the cache should not be used.
+	@returns: the Aslan event name and the AslanObject the event is for
 	"""
 	if isMSAADebugLoggingEnabled():
 		log.debug(
-			f"Creating NVDA event from winEvent: {getWinEventLogInfo(window, objectID, childID, eventID)}, "
+			f"Creating Aslan event from winEvent: {getWinEventLogInfo(window, objectID, childID, eventID)}, "
 			f"use cache {useCache}",
 		)
-	NVDAEventName = internalWinEventHandler.winEventIDsToNVDAEventNames.get(eventID, None)
-	if not NVDAEventName:
-		log.debugWarning(f"No NVDA event name for {getWinEventName(eventID)}")
+	AslanEventName = internalWinEventHandler.winEventIDsToAslanEventNames.get(eventID, None)
+	if not AslanEventName:
+		log.debugWarning(f"No Aslan event name for {getWinEventName(eventID)}")
 		return None
 	if isMSAADebugLoggingEnabled():
-		log.debug(f"winEvent mapped to NVDA event: {NVDAEventName}")
+		log.debug(f"winEvent mapped to Aslan event: {AslanEventName}")
 	# Ignore any events with invalid window handles
 	if not window or not winUser.isWindow(window):
 		if isMSAADebugLoggingEnabled():
@@ -565,7 +565,7 @@ def winEventToNVDAEvent(  # noqa: C901
 	# accParent during the focus ancestor walk) that blocks the core until the
 	# watchdog cancels it. This engages as soon as the system flags the app,
 	# without waiting for its DWM ghost window to be created (which is the gap
-	# that previously froze NVDA for several seconds on first contact, and on
+	# that previously froze Aslan for several seconds on first contact, and on
 	# every subsequent interaction with the hung window).
 	if winUser.isHungAppWindow(window):
 		if isMSAADebugLoggingEnabled():
@@ -583,25 +583,25 @@ def winEventToNVDAEvent(  # noqa: C901
 	obj = None
 	if useCache:
 		# See if we already know an object by this win event info
-		obj = liveNVDAObjectTable.get((window, objectID, childID), None)
+		obj = liveAslanObjectTable.get((window, objectID, childID), None)
 		if isMSAADebugLoggingEnabled() and obj:
 			log.debug(
-				f"Fetched existing NVDAObject {obj} from liveNVDAObjectTable"
+				f"Fetched existing AslanObject {obj} from liveAslanObjectTable"
 				f" for winEvent {getWinEventLogInfo(window, objectID, childID)}",
 			)
 	# If we don't yet have the object, then actually instanciate it.
 	if not obj:
-		obj = NVDAObjects.IAccessible.getNVDAObjectFromEvent(window, objectID, childID)
+		obj = AslanObjects.IAccessible.getAslanObjectFromEvent(window, objectID, childID)
 	# At this point if we don't have an object then we can't do any more
 	if not obj:
 		if isMSAADebugLoggingEnabled():
 			log.debug(
-				"Could not instantiate an NVDAObject for winEvent: "
+				"Could not instantiate an AslanObject for winEvent: "
 				f"{getWinEventLogInfo(window, objectID, childID, eventID)}",
 			)
 		return None
 	# SDM MSAA objects sometimes don't contain enough information to be useful Sometimes there is a real
-	# window that does, so try to get the SDMChild property on the NVDAObject, and if successull use that as
+	# window that does, so try to get the SDMChild property on the AslanObject, and if successull use that as
 	# obj instead.
 	if "bosa_sdm" in obj.windowClassName:
 		SDMChild = getattr(obj, "SDMChild", None)
@@ -609,15 +609,15 @@ def winEventToNVDAEvent(  # noqa: C901
 			obj = SDMChild
 	if isMSAADebugLoggingEnabled():
 		log.debug(
-			f"Successfully created NVDA event {NVDAEventName} for {obj} "
+			f"Successfully created Aslan event {AslanEventName} for {obj} "
 			f"from winEvent {getWinEventLogInfo(window, objectID, childID, eventID)}",
 		)
-	return (NVDAEventName, obj)
+	return (AslanEventName, obj)
 
 
 def processGenericWinEvent(eventID: int, window: int, objectID: int, childID: int) -> bool:
-	"""Converts the win event to an NVDA event,
-	Checks to see if this NVDAObject  equals the current focus.
+	"""Converts the win event to an Aslan event,
+	Checks to see if this AslanObject  equals the current focus.
 	If all goes well, then the event is queued and we return True
 	:param eventID: a win event ID (type)
 	:param window: a win event's window handle
@@ -637,14 +637,14 @@ def processGenericWinEvent(eventID: int, window: int, objectID: int, childID: in
 		winUser.EVENT_OBJECT_LOCATIONCHANGE,
 		winUser.EVENT_OBJECT_SHOW,
 	):
-		if not isinstance(focus, NVDAObjects.IAccessible.IAccessible):
+		if not isinstance(focus, AslanObjects.IAccessible.IAccessible):
 			# #12855: Ignore MSAA caret event on non-MSAA focus.
 			# as Chinese input method fires MSAA caret events over and over on UIA Word documents.
 			# #13098: However, limit this specifically to UIA Word documents,
 			# As other UIA documents (E.g. Visual Studio)
 			# Seem to rely on MSAA caret events,
 			# as they do not fire their own UIA caret events.
-			from NVDAObjects.UIA.wordDocument import WordDocument
+			from AslanObjects.UIA.wordDocument import WordDocument
 
 			if isinstance(focus, WordDocument):
 				if isMSAADebugLoggingEnabled():
@@ -665,34 +665,34 @@ def processGenericWinEvent(eventID: int, window: int, objectID: int, childID: in
 				"handling winEvent as caret event on focus. "
 				f"winEvent {getWinEventLogInfo(window, objectID, childID)}",
 			)
-		NVDAEvent = ("caret", focus)
+		AslanEvent = ("caret", focus)
 	else:
-		NVDAEvent = winEventToNVDAEvent(eventID, window, objectID, childID)
-		if not NVDAEvent:
+		AslanEvent = winEventToAslanEvent(eventID, window, objectID, childID)
+		if not AslanEvent:
 			return False
-	if NVDAEvent[0] == "nameChange" and objectID == winUser.OBJID_CURSOR:
+	if AslanEvent[0] == "nameChange" and objectID == winUser.OBJID_CURSOR:
 		if isMSAADebugLoggingEnabled():
 			log.debug("Handling winEvent as mouse shape change")
-		mouseHandler.updateMouseShape(NVDAEvent[1].name)
+		mouseHandler.updateMouseShape(AslanEvent[1].name)
 		return
 	# if the winEvent is for the object with focus,
 	# Ensure that that the event is send to the existing focus instance,
 	# rather than a new instance of the object with focus.
-	if NVDAEvent[1] is not focus and NVDAEvent[1] == focus:
+	if AslanEvent[1] is not focus and AslanEvent[1] == focus:
 		if isMSAADebugLoggingEnabled():
 			log.debug(
 				f"Directing winEvent to existing focus object {focus}. "
 				f"WinEvent {getWinEventLogInfo(window, objectID, childID)}",
 			)
-		NVDAEvent = (NVDAEvent[0], focus)
-	eventHandler.queueEvent(*NVDAEvent)
+		AslanEvent = (AslanEvent[0], focus)
+	eventHandler.queueEvent(*AslanEvent)
 	return True
 
 
 def processFocusWinEvent(window: int, objectID: int, childID: int, force: bool = False) -> bool:
 	"""checks to see if the focus win event is not the same as the existing focus,
-	then converts the win event to an NVDA event (instantiating an NVDA Object) then calls
-	processFocusNVDAEvent. If all is ok it returns True.
+	then converts the win event to an Aslan event (instantiating an Aslan Object) then calls
+	processFocusAslanEvent. If all is ok it returns True.
 	:param window: a win event's window handle
 	:param objectID: a win event's object ID
 	:param childID: a win event's child ID
@@ -733,11 +733,11 @@ def processFocusWinEvent(window: int, objectID: int, childID: int, force: bool =
 			)
 		JABHandler.event_enterJavaWindow(window)
 		return True
-	# Convert the win event to an NVDA event
-	NVDAEvent = winEventToNVDAEvent(winUser.EVENT_OBJECT_FOCUS, window, objectID, childID, useCache=False)
-	if not NVDAEvent:
+	# Convert the win event to an Aslan event
+	AslanEvent = winEventToAslanEvent(winUser.EVENT_OBJECT_FOCUS, window, objectID, childID, useCache=False)
+	if not AslanEvent:
 		return False
-	eventName, obj = NVDAEvent
+	eventName, obj = AslanEvent
 	if (childID == 0 and obj.IAccessibleRole == oleacc.ROLE_SYSTEM_LIST) or (
 		objectID == winUser.OBJID_CLIENT and "SysListView32" in obj.windowClassName
 	):
@@ -747,7 +747,7 @@ def processFocusWinEvent(window: int, objectID: int, childID: int, force: bool =
 		except:  # noqa: E722 Bare except
 			realChildID = None
 		if isinstance(realChildID, int) and realChildID > 0 and realChildID != childID:
-			realObj = NVDAObjects.IAccessible.IAccessible(
+			realObj = AslanObjects.IAccessible.IAccessible(
 				IAccessibleObject=obj.IAccessibleObject,
 				IAccessibleChildID=realChildID,
 				event_windowHandle=window,
@@ -756,22 +756,22 @@ def processFocusWinEvent(window: int, objectID: int, childID: int, force: bool =
 			)
 			if realObj:
 				obj = realObj
-	return processFocusNVDAEvent(obj, force=force)
+	return processFocusAslanEvent(obj, force=force)
 
 
-def processFocusNVDAEvent(obj, force=False):
-	"""Processes a focus NVDA event.
+def processFocusAslanEvent(obj, force=False):
+	"""Processes a focus Aslan event.
 	If the focus event is valid, it is queued.
-	@param obj: the NVDAObject the focus event is for
-	@type obj: L{NVDAObjects.NVDAObject}
+	@param obj: the AslanObject the focus event is for
+	@type obj: L{AslanObjects.AslanObject}
 	@param force: If True, the shouldAllowIAccessibleFocusEvent property of the object is ignored.
 	@type force: boolean
 	@return: C{True} if the focus event is valid and was queued, C{False} otherwise.
 	@rtype: boolean
 	"""
-	if not force and isinstance(obj, NVDAObjects.IAccessible.IAccessible):
+	if not force and isinstance(obj, AslanObjects.IAccessible.IAccessible):
 		focus = eventHandler.lastQueuedFocusObject
-		if isinstance(focus, NVDAObjects.IAccessible.IAccessible) and focus.isDuplicateIAccessibleEvent(obj):
+		if isinstance(focus, AslanObjects.IAccessible.IAccessible) and focus.isDuplicateIAccessibleEvent(obj):
 			if isMSAADebugLoggingEnabled():
 				log.debug(f"Dropping duplicate IAccessible focus event for {obj}")
 			return True
@@ -815,9 +815,9 @@ def _handleUserDesktop():
 
 def processForegroundWinEvent(window, objectID, childID):
 	"""checks to see if the foreground win event is not the same as the existing focus or any of its parents,
-	then converts the win event to an NVDA event (instantiating an NVDA Object) and then checks the NVDAObject
+	then converts the win event to an Aslan event (instantiating an Aslan Object) and then checks the AslanObject
 	against the existing focus object.
-	If all is ok it queues the foreground event to NVDA and returns True.
+	If all is ok it queues the foreground event to Aslan and returns True.
 	@param window: a win event's window handle
 	@type window: integer
 	@param objectID: a win event's object ID
@@ -842,7 +842,7 @@ def processForegroundWinEvent(window, objectID, childID):
 	# If there is a pending gainFocus, it will handle the foreground object.
 	oldFocus = eventHandler.lastQueuedFocusObject
 	# If this foreground win event's window is an ancestor of the existing focus's window, then ignore it
-	if isinstance(oldFocus, NVDAObjects.window.Window) and winUser.isDescendantWindow(
+	if isinstance(oldFocus, AslanObjects.window.Window) and winUser.isDescendantWindow(
 		window,
 		oldFocus.windowHandle,
 	):
@@ -854,7 +854,7 @@ def processForegroundWinEvent(window, objectID, childID):
 		return False
 	# If the existing focus has the same win event params as these, then ignore this event
 	if (
-		isinstance(oldFocus, NVDAObjects.IAccessible.IAccessible)
+		isinstance(oldFocus, AslanObjects.IAccessible.IAccessible)
 		and window == oldFocus.event_windowHandle
 		and objectID == oldFocus.event_objectID
 		and childID == oldFocus.event_childID
@@ -876,22 +876,22 @@ def processForegroundWinEvent(window, objectID, childID):
 				f"WinEvent {getWinEventLogInfo(window, objectID, childID)}",
 			)
 		return True
-	# Convert the win event to an NVDA event
-	NVDAEvent = winEventToNVDAEvent(
+	# Convert the win event to an Aslan event
+	AslanEvent = winEventToAslanEvent(
 		winUser.EVENT_SYSTEM_FOREGROUND,
 		window,
 		objectID,
 		childID,
 		useCache=False,
 	)
-	if not NVDAEvent:
+	if not AslanEvent:
 		if isMSAADebugLoggingEnabled():
 			log.debug(
-				f"Could not convert foreground winEvent to an NVDA event. "
+				f"Could not convert foreground winEvent to an Aslan event. "
 				f"WinEvent {getWinEventLogInfo(window, objectID, childID)}",
 			)
 		return False
-	eventHandler.queueEvent(*NVDAEvent)
+	eventHandler.queueEvent(*AslanEvent)
 	return True
 
 
@@ -903,14 +903,14 @@ def processShowWinEvent(window, objectID, childID):
 	# eventHandler.shouldAcceptEvent only accepts show events for a few specific cases.
 	# Narrow this further to only accept events for clients or custom objects.
 	if objectID == winUser.OBJID_CLIENT or objectID > 0:
-		NVDAEvent = winEventToNVDAEvent(winUser.EVENT_OBJECT_SHOW, window, objectID, childID)
-		if NVDAEvent:
-			eventHandler.queueEvent(*NVDAEvent)
+		AslanEvent = winEventToAslanEvent(winUser.EVENT_OBJECT_SHOW, window, objectID, childID)
+		if AslanEvent:
+			eventHandler.queueEvent(*AslanEvent)
 
 
 def processDestroyWinEvent(window, objectID, childID):
 	"""Process a destroy win event.
-	This removes the object associated with the event parameters from L{liveNVDAObjectTable} if
+	This removes the object associated with the event parameters from L{liveAslanObjectTable} if
 	such an object exists.
 	"""
 	if isMSAADebugLoggingEnabled():
@@ -918,14 +918,14 @@ def processDestroyWinEvent(window, objectID, childID):
 			f"Processing destroy winEvent: {getWinEventLogInfo(window, objectID, childID)}",
 		)
 	try:
-		del liveNVDAObjectTable[(window, objectID, childID)]
+		del liveAslanObjectTable[(window, objectID, childID)]
 	except KeyError:
 		pass
 	# Specific support for input method MSAA candidate lists.
 	# When their window is destroyed we must correct focus to its parent - which could be a composition string
 	# so can't use generic focus correction. (#2695)
 	focus = api.getFocusObject()
-	from NVDAObjects.IAccessible.mscandui import BaseCandidateItem
+	from AslanObjects.IAccessible.mscandui import BaseCandidateItem
 
 	if (
 		objectID == 0
@@ -950,16 +950,16 @@ def processMenuStartWinEvent(eventID, window, objectID, childID, validFocus):
 		)
 	if validFocus:
 		lastFocus = eventHandler.lastQueuedFocusObject
-		if isinstance(lastFocus, NVDAObjects.IAccessible.IAccessible) and lastFocus.IAccessibleRole in (
+		if isinstance(lastFocus, AslanObjects.IAccessible.IAccessible) and lastFocus.IAccessibleRole in (
 			oleacc.ROLE_SYSTEM_MENUPOPUP,
 			oleacc.ROLE_SYSTEM_MENUITEM,
 		):
 			# Focus has already been set to a menu or menu item, so we don't need to handle the menuStart.
 			return
-	NVDAEvent = winEventToNVDAEvent(eventID, window, objectID, childID)
-	if not NVDAEvent:
+	AslanEvent = winEventToAslanEvent(eventID, window, objectID, childID)
+	if not AslanEvent:
 		return
-	eventName, obj = NVDAEvent
+	eventName, obj = AslanEvent
 	if obj.IAccessibleRole != oleacc.ROLE_SYSTEM_MENUPOPUP:
 		# menuStart on anything other than a menu is silly.
 		return
@@ -970,7 +970,7 @@ def processMenuStartWinEvent(eventID, window, objectID, childID, validFocus):
 				f"shouldAllowIAccessibleMenuStartEvent {obj.shouldAllowIAccessibleMenuStartEvent}",
 			)
 		return
-	processFocusNVDAEvent(obj, force=True)
+	processFocusAslanEvent(obj, force=True)
 
 
 def processFakeFocusWinEvent(eventID, window, objectID, childID):
@@ -999,7 +999,7 @@ def _fakeFocus(oldFocus):
 		log.debug(
 			f"Faking focus on {focus}",
 		)
-	processFocusNVDAEvent(focus)
+	processFocusAslanEvent(focus)
 
 
 #: Only valid after initialisation.
@@ -1027,7 +1027,7 @@ def pumpAll():  # noqa: C901
 	alwaysAllowedObjects = []
 	# winEvents for the currently focused object are special,
 	# and should be never filtered out.
-	if isinstance(focus, NVDAObjects.IAccessible.IAccessible) and focus.event_objectID is not None:
+	if isinstance(focus, AslanObjects.IAccessible.IAccessible) and focus.event_objectID is not None:
 		alwaysAllowedObjects.append((focus.event_windowHandle, focus.event_objectID, focus.event_childID))
 
 	# Receive all the winEvents from the limiter for this cycle
@@ -1054,11 +1054,11 @@ def pumpAll():  # noqa: C901
 			if not focus.shouldAcceptShowHideCaretEvent:
 				continue
 		elif not eventHandler.shouldAcceptEvent(
-			internalWinEventHandler.winEventIDsToNVDAEventNames[winEvent[0]],
+			internalWinEventHandler.winEventIDsToAslanEventNames[winEvent[0]],
 			windowHandle=winEvent[1],
 		):
 			continue
-		# We want to only pass on one focus event to NVDA, but we always want to use the most recent possible one
+		# We want to only pass on one focus event to Aslan, but we always want to use the most recent possible one
 		if winEvent[0] in (
 			winUser.EVENT_OBJECT_FOCUS,
 			winUser.EVENT_SYSTEM_FOREGROUND,
@@ -1142,7 +1142,7 @@ def findGroupboxObject(obj):
 			and winUser.getWindowStyle(prevWindow) & winUser.BS_GROUPBOX
 			and winUser.isWindowVisible(prevWindow)
 		):
-			groupObj = NVDAObjects.IAccessible.getNVDAObjectFromEvent(prevWindow, winUser.OBJID_CLIENT, 0)
+			groupObj = AslanObjects.IAccessible.getAslanObjectFromEvent(prevWindow, winUser.OBJID_CLIENT, 0)
 			try:
 				(left, top, width, height) = obj.location
 				(groupLeft, groupTop, groupWidth, groupHeight) = groupObj.location
@@ -1233,7 +1233,7 @@ def splitIA2Attribs(  # noqa: C901
 	@param attribsString: The IAccessible2 attributes string to convert.
 	@return: A dict of the attribute keys and values, where values are strings or dicts.
 	"""
-	# Do not treat huge base64 data as it might freeze NVDA in Google Chrome (#10227)
+	# Do not treat huge base64 data as it might freeze Aslan in Google Chrome (#10227)
 	if len(attribsString) >= ATTRIBS_STRING_BASE64_THRESHOLD:
 		attribsString = ATTRIBS_STRING_BASE64_PATTERN.sub(ATTRIBS_STRING_BASE64_REPL, attribsString)
 		if len(attribsString) >= ATTRIBS_STRING_BASE64_THRESHOLD:

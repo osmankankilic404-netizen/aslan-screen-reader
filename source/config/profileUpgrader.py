@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2016-2023 NV Access Limited, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -26,7 +26,7 @@ def upgrade(profile, validator, writeProfileToFileFunc):
 		_doConfigUpgrade(profile, fromVersion)
 	_doValidation(deepcopy(profile), validator)  # copy the profile, since validating mutates the object
 	try:
-		# write out the configuration once the upgrade has been validated. This means that if NVDA crashes for some
+		# write out the configuration once the upgrade has been validated. This means that if Aslan crashes for some
 		# other reason the file does not need to be upgraded again.
 		if writeProfileToFileFunc:
 			writeProfileToFileFunc(profile.filename, profile)

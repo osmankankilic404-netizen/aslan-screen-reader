@@ -1,22 +1,22 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2025 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton and others.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 """
-URL Handler Module for NVDARemote
-This module provides functionality for launching NVDARemote connections via custom 'nvdaremote://' URLs.
+URL Handler Module for AslanRemote
+This module provides functionality for launching AslanRemote connections via custom 'aslanremote://' URLs.
 
 Key Components:
 - URL registration and unregistration utilities for Windows registry
-- Parsing and handling of NVDARemote connection URLs
+- Parsing and handling of AslanRemote connection URLs
 
 Main Functions:
 
 -:func:`registerURLHandler`:
-	Registers the NVDARemote URL protocol in the Windows Registry
+	Registers the AslanRemote URL protocol in the Windows Registry
 :func:`unregisterURLHandler`:
-	Removes the NVDARemote URL protocol registration
+	Removes the AslanRemote URL protocol registration
 :func:`URLHandlerPath`:
 	Returns the path to the URL handler executable
 """
@@ -55,7 +55,7 @@ def _createRegistryStructure(keyHandle: winreg.HKEYType, data: dict):
 
 
 def registerURLHandler():
-	"""Registers the nvdaremote:// URL protocol handler in the Windows Registry.
+	"""Registers the aslanremote:// URL protocol handler in the Windows Registry.
 
 	:raises OSError: If registration in the registry fails
 	"""
@@ -67,7 +67,7 @@ def registerURLHandler():
 
 
 def unregisterURLHandler():
-	"""Unregisters the nvdaremote:// URL protocol handler from the Windows Registry.
+	"""Unregisters the aslanremote:// URL protocol handler from the Windows Registry.
 
 	:raises OSError: If unregistration from the registry fails
 	"""
@@ -95,7 +95,7 @@ URL_HANDLER_REGISTRY = {
 	"shell": {
 		"open": {
 			"command": {
-				"": '"{path}" handleRemoteURL %1'.format(path=os.path.join(sys.prefix, "nvda_slave.exe")),
+				"": '"{path}" handleRemoteURL %1'.format(path=os.path.join(sys.prefix, "aslan_slave.exe")),
 			},
 		},
 	},

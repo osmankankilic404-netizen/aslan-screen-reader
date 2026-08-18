@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Aleksey Sadovoy, Peter Vagner, Aaron Cannon, Leonard de Ruijter, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Types used for the speech dictionary system."""
 
@@ -20,7 +20,7 @@ import regex
 
 import config
 from logHandler import log
-from NVDAState import WritePaths, shouldWriteToDisk
+from AslanState import WritePaths, shouldWriteToDisk
 from utils.displayString import DisplayStringIntEnum, DisplayStringStrEnum
 
 from . import dictFormatUpgrade

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2023 NV Access Limited, Burman's Computer and Education Ltd.
@@ -86,7 +86,7 @@ _gestureMap = inputCore.GlobalGestureMap(
 
 
 class InputGestureKeys(braille.display.gesture.BrailleDisplayGesture):
-	"""Changes display key presses to gestures for NVDA input system."""
+	"""Changes display key presses to gestures for Aslan input system."""
 
 	def __init__(self, keys: Set[int], name: str):
 		"""Constructor.

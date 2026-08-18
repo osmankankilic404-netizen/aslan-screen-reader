@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2011-2023 Willem Venter and Rynhardt Kruger, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-from NVDAObjects.window import edit
+from AslanObjects.window import edit
 import ui
 import appModuleHandler
 import controlTypes
@@ -11,10 +11,10 @@ from scriptHandler import script
 
 """
 App module for VIP Mud
-This module makes NVDA read incoming text, as well as allowing the user to review the last nine messages with control 1 through 9.
+This module makes Aslan read incoming text, as well as allowing the user to review the last nine messages with control 1 through 9.
 """
 
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_VIPMUD = _("VipMud")
 
 
@@ -23,12 +23,12 @@ class AppModule(appModuleHandler.AppModule):
 	msgs = []
 	historyLength = 9
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if controlTypes.State.READONLY in obj.states:
 			clsList.insert(0, MudText)
 
 	@script(
-		# Translators: The description of an NVDA command to view one of the recent messages.
+		# Translators: The description of an Aslan command to view one of the recent messages.
 		description=_("Displays one of the recent messages"),
 		gestures=[f"kb:control+{n}" for n in range(1, historyLength + 1)],
 		category=SCRCAT_VIPMUD,

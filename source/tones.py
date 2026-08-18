@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2025 NV Access Limited, Aleksey Sadovoy, Leonard de Ruijter, Babbage B.V.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -81,7 +81,7 @@ def beep(
 		return
 	if not player:
 		return
-	from NVDAHelper.localLib import generateBeep
+	from AslanHelper.localLib import generateBeep
 
 	bufSize = generateBeep(None, hz, length, left, right)
 	buf = create_string_buffer(bufSize)

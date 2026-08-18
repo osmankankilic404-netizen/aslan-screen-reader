@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025 NV Access Limited.
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from __future__ import annotations
 import functools
@@ -29,7 +29,7 @@ from winBindings.kernel32 import (
 import win32con
 
 
-"""Base classes for NVDA Bridge components."""
+"""Base classes for Aslan Bridge components."""
 
 
 @rpyc.service
@@ -192,7 +192,7 @@ class Service(rpyc.Service):
 
 class Proxy[Service_t: Service]:
 	"""Proxy for wrapping remote rpyc services.
-	All NVDA Bridge proxies should inherit from this class.
+	All Aslan Bridge proxies should inherit from this class.
 
 	This class stores a reference to a remote rpyc service and provides a
 	helper method to create a subclass with the remote service bound.

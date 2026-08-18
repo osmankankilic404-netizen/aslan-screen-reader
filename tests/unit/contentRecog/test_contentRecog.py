@@ -1,5 +1,5 @@
 # tests/unit/contentRecog/test_contentRecog.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2017 NV Access Limited
@@ -61,7 +61,7 @@ class TestRecogImageInfo(unittest.TestCase):
 		self.assertEqual(info.convertHeightToScreen(400), 200)
 
 
-class FakeNVDAObject(object):
+class FakeAslanObject(object):
 	pass
 
 
@@ -103,7 +103,7 @@ class TestLinesWordsResult(unittest.TestCase):
 	def setUp(self):
 		info = contentRecog.RecogImageInfo(0, 0, 1000, 2000, 1)
 		self.result = contentRecog.LinesWordsResult(self.DATA, info)
-		self.fakeObj = FakeNVDAObject()
+		self.fakeObj = FakeAslanObject()
 		self.textInfo = self.result.makeTextInfo(self.fakeObj, textInfos.POSITION_FIRST)
 
 	def test_text(self):

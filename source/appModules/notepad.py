@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2025 NV Access Limited, Joseph Lee
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -16,13 +16,13 @@ import controlTypes
 import eventHandler
 import speech
 import UIAHandler
-from NVDAObjects.UIA import UIA
-from NVDAObjects import NVDAObject
+from AslanObjects.UIA import UIA
+from AslanObjects import AslanObject
 from typing import Callable
 
 
 class AppModule(appModuleHandler.AppModule):
-	def event_UIA_elementSelected(self, obj: NVDAObject, nextHandler: Callable[[], None]):
+	def event_UIA_elementSelected(self, obj: AslanObject, nextHandler: Callable[[], None]):
 		# Announce currently selected tab when it changes.
 		if (
 			obj.role == controlTypes.Role.TAB
@@ -42,7 +42,7 @@ class AppModule(appModuleHandler.AppModule):
 			)
 		nextHandler()
 
-	def _get_statusBar(self) -> NVDAObject:
+	def _get_statusBar(self) -> AslanObject:
 		"""Retrieves Windows 11 Notepad status bar.
 		In Windows 10 and earlier, status bar can be obtained by looking at the bottom of the screen.
 		Windows 11 Notepad uses Windows 11 UI design (top-level window is labeled "DesktopWindowXamlSource",
@@ -78,7 +78,7 @@ class AppModule(appModuleHandler.AppModule):
 		statusBar = UIA(UIAElement=element).parent
 		return statusBar
 
-	def event_NVDAObject_init(self, obj: NVDAObject):
+	def event_AslanObject_init(self, obj: AslanObject):
 		# #18208: "go to line" edit field is classified as a dialog.
 		if isinstance(obj, UIA) and obj.UIAAutomationId == "LineNumberBox":
 			obj.role = controlTypes.Role.EDITABLETEXT

@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020-2026 NV Access Limited, Leonard de Ruijter, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
-"""Logic for NVDA + Google Chrome tests"""
+"""Logic for Aslan + Google Chrome tests"""
 
 import typing
 import os
@@ -24,7 +24,7 @@ _chrome: _ChromeLib = _getLib("ChromeLib")
 _asserts: _AssertsLib = _getLib("AssertsLib")
 
 if typing.TYPE_CHECKING:
-	from ..libraries.SystemTestSpy.speechSpyGlobalPlugin import NVDASpyLib
+	from ..libraries.SystemTestSpy.speechSpyGlobalPlugin import AslanSpyLib
 
 
 #: Double space is used to separate semantics in speech output this typically
@@ -69,7 +69,7 @@ AUTO_LANGUAGE_SWITCHING_KEY = ["speech", "autoLanguageSwitching"]
 AUTO_DIALECT_SWITCHING_KEY = ["speech", "autoDialectSwitching"]
 REPORT_LANGUAGE_KEY = ["speech", "reportLanguage"]
 REPORT_NOT_SUPPORTED_LANGUAGE_KEY = ["speech", "reportNotSupportedLanguage"]
-READ_DETAILS_GESTURE = "NVDA+d"
+READ_DETAILS_GESTURE = "Aslan+d"
 
 
 def _getNoVBuf_AriaDetails_sample() -> str:
@@ -85,10 +85,10 @@ def _getNoVBuf_AriaDetails_sample() -> str:
 		"""
 
 
-def _doTestAriaDetails_NoVBufNoTextInterface(nvdaConfValues: "NVDASpyLib.NVDAConfMods"):
+def _doTestAriaDetails_NoVBufNoTextInterface(aslanConfValues: "AslanSpyLib.AslanConfMods"):
 	_chrome.prepareChrome(_getNoVBuf_AriaDetails_sample())
-	spy: "NVDASpyLib" = _NvdaLib.getSpyLib()
-	spy.modifyNVDAConfig(nvdaConfValues)
+	spy: "AslanSpyLib" = _NvdaLib.getSpyLib()
+	spy.modifyAslanConfig(aslanConfValues)
 
 	actualSpeech = _NvdaLib.getSpeechAfterKey("tab")
 	_builtIn.should_contain(actualSpeech, "focus in app")
@@ -128,7 +128,7 @@ def test_aria_details_noVBufNoTextInterface():
 	interface.
 	"""
 	_doTestAriaDetails_NoVBufNoTextInterface(
-		nvdaConfValues=[
+		aslanConfValues=[
 			(REVIEW_CURSOR_FOLLOW_CARET_KEY, True),
 			(REVIEW_CURSOR_FOLLOW_FOCUS_KEY, True),
 		],
@@ -140,7 +140,7 @@ def test_aria_details_noVBufNoTextInterface_freeReview():
 	interface. Test with the review cursor configured not to follow focus or caret.
 	"""
 	_doTestAriaDetails_NoVBufNoTextInterface(
-		nvdaConfValues=[
+		aslanConfValues=[
 			(REVIEW_CURSOR_FOLLOW_CARET_KEY, False),
 			(REVIEW_CURSOR_FOLLOW_FOCUS_KEY, False),
 		],
@@ -149,7 +149,7 @@ def test_aria_details_noVBufNoTextInterface_freeReview():
 
 def test_mark_aria_details():
 	exercise_mark_aria_details(
-		nvdaConfValues=[
+		aslanConfValues=[
 			(REVIEW_CURSOR_FOLLOW_CARET_KEY, True),
 			(REVIEW_CURSOR_FOLLOW_FOCUS_KEY, True),
 		],
@@ -158,7 +158,7 @@ def test_mark_aria_details():
 
 def test_mark_aria_details_FreeReviewCursor():
 	exercise_mark_aria_details(
-		nvdaConfValues=[
+		aslanConfValues=[
 			(REVIEW_CURSOR_FOLLOW_CARET_KEY, False),
 			(REVIEW_CURSOR_FOLLOW_FOCUS_KEY, False),
 		],
@@ -240,7 +240,7 @@ def test_mark_aria_details_role():
 			"form",
 		],
 	)
-	_spy: NVDASpyLib = _NvdaLib.getSpyLib()
+	_spy: AslanSpyLib = _NvdaLib.getSpyLib()
 	_spy.setBrailleCellCount(400)
 
 	actualSpeech, actualBraille = _NvdaLib.getSpeechAndBrailleAfterKey("downArrow")
@@ -297,7 +297,7 @@ def test_mark_aria_details_role():
 	)
 
 	# Force focus mode
-	actualSpeech = _NvdaLib.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _NvdaLib.getSpeechAfterKey("Aslan+space")
 	_asserts.speech_matches(
 		actualSpeech,
 		"Focus mode",
@@ -344,7 +344,7 @@ def test_mark_aria_details_role():
 	)
 
 
-def exercise_mark_aria_details(nvdaConfValues: "NVDASpyLib.NVDAConfMods"):
+def exercise_mark_aria_details(aslanConfValues: "AslanSpyLib.AslanConfMods"):
 	_chrome.prepareChrome(
 		"""
 		<div class="editor" contenteditable spellcheck="false" role="textbox" aria-multiline="true">
@@ -367,8 +367,8 @@ def exercise_mark_aria_details(nvdaConfValues: "NVDASpyLib.NVDAConfMods"):
 		</div>
 		""",
 	)
-	spy: "NVDASpyLib" = _NvdaLib.getSpyLib()
-	spy.modifyNVDAConfig(nvdaConfValues)
+	spy: "AslanSpyLib" = _NvdaLib.getSpyLib()
+	spy.modifyAslanConfig(aslanConfValues)
 
 	actualSpeech, actualBraille = _NvdaLib.getSpeechAndBrailleAfterKey("downArrow")
 	_asserts.speech_matches(
@@ -525,7 +525,7 @@ def exercise_mark_aria_details(nvdaConfValues: "NVDASpyLib.NVDAConfMods"):
 	)
 
 	# Force focus mode
-	actualSpeech = _NvdaLib.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _NvdaLib.getSpeechAfterKey("Aslan+space")
 	_asserts.speech_matches(
 		actualSpeech,
 		"Focus mode",
@@ -680,7 +680,7 @@ def test_annotations_multi_target():
 		"details",  # The role "form" is deliberately unsupported
 		"example origin",
 	]
-	_spy: NVDASpyLib = _NvdaLib.getSpyLib()
+	_spy: AslanSpyLib = _NvdaLib.getSpyLib()
 	_spy.setBrailleCellCount(400)
 
 	actualSpeech, actualBraille = _NvdaLib.getSpeechAndBrailleAfterKey("downArrow")
@@ -711,7 +711,7 @@ def test_annotations_multi_target():
 	)
 
 	# Force focus mode
-	actualSpeech = _NvdaLib.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _NvdaLib.getSpeechAfterKey("Aslan+space")
 	_asserts.speech_matches(
 		actualSpeech,
 		"Focus mode",
@@ -764,7 +764,7 @@ def announce_list_item_when_moving_by_word_or_character():
 		""",
 	)
 	# Force focus mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+space")
 	_asserts.strings_match(
 		actualSpeech,
 		"Focus mode",
@@ -853,7 +853,7 @@ def test_i7562():
 		""",
 	)
 	# Force focus mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+space")
 	_asserts.strings_match(
 		actualSpeech,
 		"Focus mode",
@@ -899,7 +899,7 @@ def test_pr11606():
 		""",
 	)
 	# Force focus mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+space")
 	_asserts.strings_match(
 		actualSpeech,
 		"Focus mode",
@@ -931,7 +931,7 @@ def test_pr11606():
 	)
 	# Read the current line.
 	# Before pr #11606 the next line ("C D")  would have been read.
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+upArrow")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+upArrow")
 	_asserts.strings_match(
 		actualSpeech,
 		"bullet  link  A    link  B",
@@ -976,13 +976,13 @@ def test_ariaTreeGrid_browseMode():
 		actualSpeech,
 		"row 1  column 1  Subject",
 	)
-	# Navigate to row 2 column 1 with NVDA table navigation command
+	# Navigate to row 2 column 1 with Aslan table navigation command
 	actualSpeech = _chrome.getSpeechAfterKey("control+alt+downArrow")
 	_asserts.strings_match(
 		actualSpeech,
 		"expanded  level 1  row 2  Treegrids are awesome",
 	)
-	# Press enter to activate NVDA focus mode and focus the current row
+	# Press enter to activate Aslan focus mode and focus the current row
 	actualSpeech = _chrome.getSpeechAfterKey("enter")
 	_asserts.strings_match(
 		actualSpeech,
@@ -1089,7 +1089,7 @@ def test_i12147():
 def test_tableInStyleDisplayTable():
 	"""
 	Chrome treats nodes with `style="display: table"` as tables.
-	When a HTML style table is positioned in such a node, NVDA was previously unable to announce
+	When a HTML style table is positioned in such a node, Aslan was previously unable to announce
 	table row and column count as well as provide table navigation for the inner table.
 	"""
 	_chrome.prepareChrome(
@@ -1128,7 +1128,7 @@ def test_tableInStyleDisplayTable():
 
 def test_ariaRoleDescription_focus():
 	"""
-	NVDA should report the custom role of an object on focus.
+	Aslan should report the custom role of an object on focus.
 	"""
 	_chrome.prepareChrome(
 		"""
@@ -1142,7 +1142,7 @@ def test_ariaRoleDescription_focus():
 		"Cheese  pizza",
 	)
 	# Force focus mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+space")
 	_asserts.strings_match(
 		actualSpeech,
 		"Focus mode",
@@ -1159,7 +1159,7 @@ IMG_DESC_MSG = "To get missing image descriptions, open the context menu."
 
 def test_ariaRoleDescription_inline_browseMode():
 	"""
-	NVDA should report the custom role for inline elements in browse mode.
+	Aslan should report the custom role for inline elements in browse mode.
 	"""
 	_chrome.prepareChrome(
 		"""
@@ -1194,7 +1194,7 @@ def test_ariaRoleDescription_inline_browseMode():
 
 def test_ariaRoleDescription_block_browseMode():
 	"""
-	NVDA should report the custom role at start and end for block elements in browse mode.
+	Aslan should report the custom role at start and end for block elements in browse mode.
 	"""
 	_chrome.prepareChrome(
 		"""
@@ -1226,7 +1226,7 @@ def test_ariaRoleDescription_block_browseMode():
 
 def test_ariaRoleDescription_inline_contentEditable():
 	"""
-	NVDA should report the custom role for inline elements in content editables.
+	Aslan should report the custom role for inline elements in content editables.
 	"""
 	_chrome.prepareChrome(
 		"""
@@ -1239,7 +1239,7 @@ def test_ariaRoleDescription_inline_contentEditable():
 		""",
 	)
 	# Force focus mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+space")
 	_asserts.strings_match(
 		actualSpeech,
 		"Focus mode",
@@ -1273,7 +1273,7 @@ def test_ariaRoleDescription_inline_contentEditable():
 
 def test_ariaRoleDescription_block_contentEditable():
 	"""
-	NVDA should report the custom role at start and end for block elements in content editables.
+	Aslan should report the custom role at start and end for block elements in content editables.
 	"""
 	_chrome.prepareChrome(
 		"""
@@ -1288,7 +1288,7 @@ def test_ariaRoleDescription_block_contentEditable():
 		""",
 	)
 	# Force focus mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+space")
 	_asserts.strings_match(
 		actualSpeech,
 		"Focus mode",
@@ -1479,7 +1479,7 @@ def test_ariaDescription_sayAll():
 	- annotations.reportAriaDescription default:True
 	"""
 	_chrome.prepareChrome(_getAriaDescriptionSample())
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+downArrow")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+downArrow")
 
 	# Reporting aria-description only supported in:
 	# - Chrome 92.0.4479.0+
@@ -1605,7 +1605,7 @@ def test_mark_focus():
 	)
 
 	# Force focus mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+space")
 	_asserts.strings_match(
 		actualSpeech,
 		"Focus mode",
@@ -1667,7 +1667,7 @@ def preventDuplicateSpeechFromDescription_focus():
 	spy.set_configValue(REPORT_OBJ_DESC_KEY, True)
 
 	# Force focus mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+space")
 	_asserts.strings_match(
 		actualSpeech,
 		"Focus mode",
@@ -1770,7 +1770,7 @@ def test_ensureNoBrowseModeDescription():
 	spy.set_configValue(REPORT_OBJ_DESC_KEY, True)
 
 	# Test focus mode
-	actualSpeech = _NvdaLib.getSpeechAfterKey("nvda+space")
+	actualSpeech = _NvdaLib.getSpeechAfterKey("aslan+space")
 	_asserts.speech_matches(actualSpeech, "Focus mode")
 
 	actualSpeech, actualBraille = _NvdaLib.getSpeechAndBrailleAfterKey("tab")
@@ -1983,7 +1983,7 @@ def test_focusTargetReporting():
 	)
 
 	# Force focus mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+space")
 	_asserts.strings_match(
 		actualSpeech,
 		"Focus mode",
@@ -2053,7 +2053,7 @@ def test_focusTargetReporting():
 
 def test_tableNavigationWithMergedColumns():
 	"""When navigating through a merged cell,
-	NVDA should preserve the column/row position from the previous cell.
+	Aslan should preserve the column/row position from the previous cell.
 	Refer to #7278, #11919.
 	"""
 	_chrome.prepareChrome("""
@@ -2091,7 +2091,7 @@ def test_tableNavigationWithMergedColumns():
 	_asserts.strings_match(actualSpeech, "row 2  column 1  through 2  a 2 and b 2")
 
 	# Return to row 1, column 2
-	# In #7278, #11919, NVDA would return to row 1, column 1
+	# In #7278, #11919, Aslan would return to row 1, column 1
 	# This caused column position to be lost when navigating through merged cells
 	actualSpeech = _chrome.getSpeechAfterKey("control+alt+upArrow")
 	_asserts.strings_match(actualSpeech, "row 1  column 2  b 1")
@@ -2149,13 +2149,13 @@ def tableSayAllJumpToB2():
 
 def test_tableSayAllCommands():
 	"""Tests that table sayAll commands work correctly.
-	Key bindings: NVDA+control+alt+downArrow/rightArrow
+	Key bindings: Aslan+control+alt+downArrow/rightArrow
 	Refer to #13469.
 	"""
 	prepareChromeForTableSayAllTests()
 	tableSayAllJumpToB2()
 	# sayAll column
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+control+alt+downArrow")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+control+alt+downArrow")
 	_asserts.strings_match(
 		actualSpeech,
 		"\n".join(
@@ -2169,12 +2169,12 @@ def test_tableSayAllCommands():
 	)
 
 	# Check that cursor has moved to B5
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+upArrow")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+upArrow")
 	_asserts.strings_match(actualSpeech, "B 5")
 
 	tableSayAllJumpToB2()
 	# sayAll row
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+control+alt+rightArrow")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+control+alt+rightArrow")
 	_asserts.strings_match(
 		actualSpeech,
 		"\n".join(
@@ -2188,7 +2188,7 @@ def test_tableSayAllCommands():
 	)
 
 	# Check that cursor has moved to E2
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+upArrow")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+upArrow")
 	_asserts.strings_match(actualSpeech, "E 2")
 
 	# Jump to A3
@@ -2199,7 +2199,7 @@ def test_tableSayAllCommands():
 	_asserts.strings_match(actualSpeech, "row 3  column 1  through 2  A 3 plus B 3")
 
 	# sayAll row with cells merged horizontally
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+control+alt+rightArrow")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+control+alt+rightArrow")
 	_asserts.strings_match(
 		actualSpeech,
 		"\n".join(
@@ -2212,19 +2212,19 @@ def test_tableSayAllCommands():
 	)
 
 	# Check that cursor has moved to E3
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+upArrow")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+upArrow")
 	_asserts.strings_match(actualSpeech, "D 3 plus E 3")
 
 
 def test_tableSpeakAllCommands():
 	"""Tests that table speak entire row/column commands work correctly.
-	Key bindings: NVDA+control+alt+upArrow/leftArrow
+	Key bindings: Aslan+control+alt+upArrow/leftArrow
 	Refer to #13469.
 	"""
 	prepareChromeForTableSayAllTests()
 	tableSayAllJumpToB2()
 	# Speak current column
-	actualSpeech, actualBraille = _NvdaLib.getSpeechAndBrailleAfterKey("NVDA+control+alt+upArrow")
+	actualSpeech, actualBraille = _NvdaLib.getSpeechAndBrailleAfterKey("Aslan+control+alt+upArrow")
 	_asserts.strings_match(
 		actualSpeech,
 		"\n".join(
@@ -2244,11 +2244,11 @@ def test_tableSpeakAllCommands():
 	)
 
 	# Check that cursor still stays at B2
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+upArrow")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+upArrow")
 	_asserts.strings_match(actualSpeech, "row 2  B 2")
 
 	# Speak current row
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+control+alt+leftArrow")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+control+alt+leftArrow")
 	_asserts.strings_match(
 		actualSpeech,
 		"\n".join(
@@ -2263,7 +2263,7 @@ def test_tableSpeakAllCommands():
 	)
 
 	# Check that cursor stays at B2
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+upArrow")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+upArrow")
 	_asserts.strings_match(actualSpeech, "column 2  B 2")
 
 
@@ -2286,7 +2286,7 @@ def test_tableSayAllAxisCachingForMergedCells():
 	)
 
 	# Speak current column - should reuse cached column
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+control+alt+upArrow")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+control+alt+upArrow")
 	_asserts.strings_match(
 		actualSpeech,
 		"\n".join(
@@ -2458,7 +2458,7 @@ def test_ARIASwitchRole():
 		message="Read current line",
 	)
 	# Report the current focus
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+tab")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+tab")
 	_asserts.strings_match(
 		actualSpeech,
 		SPEECH_SEP.join(
@@ -2496,7 +2496,7 @@ def test_ARIASwitchRole():
 		message="Read current line",
 	)
 	# Report the current focus
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+tab")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+tab")
 	_asserts.strings_match(
 		actualSpeech,
 		SPEECH_SEP.join(
@@ -2534,7 +2534,7 @@ def test_ARIASwitchRole():
 		message="Read current line",
 	)
 	# Report the current focus
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+tab")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+tab")
 	_asserts.strings_match(
 		actualSpeech,
 		SPEECH_SEP.join(
@@ -2551,7 +2551,7 @@ def test_ARIASwitchRole():
 
 def test_i13307():
 	"""
-	Even if (to avoid duplication) NVDA may choose to not speak a landmark or region's label
+	Even if (to avoid duplication) Aslan may choose to not speak a landmark or region's label
 	when arrowing into a landmark or region with an aria-labelledby,
 	it should still speak the label when junping inside the landmark or region
 	from outside using quicknav or focus.
@@ -2686,7 +2686,7 @@ def test_styleNav():
 	By default these commands don't have assigned gestures,
 	so we will assign temporary gestures just for testing.
 	"""
-	spy: "NVDASpyLib" = _NvdaLib.getSpyLib()
+	spy: "AslanSpyLib" = _NvdaLib.getSpyLib()
 	spy.assignGesture(
 		"kb:s",
 		"browseMode",
@@ -2762,7 +2762,7 @@ def test_styleNav():
 
 def test_clickableNavigation() -> None:
 	"""Tests that unassigned quick navigation commands move between clickable elements."""
-	spy: "NVDASpyLib" = _NvdaLib.getSpyLib()
+	spy: "AslanSpyLib" = _NvdaLib.getSpyLib()
 	spy.assignGesture(
 		"kb:z",
 		"browseMode",
@@ -2823,7 +2823,7 @@ def test_ariaErrorMessage():
 		<p id="e4">Error 4</p>
 	""")
 	# Force focus mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+space")
 	_asserts.strings_match(
 		actualSpeech,
 		"Focus mode",
@@ -2857,7 +2857,7 @@ def test_ariaErrorMessage():
 	)
 
 	# Force browse mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+space")
 	_asserts.strings_match(
 		actualSpeech,
 		"Browse mode",
@@ -2893,19 +2893,19 @@ def test_ariaErrorMessage():
 	)
 
 
-def _doTestReportLanguage(nvdaConfValues: "NVDASpyLib.NVDAConfMods"):
+def _doTestReportLanguage(aslanConfValues: "AslanSpyLib.AslanConfMods"):
 	_chrome.prepareChrome(
 		"""
 		<p><span lang="fr">Cyrille</span> created this <span lang="unknown">test:</span> Let's mention <span lang="es-ES">Noelia</span> and <span lang="la">Leonem</span> in the same sentence.</p>
 	""",
 	)
-	spy: "NVDASpyLib" = _NvdaLib.getSpyLib()
-	spy.modifyNVDAConfig(nvdaConfValues)
+	spy: "AslanSpyLib" = _NvdaLib.getSpyLib()
+	spy.modifyAslanConfig(aslanConfValues)
 
 
 def test_reportLanguageDisabled():
 	_doTestReportLanguage(
-		nvdaConfValues=[
+		aslanConfValues=[
 			(AUTO_LANGUAGE_SWITCHING_KEY, True),
 			(AUTO_DIALECT_SWITCHING_KEY, False),
 			(REPORT_LANGUAGE_KEY, False),
@@ -2932,14 +2932,14 @@ def test_reportLanguageDisabled():
 
 def test_reportLanguageEnabled():
 	_doTestReportLanguage(
-		nvdaConfValues=[
+		aslanConfValues=[
 			(AUTO_LANGUAGE_SWITCHING_KEY, False),
 			(AUTO_DIALECT_SWITCHING_KEY, False),
 			(REPORT_LANGUAGE_KEY, True),
 			(REPORT_NOT_SUPPORTED_LANGUAGE_KEY, "off"),
 		],
 	)
-	spy: "NVDASpyLib" = _NvdaLib.getSpyLib()
+	spy: "AslanSpyLib" = _NvdaLib.getSpyLib()
 	actualSpeech = _chrome.getSpeechAfterKey("downArrow")
 	_asserts.strings_match(
 		actualSpeech,
@@ -2968,14 +2968,14 @@ def test_reportLanguageEnabled():
 
 def test_reportLanguageWithoutDialects():
 	_doTestReportLanguage(
-		nvdaConfValues=[
+		aslanConfValues=[
 			(AUTO_LANGUAGE_SWITCHING_KEY, True),
 			(AUTO_DIALECT_SWITCHING_KEY, False),
 			(REPORT_LANGUAGE_KEY, True),
 			(REPORT_NOT_SUPPORTED_LANGUAGE_KEY, "off"),
 		],
 	)
-	spy: "NVDASpyLib" = _NvdaLib.getSpyLib()
+	spy: "AslanSpyLib" = _NvdaLib.getSpyLib()
 	actualSpeech = _chrome.getSpeechAfterKey("downArrow")
 	_asserts.strings_match(
 		actualSpeech,
@@ -3004,7 +3004,7 @@ def test_reportLanguageWithoutDialects():
 
 def test_reportNotSupportedLanguageWithoutOtherLanguages():
 	_doTestReportLanguage(
-		nvdaConfValues=[
+		aslanConfValues=[
 			(AUTO_LANGUAGE_SWITCHING_KEY, True),
 			(AUTO_DIALECT_SWITCHING_KEY, False),
 			(REPORT_LANGUAGE_KEY, False),
@@ -3032,7 +3032,7 @@ def test_reportNotSupportedLanguageWithoutOtherLanguages():
 
 def test_reportNotSupportedLanguageAndOtherLanguages():
 	_doTestReportLanguage(
-		nvdaConfValues=[
+		aslanConfValues=[
 			(AUTO_LANGUAGE_SWITCHING_KEY, True),
 			(AUTO_DIALECT_SWITCHING_KEY, False),
 			(REPORT_LANGUAGE_KEY, True),
@@ -3040,7 +3040,7 @@ def test_reportNotSupportedLanguageAndOtherLanguages():
 		],
 	)
 
-	spy: "NVDASpyLib" = _NvdaLib.getSpyLib()
+	spy: "AslanSpyLib" = _NvdaLib.getSpyLib()
 	actualSpeech = _chrome.getSpeechAfterKey("downArrow")
 	_asserts.strings_match(
 		actualSpeech,
@@ -3068,11 +3068,11 @@ def test_reportNotSupportedLanguageAndOtherLanguages():
 
 
 # Constants for link destination tests
-REPORT_LINK_DESTINATION_GESTURE = "NVDA+k"
+REPORT_LINK_DESTINATION_GESTURE = "Aslan+k"
 
 
 def test_reportLinkDestination_plainLink():
-	"""Test NVDA+K reports the URL of a plain link."""
+	"""Test Aslan+K reports the URL of a plain link."""
 	_chrome.prepareChrome('<p><a href="https://example.com/plain">Plain link</a></p>')
 
 	# Move to the first link line
@@ -3084,12 +3084,12 @@ def test_reportLinkDestination_plainLink():
 	_asserts.strings_match(
 		actualSpeech,
 		"https: slash  slash example dot com slash plain",
-		message="NVDA+K should report the URL of a plain link",
+		message="Aslan+K should report the URL of a plain link",
 	)
 
 
 def test_reportLinkDestination_nestedStrong():
-	"""Test NVDA+K reports the URL when caret is on text inside a <strong> tag within a link (#17363)."""
+	"""Test Aslan+K reports the URL when caret is on text inside a <strong> tag within a link (#17363)."""
 	_chrome.prepareChrome(
 		'<p><a href="https://example.com/strong"><strong>Bold link text</strong></a></p>',
 	)
@@ -3099,16 +3099,16 @@ def test_reportLinkDestination_nestedStrong():
 	_builtIn.should_contain(actualSpeech, "Bold link text")
 
 	# Report link destination - this was broken before #17363 fix
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+k")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+k")
 	_asserts.strings_match(
 		actualSpeech,
 		"https: slash  slash example dot com slash strong",
-		message="NVDA+K should report the URL when caret is on nested <strong> inside a link",
+		message="Aslan+K should report the URL when caret is on nested <strong> inside a link",
 	)
 
 
 def test_reportLinkDestination_nestedEm():
-	"""Test NVDA+K reports the URL when caret is on text inside an <em> tag within a link (#17363)."""
+	"""Test Aslan+K reports the URL when caret is on text inside an <em> tag within a link (#17363)."""
 	_chrome.prepareChrome(
 		'<p><a href="https://example.com/em"><em>Italic link text</em></a></p>',
 	)
@@ -3118,16 +3118,16 @@ def test_reportLinkDestination_nestedEm():
 	_builtIn.should_contain(actualSpeech, "Italic link text")
 
 	# Report link destination
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+k")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+k")
 	_asserts.strings_match(
 		actualSpeech,
 		"https: slash  slash example dot com slash em",
-		message="NVDA+K should report the URL when caret is on nested <em> inside a link",
+		message="Aslan+K should report the URL when caret is on nested <em> inside a link",
 	)
 
 
 def test_reportLinkDestination_deeplyNested():
-	"""Test NVDA+K reports the URL when caret is on deeply nested elements within a link (#17363)."""
+	"""Test Aslan+K reports the URL when caret is on deeply nested elements within a link (#17363)."""
 	_chrome.prepareChrome(
 		'<p><a href="https://example.com/nested"><strong><em><span>Deeply nested</span></em></strong></a></p>',
 	)
@@ -3137,16 +3137,16 @@ def test_reportLinkDestination_deeplyNested():
 	_builtIn.should_contain(actualSpeech, "Deeply nested")
 
 	# Report link destination
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+k")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+k")
 	_asserts.strings_match(
 		actualSpeech,
 		"https: slash  slash example dot com slash nested",
-		message="NVDA+K should report the URL when caret is on deeply nested elements within a link",
+		message="Aslan+K should report the URL when caret is on deeply nested elements within a link",
 	)
 
 
 def test_reportLinkDestination_imageLink():
-	"""Test NVDA+K reports the URL of an image link (#14779)."""
+	"""Test Aslan+K reports the URL of an image link (#14779)."""
 	_chrome.prepareChrome(
 		'<p><a href="https://example.com/image">'
 		'<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" '
@@ -3158,16 +3158,16 @@ def test_reportLinkDestination_imageLink():
 	_builtIn.should_contain(actualSpeech, "Test image")
 
 	# Report link destination
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+k")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+k")
 	_asserts.strings_match(
 		actualSpeech,
 		"https: slash  slash example dot com slash image",
-		message="NVDA+K should report the URL of an image link",
+		message="Aslan+K should report the URL of an image link",
 	)
 
 
 def test_reportLinkDestination_notALink():
-	"""Test NVDA+K reports 'Not a link' when caret is not on a link."""
+	"""Test Aslan+K reports 'Not a link' when caret is not on a link."""
 	_chrome.prepareChrome("<p><strong>Not a link</strong></p>")
 
 	# Move to the non-link element
@@ -3179,7 +3179,7 @@ def test_reportLinkDestination_notALink():
 	_asserts.strings_match(
 		actualSpeech,
 		"Not a link.",
-		message="NVDA+K should report 'Not a link' when caret is not on a link",
+		message="Aslan+K should report 'Not a link' when caret is not on a link",
 	)
 
 
@@ -3198,13 +3198,13 @@ def test_nativeSelectionMode_focusModeCaretMovement():
 		""",
 	)
 	# Enable native selection mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+shift+f10")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+shift+f10")
 	_asserts.strings_match(
 		actualSpeech,
 		"Native app selection mode enabled",
 	)
 	# Force focus mode
-	actualSpeech = _chrome.getSpeechAfterKey("NVDA+space")
+	actualSpeech = _chrome.getSpeechAfterKey("Aslan+space")
 	_asserts.strings_match(
 		actualSpeech,
 		"Focus mode",

@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025-2026 NV Access Limited, Antoine Haffreingue, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """
 Magnifier module.
@@ -11,7 +11,7 @@ Implements the magnifier global class and its basic functionalities.
 from collections.abc import Callable
 from comtypes import COMError
 from logHandler import log
-from NVDAState import _TrackNVDAInitialization
+from AslanState import _TrackAslanInitialization
 import wx
 import ui
 import screenCurtain
@@ -181,14 +181,14 @@ class Magnifier:
 		Returns True if the magnifier should not start.
 		At startup, defers silently so the magnifier auto-restarts when the screen curtain is disabled.
 
-		:raises MagnifierStartError: If the screen curtain is active and NVDA startup is complete,
+		:raises MagnifierStartError: If the screen curtain is active and Aslan startup is complete,
 			so the caller can present the failure (spoken for keyboard commands, or in a message box
 			for GUI actions).
 		"""
 		if not (screenCurtain.screenCurtain and screenCurtain.screenCurtain.enabled):
 			return False
 
-		if _TrackNVDAInitialization.isInitializationComplete():
+		if _TrackAslanInitialization.isInitializationComplete():
 			log.debug("Screen curtain is active, cannot start magnifier")
 			raise MagnifierStartError(
 				pgettext(
@@ -284,7 +284,7 @@ class Magnifier:
 		the actual update on the main thread. Calling into the Magnification API
 		(via _doUpdate) from here would delay delivery of the real WM_MOUSEMOVE to
 		whatever window is under the cursor, for every mouse move on the system,
-		not just NVDA's own windows.
+		not just Aslan's own windows.
 
 		Only acts when mouse tracking is enabled and the magnifier is active.
 		"""

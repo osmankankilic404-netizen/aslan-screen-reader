@@ -1,12 +1,12 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2025 NV Access Limited, Rui Batista, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 """
-Tracking was introduced so that NVDA has a mechanism to announce changes to the power state.
+Tracking was introduced so that Aslan has a mechanism to announce changes to the power state.
 
-When NVDA receives a power status change Window Message,
+When Aslan receives a power status change Window Message,
 we notify the user of the power status.
 The power status can also be reported using script_say_battery_status.
 """
@@ -97,7 +97,7 @@ _powerState: PowerState = PowerState.UNKNOWN
 
 def initialize():
 	"""
-	The NVDA message window only handles changes of state.
+	The Aslan message window only handles changes of state.
 	As such, to correctly ignore an initial power change event,
 	which does not change the power state (e.g. a battery level drop),
 	we fetch the initial power state manually.
@@ -128,7 +128,7 @@ class _ReportContext(Enum):
 	AC_STATUS_CHANGE = auto()
 	"""e.g. a charger is connected/disconnected"""
 	FETCH_STATUS = auto()
-	"""e.g. when a user presses nvda+shift+b to fetch the current battery status"""
+	"""e.g. when a user presses aslan+shift+b to fetch the current battery status"""
 
 
 def reportACStateChange() -> None:

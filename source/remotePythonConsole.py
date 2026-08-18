@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2011-2026 NV Access Limited, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
-"""Provides an interactive Python console run inside NVDA which can be accessed via TCP.
+"""Provides an interactive Python console run inside Aslan which can be accessed via TCP.
 To use, call `initialize` to start the server.
 Then, connect to it using TCP port `PORT`.
 The server will only handle one connection at a time.
@@ -51,7 +51,7 @@ class RequestHandler(socketserver.StreamRequestHandler):
 		self._keepRunning = True
 
 		try:
-			self._write("NVDA Remote Python Console\n")
+			self._write("Aslan Remote Python Console\n")
 			self.console = pythonConsole.PythonConsole(
 				outputFunc=self._write,
 				setPromptFunc=self.setPrompt,

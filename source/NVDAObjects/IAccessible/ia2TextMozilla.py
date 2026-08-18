@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2015-2021 NV Access Limited, Mozilla Corporation
@@ -21,7 +21,7 @@ from textInfos import offsets
 import controlTypes
 from comInterfaces import IAccessible2Lib as IA2
 import api
-from NVDAObjects import NVDAObject, NVDAObjectTextInfo
+from AslanObjects import AslanObject, AslanObjectTextInfo
 from . import IA2TextTextInfo, IAccessible
 from compoundDocuments import CompoundTextInfo
 import locationHelper
@@ -29,8 +29,8 @@ from logHandler import log
 
 
 def _getRawTextInfo(obj) -> Type[offsets.OffsetsTextInfo]:
-	if obj.TextInfo is NVDAObjectTextInfo:
-		return NVDAObjectTextInfo
+	if obj.TextInfo is AslanObjectTextInfo:
+		return AslanObjectTextInfo
 	return IA2TextTextInfo
 
 
@@ -112,7 +112,7 @@ class MozillaCompoundTextInfo(CompoundTextInfo):
 		# handling POSITION_CARET or a copy below. It must be reset to False whenever
 		# this TextInfo is adjusted.
 		self._isEndOfLineInsertionPoint = False
-		if isinstance(position, NVDAObject):
+		if isinstance(position, AslanObject):
 			try:
 				self._start, self._startObj = self._findContentDescendant(position, textInfos.POSITION_FIRST)
 				self._end, self._endObj = self._findContentDescendant(position, textInfos.POSITION_LAST)
@@ -193,7 +193,7 @@ class MozillaCompoundTextInfo(CompoundTextInfo):
 			raise NotImplementedError
 
 	def _getSelectionBase(self):
-		"""Get an NVDAObject and TextInfo somewhere within the selection.
+		"""Get an AslanObject and TextInfo somewhere within the selection.
 		This is just a base point to start from.
 		It will often be necessary to expand outwards and/or descend to get the complete selection.
 		"""
@@ -262,13 +262,13 @@ class MozillaCompoundTextInfo(CompoundTextInfo):
 
 	def _findContentDescendant(self, obj, position):
 		import ctypes
-		import NVDAHelper
-		import NVDAObjects.IAccessible
+		import AslanHelper
+		import AslanObjects.IAccessible
 
 		descendantID = ctypes.c_int()
 		descendantOffset = ctypes.c_int()
 		what = self.FINDCONTENTDESCENDANT_POSITIONS.get(position, position)
-		NVDAHelper.localLib.nvdaInProcUtils_IA2Text_findContentDescendant(
+		AslanHelper.localLib.aslanInProcUtils_IA2Text_findContentDescendant(
 			obj.appModule.helperLocalBindingHandle,
 			obj.windowHandle,
 			obj.IAccessibleObject.uniqueID,
@@ -289,7 +289,7 @@ class MozillaCompoundTextInfo(CompoundTextInfo):
 				obj = cached
 				break
 		else:
-			obj = NVDAObjects.IAccessible.getNVDAObjectFromEvent(
+			obj = AslanObjects.IAccessible.getAslanObjectFromEvent(
 				obj.windowHandle,
 				winUser.OBJID_CLIENT,
 				descendantID.value,
@@ -297,7 +297,7 @@ class MozillaCompoundTextInfo(CompoundTextInfo):
 		if position == textInfos.POSITION_CARET:
 			# If the compound TextInfo is for the current focus,
 			# We should cache the caret object as we know it will probably be needed again.
-			# Note that event_loseFocus on NVDAObjects.IAccessible.ia2Web.Editor will clear the cache,
+			# Note that event_loseFocus on AslanObjects.IAccessible.ia2Web.Editor will clear the cache,
 			# To ensure we don't end up with a reference cycle.
 			if self.obj is api.getFocusObject():
 				self.obj._lastCaretObj = obj
@@ -322,7 +322,7 @@ class MozillaCompoundTextInfo(CompoundTextInfo):
 				embedded: typing.Optional[IAccessible] = _getEmbedded(ti.obj, item)
 				if embedded is None:
 					continue
-				notText = _getRawTextInfo(embedded) is NVDAObjectTextInfo
+				notText = _getRawTextInfo(embedded) is AslanObjectTextInfo
 				if controlStack is not None:
 					controlField = self._getControlFieldForObject(embedded)
 					controlStack.append(controlField)
@@ -810,7 +810,7 @@ class MozillaCompoundTextInfo(CompoundTextInfo):
 			return 1
 		return selfAncTi.compareEndPoints(otherAncTi, which)
 
-	def _get_NVDAObjectAtStart(self):
+	def _get_AslanObjectAtStart(self):
 		obj = self._startObj
 		# If the start is an embedded object that doesn't have text (e.g. graphic or math),
 		# _startObj will be the text parent that embeds it.

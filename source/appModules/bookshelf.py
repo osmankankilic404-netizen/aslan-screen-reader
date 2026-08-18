@@ -1,22 +1,22 @@
 # -*- coding: UTF-8 -*-
 # appModules/bookshelf.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017 NV Access Limited, Noelia Ruiz Martínez
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 import appModuleHandler
 import controlTypes
-import NVDAObjects.IAccessible
+import AslanObjects.IAccessible
 import windowUtils
 import api
 import winUser
-from NVDAObjects.window import Window
+from AslanObjects.window import Window
 
 
 def getDocument():
 	try:
-		document = NVDAObjects.IAccessible.getNVDAObjectFromEvent(
+		document = AslanObjects.IAccessible.getAslanObjectFromEvent(
 			windowUtils.findDescendantWindow(
 				api.getForegroundObject().windowHandle,
 				className="Internet Explorer_Server",
@@ -41,6 +41,6 @@ class EnhancedPane(Window):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if obj.role == controlTypes.Role.PANE:
 			clsList.insert(0, EnhancedPane)

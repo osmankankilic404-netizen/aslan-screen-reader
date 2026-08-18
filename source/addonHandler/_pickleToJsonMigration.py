@@ -1,22 +1,22 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Utilities for migrating add-on state from the legacy pickle format to JSON.
 
-Prior to NVDA 2026.1, add-on state (which add-ons are disabled, pending install/removal, etc.) was persisted as a pickle file (``addonsState.pickle``).
+Prior to Aslan 2026.1, add-on state (which add-ons are disabled, pending install/removal, etc.) was persisted as a pickle file (``addonsState.pickle``).
 This module provides helpers that read such a pickle file, validate its contents, and return a JSON-serialisable dictionary so the state can be persisted as JSON instead (``addonsState.json``).
 
 .. warning:
-	This module is scheduled for removal in NVDA 2027.1 once all users have had sufficient opportunity to migrate.
+	This module is scheduled for removal in Aslan 2027.1 once all users have had sufficient opportunity to migrate.
 """
 
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Any
 
-import NVDAState
+import AslanState
 from addonAPIVersion import BACK_COMPAT_TO
 from addonStore.models.status import AddonStateCategory
 from logHandler import log
@@ -28,8 +28,8 @@ if TYPE_CHECKING:
 # This module and its callers should be removed in 2027.1.
 # To ensure this isn't missed, log an error about using the module on 2027.1 if deprecated APIs are allowed, and fail if they're not.
 if BACK_COMPAT_TO >= (2027, 1, 0):
-	DEPRECATION_STRING = "addonHandler._pickleToJsonMigration is deprecated. All internal use of pickle should be removed in NVDA 2027.1."
-	if NVDAState._allowDeprecatedAPI():
+	DEPRECATION_STRING = "addonHandler._pickleToJsonMigration is deprecated. All internal use of pickle should be removed in Aslan 2027.1."
+	if AslanState._allowDeprecatedAPI():
 		log.error(DEPRECATION_STRING, stack_info=True)
 	else:
 		raise RuntimeError(DEPRECATION_STRING)

@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2026 NV Access Limited, Babbage B.V., Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 from typing import (
 	Optional,
 	Dict,
@@ -364,9 +364,9 @@ class UIAWeb(UIA):
 			return controlTypes.Role.INTERNALFRAME
 		ariaRole = self._getUIACacheablePropertyValue(UIAHandler.UIA_AriaRolePropertyId).lower()
 		# #7333: It is valid to provide multiple, space separated aria roles in HTML
-		# The role used is the first role in the list that has an associated NVDA role in aria.ariaRolesToNVDARoles
+		# The role used is the first role in the list that has an associated Aslan role in aria.ariaRolesToAslanRoles
 		for ariaRole in ariaRole.split():
-			newRole = aria.ariaRolesToNVDARoles.get(ariaRole)
+			newRole = aria.ariaRolesToAslanRoles.get(ariaRole)
 			if newRole:
 				return newRole
 		return super().role
@@ -438,7 +438,7 @@ class UIAWeb(UIA):
 
 
 class List(UIAWeb):
-	# non-focusable lists are readonly lists (ensures correct NVDA presentation category)
+	# non-focusable lists are readonly lists (ensures correct Aslan presentation category)
 	def _get_states(self):
 		states = super().states
 		if controlTypes.State.FOCUSABLE not in states:

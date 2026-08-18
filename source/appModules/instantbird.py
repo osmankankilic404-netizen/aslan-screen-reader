@@ -1,5 +1,5 @@
 # appModules/instantbird.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2013 NV Access Limited
@@ -7,16 +7,16 @@
 """App module for Instantbird"""
 
 import appModuleHandler
-import NVDAObjects.IAccessible.mozilla
+import AslanObjects.IAccessible.mozilla
 import controlTypes
 
 
 class AppModule(appModuleHandler.AppModule):
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		if (
-			isinstance(obj, NVDAObjects.IAccessible.IAccessible)
+			isinstance(obj, AslanObjects.IAccessible.IAccessible)
 			and obj.windowClassName == "MozillaWindowClass"
-			and not isinstance(obj, NVDAObjects.IAccessible.mozilla.Mozilla)
+			and not isinstance(obj, AslanObjects.IAccessible.mozilla.Mozilla)
 			and obj.role == controlTypes.Role.UNKNOWN
 		):
 			# #2667: This is a Mozilla accessible that has already died.

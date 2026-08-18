@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2023 NV Access Limited, Łukasz Golonka, Leonard de Ruijter
 # This file is covered by the GNU Lesser General Public License, version 2.1.
 # See the file license.txt for more details.
@@ -6,21 +6,21 @@
 import ctypes
 import time
 
-# Load the NVDA client library
-clientLib = ctypes.windll.LoadLibrary("./nvdaControllerClient.dll")
+# Load the Aslan client library
+clientLib = ctypes.windll.LoadLibrary("./aslanControllerClient.dll")
 
-# Test if NVDA is running, and if its not show a message
-res = clientLib.nvdaController_testIfRunning()
+# Test if Aslan is running, and if its not show a message
+res = clientLib.aslanController_testIfRunning()
 if res != 0:
 	errorMessage = str(ctypes.WinError(res))
-	ctypes.windll.user32.MessageBoxW(0, f"Error: {errorMessage}", "Error communicating with NVDA", 0)
+	ctypes.windll.user32.MessageBoxW(0, f"Error: {errorMessage}", "Error communicating with Aslan", 0)
 
 # Speak and braille some messages
 for count in range(4):
-	clientLib.nvdaController_speakText("This is a test client for NVDA")
-	clientLib.nvdaController_brailleMessage("Time: %g seconds" % (0.75 * count))
+	clientLib.aslanController_speakText("This is a test client for Aslan")
+	clientLib.aslanController_brailleMessage("Time: %g seconds" % (0.75 * count))
 	time.sleep(0.625)
-	clientLib.nvdaController_cancelSpeech()
+	clientLib.aslanController_cancelSpeech()
 
 
 # Test SSML output
@@ -45,7 +45,7 @@ ssml = (
 	'<mark name="test5" />'
 	"</speak>"
 )
-clientLib.nvdaController_setOnSsmlMarkReachedCallback(onMarkReached)
-clientLib.nvdaController_speakSsml(ssml, -1, 0, False)
-clientLib.nvdaController_setOnSsmlMarkReachedCallback(None)
-clientLib.nvdaController_brailleMessage("Test completed!")
+clientLib.aslanController_setOnSsmlMarkReachedCallback(onMarkReached)
+clientLib.aslanController_speakSsml(ssml, -1, 0, False)
+clientLib.aslanController_setOnSsmlMarkReachedCallback(None)
+clientLib.aslanController_brailleMessage("Test completed!")

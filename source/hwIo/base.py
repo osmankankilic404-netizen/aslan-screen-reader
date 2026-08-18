@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2015-2026 NV Access Limited, Babbage B.V., Leonard de Ruijter, Selvas Healthcare
@@ -36,12 +36,12 @@ from logHandler import log
 import config
 import time
 from .ioThread import IoThread
-import NVDAState
+import AslanState
 
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	if attrName == "LPOVERLAPPED_COMPLETION_ROUTINE" and NVDAState._allowDeprecatedAPI():
+	if attrName == "LPOVERLAPPED_COMPLETION_ROUTINE" and AslanState._allowDeprecatedAPI():
 		log.warning(
 			"Importing LPOVERLAPPED_COMPLETION_ROUTINE from hwIo.base is deprecated. "
 			"Import LPOVERLAPPED_COMPLETION_ROUTINE from hwIo.ioThread instead.",
@@ -60,7 +60,7 @@ def requiresBackgroundThread(func: Callable) -> Callable:
 	"""Decorator that raises RuntimeError if the decorated function is called on the main thread.
 
 	Use this on any hwIo function that blocks (e.g. sleeps or polls) and must not be called
-	from NVDA's main thread, where it would freeze the UI.
+	from Aslan's main thread, where it would freeze the UI.
 	"""
 
 	@functools.wraps(func)

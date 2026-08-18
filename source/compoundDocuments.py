@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2010-2025 NV Access Limited, Bram Duvigneau, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from typing import (
 	Optional,
@@ -15,12 +15,12 @@ import textInfos
 import textInfos.offsets
 import controlTypes
 import eventHandler
-from NVDAObjects import NVDAObject
+from AslanObjects import AslanObject
 from editableText import EditableText
 from treeInterceptorHandler import DocumentTreeInterceptor
 import speech
 import braille
-from NVDAObjects import behaviors
+from AslanObjects import behaviors
 import review
 import vision
 from logHandler import log
@@ -146,24 +146,24 @@ class CompoundTextInfo(textInfos.TextInfo):
 	def _get_bookmark(self):
 		return self.copy()
 
-	def _get_NVDAObjectAtStart(self):
+	def _get_AslanObjectAtStart(self):
 		return self._startObj
 
 	def _get_pointAtStart(self):
 		return self._start.pointAtStart
 
-	def _isObjectEditableText(self, obj: NVDAObject) -> bool:
+	def _isObjectEditableText(self, obj: AslanObject) -> bool:
 		return obj.role in (
 			controlTypes.Role.PARAGRAPH,
 			controlTypes.Role.EDITABLETEXT,
 		)
 
-	def _isNamedlinkDestination(self, obj: NVDAObject) -> bool:
+	def _isNamedlinkDestination(self, obj: AslanObject) -> bool:
 		return (  # Named link destination, not a link that can be activated.
 			obj.role == controlTypes.Role.LINK and controlTypes.State.LINKED not in obj.states
 		)
 
-	def _getControlFieldForObject(self, obj: NVDAObject, ignoreEditableText=True):
+	def _getControlFieldForObject(self, obj: AslanObject, ignoreEditableText=True):
 		if ignoreEditableText and self._isObjectEditableText(obj):
 			# This is basically just a text node.
 			return None
@@ -260,8 +260,8 @@ class TreeCompoundTextInfo(CompoundTextInfo):
 
 	def __init__(self, obj, position):
 		super(TreeCompoundTextInfo, self).__init__(obj, position)
-		rootObj = obj.rootNVDAObject
-		if isinstance(position, NVDAObject):
+		rootObj = obj.rootAslanObject
+		if isinstance(position, AslanObject):
 			# FIXME
 			position = textInfos.POSITION_CARET
 		if isinstance(position, self.__class__):
@@ -335,7 +335,7 @@ class TreeCompoundTextInfo(CompoundTextInfo):
 	def getTextWithFields(self, formatConfig: Optional[Dict] = None) -> textInfos.TextInfo.TextWithFieldsT:
 		# Get the initial control fields.
 		fields = []
-		rootObj = self.obj.rootNVDAObject
+		rootObj = self.obj.rootAslanObject
 		obj = self._startObj
 		while obj and obj != rootObj:
 			field = self._getControlFieldForObject(obj)
@@ -354,7 +354,7 @@ class TreeCompoundTextInfo(CompoundTextInfo):
 						embedIndex = self._getFirstEmbedIndex(ti)
 					else:
 						embedIndex += 1
-					childObject: NVDAObject = ti.obj.getChild(embedIndex)
+					childObject: AslanObject = ti.obj.getChild(embedIndex)
 					controlField = self._getControlFieldForObject(childObject, ignoreEditableText=False)
 					controlField["content"] = childObject.name
 					fields.extend(
@@ -379,7 +379,7 @@ class TreeCompoundTextInfo(CompoundTextInfo):
 
 	def _getObjectPosition(self, obj):
 		indexes = []
-		rootObj = self.obj.rootNVDAObject
+		rootObj = self.obj.rootAslanObject
 		while obj and obj != rootObj:
 			indexes.insert(0, obj.indexInParent)
 			obj = obj.parent
@@ -516,15 +516,15 @@ class CompoundTextLeafTextInfo(textInfos.offsets.OffsetsTextInfo):
 class CompoundDocument(EditableText, DocumentTreeInterceptor):
 	TextInfo = TreeCompoundTextInfo
 
-	def __init__(self, rootNVDAObject):
-		super(CompoundDocument, self).__init__(rootNVDAObject)
+	def __init__(self, rootAslanObject):
+		super(CompoundDocument, self).__init__(rootAslanObject)
 
 	def _get_isAlive(self):
-		root = self.rootNVDAObject
+		root = self.rootAslanObject
 		return winUser.isWindow(root.windowHandle)
 
 	def __contains__(self, obj):
-		root = self.rootNVDAObject
+		root = self.rootAslanObject
 		while obj:
 			if obj.windowHandle != root.windowHandle:
 				return False
@@ -537,7 +537,7 @@ class CompoundDocument(EditableText, DocumentTreeInterceptor):
 		return eventHandler.lastQueuedFocusObject
 
 	def event_treeInterceptor_gainFocus(self):
-		speech.speakObject(self.rootNVDAObject, reason=controlTypes.OutputReason.FOCUS)
+		speech.speakObject(self.rootAslanObject, reason=controlTypes.OutputReason.FOCUS)
 		try:
 			info = self.makeTextInfo(textInfos.POSITION_SELECTION)
 		except RuntimeError:

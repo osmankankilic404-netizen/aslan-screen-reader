@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, Bram Duvigneau, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """
 Braille display driver for Freedom Scientific braille displays.
@@ -691,12 +691,12 @@ class BrailleDisplayDriver(braille.display.driver.BrailleDisplayDriver, Scriptab
 				"braille_toggleControl": ("br(freedomscientific):dot3+dot8+brailleSpaceBar",),
 				"braille_toggleAlt": ("br(freedomscientific):dot6+dot8+brailleSpaceBar",),
 				"braille_toggleWindows": ("br(freedomscientific):dot4+dot8+brailleSpaceBar",),
-				"braille_toggleNVDAKey": ("br(freedomscientific):dot5+dot8+brailleSpaceBar",),
+				"braille_toggleAslanKey": ("br(freedomscientific):dot5+dot8+brailleSpaceBar",),
 				"braille_toggleShift": ("br(freedomscientific):dot7+dot8+brailleSpaceBar",),
 				"braille_toggleControlShift": ("br(freedomscientific):dot3+dot7+dot8+brailleSpaceBar",),
 				"braille_toggleAltShift": ("br(freedomscientific):dot6+dot7+dot8+brailleSpaceBar",),
 				"braille_toggleWindowsShift": ("br(freedomscientific):dot4+dot7+dot8+brailleSpaceBar",),
-				"braille_toggleNVDAKeyShift": ("br(freedomscientific):dot5+dot7+dot8+brailleSpaceBar",),
+				"braille_toggleAslanKeyShift": ("br(freedomscientific):dot5+dot7+dot8+brailleSpaceBar",),
 				"braille_toggleControlAlt": ("br(freedomscientific):dot3+dot6+dot8+brailleSpaceBar",),
 				"braille_toggleControlAltShift": (
 					"br(freedomscientific):dot3+dot6+dot7+dot8+brailleSpaceBar",

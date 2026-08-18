@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -19,11 +19,11 @@ from buildVersion import (
 
 longName = _("NonVisual Desktop Access")
 description = _("A free and open source screen reader for Microsoft Windows")
-copyright = _("Copyright (C) {years} NVDA Contributors").format(
+copyright = _("Copyright (C) {years} Aslan Contributors").format(
 	years=copyrightYears,
 )
 aboutMessage = _(
-	# Translators: "About NVDA" dialog box message
+	# Translators: "About Aslan" dialog box message
 	"""{longName} ({name})
 Version: {version} ({version_detailed})
 URL: {url}
@@ -36,7 +36,7 @@ For further details, you can view the license from the Help menu.
 It can also be viewed online at: https://www.gnu.org/licenses/old-licenses/gpl-2.0.html and https://www.gnu.org/licenses/gpl-3.0.en.html
 
 {name} is developed by NV Access, a non-profit organisation committed to helping and promoting free and open source solutions for blind and vision impaired people.
-If you find NVDA useful and want it to continue to improve, please consider donating to NV Access. You can do this by selecting Donate from the NVDA menu.""",  # noqa: E501 line too long
+If you find Aslan useful and want it to continue to improve, please consider donating to NV Access. You can do this by selecting Donate from the Aslan menu.""",  # noqa: E501 line too long
 ).format(
 	longName=longName,
 	name=name,

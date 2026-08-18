@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2007-2025 NV Access Limited, Babbage B.V., Joseph Lee
@@ -27,7 +27,7 @@ import winVersion
 from comInterfaces import IAccessible2Lib as IA2
 
 if typing.TYPE_CHECKING:
-	import NVDAObjects
+	import AslanObjects
 
 
 # Some dicts to store event counts by name and or obj
@@ -37,7 +37,7 @@ _pendingEventCountsByNameAndObj = {}
 # Needed to ensure updates are atomic, as these might be updated from multiple threads simultaneously.
 _pendingEventCountsLock = threading.RLock()
 
-#: the last object queued for a gainFocus event. Useful for code running outside NVDA's core queue
+#: the last object queued for a gainFocus event. Useful for code running outside Aslan's core queue
 lastQueuedFocusObject = None
 
 
@@ -47,7 +47,7 @@ _canAnnounceVirtualDesktopNames: bool = winVersion.getWinVer() >= winVersion.WIN
 
 
 def queueEvent(eventName, obj, **kwargs):
-	"""Queues an NVDA event to be executed.
+	"""Queues an Aslan event to be executed.
 	@param eventName: the name of the event type (e.g. 'gainFocus', 'nameChange')
 	@type eventName: string
 	"""
@@ -92,8 +92,8 @@ def isPendingEvents(eventName=None, obj=None):
 	"""Are there currently any events queued?
 	@param eventName: an optional name of an event type. If given then only if there are events of this type queued will it return True.
 	@type eventName: string
-	@param obj: the NVDAObject the event is for
-	@type obj: L{NVDAObjects.NVDAObject}
+	@param obj: the AslanObject the event is for
+	@type obj: L{AslanObjects.AslanObject}
 	@returns: True if there are events queued, False otherwise.
 	@rtype: boolean
 	"""
@@ -161,7 +161,7 @@ class _EventExecuter(garbageHandler.TrackedObject):
 			if func and (getattr(func, "ignoreIsReady", False) or treeInterceptor.isReady):
 				yield func, (obj, self.next)
 
-		# NVDAObject level.
+		# AslanObject level.
 		func = getattr(obj, funcName, None)
 		if func:
 			yield func, ()
@@ -170,7 +170,7 @@ class _EventExecuter(garbageHandler.TrackedObject):
 WAS_GAIN_FOCUS_OBJ_ATTR_NAME = "wasGainFocusObj"
 
 
-def _trackFocusObject(eventName: str, obj: "NVDAObjects.NVDAObject") -> None:
+def _trackFocusObject(eventName: str, obj: "AslanObjects.AslanObject") -> None:
 	"""Keeps track of lastQueuedFocusObject and sets wasGainFocusObj attr on objects.
 	:param eventName: the event type, eg "gainFocus"
 	:param obj: the object to track if focused
@@ -186,10 +186,10 @@ def _trackFocusObject(eventName: str, obj: "NVDAObjects.NVDAObject") -> None:
 
 class FocusLossCancellableSpeechCommand(_CancellableSpeechCommand):
 	def __init__(self, obj, reportDevInfo: bool):
-		from NVDAObjects import NVDAObject
+		from AslanObjects import AslanObject
 
-		if not isinstance(obj, NVDAObject):
-			log.warning("Unhandled object type. Expected all objects to be descendant from NVDAObject")
+		if not isinstance(obj, AslanObject):
+			log.warning("Unhandled object type. Expected all objects to be descendant from AslanObject")
 			raise TypeError(f"Unhandled object type: {obj!r}")
 		self._obj = obj
 		super(FocusLossCancellableSpeechCommand, self).__init__(reportDevInfo=reportDevInfo)
@@ -211,7 +211,7 @@ class FocusLossCancellableSpeechCommand(_CancellableSpeechCommand):
 			self.isLastFocusObj()
 			or not self.previouslyHadFocus()
 			or self.isAncestorOfCurrentFocus()
-			# Ensure titles for dialogs gaining focus are reported, EG NVDA Find dialog
+			# Ensure titles for dialogs gaining focus are reported, EG Aslan Find dialog
 			or self.isForegroundObject()
 			# Ensure menu items are reported when focus is gained to the menu start (see #12624).
 			or self.isMenuItemOfCurrentFocus()
@@ -248,14 +248,14 @@ class FocusLossCancellableSpeechCommand(_CancellableSpeechCommand):
 		The only known case where this returns True is the following (see #12624, #14550):
 
 		When opening a submenu in certain applications (like Thunderbird 78.12),
-		NVDA can process a menu start event after the first item in the menu is focused.
-		The menu start event causes a focus event on the menu, taking NVDA's focus from the menu item.
+		Aslan can process a menu start event after the first item in the menu is focused.
+		The menu start event causes a focus event on the menu, taking Aslan's focus from the menu item.
 		Additionally, the "menu" parent of the submenu item is not keyboard focusable, and is separate from
 		the menu item which triggered the submenu.
 		The object tree in this case (menu item > submenu (not keyboard focusable) > submenu item).
 		The focus event order after activating the menu item's sub menu is (submenu item, submenu).
 		"""
-		from NVDAObjects import IAccessible
+		from AslanObjects import IAccessible
 
 		lastFocus = api.getFocusObject()
 
@@ -300,10 +300,10 @@ def _getFocusLossCancellableSpeechCommand(
 ) -> Optional[_CancellableSpeechCommand]:
 	if reason != controlTypes.OutputReason.FOCUS or not speech.manager._shouldCancelExpiredFocusEvents():
 		return None
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 
-	if not isinstance(obj, NVDAObject):
-		log.warning("Unhandled object type. Expected all objects to be descendant from NVDAObject")
+	if not isinstance(obj, AslanObject):
+		log.warning("Unhandled object type. Expected all objects to be descendant from AslanObject")
 		return None
 
 	shouldReportDevInfo = speech.manager._shouldDoSpeechManagerLogging()
@@ -312,10 +312,10 @@ def _getFocusLossCancellableSpeechCommand(
 
 def executeEvent(
 	eventName: str,
-	obj: "NVDAObjects.NVDAObject",
+	obj: "AslanObjects.AslanObject",
 	**kwargs,
 ) -> None:
-	"""Executes an NVDA event.
+	"""Executes an Aslan event.
 	@param eventName: the name of the event type (e.g. 'gainFocus', 'nameChange')
 	@param obj: the object the event is for
 	@param kwargs: Additional event parameters as keyword arguments.
@@ -328,13 +328,13 @@ def executeEvent(
 	try:
 		global _virtualDesktopName
 		isGainFocus = eventName == "gainFocus"
-		# Allow NVDAObjects to redirect focus events to another object of their choosing.
+		# Allow AslanObjects to redirect focus events to another object of their choosing.
 		if isGainFocus and obj.focusRedirect:
 			obj = obj.focusRedirect
 		sleepMode = obj.sleepMode
 		# Handle possible virtual desktop name change event.
 		# More effective in Windows 10 Version 1903 and later.
-		from NVDAObjects.window import Window
+		from AslanObjects.window import Window
 
 		if (
 			eventName == "nameChange"
@@ -372,7 +372,7 @@ def handlePossibleDesktopNameChange() -> None:
 		_virtualDesktopName = None
 
 
-def doPreGainFocus(obj: "NVDAObjects.NVDAObject", sleepMode: bool = False) -> bool:
+def doPreGainFocus(obj: "AslanObjects.AslanObject", sleepMode: bool = False) -> bool:
 	if objectBelowLockScreenAndWindowsIsLocked(
 		obj,
 		shouldLog=config.conf["debugLog"]["events"],
@@ -452,7 +452,7 @@ def requestEvents(eventName=None, processId=None, windowClassName=None):
 	This function allows plugins to override this for specific cases;
 	e.g. to receive show events from a specific control or
 	to receive certain events even when in the background.
-	Note that NVDA may block some events at a lower level and doesn't listen for some event types at all.
+	Note that Aslan may block some events at a lower level and doesn't listen for some event types at all.
 	In these cases, you will not be able to override this.
 	This should generally be called when a plugin is instantiated.
 	All arguments must be provided.
@@ -477,9 +477,9 @@ def handleAppTerminate(appModule):
 
 def shouldAcceptEvent(eventName, windowHandle=None):
 	"""Check whether an event should be accepted from a platform API.
-	Creating NVDAObjects and executing events can be expensive
+	Creating AslanObjects and executing events can be expensive
 	and might block the main thread noticeably if the object is slow to respond.
-	Therefore, this should be used before NVDAObject creation to filter out any unnecessary events.
+	Therefore, this should be used before AslanObject creation to filter out any unnecessary events.
 	A platform API handler may do its own filtering before this.
 	"""
 	if not windowHandle:

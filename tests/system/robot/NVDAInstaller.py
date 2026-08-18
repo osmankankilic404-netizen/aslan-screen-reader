@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020-2021 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
 
-"""Logic for NVDA installation process tests."""
+"""Logic for Aslan installation process tests."""
 
 from robot.libraries.BuiltIn import BuiltIn
 
@@ -18,10 +18,10 @@ from robot.libraries.Process import Process as _ProcessLib
 
 from AssertsLib import AssertsLib as _AssertsLib
 
-import NvdaLib as _nvdaLib
-from NvdaLib import NvdaLib as _nvdaRobotLib
+import NvdaLib as _aslanLib
+from NvdaLib import NvdaLib as _aslanRobotLib
 
-_nvdaProcessAlias = _nvdaRobotLib.nvdaProcessAlias
+_aslanProcessAlias = _aslanRobotLib.aslanProcessAlias
 
 _builtIn: BuiltIn = BuiltIn()
 _process: _ProcessLib = _getLib("Process")
@@ -29,10 +29,10 @@ _asserts: _AssertsLib = _getLib("AssertsLib")
 
 
 def read_install_dialog():
-	"Smoke test the launcher dialogs used to install NVDA"
+	"Smoke test the launcher dialogs used to install Aslan"
 
-	spy = _nvdaLib.getSpyLib()
-	launchDialog = spy.wait_for_specific_speech("NVDA Launcher")  # ensure the dialog is present.
+	spy = _aslanLib.getSpyLib()
+	launchDialog = spy.wait_for_specific_speech("Aslan Launcher")  # ensure the dialog is present.
 	spy.wait_for_speech_to_finish()
 	spy.get_speech_at_index_until_now(launchDialog)
 
@@ -43,17 +43,17 @@ def read_install_dialog():
 	# start install
 	spy.emulateKeyPress("alt+i")
 
-	spy.wait_for_specific_speech("To install NVDA to your hard drive, please press the Continue button.")
+	spy.wait_for_specific_speech("To install Aslan to your hard drive, please press the Continue button.")
 
-	# exit NVDA Installer
+	# exit Aslan Installer
 	spy.emulateKeyPress("escape")
 
 
 def read_portable_copy_dialog():
-	"Smoke test the launcher dialogs used to create a portable copy of NVDA"
+	"Smoke test the launcher dialogs used to create a portable copy of Aslan"
 
-	spy = _nvdaLib.getSpyLib()
-	launchDialog = spy.wait_for_specific_speech("NVDA Launcher")  # ensure the dialog is present.
+	spy = _aslanLib.getSpyLib()
+	launchDialog = spy.wait_for_specific_speech("Aslan Launcher")  # ensure the dialog is present.
 	spy.wait_for_speech_to_finish()
 	spy.get_speech_at_index_until_now(launchDialog)
 
@@ -65,8 +65,8 @@ def read_portable_copy_dialog():
 	spy.emulateKeyPress("alt+p")
 
 	spy.wait_for_specific_speech(
-		"To create a portable copy of NVDA, please select the path and other options and then press Continue",
+		"To create a portable copy of Aslan, please select the path and other options and then press Continue",
 	)
 
-	# exit NVDA Installer
+	# exit Aslan Installer
 	spy.emulateKeyPress("escape")

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2020 NV Access Limited
@@ -313,7 +313,7 @@ class CancellableSpeechTests(unittest.TestCase):
 
 	def test_validSpeechAfterInvalid(self):
 		"""Tests that calling speak with invalid speech will not lock up the SpeechManager.
-		Under certain circumstances this resulted in NVDA going silent when more speech was in the queue.
+		Under certain circumstances this resulted in Aslan going silent when more speech was in the queue.
 		"""
 		smi = SpeechManagerInteractions(self)
 
@@ -500,7 +500,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 	See PR #7599 for source of tests.
 	Test numbers match order of tests defined on original PR, however they are grouped in this file based on
 	the features they test.
-	Manual test steps are kept in unit tests doc string, they can be run in the NVDA python console after
+	Manual test steps are kept in unit tests doc string, they can be run in the Aslan python console after
 	the following imports:
 		from speech import sayAll, appModuleHandler
 	"""
@@ -515,7 +515,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 	@patch.object(BeepCommand, "run")
 	def test_1(self, mock_BeepCommand_run, mock_WaveFileCommand_run):
 		r"""Text, beep, beep, sound, text.
-		Manual Test (in NVDA python console):
+		Manual Test (in Aslan python console):
 			wx.CallLater(500, speech.speak, [
 				u"This is some speech and then comes a", BeepCommand(440, 10),
 				u"beep. If you liked that, let's ", BeepCommand(880, 10),
@@ -555,7 +555,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 
 	def test2(self):
 		"""Text, end utterance, text.
-		Manual Test (in NVDA python console):
+		Manual Test (in Aslan python console):
 			wx.CallLater(500, speech.speak, [
 				u"This is the first utterance", EndUtteranceCommand(), u"And this is the second"
 			])
@@ -605,7 +605,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 
 	def test_6_SPRI(self):
 		"""Two utterances at SPRI_NORMAL in same sequence. Two separate sequences at SPRI_NEXT.
-		Manual Test (in NVDA python console):
+		Manual Test (in Aslan python console):
 			wx.CallLater(500, speech.speak, [
 				u"1 2 3 ", u"4 5", EndUtteranceCommand(), u"16 17 18 19 20"
 			])
@@ -666,7 +666,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 	@patch.object(BeepCommand, "run")
 	def test_7_SPRI(self, mock_BeepCommand_run):
 		"""Utterance at SPRI_NORMAL including a beep. Utterance at SPRI_NOW.
-		Manual Test (in NVDA python console):
+		Manual Test (in Aslan python console):
 			wx.CallLater(500, speech.speak, [
 				u"Text before the beep ", BeepCommand(440, 10),
 				u"text after the beep, text, text, text, text"
@@ -712,7 +712,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 
 	def test_8_SPRI(self):
 		"""Utterance with two sequences at SPRI_NOW. Utterance at SPRI_NOW.
-		Manual Test (in NVDA python console):
+		Manual Test (in Aslan python console):
 			wx.CallLater(500, speech.speak, [u"First ", u"utterance"], priority=speech.SPRI_NOW)
 			wx.CallLater(510, speech.speak, [u"Second ", u"utterance"], priority=speech.SPRI_NOW)
 		Expected result: First utterance, second utterance
@@ -747,7 +747,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 
 	def test_9_SPRI(self):
 		"""Utterance with two sequences at SPRI_NOW. Utterance at SPRI_NEXT.
-		Manual Test (in NVDA python console):
+		Manual Test (in Aslan python console):
 			wx.CallLater(500, speech.speak, [u"First ", u"utterance"], priority=speech.SPRI_NOW)
 			wx.CallLater(501, speech.speak, [u"Second ", u"utterance"], priority=speech.SPRI_NEXT)
 		Expected result: First utterance, second utterance
@@ -819,7 +819,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 	@patch.object(BeepCommand, "run")
 	def test_13_SPRI_interruptAfterIndexReached(self, mock_BeepCommand_run):
 		"""Utterance at SPRI_NORMAL including a pitch change and beep. Utterance at SPRI_NOW.
-		Manual Test (in NVDA python console):
+		Manual Test (in Aslan python console):
 			wx.CallLater(500, speech.speak, [
 			PitchCommand(offset=100),
 			u"Text before the beep ",
@@ -883,7 +883,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 
 	def test_4_profiles(self):
 		"""Text, pitch, text, enter profile1, enter profile2, text, exit profile1, text.
-		Manual Test (in NVDA python console):
+		Manual Test (in Aslan python console):
 			from speech import sayAll, appModuleHandler
 			t1 = sayAll.SayAllProfileTrigger()
 			t2 = appModuleHandler.AppProfileTrigger("notepad")
@@ -965,7 +965,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 
 	def test_5_profiles(self):
 		"""Enter profile, text, exit profile.
-		Manual Test (in NVDA python console):
+		Manual Test (in Aslan python console):
 			from speech import sayAll
 			trigger = sayAll.SayAllProfileTrigger()
 			wx.CallLater(500, speech.speak, [
@@ -1007,7 +1007,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 
 	def test_10_SPRI_profiles(self):
 		"""Utterance at SPRI_NORMAL. Utterance at SPRI_NOW with profile switch.
-		Manual Test (in NVDA python console):
+		Manual Test (in Aslan python console):
 			from speech import sayAll;
 			trigger = sayAll.SayAllProfileTrigger();
 			wx.CallLater(500, speech.speak, [
@@ -1055,7 +1055,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 
 	def test_11_SPRI_Profile(self):
 		"""Utterance at SPRI_NORMAL with profile switch. Utterance at SPRI_NOW.
-		Manual Test (in NVDA python console):
+		Manual Test (in Aslan python console):
 			from speech import sayAll
 			trigger = sayAll.SayAllProfileTrigger()
 			wx.CallLater(500, speech.speak, [
@@ -1119,7 +1119,7 @@ class InitialDevelopmentTests(unittest.TestCase):
 
 	def test_12_SPRI_profile(self):
 		"""Utterance at SPRI_NORMAL with profile 1. Utterance at SPRI_NOW with profile 2.
-		Manual Test (in NVDA python console):
+		Manual Test (in Aslan python console):
 			from speech import sayAll, appModuleHandler
 			t1 = sayAll.SayAllProfileTrigger()
 			t2 = appModuleHandler.AppProfileTrigger("notepad")
@@ -1231,8 +1231,8 @@ class RegressionTests(unittest.TestCase):
 			smi.pumpAll()
 
 	def test_nonSpokenCharacter(self):
-		"""Test for fix to GH#11752 - NVDA Freeze with unicode value U+000B
-		Actually, the speech manager receives an empty string for the character U+000B. NVDA
+		"""Test for fix to GH#11752 - Aslan Freeze with unicode value U+000B
+		Actually, the speech manager receives an empty string for the character U+000B. Aslan
 		does not have a mapping for this character.
 		It is questionable whether we should send anything to the synth when there is no content, however
 		what constitutes 'content' is currently not easy to define.

@@ -1,10 +1,10 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Peter Vágner, Aleksey Sadovoy, Rui Batista, Joseph Lee,
 # Leonard de Ruijter, Derek Riemer, Babbage B.V., Davy Kager, Ethan Holliger, Łukasz Golonka, Accessolutions,
 # Julien Cochuyt, Jakub Lukowicz, Bill Dengler, Cyrille Bougot, Rob Meredith, Luke Davis,
 # Burman's Computer and Education Ltd, Cary-rowen.
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import itertools
 from typing import (
@@ -37,7 +37,7 @@ from speech import (
 	shortcutKeys,
 )
 from speech.speech import CHUNK_SEPARATOR
-from NVDAObjects import NVDAObject, NVDAObjectTextInfo
+from AslanObjects import AslanObject, AslanObjectTextInfo
 import globalVars
 from logHandler import log, Logger
 import gui
@@ -84,58 +84,58 @@ if TYPE_CHECKING:
 	import documentBase
 
 #: Script category for text review commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_TEXTREVIEW = _("Text review")
 #: Script category for Object navigation commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_OBJECTNAVIGATION = _("Object navigation")
 #: Script category for system caret commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_SYSTEMCARET = _("System caret")
 #: Script category for mouse commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_MOUSE = _("Mouse")
 #: Script category for speech commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_SPEECH = _("Speech")
 #: Script category for configuration dialogs commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_CONFIG = _("Configuration")
 #: Script category for configuration profile activation and management commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_CONFIG_PROFILES = _("Configuration profiles")
 #: Script category for Braille commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_BRAILLE = _("Braille")
 #: Script category for Vision commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_VISION = _("Vision")
 #: Script category for Magnifier commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_MAGNIFIER = _("Magnifier")
 #: Script category for tools commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_TOOLS = pgettext("script category", "Tools")
 #: Script category for touch commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_TOUCH = _("Touch screen")
 #: Script category for focus commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_FOCUS = _("System focus")
 #: Script category for system status commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_SYSTEM = _("System status")
 #: Script category for input commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_INPUT = _("Input")
 #: Script category for document formatting commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_DOCUMENTFORMATTING = _("Document formatting")
 #: Script category for audio streaming commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_AUDIO = _("Audio")
 #: Script category for Remote Access commands.
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_REMOTE = pgettext("remote", "Remote Access")
 # Translators: The name of the category of math navigation commands in the Input Gestures dialog.
 SCRCAT_MATH_NAV = _("Math navigation")
@@ -236,10 +236,10 @@ class GlobalCommands(ScriptableObject):
 	@script(
 		description=_(
 			# Translators: Describes the Cycle audio ducking mode command.
-			"Cycles through audio ducking modes which determine when NVDA lowers the volume of other sounds",
+			"Cycles through audio ducking modes which determine when Aslan lowers the volume of other sounds",
 		),
 		category=SCRCAT_AUDIO,
-		gesture="kb:NVDA+shift+d",
+		gesture="kb:Aslan+shift+d",
 	)
 	def script_cycleAudioDuckingMode(self, gesture):
 		if not audioDucking.isAudioDuckingSupported() or audioDucking._isAudioDuckingSuspended():
@@ -262,7 +262,7 @@ class GlobalCommands(ScriptableObject):
 			"will tell you what script is associated with that input, if any.",
 		),
 		category=SCRCAT_INPUT,
-		gesture="kb:NVDA+1",
+		gesture="kb:Aslan+1",
 		speakOnDemand=True,
 	)
 	def script_toggleInputHelp(self, gesture):
@@ -279,7 +279,7 @@ class GlobalCommands(ScriptableObject):
 	@script(
 		# Translators: Input help mode message for toggle sleep mode command.
 		description=_("Toggles sleep mode on and off for the active application."),
-		gestures=("kb(desktop):NVDA+shift+s", "kb(laptop):NVDA+shift+z"),
+		gestures=("kb(desktop):Aslan+shift+s", "kb(laptop):Aslan+shift+z"),
 		allowInSleepMode=True,
 	)
 	def script_toggleCurrentAppSleepMode(self, gesture):
@@ -287,7 +287,7 @@ class GlobalCommands(ScriptableObject):
 		curApp = curFocus.appModule
 		if curApp.sleepMode:
 			curApp.sleepMode = False
-			# Translators: This is presented when sleep mode is deactivated, NVDA will continue working as expected.
+			# Translators: This is presented when sleep mode is deactivated, Aslan will continue working as expected.
 			ui.message(_("Sleep mode off"))
 			eventHandler.executeEvent("gainFocus", curFocus)
 		else:
@@ -304,7 +304,7 @@ class GlobalCommands(ScriptableObject):
 			"Pressing three times will spell the line using character descriptions.",
 		),
 		category=SCRCAT_SYSTEMCARET,
-		gestures=("kb(desktop):NVDA+upArrow", "kb(laptop):NVDA+l"),
+		gestures=("kb(desktop):Aslan+upArrow", "kb(laptop):Aslan+l"),
 		speakOnDemand=True,
 	)
 	def script_reportCurrentLine(self, gesture):
@@ -330,7 +330,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for left mouse click command.
 		description=_("Clicks the left mouse button once at the current mouse position"),
 		category=SCRCAT_MOUSE,
-		gestures=("kb:numpadDivide", "kb(laptop):NVDA+["),
+		gestures=("kb:numpadDivide", "kb(laptop):Aslan+["),
 	)
 	def script_leftMouseClick(self, gesture):
 		# Translators: Reported when left mouse button is clicked.
@@ -342,7 +342,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for right mouse click command.
 		description=_("Clicks the right mouse button once at the current mouse position"),
 		category=SCRCAT_MOUSE,
-		gestures=("kb:numpadMultiply", "kb(laptop):NVDA+]"),
+		gestures=("kb:numpadMultiply", "kb(laptop):Aslan+]"),
 	)
 	def script_rightMouseClick(self, gesture):
 		# Translators: Reported when right mouse button is clicked.
@@ -354,7 +354,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for left mouse lock/unlock toggle command.
 		description=_("Locks or unlocks the left mouse button"),
 		category=SCRCAT_MOUSE,
-		gestures=("kb:shift+numpadDivide", "kb(laptop):NVDA+control+["),
+		gestures=("kb:shift+numpadDivide", "kb(laptop):Aslan+control+["),
 	)
 	def script_toggleLeftMouseButton(self, gesture):
 		if mouseHandler.isLeftMouseButtonLocked():
@@ -366,7 +366,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for right mouse lock/unlock command.
 		description=_("Locks or unlocks the right mouse button"),
 		category=SCRCAT_MOUSE,
-		gestures=("kb:shift+numpadMultiply", "kb(laptop):NVDA+control+]"),
+		gestures=("kb:shift+numpadMultiply", "kb(laptop):Aslan+control+]"),
 	)
 	def script_toggleRightMouseButton(self, gesture):
 		if mouseHandler.isRightMouseButtonLocked():
@@ -423,7 +423,7 @@ class GlobalCommands(ScriptableObject):
 			"Pressing four times shows it in a browsable message. ",
 		),
 		category=SCRCAT_SYSTEMCARET,
-		gestures=("kb(desktop):NVDA+shift+upArrow", "kb(laptop):NVDA+shift+s"),
+		gestures=("kb(desktop):Aslan+shift+upArrow", "kb(laptop):Aslan+shift+s"),
 		speakOnDemand=True,
 	)
 	def script_reportCurrentSelection(self, gesture):
@@ -482,7 +482,7 @@ class GlobalCommands(ScriptableObject):
 			"If pressed once, reports the current time. If pressed twice, reports the current date",
 		),
 		category=SCRCAT_SYSTEM,
-		gesture="kb:NVDA+f12",
+		gesture="kb:Aslan+f12",
 		speakOnDemand=True,
 	)
 	def script_dateTime(self, gesture):
@@ -535,7 +535,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for increase synth setting value command.
 		description=_("Increases the currently active setting in the synth settings ring"),
 		category=SCRCAT_SPEECH,
-		gestures=("kb(desktop):NVDA+control+upArrow", "kb(laptop):NVDA+shift+control+upArrow"),
+		gestures=("kb(desktop):Aslan+control+upArrow", "kb(laptop):Aslan+shift+control+upArrow"),
 	)
 	def script_increaseSynthSetting(self, gesture):
 		settingName = globalVars.settingsRing.currentSettingName
@@ -549,7 +549,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for increasing synth setting value command in larger steps.
 		description=_("Increases the currently active setting in the synth settings ring in a larger step"),
 		category=SCRCAT_SPEECH,
-		gestures=("kb(desktop):NVDA+control+pageUp", "kb(laptop):NVDA+shift+control+pageUp"),
+		gestures=("kb(desktop):Aslan+control+pageUp", "kb(laptop):Aslan+shift+control+pageUp"),
 	)
 	def script_increaseLargeSynthSetting(self, gesture: inputCore.InputGesture):
 		settingName = globalVars.settingsRing.currentSettingName
@@ -563,7 +563,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for decrease synth setting value command.
 		description=_("Decreases the currently active setting in the synth settings ring"),
 		category=SCRCAT_SPEECH,
-		gestures=("kb(desktop):NVDA+control+downArrow", "kb(laptop):NVDA+control+shift+downArrow"),
+		gestures=("kb(desktop):Aslan+control+downArrow", "kb(laptop):Aslan+control+shift+downArrow"),
 	)
 	def script_decreaseSynthSetting(self, gesture):
 		settingName = globalVars.settingsRing.currentSettingName
@@ -577,7 +577,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for decreasing synth setting value command in larger steps.
 		description=_("Decreases the currently active setting in the synth settings ring in a larger step"),
 		category=SCRCAT_SPEECH,
-		gestures=("kb(desktop):NVDA+control+pageDown", "kb(laptop):NVDA+control+shift+pageDown"),
+		gestures=("kb(desktop):Aslan+control+pageDown", "kb(laptop):Aslan+control+shift+pageDown"),
 	)
 	def script_decreaseLargeSynthSetting(self, gesture: inputCore.InputGesture):
 		settingName = globalVars.settingsRing.currentSettingName
@@ -591,7 +591,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for next synth setting command.
 		description=_("Moves to the next available setting in the synth settings ring"),
 		category=SCRCAT_SPEECH,
-		gestures=("kb(desktop):NVDA+control+rightArrow", "kb(laptop):NVDA+shift+control+rightArrow"),
+		gestures=("kb(desktop):Aslan+control+rightArrow", "kb(laptop):Aslan+shift+control+rightArrow"),
 	)
 	def script_nextSynthSetting(self, gesture):
 		nextSettingName = globalVars.settingsRing.next()
@@ -605,7 +605,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for previous synth setting command.
 		description=_("Moves to the previous available setting in the synth settings ring"),
 		category=SCRCAT_SPEECH,
-		gestures=("kb(desktop):NVDA+control+leftArrow", "kb(laptop):NVDA+shift+control+leftArrow"),
+		gestures=("kb(desktop):Aslan+control+leftArrow", "kb(laptop):Aslan+shift+control+leftArrow"),
 	)
 	def script_previousSynthSetting(self, gesture):
 		previousSettingName = globalVars.settingsRing.previous()
@@ -637,7 +637,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for cycling the reporting of typed characters.
 		description=_("Cycles through options for when to speak typed characters."),
 		category=SCRCAT_SPEECH,
-		gesture="kb:NVDA+2",
+		gesture="kb:Aslan+2",
 	)
 	def script_toggleSpeakTypedCharacters(self, gesture: "inputCore.InputGesture") -> None:
 		toggleIntegerValue(
@@ -653,7 +653,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for cycling the reporting of typed words.
 		description=_("Cycles through options for when to speak typed words."),
 		category=SCRCAT_SPEECH,
-		gesture="kb:NVDA+3",
+		gesture="kb:Aslan+3",
 	)
 	def script_toggleSpeakTypedWords(self, gesture: "inputCore.InputGesture") -> None:
 		toggleIntegerValue(
@@ -669,7 +669,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for toggle speak command keys command.
 		description=_("Toggles on and off the speaking of command keys"),
 		category=SCRCAT_SPEECH,
-		gesture="kb:NVDA+4",
+		gesture="kb:Aslan+4",
 	)
 	def script_toggleSpeakCommandKeys(self, gesture):
 		if config.conf["keyboard"]["speakCommandKeys"]:
@@ -894,7 +894,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for command to toggle braille automatic scroll.
 		description=_("Toggles braille automatic scroll"),
 		category=SCRCAT_BRAILLE,
-		gesture="kb:NVDA+alt+k",
+		gesture="kb:Aslan+alt+k",
 	)
 	def script_toggleBrailleAutoScroll(self, gesture: inputCore.InputGesture):
 		shouldEnableAutoScroll = braille.handler._autoScrollCallLater is None
@@ -916,7 +916,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for command to increase the rate for braille automatic scroll.
 		description=_("Increases the rate for braille automatic scroll"),
 		category=SCRCAT_BRAILLE,
-		gesture="kb:NVDA+alt+l",
+		gesture="kb:Aslan+alt+l",
 	)
 	def script_increaseBrailleAutoScrollRate(self, gesture: inputCore.InputGesture):
 		config.conf.clampedIncrementAndUpdateConfig("braille", "autoScrollRate", step=0.5)
@@ -929,7 +929,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for command to decrease the rate for braille automatic scroll.
 		description=_("Decreases the rate for braille automatic scroll"),
 		category=SCRCAT_BRAILLE,
-		gesture="kb:NVDA+alt+j",
+		gesture="kb:Aslan+alt+j",
 	)
 	def script_decreaseBrailleAutoScrollRate(self, gesture: inputCore.InputGesture):
 		config.conf.clampedIncrementAndUpdateConfig("braille", "autoScrollRate", step=-0.5)
@@ -1339,7 +1339,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for cycle speech symbol level command.
 		description=_("Cycles through speech symbol levels which determine what symbols are spoken"),
 		category=SCRCAT_SPEECH,
-		gesture="kb:NVDA+p",
+		gesture="kb:Aslan+p",
 	)
 	def script_cycleSpeechSymbolLevel(self, gesture):
 		curLevel = config.conf["speech"]["symbolLevel"]
@@ -1375,7 +1375,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for move mouse to navigator object command.
 		description=_("Moves the mouse pointer to the current navigator object"),
 		category=SCRCAT_MOUSE,
-		gestures=("kb:NVDA+numpadDivide", "kb(laptop):NVDA+shift+m"),
+		gestures=("kb:Aslan+numpadDivide", "kb(laptop):Aslan+shift+m"),
 	)
 	def script_moveMouseToNavigatorObject(self, gesture: inputCore.InputGesture):
 		reviewPosition = api.getReviewPosition()
@@ -1422,7 +1422,7 @@ class GlobalCommands(ScriptableObject):
 			"Sets the navigator object to the current object under the mouse pointer and speaks it",
 		),
 		category=SCRCAT_MOUSE,
-		gestures=("kb:NVDA+numpadMultiply", "kb(laptop):NVDA+shift+n"),
+		gestures=("kb:Aslan+numpadMultiply", "kb(laptop):Aslan+shift+n"),
 	)
 	def script_moveNavigatorObjectToMouse(self, gesture: inputCore.InputGesture):
 		# Translators: Reported when attempting to move the navigator object to the object under mouse pointer.
@@ -1445,7 +1445,7 @@ class GlobalCommands(ScriptableObject):
 			"and positions the review position at the point of the navigator object",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:NVDA+numpad7", "kb(laptop):NVDA+pageUp", "ts(object):2finger_flickUp"),
+		gestures=("kb:Aslan+numpad7", "kb(laptop):Aslan+pageUp", "ts(object):2finger_flickUp"),
 	)
 	def script_reviewMode_next(self, gesture):
 		label = review.nextMode()
@@ -1466,7 +1466,7 @@ class GlobalCommands(ScriptableObject):
 			"and positions the review position at the point of the navigator object",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:NVDA+numpad1", "kb(laptop):NVDA+pageDown", "ts(object):2finger_flickDown"),
+		gestures=("kb:Aslan+numpad1", "kb(laptop):Aslan+pageDown", "ts(object):2finger_flickDown"),
 	)
 	def script_reviewMode_previous(self, gesture):
 		label = review.nextMode(prev=True)
@@ -1504,12 +1504,12 @@ class GlobalCommands(ScriptableObject):
 			"and pressing three times Copies name and value of this object to the clipboard",
 		),
 		category=SCRCAT_OBJECTNAVIGATION,
-		gestures=("kb:NVDA+numpad5", "kb(laptop):NVDA+shift+o"),
+		gestures=("kb:Aslan+numpad5", "kb(laptop):Aslan+shift+o"),
 		speakOnDemand=True,
 	)
 	def script_navigatorObject_current(self, gesture: inputCore.InputGesture):
 		curObject = api.getNavigatorObject()
-		if not isinstance(curObject, NVDAObject):
+		if not isinstance(curObject, AslanObject):
 			# Translators: Reported when the user tries to perform a command related to the navigator object
 			# but there is no current navigator object.
 			ui.reviewMessage(_("No navigator object"))
@@ -1523,7 +1523,7 @@ class GlobalCommands(ScriptableObject):
 			return
 
 		if getLastScriptRepeatCount() >= 1:
-			if curObject.TextInfo != NVDAObjectTextInfo:
+			if curObject.TextInfo != AslanObjectTextInfo:
 				textList = []
 				name = curObject.name
 				if name and isinstance(name, str) and not name.isspace():
@@ -1558,7 +1558,7 @@ class GlobalCommands(ScriptableObject):
 			braille.handler.message(text)
 
 	@staticmethod
-	def _reportLocationText(objs: Tuple[Union[None, NVDAObject, textInfos.TextInfo], ...]) -> None:
+	def _reportLocationText(objs: Tuple[Union[None, AslanObject, textInfos.TextInfo], ...]) -> None:
 		for obj in objs:
 			if obj is not None and obj.locationText:
 				ui.message(obj.locationText)
@@ -1624,7 +1624,7 @@ class GlobalCommands(ScriptableObject):
 			"Pressing twice may provide further detail.",
 		),
 		category=SCRCAT_OBJECTNAVIGATION,
-		gestures=("kb:NVDA+shift+numpadDelete", "kb(laptop):NVDA+shift+delete"),
+		gestures=("kb:Aslan+shift+numpadDelete", "kb(laptop):Aslan+shift+delete"),
 		speakOnDemand=True,
 	)
 	def script_navigatorObject_currentDimensions(self, gesture):
@@ -1642,7 +1642,7 @@ class GlobalCommands(ScriptableObject):
 			"Pressing twice may provide further detail.",
 		),
 		category=SCRCAT_SYSTEMCARET,
-		gestures=("kb:NVDA+numpadDelete", "kb(laptop):NVDA+delete"),
+		gestures=("kb:Aslan+numpadDelete", "kb(laptop):Aslan+delete"),
 		speakOnDemand=True,
 	)
 	def script_caretPos_currentDimensions(self, gesture):
@@ -1658,7 +1658,7 @@ class GlobalCommands(ScriptableObject):
 			"and the review cursor to the position of the caret inside it, if possible.",
 		),
 		category=SCRCAT_OBJECTNAVIGATION,
-		gestures=("kb:NVDA+numpadMinus", "kb(laptop):NVDA+backspace"),
+		gestures=("kb:Aslan+numpadMinus", "kb(laptop):Aslan+backspace"),
 	)
 	def script_navigatorObject_toFocus(self, gesture: inputCore.InputGesture):
 		tIAtCaret = self._getTIAtCaret(True)
@@ -1684,11 +1684,11 @@ class GlobalCommands(ScriptableObject):
 			"pressed twice sets the system caret to the position of the review cursor",
 		),
 		category=SCRCAT_OBJECTNAVIGATION,
-		gestures=("kb:NVDA+shift+numpadMinus", "kb(laptop):NVDA+shift+backspace"),
+		gestures=("kb:Aslan+shift+numpadMinus", "kb(laptop):Aslan+shift+backspace"),
 	)
 	def script_navigatorObject_moveFocus(self, gesture: inputCore.InputGesture):
 		obj = api.getNavigatorObject()
-		if not isinstance(obj, NVDAObject):
+		if not isinstance(obj, AslanObject):
 			# Translators: Reported when:
 			# 1. There is no focusable object e.g. cannot use tab and shift tab to move to controls.
 			# 2. Trying to move focus to navigator object but there is no focus.
@@ -1728,11 +1728,11 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for move to parent object command.
 		description=_("Moves the navigator object to the object containing it"),
 		category=SCRCAT_OBJECTNAVIGATION,
-		gestures=("kb:NVDA+numpad8", "kb(laptop):NVDA+shift+upArrow", "ts(object):flickup"),
+		gestures=("kb:Aslan+numpad8", "kb(laptop):Aslan+shift+upArrow", "ts(object):flickup"),
 	)
 	def script_navigatorObject_parent(self, gesture: inputCore.InputGesture):
 		curObject = api.getNavigatorObject()
-		if not isinstance(curObject, NVDAObject):
+		if not isinstance(curObject, AslanObject):
 			# Translators: Reported when the user tries to perform a command related to the navigator object
 			# but there is no current navigator object.
 			ui.reviewMessage(_("No navigator object"))
@@ -1759,11 +1759,11 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for move to next object command.
 		description=_("Moves the navigator object to the next object"),
 		category=SCRCAT_OBJECTNAVIGATION,
-		gestures=("kb:NVDA+numpad6", "kb(laptop):NVDA+shift+rightArrow", "ts(object):2finger_flickright"),
+		gestures=("kb:Aslan+numpad6", "kb(laptop):Aslan+shift+rightArrow", "ts(object):2finger_flickright"),
 	)
 	def script_navigatorObject_next(self, gesture: inputCore.InputGesture):
 		curObject = api.getNavigatorObject()
-		if not isinstance(curObject, NVDAObject):
+		if not isinstance(curObject, AslanObject):
 			# Translators: Reported when the user tries to perform a command related to the navigator object
 			# but there is no current navigator object.
 			ui.reviewMessage(_("No navigator object"))
@@ -1789,11 +1789,11 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for move to previous object command.
 		description=_("Moves the navigator object to the previous object"),
 		category=SCRCAT_OBJECTNAVIGATION,
-		gestures=("kb:NVDA+numpad4", "kb(laptop):NVDA+shift+leftArrow", "ts(object):2finger_flickleft"),
+		gestures=("kb:Aslan+numpad4", "kb(laptop):Aslan+shift+leftArrow", "ts(object):2finger_flickleft"),
 	)
 	def script_navigatorObject_previous(self, gesture: inputCore.InputGesture):
 		curObject = api.getNavigatorObject()
-		if not isinstance(curObject, NVDAObject):
+		if not isinstance(curObject, AslanObject):
 			# but there is no current navigator object.
 			ui.reviewMessage(_("No navigator object"))
 			return
@@ -1818,11 +1818,11 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for move to first child object command.
 		description=_("Moves the navigator object to the first object inside it"),
 		category=SCRCAT_OBJECTNAVIGATION,
-		gestures=("kb:NVDA+numpad2", "kb(laptop):NVDA+shift+downArrow", "ts(object):flickdown"),
+		gestures=("kb:Aslan+numpad2", "kb(laptop):Aslan+shift+downArrow", "ts(object):flickdown"),
 	)
 	def script_navigatorObject_firstChild(self, gesture: inputCore.InputGesture):
 		curObject = api.getNavigatorObject()
-		if not isinstance(curObject, NVDAObject):
+		if not isinstance(curObject, AslanObject):
 			# Translators: Reported when the user tries to perform a command related to the navigator object
 			# but there is no current navigator object.
 			ui.reviewMessage(_("No navigator object"))
@@ -1852,7 +1852,7 @@ class GlobalCommands(ScriptableObject):
 			"(example: presses it if it is a button).",
 		),
 		category=SCRCAT_OBJECTNAVIGATION,
-		gestures=("kb:NVDA+numpadEnter", "kb(laptop):NVDA+enter", "ts:double_tap"),
+		gestures=("kb:Aslan+numpadEnter", "kb(laptop):Aslan+enter", "ts:double_tap"),
 	)
 	def script_review_activate(self, gesture: inputCore.InputGesture):
 		# Translators: a message reported when the action at the position of the review cursor or navigator object is performed.
@@ -1867,7 +1867,7 @@ class GlobalCommands(ScriptableObject):
 		try:
 			pos.activate()
 			if isinstance(gesture, touchHandler.TouchInputGesture):
-				touchHandler.handler.notifyInteraction(pos.NVDAObjectAtStart)
+				touchHandler.handler.notifyInteraction(pos.AslanObjectAtStart)
 			ui.message(actionName)
 			return
 		except NotImplementedError:
@@ -1903,7 +1903,7 @@ class GlobalCommands(ScriptableObject):
 			"Moves the review cursor to the top line of the current navigator object and speaks it",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:shift+numpad7", "kb(laptop):NVDA+control+home"),
+		gestures=("kb:shift+numpad7", "kb(laptop):Aslan+control+home"),
 	)
 	def script_review_top(self, gesture: inputCore.InputGesture):
 		info = api.getReviewPosition().obj.makeTextInfo(textInfos.POSITION_FIRST)
@@ -1929,7 +1929,7 @@ class GlobalCommands(ScriptableObject):
 		),
 		resumeSayAllMode=sayAll.CURSOR.REVIEW,
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:numpad7", "kb(laptop):NVDA+upArrow", "ts(text):flickUp"),
+		gestures=("kb:numpad7", "kb(laptop):Aslan+upArrow", "ts(text):flickUp"),
 	)
 	def script_review_previousLine(self, gesture: inputCore.InputGesture):
 		info = api.getReviewPosition().copy()
@@ -1964,7 +1964,7 @@ class GlobalCommands(ScriptableObject):
 			"Pressing three times will spell the line using character descriptions.",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:numpad8", "kb(laptop):NVDA+shift+."),
+		gestures=("kb:numpad8", "kb(laptop):Aslan+shift+."),
 		speakOnDemand=True,
 	)
 	def script_review_currentLine(self, gesture: inputCore.InputGesture):
@@ -1991,7 +1991,7 @@ class GlobalCommands(ScriptableObject):
 		),
 		resumeSayAllMode=sayAll.CURSOR.REVIEW,
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:numpad9", "kb(laptop):NVDA+downArrow", "ts(text):flickDown"),
+		gestures=("kb:numpad9", "kb(laptop):Aslan+downArrow", "ts(text):flickDown"),
 	)
 	def script_review_nextLine(self, gesture: inputCore.InputGesture):
 		origInfo = api.getReviewPosition().copy()
@@ -2030,7 +2030,7 @@ class GlobalCommands(ScriptableObject):
 		),
 		resumeSayAllMode=sayAll.CURSOR.REVIEW,
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:NVDA+pageUp", "kb(laptop):NVDA+shift+pageUp"),
+		gestures=("kb:Aslan+pageUp", "kb(laptop):Aslan+shift+pageUp"),
 	)
 	def script_review_previousPage(self, gesture: inputCore.InputGesture) -> None:
 		info = api.getReviewPosition().copy()
@@ -2064,7 +2064,7 @@ class GlobalCommands(ScriptableObject):
 		),
 		resumeSayAllMode=sayAll.CURSOR.REVIEW,
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:NVDA+pageDown", "kb(laptop):NVDA+shift+pageDown"),
+		gestures=("kb:Aslan+pageDown", "kb(laptop):Aslan+shift+pageDown"),
 	)
 	def script_review_nextPage(self, gesture: inputCore.InputGesture) -> None:
 		origInfo = api.getReviewPosition().copy()
@@ -2102,7 +2102,7 @@ class GlobalCommands(ScriptableObject):
 			"Moves the review cursor to the bottom line of the current navigator object and speaks it",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:shift+numpad9", "kb(laptop):NVDA+control+end"),
+		gestures=("kb:shift+numpad9", "kb(laptop):Aslan+control+end"),
 	)
 	def script_review_bottom(self, gesture: inputCore.InputGesture):
 		info = api.getReviewPosition().obj.makeTextInfo(textInfos.POSITION_LAST)
@@ -2127,7 +2127,7 @@ class GlobalCommands(ScriptableObject):
 			"Moves the review cursor to the previous word of the current navigator object and speaks it",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:numpad4", "kb(laptop):NVDA+control+leftArrow", "ts(text):2finger_flickLeft"),
+		gestures=("kb:numpad4", "kb(laptop):Aslan+control+leftArrow", "ts(text):2finger_flickLeft"),
 	)
 	def script_review_previousWord(self, gesture: inputCore.InputGesture):
 		info = api.getReviewPosition().copy()
@@ -2162,7 +2162,7 @@ class GlobalCommands(ScriptableObject):
 			"Pressing three times spells the word using character descriptions",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:numpad5", "kb(laptop):NVDA+control+.", "ts(text):hoverUp"),
+		gestures=("kb:numpad5", "kb(laptop):Aslan+control+.", "ts(text):hoverUp"),
 		speakOnDemand=True,
 	)
 	def script_review_currentWord(self, gesture: inputCore.InputGesture):
@@ -2189,7 +2189,7 @@ class GlobalCommands(ScriptableObject):
 			"Moves the review cursor to the next word of the current navigator object and speaks it",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:numpad6", "kb(laptop):NVDA+control+rightArrow", "ts(text):2finger_flickRight"),
+		gestures=("kb:numpad6", "kb(laptop):Aslan+control+rightArrow", "ts(text):2finger_flickRight"),
 	)
 	def script_review_nextWord(self, gesture: inputCore.InputGesture):
 		origInfo = api.getReviewPosition().copy()
@@ -2228,7 +2228,7 @@ class GlobalCommands(ScriptableObject):
 			"where it is situated in the current navigator object and speaks it",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:shift+numpad1", "kb(laptop):NVDA+home"),
+		gestures=("kb:shift+numpad1", "kb(laptop):Aslan+home"),
 	)
 	def script_review_startOfLine(self, gesture: inputCore.InputGesture):
 		info = api.getReviewPosition().copy()
@@ -2256,7 +2256,7 @@ class GlobalCommands(ScriptableObject):
 			"Moves the review cursor to the previous character of the current navigator object and speaks it",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:numpad1", "kb(laptop):NVDA+leftArrow", "ts(text):flickLeft"),
+		gestures=("kb:numpad1", "kb(laptop):Aslan+leftArrow", "ts(text):flickLeft"),
 	)
 	def script_review_previousCharacter(self, gesture: inputCore.InputGesture):
 		lineInfo = api.getReviewPosition().copy()
@@ -2295,7 +2295,7 @@ class GlobalCommands(ScriptableObject):
 			"Pressing three times reports the numeric value of the character in decimal and hexadecimal",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:numpad2", "kb(laptop):NVDA+."),
+		gestures=("kb:numpad2", "kb(laptop):Aslan+."),
 		speakOnDemand=True,
 	)
 	def script_review_currentCharacter(self, gesture: inputCore.InputGesture):
@@ -2341,7 +2341,7 @@ class GlobalCommands(ScriptableObject):
 			"Moves the review cursor to the next character of the current navigator object and speaks it",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:numpad3", "kb(laptop):NVDA+rightArrow", "ts(text):flickRight"),
+		gestures=("kb:numpad3", "kb(laptop):Aslan+rightArrow", "ts(text):flickRight"),
 	)
 	def script_review_nextCharacter(self, gesture: inputCore.InputGesture):
 		lineInfo = api.getReviewPosition().copy()
@@ -2379,7 +2379,7 @@ class GlobalCommands(ScriptableObject):
 			"where it is situated in the current navigator object and speaks it",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:shift+numpad3", "kb(laptop):NVDA+end"),
+		gestures=("kb:shift+numpad3", "kb(laptop):Aslan+end"),
 	)
 	def script_review_endOfLine(self, gesture: inputCore.InputGesture):
 		info = api.getReviewPosition().copy()
@@ -2407,7 +2407,7 @@ class GlobalCommands(ScriptableObject):
 			"Moves the review cursor to the first character of the selection, and speaks it",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gesture="kb:NVDA+alt+home",
+		gesture="kb:Aslan+alt+home",
 	)
 	def script_review_startOfSelection(self, gesture: inputCore.InputGesture):
 		info = self._getSelection()
@@ -2435,7 +2435,7 @@ class GlobalCommands(ScriptableObject):
 			"Moves the review cursor to the last character of the selection, and speaks it",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gesture="kb:NVDA+alt+end",
+		gesture="kb:Aslan+alt+end",
 	)
 	def script_review_endOfSelection(self, gesture: inputCore.InputGesture):
 		info = self._getSelection()
@@ -2507,7 +2507,7 @@ class GlobalCommands(ScriptableObject):
 			"Cycles between speech modes.",
 		),
 		category=SCRCAT_SPEECH,
-		gesture="kb:NVDA+s",
+		gesture="kb:Aslan+s",
 	)
 	def script_speechMode(self, gesture: inputCore.InputGesture) -> None:
 		curMode = speech.getState().speechMode
@@ -2537,7 +2537,7 @@ class GlobalCommands(ScriptableObject):
 			"Moves the focus out of the current embedded object and into the document that contains it",
 		),
 		category=SCRCAT_FOCUS,
-		gesture="kb:NVDA+control+space",
+		gesture="kb:Aslan+control+space",
 	)
 	def script_moveToParentTreeInterceptor(self, gesture):
 		obj = api.getFocusObject()
@@ -2550,10 +2550,10 @@ class GlobalCommands(ScriptableObject):
 		while parent and not parent.treeInterceptor:
 			parent = parent.parent
 		if parent:
-			parent.treeInterceptor.rootNVDAObject.setFocus()
-			# We must use core.callLater rather than wx.CallLater to ensure that the callback runs within NVDA's core pump.
-			# If it didn't, and it directly or indirectly called wx.Yield, it could start executing NVDA's core pump from within the yield, causing recursion.
-			core.callLater(50, eventHandler.executeEvent, "gainFocus", parent.treeInterceptor.rootNVDAObject)
+			parent.treeInterceptor.rootAslanObject.setFocus()
+			# We must use core.callLater rather than wx.CallLater to ensure that the callback runs within Aslan's core pump.
+			# If it didn't, and it directly or indirectly called wx.Yield, it could start executing Aslan's core pump from within the yield, causing recursion.
+			core.callLater(50, eventHandler.executeEvent, "gainFocus", parent.treeInterceptor.rootAslanObject)
 
 	@script(
 		description=_(
@@ -2565,7 +2565,7 @@ class GlobalCommands(ScriptableObject):
 			"When in browse mode, you can navigate the document with the cursor, quick navigation keys, etc.",
 		),
 		category=inputCore.SCRCAT_BROWSEMODE,
-		gesture="kb:NVDA+space",
+		gesture="kb:Aslan+space",
 	)
 	def script_toggleVirtualBufferPassThrough(self, gesture):
 		focus = api.getFocusObject()
@@ -2608,24 +2608,24 @@ class GlobalCommands(ScriptableObject):
 		browseMode.reportPassThrough(vbuf)
 
 	@script(
-		# Translators: Input help mode message for quit NVDA command.
-		description=_("Quits NVDA!"),
-		gesture="kb:NVDA+q",
+		# Translators: Input help mode message for quit Aslan command.
+		description=_("Quits Aslan!"),
+		gesture="kb:Aslan+q",
 	)
 	def script_quit(self, gesture):
 		wx.CallAfter(gui.mainFrame.onExitCommand, None)
 
 	@script(
-		# Translators: Input help mode message for restart NVDA command.
-		description=_("Restarts NVDA!"),
+		# Translators: Input help mode message for restart Aslan command.
+		description=_("Restarts Aslan!"),
 	)
 	def script_restart(self, gesture):
 		core.restart()
 
 	@script(
-		# Translators: Input help mode message for show NVDA menu command.
-		description=_("Shows the NVDA menu"),
-		gestures=("kb:NVDA+n", "ts:2finger_double_tap"),
+		# Translators: Input help mode message for show Aslan menu command.
+		description=_("Shows the Aslan menu"),
+		gestures=("kb:Aslan+n", "ts:2finger_double_tap"),
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
 	def script_showGui(self, gesture):
@@ -2638,7 +2638,7 @@ class GlobalCommands(ScriptableObject):
 			" moving the review cursor as it goes",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gestures=("kb:numpadPlus", "kb(laptop):NVDA+shift+a", "ts(text):3finger_flickDown"),
+		gestures=("kb:numpadPlus", "kb(laptop):Aslan+shift+a", "ts(text):3finger_flickDown"),
 		speakOnDemand=True,
 	)
 	def script_review_sayAll(self, gesture: inputCore.InputGesture):
@@ -2650,7 +2650,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for say all with system caret command.
 		description=_("Reads from the system caret up to the end of the text, moving the caret as it goes"),
 		category=SCRCAT_SYSTEMCARET,
-		gestures=("kb(desktop):NVDA+downArrow", "kb(laptop):NVDA+a"),
+		gestures=("kb(desktop):Aslan+downArrow", "kb(laptop):Aslan+a"),
 		speakOnDemand=True,
 	)
 	def script_sayAll(self, gesture: inputCore.InputGesture):
@@ -2783,7 +2783,7 @@ class GlobalCommands(ScriptableObject):
 			" If pressed twice, presents the information in browse mode",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gesture="kb:NVDA+shift+f",
+		gesture="kb:Aslan+shift+f",
 		speakOnDemand=True,
 	)
 	def script_reportFormatting(self, gesture):
@@ -2817,7 +2817,7 @@ class GlobalCommands(ScriptableObject):
 			" If pressed twice, presents the information in browse mode",
 		),
 		category=SCRCAT_SYSTEMCARET,
-		gesture="kb:NVDA+f",
+		gesture="kb:Aslan+f",
 		speakOnDemand=True,
 	)
 	def script_reportOrShowFormattingAtCaret(self, gesture):
@@ -2827,11 +2827,11 @@ class GlobalCommands(ScriptableObject):
 		elif repeats == 1:
 			self.script_showFormattingAtCaret(gesture)
 
-	def _getNvdaObjWithAnnotationUnderCaret(self) -> Optional[NVDAObject]:
-		"""If it has an annotation, get the NVDA object for the single character under the caret or the object
+	def _getNvdaObjWithAnnotationUnderCaret(self) -> Optional[AslanObject]:
+		"""If it has an annotation, get the Aslan object for the single character under the caret or the object
 		with system focus.
 		@note: It is tempting to try to report any annotation details that exists in the range formed by prior
-			and current location. This would be a new paradigm in NVDA, and may feel natural when moving by line
+			and current location. This would be a new paradigm in Aslan, and may feel natural when moving by line
 			to be able to more quickly have the 'details' reported. However, there may be more than one 'details
 			relation' in that range, and we don't yet have a way for the user to select which one to report.
 			For now, we minimise this risk by only reporting details at the current location.
@@ -2846,15 +2846,15 @@ class GlobalCommands(ScriptableObject):
 			log.debugWarning("Unable to get the caret position.", exc_info=True)
 		else:
 			caret.expand(textInfos.UNIT_CHARACTER)
-			objAtStart: NVDAObject = caret.NVDAObjectAtStart
+			objAtStart: AslanObject = caret.AslanObjectAtStart
 			if _isDebugLogCatEnabled:
-				log.debug(f"Trying with nvdaObject : {objAtStart}")
+				log.debug(f"Trying with aslanObject : {objAtStart}")
 			if objAtStart.annotations:
 				if _isDebugLogCatEnabled:
-					log.debug("NVDAObjectAtStart of caret has details")
+					log.debug("AslanObjectAtStart of caret has details")
 				return objAtStart
 
-		focus: NVDAObject = api.getFocusObject()
+		focus: AslanObject = api.getFocusObject()
 		if focus:
 			# If fetching from the caret position fails, try via the focus object
 			# This case is to support where there is no virtual buffer or text interface and a caret position can
@@ -2875,7 +2875,7 @@ class GlobalCommands(ScriptableObject):
 	_annotationNav = _AnnotationNavigation()
 
 	@script(
-		gesture="kb:NVDA+d",
+		gesture="kb:Aslan+d",
 		description=_(
 			# Translators: the description for the reportDetailsSummary script.
 			"Report summary of any annotation details at the system caret.",
@@ -2887,7 +2887,7 @@ class GlobalCommands(ScriptableObject):
 		"""Report the annotation details summary for the single character under the caret or the object with
 		system focus.
 		@note: It is tempting to try to report any annotation details that exists in the range formed by prior
-			and current location. This would be a new paradigm in NVDA, and may feel natural when moving by line
+			and current location. This would be a new paradigm in Aslan, and may feel natural when moving by line
 			to be able to more quickly have the 'details' reported. However, there may be more than one 'details
 			relation' in that range, and we don't yet have a way for the user to select which one to report.
 			For now, we minimise this risk by only reporting details at the current location.
@@ -2945,12 +2945,12 @@ class GlobalCommands(ScriptableObject):
 			"Pressing three times spells it using character descriptions.",
 		),
 		category=SCRCAT_FOCUS,
-		gesture="kb:NVDA+tab",
+		gesture="kb:Aslan+tab",
 		speakOnDemand=True,
 	)
 	def script_reportCurrentFocus(self, gesture: inputCore.InputGesture):
 		focusObject = api.getFocusObject()
-		if not isinstance(focusObject, NVDAObject):
+		if not isinstance(focusObject, AslanObject):
 			# Translators: Reported when:
 			# 1. There is no focusable object e.g. cannot use tab and shift tab to move to controls.
 			# 2. Trying to move focus to navigator object but there is no focus.
@@ -3100,7 +3100,7 @@ class GlobalCommands(ScriptableObject):
 			"If pressed three times, copies the status bar to the clipboard",
 		),
 		category=SCRCAT_FOCUS,
-		gestures=("kb(desktop):NVDA+end", "kb(laptop):NVDA+shift+end"),
+		gestures=("kb(desktop):Aslan+end", "kb(laptop):Aslan+shift+end"),
 		speakOnDemand=True,
 	)
 	def script_reportStatusLine(self, gesture):
@@ -3122,7 +3122,7 @@ class GlobalCommands(ScriptableObject):
 			"Reports the shortcut key of the currently focused object",
 		),
 		category=SCRCAT_FOCUS,
-		gestures=("kb:shift+numpad2", "kb(laptop):NVDA+control+shift+."),
+		gestures=("kb:shift+numpad2", "kb(laptop):Aslan+control+shift+."),
 		speakOnDemand=True,
 	)
 	def script_reportFocusObjectAccelerator(self, gesture: inputCore.InputGesture) -> None:
@@ -3140,7 +3140,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for toggle mouse tracking command.
 		description=_("Toggles the reporting of information as the mouse moves"),
 		category=SCRCAT_MOUSE,
-		gesture="kb:NVDA+m",
+		gesture="kb:Aslan+m",
 	)
 	def script_toggleMouseTracking(self, gesture):
 		if config.conf["mouse"]["enableMouseTracking"]:
@@ -3199,7 +3199,7 @@ class GlobalCommands(ScriptableObject):
 			"If pressed three times, copies the title to the clipboard",
 		),
 		category=SCRCAT_FOCUS,
-		gesture="kb:NVDA+t",
+		gesture="kb:Aslan+t",
 		speakOnDemand=True,
 	)
 	def script_title(self, gesture: inputCore.InputGesture):
@@ -3228,7 +3228,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for read foreground object command (usually the foreground window).
 		description=_("Reads all controls in the active window"),
 		category=SCRCAT_FOCUS,
-		gesture="kb:NVDA+b",
+		gesture="kb:Aslan+b",
 		speakOnDemand=True,
 	)
 	def script_speakForeground(self, gesture):
@@ -3237,7 +3237,7 @@ class GlobalCommands(ScriptableObject):
 			sayAll.SayAllHandler.readObjects(obj, startedFromScript=True)
 
 	@script(
-		gesture="kb(desktop):NVDA+control+f2",
+		gesture="kb(desktop):Aslan+control+f2",
 	)
 	def script_test_navigatorDisplayModelText(self, gesture):
 		obj = api.getNavigatorObject()
@@ -3247,7 +3247,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		description=_(
-			# Translators: GUI development tool, to get information about the components used in the NVDA GUI
+			# Translators: GUI development tool, to get information about the components used in the Aslan GUI
 			"Opens the WX GUI inspection tool. Used to get more information about the state of GUI components.",
 		),
 		category=SCRCAT_TOOLS,
@@ -3262,12 +3262,12 @@ class GlobalCommands(ScriptableObject):
 		description=_(
 			# Translators: Input help mode message for developer info for current navigator object command,
 			# used by developers to examine technical info on navigator object.
-			# This command also serves as a shortcut to open NVDA log viewer.
+			# This command also serves as a shortcut to open Aslan log viewer.
 			"Logs information about the current navigator object which is useful to developers "
 			"and activates the log viewer so the information can be examined.",
 		),
 		category=SCRCAT_TOOLS,
-		gesture="kb:NVDA+f1",
+		gesture="kb:Aslan+f1",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.SECURE_MODE)
 	def script_navigatorObject_devInfo(self, gesture):
@@ -3293,7 +3293,7 @@ class GlobalCommands(ScriptableObject):
 			" copied to clipboard by pressing again.",
 		),
 		category=SCRCAT_TOOLS,
-		gesture="kb:NVDA+control+shift+f1",
+		gesture="kb:Aslan+control+shift+f1",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.SECURE_MODE)
 	def script_log_markStartThenCopy(self, gesture):
@@ -3322,7 +3322,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for Open user configuration directory command.
-		description=_("Opens NVDA configuration directory for the current user."),
+		description=_("Opens Aslan configuration directory for the current user."),
 		category=SCRCAT_TOOLS,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.SECURE_MODE)
@@ -3335,7 +3335,7 @@ class GlobalCommands(ScriptableObject):
 			"Toggles between beeps, speech, beeps and speech, and off, for reporting progress bar updates",
 		),
 		category=SCRCAT_SPEECH,
-		gesture="kb:NVDA+u",
+		gesture="kb:Aslan+u",
 	)
 	def script_toggleProgressBarOutput(self, gesture):
 		outputMode = config.conf["presentation"]["progressBarUpdates"]["progressBarOutputMode"]
@@ -3364,7 +3364,7 @@ class GlobalCommands(ScriptableObject):
 			"such as new text in dos console windows",
 		),
 		category=SCRCAT_SPEECH,
-		gesture="kb:NVDA+5",
+		gesture="kb:Aslan+5",
 	)
 	def script_toggleReportDynamicContentChanges(self, gesture):
 		if config.conf["presentation"]["reportDynamicContentChanges"]:
@@ -3381,7 +3381,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for toggle caret moves review cursor command.
 		description=_("Toggles on and off the movement of the review cursor due to the caret moving."),
 		category=SCRCAT_TEXTREVIEW,
-		gesture="kb:NVDA+6",
+		gesture="kb:Aslan+6",
 	)
 	def script_toggleCaretMovesReviewCursor(self, gesture):
 		if config.conf["reviewCursor"]["followCaret"]:
@@ -3398,7 +3398,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for toggle focus moves navigator object command.
 		description=_("Toggles on and off the movement of the navigator object due to focus changes"),
 		category=SCRCAT_OBJECTNAVIGATION,
-		gesture="kb:NVDA+7",
+		gesture="kb:Aslan+7",
 	)
 	def script_toggleFocusMovesNavigatorObject(self, gesture):
 		if config.conf["reviewCursor"]["followFocus"]:
@@ -3416,7 +3416,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for report battery status command.
 		description=_("Reports battery status and time remaining if AC is not plugged in"),
 		category=SCRCAT_SYSTEM,
-		gesture="kb:NVDA+shift+b",
+		gesture="kb:Aslan+shift+b",
 		speakOnDemand=True,
 	)
 	def script_say_battery_status(self, gesture: inputCore.InputGesture) -> None:
@@ -3425,15 +3425,15 @@ class GlobalCommands(ScriptableObject):
 	@script(
 		description=_(
 			# Translators: Input help mode message for pass next key through command.
-			"The next key that is pressed will not be handled at all by NVDA, "
+			"The next key that is pressed will not be handled at all by Aslan, "
 			"it will be passed directly through to Windows.",
 		),
 		category=SCRCAT_INPUT,
-		gesture="kb:NVDA+f2",
+		gesture="kb:Aslan+f2",
 	)
 	def script_passNextKeyThrough(self, gesture):
 		keyboardHandler.passNextKeyThrough()
-		# Translators: Spoken to indicate that the next key press will be sent straight to the current program as though NVDA is not running.
+		# Translators: Spoken to indicate that the next key press will be sent straight to the current program as though Aslan is not running.
 		ui.message(_("Pass next key through"))
 
 	@script(
@@ -3442,7 +3442,7 @@ class GlobalCommands(ScriptableObject):
 			"Speaks the filename of the active application along with the name of the currently loaded appModule",
 		),
 		category=SCRCAT_TOOLS,
-		gesture="kb:NVDA+control+f1",
+		gesture="kb:Aslan+control+f1",
 		speakOnDemand=True,
 	)
 	def script_reportAppModuleInfo(self, gesture):
@@ -3462,9 +3462,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to general settings command.
-		description=_("Shows NVDA's general settings"),
+		description=_("Shows Aslan's general settings"),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+g",
+		gesture="kb:Aslan+control+g",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
 	def script_activateGeneralSettingsDialog(self, gesture):
@@ -3472,9 +3472,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to select synthesizer command.
-		description=_("Shows the NVDA synthesizer selection dialog"),
+		description=_("Shows the Aslan synthesizer selection dialog"),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+s",
+		gesture="kb:Aslan+control+s",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
 	def script_activateSynthesizerDialog(self, gesture):
@@ -3482,9 +3482,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to speech settings command.
-		description=_("Shows NVDA's speech settings"),
+		description=_("Shows Aslan's speech settings"),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+v",
+		gesture="kb:Aslan+control+v",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
 	def script_activateVoiceDialog(self, gesture):
@@ -3492,9 +3492,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to select braille display command.
-		description=_("Shows the NVDA braille display selection dialog"),
+		description=_("Shows the Aslan braille display selection dialog"),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+a",
+		gesture="kb:Aslan+control+a",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
 	def script_activateBrailleDisplayDialog(self, gesture):
@@ -3502,7 +3502,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to braille settings command.
-		description=_("Shows NVDA's braille settings"),
+		description=_("Shows Aslan's braille settings"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3511,9 +3511,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to audio settings command.
-		description=_("Shows NVDA's audio settings"),
+		description=_("Shows Aslan's audio settings"),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+u",
+		gesture="kb:Aslan+control+u",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
 	def script_activateAudioSettingsDialog(self, gesture):
@@ -3521,7 +3521,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to privacy and security settings command.
-		description=_("Shows NVDA's privacy and security settings"),
+		description=_("Shows Aslan's privacy and security settings"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3530,7 +3530,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to vision settings command.
-		description=_("Shows NVDA's vision settings"),
+		description=_("Shows Aslan's vision settings"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3539,9 +3539,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to keyboard settings command.
-		description=_("Shows NVDA's keyboard settings"),
+		description=_("Shows Aslan's keyboard settings"),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+k",
+		gesture="kb:Aslan+control+k",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
 	def script_activateKeyboardSettingsDialog(self, gesture):
@@ -3549,9 +3549,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to mouse settings command.
-		description=_("Shows NVDA's mouse settings"),
+		description=_("Shows Aslan's mouse settings"),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+m",
+		gesture="kb:Aslan+control+m",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
 	def script_activateMouseSettingsDialog(self, gesture):
@@ -3559,7 +3559,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to review cursor settings command.
-		description=_("Shows NVDA's review cursor settings"),
+		description=_("Shows Aslan's review cursor settings"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3568,7 +3568,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to input composition settings command.
-		description=_("Shows NVDA's input composition settings"),
+		description=_("Shows Aslan's input composition settings"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3577,9 +3577,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to object presentation settings command.
-		description=_("Shows NVDA's object presentation settings"),
+		description=_("Shows Aslan's object presentation settings"),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+o",
+		gesture="kb:Aslan+control+o",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
 	def script_activateObjectPresentationDialog(self, gesture):
@@ -3587,9 +3587,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to browse mode settings command.
-		description=_("Shows NVDA's browse mode settings"),
+		description=_("Shows Aslan's browse mode settings"),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+b",
+		gesture="kb:Aslan+control+b",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
 	def script_activateBrowseModeDialog(self, gesture):
@@ -3597,9 +3597,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to document formatting settings command.
-		description=_("Shows NVDA's document formatting settings"),
+		description=_("Shows Aslan's document formatting settings"),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+d",
+		gesture="kb:Aslan+control+d",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
 	def script_activateDocumentFormattingDialog(self, gesture):
@@ -3616,7 +3616,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to Add-on Store settings command.
-		description=_("Shows NVDA's Add-on Store settings"),
+		description=_("Shows Aslan's Add-on Store settings"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3625,7 +3625,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to Windows OCR settings command.
-		description=_("Shows NVDA's Windows OCR settings"),
+		description=_("Shows Aslan's Windows OCR settings"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3634,7 +3634,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to Advanced settings command.
-		description=_("Shows NVDA's Advanced settings"),
+		description=_("Shows Aslan's Advanced settings"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3643,7 +3643,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for opening default dictionary dialog.
-		description=_("Shows the NVDA default dictionary dialog"),
+		description=_("Shows the Aslan default dictionary dialog"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3652,7 +3652,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for opening voice-specific dictionary dialog.
-		description=_("Shows the NVDA voice-specific dictionary dialog"),
+		description=_("Shows the Aslan voice-specific dictionary dialog"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3661,7 +3661,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for opening temporary dictionary.
-		description=_("Shows the NVDA temporary dictionary dialog"),
+		description=_("Shows the Aslan temporary dictionary dialog"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3670,7 +3670,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to punctuation/symbol pronunciation dialog.
-		description=_("Shows the NVDA symbol pronunciation dialog"),
+		description=_("Shows the Aslan symbol pronunciation dialog"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3679,7 +3679,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to input gestures dialog command.
-		description=_("Shows the NVDA input gestures dialog"),
+		description=_("Shows the Aslan input gestures dialog"),
 		category=SCRCAT_CONFIG,
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
@@ -3688,9 +3688,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for go to magnifier settings command.
-		description=_("Shows NVDA's magnifier settings"),
+		description=_("Shows Aslan's magnifier settings"),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+w",
+		gesture="kb:Aslan+control+w",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.MODAL_DIALOG_OPEN)
 	def script_activateMagnifierSettingsDialog(self, gesture: inputCore.InputGesture):
@@ -3698,7 +3698,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for the report current configuration profile command.
-		description=_("Reports the name of the current NVDA configuration profile"),
+		description=_("Reports the name of the current Aslan configuration profile"),
 		category=SCRCAT_CONFIG,
 		speakOnDemand=True,
 	)
@@ -3719,9 +3719,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for save current configuration command.
-		description=_("Saves the current NVDA configuration"),
+		description=_("Saves the current Aslan configuration"),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+c",
+		gesture="kb:Aslan+control+c",
 	)
 	def script_saveConfiguration(self, gesture):
 		wx.CallAfter(gui.mainFrame.onSaveConfigurationCommand, None)
@@ -3733,7 +3733,7 @@ class GlobalCommands(ScriptableObject):
 			" Pressing three times resets to factory defaults.",
 		),
 		category=SCRCAT_CONFIG,
-		gesture="kb:NVDA+control+r",
+		gesture="kb:Aslan+control+r",
 	)
 	def script_revertConfiguration(self, gesture):
 		scriptCount = getLastScriptRepeatCount()
@@ -3744,9 +3744,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for activate python console command.
-		description=_("Activates the NVDA Python Console, primarily useful for development"),
+		description=_("Activates the Aslan Python Console, primarily useful for development"),
 		category=SCRCAT_TOOLS,
-		gesture="kb:NVDA+control+z",
+		gesture="kb:Aslan+control+z",
 	)
 	@gui.blockAction.when(
 		gui.blockAction.Context.WINDOWS_STORE_VERSION,
@@ -3764,7 +3764,7 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message to activate Add-on Store command.
-		description=_("Activates the Add-on Store to browse and manage add-on packages for NVDA"),
+		description=_("Activates the Add-on Store to browse and manage add-on packages for Aslan"),
 		category=SCRCAT_TOOLS,
 	)
 	def script_activateAddonsManager(self, gesture: inputCore.InputGesture):
@@ -3773,8 +3773,8 @@ class GlobalCommands(ScriptableObject):
 	@script(
 		description=_(
 			# Translators: Input help mode message for toggle speech viewer command.
-			"Toggles the NVDA Speech viewer, "
-			"a floating window that allows you to view all the text that NVDA is currently speaking",
+			"Toggles the Aslan Speech viewer, "
+			"a floating window that allows you to view all the text that Aslan is currently speaking",
 		),
 		category=SCRCAT_TOOLS,
 	)
@@ -3795,7 +3795,7 @@ class GlobalCommands(ScriptableObject):
 	@script(
 		description=_(
 			# Translators: Input help mode message for toggle Braille viewer command.
-			"Toggles the NVDA Braille viewer, a floating window that allows you to view braille output, "
+			"Toggles the Aslan Braille viewer, a floating window that allows you to view braille output, "
 			"and the text equivalent for each braille character",
 		),
 		category=SCRCAT_TOOLS,
@@ -3821,7 +3821,7 @@ class GlobalCommands(ScriptableObject):
 		# (tethered means connected to or follows).
 		description=_("Toggle tethering of braille between the focus and the review position"),
 		category=SCRCAT_BRAILLE,
-		gesture="kb:NVDA+control+t",
+		gesture="kb:Aslan+control+t",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.BRAILLE_MODE_SPEECH_OUTPUT)
 	def script_braille_toggleTether(self, gesture):
@@ -3845,7 +3845,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Input help mode message for toggle braille mode command
 		description=_("Toggles braille mode"),
 		category=SCRCAT_BRAILLE,
-		gesture="kb:NVDA+alt+t",
+		gesture="kb:Aslan+alt+t",
 	)
 	def script_toggleBrailleMode(self, gesture: inputCore.InputGesture):
 		curMode = BrailleMode(config.conf["braille"]["mode"])
@@ -4091,7 +4091,7 @@ class GlobalCommands(ScriptableObject):
 			"Pressing three times spells it using character descriptions.",
 		),
 		category=SCRCAT_SYSTEM,
-		gesture="kb:NVDA+c",
+		gesture="kb:Aslan+c",
 		speakOnDemand=True,
 	)
 	def script_reportClipboardText(self, gesture):
@@ -4130,7 +4130,7 @@ class GlobalCommands(ScriptableObject):
 			"Marks the current position of the review cursor as the start of text to be selected or copied",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gesture="kb:NVDA+f9",
+		gesture="kb:Aslan+f9",
 	)
 	def script_review_markStartForCopy(self, gesture: inputCore.InputGesture) -> None:
 		reviewPos = api.getReviewPosition()
@@ -4148,7 +4148,7 @@ class GlobalCommands(ScriptableObject):
 			"Move the review cursor to the position marked as the start of text to be selected or copied",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gesture="kb:NVDA+shift+F9",
+		gesture="kb:Aslan+shift+F9",
 	)
 	def script_review_moveToStartMarkedForCopy(self, gesture: inputCore.InputGesture) -> None:
 		startMarker = self._getReviewCopyStartMarker(api.getReviewPosition())
@@ -4181,7 +4181,7 @@ class GlobalCommands(ScriptableObject):
 			"position of the review cursor is selected. If pressed twice, the text is copied to the clipboard",
 		),
 		category=SCRCAT_TEXTREVIEW,
-		gesture="kb:NVDA+f10",
+		gesture="kb:Aslan+f10",
 	)
 	def script_review_copy(self, gesture: inputCore.InputGesture) -> None:
 		pos = api.getReviewPosition().copy()
@@ -4432,12 +4432,12 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Input help mode message for a braille command.
-		description=_("Virtually toggles the NVDA key to emulate a keyboard shortcut with braille input"),
+		description=_("Virtually toggles the Aslan key to emulate a keyboard shortcut with braille input"),
 		category=inputCore.SCRCAT_KBEMU,
 		bypassInputHelp=True,
 	)
-	def script_braille_toggleNVDAKey(self, gesture):
-		braille.input.handler.toggleModifier("NVDA")
+	def script_braille_toggleAslanKey(self, gesture):
+		braille.input.handler.toggleModifier("Aslan")
 
 	@script(
 		description=_(
@@ -4476,13 +4476,13 @@ class GlobalCommands(ScriptableObject):
 	@script(
 		description=_(
 			# Translators: Input help mode message for a braille command.
-			"Virtually toggles the NVDA and shift keys to emulate a keyboard shortcut with braille input",
+			"Virtually toggles the Aslan and shift keys to emulate a keyboard shortcut with braille input",
 		),
 		category=inputCore.SCRCAT_KBEMU,
 		bypassInputHelp=True,
 	)
-	def script_braille_toggleNVDAKeyShift(self, gesture):
-		braille.input.handler.toggleModifiers(["NVDA", "shift"])
+	def script_braille_toggleAslanKeyShift(self, gesture):
+		braille.input.handler.toggleModifiers(["Aslan", "shift"])
 
 	@script(
 		description=_(
@@ -4510,17 +4510,17 @@ class GlobalCommands(ScriptableObject):
 	@script(
 		description=_(
 			# Translators: Input help mode message for reload plugins command.
-			"Reloads app modules and global plugins without restarting NVDA, which can be Useful for developers",
+			"Reloads app modules and global plugins without restarting Aslan, which can be Useful for developers",
 		),
 		category=SCRCAT_TOOLS,
-		gesture="kb:NVDA+control+f3",
+		gesture="kb:Aslan+control+f3",
 	)
 	def script_reloadPlugins(self, gesture):
 		import globalPluginHandler
 
 		appModuleHandler.reloadAppModules()
 		globalPluginHandler.reloadGlobalPlugins()
-		NVDAObject.clearDynamicClassCache()
+		AslanObject.clearDynamicClassCache()
 		# Translators: Presented when plugins (app modules and global plugins) are reloaded.
 		ui.message(_("Plugins reloaded"))
 
@@ -4530,7 +4530,7 @@ class GlobalCommands(ScriptableObject):
 			"Report the destination URL of the link at the position of caret or focus. "
 			"If pressed twice, shows the URL in a window for easier review.",
 		),
-		gesture="kb:NVDA+k",
+		gesture="kb:Aslan+k",
 		category=SCRCAT_TOOLS,
 		speakOnDemand=True,
 	)
@@ -4606,8 +4606,8 @@ class GlobalCommands(ScriptableObject):
 		category=SCRCAT_OBJECTNAVIGATION,
 		gestures=(
 			"ts(object):flickright",
-			"kb:NVDA+numpad3",
-			"kb(laptop):shift+NVDA+]",
+			"kb:Aslan+numpad3",
+			"kb(laptop):shift+Aslan+]",
 		),
 	)
 	def script_navigatorObject_nextInFlow(self, gesture: inputCore.InputGesture):
@@ -4644,8 +4644,8 @@ class GlobalCommands(ScriptableObject):
 		category=SCRCAT_OBJECTNAVIGATION,
 		gestures=(
 			"ts(object):flickleft",
-			"kb:NVDA+numpad9",
-			"kb(laptop):shift+NVDA+[",
+			"kb:Aslan+numpad9",
+			"kb(laptop):shift+Aslan+[",
 		),
 	)
 	def script_navigatorObject_previousInFlow(self, gesture: inputCore.InputGesture):
@@ -4675,7 +4675,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Describes a command.
 		description=_("Toggles the support of touch interaction"),
 		category=SCRCAT_TOUCH,
-		gesture="kb:NVDA+control+alt+t",
+		gesture="kb:Aslan+control+alt+t",
 	)
 	def script_toggleTouchSupport(self, gesture):
 		enabled = not bool(config.conf["touch"]["enabled"])
@@ -4739,9 +4739,9 @@ class GlobalCommands(ScriptableObject):
 		# To restore old behavior, go to Touch Interaction dialog and change touch typing option.
 		if config.conf["touch"]["touchTyping"]:
 			obj = api.getNavigatorObject()
-			import NVDAObjects.UIA
+			import AslanObjects.UIA
 
-			if isinstance(obj, NVDAObjects.UIA.UIA) and obj.UIAElement.cachedClassName == "CRootKey":
+			if isinstance(obj, AslanObjects.UIA.UIA) and obj.UIAElement.cachedClassName == "CRootKey":
 				obj.doAction()
 
 	@script(
@@ -4783,9 +4783,9 @@ class GlobalCommands(ScriptableObject):
 
 	@script(
 		# Translators: Describes the command to open the Configuration Profiles dialog.
-		description=_("Shows the NVDA Configuration Profiles dialog"),
+		description=_("Shows the Aslan Configuration Profiles dialog"),
 		category=SCRCAT_CONFIG_PROFILES,
-		gesture="kb:NVDA+control+p",
+		gesture="kb:Aslan+control+p",
 	)
 	def script_activateConfigProfilesDialog(self, gesture):
 		wx.CallAfter(gui.mainFrame.onConfigProfilesCommand, None)
@@ -4794,7 +4794,7 @@ class GlobalCommands(ScriptableObject):
 		description=_(
 			# Translators: Input help mode message for toggle configuration profile triggers command.
 			"Toggles disabling of all configuration profile triggers. "
-			"Disabling remains in effect until NVDA is restarted",
+			"Disabling remains in effect until Aslan is restarted",
 		),
 		category=SCRCAT_CONFIG,
 	)
@@ -4817,7 +4817,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Describes a command.
 		description=_("Begins interaction with math content"),
 		category=SCRCAT_MATH_NAV,
-		gesture="kb:NVDA+alt+m",
+		gesture="kb:Aslan+alt+m",
 	)
 	def script_interactWithMath(self, gesture):
 		import mathPres
@@ -4835,7 +4835,7 @@ class GlobalCommands(ScriptableObject):
 					mathMl = None
 		else:
 			try:
-				sourceObj = reviewPosition.NVDAObjectAtStart
+				sourceObj = reviewPosition.AslanObjectAtStart
 			except (NotImplementedError, LookupError):
 				pass
 		if not mathMl:
@@ -4848,7 +4848,7 @@ class GlobalCommands(ScriptableObject):
 	@script(
 		# Translators: Describes a command.
 		description=_("Recognizes the content of the current navigator object with Windows OCR"),
-		gesture="kb:NVDA+r",
+		gesture="kb:Aslan+r",
 	)
 	def script_recognizeWithUwpOcr(self, gesture):
 		if not winVersion.isUwpOcrAvailable():
@@ -4898,10 +4898,10 @@ class GlobalCommands(ScriptableObject):
 			# Translators: The message announced when toggling automatic refresh of recognized content
 			disabledMsg=_("Automatic refresh disabled"),
 		)
-		from contentRecog.recogUi import RecogResultNVDAObject
+		from contentRecog.recogUi import RecogResultAslanObject
 
 		focus = api.getFocusObject()
-		if isinstance(focus, RecogResultNVDAObject):
+		if isinstance(focus, RecogResultAslanObject):
 			focus._scheduleRecognize()
 
 	@script(
@@ -4962,10 +4962,10 @@ class GlobalCommands(ScriptableObject):
 			# Translators: Describes a command.
 			"Toggles the state of the screen curtain, "
 			"enable to make the screen black or disable to show the contents of the screen. "
-			"Pressed once, screen curtain is enabled until you restart NVDA. "
+			"Pressed once, screen curtain is enabled until you restart Aslan. "
 			"Pressed twice, screen curtain is enabled until you disable it",
 		),
-		gesture="kb:NVDA+control+escape",
+		gesture="kb:Aslan+control+escape",
 	)
 	def script_toggleScreenCurtain(self, gesture: inputCore.InputGesture) -> None:
 		import screenCurtain
@@ -4990,7 +4990,7 @@ class GlobalCommands(ScriptableObject):
 			# announced properly (if the user triggered the gesture more
 			# than once). So we speak the objects to imitate the dialog getting
 			# focus again. It might be useful to have something like this in a
-			# script: see https://github.com/nvaccess/nvda/issues/9147#issuecomment-454278313
+			# script: see https://github.com/nvaccess/aslan/issues/9147#issuecomment-454278313
 			speech.cancelSpeech()
 			speech.speakObject(
 				api.getForegroundObject(),
@@ -5122,7 +5122,7 @@ class GlobalCommands(ScriptableObject):
 			"Toggle the magnifier on and off",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:NVDA+shift+w",
+		gesture="kb:Aslan+shift+w",
 	)
 	def script_toggleMagnifier(
 		self,
@@ -5136,7 +5136,7 @@ class GlobalCommands(ScriptableObject):
 			"Increase the magnification level",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:NVDA+shift+=",
+		gesture="kb:Aslan+shift+=",
 	)
 	def script_zoomIn(
 		self,
@@ -5150,7 +5150,7 @@ class GlobalCommands(ScriptableObject):
 			"Decrease the magnification level",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:NVDA+shift+-",
+		gesture="kb:Aslan+shift+-",
 	)
 	def script_zoomOut(
 		self,
@@ -5164,7 +5164,7 @@ class GlobalCommands(ScriptableObject):
 			"Pan the magnified view left",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:nvda+alt+leftArrow",
+		gesture="kb:aslan+alt+leftArrow",
 	)
 	def script_panLeft(
 		self,
@@ -5178,7 +5178,7 @@ class GlobalCommands(ScriptableObject):
 			"Pan the magnified view right",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:nvda+alt+rightArrow",
+		gesture="kb:aslan+alt+rightArrow",
 	)
 	def script_panRight(
 		self,
@@ -5192,7 +5192,7 @@ class GlobalCommands(ScriptableObject):
 			"Pan the magnified view up",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:nvda+alt+upArrow",
+		gesture="kb:aslan+alt+upArrow",
 	)
 	def script_panUp(
 		self,
@@ -5206,7 +5206,7 @@ class GlobalCommands(ScriptableObject):
 			"Pan the magnified view down",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:nvda+alt+downArrow",
+		gesture="kb:aslan+alt+downArrow",
 	)
 	def script_panDown(
 		self,
@@ -5220,7 +5220,7 @@ class GlobalCommands(ScriptableObject):
 			"Pan the magnified view to left edge",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:nvda+shift+alt+leftArrow",
+		gesture="kb:aslan+shift+alt+leftArrow",
 	)
 	def script_panToLeftEdge(
 		self,
@@ -5234,7 +5234,7 @@ class GlobalCommands(ScriptableObject):
 			"Pan the magnified view to right edge",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:nvda+shift+alt+rightArrow",
+		gesture="kb:aslan+shift+alt+rightArrow",
 	)
 	def script_panToRightEdge(
 		self,
@@ -5248,7 +5248,7 @@ class GlobalCommands(ScriptableObject):
 			"Pan the magnified view to top edge",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:nvda+shift+alt+upArrow",
+		gesture="kb:aslan+shift+alt+upArrow",
 	)
 	def script_panToTopEdge(
 		self,
@@ -5262,7 +5262,7 @@ class GlobalCommands(ScriptableObject):
 			"Pan the magnified view to bottom edge",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:nvda+shift+alt+downArrow",
+		gesture="kb:aslan+shift+alt+downArrow",
 	)
 	def script_panToBottomEdge(
 		self,
@@ -5289,7 +5289,7 @@ class GlobalCommands(ScriptableObject):
 			"Cycle through the color filters",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:NVDA+shift+i",
+		gesture="kb:Aslan+shift+i",
 	)
 	def script_cycleFilters(
 		self,
@@ -5381,7 +5381,7 @@ class GlobalCommands(ScriptableObject):
 			"Temporarily show an overview of the entire screen",
 		),
 		category=SCRCAT_MAGNIFIER,
-		gesture="kb:NVDA+shift+l",
+		gesture="kb:Aslan+shift+l",
 	)
 	def script_showEntireScreenOverview(
 		self,
@@ -5409,7 +5409,7 @@ class GlobalCommands(ScriptableObject):
 			"Cycles through sound split modes",
 		),
 		category=SCRCAT_AUDIO,
-		gesture="kb:NVDA+alt+s",
+		gesture="kb:Aslan+alt+s",
 	)
 	def script_cycleSoundSplit(self, gesture: "inputCore.InputGesture") -> None:
 		audio._toggleSoundSplitState()
@@ -5517,7 +5517,7 @@ class GlobalCommands(ScriptableObject):
 		# Translators: Describes the script that creates a new Remote Access session, or disconnects it if one already exists.
 		description=pgettext("remote", "Toggles whether Remote Access is connected"),
 		category=SCRCAT_REMOTE,
-		gesture="kb:NVDA+alt+r",
+		gesture="kb:Aslan+alt+r",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.REMOTE_ACCESS_DISABLED)
 	def script_toggleRemoteConnection(self, gesture: "inputCore.InputGesture") -> None:
@@ -5533,7 +5533,7 @@ class GlobalCommands(ScriptableObject):
 			"Switches whether the keyboard controls the local or remote computer",
 		),
 		category=SCRCAT_REMOTE,
-		gesture="kb:NVDA+alt+tab",
+		gesture="kb:Aslan+alt+tab",
 	)
 	@gui.blockAction.when(gui.blockAction.Context.REMOTE_ACCESS_DISABLED)
 	def script_sendKeys(self, gesture: "inputCore.InputGesture"):
@@ -5556,7 +5556,7 @@ class GlobalCommands(ScriptableObject):
 			# Translators: Description for the repeat last speech script
 			"Repeat the last spoken information. Pressing twice shows it in a browsable message.",
 		),
-		gesture="kb:NVDA+x",
+		gesture="kb:Aslan+x",
 		category=SCRCAT_SPEECH,
 		speakOnDemand=True,
 	)
@@ -5580,7 +5580,7 @@ class GlobalCommands(ScriptableObject):
 			# Translators: Input help mode message for the command to copy the last spoken information.
 			"Copies the last spoken information to the clipboard.",
 		),
-		gesture="kb:NVDA+control+x",
+		gesture="kb:Aslan+control+x",
 		category=SCRCAT_SPEECH,
 	)
 	def script_copyLastSpokenInformation(self, gesture: "inputCore.InputGesture") -> None:
@@ -5625,7 +5625,7 @@ class ConfigProfileActivationCommands(ScriptableObject):
 		if gui.shouldConfigProfileTriggersBeSuspended():
 			# Translators: a message indicating that configuration profiles can't be activated using gestures,
 			# due to profile activation being suspended.
-			state = _("Can't change the active profile while an NVDA dialog is open")
+			state = _("Can't change the active profile while an Aslan dialog is open")
 		elif config.conf.profiles[-1].name == name:
 			config.conf.manualActivateProfile(None)
 			# Translators: a message when a configuration profile is manually deactivated.

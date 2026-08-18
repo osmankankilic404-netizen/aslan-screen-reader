@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2024-2026 NV Access Limited, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Unit tests for the louisHelper module."""
 
@@ -10,7 +10,7 @@ import unittest
 
 import brailleTables
 import louisHelper
-import NVDAState
+import AslanState
 
 TABLES = ["en-us-comp8-ext.utb", "braille-patterns.cti"]
 """An 8 dot computer braille table, which round trips ASCII without contractions."""
@@ -59,7 +59,7 @@ class TestResolvingCustom(unittest.TestCase):
 	tableDir: str
 
 	def setUp(self):
-		self.tablesDir = os.path.join(NVDAState.WritePaths.configDir, "brailleTables")
+		self.tablesDir = os.path.join(AslanState.WritePaths.configDir, "brailleTables")
 		self.assertTrue(os.path.exists(self.tablesDir))
 		brailleTables._tablesDirs["tests"] = self.tablesDir
 		brailleTables.addTable(

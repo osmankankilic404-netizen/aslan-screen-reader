@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2018-2025 NV Access Limited, Babbage B.V., Takuya Nishimoto, hwf1324
@@ -39,7 +39,7 @@ from windowUtils import CustomWindow
 
 if TYPE_CHECKING:
 	from cursorManager import CursorManager
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 	from winBindings.user32 import WNDCLASSEXW
 
 
@@ -76,8 +76,8 @@ SOLID_YELLOW = HighlightStyle(YELLOW, 2, winGDI.DashStyleSolid, 2)
 
 class HighlightWindow(CustomWindow):
 	transparency = 0xFF
-	className = "NVDAHighlighter"
-	windowName = "NVDA Highlighter Window"
+	className = "AslanHighlighter"
+	windowName = "Aslan Highlighter Window"
 	windowStyle = winUser.WS_POPUP | winUser.WS_DISABLED
 	extendedWindowStyle = (
 		# Ensure that the window is on top of all other windows
@@ -105,7 +105,7 @@ class HighlightWindow(CustomWindow):
 
 	def updateLocationForDisplays(self) -> None:
 		if vision._isDebug():
-			log.debug("Updating NVDAHighlighter window location for displays")
+			log.debug("Updating AslanHighlighter window location for displays")
 		displays: list[wx.Rect] = [wx.Display(i).GetGeometry() for i in range(wx.Display.GetCount())]
 		screenWidth, screenHeight, minPos = getTotalWidthAndHeightAndMinimumPosition(displays)
 		# Hack: Windows has a "feature" that will stop desktop shortcut hotkeys from working
@@ -132,9 +132,9 @@ class HighlightWindow(CustomWindow):
 		self._prevContextRects = {}
 		user32.InvalidateRect(self.handle, None, True)
 
-	def __init__(self, highlighter: "NVDAHighlighter"):
+	def __init__(self, highlighter: "AslanHighlighter"):
 		if vision._isDebug():
-			log.debug("initializing NVDAHighlighter window")
+			log.debug("initializing AslanHighlighter window")
 		super().__init__(
 			windowName=self.windowName,
 			windowStyle=self.windowStyle,
@@ -177,7 +177,7 @@ class HighlightWindow(CustomWindow):
 			# wx might not be aware of the display change at this point
 			core.callLater(100, self.updateLocationForDisplays)
 
-	def _getDrawRects(self, highlighter: "NVDAHighlighter") -> dict[Context, RectLTRB]:
+	def _getDrawRects(self, highlighter: "AslanHighlighter") -> dict[Context, RectLTRB]:
 		"""
 		Calculates the logical rectangles that should be drawn based on the highlighter's state.
 		Handles logic like merging Focus and Navigator if they overlap.
@@ -313,7 +313,7 @@ _contextOptionLabelsWithAccelerators = {
 _supportedContexts = (Context.FOCUS, Context.NAVIGATOR, Context.BROWSEMODE)
 
 
-class NVDAHighlighterSettings(providerBase.VisionEnhancementProviderSettings):
+class AslanHighlighterSettings(providerBase.VisionEnhancementProviderSettings):
 	# Default settings for parameters
 	highlightFocus = False
 	highlightNavigator = False
@@ -322,12 +322,12 @@ class NVDAHighlighterSettings(providerBase.VisionEnhancementProviderSettings):
 	@override
 	@classmethod
 	def getId(cls) -> str:
-		return "NVDAHighlighter"
+		return "AslanHighlighter"
 
 	@override
 	@classmethod
 	def getDisplayName(cls) -> str:
-		# Translators: Description for NVDA's built-in screen highlighter.
+		# Translators: Description for Aslan's built-in screen highlighter.
 		return _("Visual Highlight")
 
 	@override
@@ -342,7 +342,7 @@ class NVDAHighlighterSettings(providerBase.VisionEnhancementProviderSettings):
 		]
 
 
-class NVDAHighlighterGuiPanel(
+class AslanHighlighterGuiPanel(
 	AutoSettingsMixin,
 	SettingsPanel,
 ):
@@ -357,9 +357,9 @@ class NVDAHighlighterGuiPanel(
 		providerControl: VisionProviderStateControl,
 	) -> None:
 		self._providerControl = providerControl
-		initiallyEnabledInConfig = NVDAHighlighter.isEnabledInConfig()
+		initiallyEnabledInConfig = AslanHighlighter.isEnabledInConfig()
 		if not initiallyEnabledInConfig:
-			settingsStorage: NVDAHighlighterSettings = self._getSettingsStorage()
+			settingsStorage: AslanHighlighterSettings = self._getSettingsStorage()
 			settingsToCheck = [
 				settingsStorage.highlightBrowseMode,
 				settingsStorage.highlightFocus,
@@ -382,7 +382,7 @@ class NVDAHighlighterGuiPanel(
 		self._enabledCheckbox = wx.CheckBox(
 			self,
 			#  Translators: The label for a checkbox that enables / disables focus highlighting
-			#  in the NVDA Highlighter vision settings panel.
+			#  in the Aslan Highlighter vision settings panel.
 			label=_("&Enable Highlighting"),
 			style=wx.CHK_3STATE,
 		)
@@ -393,7 +393,7 @@ class NVDAHighlighterGuiPanel(
 		# but visually some separation is helpful, since the rest of the options are really sub-settings.
 		self.optionsText = wx.StaticText(
 			self,
-			# Translators: The label for a group box containing the NVDA highlighter options.
+			# Translators: The label for a group box containing the Aslan highlighter options.
 			label=_("Options:"),
 		)
 		self.mainSizer.Add(self.optionsText)
@@ -406,7 +406,7 @@ class NVDAHighlighterGuiPanel(
 		self.SetSizer(self.mainSizer)
 
 	@override
-	def getSettings(self) -> NVDAHighlighterSettings:
+	def getSettings(self) -> AslanHighlighterSettings:
 		# AutoSettingsMixin uses the getSettings method (via getSettingsStorage) to get the instance which is
 		# used to get / set attributes. The attributes must match the id's of the settings.
 		# We want them set on our settings instance.
@@ -424,7 +424,7 @@ class NVDAHighlighterGuiPanel(
 		self.lastControl = self.optionsText
 
 	def _updateEnabledState(self) -> None:
-		settingsStorage: NVDAHighlighterSettings = self._getSettingsStorage()
+		settingsStorage: AslanHighlighterSettings = self._getSettingsStorage()
 		settingsToTriggerActivation = [
 			settingsStorage.highlightBrowseMode,
 			settingsStorage.highlightFocus,
@@ -443,7 +443,7 @@ class NVDAHighlighterGuiPanel(
 
 	def _onEnableFailure(self) -> None:
 		"""Initialization of Highlighter failed. Reset settings / GUI"""
-		settingsStorage: NVDAHighlighterSettings = self._getSettingsStorage()
+		settingsStorage: AslanHighlighterSettings = self._getSettingsStorage()
 		settingsStorage.highlightBrowseMode = False
 		settingsStorage.highlightFocus = False
 		settingsStorage.highlightNavigator = False
@@ -459,7 +459,7 @@ class NVDAHighlighterGuiPanel(
 		return True
 
 	def _onCheckEvent(self, evt: wx.CommandEvent) -> None:
-		settingsStorage: NVDAHighlighterSettings = self._getSettingsStorage()
+		settingsStorage: AslanHighlighterSettings = self._getSettingsStorage()
 		if evt.GetEventObject() is self._enabledCheckbox:
 			isEnableAllChecked = evt.IsChecked()
 			settingsStorage.highlightBrowseMode = isEnableAllChecked
@@ -471,12 +471,12 @@ class NVDAHighlighterGuiPanel(
 		else:
 			self._updateEnabledState()
 
-		providerInst: NVDAHighlighter | None = self._providerControl.getProviderInstance()
+		providerInst: AslanHighlighter | None = self._providerControl.getProviderInstance()
 		if providerInst:
 			providerInst.refresh()
 
 
-class NVDAHighlighter(providerBase.VisionEnhancementProvider):
+class AslanHighlighter(providerBase.VisionEnhancementProvider):
 	_ContextStyles = {
 		Context.FOCUS: DASH_BLUE,
 		Context.NAVIGATOR: SOLID_PINK,
@@ -485,20 +485,20 @@ class NVDAHighlighter(providerBase.VisionEnhancementProvider):
 	}
 	_refreshInterval = 100
 	customWindowClass = HighlightWindow
-	_settings = NVDAHighlighterSettings()
+	_settings = AslanHighlighterSettings()
 	_window: HighlightWindow | None = None
 	enabledContexts: tuple[Context, ...]  # type info for autoprop: :meth:~._get_enableContexts
 
 	@override
 	@classmethod
-	def getSettings(cls) -> NVDAHighlighterSettings:
+	def getSettings(cls) -> AslanHighlighterSettings:
 		return cls._settings
 
 	@override
 	@classmethod
-	def getSettingsPanelClass(cls) -> type[NVDAHighlighterGuiPanel]:
-		"""Returns the class to be used in order to construct a settings panel for NVDAHighlighter provider."""
-		return NVDAHighlighterGuiPanel
+	def getSettingsPanelClass(cls) -> type[AslanHighlighterGuiPanel]:
+		"""Returns the class to be used in order to construct a settings panel for AslanHighlighter provider."""
+		return AslanHighlighterGuiPanel
 
 	@override
 	@classmethod
@@ -517,7 +517,7 @@ class NVDAHighlighter(providerBase.VisionEnhancementProvider):
 
 	def __init__(self):
 		super().__init__()
-		log.debug("Starting NVDAHighlighter")
+		log.debug("Starting AslanHighlighter")
 		self.contextToRectMap: dict[Context, RectLTRB | None] = {}
 		winGDI.gdiPlusInitialize()
 		self._highlighterThread = threading.Thread(
@@ -534,7 +534,7 @@ class NVDAHighlighter(providerBase.VisionEnhancementProvider):
 
 	@override
 	def terminate(self) -> None:
-		log.debug("Terminating NVDAHighlighter")
+		log.debug("Terminating AslanHighlighter")
 		if self._highlighterThread and self._window and self._window.handle:
 			if not user32.PostThreadMessage(self._highlighterThread.ident, winUser.WM_QUIT, 0, 0):
 				raise WinError()
@@ -548,7 +548,7 @@ class NVDAHighlighter(providerBase.VisionEnhancementProvider):
 	def _run(self) -> None:
 		try:
 			if vision._isDebug():
-				log.debug("Starting NVDAHighlighter thread")
+				log.debug("Starting AslanHighlighter thread")
 
 			window = self._window = self.customWindowClass(self)
 			timer = winUser.WinTimer(window.handle, 0, self._refreshInterval, None)
@@ -562,17 +562,17 @@ class NVDAHighlighter(providerBase.VisionEnhancementProvider):
 				# https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getmessage
 				raise WinError()
 			if vision._isDebug():
-				log.debug("Quit message received on NVDAHighlighter thread")
+				log.debug("Quit message received on AslanHighlighter thread")
 			timer.terminate()
 			window.destroy()
 		except Exception:
-			log.exception("Exception in NVDA Highlighter thread")
+			log.exception("Exception in Aslan Highlighter thread")
 
 	def updateContextRect(
 		self,
 		context: Context,
 		rect: RectLTRB | None = None,
-		obj: "NVDAObject | None" = None,
+		obj: "AslanObject | None" = None,
 	) -> None:
 		"""Updates the position rectangle of the highlight for the specified context.
 		If rect is specified, the method directly writes the rectangle to the contextToRectMap.
@@ -587,7 +587,7 @@ class NVDAHighlighter(providerBase.VisionEnhancementProvider):
 				rect = None
 		self.contextToRectMap[context] = rect
 
-	def handleFocusChange(self, obj: "NVDAObject") -> None:
+	def handleFocusChange(self, obj: "AslanObject") -> None:
 		self.updateContextRect(context=Context.FOCUS, obj=obj)
 		if not api.isObjectInActiveTreeInterceptor(obj):
 			self.contextToRectMap.pop(Context.BROWSEMODE, None)
@@ -625,4 +625,4 @@ class NVDAHighlighter(providerBase.VisionEnhancementProvider):
 		)
 
 
-VisionEnhancementProvider = NVDAHighlighter
+VisionEnhancementProvider = AslanHighlighter

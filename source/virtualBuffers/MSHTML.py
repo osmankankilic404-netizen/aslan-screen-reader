@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2009-2024 NV Access Limited, Babbage B.V., Accessolutions, Julien Cochuyt, Cyrille Bougot
@@ -8,7 +8,7 @@ from . import VirtualBuffer, VirtualBufferTextInfo, VBufStorage_findMatch_word, 
 import controlTypes
 from controlTypes import TextPosition, TextAlign
 from controlTypes.formatFields import FontSize
-import NVDAObjects.IAccessible.MSHTML
+import AslanObjects.IAccessible.MSHTML
 import winUser
 import IAccessibleHandler
 import languageHandler
@@ -104,17 +104,17 @@ class MSHTMLTextInfo(VirtualBufferTextInfo):
 		# choose role
 		# Priority is aria role -> HTML tag name -> IAccessible role
 		role = next(
-			(aria.ariaRolesToNVDARoles[ar] for ar in ariaRoles if ar in aria.ariaRolesToNVDARoles),
+			(aria.ariaRolesToAslanRoles[ar] for ar in ariaRoles if ar in aria.ariaRolesToAslanRoles),
 			controlTypes.Role.UNKNOWN,
 		)
 		if role == controlTypes.Role.UNKNOWN and nodeName:
-			role = NVDAObjects.IAccessible.MSHTML.nodeNamesToNVDARoles.get(
+			role = AslanObjects.IAccessible.MSHTML.nodeNamesToAslanRoles.get(
 				nodeName,
 				controlTypes.Role.UNKNOWN,
 			)
 
 		if role == controlTypes.Role.UNKNOWN:
-			role = IAccessibleHandler.NVDARoleFromAttr(attrs.get("IAccessible::role"))
+			role = IAccessibleHandler.AslanRoleFromAttr(attrs.get("IAccessible::role"))
 
 		roleText = attrs.get("HTMLAttrib::aria-roledescription")
 		if roleText:
@@ -146,13 +146,13 @@ class MSHTMLTextInfo(VirtualBufferTextInfo):
 			for ariaDescribedById in ariaDescribedByIds:
 				descNode = None
 				try:
-					descNode = self.obj.rootNVDAObject.HTMLNode.document.getElementById(ariaDescribedById)
+					descNode = self.obj.rootAslanObject.HTMLNode.document.getElementById(ariaDescribedById)
 				except (COMError, NameError):
 					descNode = None
 				if not descNode:
 					try:
-						descNode = NVDAObjects.IAccessible.MSHTML.locateHTMLElementByID(
-							self.obj.rootNVDAObject.HTMLNode.document,
+						descNode = AslanObjects.IAccessible.MSHTML.locateHTMLElementByID(
+							self.obj.rootAslanObject.HTMLNode.document,
 							ariaDescribedById,
 						)
 					except (COMError, NameError):
@@ -163,13 +163,13 @@ class MSHTMLTextInfo(VirtualBufferTextInfo):
 							description
 							+ " "
 							+ self.obj.makeTextInfo(
-								NVDAObjects.IAccessible.MSHTML.MSHTML(HTMLNode=descNode),
+								AslanObjects.IAccessible.MSHTML.MSHTML(HTMLNode=descNode),
 							).text
 						)
 					except:  # noqa: E722
 						pass
 		ariaSort = attrs.get("HTMLAttrib::aria-sort")
-		state = aria.ariaSortValuesToNVDAStates.get(ariaSort)
+		state = aria.ariaSortValuesToAslanStates.get(ariaSort)
 		if state is not None:
 			states.add(state)
 		ariaSelected = attrs.get("HTMLAttrib::aria-selected")
@@ -229,16 +229,16 @@ class MSHTMLTextInfo(VirtualBufferTextInfo):
 class MSHTML(VirtualBuffer):
 	TextInfo = MSHTMLTextInfo
 
-	def __init__(self, rootNVDAObject):
-		super(MSHTML, self).__init__(rootNVDAObject, backendName="mshtml")
+	def __init__(self, rootAslanObject):
+		super(MSHTML, self).__init__(rootAslanObject, backendName="mshtml")
 		# As virtualBuffers must be created at all times for MSHTML to support live regions,
 		# Force focus mode for applications, and dialogs with no parent treeInterceptor (E.g. a dialog embedded in an application)
-		if rootNVDAObject.role == controlTypes.Role.APPLICATION or (
-			rootNVDAObject.role == controlTypes.Role.DIALOG
+		if rootAslanObject.role == controlTypes.Role.APPLICATION or (
+			rootAslanObject.role == controlTypes.Role.DIALOG
 			and (
-				not rootNVDAObject.parent
-				or not rootNVDAObject.parent.treeInterceptor
-				or rootNVDAObject.parent.treeInterceptor.passThrough
+				not rootAslanObject.parent
+				or not rootAslanObject.parent.treeInterceptor
+				or rootAslanObject.parent.treeInterceptor.passThrough
 			)
 		):
 			self.disableAutoPassThrough = True
@@ -254,7 +254,7 @@ class MSHTML(VirtualBuffer):
 		if initialPos:
 			return initialPos
 		try:
-			url = getattr(self.rootNVDAObject.HTMLNode.document, "url", "").split("#")
+			url = getattr(self.rootAslanObject.HTMLNode.document, "url", "").split("#")
 		except COMError as e:
 			log.debugWarning("Error getting URL from document: %s" % e)
 			return None
@@ -263,7 +263,7 @@ class MSHTML(VirtualBuffer):
 		anchorName = url[-1]
 		if not anchorName:
 			return None
-		return self._getNVDAObjectByAnchorName(anchorName)
+		return self._getAslanObjectByAnchorName(anchorName)
 
 	def __contains__(self, obj):
 		if not obj.windowClassName.startswith("Internet Explorer_"):
@@ -273,12 +273,12 @@ class MSHTML(VirtualBuffer):
 			and obj.windowHandle != self.rootDocHandle
 		):
 			return False
-		return not self._isNVDAObjectInApplication(obj)
+		return not self._isAslanObjectInApplication(obj)
 
 	def _get_isAlive(self):
 		if self.isLoading:
 			return True
-		root = self.rootNVDAObject
+		root = self.rootAslanObject
 		if not root:
 			return False
 		if not winUser.isWindow(root.windowHandle):
@@ -307,17 +307,17 @@ class MSHTML(VirtualBuffer):
 			return False
 		return True
 
-	def getNVDAObjectFromIdentifier(self, docHandle, ID):
-		HTMLNode = NVDAObjects.IAccessible.MSHTML.locateHTMLElementByID(
-			self.rootNVDAObject.HTMLNode.document,
+	def getAslanObjectFromIdentifier(self, docHandle, ID):
+		HTMLNode = AslanObjects.IAccessible.MSHTML.locateHTMLElementByID(
+			self.rootAslanObject.HTMLNode.document,
 			"ms__id%d" % ID,
 		)
 		if not HTMLNode:
-			return self.rootNVDAObject
-		return NVDAObjects.IAccessible.MSHTML.MSHTML(HTMLNode=HTMLNode)
+			return self.rootAslanObject
+		return AslanObjects.IAccessible.MSHTML.MSHTML(HTMLNode=HTMLNode)
 
-	def getIdentifierFromNVDAObject(self, obj):
-		if not isinstance(obj, NVDAObjects.IAccessible.MSHTML.MSHTML):
+	def getIdentifierFromAslanObject(self, obj):
+		if not isinstance(obj, AslanObjects.IAccessible.MSHTML.MSHTML):
 			raise LookupError
 		docHandle = obj.windowHandle
 		ID = obj.HTMLNodeUniqueNumber
@@ -496,23 +496,23 @@ class MSHTML(VirtualBuffer):
 
 	def _activateLongDesc(self, controlField):
 		longDesc = controlField["HTMLAttrib::longdesc"]
-		self.rootNVDAObject.HTMLNode.document.parentWindow.open(
+		self.rootAslanObject.HTMLNode.document.parentWindow.open(
 			longDesc,
 			"_blank",
 			"location=no, menubar=no, toolbar=no",
 		)
 
-	def _activateNVDAObject(self, obj):
-		super(MSHTML, self)._activateNVDAObject(obj)
+	def _activateAslanObject(self, obj):
+		super(MSHTML, self)._activateAslanObject(obj)
 		# If we activated a same-page link, then scroll to its anchor
 		count = 0
 		# #4134: The link may not always be the deepest node
-		while obj and count < 3 and isinstance(obj, NVDAObjects.IAccessible.MSHTML.MSHTML):
+		while obj and count < 3 and isinstance(obj, AslanObjects.IAccessible.MSHTML.MSHTML):
 			if obj.HTMLNodeName == "A":
 				anchorName = getattr(obj.HTMLNode, "hash")
 				if not anchorName:
 					return
-				obj = self._getNVDAObjectByAnchorName(anchorName[1:], HTMLDocument=obj.HTMLNode.document)
+				obj = self._getAslanObjectByAnchorName(anchorName[1:], HTMLDocument=obj.HTMLNode.document)
 				if not obj:
 					return
 				self._handleScrollTo(obj)
@@ -520,20 +520,20 @@ class MSHTML(VirtualBuffer):
 			obj = obj.parent
 			count += 1
 
-	def _getNVDAObjectByAnchorName(self, name, HTMLDocument=None):
+	def _getAslanObjectByAnchorName(self, name, HTMLDocument=None):
 		if not HTMLDocument:
-			HTMLDocument = self.rootNVDAObject.HTMLNode.document
+			HTMLDocument = self.rootAslanObject.HTMLNode.document
 		# #4134: could be name or ID, document.all.item supports both
 		HTMLNode = HTMLDocument.all.item(name)
 		if not HTMLNode:
 			log.debugWarning("GetElementById can't find node with ID %s" % name)
 			return None
-		obj = NVDAObjects.IAccessible.MSHTML.MSHTML(HTMLNode=HTMLNode)
+		obj = AslanObjects.IAccessible.MSHTML.MSHTML(HTMLNode=HTMLNode)
 		return obj
 
 	def _get_documentConstantIdentifier(self):
 		try:
-			return self.rootNVDAObject.HTMLNode.document.url
+			return self.rootAslanObject.HTMLNode.document.url
 		except COMError:
 			return None
 
@@ -546,7 +546,7 @@ class MSHTML(VirtualBuffer):
 				and obj.HTMLNode.type == "file"
 			):
 				# #1720: The user is activating a file input control in browse mode.
-				# The NVDAObject for this is an editable text field,
+				# The AslanObject for this is an editable text field,
 				# but we want to activate the browse button instead of editing the field.
 				return False
 		except COMError:

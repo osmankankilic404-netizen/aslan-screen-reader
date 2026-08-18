@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2010-2024 NV Access Limited, World Light Information Limited,
 # Hong Kong Blind Union, Babbage B.V., Julien Cochuyt, Cyrille Bougot, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
@@ -22,11 +22,11 @@ from typing import (
 	TypeVar,
 )
 
-import NVDAState
+import AslanState
 from logHandler import log
 import globalVars
 import config
-from NVDAState import WritePaths
+from AslanState import WritePaths
 
 
 _LocaleDataT = TypeVar("_LocaleDataT")
@@ -155,8 +155,8 @@ def getCharacterDescription(locale: str, character: str) -> Optional[List[str]]:
 # Speech symbol levels
 class SymbolLevel(IntEnum):
 	"""The desired symbol level in a speech sequence or in configuration.
-	Note: This enum has its counterpart in the NVDAController RPC interface (nvdaController.idl).
-	Additions to this enum should also be reflected in nvdaController.idl.
+	Note: This enum has its counterpart in the AslanController RPC interface (aslanController.idl).
+	Additions to this enum should also be reflected in aslanController.idl.
 	"""
 
 	NONE = 0
@@ -357,7 +357,7 @@ class SpeechSymbols:
 		@raise ValueError: If C{fileName} is C{None}
 			and L{load} or L{save} has not been called.
 		"""
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			log.debugWarning("Not saving speech symbols, as shouldWriteToDisk returned False.")
 			return
 		if fileName:

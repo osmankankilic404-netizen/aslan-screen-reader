@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Bram Duvigneau
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""GUI functionality for managing NVDA configuration, including factory reset with undo support."""
+"""GUI functionality for managing Aslan configuration, including factory reset with undo support."""
 
 import core
 import queueHandler
@@ -74,8 +74,8 @@ def confirmRevertToDefaultConfiguration() -> None:
 
 	The on-disk configuration is not modified. If the user chooses to undo, the configuration
 	is reloaded from disk. If the user keeps the factory defaults, the in-memory defaults
-	will be saved to disk on normal NVDA shutdown.
-	This is used when triggered from the NVDA menu.
+	will be saved to disk on normal Aslan shutdown.
+	This is used when triggered from the Aslan menu.
 	"""
 	queueHandler.queueFunction(queueHandler.eventQueue, core.resetConfiguration, factoryDefaults=True)
 	queueHandler.queueFunction(

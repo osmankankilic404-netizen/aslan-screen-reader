@@ -1,8 +1,8 @@
 # Design Overview
 
-This article attempts to provide an overview of NVDA's technical design and architecture.
+This article attempts to provide an overview of Aslan's technical design and architecture.
 It is necessarily technical in nature.
-You should have a reasonable knowledge of programming and object oriented programming concepts in particular, as well as at least a basic knowledge of Python, before attempting to understand NVDA's design.
+You should have a reasonable knowledge of programming and object oriented programming concepts in particular, as well as at least a basic knowledge of Python, before attempting to understand Aslan's design.
 Please see the code documentation for the relevant classes for more information.
 
 ## Terminology
@@ -26,7 +26,7 @@ Also known as a control or object.
 
 ### Programming Languages
 
-NVDA is primarily written in the [Python programming language](http://www.python.org/), which allows for rapid development among other benefits.
+Aslan is primarily written in the [Python programming language](http://www.python.org/), which allows for rapid development among other benefits.
 Code that needs to be [injected into other processes](#in-process-code) is written in C++ for high performance.
 
 ### Accessibility APIs
@@ -35,7 +35,7 @@ In order to make graphical widgets accessible to assistive technologies, operati
 These APIs provide information about the widget such as its name, type/role (button, check box, editable text field, etc.), description, value, states (checked, unavailable, invisible, etc.) and keyboard shortcut.
 Accessibility APIs also provide events to allow assistive technologies to monitor changes, such as when the focus changes, properties of an object (such as name, description, value, and state) change, etc.
 Rich accessibility APIs provide additional information, including the ability to access detailed information about and track the cursor in editable text controls, and table information such as row and column coordinates.
-NVDA relies heavily on accessibility APIs to gather information.
+Aslan relies heavily on accessibility APIs to gather information.
 Several accessibility APIs are used, including Microsoft Active Accessibility (MSAA) (also known as IAccessible), [IAccessible2](http://www.linuxfoundation.org/en/Accessibility/IAccessible2), Java Access Bridge and UI Automation.
 
 **Note:** IAccessible2 was not created by Microsoft, see [Wikipedia for more background](https://en.wikipedia.org/wiki/IAccessible2).
@@ -51,7 +51,7 @@ See also:
 
 #### Tools for investigating Accessibility APIs
 
-* Using [NVDA Object Navigation](https://download.nvaccess.org/documentation/userGuide.html#ObjectNavigation) and [logging developer information](https://download.nvaccess.org/documentation/userGuide.html#LogViewer).
+* Using [Aslan Object Navigation](https://download.nvaccess.org/documentation/userGuide.html#ObjectNavigation) and [logging developer information](https://download.nvaccess.org/documentation/userGuide.html#LogViewer).
 * [Accessibility Viewer (aViewer)](https://github.com/ThePacielloGroup/aviewer/)
   * handles MSAA, IA2, UIA but can be a bit buggy
   * tends to provide user friendly display strings that make it harder to map back to raw values
@@ -65,7 +65,7 @@ See also:
 Some widgets do not expose sufficient information via accessibility APIs to make them fully accessible.
 For example, MSAA, which is the accessibility API used by most standard Windows controls, does not provide the ability to obtain the location of the cursor or retrieve individual units of text in editable text fields.
 However, some widgets provide their own native APIs (not specific to accessibility) which can be used to obtain this information.
-NVDA makes use of these APIs where possible; e.g. in standard edit controls.
+Aslan makes use of these APIs where possible; e.g. in standard edit controls.
 
 ### Operating System Functions
 
@@ -80,17 +80,17 @@ Tasks that can be performed include moving/clicking the mouse and sending key pr
 `logHandler.initialize` prevents logging in [secure mode](https://download.nvaccess.org/documentation/userGuide.html#SecureMode).
 This is because it is a security concern to log during secure mode (e.g. passwords are logged on [secure screens](https://download.nvaccess.org/documentation/userGuide.html#SecureScreens).
 To change this for testing, use the [serviceDebug](https://download.nvaccess.org/documentation/userGuide.html#SystemWideParameters) system wide parameter to prevent secure mode on secure screens.
-When logging from a secure screen, `nvda.log` files are generated in the System profile's `%TEMP%` directory.
+When logging from a secure screen, `aslan.log` files are generated in the System profile's `%TEMP%` directory.
 
-## NVDA Components
+## Aslan Components
 
-NVDA is built with an extensible, modular, object oriented, abstract design.
+Aslan is built with an extensible, modular, object oriented, abstract design.
 It is divided into several distinct components.
 
 ### Launcher
 
-The launcher is the module which the user executes to start NVDA.
-It is contained in the file `nvda.pyw`.
+The launcher is the module which the user executes to start Aslan.
+It is contained in the file `aslan.pyw`.
 Refer to [startupShutdown documentation](./startupShutdown.md).
 
 ### Core
@@ -99,8 +99,8 @@ The core (in the function `core.main`) loads the configuration, initialises all 
 In each iteration of the main loop, the core pumps the [API](#api-handlers) and [input](#input-handlers) handlers, [registered generators](#registered-generators) and the main queue.
 All events, scripts, etc. are indirectly queued to this main queue by API and input handlers, so pumping the main queue causes these to be executed.
 At the end of the iteration, the core then goes to sleep until more work is added to the main queue, at which point the core will again wake and perform another iteration.
-The main loop continues to iterate / sleep until NVDA is instructed to exit either by the user or a newly started copy of NVDA.
-Once NVDA is instructed to exit, the core terminates all other components, saves the configuration if appropriate and then exits.
+The main loop continues to iterate / sleep until Aslan is instructed to exit either by the user or a newly started copy of Aslan.
+Once Aslan is instructed to exit, the core terminates all other components, saves the configuration if appropriate and then exits.
 
 #### Event and Script Handling
 
@@ -109,9 +109,9 @@ Input and API handlers use these modules to queue or directly execute scripts an
 
 #### Registered Generators
 
-Some tasks need to run in the background without causing NVDA to block (freeze) while waiting for them to complete.
+Some tasks need to run in the background without causing Aslan to block (freeze) while waiting for them to complete.
 They need to execute code regularly, but at no specific time interval.
-NVDA allows Python generator functions to be registered for this purpose.
+Aslan allows Python generator functions to be registered for this purpose.
 Once registered, the generator will be pumped once for each iteration/tick of the main loop.
 Examples of this include the say all and speak spelling functionality.
 They are registered using `queueHandler.registerGeneratorObject`.
@@ -133,9 +133,9 @@ For example, any input gesture can be bound to any script, both in code and by t
 
 These handle initialisation, listening for events and termination for specific accessibility and native APIs.
 They also contain utility functions useful for working with their API.
-When an event is received for a widget, an appropriate [NVDA object](#nvda-objects) is fetched or constructed and an event is then queued for that NVDA object.
-Together with [NVDA objects](#nvda-objects), they abstract the handling of queries and events for specific APIs so that the bulk of NVDA need not be concerned with specific APIs.
-To introduce support for a new API, a developer just creates another API handler and appropriate NVDA objects without needing to change the majority of the code.
+When an event is received for a widget, an appropriate [Aslan object](#aslan-objects) is fetched or constructed and an event is then queued for that Aslan object.
+Together with [Aslan objects](#aslan-objects), they abstract the handling of queries and events for specific APIs so that the bulk of Aslan need not be concerned with specific APIs.
+To introduce support for a new API, a developer just creates another API handler and appropriate Aslan objects without needing to change the majority of the code.
 API handler modules include `IAccessibleHandler` for MSAA/IAccessible and IAccessible2, `JABHandler` for Java Access Bridge and `UIAHandler` for UI Automation.
 
 ### Output Modules
@@ -146,34 +146,34 @@ There is also the `tones` module, which is used to output tones/beeps, and `nvWa
 
 ### Output Drivers
 
-Synth drivers are drivers to allow NVDA to utilise particular speech synthesisers.
+Synth drivers are drivers to allow Aslan to utilise particular speech synthesisers.
 They are derived from the `synthDriverHandler.SynthDriver` base class.
-Braille display drivers are drivers to allow NVDA to utilise particular braille displays.
+Braille display drivers are drivers to allow Aslan to utilise particular braille displays.
 They are derived from the `braille.BrailleDisplayDriver` base class.
 
-### NVDA Objects
+### Aslan Objects
 
-An NVDA object (`NVDAObject`) is an abstract representation of a single widget in NVDA.
-All NVDA objects derive from the base `NVDAObjects.NVDAObject` class.
-Methods and properties are used to query information about, handle events from and execute actions on the widget represented by the NVDA object in an abstract way.
-This means that the bulk of NVDA need not be concerned with specific accessibility or native APIs, but can instead work with a single, abstract representation.
+An Aslan object (`AslanObject`) is an abstract representation of a single widget in Aslan.
+All Aslan objects derive from the base `AslanObjects.AslanObject` class.
+Methods and properties are used to query information about, handle events from and execute actions on the widget represented by the Aslan object in an abstract way.
+This means that the bulk of Aslan need not be concerned with specific accessibility or native APIs, but can instead work with a single, abstract representation.
 This allows for the seamless support and integration of many vastly different APIs.
 It is here that the full power of object oriented programming is used.
-Many methods are implemented on the base `NVDAObject` class and only need to be overridden if specific functionality is required.
-Similarly, if a particular widget is non-standard, problematic, provides additional information using other mechanisms, etc., it can simply subclass another NVDA object and override methods as appropriate.
-NVDA objects that might be used in any application are contained in the NVDAObjects package. [App modules](#app-modules) may also define NVDA objects specific to an application.
+Many methods are implemented on the base `AslanObject` class and only need to be overridden if specific functionality is required.
+Similarly, if a particular widget is non-standard, problematic, provides additional information using other mechanisms, etc., it can simply subclass another Aslan object and override methods as appropriate.
+Aslan objects that might be used in any application are contained in the AslanObjects package. [App modules](#app-modules) may also define Aslan objects specific to an application.
 
-A part from properties such as a widget's name, role, states etc, NVDA objects also include relational properties such as parent, next, previous and first child.
+A part from properties such as a widget's name, role, states etc, Aslan objects also include relational properties such as parent, next, previous and first child.
 These allow both the user and code to navigate the entire Operating System and its applications in a tree-like structure.
 The root of the tree being the Desktop, whose children is all the top-level windows for all open applications, each containing further subtrees of more widgets representing an application's user interface.
 
 ### Text Ranges
 
-When working with editable text controls, NVDA needs to be able to obtain information about the text in the widget.
+When working with editable text controls, Aslan needs to be able to obtain information about the text in the widget.
 Aside from just retrieving the entire text, proper navigation requires retrieval of specific units of text (e.g. paragraphs, lines, words and characters), as well as the ability to find and set the location of the caret and selection.
-Also, if the widget supports formatting, NVDA should be able to retrieve text attributes such as font name, size, bold, italic, underline and whether there is a spelling error.
+Also, if the widget supports formatting, Aslan should be able to retrieve text attributes such as font name, size, bold, italic, underline and whether there is a spelling error.
 Each API provides a different way of querying and manipulating text.
-Just as NVDA objects provide an abstract representation of a widget, TextInfo objects provide an abstract representation of a range of text.
+Just as Aslan objects provide an abstract representation of a widget, TextInfo objects provide an abstract representation of a range of text.
 These objects are derived from the `textInfos.TextInfo` base class.
 
 TextInfo objects contain properties and methods to:
@@ -182,7 +182,7 @@ TextInfo objects contain properties and methods to:
 * compare the start and end of a range with itself or another range
 * Fetch the text and formatting of the range
 
-You can fetch a TextInfo object from an NVDA object via its `makeTextInfo` method, passing in the particular `textInfos.POSITION_*` constant depending on whether you want to fetch a range representing the position of the caret, selection, start or end of the text, or the entire text.
+You can fetch a TextInfo object from an Aslan object via its `makeTextInfo` method, passing in the particular `textInfos.POSITION_*` constant depending on whether you want to fetch a range representing the position of the caret, selection, start or end of the text, or the entire text.
 
 ### Global Commands
 
@@ -192,40 +192,40 @@ For example, the review, report current focus and date/time scripts are all loca
 
 ### Plugins
 
-NVDA allows third-parties to extend NVDA's functionality through plugins and add-ons.
-These may define custom NVDA objects for specific applications, add global features and add support for new braille displays and speech synthesizers.
+Aslan allows third-parties to extend Aslan's functionality through plugins and add-ons.
+These may define custom Aslan objects for specific applications, add global features and add support for new braille displays and speech synthesizers.
 There are three plugin types: appModules, globalPlugins and drivers, with drivers further divided between speech synthesizer and braille display support.
 
 #### App Modules
 
-Generally, most widgets may appear in any application and an [NVDA object](#nvda-objects) should therefore be included in the main `NVDAObjects` package.
+Generally, most widgets may appear in any application and an [Aslan object](#aslan-objects) should therefore be included in the main `AslanObjects` package.
 However, there are sometimes cases where a widget is implemented specifically for one application, as well as cases where a single event must be overridden or a script must be provided only in one application.
 An app module provides support specific to an application for these cases.
 An app module is derived from the `appModuleHandler.AppModule` base class.
-App modules receive events for all [NVDA objects](#nvda-objects) in the application and can bind scripts which can be executed anywhere in that application.
-They can also implement their own NVDA objects for use within the application.
+App modules receive events for all [Aslan objects](#aslan-objects) in the application and can bind scripts which can be executed anywhere in that application.
+They can also implement their own Aslan objects for use within the application.
 Usually the App Module should be named the same as the executable for which it should be loaded.
 In cases where this is problematic (one App Module should support multiple applications, the binary is named in a way which conflicts with the Python import system) you can add an entry to the `appModules.EXECUTABLE_NAMES_TO_APP_MODS` where the binary name is the key and the name of the App Module is the value.
 
 #### Global Plugins
 
-Aside from application specific customisation using [app modules](#app-modules), it is also possible to extend NVDA on a global level.
+Aside from application specific customisation using [app modules](#app-modules), it is also possible to extend Aslan on a global level.
 For example, new global commands can be added, behaviour can be changed and new GUI toolkits can be supported.
 This can be done using global plugins.
 A global plugin is derived from the `globalPluginHandler.GlobalPlugin` base class.
 Similar to [global commands](#global-commands), they can bind scripts which can be executed everywhere.
-More specifically, global plugins receive events for all [NVDA objects](#nvda-objects) in the Operating System and can bind scripts which can be executed anywhere.
-They can also implement their own global [NVDA Objects](#nvda-objects).
+More specifically, global plugins receive events for all [Aslan objects](#aslan-objects) in the Operating System and can bind scripts which can be executed anywhere.
+They can also implement their own global [Aslan Objects](#aslan-objects).
 
 ### Tree Interceptors
 
-Sometimes, it is necessary to intercept events and scripts for an entire hierarchy (or tree) of [NVDA objects](#nvda-objects).
+Sometimes, it is necessary to intercept events and scripts for an entire hierarchy (or tree) of [Aslan objects](#aslan-objects).
 For example, this is necessary to seamlessly handle complex documents which consist of many objects.
 This can be done using a tree interceptor.
 A tree interceptor (TreeInterceptor) is derived from the `treeInterceptorHandler.TreeInterceptor` base class.
-It receives events and scripts for all [NVDA objects](#nvda-objects) beneath and including the root NVDA object of the tree interceptor.
-Tree interceptors are created when a TreeInterceptor class is returned from the `treeInterceptorClass` property of an NVDA object.
-Tree interceptors are used mostly for web documents, where all events and scripts for NVDA objects within a document need to be handled by the document (root NVDA object) itself.
+It receives events and scripts for all [Aslan objects](#aslan-objects) beneath and including the root Aslan object of the tree interceptor.
+Tree interceptors are created when a TreeInterceptor class is returned from the `treeInterceptorClass` property of an Aslan object.
+Tree interceptors are used mostly for web documents, where all events and scripts for Aslan objects within a document need to be handled by the document (root Aslan object) itself.
 
 #### Browse mode documents
 
@@ -236,13 +236,13 @@ Browse mode documents are a subclass of `TreeInterceptor` that provide scripts t
 
 ##### Virtual buffers
 
-Due to the extreme slowness of performing large numbers of [out-of-process](#out-of-process-code) queries, some complex documents are accessed by NVDA by using [in-process code](#in-process-code), which collects all the content of a document in one go, and allows NVDA to search and fetch parts of this cached content on demand.
+Due to the extreme slowness of performing large numbers of [out-of-process](#out-of-process-code) queries, some complex documents are accessed by Aslan by using [in-process code](#in-process-code), which collects all the content of a document in one go, and allows Aslan to search and fetch parts of this cached content on demand.
 These are known as virtual buffers.
-A virtual buffer (VirtualBuffer) in NVDA is derived from the `virtualBuffers.VirtualBuffer` base class and is a type of [browse mode document](##browse-mode-documents).
+A virtual buffer (VirtualBuffer) in Aslan is derived from the `virtualBuffers.VirtualBuffer` base class and is a type of [browse mode document](##browse-mode-documents).
 
 ### GUI
 
-NVDA has its own graphical user interface to allow for easy configuration and other user interaction.
+Aslan has its own graphical user interface to allow for easy configuration and other user interaction.
 This code is primarily contained in the `gui` package.
 [wxPython](http://www.wxpython.org/) is used as the GUI toolkit.
 
@@ -271,7 +271,7 @@ sizer.Add(wx.StaticText(sizer.GetStaticBox(), wx.ID_ANY, "Where am I?"))
 sizer.Add(wx.Button(sizer.GetStaticBox(), wx.ID_ADD))
 ```
 
-PR [#12181](https://github.com/nvaccess/nvda/pull/12181) is an example of fixing this.
+PR [#12181](https://github.com/nvaccess/aslan/pull/12181) is an example of fixing this.
 
 ##### Event handlers are firing unexpectedly or failing to fire
 
@@ -283,38 +283,38 @@ Notably:
   * If `event.Skip()` is called in an event handler, propagation will continue.
 * `wx.CommandEvents`, a subset of wxEvents, will propagate up to the parent dialog by default.
   * If a child control performs an event, a parent event handler may fire.
-  PR [#13117](https://github.com/nvaccess/nvda/pull/13117) is an example of a bug caused by this being fixed.
+  PR [#13117](https://github.com/nvaccess/aslan/pull/13117) is an example of a bug caused by this being fixed.
 
 ### Configuration management
 
-NVDA includes an extensive configuration management facility including various preferences dialogs, ability to apply a given configuration in apps and so forth.
-The base configuration options, as well as routines that manage configuration profiles and other management routines are housed in the `config` package, and NVDA uses [ConfigObj](http://www.voidspace.org.uk/python/configobj.html) to store configuration options.
+Aslan includes an extensive configuration management facility including various preferences dialogs, ability to apply a given configuration in apps and so forth.
+The base configuration options, as well as routines that manage configuration profiles and other management routines are housed in the `config` package, and Aslan uses [ConfigObj](http://www.voidspace.org.uk/python/configobj.html) to store configuration options.
 
 ## Special Object Functions
 
 ### Events
 
-NVDA object, global plugin, app module and tree interceptor instances can all contain special methods which handle events for NVDA Objects.
+Aslan object, global plugin, app module and tree interceptor instances can all contain special methods which handle events for Aslan Objects.
 These methods are all named beginning with "`event_`"; e.g. `event_gainFocus` and `event_nameChange`.
 These events are generally executed by a call to `eventHandler.executeEvent`, which is in turn generally called resultant to events queued by [API Handlers](#api-handlers).
 Most events do not take any additional arguments.
 Global plugins, app modules and tree interceptors are passed a handler function which should be called if the event should be handled by the next handler;
 e.g. the object itself.
 
-Although an event is always for a particular NVDA object, it first has a chance of being handled by global plugins, app modules or tree interceptors.
+Although an event is always for a particular Aslan object, it first has a chance of being handled by global plugins, app modules or tree interceptors.
 If an event is handled by one of these, meaning that an `event_*` method was found and executed, the event stops there and does not go further, unless the method that handled it specifically calls the `nextHandler` function object passed to it.
 
 The chain of handlers is as follows:
 
 * The first found global plugin
 * The next found global plugin (until no more are found)
-* The app module containing the NVDA object the event is for, I.e. fetched from the NVDA object's `appModule` property.
-* The tree interceptor containing the NVDA object the event is for. I.e. fetched from the NVDA object's `treeInterceptor` property if the property is not `None`
-* The NVDA object itself.
+* The app module containing the Aslan object the event is for, I.e. fetched from the Aslan object's `appModule` property.
+* The tree interceptor containing the Aslan object the event is for. I.e. fetched from the Aslan object's `treeInterceptor` property if the property is not `None`
+* The Aslan object itself.
 
 ### Scripts
 
-NVDA object, global plugin, app module and tree interceptor instances can all contain special methods called scripts which are executed in response to [input gestures](#input-gestures) from the user.
+Aslan object, global plugin, app module and tree interceptor instances can all contain special methods called scripts which are executed in response to [input gestures](#input-gestures) from the user.
 These methods are all named beginning with "script_"; e.g. `script_reportCurrentFocus` and `script_dateTime`.
 Script methods are passed the input gesture that triggered them.
 Input gestures are bound to scripts in the class using a `scriptHandler.script` function decorator.
@@ -328,23 +328,23 @@ The chain of handlers is as follows:
 
 * The first found global plugin
 * The next found global plugin (until no more are found)
-* The app module containing the currently focused NVDA object, I.e. fetched from the NVDA object's `appModule` property
-* The tree interceptor containing the currently focused NVDA object, I.e. fetched from the NVDA object's `treeInterceptor` property if the property is not `None`
-* The currently focused NVDA object
-* the first ancestor (parent) of the currently focused NVDAObject, if the found script's `canPropagate` property is `True`
-* the next ancestor of the currently focused NVDAObject, if the found script's `canPropagate` property is `True`...
+* The app module containing the currently focused Aslan object, I.e. fetched from the Aslan object's `appModule` property
+* The tree interceptor containing the currently focused Aslan object, I.e. fetched from the Aslan object's `treeInterceptor` property if the property is not `None`
+* The currently focused Aslan object
+* the first ancestor (parent) of the currently focused AslanObject, if the found script's `canPropagate` property is `True`
+* the next ancestor of the currently focused AslanObject, if the found script's `canPropagate` property is `True`...
   * Global commands
 
 ## Inter-process Communication
 
-In general terms, every running application or service on a computer, including NVDA, is a separate process.
+In general terms, every running application or service on a computer, including Aslan, is a separate process.
 No process can access data in another process except via special operating system mechanisms.
 This is called inter-process communication (IPC).
 
 ### Out-of-process Code
 
-NVDA functions primarily out-of-process.
-That is, events and queries for information from other processes must be marshalled (communicated) between NVDA and the process in question using IPC.
+Aslan functions primarily out-of-process.
+That is, events and queries for information from other processes must be marshalled (communicated) between Aslan and the process in question using IPC.
 This is many times slower than queries and events managed in the same process.
 However, for the majority of screen reader functionality, this performance hit is insignificant.
 
@@ -354,8 +354,8 @@ When large numbers of queries need to be made in one hit, working [out-of-proces
 A noteworthy example is rendering a web page into a flat representation, as is done by [virtual buffers](#virtual-buffers).
 In these cases, code can be "injected" into the remote process.
 Because this code is running in the same process, queries and events are much faster, as they do not have to be marshalled between processes, which means that large numbers of queries are quite fast.
-NVDA can then perform single out-of-process queries for relevant information.
+Aslan can then perform single out-of-process queries for relevant information.
 In-process code must be small and light-weight, as it is being injected into other processes.
 It must also be as fast as possible to allow for maximum performance.
 Python is unsuitable for this task.
-All of NVDA's in-process code is written in C++, which allows for maximum performance and minimal overhead.
+All of Aslan's in-process code is written in C++, which allows for maximum performance and minimal overhead.

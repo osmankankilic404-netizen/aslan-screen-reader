@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Peter Vágner, Aleksey Sadovoy,
 # Rui Batista, Joseph Lee, Heiko Folkerts, Zahari Yurukov, Leonard de Ruijter,
 # Derek Riemer, Babbage B.V., Davy Kager, Ethan Holliger, Bill Dengler,
@@ -7,8 +7,8 @@
 # Takuya Nishimoto, jakubl7545, Tony Malykh, Rob Meredith,
 # Burman's Computer and Education Ltd, hwf1324, Cary-rowen, Christopher Proß, Tianze
 # Neil Soiffer, Ryan McCleary, Wang Chong, Kefas Lungu.
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import copy
 import logging
@@ -67,7 +67,7 @@ import wx.lib.newevent
 from addonStore.models.channel import UpdateChannel
 from config.configFlags import (
 	AddonsAutomaticUpdate,
-	NVDAKey,
+	AslanKey,
 	OutputMode,
 	ParagraphStartMarker,
 	PlayErrorSound,
@@ -109,7 +109,7 @@ from autoSettingsUtils.autoSettings import AutoSettings
 from autoSettingsUtils.driverSetting import BooleanDriverSetting, DriverSetting, NumericDriverSetting
 from autoSettingsUtils.utils import UnsupportedConfigParameterError
 
-from . import nvdaControls
+from . import aslanControls
 from .dpiScalingHelper import DpiScalingHelperMixinWithoutInit
 
 #: The size that settings panel text descriptions should be wrapped at.
@@ -156,7 +156,7 @@ class SettingsDialog(
 	# holds instances of SettingsDialogs as keys, and state as the value
 	_instances = weakref.WeakKeyDictionary()
 	title = ""
-	helpId = "NVDASettings"
+	helpId = "AslanSettings"
 	shouldSuspendConfigProfileTriggers = True
 
 	def __new__(cls, *args, **kwargs):
@@ -353,7 +353,7 @@ class SettingsDialog(
 		# If a child window is being destroyed, we don't want to
 		# set this object as destroyed.
 		# The ExpandoTextCtrl creates a destroy event as part of
-		# initialization, this caused the NVDASettings dialog
+		# initialization, this caused the AslanSettings dialog
 		# to be incorrectly set to destroyed, causing #12818.
 		isSelfAlive = bool(self)
 		if not isSelfAlive:
@@ -595,7 +595,7 @@ class MultiCategorySettingsDialog(SettingsDialog):
 		catListWidth = catListDim[0]
 		containerDim = (initialScaledWidth - catListWidth - spaceForBorderWidth, self.scaleSize(10))
 
-		self.catListCtrl = nvdaControls.AutoWidthColumnListCtrl(
+		self.catListCtrl = aslanControls.AutoWidthColumnListCtrl(
 			self,
 			autoSizeColumn=1,
 			size=catListDim,
@@ -826,10 +826,10 @@ class GeneralSettingsPanel(SettingsPanel):
 				_("Command line option: {langDesc}").format(langDesc=cmdLangDescription),
 			)
 			self.languageNames.append("FORCED")
-		# Translators: The label for a setting in general settings to select NVDA's interface language
-		# (once selected, NVDA must be restarted; the option user default means the user's Windows language
+		# Translators: The label for a setting in general settings to select Aslan's interface language
+		# (once selected, Aslan must be restarted; the option user default means the user's Windows language
 		# will be used).
-		languageLabelText = _("NVDA &Language (requires restart):")
+		languageLabelText = _("Aslan &Language (requires restart):")
 		self.languageList = settingsSizerHelper.addLabeledControl(
 			languageLabelText,
 			wx.Choice,
@@ -845,34 +845,34 @@ class GeneralSettingsPanel(SettingsPanel):
 		if globalVars.appArgs.secure:
 			self.languageList.Disable()
 
-		# Translators: The label for a setting in general settings to save current configuration when NVDA
-		# exits (if it is not checked, user needs to save configuration before quitting NVDA).
-		self.saveOnExitCheckBox = wx.CheckBox(self, label=_("&Save configuration when exiting NVDA"))
+		# Translators: The label for a setting in general settings to save current configuration when Aslan
+		# exits (if it is not checked, user needs to save configuration before quitting Aslan).
+		self.saveOnExitCheckBox = wx.CheckBox(self, label=_("&Save configuration when exiting Aslan"))
 		self.bindHelpEvent("GeneralSettingsSaveConfig", self.saveOnExitCheckBox)
 		self.saveOnExitCheckBox.SetValue(config.conf["general"]["saveConfigurationOnExit"])
 		if globalVars.appArgs.secure:
 			self.saveOnExitCheckBox.Disable()
 		settingsSizerHelper.addItem(self.saveOnExitCheckBox)
 
-		# Translators: The label for a setting in general settings to ask before quitting NVDA (if not checked, NVDA will exit without asking the user for action).
-		self.askToExitCheckBox = wx.CheckBox(self, label=_("Sho&w exit options when exiting NVDA"))
+		# Translators: The label for a setting in general settings to ask before quitting Aslan (if not checked, Aslan will exit without asking the user for action).
+		self.askToExitCheckBox = wx.CheckBox(self, label=_("Sho&w exit options when exiting Aslan"))
 		self.askToExitCheckBox.SetValue(config.conf["general"]["askToExit"])
 		settingsSizerHelper.addItem(self.askToExitCheckBox)
 		self.bindHelpEvent("GeneralSettingsShowExitOptions", self.askToExitCheckBox)
 
 		self.playStartAndExitSoundsCheckBox = wx.CheckBox(
 			self,
-			# Translators: The label for a setting in general settings to play sounds when NVDA starts or exits.
-			label=_("&Play sounds when starting or exiting NVDA"),
+			# Translators: The label for a setting in general settings to play sounds when Aslan starts or exits.
+			label=_("&Play sounds when starting or exiting Aslan"),
 		)
 		self.bindHelpEvent("GeneralSettingsPlaySounds", self.playStartAndExitSoundsCheckBox)
 		self.playStartAndExitSoundsCheckBox.SetValue(config.conf["general"]["playStartAndExitSounds"])
 		settingsSizerHelper.addItem(self.playStartAndExitSoundsCheckBox)
 
-		# Translators: The label for a setting in general settings to allow NVDA to start after logging onto
-		# Windows (if checked, NVDA will start automatically after logging into Windows; if not, user must
-		# start NVDA by pressing the shortcut key (CTRL+Alt+N by default).
-		self.startAfterLogonCheckBox = wx.CheckBox(self, label=_("St&art NVDA after I sign in"))
+		# Translators: The label for a setting in general settings to allow Aslan to start after logging onto
+		# Windows (if checked, Aslan will start automatically after logging into Windows; if not, user must
+		# start Aslan by pressing the shortcut key (CTRL+Alt+N by default).
+		self.startAfterLogonCheckBox = wx.CheckBox(self, label=_("St&art Aslan after I sign in"))
 		self.startAfterLogonCheckBox.SetValue(config.getStartAfterLogon())
 		if globalVars.appArgs.secure or not config.isInstalledCopy():
 			self.startAfterLogonCheckBox.Disable()
@@ -881,10 +881,10 @@ class GeneralSettingsPanel(SettingsPanel):
 		self.startOnLogonScreenCheckBox = wx.CheckBox(
 			self,
 			# Translators: The label for a setting in general settings to
-			# allow NVDA to come up in Windows login screen (useful if user
+			# allow Aslan to come up in Windows login screen (useful if user
 			# needs to enter passwords or if multiple user accounts are present
 			# to allow user to choose the correct account).
-			label=_("Use NVDA during sign-in (requires administrator privileges)"),
+			label=_("Use Aslan during sign-in (requires administrator privileges)"),
 		)
 		self.bindHelpEvent("GeneralSettingsStartOnLogOnScreen", self.startOnLogonScreenCheckBox)
 		self.startOnLogonScreenCheckBox.SetValue(config.getStartOnLogonScreen())
@@ -911,9 +911,9 @@ class GeneralSettingsPanel(SettingsPanel):
 
 		item = self.autoCheckForUpdatesCheckBox = wx.CheckBox(
 			self,
-			# Translators: The label of a checkbox in general settings to toggle automatic checking for updated versions of NVDA.
+			# Translators: The label of a checkbox in general settings to toggle automatic checking for updated versions of Aslan.
 			# If not checked, user must check for updates manually.
-			label=_("Automatically check for &updates to NVDA"),
+			label=_("Automatically check for &updates to Aslan"),
 		)
 		self.bindHelpEvent("GeneralSettingsCheckForUpdates", self.autoCheckForUpdatesCheckBox)
 		item.Value = config.conf["update"]["autoCheck"]
@@ -925,7 +925,7 @@ class GeneralSettingsPanel(SettingsPanel):
 		item = self.notifyForPendingUpdateCheckBox = wx.CheckBox(
 			self,
 			# Translators: The label of a checkbox in general settings to toggle startup notifications
-			# for a pending NVDA update.
+			# for a pending Aslan update.
 			label=_("Notify for &pending update on startup"),
 		)
 		self.bindHelpEvent("GeneralSettingsNotifyPendingUpdates", self.notifyForPendingUpdateCheckBox)
@@ -952,8 +952,8 @@ class GeneralSettingsPanel(SettingsPanel):
 			size=(self.scaleSize(250), -1),
 			style=wx.TE_READONLY,
 		)
-		# Translators: This is the label for the button used to change the NVDA update mirror URL,
-		# it appears in the context of the update mirror group on the General page of NVDA's settings.
+		# Translators: This is the label for the button used to change the Aslan update mirror URL,
+		# it appears in the context of the update mirror group on the General page of Aslan's settings.
 		changeMirrorBtn = wx.Button(mirrorBox, label=_("Change..."))
 		mirrorBoxSizerHelper.addItem(
 			guiHelper.associateElements(
@@ -983,8 +983,8 @@ class GeneralSettingsPanel(SettingsPanel):
 
 		changeMirror = _SetURLDialog(
 			self,
-			# Translators: Title of the dialog used to change NVDA's update server mirror URL.
-			title=_("Set NVDA Update Mirror"),
+			# Translators: Title of the dialog used to change Aslan's update server mirror URL.
+			title=_("Set Aslan Update Mirror"),
 			configPath=("update", "serverURL"),
 			helpId="SetURLDialog",
 			urlTransformer=lambda url: f"{url}?versionType=stable",
@@ -1044,11 +1044,11 @@ class GeneralSettingsPanel(SettingsPanel):
 		del progressDialog
 		if not res:
 			# Translators: The message displayed when errors were found while trying to copy current configuration to system settings.
-			gui.messageBox(_("Error copying NVDA user settings"), _("Error"), wx.OK | wx.ICON_ERROR, self)
+			gui.messageBox(_("Error copying Aslan user settings"), _("Error"), wx.OK | wx.ICON_ERROR, self)
 		else:
 			gui.messageBox(
 				# Translators: The message displayed when copying configuration to system settings was successful.
-				_("Successfully copied NVDA user settings"),
+				_("Successfully copied Aslan user settings"),
 				# Translators: The message title displayed when copying configuration to system settings was successful.
 				_("Success"),
 				wx.OK | wx.ICON_INFORMATION,
@@ -1095,7 +1095,7 @@ class GeneralSettingsPanel(SettingsPanel):
 			(
 				url
 				if (url := config.conf["update"]["serverURL"])
-				# Translators: A value that appears in NVDA's Settings to indicate that no mirror is in use.
+				# Translators: A value that appears in Aslan's Settings to indicate that no mirror is in use.
 				else _("No mirror")
 			),
 		)
@@ -1112,22 +1112,22 @@ class LanguageRestartDialog(
 	helpId = "GeneralSettingsLanguage"
 
 	def __init__(self, parent):
-		# Translators: The title of the dialog which appears when the user changed NVDA's interface language.
+		# Translators: The title of the dialog which appears when the user changed Aslan's interface language.
 		super(LanguageRestartDialog, self).__init__(parent, title=_("Language Configuration Change"))
 		mainSizer = wx.BoxSizer(wx.VERTICAL)
 		sHelper = guiHelper.BoxSizerHelper(self, orientation=wx.VERTICAL)
 		sHelper.addItem(
-			# Translators: The message displayed after NVDA interface language has been changed.
-			wx.StaticText(self, label=_("NVDA must be restarted for the new language to take effect.")),
+			# Translators: The message displayed after Aslan interface language has been changed.
+			wx.StaticText(self, label=_("Aslan must be restarted for the new language to take effect.")),
 		)
 
 		bHelper = sHelper.addDialogDismissButtons(guiHelper.ButtonHelper(wx.HORIZONTAL))
-		# Translators: The label for a button  in the dialog which appears when the user changed NVDA's interface language.
+		# Translators: The label for a button  in the dialog which appears when the user changed Aslan's interface language.
 		restartNowButton = bHelper.addButton(self, label=_("Restart &now"))
 		restartNowButton.Bind(wx.EVT_BUTTON, self.onRestartNowButton)
 		restartNowButton.SetFocus()
 
-		# Translators: The label for a button  in the dialog which appears when the user changed NVDA's interface language.
+		# Translators: The label for a button  in the dialog which appears when the user changed Aslan's interface language.
 		restartLaterButton = bHelper.addButton(self, wx.ID_CLOSE, label=_("Restart &later"))
 		restartLaterButton.Bind(wx.EVT_BUTTON, lambda evt: self.Close())
 		self.Bind(wx.EVT_CLOSE, lambda evt: self.Destroy())
@@ -1276,7 +1276,7 @@ class SynthesizerSelectionDialog(SettingsDialog):
 
 		if self.IsModal():
 			# Hack: we need to update the synth in our parent window before closing.
-			# Otherwise, NVDA will report the old synth even though the new synth is reflected visually.
+			# Otherwise, Aslan will report the old synth even though the new synth is reflected visually.
 			self.Parent.updateCurrentSynth()
 		super(SynthesizerSelectionDialog, self).onOk(evt)
 
@@ -1403,7 +1403,7 @@ class AutoSettingsMixin(metaclass=ABCMeta):
 		labeledControl = guiHelper.LabeledControlHelper(
 			self,
 			f"{setting.displayNameWithAccelerator}:",
-			nvdaControls.EnhancedInputSlider,
+			aslanControls.EnhancedInputSlider,
 			minValue=setting.minVal,
 			maxValue=setting.maxVal,
 		)
@@ -1741,24 +1741,24 @@ class VoiceSettingsPanel(AutoSettingsMixin, SettingsPanel):
 		self.bindHelpEvent("SpeechSettingsTrust", self.trustVoiceLanguageCheckbox)
 		self.trustVoiceLanguageCheckbox.SetValue(config.conf["speech"]["trustVoiceLanguage"])
 
-		self.unicodeNormalizationCombo: nvdaControls.FeatureFlagCombo = settingsSizerHelper.addLabeledControl(
+		self.unicodeNormalizationCombo: aslanControls.FeatureFlagCombo = settingsSizerHelper.addLabeledControl(
 			labelText=_(
 				# Translators: This is a label for a combo-box in the Speech settings panel.
 				"Unicode normali&zation",
 			),
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["speech", "unicodeNormalization"],
 			conf=config.conf,
 			onChoiceEventHandler=self._onUnicodeNormalizationChange,
 		)
 		self.bindHelpEvent("SpeechUnicodeNormalization", self.unicodeNormalizationCombo)
 
-		self.sayAllReadingUnitCombo: nvdaControls.FeatureFlagCombo = settingsSizerHelper.addLabeledControl(
+		self.sayAllReadingUnitCombo: aslanControls.FeatureFlagCombo = settingsSizerHelper.addLabeledControl(
 			labelText=_(
 				# Translators: This is a label for a combo-box in the Speech settings panel.
 				"Say all reads by",
 			),
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["speech", "sayAllReadingUnit"],
 			conf=config.conf,
 		)
@@ -1804,7 +1804,7 @@ class VoiceSettingsPanel(AutoSettingsMixin, SettingsPanel):
 		capPitchChangeLabelText = _("Capital pitch change percentage")
 		self.capPitchChangeEdit = settingsSizerHelper.addLabeledControl(
 			capPitchChangeLabelText,
-			nvdaControls.SelectOnFocusSpinCtrl,
+			aslanControls.SelectOnFocusSpinCtrl,
 			min=minPitchChange,
 			max=maxPitchChange,
 			initial=config.conf["speech"][self.driver.name]["capPitchChange"],
@@ -1855,10 +1855,10 @@ class VoiceSettingsPanel(AutoSettingsMixin, SettingsPanel):
 		self._availableSymbolDictionaries = [
 			d for d in characterProcessing.listAvailableSymbolDictionaryDefinitions() if d.userVisible
 		]
-		self.symbolDictionariesList: nvdaControls.CustomCheckListBox = settingsSizerHelper.addLabeledControl(
+		self.symbolDictionariesList: aslanControls.CustomCheckListBox = settingsSizerHelper.addLabeledControl(
 			# Translators: Label of the list where user can enable or disable symbol dictionaries.
 			_("E&xtra dictionaries for character and symbol processing:"),
-			nvdaControls.CustomCheckListBox,
+			aslanControls.CustomCheckListBox,
 			choices=[d.displayName for d in self._availableSymbolDictionaries],
 		)
 		self.bindHelpEvent("SpeechSymbolDictionaries", self.symbolDictionariesList)
@@ -1871,10 +1871,10 @@ class VoiceSettingsPanel(AutoSettingsMixin, SettingsPanel):
 		self._availableSpeechDictionaries = [
 			d for d in speechDictHandler.listAvailableSpeechDictDefinitions(forDisplay=True) if d.userVisible
 		]
-		self.speechDictionariesList: nvdaControls.CustomCheckListBox = settingsSizerHelper.addLabeledControl(
+		self.speechDictionariesList: aslanControls.CustomCheckListBox = settingsSizerHelper.addLabeledControl(
 			# Translators: Label of the list where user can enable or disable speech dictionaries.
 			_("Sp&eech dictionaries:"),
-			nvdaControls.CustomCheckListBox,
+			aslanControls.CustomCheckListBox,
 			choices=[d.displayName for d in self._availableSpeechDictionaries],
 		)
 		self.bindHelpEvent("SpeechDictionaries", self.speechDictionariesList)
@@ -1885,10 +1885,10 @@ class VoiceSettingsPanel(AutoSettingsMixin, SettingsPanel):
 
 	def _appendSpeechModesList(self, settingsSizerHelper: guiHelper.BoxSizerHelper) -> None:
 		self._allSpeechModes = list(speech.SpeechMode)
-		self.speechModesList: nvdaControls.CustomCheckListBox = settingsSizerHelper.addLabeledControl(
+		self.speechModesList: aslanControls.CustomCheckListBox = settingsSizerHelper.addLabeledControl(
 			# Translators: Label of the list where user can select speech modes that will be available.
 			_("&Modes available in the Cycle speech mode command:"),
-			nvdaControls.CustomCheckListBox,
+			aslanControls.CustomCheckListBox,
 			choices=[mode.displayString for mode in self._allSpeechModes],
 		)
 		self.bindHelpEvent("SpeechModesDisabling", self.speechModesList)
@@ -2031,17 +2031,17 @@ class KeyboardSettingsPanel(SettingsPanel):
 			log.debugWarning("Could not set Keyboard layout list to current layout", exc_info=True)
 
 		# Translators: This is the label for a list of checkboxes
-		# controlling which keys are NVDA modifier keys.
-		modifierBoxLabel = _("&Select NVDA Modifier Keys")
-		self.modifierChoices = [key.displayString for key in NVDAKey]
+		# controlling which keys are Aslan modifier keys.
+		modifierBoxLabel = _("&Select Aslan Modifier Keys")
+		self.modifierChoices = [key.displayString for key in AslanKey]
 		self.modifierList = sHelper.addLabeledControl(
 			modifierBoxLabel,
-			nvdaControls.CustomCheckListBox,
+			aslanControls.CustomCheckListBox,
 			choices=self.modifierChoices,
 		)
 		checkedItems = []
-		for n, key in enumerate(NVDAKey):
-			if config.conf["keyboard"]["NVDAModifierKeys"] & key.value:
+		for n, key in enumerate(AslanKey):
+			if config.conf["keyboard"]["AslanModifierKeys"] & key.value:
 				checkedItems.append(n)
 		self.modifierList.CheckedItems = checkedItems
 		self.modifierList.Select(0)
@@ -2140,7 +2140,7 @@ class KeyboardSettingsPanel(SettingsPanel):
 		multiPressTimeoutText = _("&Multiple key press timeout (ms):")
 		self.multiPressTimeoutEdit = sHelper.addLabeledControl(
 			multiPressTimeoutText,
-			nvdaControls.SelectOnFocusSpinCtrl,
+			aslanControls.SelectOnFocusSpinCtrl,
 			min=minTimeout,
 			max=maxTimeout,
 			initial=config.conf["keyboard"]["multiPressTimeout"],
@@ -2148,15 +2148,15 @@ class KeyboardSettingsPanel(SettingsPanel):
 		self.bindHelpEvent("MultiPressTimeout", self.multiPressTimeoutEdit)
 
 	def isValid(self) -> bool:
-		# #2871: check whether at least one key is the nvda key.
+		# #2871: check whether at least one key is the aslan key.
 		if not self.modifierList.CheckedItems:
-			log.debugWarning("No NVDA key set")
+			log.debugWarning("No Aslan key set")
 			self._validationErrorMessageBox(
-				# Translators: Message to report wrong configuration of the NVDA key
-				message=_("At least one key must be used as the NVDA key."),
-				# Translators: Same as the label for the list of checkboxes controlling which keys are NVDA modifier
+				# Translators: Message to report wrong configuration of the Aslan key
+				message=_("At least one key must be used as the Aslan key."),
+				# Translators: Same as the label for the list of checkboxes controlling which keys are Aslan modifier
 				# keys in Keyboard Settings, but without keyboard accelerator (& character).
-				option=_("Select NVDA Modifier Keys"),
+				option=_("Select Aslan Modifier Keys"),
 			)
 			return False
 		return super().isValid()
@@ -2164,8 +2164,8 @@ class KeyboardSettingsPanel(SettingsPanel):
 	def onSave(self):
 		layout = self.kbdNames[self.kbdList.GetSelection()]
 		config.conf["keyboard"]["keyboardLayout"] = layout
-		config.conf["keyboard"]["NVDAModifierKeys"] = sum(
-			key.value for (n, key) in enumerate(NVDAKey) if self.modifierList.IsChecked(n)
+		config.conf["keyboard"]["AslanModifierKeys"] = sum(
+			key.value for (n, key) in enumerate(AslanKey) if self.modifierList.IsChecked(n)
 		)
 		config.conf["keyboard"]["speakTypedCharacters"] = self.speakTypedCharsList.GetSelection()
 		config.conf["keyboard"]["speakTypedWords"] = self.speakTypedWordsList.GetSelection()
@@ -2406,8 +2406,8 @@ class InputCompositionPanel(SettingsPanel):
 class ObjectPresentationPanel(SettingsPanel):
 	panelDescription = _(
 		# Translators: This is a label appearing on the Object Presentation settings panel.
-		"Configure how much information NVDA will present about controls."
-		" These options apply to focus reporting and NVDA object navigation,"
+		"Configure how much information Aslan will present about controls."
+		" These options apply to focus reporting and Aslan object navigation,"
 		" but not when reading text content e.g. web content with browse mode.",
 	)
 
@@ -2577,7 +2577,7 @@ class BrowseModePanel(SettingsPanel):
 		maxLengthLabelText = _("&Maximum number of characters on one line")
 		self.maxLengthEdit = sHelper.addLabeledControl(
 			maxLengthLabelText,
-			nvdaControls.SelectOnFocusSpinCtrl,
+			aslanControls.SelectOnFocusSpinCtrl,
 			# min and max are not enforced in the config for virtualBuffers.maxLineLength
 			min=10,
 			max=250,
@@ -2590,7 +2590,7 @@ class BrowseModePanel(SettingsPanel):
 		pageLinesLabelText = _("&Number of lines per page")
 		self.pageLinesEdit = sHelper.addLabeledControl(
 			pageLinesLabelText,
-			nvdaControls.SelectOnFocusSpinCtrl,
+			aslanControls.SelectOnFocusSpinCtrl,
 			# min and max are not enforced in the config for virtualBuffers.linesPerPage
 			min=5,
 			max=150,
@@ -2680,12 +2680,12 @@ class BrowseModePanel(SettingsPanel):
 		)
 		self.trapNonCommandGesturesCheckBox.SetValue(config.conf["virtualBuffers"]["trapNonCommandGestures"])
 
-		self.searchHistoryCombo: nvdaControls.FeatureFlagCombo = sHelper.addLabeledControl(
+		self.searchHistoryCombo: aslanControls.FeatureFlagCombo = sHelper.addLabeledControl(
 			labelText=_(
 				# Translators: This is the label for a combo box in the browse mode settings panel.
 				"&Keep search history",
 			),
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["virtualBuffers", "findHistory"],
 			conf=config.conf,
 		)
@@ -2697,10 +2697,10 @@ class BrowseModePanel(SettingsPanel):
 
 		# Store element types for use in onSave (excludes the always-active "default" entry).
 		self._browseModeElements = list(browseMode.BrowseModeTreeInterceptor._browseTouchNavRegistry)
-		self._browseModeCheckListBox: nvdaControls.CustomCheckListBox = sHelper.addLabeledControl(
+		self._browseModeCheckListBox: aslanControls.CustomCheckListBox = sHelper.addLabeledControl(
 			# Translators: Label for the list of browse mode touch navigation element types in browse mode settings.
 			_("T&ouch navigation elements:"),
-			nvdaControls.CustomCheckListBox,
+			aslanControls.CustomCheckListBox,
 			choices=[label for _itemType, label in self._browseModeElements],
 		)
 		self._browseModeCheckListBox.Enable(touchHandler.touchSupported())
@@ -2901,9 +2901,9 @@ class MathSettingsPanel(SettingsPanel):
 		relativeSpeedText = pgettext("math", "Relative speech rate")
 		minMathRate = int(config.conf.getConfigValidation(("math", "speech", "mathRate")).kwargs["min"])
 		maxMathRate = int(config.conf.getConfigValidation(("math", "speech", "mathRate")).kwargs["max"])
-		self.relativeSpeedSlider: nvdaControls.EnhancedInputSlider = speechGroup.addLabeledControl(
+		self.relativeSpeedSlider: aslanControls.EnhancedInputSlider = speechGroup.addLabeledControl(
 			relativeSpeedText,
-			nvdaControls.EnhancedInputSlider,
+			aslanControls.EnhancedInputSlider,
 			minValue=minMathRate,
 			maxValue=maxMathRate,
 		)
@@ -2914,9 +2914,9 @@ class MathSettingsPanel(SettingsPanel):
 		pauseFactorText = pgettext("math", "Pause factor")
 		# Note: the UI uses a log scale for pause factors.
 		# The values 1 - 14 get mapped onto 0 - 1056, which are the actual config values.
-		self.pauseFactorSlider: nvdaControls.EnhancedInputSlider = speechGroup.addLabeledControl(
+		self.pauseFactorSlider: aslanControls.EnhancedInputSlider = speechGroup.addLabeledControl(
 			pauseFactorText,
-			nvdaControls.EnhancedInputSlider,
+			aslanControls.EnhancedInputSlider,
 			minValue=0,
 			maxValue=14,
 		)
@@ -3038,7 +3038,7 @@ class MathSettingsPanel(SettingsPanel):
 		availableBrailleCodes: list[str] = preferences.getBrailleCodes()
 		autoBrailleCode = preferences.getAutoBrailleCode(availableBrailleCodes)
 		# Translators: An option in Math settings to select a braille code automatically,
-		# according to NVDA's language.
+		# according to Aslan's language.
 		autoDisplay = pgettext("math", "Automatic ({name})").format(name=autoBrailleCode)
 		self._brailleCodeIds: list[str] = ["Auto"]
 		brailleMathCodeOptions: list[str] = [autoDisplay]
@@ -3168,7 +3168,7 @@ class MathSettingsPanel(SettingsPanel):
 		selectedBrailleIndex = self.brailleMathCodeList.GetSelection()
 		mathConf["braille"]["brailleCode"] = self._brailleCodeIds[selectedBrailleIndex]
 		mathConf["other"]["useWordNativeMath"] = self.useWordNativeMathCheckBox.GetValue()
-		mcPrefs = MathCATUserPreferences.fromNVDAConfig()
+		mcPrefs = MathCATUserPreferences.fromAslanConfig()
 		mcPrefs.apply()
 
 	def onLanguageChange(self, event: wx.CommandEvent) -> None:
@@ -3194,7 +3194,7 @@ class DocumentFormattingPanel(SettingsPanel):
 	helpId = "DocumentFormattingSettings"
 
 	# Translators: This is a label appearing on the document formatting settings panel.
-	panelDescription = _("The following options control the types of document formatting reported by NVDA.")
+	panelDescription = _("The following options control the types of document formatting reported by Aslan.")
 
 	def makeSettings(self, settingsSizer):
 		sHelper = guiHelper.BoxSizerHelper(self, sizer=settingsSizer)
@@ -3301,7 +3301,7 @@ class DocumentFormattingPanel(SettingsPanel):
 			# Translators: This is the label for a checklist in the
 			# document formatting settings panel.
 			_("Spelling or grammar e&rrors"),
-			nvdaControls.CustomCheckListBox,
+			aslanControls.CustomCheckListBox,
 			choices=[i.displayString for i in ReportSpellingErrors],
 		)
 		checkedItems = []
@@ -3352,7 +3352,7 @@ class DocumentFormattingPanel(SettingsPanel):
 		self.lineIndentationCombo.SetSelection(reportLineIndentation)
 
 		# Translators: This is the label of a checkbox in the document formatting settings panel
-		# If this option is selected, NVDA will ignore blank lines for line indentation reporting
+		# If this option is selected, Aslan will ignore blank lines for line indentation reporting
 		ignoreBlankLinesText = _("Ignore &blank lines for line indentation reporting")
 		ignoreBlankLinesCheckBox = wx.CheckBox(pageAndSpaceBox, label=ignoreBlankLinesText)
 		self.ignoreBlankLinesRLICheckbox = pageAndSpaceGroup.addItem(ignoreBlankLinesCheckBox)
@@ -3382,7 +3382,7 @@ class DocumentFormattingPanel(SettingsPanel):
 		)
 
 		# Translators: This message is presented in the document formatting settings panel
-		# If this option is selected, NVDA will report paragraph indentation if available.
+		# If this option is selected, Aslan will report paragraph indentation if available.
 		paragraphIndentationText = _("&Paragraph indentation")
 		_paragraphIndentationCheckBox = wx.CheckBox(pageAndSpaceBox, label=paragraphIndentationText)
 		self.paragraphIndentationCheckBox = pageAndSpaceGroup.addItem(_paragraphIndentationCheckBox)
@@ -3391,7 +3391,7 @@ class DocumentFormattingPanel(SettingsPanel):
 		)
 
 		# Translators: This message is presented in the document formatting settings panel
-		# If this option is selected, NVDA will report line spacing if available.
+		# If this option is selected, Aslan will report line spacing if available.
 		lineSpacingText = _("&Line spacing")
 		_lineSpacingCheckBox = wx.CheckBox(pageAndSpaceBox, label=lineSpacingText)
 		self.lineSpacingCheckBox = pageAndSpaceGroup.addItem(_lineSpacingCheckBox)
@@ -3601,9 +3601,9 @@ class DocumentNavigationPanel(SettingsPanel):
 
 		# Translators: This is a label for the paragraph navigation style in the document navigation dialog
 		paragraphStyleLabel = _("&Paragraph style:")
-		self.paragraphStyleCombo: nvdaControls.FeatureFlagCombo = sHelper.addLabeledControl(
+		self.paragraphStyleCombo: aslanControls.FeatureFlagCombo = sHelper.addLabeledControl(
 			labelText=paragraphStyleLabel,
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["documentNavigation", "paragraphStyle"],
 			conf=config.conf,
 		)
@@ -3611,9 +3611,9 @@ class DocumentNavigationPanel(SettingsPanel):
 
 		# Translators: This is a label for the word segmentation standard in the document navigation dialog
 		wordNavigationUnitLabel = _("&Word Segmentation Standard:")
-		self.wordSegCombo: nvdaControls.FeatureFlagCombo = sHelper.addLabeledControl(
+		self.wordSegCombo: aslanControls.FeatureFlagCombo = sHelper.addLabeledControl(
 			labelText=wordNavigationUnitLabel,
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["documentNavigation", "wordSegmentationStandard"],
 			conf=config.conf,
 		)
@@ -3632,10 +3632,10 @@ class DocumentNavigationPanel(SettingsPanel):
 def _synthWarningDialog(newSynth: str):
 	gui.messageBox(
 		# Translators: This message is presented when
-		# NVDA is unable to load the selected synthesizer.
+		# Aslan is unable to load the selected synthesizer.
 		_("Could not load the %s synthesizer.") % newSynth,
 		# Translators: Dialog title presented when
-		# NVDA is unable to load the selected synthesizer.
+		# Aslan is unable to load the selected synthesizer.
 		_("Synthesizer Error"),
 		wx.OK | wx.ICON_WARNING,
 	)
@@ -3649,7 +3649,7 @@ class AudioPanel(SettingsPanel):
 	def makeSettings(self, settingsSizer: wx.BoxSizer) -> None:
 		sHelper = guiHelper.BoxSizerHelper(self, sizer=settingsSizer)
 
-		# Translators: This is the label for the select output device combo in NVDA audio settings.
+		# Translators: This is the label for the select output device combo in Aslan audio settings.
 		# Examples of an output device are default soundcard, usb headphones, etc.
 		deviceListLabelText = _("Audio output &device:")
 		self._deviceIds, deviceNames = zip(*mmdevice.getOutputDevices(includeDefault=True))
@@ -3680,7 +3680,7 @@ class AudioPanel(SettingsPanel):
 
 		# Translators: This is the label for a checkbox control in the
 		# Audio settings panel.
-		label = _("Volume of NVDA sounds follows voice volume")
+		label = _("Volume of Aslan sounds follows voice volume")
 		self.soundVolFollowCheckBox: wx.CheckBox = sHelper.addItem(wx.CheckBox(self, label=label))
 		self.bindHelpEvent("SoundVolumeFollowsVoice", self.soundVolFollowCheckBox)
 		self.soundVolFollowCheckBox.SetValue(config.conf["audio"]["soundVolumeFollowsVoice"])
@@ -3688,10 +3688,10 @@ class AudioPanel(SettingsPanel):
 
 		# Translators: This is the label for a slider control in the
 		# Audio settings panel.
-		label = _("Volume of NVDA sounds")
-		self.soundVolSlider: nvdaControls.EnhancedInputSlider = sHelper.addLabeledControl(
+		label = _("Volume of Aslan sounds")
+		self.soundVolSlider: aslanControls.EnhancedInputSlider = sHelper.addLabeledControl(
 			label,
-			nvdaControls.EnhancedInputSlider,
+			aslanControls.EnhancedInputSlider,
 			minValue=0,
 			maxValue=100,
 		)
@@ -3722,7 +3722,7 @@ class AudioPanel(SettingsPanel):
 		maxTime = int(config.conf.getConfigValidation(("audio", "audioAwakeTime")).kwargs["max"])
 		self.audioAwakeTimeEdit = sHelper.addLabeledControl(
 			audioAwakeTimeLabelText,
-			nvdaControls.SelectOnFocusSpinCtrl,
+			aslanControls.SelectOnFocusSpinCtrl,
 			min=minTime,
 			max=maxTime,
 			initial=config.conf["audio"]["audioAwakeTime"],
@@ -3731,10 +3731,10 @@ class AudioPanel(SettingsPanel):
 
 	def _appendSoundSplitModesList(self, settingsSizerHelper: guiHelper.BoxSizerHelper) -> None:
 		self._allSoundSplitModes = list(audio.SoundSplitState)
-		self.soundSplitModesList: nvdaControls.CustomCheckListBox = settingsSizerHelper.addLabeledControl(
+		self.soundSplitModesList: aslanControls.CustomCheckListBox = settingsSizerHelper.addLabeledControl(
 			# Translators: Label of the list where user can select sound split modes that will be available.
 			_("&Modes available in the 'Cycle sound split mode' command:"),
-			nvdaControls.CustomCheckListBox,
+			aslanControls.CustomCheckListBox,
 			choices=[mode.displayString for mode in self._allSoundSplitModes],
 		)
 		self.bindHelpEvent("CustomizeSoundSplitModes", self.soundSplitModesList)
@@ -3857,7 +3857,7 @@ class AddonStorePanel(SettingsPanel):
 			style=wx.TE_READONLY,
 		)
 		# Translators: This is the label for the button used to change the Add-on Store mirror URL,
-		# it appears in the context of the mirror server group on the Add-on Store page of NVDA's settings.
+		# it appears in the context of the mirror server group on the Add-on Store page of Aslan's settings.
 		changeMirrorBtn = wx.Button(mirrorBox, label=_("Change..."))
 		mirrorBoxSizerHelper.addItem(
 			guiHelper.associateElements(
@@ -3903,7 +3903,7 @@ class AddonStorePanel(SettingsPanel):
 			(
 				url
 				if (url := config.conf["addonStore"]["baseServerURL"])
-				# Translators: A value that appears in NVDA's Settings to indicate that no mirror is in use.
+				# Translators: A value that appears in Aslan's Settings to indicate that no mirror is in use.
 				else _("No mirror")
 			),
 		)
@@ -3920,7 +3920,7 @@ class AddonStorePanel(SettingsPanel):
 
 
 class RemoteSettingsPanel(SettingsPanel):
-	# Translators: This is the label for the Remote Access settings category in NVDA's Settings screen.
+	# Translators: This is the label for the Remote Access settings category in Aslan's Settings screen.
 	title = pgettext("remote", "Remote Access")
 	helpId = "RemoteSettings"
 
@@ -3968,8 +3968,8 @@ class RemoteSettingsPanel(SettingsPanel):
 		self.autoconnect = remoteSettingsGroupHelper.addItem(
 			wx.CheckBox(
 				self.remoteSettingsGroupBox,
-				# Translators: A checkbox in Remote Access settings to set whether NVDA should automatically connect to a control server on startup.
-				label=pgettext("remote", "Automatically &connect after NVDA starts"),
+				# Translators: A checkbox in Remote Access settings to set whether Aslan should automatically connect to a control server on startup.
+				label=pgettext("remote", "Automatically &connect after Aslan starts"),
 			),
 		)
 		self.autoconnect.Bind(wx.EVT_CHECKBOX, self._onAutoconnect)
@@ -3978,7 +3978,7 @@ class RemoteSettingsPanel(SettingsPanel):
 		self.autoConnectGroupSizer = wx.StaticBoxSizer(
 			wx.VERTICAL,
 			self.remoteSettingsGroupBox,
-			# Translators: A group of settings configuring how to connect if NVDA is set to automatically establish a Remote Access connection at startup.
+			# Translators: A group of settings configuring how to connect if Aslan is set to automatically establish a Remote Access connection at startup.
 			label=pgettext("remote", "Automatic connection"),
 		)
 		self.autoConnectionGroupBox: wx.StaticBox = self.autoConnectGroupSizer.GetStaticBox()
@@ -4017,7 +4017,7 @@ class RemoteSettingsPanel(SettingsPanel):
 			# This is the port on which the local control server will be accessible,
 			# if the user has chosen to host their own.
 			_("&Port:"),
-			nvdaControls.SelectOnFocusSpinCtrl,
+			aslanControls.SelectOnFocusSpinCtrl,
 			min=1,
 			max=65535,
 		)
@@ -4123,7 +4123,7 @@ class RemoteSettingsPanel(SettingsPanel):
 			pgettext(
 				"remote",
 				# Translators: This message is presented when the user tries to delete all stored trusted fingerprints.
-				"This will cause NVDA to forget all previously trusted Remote Access servers. "
+				"This will cause Aslan to forget all previously trusted Remote Access servers. "
 				"When connecting to a previously trusted unrecognised server, you will again be asked whether to trust its certificate.\n\n"
 				"Are you sure you want to continue?",
 			),
@@ -4145,13 +4145,13 @@ class RemoteSettingsPanel(SettingsPanel):
 				message = pgettext(
 					"remote",
 					# Translators: This message is presented when the user tries to save the settings with the host or key field empty.
-					"Both host and key must be set in the Remote Access section in order to automatically connect using an existing server after NVDA starts.",
+					"Both host and key must be set in the Remote Access section in order to automatically connect using an existing server after Aslan starts.",
 				)
 			elif self.clientOrServer.GetSelection() and not self.port.GetValue() or not self.key.GetValue():
 				message = pgettext(
 					"remote",
 					# Translators: This message is presented when the user tries to save the settings with the port or key field empty.
-					"Both port and key must be set in the Remote Access category in order to automatically connect using a locally hosted server after NVDA starts.",
+					"Both port and key must be set in the Remote Access category in order to automatically connect using a locally hosted server after Aslan starts.",
 				)
 			if message is not None:
 				gui.messageBox(
@@ -4291,7 +4291,7 @@ class AdvancedPanelControls(
 		self.SetSizer(sHelper.sizer)
 		# Translators: This is the label for a group of advanced options in the
 		#  Advanced settings panel
-		groupText = _("NVDA Development")
+		groupText = _("Aslan Development")
 		devGroupSizer = wx.StaticBoxSizer(wx.VERTICAL, self, label=groupText)
 		devGroupBox = devGroupSizer.GetStaticBox()
 		devGroup = guiHelper.BoxSizerHelper(self, sizer=devGroupSizer)
@@ -4336,15 +4336,15 @@ class AdvancedPanelControls(
 		)
 		selectiveUIAEventRegistrationChoices = [
 			# Translators: A choice in a combo box in the advanced settings
-			# panel to have NVDA decide whether to register
+			# panel to have Aslan decide whether to register
 			# selectively or globally for UI Automation events.
 			_("Automatic (prefer selective)"),
 			# Translators: A choice in a combo box in the advanced settings
-			# panel to have NVDA register selectively for UI Automation events
+			# panel to have Aslan register selectively for UI Automation events
 			# (i.e. not to request events for objects outside immediate focus).
 			_("Selective"),
 			# Translators: A choice in a combo box in the advanced settings
-			# panel to have NVDA register for all UI Automation events
+			# panel to have Aslan register for all UI Automation events
 			# in all cases.
 			_("Global"),
 		]
@@ -4406,14 +4406,14 @@ class AdvancedPanelControls(
 		consoleComboText = _("Windows C&onsole support:")
 		consoleChoices = [
 			# Translators: A choice in a combo box in the advanced settings
-			# panel to have NVDA determine its Windows Console implementation
+			# panel to have Aslan determine its Windows Console implementation
 			# automatically.
 			_("Automatic (prefer UIA)"),
 			# Translators: A choice in a combo box in the advanced settings
-			# panel to have NVDA use UIA in the Windows Console when available.
+			# panel to have Aslan use UIA in the Windows Console when available.
 			_("UIA when available"),
 			# Translators: A choice in a combo box in the advanced settings
-			# panel to have NVDA use its legacy Windows Console support
+			# panel to have Aslan use its legacy Windows Console support
 			# in all cases.
 			_("Legacy"),
 		]
@@ -4460,7 +4460,7 @@ class AdvancedPanelControls(
 		label = _("Use en&hanced event processing (requires restart)")
 		self.enhancedEventProcessingComboBox = UIAGroup.addLabeledControl(
 			labelText=label,
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["UIA", "enhancedEventProcessing"],
 			conf=config.conf,
 		)
@@ -4498,10 +4498,10 @@ class AdvancedPanelControls(
 		brailleGroup = guiHelper.BoxSizerHelper(self, sizer=brailleSizer)
 		sHelper.addItem(brailleGroup)
 
-		self.brailleLiveRegionsCombo: nvdaControls.FeatureFlagCombo = brailleGroup.addLabeledControl(
+		self.brailleLiveRegionsCombo: aslanControls.FeatureFlagCombo = brailleGroup.addLabeledControl(
 			# Translators: This is the label for a combo-box in the Advanced settings panel.
 			labelText=_("Report live regions:"),
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["braille", "reportLiveRegions"],
 			conf=config.conf,
 		)
@@ -4557,15 +4557,15 @@ class AdvancedPanelControls(
 		diffAlgoComboText = _("&Diff algorithm:")
 		diffAlgoChoices = [
 			# Translators: A choice in a combo box in the advanced settings
-			# panel to have NVDA determine the method of detecting changed
+			# panel to have Aslan determine the method of detecting changed
 			# content in terminals automatically.
 			_("Automatic (prefer Diff Match Patch)"),
 			# Translators: A choice in a combo box in the advanced settings
-			# panel to have NVDA detect changes in terminals
+			# panel to have Aslan detect changes in terminals
 			# by character, using the diff match patch algorithm.
 			_("Diff Match Patch"),
 			# Translators: A choice in a combo box in the advanced settings
-			# panel to have NVDA detect changes in terminals
+			# panel to have Aslan detect changes in terminals
 			# by line, using the difflib algorithm.
 			_("Difflib"),
 		]
@@ -4590,12 +4590,12 @@ class AdvancedPanelControls(
 			self._getDefaultValue(["terminals", "diffAlgo"]),
 		)
 
-		self.wtStrategyCombo: nvdaControls.FeatureFlagCombo = terminalsGroup.addLabeledControl(
+		self.wtStrategyCombo: aslanControls.FeatureFlagCombo = terminalsGroup.addLabeledControl(
 			labelText=_(
 				# Translators: This is the label for a combo-box in the Advanced settings panel.
 				"Speak new text in Windows Terminal via:",
 			),
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["terminals", "wtStrategy"],
 			conf=config.conf,
 		)
@@ -4649,7 +4649,7 @@ class AdvancedPanelControls(
 		label = _("Use WASAPI for SAPI 4 audio output:")
 		self.useWASAPIForSAPI4Combo = speechGroup.addLabeledControl(
 			labelText=label,
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["speech", "useWASAPIForSAPI4"],
 			conf=config.conf,
 		)
@@ -4658,9 +4658,9 @@ class AdvancedPanelControls(
 		# Translators: This is the label for a combo-box control in the
 		# Advanced settings panel.
 		label = _("Use modern regular expression engine for speech dictionary entries:")
-		self.speechDictsUseModernRegexCombo: nvdaControls.FeatureFlagCombo = speechGroup.addLabeledControl(
+		self.speechDictsUseModernRegexCombo: aslanControls.FeatureFlagCombo = speechGroup.addLabeledControl(
 			labelText=label,
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["featureFlag", "speechDictsUseModernRegex"],
 			conf=config.conf,
 		)
@@ -4673,12 +4673,12 @@ class AdvancedPanelControls(
 		vBufGroup = guiHelper.BoxSizerHelper(vBufSizer, sizer=vBufSizer)
 		sHelper.addItem(vBufGroup)
 
-		self.loadChromeVBufWhenBusyCombo: nvdaControls.FeatureFlagCombo = vBufGroup.addLabeledControl(
+		self.loadChromeVBufWhenBusyCombo: aslanControls.FeatureFlagCombo = vBufGroup.addLabeledControl(
 			labelText=_(
 				# Translators: This is the label for a combo-box in the Advanced settings panel.
 				"Load Chromium virtual buffer when document busy.",
 			),
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["virtualBuffers", "loadChromiumVBufOnBusyState"],
 			conf=config.conf,
 		)
@@ -4695,7 +4695,7 @@ class AdvancedPanelControls(
 		label = _("Caret movement timeout (in ms)")
 		self.caretMoveTimeoutSpinControl = editableTextGroup.addLabeledControl(
 			label,
-			nvdaControls.SelectOnFocusSpinCtrl,
+			aslanControls.SelectOnFocusSpinCtrl,
 			min=0,
 			max=2000,
 			initial=config.conf["editableText"]["caretMoveTimeoutMs"],
@@ -4760,7 +4760,7 @@ class AdvancedPanelControls(
 		logCategoriesLabel = _("Enabled logging categories")
 		self.logCategoriesList = debugLogGroup.addLabeledControl(
 			logCategoriesLabel,
-			nvdaControls.CustomCheckListBox,
+			aslanControls.CustomCheckListBox,
 			choices=self.logCategories,
 		)
 		self.bindHelpEvent("AdvancedSettingsDebugLoggingCategories", self.logCategoriesList)
@@ -4960,9 +4960,9 @@ class AdvancedPanel(SettingsPanel):
 	warningExplanation = _(
 		# Translators: This is a label appearing on the Advanced settings panel.
 		"The following settings are for advanced users. "
-		"Changing them may cause NVDA to function incorrectly. "
+		"Changing them may cause Aslan to function incorrectly. "
 		"Please only change these if you know what you are doing or "
-		"have been specifically instructed by NVDA developers.",
+		"have been specifically instructed by Aslan developers.",
 	)
 
 	panelDescription = "{}\n{}".format(warningHeader, warningExplanation)
@@ -4986,7 +4986,7 @@ class AdvancedPanel(SettingsPanel):
 
 		enableAdvancedControlslabel = _(
 			# Translators: This is the label for a checkbox in the Advanced settings panel.
-			"I understand that changing these settings may cause NVDA to function incorrectly.",
+			"I understand that changing these settings may cause Aslan to function incorrectly.",
 		)
 		self.enableControlsCheckBox = warningGroup.addItem(
 			wx.CheckBox(parent=warningBox, label=enableAdvancedControlslabel, id=wx.NewIdRef()),
@@ -5016,11 +5016,11 @@ class AdvancedPanel(SettingsPanel):
 			self.advancedControls.onSave()
 
 	def onEnableControlsCheckBox(self, evt):
-		# due to some not very well understood mis ordering of event processing, we force NVDA to
+		# due to some not very well understood mis ordering of event processing, we force Aslan to
 		# process pending events. This fixes an issue where the checkbox state was being reported
 		# incorrectly. This checkbox is slightly different from most, in that its behaviour is to
 		# enable more controls than is typical. This might be causing enough of a delay, that there
-		# is a mismatch in the state of the checkbox and when the events are processed by NVDA.
+		# is a mismatch in the state of the checkbox and when the events are processed by Aslan.
 		from api import processPendingEvents
 
 		processPendingEvents()
@@ -5127,7 +5127,7 @@ class BrailleDisplaySelectionDialog(SettingsDialog):
 		autoDetectLabelText = _("&Displays to detect automatically:")
 		self.autoDetectList = sHelper.addLabeledControl(
 			autoDetectLabelText,
-			nvdaControls.CustomCheckListBox,
+			aslanControls.CustomCheckListBox,
 			choices=[],
 		)
 		self.bindHelpEvent("SelectBrailleDisplayAutoDetect", self.autoDetectList)
@@ -5238,10 +5238,10 @@ class BrailleDisplaySelectionDialog(SettingsDialog):
 
 		if not braille.handler.setDisplayByName(display):
 			gui.messageBox(
-				# Translators: The message in a dialog presented when NVDA is unable to load the selected
+				# Translators: The message in a dialog presented when Aslan is unable to load the selected
 				# braille display.
 				message=_("Could not load the {display} display.").format(display=display),
-				# Translators: The title in a dialog presented when NVDA is unable to load the selected
+				# Translators: The title in a dialog presented when Aslan is unable to load the selected
 				# braille display.
 				caption=_("Braille Display Error"),
 				style=wx.OK | wx.ICON_WARNING,
@@ -5251,7 +5251,7 @@ class BrailleDisplaySelectionDialog(SettingsDialog):
 
 		if self.IsModal():
 			# Hack: we need to update the display in our parent window before closing.
-			# Otherwise, NVDA will report the old display even though the new display is reflected visually.
+			# Otherwise, Aslan will report the old display even though the new display is reflected visually.
 			self.Parent.updateCurrentDisplay()
 		super(BrailleDisplaySelectionDialog, self).onOk(evt)
 
@@ -5381,7 +5381,7 @@ class BrailleSettingsSubPanel(AutoSettingsMixin, SettingsPanel):
 		maxBlinkRate = int(config.conf.getConfigValidation(("braille", "cursorBlinkRate")).kwargs["max"])
 		self.cursorBlinkRateEdit = followCursorGroupHelper.addLabeledControl(
 			cursorBlinkRateLabelText,
-			nvdaControls.SelectOnFocusSpinCtrl,
+			aslanControls.SelectOnFocusSpinCtrl,
 			min=minBlinkRate,
 			max=maxBlinkRate,
 			initial=config.conf["braille"]["cursorBlinkRate"],
@@ -5457,7 +5457,7 @@ class BrailleSettingsSubPanel(AutoSettingsMixin, SettingsPanel):
 		messageTimeoutText = _("Message &timeout (sec)")
 		self.messageTimeoutEdit = followCursorGroupHelper.addLabeledControl(
 			messageTimeoutText,
-			nvdaControls.SelectOnFocusSpinCtrl,
+			aslanControls.SelectOnFocusSpinCtrl,
 			min=minTimeout,
 			max=maxTimeOut,
 			initial=config.conf["braille"]["messageTimeout"],
@@ -5493,13 +5493,13 @@ class BrailleSettingsSubPanel(AutoSettingsMixin, SettingsPanel):
 				% (time.time() - startTime),
 			)
 
-		self.brailleReviewRoutingMovesSystemCaretCombo: nvdaControls.FeatureFlagCombo = (
+		self.brailleReviewRoutingMovesSystemCaretCombo: aslanControls.FeatureFlagCombo = (
 			followCursorGroupHelper.addLabeledControl(
 				labelText=_(
 					# Translators: This is a label for a combo-box in the Braille settings panel.
 					"Move system caret when ro&uting review cursor",
 				),
-				wxCtrlClass=nvdaControls.FeatureFlagCombo,
+				wxCtrlClass=aslanControls.FeatureFlagCombo,
 				keyPath=["braille", "reviewRoutingMovesSystemCaret"],
 				conf=config.conf,
 			)
@@ -5554,24 +5554,24 @@ class BrailleSettingsSubPanel(AutoSettingsMixin, SettingsPanel):
 			index = 0
 		self.focusContextPresentationList.SetSelection(index)
 
-		self.brailleShowSelectionCombo: nvdaControls.FeatureFlagCombo = (
+		self.brailleShowSelectionCombo: aslanControls.FeatureFlagCombo = (
 			followCursorGroupHelper.addLabeledControl(
 				labelText=_(
 					# Translators: This is a label for a combo-box in the Braille settings panel.
 					"Show se&lection",
 				),
-				wxCtrlClass=nvdaControls.FeatureFlagCombo,
+				wxCtrlClass=aslanControls.FeatureFlagCombo,
 				keyPath=["braille", "showSelection"],
 				conf=config.conf,
 			)
 		)
 		self.bindHelpEvent("BrailleSettingsShowSelection", self.brailleShowSelectionCombo)
 
-		self.formattingDisplayCombo: nvdaControls.FeatureFlagCombo = (
+		self.formattingDisplayCombo: aslanControls.FeatureFlagCombo = (
 			followCursorGroupHelper.addLabeledControl(
 				# Translators: This is a label for a combo-box in the Braille settings panel.
 				labelText=_("Formatting &display"),
-				wxCtrlClass=nvdaControls.FeatureFlagCombo,
+				wxCtrlClass=aslanControls.FeatureFlagCombo,
 				keyPath=("braille", "fontFormattingDisplay"),
 				conf=config.conf,
 			)
@@ -5598,33 +5598,33 @@ class BrailleSettingsSubPanel(AutoSettingsMixin, SettingsPanel):
 			list(BrailleMode)[self.brailleModes.GetSelection()] is BrailleMode.FOLLOW_CURSORS,
 		)
 
-		self.textWrapComboBox: nvdaControls.FeatureFlagCombo = sHelper.addLabeledControl(
+		self.textWrapComboBox: aslanControls.FeatureFlagCombo = sHelper.addLabeledControl(
 			# Translators: The label for a setting in braille settings to configure text wrap behaviour
 			# (how to break lines that don't fit on the braille display).
 			labelText=_("Text &wrap"),
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["braille", "textWrap"],
 			conf=config.conf,
 		)
 		self.bindHelpEvent("BrailleSettingsWordWrap", self.textWrapComboBox)
 
-		self.unicodeNormalizationCombo: nvdaControls.FeatureFlagCombo = sHelper.addLabeledControl(
+		self.unicodeNormalizationCombo: aslanControls.FeatureFlagCombo = sHelper.addLabeledControl(
 			labelText=_(
 				# Translators: This is a label for a combo-box in the Braille settings panel.
 				"Unicode normali&zation",
 			),
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["braille", "unicodeNormalization"],
 			conf=config.conf,
 		)
 		self.bindHelpEvent("BrailleUnicodeNormalization", self.unicodeNormalizationCombo)
 
-		self.brailleInterruptSpeechCombo: nvdaControls.FeatureFlagCombo = sHelper.addLabeledControl(
+		self.brailleInterruptSpeechCombo: aslanControls.FeatureFlagCombo = sHelper.addLabeledControl(
 			labelText=_(
 				# Translators: This is a label for a combo-box in the Braille settings panel.
 				"I&nterrupt speech while scrolling",
 			),
-			wxCtrlClass=nvdaControls.FeatureFlagCombo,
+			wxCtrlClass=aslanControls.FeatureFlagCombo,
 			keyPath=["braille", "interruptSpeechWhileScrolling"],
 			conf=config.conf,
 		)
@@ -5632,9 +5632,9 @@ class BrailleSettingsSubPanel(AutoSettingsMixin, SettingsPanel):
 
 		# Translators: The label for a setting in braille settings to change the rate for autoscroll.
 		autoScrollRateText = _("Auto&matic scroll rate")
-		self.autoScrollRateSlider: nvdaControls.EnhancedInputSlider = sHelper.addLabeledControl(
+		self.autoScrollRateSlider: aslanControls.EnhancedInputSlider = sHelper.addLabeledControl(
 			autoScrollRateText,
-			nvdaControls.EnhancedInputSlider,
+			aslanControls.EnhancedInputSlider,
 			minValue=0,
 			maxValue=100,
 		)
@@ -5739,13 +5739,13 @@ def showStartErrorForProviders(
 	if len(providers) == 1:
 		providerName = providers[0].displayName
 		# Translators: This message is presented when
-		# NVDA is unable to load a single vision enhancement provider.
+		# Aslan is unable to load a single vision enhancement provider.
 		message = _("Could not load the {providerName} vision enhancement provider").format(
 			providerName=providerName,
 		)
 	else:
 		providerNames = ", ".join(provider.displayName for provider in providers)
-		# Translators: This message is presented when NVDA is unable to
+		# Translators: This message is presented when Aslan is unable to
 		# load multiple vision enhancement providers.
 		message = _("Could not load the following vision enhancement providers:\n{providerNames}").format(
 			providerNames=providerNames,
@@ -5769,7 +5769,7 @@ def showTerminationErrorForProviders(
 	if len(providers) == 1:
 		providerName = providers[0].displayName
 		# Translators: This message is presented when
-		# NVDA is unable to gracefully terminate a single vision enhancement provider.
+		# Aslan is unable to gracefully terminate a single vision enhancement provider.
 		message = _("Could not gracefully terminate the {providerName} vision enhancement provider").format(
 			providerName=providerName,
 		)
@@ -5777,7 +5777,7 @@ def showTerminationErrorForProviders(
 		providerNames = ", ".join(provider.displayName for provider in providers)
 		message = _(
 			# Translators: This message is presented when
-			# NVDA is unable to terminate multiple vision enhancement providers.
+			# Aslan is unable to terminate multiple vision enhancement providers.
 			"Could not gracefully terminate the following vision enhancement providers:\n{providerNames}",
 		).format(providerNames=providerNames)
 	gui.messageBox(
@@ -6380,7 +6380,7 @@ class MagnifierPanel(SettingsPanel):
 
 
 class PrivacyAndSecuritySettingsPanel(SettingsPanel):
-	# Translators: The title of the privacy and security category in NVDA's settings.
+	# Translators: The title of the privacy and security category in Aslan's settings.
 	title = _("Privacy and Security")
 	helpId = "PrivacyAndSecuritySettings"
 
@@ -6393,7 +6393,7 @@ class PrivacyAndSecuritySettingsPanel(SettingsPanel):
 	def _confirmLogLevelChange(self, selectedLogLevel: LoggingLevel) -> bool:
 		if selectedLogLevel == LoggingLevel.DEBUG_UNREDACTED:
 			message = _(
-				# Translators: Warning shown when enabling the "debug (unredacted)" log level from NVDA settings.
+				# Translators: Warning shown when enabling the "debug (unredacted)" log level from Aslan settings.
 				'Setting the logging level to "debug (unredacted)" will write sensitive information to the log without redaction, '
 				"including passwords, API keys, or other private data. "
 				"Only enable this temporarily if you explicitly need unredacted diagnostic logs. "
@@ -6405,7 +6405,7 @@ class PrivacyAndSecuritySettingsPanel(SettingsPanel):
 			)
 		else:
 			message = _(
-				# Translators: Warning shown when enabling a logging level above info from NVDA settings.
+				# Translators: Warning shown when enabling a logging level above info from Aslan settings.
 				"Setting the logging level above info may record sensitive information such as typed input, "
 				"speech output, or other private data in the log. "
 				"Only enable higher logging levels temporarily while troubleshooting. "
@@ -6483,7 +6483,7 @@ class PrivacyAndSecuritySettingsPanel(SettingsPanel):
 		sHelper.addItem(generalGroup)
 
 		self._logLevelCombo: wx.Choice = generalGroup.addLabeledControl(
-			# Translators: The label for a setting in privacy and security settings to select NVDA's logging level
+			# Translators: The label for a setting in privacy and security settings to select Aslan's logging level
 			_("L&ogging level:"),
 			wx.Choice,
 			choices=[level.displayString for level in LoggingLevel],
@@ -6507,7 +6507,7 @@ class PrivacyAndSecuritySettingsPanel(SettingsPanel):
 
 		self._allowUsageStatsCheckBox: wx.CheckBox = generalGroup.addItem(
 			# Translators: The label of a checkbox in privacy and security settings to toggle allowing of usage stats gathering
-			wx.CheckBox(generalBox, label=_("Allow NV Access to gather NVDA usage statistics")),
+			wx.CheckBox(generalBox, label=_("Allow NV Access to gather Aslan usage statistics")),
 		)
 		self.bindHelpEvent("GeneralSettingsGatherUsageStats", self._allowUsageStatsCheckBox)
 		self._allowUsageStatsCheckBox.Value = config.conf["update"]["allowUsageStats"]
@@ -6620,15 +6620,15 @@ class PrivacyAndSecuritySettingsPanel(SettingsPanel):
 
 """ The name of the config profile currently being edited, if any.
 This is set when the currently edited configuration profile is determined and returned to None when the dialog is destroyed.
-This can be used by an AppModule for NVDA to identify and announce
+This can be used by an AppModule for Aslan to identify and announce
 changes in the name of the edited configuration profile when categories are changed"""
 NvdaSettingsDialogActiveConfigProfile = None
 NvdaSettingsDialogWindowHandle = None
 
 
-class NVDASettingsDialog(MultiCategorySettingsDialog):
-	# Translators: This is the label for the NVDA settings dialog.
-	title = _("NVDA Settings")
+class AslanSettingsDialog(MultiCategorySettingsDialog):
+	# Translators: This is the label for the Aslan settings dialog.
+	title = _("Aslan Settings")
 	categoryClasses = [
 		GeneralSettingsPanel,
 		SpeechSettingsPanel,
@@ -6667,7 +6667,7 @@ class NVDASettingsDialog(MultiCategorySettingsDialog):
 
 	def makeSettings(self, settingsSizer):
 		# Ensure that after the settings dialog is created the name is set correctly
-		super(NVDASettingsDialog, self).makeSettings(settingsSizer)
+		super(AslanSettingsDialog, self).makeSettings(settingsSizer)
 		self._doOnCategoryChange()
 		global NvdaSettingsDialogWindowHandle
 		NvdaSettingsDialogWindowHandle = self.GetHandle()
@@ -6780,7 +6780,7 @@ class SpeechSymbolsDialog(SettingsDialog):
 		symbolsText = _("&Symbols")
 		self.symbolsList = sHelper.addLabeledControl(
 			symbolsText,
-			nvdaControls.AutoWidthColumnListCtrl,
+			aslanControls.AutoWidthColumnListCtrl,
 			autoSizeColumn=2,  # The replacement column is likely to need the most space
 			itemTextCallable=self.getItemTextForList,
 			style=wx.LC_REPORT | wx.LC_SINGLE_SEL | wx.LC_VIRTUAL,

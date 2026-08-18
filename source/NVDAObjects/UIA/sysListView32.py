@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2023 NV Access Limited, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -12,12 +12,12 @@ import config
 from logHandler import log
 from config.configFlags import ReportTableHeaders
 import UIAHandler
-from .. import NVDAObject
+from .. import AslanObject
 from ..behaviors import RowWithFakeNavigation
 from . import ListItem, UIA
 
 
-def findExtraOverlayClasses(obj: NVDAObject, clsList: List[Type[NVDAObject]]) -> None:
+def findExtraOverlayClasses(obj: AslanObject, clsList: List[Type[AslanObject]]) -> None:
 	UIAControlType = obj.UIAElement.cachedControlType
 	if UIAControlType == UIAHandler.UIA.UIA_ListControlTypeId:
 		clsList.insert(0, SysListViewList)

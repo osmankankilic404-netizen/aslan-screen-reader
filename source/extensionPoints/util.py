@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2025 NV Access Limited, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -22,7 +22,7 @@ from typing import (
 	Union,
 )
 
-import NVDAState
+import AslanState
 
 from logHandler import log
 
@@ -125,7 +125,7 @@ class HandlerRegistrar(Generic[HandlerT]):
 			if sig.parameters and list(sig.parameters)[0] == "self":
 				raise TypeError("Registering unbound instance methods not supported.")
 		if self._deprecationMessage:
-			if NVDAState._allowDeprecatedAPI():
+			if AslanState._allowDeprecatedAPI():
 				log.warning(self._deprecationMessage, stack_info=True)
 			else:
 				raise RuntimeError(self._deprecationMessage)

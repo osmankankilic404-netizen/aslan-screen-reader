@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2009-2026 NV Access Limited, Cyrille Bougot, Christopher Toth
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""NVDA slave process
+"""Aslan slave process
 Performs miscellaneous tasks which need to be performed in a separate process.
 """
 
@@ -13,7 +13,7 @@ import os
 import globalVars
 import logHandler
 import monkeyPatches.comtypesMonkeyPatches
-import NVDAState
+import AslanState
 import winBindings.kernel32
 
 
@@ -21,7 +21,7 @@ import winBindings.kernel32
 monkeyPatches.comtypesMonkeyPatches.appendComInterfacesToGenSearchPath()
 
 
-if NVDAState.isRunningAsSource():
+if AslanState.isRunningAsSource():
 	globalVars.appDir = os.path.abspath(os.path.dirname(__file__))
 else:
 	# Error messages (which are only for debugging) should not cause the py2exe log message box to appear.
@@ -29,7 +29,7 @@ else:
 	globalVars.appDir = sys.prefix
 
 
-# #2391: some functions may still require the current directory to be set to NVDA's app dir
+# #2391: some functions may still require the current directory to be set to Aslan's app dir
 os.chdir(globalVars.appDir)
 globalVars.appPid = os.getpid()
 
@@ -39,14 +39,14 @@ def getNvdaHelperRemote():
 	import winKernel
 
 	h = winBindings.kernel32.LoadLibraryEx(
-		NVDAState.ReadPaths.nvdaHelperRemoteDll,
+		AslanState.ReadPaths.aslanHelperRemoteDll,
 		0,
 		# Using an altered search path is necessary here
-		# As NVDAHelperRemote needs to locate dependent dlls in the same directory
+		# As AslanHelperRemote needs to locate dependent dlls in the same directory
 		# such as IAccessible2proxy.dll.
 		winKernel.LOAD_WITH_ALTERED_SEARCH_PATH,
 	)
-	remoteLib = ctypes.CDLL("nvdaHelperRemote", handle=h)
+	remoteLib = ctypes.CDLL("aslanHelperRemote", handle=h)
 	return remoteLib
 
 
@@ -70,7 +70,7 @@ def main():
 			import COMRegistrationFixes
 
 			COMRegistrationFixes.fixCOMRegistrations()
-		elif action == "launchNVDA":
+		elif action == "launchAslan":
 			import subprocess
 			import shellapi
 			import winUser
@@ -78,7 +78,7 @@ def main():
 			shellapi.ShellExecute(
 				0,
 				None,
-				r"%s\nvda.exe" % sys.prefix,
+				r"%s\aslan.exe" % sys.prefix,
 				subprocess.list2cmdline(args),
 				None,
 				winUser.SW_SHOWNORMAL,
@@ -93,8 +93,8 @@ def main():
 
 			config._setStartOnLogonScreen(enable)
 		elif action == "explore_userConfigPath":
-			ret = getNvdaHelperRemote().nvdaControllerInternal_openConfigDirectory()
-			if ret != 0:  # NVDA is not running
+			ret = getNvdaHelperRemote().aslanControllerInternal_openConfigDirectory()
+			if ret != 0:  # Aslan is not running
 				import systemUtils
 
 				systemUtils.openDefaultConfigurationDirectory()
@@ -103,7 +103,7 @@ def main():
 				addonPath = args[0]
 			except IndexError:
 				raise ValueError("Addon path was not provided.")
-			ret = getNvdaHelperRemote().nvdaControllerInternal_installAddonPackageFromPath(addonPath)
+			ret = getNvdaHelperRemote().aslanControllerInternal_installAddonPackageFromPath(addonPath)
 			if ret != 0:
 				import winUser
 
@@ -111,9 +111,9 @@ def main():
 					0,
 					_(
 						# Translators: the message that is shown when the user tries to install an add-on
-						# from windows explorer and NVDA is not running.
-						"Cannot install NVDA add-on from {path}.\n"
-						"You must be running NVDA to be able to install add-ons.",
+						# from windows explorer and Aslan is not running.
+						"Cannot install Aslan add-on from {path}.\n"
+						"You must be running Aslan to be able to install add-ons.",
 					).format(path=addonPath),
 					0,
 					winUser.MB_ICONERROR,
@@ -121,7 +121,7 @@ def main():
 		elif action == "handleRemoteURL":
 			try:
 				url = args[0]
-				ret = getNvdaHelperRemote().nvdaControllerInternal_handleRemoteURL(url)
+				ret = getNvdaHelperRemote().aslanControllerInternal_handleRemoteURL(url)
 				if ret != 0:
 					raise RuntimeError(f"URL handling failed with code {ret}")
 			except Exception:
@@ -149,9 +149,9 @@ def main():
 
 
 if __name__ == "__main__":
-	# Initialize remote logging back to NVDA
+	# Initialize remote logging back to Aslan
 	logHandler.initialize(True)
-	# Log at the most detailed level, and NVDA will filter it using its own level setting.
+	# Log at the most detailed level, and Aslan will filter it using its own level setting.
 	logHandler.log.setLevel(logHandler.log.DEBUG)
 	import languageHandler
 

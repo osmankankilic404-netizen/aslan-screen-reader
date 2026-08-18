@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2012-2024 Mesar Hameed, NV Access Limited, Leonard de Ruijter, Rui Fontes, Cyrille Bougot
@@ -10,20 +10,20 @@ from enum import IntEnum
 import api
 import appModuleHandler
 import controlTypes
-import NVDAObjects.IAccessible
+import AslanObjects.IAccessible
 import tones
 import ui
 import windowUtils
 import winUser
-from NVDAObjects import NVDAObject
-from NVDAObjects.window import Window
+from AslanObjects import AslanObject
+from AslanObjects.window import Window
 from scriptHandler import getLastScriptRepeatCount, script
 
 
 LEFT_TO_RIGHT_EMBEDDING = "\u202a"
 """Character often found in translator comments."""
 
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_POEDIT = _("Poedit")
 
 
@@ -69,7 +69,7 @@ def _findDescendantObject(
 	and returns the object belonging to it.
 	"""
 	try:
-		obj = NVDAObjects.IAccessible.getNVDAObjectFromEvent(
+		obj = AslanObjects.IAccessible.getAslanObjectFromEvent(
 			windowUtils.findDescendantWindow(parentWindowHandle, controlID=controlId, className=className),
 			winUser.OBJID_CLIENT,
 			0,
@@ -82,7 +82,7 @@ def _findDescendantObject(
 class AppModule(appModuleHandler.AppModule):
 	cachePropertiesByDefault = True
 
-	def _getNVDAObjectForWindowControlId(
+	def _getAslanObjectForWindowControlId(
 		self,
 		windowControlId: _WindowControlId,
 	) -> Window | None:
@@ -93,7 +93,7 @@ class AppModule(appModuleHandler.AppModule):
 	"""Type definition for auto prop '_get__translatorNotesObj'"""
 
 	def _get__translatorNotesObj(self) -> Window | None:
-		return self._getNVDAObjectForWindowControlId(
+		return self._getAslanObjectForWindowControlId(
 			_WindowControlId.NOTES_FOR_TRANSLATOR,
 		)
 
@@ -116,7 +116,7 @@ class AppModule(appModuleHandler.AppModule):
 				)
 		else:
 			ui.message(
-				# Translators: this message is reported when NVDA is unable to find
+				# Translators: this message is reported when Aslan is unable to find
 				# a requested window in Poedit.
 				# {description} is replaced by the description of the window to be reported, e.g. translator notes
 				pgettext("poedit", "Could not find {description} window.").format(description=description),
@@ -125,7 +125,7 @@ class AppModule(appModuleHandler.AppModule):
 	@script(
 		description=pgettext(
 			"poedit",
-			# Translators: The description of an NVDA command for Poedit.
+			# Translators: The description of an Aslan command for Poedit.
 			"Reports any notes for translators. If pressed twice, presents the notes in browse mode",
 		),
 		gesture="kb:control+shift+a",
@@ -144,12 +144,12 @@ class AppModule(appModuleHandler.AppModule):
 	"""Type definition for auto prop '_get__commentObj'"""
 
 	def _get__commentObj(self) -> Window | None:
-		return self._getNVDAObjectForWindowControlId(_WindowControlId.TRANSLATOR_COMMENT)
+		return self._getAslanObjectForWindowControlId(_WindowControlId.TRANSLATOR_COMMENT)
 
 	@script(
 		description=pgettext(
 			"poedit",
-			# Translators: The description of an NVDA command for Poedit.
+			# Translators: The description of an Aslan command for Poedit.
 			"Reports any comment in the comments window. "
 			"If pressed twice, presents the comment in browse mode",
 		),
@@ -169,14 +169,14 @@ class AppModule(appModuleHandler.AppModule):
 	"""Type definition for auto prop '_get__previousSourceTextObj'"""
 
 	def _get__previousSourceTextObj(self) -> Window | None:
-		return self._getNVDAObjectForWindowControlId(
+		return self._getAslanObjectForWindowControlId(
 			_WindowControlId.PREVIOUS_SOURCE_TEXT,
 		)
 
 	@script(
 		description=pgettext(
 			"poedit",
-			# Translators: The description of an NVDA command for Poedit.
+			# Translators: The description of an Aslan command for Poedit.
 			"Reports the previous source text, if any. If pressed twice, presents the text in browse mode",
 		),
 		gesture="kb:control+shift+o",
@@ -195,14 +195,14 @@ class AppModule(appModuleHandler.AppModule):
 	"""Type definition for auto prop '_get__translationIssueObj'"""
 
 	def _get__translationIssueObj(self) -> Window | None:
-		return self._getNVDAObjectForWindowControlId(
+		return self._getAslanObjectForWindowControlId(
 			_WindowControlId.TRANSLATION_ISSUE_TEXT,
 		)
 
 	@script(
 		description=pgettext(
 			"poedit",
-			# Translators: The description of an NVDA command for Poedit.
+			# Translators: The description of an Aslan command for Poedit.
 			"Reports a translation issue, if any. If pressed twice, presents the warning in browse mode",
 		),
 		gesture="kb:control+shift+w",
@@ -221,14 +221,14 @@ class AppModule(appModuleHandler.AppModule):
 	"""Type definition for auto prop '_get__needsWorkObj'"""
 
 	def _get__needsWorkObj(self) -> Window | None:
-		obj = self._getNVDAObjectForWindowControlId(
+		obj = self._getAslanObjectForWindowControlId(
 			_WindowControlId.NEEDS_WORK_SWITCH,
 		)
 		if obj and obj.role == controlTypes.Role.CHECKBOX:
 			return obj
 		return None
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if obj.role == controlTypes.Role.LISTITEM and obj.windowClassName == "wxWindowNR":
 			clsList.insert(0, PoeditListItem)
 		elif (
@@ -238,20 +238,20 @@ class AppModule(appModuleHandler.AppModule):
 			clsList.insert(0, PoeditRichEdit)
 
 
-class PoeditRichEdit(NVDAObject):
+class PoeditRichEdit(AslanObject):
 	def _get_name(self) -> str:
 		# These rich edit controls are incorrectly labeled.
 		# Oleacc doesn't return any name, and UIA defaults to RichEdit Control.
 		# The label object is positioned just above the field on the screen.
 		l, t, w, h = self.location  # noqa: E741
 		try:
-			self.name = NVDAObjects.NVDAObject.objectFromPoint(l + 10, t - 10).name
+			self.name = AslanObjects.AslanObject.objectFromPoint(l + 10, t - 10).name
 		except AttributeError:
 			return super().name
 		return self.name
 
 
-class PoeditListItem(NVDAObject):
+class PoeditListItem(AslanObject):
 	_warningControlToReport: _WindowControlId | None
 	appModule: AppModule
 

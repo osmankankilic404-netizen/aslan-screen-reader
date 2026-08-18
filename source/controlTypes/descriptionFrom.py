@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2021 NV Access Limited
@@ -10,8 +10,8 @@ from enum import (
 
 
 class DescriptionFrom(Enum):
-	"""Values to use within NVDA to denote possible values for DescriptionFrom.
-	These are used to determine how the source of the 'description' property if an NVDAObject.
+	"""Values to use within Aslan to denote possible values for DescriptionFrom.
+	These are used to determine how the source of the 'description' property if an AslanObject.
 	"""
 
 	UNKNOWN = auto()

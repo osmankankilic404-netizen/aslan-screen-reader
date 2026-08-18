@@ -2,12 +2,12 @@
 
 ## Background
 
-The NVDA API must maintain compatibility with add-ons throughout yearly development cycles.
-The first release of a year, i.e. `20XX.1`, is when the NVDA API can introduce breaking changes.
+The Aslan API must maintain compatibility with add-ons throughout yearly development cycles.
+The first release of a year, i.e. `20XX.1`, is when the Aslan API can introduce breaking changes.
 
 ## Deprecating module attributes
 
-Where possible, ensure the NVDA API maintains backwards compatibility.
+Where possible, ensure the Aslan API maintains backwards compatibility.
 To assist with a uniform approach, the `utils._deprecate` module provides a factory function, `handleDeprecations`, which returns a function suitable for use as a module's `__getattr__`.
 Call `handleDeprecations` with any number of concrete `DeprecatedSymbol` objects to handle the logic for emitting a deprecation warning and returning the deprecated symbol.
 The following `DeprecatedSymbol` subclasses are currently available:
@@ -52,21 +52,21 @@ filter_something = extensionPoints.Filter[int](
 ```
 
 The deprecation message is logged at the warning level when calling `register` on a `HandlerRegistrar`.
-When `NVDAState._allowDeprecatedAPI()` returns `False`, a `RuntimeError` is raised instead.
+When `AslanState._allowDeprecatedAPI()` returns `False`, a `RuntimeError` is raised instead.
 
 ## Required API breaking changes
 
-In order to improve the NVDA API, changes that will break future compatibility may be implemented, as long as they retain backwards compatibility until the `20XX.1` release.
+In order to improve the Aslan API, changes that will break future compatibility may be implemented, as long as they retain backwards compatibility until the `20XX.1` release.
 
 This can be done by using a version check to automate deprecation.
 For example, if you wish to replace usages of `deprecatedSymbolName` with `newSymbolName`.
 When we begin work on `NEXT_YEAR`, we update `BACK_COMPAT_TO`, which introduces the add-on API breakage warning.
-At this stage, `deprecatedSymbolName` will no longer be part of the NVDA API and all internal usages must be removed prior.
+At this stage, `deprecatedSymbolName` will no longer be part of the Aslan API and all internal usages must be removed prior.
 
 ```python
 from addonAPIVersion import BACK_COMPAT_TO
-import NVDAState
-if BACK_COMPAT_TO < (NEXT_YEAR, 1, 0) and NVDAState._allowDeprecatedAPI():
+import AslanState
+if BACK_COMPAT_TO < (NEXT_YEAR, 1, 0) and AslanState._allowDeprecatedAPI():
 	deprecatedSymbolName = newSymbolName
 ```
 
@@ -90,7 +90,7 @@ As a result, module level variables should be avoided.
 
 ## Testing backwards compatibility
 
-To ensure a module retains the same symbol names being importable, check across versions what is imported using the NVDA python console.
+To ensure a module retains the same symbol names being importable, check across versions what is imported using the Aslan python console.
 
 ```python
 import controlTypes
@@ -99,8 +99,8 @@ dir(controlTypes)
 
 Changes different to moving or renaming symbols need to be considered carefully with a different approach.
 
-Any API breaking changes such as deprecations marked for removal should be commented with the year of intended removal, and notes on how to implement the API change as an add-on developer and NVDA developer.
+Any API breaking changes such as deprecations marked for removal should be commented with the year of intended removal, and notes on how to implement the API change as an add-on developer and Aslan developer.
 
 ## Announcements
 
-Deprecations should be announced via the [NVDA API mailing list](https://groups.google.com/a/nvaccess.org/g/nvda-api/about).
+Deprecations should be announced via the [Aslan API mailing list](https://groups.google.com/a/nvaccess.org/g/aslan-api/about).

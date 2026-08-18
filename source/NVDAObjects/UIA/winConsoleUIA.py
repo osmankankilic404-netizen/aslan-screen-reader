@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2019-2023 Bill Dengler, Leonard de Ruijter
@@ -8,7 +8,7 @@ import braille
 import config
 import controlTypes
 import ctypes
-import NVDAHelper
+import AslanHelper
 import speech
 import textInfos
 import textUtils
@@ -76,7 +76,7 @@ class ConsoleUIATextInfo(UIATextInfo):
 			# Move back one character to remain within bounds.
 			_rangeObj.MoveEndpointByUnit(
 				UIAHandler.TextPatternRangeEndpoint_End,
-				UIAHandler.NVDAUnitsToUIAUnits["character"],
+				UIAHandler.AslanUnitsToUIAUnits["character"],
 				-1,
 			)
 			collapseToEnd = True
@@ -220,13 +220,13 @@ class ConsoleUIATextInfoWorkaroundEndInclusive(ConsoleUIATextInfo):
 			if wordEndPoints[0]:
 				self._rangeObj.MoveEndpointByUnit(
 					UIAHandler.TextPatternRangeEndpoint_Start,
-					UIAHandler.NVDAUnitsToUIAUnits[textInfos.UNIT_CHARACTER],
+					UIAHandler.AslanUnitsToUIAUnits[textInfos.UNIT_CHARACTER],
 					wordEndPoints[0],
 				)
 			if wordEndPoints[1]:
 				self._rangeObj.MoveEndpointByUnit(
 					UIAHandler.TextPatternRangeEndpoint_End,
-					UIAHandler.NVDAUnitsToUIAUnits[textInfos.UNIT_CHARACTER],
+					UIAHandler.AslanUnitsToUIAUnits[textInfos.UNIT_CHARACTER],
 					wordEndPoints[1],
 				)
 		else:
@@ -320,7 +320,7 @@ class ConsoleUIATextInfoWorkaroundEndInclusive(ConsoleUIATextInfo):
 		# Inject two alphanumeric characters at the end to fix this.
 		lineText += "xx"
 		lineTextLen = textUtils.WideStringOffsetConverter(lineText).encodedStringLength
-		NVDAHelper.localLib.calculateWordOffsets(
+		AslanHelper.localLib.calculateWordOffsets(
 			lineText,
 			lineTextLen,
 			offset,
@@ -381,7 +381,7 @@ class WinConsoleUIA(KeyboardHandlerBasedTypedCharSupport):
 	def _get_windowThreadID(self):
 		# #10113: Windows forces the thread of console windows to match the thread of the first attached process.
 		# However, To correctly handle speaking of typed characters,
-		# NVDA really requires the real thread the window was created in,
+		# Aslan really requires the real thread the window was created in,
 		# I.e. a thread inside conhost.
 		from IAccessibleHandler.internalWinEventHandler import consoleWindowsToThreadIDs
 
@@ -392,7 +392,7 @@ class WinConsoleUIA(KeyboardHandlerBasedTypedCharSupport):
 
 	def _get_TextInfo(self):
 		"""Overriding _get_TextInfo and thus the ConsoleUIATextInfo property
-		on NVDAObjects.UIA.UIA
+		on AslanObjects.UIA.UIA
 		ConsoleUIATextInfo bounds review to the visible text.
 		ConsoleUIATextInfoWorkaroundEndInclusive fixes expand/collapse and implements
 		word movement."""
@@ -436,7 +436,7 @@ class WinConsoleUIA(KeyboardHandlerBasedTypedCharSupport):
 		In Windows Sun Valley 2 (SV2 M2), UIA notification events will be sent
 		to announce new text. Block these for now to avoid double-reporting of
 		text changes.
-		@note: In the longer term, NVDA should leverage these events in place
+		@note: In the longer term, Aslan should leverage these events in place
 		of the current LiveText strategy, as performance will likely be
 		significantly improved and #11002 can be completely mitigated.
 		"""

@@ -1,16 +1,16 @@
-# NVDA NVDA_VERSION Developer Guide
+# Aslan Aslan_VERSION Developer Guide
 
 [TOC]
 
 ## Introduction {#introduction}
 
-This guide provides information concerning NVDA development, including translation and the development of components for NVDA.
+This guide provides information concerning Aslan development, including translation and the development of components for Aslan.
 
 ### Add-on API stability {#API}
 
 #### Definition of the public API
 
-The NVDA Add-on API consists of all NVDA Python objects, classes and functions, excluding symbols prefixed with an underscore (`_`), transitive imports and Python packages.
+The Aslan Add-on API consists of all Aslan Python objects, classes and functions, excluding symbols prefixed with an underscore (`_`), transitive imports and Python packages.
 
 * **Public symbols (e.g. `gui.mainFrame`):**
 These form the supported contract.
@@ -24,12 +24,12 @@ They may change or disappear in any release without notice.
 Add-ons relying on private symbols do so at their own risk.
 * **Pip packages:**
 These may be updated, downgraded or removed at any time.
-It is recommended to package any pip dependency directly with your add-on, rather than using NVDA's version of the package.
+It is recommended to package any pip dependency directly with your add-on, rather than using Aslan's version of the package.
 The exception to this is `wxPython`, where any breaking changes from `wxPython` will be treated as an API breaking change.
 
 #### The API release cycle
 
-To balance progress with ecosystem stability, NVDA follows a predictable schedule for API changes:
+To balance progress with ecosystem stability, Aslan follows a predictable schedule for API changes:
 
 * **Annual API-breaking release (major releases, e.g. 2026.1):**
 This is the only release window where signature breaking changes (defined below) are permitted.
@@ -55,7 +55,7 @@ A change where the code continues to run (the signature matches), but the logic 
 * **Examples:** Fixing a math error or optimising an algorithm (e.g. changing a sort order).
 * **Policy:** These are permitted in any major or minor release (e.g. 2026.1, 2026.2).
 * We recognise that some add-ons may rely on incorrect behaviour or bugs.
-However, preserving a bug to maintain backwards compatibility significantly hampers NVDA's development.
+However, preserving a bug to maintain backwards compatibility significantly hampers Aslan's development.
 If a public function was documented to do X but was actually doing Y, changing it to correctly do X is considered a bug fix, not a breaking change.
 
 ##### Security improvements
@@ -75,11 +75,11 @@ We aim to avoid silent breaks of add-on code.
 When removing or changing APIs in a breaking release (e.g. 2026.1) or due to an urgent security improvement (e.g. 2026.1.2):
 
 1. We will mark functions as deprecated, where possible, in the releases leading up to the break (e.g. raising a `DeprecationWarning` in 2025.4).
-1. All API breaking changes will be listed in the "Changes for Developers" section of the What's New document, and the [NVDA Add-on API Announcements](https://groups.google.com/a/nvaccess.org/g/nvda-api) email group.
+1. All API breaking changes will be listed in the "Changes for Developers" section of the What's New document, and the [Aslan Add-on API Announcements](https://groups.google.com/a/nvaccess.org/g/aslan-api) email group.
 
 #### Stability of transitive imports in the API {#APIImports}
 
-Make sure to import your code from the original module by checking the NVDA source code.
+Make sure to import your code from the original module by checking the Aslan source code.
 
 e.g. if a class is located at `foo.py`, you should import it as follows:
 
@@ -99,26 +99,26 @@ from bar import Foo
 #### Stability of pip packages {#APIIncludedPipPackages}
 
 Pip packages may be updated, downgraded, or removed at any time.
-It is recommended to package any pip dependency you share with NVDA directly with your add-on, rather than using NVDA's version of the package.
+It is recommended to package any pip dependency you share with Aslan directly with your add-on, rather than using Aslan's version of the package.
 
 ### A Note About Python {#aboutPython}
 
-NVDA and its components are primarily written in the Python programming language.
+Aslan and its components are primarily written in the Python programming language.
 It is not the goal of this guide to teach you Python, though examples are provided through out this guide which will help to familiarise you with the Python syntax.
 Documentation and other resources related to the Python language can be found at [www.python.org/](http://www.python.org/)
 
 ### C++ {#cPlusPlus}
 
-Some of NVDA is written in C++, e.g. nvdaHelper.
-For an overview of nvdaHelper, including how to configure Visual Studio to enable intellisense see the
-[nvdaHelper readme](https://github.com/nvaccess/nvda/blob/master/nvdaHelper/readme.md)
+Some of Aslan is written in C++, e.g. aslanHelper.
+For an overview of aslanHelper, including how to configure Visual Studio to enable intellisense see the
+[aslanHelper readme](https://github.com/nvaccess/aslan/blob/master/aslanHelper/readme.md)
 
 ## Translation {#translation}
 
-In order to support multiple languages/locales, NVDA must be translated, and data specific to the locale must be provided.
-This section only includes information on custom NVDA file formats required for translation.
-Other items need to be translated, such as the NVDA user interface and documentation, but these use standard file formats.
-For complete documentation about translating NVDA, please see the [Translating page](https://github.com/nvaccess/nvda/blob/master/projectDocs/translating/readme.md)
+In order to support multiple languages/locales, Aslan must be translated, and data specific to the locale must be provided.
+This section only includes information on custom Aslan file formats required for translation.
+Other items need to be translated, such as the Aslan user interface and documentation, but these use standard file formats.
+For complete documentation about translating Aslan, please see the [Translating page](https://github.com/nvaccess/aslan/blob/master/projectDocs/translating/readme.md)
 
 ### Character Descriptions {#characterDescriptions}
 
@@ -131,7 +131,7 @@ This is a UTF-8 encoded text file.
 Blank lines and lines beginning with a "`#`" character are ignored.
 All other lines should contain a character, followed by a tab, then one or more descriptions separated by tabs.
 Multiple descriptions for a character will be read with natural pauses between them when reading a single character, e.g. when using `leftArrow` or `rightArrow`.
-When reading character descriptions of multiple subsequent characters using spelling commands, the first description is used for each character, e.g. spelling the current line with triple press on `NVDA+upArrow`.
+When reading character descriptions of multiple subsequent characters using spelling commands, the first description is used for each character, e.g. spelling the current line with triple press on `Aslan+upArrow`.
 
 For example:
 
@@ -148,15 +148,15 @@ It is assumed that characters will have the same description regardless of their
 
 #### Translating this file {#TranslatingCharacterDescriptionsFile}
 
-Translation of `characterDescriptions.dic` happens via [Pull Request to NVDA](https://github.com/nvaccess/nvda/blob/master/projectDocs/translating/github.md).
+Translation of `characterDescriptions.dic` happens via [Pull Request to Aslan](https://github.com/nvaccess/aslan/blob/master/projectDocs/translating/github.md).
 
-For a full example and reference, please look at [the English `characterDescriptions.dic` file](https://github.com/nvaccess/nvda/blob/master/source/locale/en/characterDescriptions.dic).
+For a full example and reference, please look at [the English `characterDescriptions.dic` file](https://github.com/nvaccess/aslan/blob/master/source/locale/en/characterDescriptions.dic).
 
 ### Symbol Pronunciation {#symbolPronunciation}
 
 It is often useful to hear punctuation and other symbols pronounced as words when reading text, particularly when moving by character.
 Unfortunately, the pronunciation of symbols is inconsistent between speech synthesisers and many synthesisers do not speak many symbols and/or do not allow control over what symbols are spoken.
-Therefore, NVDA allows information about symbol pronunciation to be provided.
+Therefore, Aslan allows information about symbol pronunciation to be provided.
 
 This is done for a locale by providing a file named `symbols.dic` in the directory for the locale.
 This is a UTF-8 encoded text file.
@@ -278,15 +278,15 @@ thousands separator	comma	all	norep
 
 #### Translating this file {#TranslatingSymbolsFile}
 
-Translation of `symbols.dic` happens via [Pull Request to NVDA](https://github.com/nvaccess/nvda/blob/master/projectDocs/translating/github.md).
+Translation of `symbols.dic` happens via [Pull Request to Aslan](https://github.com/nvaccess/aslan/blob/master/projectDocs/translating/github.md).
 
-See the file [locale\en\symbols.dic](https://github.com/nvaccess/nvda/blob/master/source/locale/en/symbols.dic) for the English definitions which are inherited for all locales.
+See the file [locale\en\symbols.dic](https://github.com/nvaccess/aslan/blob/master/source/locale/en/symbols.dic) for the English definitions which are inherited for all locales.
 
 ### Gestures {#TranslatingGestures}
 
-The gestures defined originally in NVDA are configured to expect English software and keyboard layout.
+The gestures defined originally in Aslan are configured to expect English software and keyboard layout.
 In most cases, these gestures can also be executed on other keyboard layouts without any problem.
-However, sometimes a gesture originally defined by NVDA is not suitable for a specific locale (keyboard layout or software).
+However, sometimes a gesture originally defined by Aslan is not suitable for a specific locale (keyboard layout or software).
 The need to modify an original gesture may be due to the following reasons:
 
 * The original gesture is defined with a character that is not a key name on the locale keyboard layout.
@@ -294,7 +294,7 @@ Generally, the key names are the characters that can be input without the help o
 * The original gesture takes advantage of the key's physical location on the English keyboard layout, but this advantage does not exist with the locale keyboard layout.
 * The original gesture is defined to match a native shortcut in Windows or in an application, but the shortcut in the local version of Windows or of this application is not the same as the English one.
 
-In all of these cases, NVDA allows remapping of this gesture for this specific locale.
+In all of these cases, Aslan allows remapping of this gesture for this specific locale.
 
 #### Examples {#TranslatingGesturesExamples}
 
@@ -302,7 +302,7 @@ Below are three detailed examples of `gestures.ini` files corresponding to the t
 
 ##### Example 1: The original gesture is defined with a character that is not a key name on the locale keyboard layout {#TranslatingGesturesEx1}
 
-In the original English version, the scripts for left and right mouse click (laptop layout) are executed with `NVDA+[` and `NVDA+]`, respectively.
+In the original English version, the scripts for left and right mouse click (laptop layout) are executed with `Aslan+[` and `Aslan+]`, respectively.
 
 * On an English keyboard layout, the `[` and `]` keys are the two keys to the right of the `p` key.
 * On an Italian keyboard layout, `[` and `]` characters can only be input with the help of the `altGr` modifier: `altGr+è` and `altGr+plus`, respectively.
@@ -312,8 +312,8 @@ To do this, they have added the following lines in the `gestures.ini` file:
 
 ```
 [globalCommands.GlobalCommands]
-	leftMouseClick = kb(laptop):NVDA+è
-	rightMouseClick = kb(laptop):NVDA+plus
+	leftMouseClick = kb(laptop):Aslan+è
+	rightMouseClick = kb(laptop):Aslan+plus
 ```
 
 ##### Example 2: The original gesture takes advantage of the keys physical location {#TranslatingGesturesEx2}
@@ -326,25 +326,25 @@ For example, in the French `gestures.ini`, the following lines have been added:
 
 ```
 [globalCommands.GlobalCommands]
-	None = kb(laptop):nvda+[, kb(laptop):nvda+control+[, kb(laptop):nvda+], kb(laptop):nvda+control+], kb(laptop):nvda+shift+., kb(laptop):nvda+., kb(laptop):nvda+control+.
-	leftMouseClick = kb(laptop):nvda+ù
-	rightMouseClick = kb(laptop):nvda+*
+	None = kb(laptop):aslan+[, kb(laptop):aslan+control+[, kb(laptop):aslan+], kb(laptop):aslan+control+], kb(laptop):aslan+shift+., kb(laptop):aslan+., kb(laptop):aslan+control+.
+	leftMouseClick = kb(laptop):aslan+ù
+	rightMouseClick = kb(laptop):aslan+*
 ```
 
 The `ù` and `*` on the French layout are not at the same location as `[` and `]` of the English layout, but these are still two neighboring keys.
-Moreover we can see here that `NVDA+[` and `NVDA+]`, among others, have been mapped to `None`, in order to unbind these gestures.
-For the French (France) layout, this was not mandatory since there is no possibility to input `NVDA+[` or `NVDA+]` without any other modifier key.
+Moreover we can see here that `Aslan+[` and `Aslan+]`, among others, have been mapped to `None`, in order to unbind these gestures.
+For the French (France) layout, this was not mandatory since there is no possibility to input `Aslan+[` or `Aslan+]` without any other modifier key.
 
 ##### Example 3: The original gesture is defined to match a native shortcut {#TranslatingGesturesEx3}
 
-NVDA provides a script for the Word document object named `toggleBold`.
+Aslan provides a script for the Word document object named `toggleBold`.
 This script is mapped to the same gesture as the Word native shortcut to set text bold, i.e. `control+b` in the English version of Word.
 However in the French version of Word, the shortcut to turn text bold is `control+g`.
 The G stands for "gras" meaning "bold" in French.
 The following lines have been added in the French `gestures.ini` file to remap this script:
 
 ```
-[NVDAObjects.window.winword.WordDocument]
+[AslanObjects.window.winword.WordDocument]
 	None = kb:control+b, kb:control+[, kb:control+], "kb:control+shift+,", kb:control+shift+., kb:control+l, kb:control+r
 	toggleBold = kb:control+g, kb:control+shift+b
 ```
@@ -363,21 +363,21 @@ To edit the `gesture.ini` file, you will have to identify the class, the script 
 
 If the gesture to be remapped is a global command, you may execute the following steps to find out the class and the script name of the command:
 
-* activate input help (`NVDA+1`)
-* press the gesture you want to remap, e.g. `NVDA+]` (laptop layout)
-* de-activate input help (`NVDA+1`)
-* open the log (`NVDA+F1`)
+* activate input help (`Aslan+1`)
+* press the gesture you want to remap, e.g. `Aslan+]` (laptop layout)
+* de-activate input help (`Aslan+1`)
+* open the log (`Aslan+F1`)
 * find the line corresponding to the moment you executed the gesture, e.g.:
 
   ```
-  Input help: gesture kb(laptop):NVDA+], bound to script rightMouseClick on globalCommands.GlobalCommands
+  Input help: gesture kb(laptop):Aslan+], bound to script rightMouseClick on globalCommands.GlobalCommands
   ```
 
 The information you are searching is on this line:
 
 * script name: `rightMouseClick`
 * class name: `globalCommands.GlobalCommands` (Note that this is always the class for global commands)
-* original gesture: `kb(laptop):NVDA+]`
+* original gesture: `kb(laptop):Aslan+]`
 
 ##### Case of an application specific script {#TranslatingGesturesStepCaseApplication}
 
@@ -386,17 +386,17 @@ You just need to ensure before proceeding that you are in the targeted applicati
 
 ##### Case of an object specific script {#TranslatingGesturesStepCaseObject}
 
-For object specific scripts such as the ones linked to `NVDAObjects.window.winword.WordDocument`, you may follow the same steps as those for application specific scripts, paying attention to the following two points:
+For object specific scripts such as the ones linked to `AslanObjects.window.winword.WordDocument`, you may follow the same steps as those for application specific scripts, paying attention to the following two points:
 
 * You need to ensure before proceeding that the object to which the script is bound is focused.
 * Some of these scripts have no help message, so you may not hear anything when executing them in input help mode; but the script's name and the class of the object will still appear in the log.
 
 Note that the class of the object appearing in the log may be a subclass of the one where the original gesture is actually bound.
-In this case, you will have to explore NVDA's source code to find this parent class.
+In this case, you will have to explore Aslan's source code to find this parent class.
 
 #### Translating this file {#TranslatingGesturesFile}
 
-Translation of `gestures.ini` happens via [Pull Request to NVDA](https://github.com/nvaccess/nvda/blob/master/projectDocs/translating/github.md).
+Translation of `gestures.ini` happens via [Pull Request to Aslan](https://github.com/nvaccess/aslan/blob/master/projectDocs/translating/github.md).
 
 1. In this file the sections correspond to the class to which the script belongs.
 If the class your looking for does not exist, create this section.
@@ -420,7 +420,7 @@ If the class your looking for does not exist, create this section.
 
 ### Overview {#pluginsOverview}
 
-Plugins allow you to customize the way NVDA behaves overall or within a particular application.
+Plugins allow you to customize the way Aslan behaves overall or within a particular application.
 They are able to:
 
 * Respond to particular events such as focus and object property changes; e.g. when a control changes its name.
@@ -438,23 +438,23 @@ There are two types of plugins. These are:
 * App Modules: code specific to a particular application.
 The App Module receives all events for a particular application, even if that application is not currently active.
 When the application is active, any commands that the App Module has bound to key presses or other input can be executed by the user.
-* Global Plugins: code global to NVDA; i.e. it is used in all applications.
+* Global Plugins: code global to Aslan; i.e. it is used in all applications.
 Global Plugins Receive all events for all controls in the Operating System.
 Any commands bound by a Global Plugin can be executed by the user wherever they are in the operating system, regardless of application.
 
-If you wish to improve NVDA's access to a particular application, it is most likely you will want to write an App Module.
-In contrast, if you wish to add some overall functionality to NVDA (e.g. a script that announces current Wireless network strength while in any application), then a Global Plugin is what you want.
+If you wish to improve Aslan's access to a particular application, it is most likely you will want to write an App Module.
+In contrast, if you wish to add some overall functionality to Aslan (e.g. a script that announces current Wireless network strength while in any application), then a Global Plugin is what you want.
 
 Both App Modules and Global Plugins share a common look and feel.
 They are both Python source files (with a .py extension), they both define a special class containing all events, scripts and bindings, and they both may define custom classes to access controls, text content and complex documents.
 However, they do differ in some ways.
 
-Custom appModules and globalPlugins can be packaged into NVDA add-ons.
+Custom appModules and globalPlugins can be packaged into Aslan add-ons.
 This allows easy distribution, and provides a safe way for the user to install and uninstall the custom code.
 Please refer to the [Add-ons section](#Addons) later on in this document.
 
-In order to test the code while developing, you can place it in a special 'scratchpad' directory in your NVDA user configuration directory.
-You will also need to configure NVDA to enable loading of custom code from the Developer Scratchpad Directory, by enabling this in the Advanced category of NVDA's Settings dialog.
+In order to test the code while developing, you can place it in a special 'scratchpad' directory in your Aslan user configuration directory.
+You will also need to configure Aslan to enable loading of custom code from the Developer Scratchpad Directory, by enabling this in the Advanced category of Aslan's Settings dialog.
 The Advanced category also contains a button to easily open the Developer Scratchpad directory if enabled.
 
 The following few sections will talk separately about App Modules and Global Plugins.
@@ -467,14 +467,14 @@ For example, an App Module for notepad would be called notepad.py, as notepad's 
 To map a single App Module for multiple executables, or handle when an executable name violates the Python import rules, refer to [Associating App Modules with an executable](#AssociatingAppModule).
 For apps hosted inside host executables, see the section on app modules for hosted apps.
 
-App Module files must be placed in the appModules subdirectory of an add-on, or of the scratchpad directory of the NVDA user configuration directory.
+App Module files must be placed in the appModules subdirectory of an add-on, or of the scratchpad directory of the Aslan user configuration directory.
 
 App Modules must define a class called AppModule, which inherits from appModuleHandler.AppModule.
 This class can then define event and script methods, gesture bindings and other code.
 This will all be covered in depth later.
 
-NVDA loads an App Module for an application as soon as it notices the application is running.
-The App Module is unloaded once the application is closed or when NVDA is exiting.
+Aslan loads an App Module for an application as soon as it notices the application is running.
+The App Module is unloaded once the application is closed or when Aslan is exiting.
 
 ### Associating App Modules with an executable {#AssociatingAppModule}
 
@@ -504,20 +504,20 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 ### Example 1: An App Module that Beeps on Focus Change Events {#Example1}
 
-The following example App Module makes NVDA beep each time the focus changes within the notepad application.
+The following example App Module makes Aslan beep each time the focus changes within the notepad application.
 This example shows you the basic layout of an App Module.
 
 Copy and paste the code between (but not including) the start and end markers into a new text file called notepad.py, which should be saved in the AppModules subdirectory.
 Be very careful to keep all tabs and spaces intact.
 
-Once saved in the correct location, either restart NVDA or choose Reload Plugins found under Tools in the NVDA menu.
+Once saved in the correct location, either restart Aslan or choose Reload Plugins found under Tools in the Aslan menu.
 
 Finally, open Notepad and move the focus around the application; e.g. move along the menu bar, open some dialog boxes, etc.
 You should hear beeps each time the focus changes.
 Note though that if you move outside of Notepad - for instance, to Windows Explorer - you do not hear beeps.
 
 ```py
-# Notepad App Module for NVDA
+# Notepad App Module for Aslan
 # Developer guide example 1
 
 import appModuleHandler
@@ -542,7 +542,7 @@ The implementation of this event is not important for the purposes of this examp
 The most important part is the class itself.
 Events will be covered in greater detail later.
 
-As with other examples in this guide, remember to delete the created app module when you are finished testing and then restart NVDA or reload plugins, so that original functionality is restored.
+As with other examples in this guide, remember to delete the created app module when you are finished testing and then restart Aslan or reload plugins, so that original functionality is restored.
 
 ### App modules for hosted apps {#appModulesForHostedApps}
 
@@ -559,10 +559,10 @@ By default, apps employing Edge WebView2 such as modern Outlook (olk.exe) are di
 The following example is the same as the Notepad app module above, except this is for an app hosted by `wwahost.exe`.
 
 ```py
-# wwahost/test App Module for NVDA
+# wwahost/test App Module for Aslan
 # Developer guide example 2
 
-from nvdaBuiltin.appModules.wwahost import *
+from aslanBuiltin.appModules.wwahost import *
 
 class AppModule(AppModule):
 
@@ -573,7 +573,7 @@ class AppModule(AppModule):
 ```
 
 The biggest difference from the Notepad app module is where the `wwahost` app module comes from.
-As a built-in app module, `wwahost` can be imported from `nvdaBuiltin.appModules`.
+As a built-in app module, `wwahost` can be imported from `aslanBuiltin.appModules`.
 
 Another difference is how the app module class is defined.
 As wwahost app module provides necessary infrastructure for apps hosted inside, you just need to subclass the wwahost AppModule class.
@@ -598,28 +598,28 @@ You can remove the "disableBrowseModeByDefault" line if you would like to let us
 
 Global Plugin files have a .py extension, and should have a short unique name which identifies what they do.
 
-Global plugin files must be placed in the globalPlugins subdirectory of an add-on, or of the scratchpad directory of the NVDA user configuration directory.
+Global plugin files must be placed in the globalPlugins subdirectory of an add-on, or of the scratchpad directory of the Aslan user configuration directory.
 
 Global Plugins must define a class called GlobalPlugin, which inherits from globalPluginHandler.GlobalPlugin.
 This class can then define event and script methods, gesture bindings and other code.
 This will all be covered in depth later.
 
-NVDA loads all global plugins as soon as it starts, and unloads them on exit.
+Aslan loads all global plugins as soon as it starts, and unloads them on exit.
 
-### Example 3: a Global Plugin Providing a Script to Announce the NVDA Version {#example3}
+### Example 3: a Global Plugin Providing a Script to Announce the Aslan Version {#example3}
 
-The following example Global Plugin Allows you to press NVDA+shift+v while anywhere in the Operating System to find out NVDA's version.
+The following example Global Plugin Allows you to press Aslan+shift+v while anywhere in the Operating System to find out Aslan's version.
 This example is only to show you the basic layout of a Global Plugin.
 
 Copy and paste the code between (but not including) the start and end markers into a new text file with a name of example2.py, which should be saved in the globalPlugins subdirectory.
 Be very careful to keep all tabs and spaces intact.
 
-Once saved in the right place, either restart NVDA or choose Reload Plugins found under Tools in the NVDA menu.
+Once saved in the right place, either restart Aslan or choose Reload Plugins found under Tools in the Aslan menu.
 
-From anywhere, you can now press `NVDA+shift+v` to have NVDA's version spoken and brailled.
+From anywhere, you can now press `Aslan+shift+v` to have Aslan's version spoken and brailled.
 
 ```py
-# Version announcement plugin for NVDA
+# Version announcement plugin for Aslan
 # Developer guide example 3
 
 import globalPluginHandler
@@ -629,8 +629,8 @@ import buildVersion
 
 
 class GlobalPlugin(globalPluginHandler.GlobalPlugin):
-	@script(gesture="kb:NVDA+shift+v")
-	def script_announceNVDAVersion(self, gesture):
+	@script(gesture="kb:Aslan+shift+v")
+	def script_announceAslanVersion(self, gesture):
 		ui.message(buildVersion.version)
 ```
 
@@ -644,30 +644,30 @@ Next, it defines a class called GlobalPlugin, which is inherited from globalPlug
 
 Inside this class, it defines 1 or more events, scripts or gesture bindings.
 In this example, it defines a script method that performs the version announcement.
-The script decorator from the scriptHandler module is used to assign the NVDA+shift+v shortcut to this script.
+The script decorator from the scriptHandler module is used to assign the Aslan+shift+v shortcut to this script.
 However, the details of the script and its binding are not important for the purposes of this example.
 The most important part is the class itself.
 More information about scripts and the script decorator can be found in the [Defining script properties](#DefiningScriptProperties) section of this guide.
 
-As with other examples in this guide, remember to delete the created Global Plugin when finished testing and then restart NVDA or reload plugins, so that original functionality is restored.
+As with other examples in this guide, remember to delete the created Global Plugin when finished testing and then restart Aslan or reload plugins, so that original functionality is restored.
 
-### NVDA Objects {#NVDAObjects}
+### Aslan Objects {#AslanObjects}
 
-NVDA represents controls and other GUI elements as NVDA Objects.
-These NVDA Objects contain standardised properties, such as name, role, value, states and description, which allow other parts of NVDA to query or present information about a control in a generalised way.
-For example, the OK button in a dialog would be represented as an NVDA Object with a name of "OK" and a role of button.
+Aslan represents controls and other GUI elements as Aslan Objects.
+These Aslan Objects contain standardised properties, such as name, role, value, states and description, which allow other parts of Aslan to query or present information about a control in a generalised way.
+For example, the OK button in a dialog would be represented as an Aslan Object with a name of "OK" and a role of button.
 Similarly, a checkbox with a label of "I agree" would have a name of "I agree", a role of checkbox, and if currently checked, a state of checked.
 
-As there are many different GUI Toolkits and platform and accessibility APIs, NVDA Objects abstract these differences into a standard form that NVDA can use, regardless of the toolkit or API a particular control is made with.
+As there are many different GUI Toolkits and platform and accessibility APIs, Aslan Objects abstract these differences into a standard form that Aslan can use, regardless of the toolkit or API a particular control is made with.
 For example, the Ok button just discussed could be a widget in a Java application, an MSAA object, an IAccessible2 object or a UI Automation element.
 
-NVDA Objects have many properties.
+Aslan Objects have many properties.
 Some of the most useful are:
 
 * name: the label of the control.
-* role: one of the Role.* constants from NVDA's controlTypes module.
+* role: one of the Role.* constants from Aslan's controlTypes module.
 Button, dialog, editableText, window and checkbox are examples of roles.
-* states: a set of 0 or more of the State.* constants from NVDA's controlTypes module.
+* states: a set of 0 or more of the State.* constants from Aslan's controlTypes module.
 Focusable, focused, selected, selectable, expanded, collapsed and checked are some examples of states.
 * value: the value of the control; e.g. the percentage of a scroll bar or the current setting of a combo box.
 * description: a sentence or two describing what the control does (usually the same as its tooltip).
@@ -675,7 +675,7 @@ Focusable, focused, selected, selectable, expanded, collapsed and checked are so
 * parent: this object's parent object.
 For example, a list item object's parent would be the list containing it.
 * next: the object directly after this one on the same level in logical order.
-For example, a menu item NVDA Object's next object is most likely another menu item within the same menu.
+For example, a menu item Aslan Object's next object is most likely another menu item within the same menu.
 * previous: like next but in reverse.
 * firstChild: the first direct child object of this object.
 For example, a list's first child would be the first list item.
@@ -683,56 +683,56 @@ For example, a list's first child would be the first list item.
 * children: a list of all the direct children of this object; e.g. all the menu items in a menu.
 
 There are also a few simplified navigation properties such as simpleParent, simpleNext, simpleFirstChild and simpleLastChild.
-These are like their respective navigation properties described above, but NVDA filters out useless objects.
-These properties are used when NVDA's simple review mode is turned on, which is the default.
+These are like their respective navigation properties described above, but Aslan filters out useless objects.
+These properties are used when Aslan's simple review mode is turned on, which is the default.
 These simple properties may be easier to use, but the real navigation properties more closely reflect the underlying Operating System structure.
-Also, these may change in future versions of NVDA as improvements are made to simple review, so they should generally be avoided when programmatically locating specific objects.
+Also, these may change in future versions of Aslan as improvements are made to simple review, so they should generally be avoided when programmatically locating specific objects.
 
-When developing plugins, most of the time, it is not important what toolkit or API backs an NVDA Object, as the plugin will usually only access standard properties such as name, role and value.
-However, as plugins become more advanced, it is certainly possible to delve deeper into NVDA Objects to find out toolkit or API specific information if required.
+When developing plugins, most of the time, it is not important what toolkit or API backs an Aslan Object, as the plugin will usually only access standard properties such as name, role and value.
+However, as plugins become more advanced, it is certainly possible to delve deeper into Aslan Objects to find out toolkit or API specific information if required.
 
-Plugins make use of NVDA Objects in three particular ways:
+Plugins make use of Aslan Objects in three particular ways:
 
-* Most events that plugins receive take an argument which is the NVDA Object on which the event occurred.
-For example, event_gainFocus takes the NVDA Object that represents the control gaining focus.
-* Scripts, events or other code may fetch objects of interest such as the NVDA Object with focus, NVDA's current navigator object, or perhaps the Desktop NVDA Object.
+* Most events that plugins receive take an argument which is the Aslan Object on which the event occurred.
+For example, event_gainFocus takes the Aslan Object that represents the control gaining focus.
+* Scripts, events or other code may fetch objects of interest such as the Aslan Object with focus, Aslan's current navigator object, or perhaps the Desktop Aslan Object.
 The code may then retrieve information from that object or perhaps even retrieve another object related to it (e.g. its parent, first child, etc.).
-* the Plugin may define its own custom NVDA Object classes which will be used to wrap a specific control to give it extra functionality, mutate its properties, etc.
+* the Plugin may define its own custom Aslan Object classes which will be used to wrap a specific control to give it extra functionality, mutate its properties, etc.
 
-Just like App Modules and Global Plugins, NVDA Objects can also define events, scripts and gesture bindings.
+Just like App Modules and Global Plugins, Aslan Objects can also define events, scripts and gesture bindings.
 
 ### Scripts and Gesture Bindings {#scripts}
 
-App Modules, Global Plugins and NVDA Objects can define special methods which can be bound to a particular piece of input such as a key press.
-NVDA refers to these methods as scripts.
+App Modules, Global Plugins and Aslan Objects can define special methods which can be bound to a particular piece of input such as a key press.
+Aslan refers to these methods as scripts.
 
 A script is a standard Python instance method with a name starting with "script_"; e.g. "script_sayDateTime".
 
 A script method takes two arguments:
 
-* self: a reference to the App Module, Global Plugin or NVDA Object instance the script was called on.
+* self: a reference to the App Module, Global Plugin or Aslan Object instance the script was called on.
 * gesture: an Input Gesture object, which represents the input that caused the script to run.
 
-As well as the actual script method, some form of gesture binding must be defined, so that NVDA knows what input should execute the script.
+As well as the actual script method, some form of gesture binding must be defined, so that Aslan knows what input should execute the script.
 
 A gesture identifier string is a simple string representation of a piece of input.
 It consists of a two letter character code denoting the source of the input, an optional device in brackets, a colon (:) and one or more names separated by a plus (+) denoting the actual keys or input values.
 
 Some examples of gesture string identifiers are:
 
-* "kb:NVDA+shift+v"
+* "kb:Aslan+shift+v"
 * "br(freedomScientific):leftWizWheelUp"
 * "br(alva.BC640):t3"
-* "kb(laptop):NVDA+t"
+* "kb(laptop):Aslan+t"
 
-Currently, the input sources in NVDA are:
+Currently, the input sources in Aslan are:
 
 * kb: system keyboard input
 * br: braille display controls
 * ts: touch screen
 * bk: braille keyboard input
 
-When NVDA receives input, it looks for a matching gesture binding in a particular order.
+When Aslan receives input, it looks for a matching gesture binding in a particular order.
 Once a gesture binding is found, the script is executed and no further bindings are used, nor is that particular gesture passed on automatically to the Operating System.
 
 The order for gesture binding lookup is:
@@ -742,13 +742,13 @@ The order for gesture binding lookup is:
 * The braille display driver specific gesture map
 * Loaded Global Plugins
 * App Module of the active application
-* Tree Interceptor of the NVDA Object with focus if any; e.g. a virtualBuffer
-* NVDA Object with focus
-* Global Commands (built in commands like quitting NVDA, object navigation commands, etc.)
+* Tree Interceptor of the Aslan Object with focus if any; e.g. a virtualBuffer
+* Aslan Object with focus
+* Global Commands (built in commands like quitting Aslan, object navigation commands, etc.)
 
 #### Defining script properties {#DefiningScriptProperties}
 
-For NVDA 2018.3 and above, the recommended way to set script properties is by means of the so called script decorator.
+For Aslan 2018.3 and above, the recommended way to set script properties is by means of the so called script decorator.
 In short, a decorator is a function that modifies the behavior of a particular function or method.
 The script decorator modifies the script in such a way that it will be properly bound to the desired gestures.
 Furthermore, it ensures that the script is listed with the description you specify, and that it is categorised under the desired category in the input gestures dialog.
@@ -766,13 +766,13 @@ For example:
 	@script(
 		description=_("Speaks the date and time"),
 		category=inputCore.SCRCAT_MISC,
-		gestures=["kb:NVDA+shift+t", "kb:NVDA+alt+r"]
+		gestures=["kb:Aslan+shift+t", "kb:Aslan+alt+r"]
 	)
 	def script_sayDateTime(self, gesture):
 ```
 
 In this example, your script will be listed in the input gestures dialog under the "Miscellaneous" category.
-It will have the description "Speaks the date and time", and will be bound to the "NVDA+shift+t" and "NVDA+alt+r" key combinations on the keyboard.
+It will have the description "Speaks the date and time", and will be bound to the "Aslan+shift+t" and "Aslan+alt+r" key combinations on the keyboard.
 
 The following keyword arguments can be used when applying the script decorator:
 
@@ -785,8 +785,8 @@ The following keyword arguments can be used when applying the script decorator:
   There are constants for common categories prefixed with SCRCAT_ in the inputCore and globalCommands modules, which can also be specified.
   The script will be listed under the specified category in the Input Gestures dialog.
   If no category is specified, the script will be categorized under "Miscellaneous".
-* gesture: A string containing a single gesture associated with this script, e.g. "kb:NVDA+shift+r".
-* gestures: A string list of multiple gestures associated with this script, e.g. ["kb:NVDA+shift+r", "kb:NVDA+alt+t"].
+* gesture: A string containing a single gesture associated with this script, e.g. "kb:Aslan+shift+r".
+* gestures: A string list of multiple gestures associated with this script, e.g. ["kb:Aslan+shift+r", "kb:Aslan+alt+t"].
   When both gesture and gestures are specified, they are combined.
   Either gesture, or any item in gestures can be used to trigger the script.
 * canPropagate: A boolean indicating whether this script should also apply when it belongs to a focus ancestor object.
@@ -803,7 +803,7 @@ The following keyword arguments can be used when applying the script decorator:
   This option defaults to False.
 
 Though the script decorator makes the script definition process a lot easier, there are more ways of binding gestures and setting script properties.
-For example, a special "__gestures" Python dictionary can be defined as a class variable on an App Module, Global Plugin or NVDA Object.
+For example, a special "__gestures" Python dictionary can be defined as a class variable on an App Module, Global Plugin or Aslan Object.
 This dictionary should contain gesture identifier strings pointing to the name of the requested script, without the "script_" prefix.
 You can also specify a description of the script in the method's "doc" attribute.
 However, beware not to include an inline docstring at the start of the method if you do not set the "doc" attribute, as it would render the description not translatable.
@@ -812,16 +812,16 @@ Furthermore, an alternative way of specifying the script's category is by means 
 
 ### Example 4: A Global Plugin to Find out Window Class and Control ID {#example4}
 
-The following Global Plugin allows you to press NVDA+leftArrow to have the window class of the current focus announced, and NVDA+rightArrow to have the window control ID of the current focus announced.
-This example shows you how to define one or more scripts and gesture bindings on a class such as an App Module, Global Plugin or NVDA Object.
+The following Global Plugin allows you to press Aslan+leftArrow to have the window class of the current focus announced, and Aslan+rightArrow to have the window control ID of the current focus announced.
+This example shows you how to define one or more scripts and gesture bindings on a class such as an App Module, Global Plugin or Aslan Object.
 
 Copy and paste the code between (but not including) the start and end markers into a new text file with a name of example3.py, which should be saved in the globalPlugins subdirectory.
 Be very careful to keep all tabs and spaces intact.
 
-Once saved in the right place, either restart NVDA or choose Reload Plugins found under Tools in the NVDA menu.
+Once saved in the right place, either restart Aslan or choose Reload Plugins found under Tools in the Aslan menu.
 
 ```py
-#Window utility scripts for NVDA
+#Window utility scripts for Aslan
 #Developer guide example 4
 
 import globalPluginHandler
@@ -833,7 +833,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	@script(
 		description=_("Announces the window class name of the current focus object"),
-		gesture="kb:NVDA+leftArrow"
+		gesture="kb:Aslan+leftArrow"
 	)
 	def script_announceWindowClassName(self, gesture):
 		focusObj = api.getFocusObject()
@@ -843,7 +843,7 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 	@script(
 		description=_("Announces the window control ID of the current focus object"),
-		gesture="kb:NVDA+rightArrow"
+		gesture="kb:Aslan+rightArrow"
 	)
 	def script_announceWindowControlID(self, gesture):
 		focusObj = api.getFocusObject()
@@ -854,42 +854,42 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 
 ### Events {#events}
 
-When NVDA detects particular toolkit, API or Operating System events, it abstracts these and fires its own internal events on plugins and NVDA Objects.
+When Aslan detects particular toolkit, API or Operating System events, it abstracts these and fires its own internal events on plugins and Aslan Objects.
 
-Although most events are related to a specific NVDA Object (e.g. name change, gain focus, state change, etc.), these events can be handled at various levels.
+Although most events are related to a specific Aslan Object (e.g. name change, gain focus, state change, etc.), these events can be handled at various levels.
 When an event is handled, it is stopped from going further down the chain.
 However, code inside the event can choose to propagate it further if needed.
 
 The order of levels through which the event passes until an event method is found is:
 
 * Loaded Global Plugins
-* The App Module associated with the NVDA Object on which the event was fired
-* The Tree Interceptor (if any) associated with the NVDAObject on which the event was fired
-* the NVDAObject itself.
+* The App Module associated with the Aslan Object on which the event was fired
+* The Tree Interceptor (if any) associated with the AslanObject on which the event was fired
+* the AslanObject itself.
 
 Events are Python instance methods, with a name starting with "event_" followed by the actual name of the event (e.g. gainFocus).
 
 These event methods take slightly different arguments depending at what level they are defined.
 
-If an event for an NVDA Object is defined on an NVDA Object itself, the method only takes one mandatory argument which is the 'self' argument; i.e. the NVDA Object instance).
+If an event for an Aslan Object is defined on an Aslan Object itself, the method only takes one mandatory argument which is the 'self' argument; i.e. the Aslan Object instance).
 Some events may take extra arguments, though this is quite rare.
 
-If an event for an NVDA Object is defined on a Global Plugin, App Module or Tree Interceptor, the event takes the following arguments:
+If an event for an Aslan Object is defined on a Global Plugin, App Module or Tree Interceptor, the event takes the following arguments:
 
 * self: the instance of the Global Plugin, App Module or Tree Interceptor
-* obj: the NVDA Object on which the event was fired
+* obj: the Aslan Object on which the event was fired
 * nextHandler: a function that when called will propagate the event further down the chain.
 
-Some common NVDA Object events are:
+Some common Aslan Object events are:
 
-* foreground: this NVDA Object has become the new foreground object; i.e. active top-level object
+* foreground: this Aslan Object has become the new foreground object; i.e. active top-level object
 * gainFocus
 * focusEntered: Focus has moved inside this object; i.e. it is an ancestor of the focus object
 * loseFocus
 * nameChange
 * valueChange
 * stateChange
-* caret: when the caret (insertion point) within this NVDA Object moves
+* caret: when the caret (insertion point) within this Aslan Object moves
 * locationChange: physical screen location changes
 
 There are many other events, though those listed above are usually the most useful.
@@ -898,10 +898,10 @@ For an example of an event handled by an App Module, please refer to [example 1]
 
 ### the App Module SleepMode variable {#appModuleSleepMode}
 
-App Modules have one very useful property called "sleepMode", which if set to true almost completely disables NVDA within that application.
+App Modules have one very useful property called "sleepMode", which if set to true almost completely disables Aslan within that application.
 Sleep Mode is very useful for self voicing applications that have their own screen reading functionality, or perhaps even some games that need full use of the keyboard.
 
-Although sleep mode can be toggled on and off by the user with the key command NVDA+shift+s, a developer can choose to have sleep mode enabled by default for an application.
+Although sleep mode can be toggled on and off by the user with the key command Aslan+shift+s, a developer can choose to have sleep mode enabled by default for an application.
 This is done by providing an App Module for that application which simply sets sleepMode to True in the AppModule class.
 
 ### Example 5: A Sleep Mode App Module {#example5}
@@ -917,39 +917,39 @@ class AppModule(appModuleHandler.AppModule):
 	sleepMode = True
 ```
 
-### Providing Custom NVDA Object Classes {#customNVDAObjectClasses}
+### Providing Custom Aslan Object Classes {#customAslanObjectClasses}
 
-Providing custom NVDA Object classes is probably the most powerful and useful way to improve the experience of an application in an NVDA plugin.
-This method allows you to place all the needed logic for a particular control altogether in one NVDA Object class for that control, rather than scattering code for many controls across a plugin's events.
+Providing custom Aslan Object classes is probably the most powerful and useful way to improve the experience of an application in an Aslan plugin.
+This method allows you to place all the needed logic for a particular control altogether in one Aslan Object class for that control, rather than scattering code for many controls across a plugin's events.
 
-There are two steps to providing a custom NVDA Object class:
+There are two steps to providing a custom Aslan Object class:
 
-* Define the NVDA Object class and its events, scripts, gesture bindings and overridden properties.
-* Tell NVDA to use this NVDA Object class in specific situations by handling it in the plugin's `chooseNVDAObjectOverlayClasses` method.
+* Define the Aslan Object class and its events, scripts, gesture bindings and overridden properties.
+* Tell Aslan to use this Aslan Object class in specific situations by handling it in the plugin's `chooseAslanObjectOverlayClasses` method.
 
-When defining a custom NVDAObject class, you have many NVDAObject base classes to choose from.
+When defining a custom AslanObject class, you have many AslanObject base classes to choose from.
 These base classes contain the base support for the particular accessibility or OS API underlying the control, such as win32, MSAA or Java access Bridge.
-You should usually inherit your custom NVDAObject class from the highest base class you need in order to choose your class in the first place.
-For example, if you choose to use your custom NVDAObject class when the window class name is "Edit" and the window control ID is 15, you should probably inherit from `NVDAObjects.window.Window`, as you are clearly aware that this is a Window object.
-Similarly, if you match on MSAA's `accRole` property, you would probably need to inherit from `NVDAObjects.IAccessible.IAccessible`.
-You should also consider what properties you are going to override on the custom NVDA Object.
-For instance, if you are going to override an IAccessible specific property, such as `shouldAllowIAccessibleFocusEvent`, then you need to inherit from `NVDAObjects.IAccessible.IAccessible`.
+You should usually inherit your custom AslanObject class from the highest base class you need in order to choose your class in the first place.
+For example, if you choose to use your custom AslanObject class when the window class name is "Edit" and the window control ID is 15, you should probably inherit from `AslanObjects.window.Window`, as you are clearly aware that this is a Window object.
+Similarly, if you match on MSAA's `accRole` property, you would probably need to inherit from `AslanObjects.IAccessible.IAccessible`.
+You should also consider what properties you are going to override on the custom Aslan Object.
+For instance, if you are going to override an IAccessible specific property, such as `shouldAllowIAccessibleFocusEvent`, then you need to inherit from `AslanObjects.IAccessible.IAccessible`.
 
-The `chooseNVDAObjectOverlayClasses` method can be implemented on app modules or global plugin classes.
+The `chooseAslanObjectOverlayClasses` method can be implemented on app modules or global plugin classes.
 It takes 3 arguments:
 
 1. `self`: the app module or global plugin instance.
-1. `obj`: the `NVDAObject` for which classes are being chosen.
-1. `clsList`: a Python list of `NVDAObject` classes that will be used for `obj`.
+1. `obj`: the `AslanObject` for which classes are being chosen.
+1. `clsList`: a Python list of `AslanObject` classes that will be used for `obj`.
 
-Inside this method, you should decide which custom NVDA Object class(es) (if any) this NVDA Object should use by checking its properties, etc.
+Inside this method, you should decide which custom Aslan Object class(es) (if any) this Aslan Object should use by checking its properties, etc.
 If a custom class should be used, it must be inserted into the class list, usually at the beginning.
-You can also remove classes chosen by NVDA from the class list, although this is rarely required.
+You can also remove classes chosen by Aslan from the class list, although this is rarely required.
 
-### Example 6: Command to Retrieve the Length of Text in an Edit Field Using a Custom NVDA Object {#example6}
+### Example 6: Command to Retrieve the Length of Text in an Edit Field Using a Custom Aslan Object {#example6}
 
 This app module for notepad provides a command to report the number of characters in edit fields.
-You can activate it using `NVDA+l`.
+You can activate it using `Aslan+l`.
 Notice that the command is specific to edit fields; i.e. it only works while you are focused in an edit field, rather than anywhere in the application.
 
 The following code can be copied and pasted in to a text file, then saved in the `appModules` directory with the name of `notepad.py`.
@@ -957,67 +957,67 @@ The following code can be copied and pasted in to a text file, then saved in the
 ```py
 import appModuleHandler
 from scriptHandler import script
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.IAccessible import IAccessible
 import controlTypes
 import ui
 
 class AppModule(appModuleHandler.AppModule):
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if obj.windowClassName == "Edit" and obj.role == controlTypes.Role.EDITABLETEXT:
 			clsList.insert(0, EnhancedEditField)
 
 class EnhancedEditField(IAccessible):
 
-	@script(gesture="kb:NVDA+l")
+	@script(gesture="kb:Aslan+l")
 	def script_reportLength(self, gesture):
 		ui.message(f"{len(self.value)}")
 ```
 
-### Making Small Changes to an NVDA Object in App Modules {#smallChangesToNVDAObjectInAppModules}
+### Making Small Changes to an Aslan Object in App Modules {#smallChangesToAslanObjectInAppModules}
 
-Sometimes, you may wish to make only small changes to an NVDA Object in an application, such as overriding its name or role.
-In these cases, you don't need the full power of a custom NVDA Object class.
-To do this, you can use the `NVDAObject_init` event available only on App Modules.
+Sometimes, you may wish to make only small changes to an Aslan Object in an application, such as overriding its name or role.
+In these cases, you don't need the full power of a custom Aslan Object class.
+To do this, you can use the `AslanObject_init` event available only on App Modules.
 
-The `event_NVDAObject_init` method takes two arguments:
+The `event_AslanObject_init` method takes two arguments:
 
 1. `self`: the AppModule instance.
-1. `obj`: the `NVDAObject` being initialized.
+1. `obj`: the `AslanObject` being initialized.
 
 Inside this method, you can check whether this object is relevant and then override properties accordingly.
 
-### Example 7: Labelling the Notepad Edit Field Using event_NVDAObject_init {#example7}
+### Example 7: Labelling the Notepad Edit Field Using event_AslanObject_init {#example7}
 
-This app module for notepad makes NVDA report Notepad's main edit field as having a name of "content".
-That is, when it receives focus, NVDA will say "Content edit".
+This app module for notepad makes Aslan report Notepad's main edit field as having a name of "content".
+That is, when it receives focus, Aslan will say "Content edit".
 
 The following code can be copied and pasted in to a text file, then saved in the `appModules` directory with the name of `notepad.py`.
 
 ```py
 import appModuleHandler
-from NVDAObjects.window import Window
+from AslanObjects.window import Window
 
 class AppModule(appModuleHandler.AppModule):
 
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		if isinstance(obj, Window) and obj.windowClassName == "Edit" and obj.windowControlID == 15:
 			obj.name = "Content"
 ```
 
 ### Parsing additional command line arguments in your plugin {#PluginCLIArgs}
 
-By default NVDA accepts a limited set of command line arguments and shows an error for unknown ones.
+By default Aslan accepts a limited set of command line arguments and shows an error for unknown ones.
 However, if you want to use any additional arguments, this is possible by adding a handler to the [extension point](#ExtensionPoints) `addonHandler.isCLIParamKnown`.
-Note that since command line arguments are processed just after NVDA starts, your add-on needs to process them in a global plugin, since app modules or other drivers may not be loaded at this stage.
+Note that since command line arguments are processed just after Aslan starts, your add-on needs to process them in a global plugin, since app modules or other drivers may not be loaded at this stage.
 A sample handler can be written as follows:
 
 ```py
 def processArgs(cliArgument: str) -> bool:
 	if cliArgument == "--enable-addon-feature":
 		# Code to process your argument...
-		return True  # Argument is known to the add-on and should not be flagged by NVDA
-	return False  # unknown argument - NVDA should warn user
+		return True  # Argument is known to the add-on and should not be flagged by Aslan
+	return False  # unknown argument - Aslan should warn user
 ```
 
 Then the handler needs to be registered, preferably in the constructor of your global plugin:
@@ -1032,11 +1032,11 @@ class GlobalPlugin(globalPluginHandler.GlobalPlugin):
 		addonHandler.isCLIParamKnown.register(processArgs)
 ```
 
-## Packaging Code as NVDA Add-ons {#Addons}
+## Packaging Code as Aslan Add-ons {#Addons}
 
 Add-ons make it easy for users to share and install plugins, drivers, speech pronunciation/symbol dictionaries and braille translation tables.
-They can be packaged in to a single NVDA add-on package, which the user can then install into a copy of NVDA via the Add-on Store found under Tools in the NVDA menu.
-An add-on package is simply a standard zip archive with the file extension of "`nvda-addon`".
+They can be packaged in to a single Aslan add-on package, which the user can then install into a copy of Aslan via the Add-on Store found under Tools in the Aslan menu.
+An add-on package is simply a standard zip archive with the file extension of "`aslan-addon`".
 It can contain a manifest file, install/uninstall code and directories containing plugins, drivers, speech dictionaries, symbol dictionaries and braille translation tables.
 
 ### Non-ASCII File Names in Zip Archives {#nonASCIIFileNamesInZip}
@@ -1082,28 +1082,28 @@ When uploading to the Add-on Store certain requirements apply:
 * url (string): A URL where this add-on, further info and upgrades can be found.
   * Starting the URL with `https://` is required for submitting to the Add-on Store.
 * docFileName (string): The name of the main documentation file for this add-on; e.g. readme.html. See the [Add-on Documentation](#AddonDoc) section for more details.
-* minimumNVDAVersion (string, required): The minimum required version of NVDA for this add-on to be installed or enabled.
+* minimumAslanVersion (string, required): The minimum required version of Aslan for this add-on to be installed or enabled.
   * e.g "2021.1"
   * Must be a three part version string i.e. Year.Major.Minor, or a two part version string of Year.Major.
   In the second case, Minor defaults to 0.
   * Defaults to "0.0.0"
-  * Must be less than or equal to `lastTestedNVDAVersion`
+  * Must be less than or equal to `lastTestedAslanVersion`
   * This must match a valid API version to be submitted to the Add-on Store.
-  Valid API versions are found [on GitHub](https://github.com/nvaccess/addon-datastore-transform/blob/main/nvdaAPIVersions.json).
-* lastTestedNVDAVersion (string, required): The last version of NVDA this add-on has been tested with.
+  Valid API versions are found [on GitHub](https://github.com/nvaccess/addon-datastore-transform/blob/main/aslanAPIVersions.json).
+* lastTestedAslanVersion (string, required): The last version of Aslan this add-on has been tested with.
   * e.g "2022.3.3"
   * Must be a three part version string i.e. Year.Major.Minor, or a two part version string of Year.Major.
   In the second case, Minor defaults to 0.
   * Defaults to "0.0.0"
-  * Must be greater than or equal to `minimumNVDAVersion`
+  * Must be greater than or equal to `minimumAslanVersion`
   * This must match a valid API version to be submitted to the Add-on Store.
-  Valid API versions are found [on GitHub](https://github.com/nvaccess/addon-datastore-transform/blob/main/nvdaAPIVersions.json).
+  Valid API versions are found [on GitHub](https://github.com/nvaccess/addon-datastore-transform/blob/main/aslanAPIVersions.json).
 
 All string values must be enclosed in quotes as shown in the example below.
 
-The lastTestedNVDAVersion field in particular is used to ensure that users can be confident about installing an add-on.
+The lastTestedAslanVersion field in particular is used to ensure that users can be confident about installing an add-on.
 It allows the add-on author to make an assurance that the add-on will not cause instability, or break the users system.
-When this is not provided, or is less than the current version of NVDA (ignoring minor point updates e.g. 2018.3.1) then the user will be warned not to install the add-on.
+When this is not provided, or is less than the current version of Aslan (ignoring minor point updates e.g. 2018.3.1) then the user will be warned not to install the add-on.
 
 The manifest can also specify information regarding any additional speech dictionaries, symbol or braille translation tables provided by the add-on.
 Please refer to the [speech dictionaries](#AddonSpeechDictionaries), [symbol dictionaries](#AddonSymbolDictionaries) and [braille translation tables](#BrailleTables) sections.
@@ -1116,10 +1116,10 @@ summary = "Cool Test Add-on"
 version = "1.0.0"
 description = "An example add-on showing how to create add-ons!"
 author = "Michael Curran <mick@example.com>"
-url = "https://github.com/nvaccess/nvda/blob/master/projectDocs/dev/addons.md"
+url = "https://github.com/nvaccess/aslan/blob/master/projectDocs/dev/addons.md"
 docFileName = "readme.html"
-minimumNVDAVersion = "2021.1"
-lastTestedNVDAVersion = "2022.3.3"
+minimumAslanVersion = "2021.1"
+lastTestedAslanVersion = "2022.3.3"
 ```
 
 ### Plugins and Drivers {#pluginsAndDrivers}
@@ -1136,28 +1136,28 @@ The following plugins and drivers can be included in an add-on:
 
 ### Optional install / Uninstall code {#installUninstallCode}
 
-If you need to execute code as your add-on is being installed or uninstalled from NVDA (e.g. to validate license information or to copy files to a custom location), you can provide a Python file called `installTasks.py` in the archive which contains special functions that NVDA will call while installing or uninstalling your add-on.
+If you need to execute code as your add-on is being installed or uninstalled from Aslan (e.g. to validate license information or to copy files to a custom location), you can provide a Python file called `installTasks.py` in the archive which contains special functions that Aslan will call while installing or uninstalling your add-on.
 This file should avoid loading any modules that are not absolutely necessary, especially Python C extensions or dlls from your own add-on, as this could cause later removal of the add-on to fail.
-However, if this does happen, the add-on directory will be renamed and then deleted after the next restart of NVDA.
+However, if this does happen, the add-on directory will be renamed and then deleted after the next restart of Aslan.
 Finally, it should not depend on the existence or state of other add-ons, as they may not be installed, may have already been removed or may not yet be initialized.
 
 #### the onInstall function {#onInstall}
 
-NVDA will look for and execute an `onInstall` function in `installTasks.py` after it has finished extracting the add-on into NVDA.
-Note that although the add-on will have been extracted at this point, its directory will have a `.pendingInstall` suffix until NVDA is restarted, the directory is renamed and the add-on is really loaded for the first time.
+Aslan will look for and execute an `onInstall` function in `installTasks.py` after it has finished extracting the add-on into Aslan.
+Note that although the add-on will have been extracted at this point, its directory will have a `.pendingInstall` suffix until Aslan is restarted, the directory is renamed and the add-on is really loaded for the first time.
 If this function raises an exception, the installation of the add-on will fail and its directory will be cleaned up.
 
 #### The onUninstall Function {#onUninstall}
 
-NVDA will look for and execute an `onUninstall` function in `installTasks.py` when NVDA is restarted after the user has chosen to remove the add-on.
+Aslan will look for and execute an `onUninstall` function in `installTasks.py` when Aslan is restarted after the user has chosen to remove the add-on.
 After this function completes, the add-on's directory will automatically be removed.
-As this happens on NVDA startup before other components are initialized, this function cannot request input from the user.
+As this happens on Aslan startup before other components are initialized, this function cannot request input from the user.
 
 ### Localizing Add-ons {#localizingAddons}
 
 It is possible to provide locale-specific information and messages for your add-on.
 Locale information can be stored in a locale directory in the archive.
-This directory should contain directories for each language it supports, using the same language code format as the rest of NVDA; e.g. en for English, fr_CA for French Canadian.
+This directory should contain directories for each language it supports, using the same language code format as the rest of Aslan; e.g. en for English, fr_CA for French Canadian.
 
 #### Locale-specific Manifest Files {#localeManifest}
 
@@ -1168,11 +1168,11 @@ All other fields will be ignored.
 
 #### Locale-specific Messages {#localeMessages}
 
-Each language directory can also contain gettext information, which is the system used to translate the rest of NVDA's user interface and reported messages.
-As with the rest of NVDA, an `nvda.mo` compiled gettext database file should be placed in the `LC_MESSAGES` directory within this directory.
+Each language directory can also contain gettext information, which is the system used to translate the rest of Aslan's user interface and reported messages.
+As with the rest of Aslan, an `aslan.mo` compiled gettext database file should be placed in the `LC_MESSAGES` directory within this directory.
 To allow plugins in your add-on to access gettext message information via calls to `_()`, `ngettext()`, `npgettext()` and `pgettext()` you must initialize translations at the top of each Python module by calling `addonHandler.initTranslation()`.
 This function cannot be called in modules that do not belong to an add-on, e.g. in a scratchpad subdirectory.
-For more information about gettext and NVDA translation in general, please read the [Translating NVDA page](https://github.com/nvaccess/nvda/blob/master/projectDocs/translating/readme.md)
+For more information about gettext and Aslan translation in general, please read the [Translating Aslan page](https://github.com/nvaccess/aslan/blob/master/projectDocs/translating/readme.md)
 
 #### Symbol dictionaries {#AddonSymbolDictionaries}
 
@@ -1199,9 +1199,9 @@ For example:
 		mandatory = true
 ```
 
-In the above example, `greek` is a symbol dictionary that is optional and will be listed in the speech category of NVDA's settings dialog under the "Extra dictionaries for character and symbol processing" setting.
+In the above example, `greek` is a symbol dictionary that is optional and will be listed in the speech category of Aslan's settings dialog under the "Extra dictionaries for character and symbol processing" setting.
 Its file will be stored as `locale\en\symbols-greek.dic`, whereas French translations of the symbols are stored in `locale\fr\symbols-greek.dic`.
-When using NVDA in French, symbols that aren't defined in the French dictionary inherit the symbol information for English.
+When using Aslan in French, symbols that aren't defined in the French dictionary inherit the symbol information for English.
 
 Also in the example, the `hebrew` dictionary is marked mandatory and will therefore always be enabled as long as the add-on is active.
 Its file will be stored as `locale\en\symbols-hebrew.dic`, whereas French translations of the symbols are stored in `locale\fr\symbols-hebrew.dic`.
@@ -1233,7 +1233,7 @@ For example:
 		mandatory = false
 ```
 
-In the above example, `pronunciation` is a dictionary that is optional and will be listed in the speech category of NVDA's settings dialog under the "Speech Dictionaries" setting.
+In the above example, `pronunciation` is a dictionary that is optional and will be listed in the speech category of Aslan's settings dialog under the "Speech Dictionaries" setting.
 Its file will be stored as `speechDicts\pronunciation.dic`.
 When you mark the dictionary as mandatory, it will be always enabled as long as the add-on is active.
 
@@ -1282,11 +1282,11 @@ A comment is preceded by a `#` (hash sign) and applies to the next entry line th
 ##### Examples
 
 ```
-# Expand NVDA acronym
-NVDA	NonVisual Desktop Access	1	2
+# Expand Aslan acronym
+Aslan	NonVisual Desktop Access	1	2
 ```
 
-This means that the word "NVDA" (case sensitive, whole word) should be spoken as "NonVisual Desktop Access".
+This means that the word "Aslan" (case sensitive, whole word) should be spoken as "NonVisual Desktop Access".
 
 ```
 # Convert percentages to spoken format
@@ -1319,14 +1319,14 @@ Similar to the `locale` directory, this directory should contain directories for
 
 Users can access documentation for a particular add-on by opening the Add-on Store, selecting the add-on and pressing the Add-on help button.
 This will open the file named in the docFileName parameter of the manifest.
-NVDA will search for this file in the appropriate language directories.
-For example, if docFileName is set to readme.html and the user is using English, NVDA will open doc\en\readme.html.
+Aslan will search for this file in the appropriate language directories.
+For example, if docFileName is set to readme.html and the user is using English, Aslan will open doc\en\readme.html.
 
 ### Braille translation tables {#BrailleTables}
 
-Although NVDA ships with more than a hundred braille translation tables provided by [the liblouis project](https://liblouis.io/) aimed at fitting most needs, it also supports the addition of custom tables.
+Although Aslan ships with more than a hundred braille translation tables provided by [the liblouis project](https://liblouis.io/) aimed at fitting most needs, it also supports the addition of custom tables.
 Custom tables must be placed in the brailleTables directory of an add-on or subdirectory of the scratchpad directory.
-These tables can either replace standard tables shipped with NVDA or be completely new ones.
+These tables can either replace standard tables shipped with Aslan or be completely new ones.
 
 When adding a table, some information must be provided such as its display name in the Preferences dialog, whether it supports input and/or output and whether it is for contracted braille.
 When an add-on ships with tables, this information is included in its manifest in the optional brailleTables section.
@@ -1347,9 +1347,9 @@ output = True
 input = True
 ```
 
-In the above example, `fr-bfu-tabmod-comp8.utb` is a new table, while `no-no-8dot.utb` replaces a table that is already included in NVDA.
+In the above example, `fr-bfu-tabmod-comp8.utb` is a new table, while `no-no-8dot.utb` replaces a table that is already included in Aslan.
 Both tables need to be shipped in the brailleTables directory of the add-on.
-It is also possible to include a table in the manifest that is shipped with NVDA but otherwise unavailable for selection in the Preferences dialog.
+It is also possible to include a table in the manifest that is shipped with Aslan but otherwise unavailable for selection in the Preferences dialog.
 In that case, the table does not need to be shipped in the add-on's brailleTables directory.
 
 Providing a custom table, whether it has the same file name as a standard table or a different name, thus requires you to define the table in the add-on's manifest.
@@ -1373,19 +1373,19 @@ Other add-on metadata in the file is ignored.
 
 Please refer to the [liblouis documentation](https://liblouis.io/documentation/) for detailed information regarding the braille translation tables format.
 
-## NVDA Python Console {#PythonConsole}
+## Aslan Python Console {#PythonConsole}
 
-The NVDA Python console emulates the interactive Python interpreter from within NVDA.
-It is a development tool which is useful for debugging, general inspection of NVDA internals or inspection of the accessibility hierarchy of an application.
+The Aslan Python console emulates the interactive Python interpreter from within Aslan.
+It is a development tool which is useful for debugging, general inspection of Aslan internals or inspection of the accessibility hierarchy of an application.
 
 ### Usage {#pythonConsoleUsage}
 
 The console can be activated in two ways:
 
-* By pressing NVDA+control+z.
-If activated in this fashion, a snapshot of the current state of NVDA at the time the key was pressed will be taken and saved in certain variables available in the console.
+* By pressing Aslan+control+z.
+If activated in this fashion, a snapshot of the current state of Aslan at the time the key was pressed will be taken and saved in certain variables available in the console.
 See [Snapshot Variables](#PythonConsoleSnapshotVariables) for more details.
-* By selecting Tools -> Python console from the NVDA system tray menu.
+* By selecting Tools -> Python console from the Aslan system tray menu.
 
 The console is similar to the standard interactive Python interpreter.
 Input is accepted one line at a time and processed when enter is pressed.
@@ -1415,7 +1415,7 @@ See: pythonConsole.PythonConsole.initNamespace
 
 #### Snapshot Variables {#PythonConsoleSnapshotVariables}
 
-Whenever NVDA+control+z is pressed, certain variables available in the console will be assigned according to the current state of NVDA.
+Whenever Aslan+control+z is pressed, certain variables available in the console will be assigned according to the current state of Aslan.
 These variables are:
 
 * `focus`: The current focus object
@@ -1441,7 +1441,7 @@ Similarly, if the input is "nav.__", attribute names with two leading underscore
 
 ## Remote Python Console {#remotePythonConsole}
 
-A remote Python console is available in source builds of NVDA, for situations where remote debugging of NVDA is useful.
+A remote Python console is available in source builds of Aslan, for situations where remote debugging of Aslan is useful.
 It is similar to the [local Python console](#PythonConsole) discussed above, but is accessed via TCP.
 
 Please be aware that this is a huge security risk.
@@ -1458,18 +1458,18 @@ The namespace is the same as [the namespace in the local Python console](#Python
 
 There are some special functions:
 
-* snap(): Takes a snapshot of the current state of NVDA and saves it in the [snapshot variables](#PythonConsoleSnapshotVariables).
+* snap(): Takes a snapshot of the current state of Aslan and saves it in the [snapshot variables](#PythonConsoleSnapshotVariables).
 * rmSnap(): Removes all snapshot variables.
 
 ## Extension Points {#ExtensionPoints}
 
-NVDA's `extensionPoints` module allows code in different parts of NVDA, or in add-ons, to perform tasks such as:
+Aslan's `extensionPoints` module allows code in different parts of Aslan, or in add-ons, to perform tasks such as:
 
 * Be notified when an action occurs or a state is changed.
 * Receive, as part of being notified, variables related to the action or changed state.
-* Cancel or alter an action NVDA was going to take, based upon certain conditions.
-* Modify data that NVDA is using (such as changing speech sequences or braille, before they are spoken or brailled).
-* Delay something NVDA is doing, while intervening operations are performed.
+* Cancel or alter an action Aslan was going to take, based upon certain conditions.
+* Modify data that Aslan is using (such as changing speech sequences or braille, before they are spoken or brailled).
+* Delay something Aslan is doing, while intervening operations are performed.
 
 There are five kinds of extension point:
 
@@ -1481,7 +1481,7 @@ There are five kinds of extension point:
 | `AccumulatingDecider` | Like `Decider`, but always runs all of its registered handlers, and only decides if one of them failed at the end. The expected result of each is `True` by default, though expecting `False` is possible. |
 | `Chain` | Allows registering handlers that return iterables (mainly generators). Calling `iter` on the `Chain` returns a generator that iterates over all the handlers. |
 
-The sections below provide the list of currently defined extension points in NVDA, along with brief descriptions for them.
+The sections below provide the list of currently defined extension points in Aslan, along with brief descriptions for them.
 Please see code documentation in the associated files, or the code itself, for further explanation.
 The section titles below represent the package or module in which the listed extension points are defined.
 
@@ -1508,7 +1508,7 @@ For examples of how to define and use new extension points, please see the code 
 
 | Type | Extension Point | Description |
 | --- | --- | --- |
-| `AccumulatingDecider` | `isCLIParamKnown` | Allows adding NVDA commandline parameters which apply to plugins. See [this section of the Dev Guide](#PluginCLIArgs) for more information. |
+| `AccumulatingDecider` | `isCLIParamKnown` | Allows adding Aslan commandline parameters which apply to plugins. See [this section of the Dev Guide](#PluginCLIArgs) for more information. |
 
 ### brailleViewer {#brailleViewerExtPts}
 
@@ -1521,8 +1521,8 @@ For examples of how to define and use new extension points, please see the code 
 | Type | Extension Point | Description |
 | --- | --- | --- |
 | `Action` | `post_configProfileSwitch` | Notifies after the configuration profile has been switched. |
-| `Action` | `pre_configSave` | Notifies before NVDA's configuration is saved to disk. |
-| `Action` | `post_configSave` | Notifies after NVDA's configuration has been saved to disk. |
+| `Action` | `pre_configSave` | Notifies before Aslan's configuration is saved to disk. |
+| `Action` | `post_configSave` | Notifies after Aslan's configuration has been saved to disk. |
 | `Action` | `pre_configReset` | Notifies before configuration is reloaded from disk or factory defaults are applied. |
 | `Action` | `post_configReset` | Notifies after configuration has been reloaded from disk or factory defaults were applied. |
 
@@ -1530,7 +1530,7 @@ For examples of how to define and use new extension points, please see the code 
 
 | Type | Extension Point | Description |
 | --- | --- | --- |
-| `Action` | `postNvdaStartup` | Notifies after NVDA has finished starting up. |
+| `Action` | `postNvdaStartup` | Notifies after Aslan has finished starting up. |
 
 ### gui.message {#guiMessageExtPts}
 
@@ -1546,7 +1546,7 @@ See [Displaying errors to the user](#DisplayableError) for a full description an
 
 | Type | Extension Point | Description |
 | --- | --- | --- |
-| `Decider` | `decide_handleRawKey` | Notifies when a raw keyboard event is received, before any NVDA processing, allowing other code to decide if it should be handled. |
+| `Decider` | `decide_handleRawKey` | Notifies when a raw keyboard event is received, before any Aslan processing, allowing other code to decide if it should be handled. |
 | `Decider` | `decide_executeGesture` | Notifies when a gesture is about to be executed, allowing other code to decide if it should be. |
 
 ### logHandler {#logHandlerExtPts}
@@ -1567,7 +1567,7 @@ See [Displaying errors to the user](#DisplayableError) for a full description an
 | --- | --- | --- |
 | `Action` | `speechCanceled` | Triggered when speech is canceled. |
 | `Action` | `pre_speechCanceled` | Triggered before speech is canceled. |
-| `Action` | `pre_speech` | Triggered before NVDA handles prepared speech. |
+| `Action` | `pre_speech` | Triggered before Aslan handles prepared speech. |
 | `Action` | `post_speechPaused` | Triggered when speech is paused or resumed. |
 | `Action` | `pre_speechQueued` | Triggered after speech is processed and normalized and directly before it is enqueued. |
 | `Filter` | `filter_speechSequence` | Allows components or add-ons to filter speech sequence before it passes to the synth driver. |
@@ -1609,7 +1609,7 @@ See [Displaying errors to the user](#DisplayableError) for a full description an
 
 | Type | Extension Point | Description |
 | --- | --- | --- |
-| `Action` | `pre_handleWindowMessage` | Notifies when NVDA receives a window message, allowing components to perform an action when certain system events occur. |
+| `Action` | `pre_handleWindowMessage` | Notifies when Aslan receives a window message, allowing components to perform an action when certain system events occur. |
 
 ### winAPI.secureDesktop {#winAPI_secureDesktopExtPts}
 
@@ -1631,8 +1631,8 @@ Please see the `EventExtensionPoints` class documentation for more information, 
 | Type | Extension Point | Notifies a vision enhancement provider when ... |
 | --- | --- | --- |
 | `Action` | `post_objectUpdate` | an object property has changed. |
-| `Action` | `post_focusChange` | the focused NVDAObject has changed. |
-| `Action` | `post_foregroundChange` | the foreground NVDAObject has changed. |
+| `Action` | `post_focusChange` | the focused AslanObject has changed. |
+| `Action` | `post_foregroundChange` | the foreground AslanObject has changed. |
 | `Action` | `post_caretMove` | a physical caret has moved. |
 | `Action` | `post_browseModeMove` | a virtual caret has moved. |
 | `Action` | `post_mathNavigation` | the math navigation position has changed. |
@@ -1672,7 +1672,7 @@ MessageDialog(
 
 This will show a non-modal (that is, non-blocking) dialog with the text "Hello world!" and an OK button.
 
-If you want the dialog to be modal (that is, to block the user from performing other actions in NVDA until they have responded to it), you can call `ShowModal` instead.
+If you want the dialog to be modal (that is, to block the user from performing other actions in Aslan until they have responded to it), you can call `ShowModal` instead.
 
 With modal dialogs, the easiest way to respond to user input is via the return code.
 
@@ -1743,8 +1743,8 @@ This can happen for several reasons:
 * The user pressed `esc` or `alt+f4` to close the dialog.
 * The user used the title bar close button or system menu close item to close the dialog.
 * The user closed the dialog from the Task View, Taskbar or App Switcher.
-* The user is quitting NVDA.
-* Some other part of NVDA or an add-on has asked the dialog to close.
+* The user is quitting Aslan.
+* Some other part of Aslan or an add-on has asked the dialog to close.
 
 By default, the fallback action is set to `EscapeCode.CANCEL_OR_AFFIRMATIVE`.
 This means that the fallback action will be the cancel button if there is one, the button whose ID is `dialog.GetAffirmativeId()` (`ReturnCode.OK`, by default), or `None` if no button with either ID exists in the dialog.
@@ -1895,7 +1895,7 @@ This keeps user-facing error presentation out of business logic, and involves th
 Where the exception may be raised on a background thread, notify via `core.callLater` (or `wx.CallAfter`) so that handlers run on the main thread.
 * A GUI component registers a handler with that action and decides how to present the error.
 Typically the handler calls the error's `displayError` method, but it may equally decide to only log the error.
-For example, NVDA's automatic add-on update check fails silently, as the user did not initiate that work.
+For example, Aslan's automatic add-on update check fails silently, as the user did not initiate that work.
 
 For example, code performing a background task may raise a `DisplayableError`:
 

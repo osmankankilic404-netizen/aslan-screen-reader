@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2016-2026 NV Access Limited, Joseph Lee, Jakub Lukowicz, Cyrille Bougot, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from typing import (
 	Optional,
@@ -32,11 +32,11 @@ from UIAHandler.browseMode import (
 	TextAttribUIATextInfoQuickNavItem,
 )
 from . import UIA, UIATextInfo
-from NVDAObjects.window.winword import (
+from AslanObjects.window.winword import (
 	WordDocument as WordDocumentBase,
 	WordDocumentTextInfo as LegacyWordDocumentTextInfo,
 )
-from NVDAObjects import NVDAObject
+from AslanObjects import AslanObject
 from scriptHandler import script
 import eventHandler
 from globalCommands import SCRCAT_SYSTEMCARET
@@ -106,7 +106,7 @@ def getReferenceFromPosition(position: "WordDocumentTextInfo") -> UIA | None:
 	"""
 	Fetches reference (footnote/endnote) for the reference located at the given position in a word document.
 	:param position: a TextInfo representing the span of the reference in the word document.
-	:return: The reference NVDAObject, if any
+	:return: The reference AslanObject, if any
 	"""
 	val = position._rangeObj.getAttributeValue(UIAHandler.UIA_AnnotationObjectsAttributeId)
 	if not val:
@@ -136,17 +136,17 @@ class ReferenceUIATextInfoQuickNavItem(TextAttribUIATextInfoQuickNavItem):
 			text = obj.UIATextPattern.DocumentRange.GetText(-1).strip()
 			match obj.UIAElement.GetCurrentPropertyValue(UIAHandler.UIA_AnnotationAnnotationTypeIdPropertyId):
 				case UIAHandler.UIA.AnnotationType_Footnote:
-					# Translators: The label shown for a footnote in the NVDA Elements List dialog in Microsoft Word.
+					# Translators: The label shown for a footnote in the Aslan Elements List dialog in Microsoft Word.
 					# {text} will be replaced with the text of the footnote.
 					return _("footnote reference: {text}").format(text=text)
 				case UIAHandler.UIA.AnnotationType_Endnote:
-					# Translators: The label shown for an endnote in the NVDA Elements List dialog in Microsoft Word.
+					# Translators: The label shown for an endnote in the Aslan Elements List dialog in Microsoft Word.
 					# {text} will be replaced with the text of the endnote.
 					return _("endnote reference: {text}").format(text=text)
 				case _:
 					log.error("Unknown reference annotation type")
 			name = self.textInfo._rangeObj.GetEnclosingElement().CurrentName
-			# Translators: The label shown for a reference in the NVDA Elements List dialog in Microsoft Word.
+			# Translators: The label shown for a reference in the Aslan Elements List dialog in Microsoft Word.
 			# {name} will be replaced with the name of the reference.
 			return _("reference: {name}").format(name=name)
 
@@ -257,7 +257,7 @@ class WordDocumentTextInfo(UIATextInfo):
 		except (COMError, NameError):
 			log.debugWarning("MS Word object model does not support rangeFromPoint")
 			return super(WordDocumentTextInfo, self).locationText
-		from NVDAObjects.window.winword import WordDocumentTextInfo as WordObjectModelTextInfo
+		from AslanObjects.window.winword import WordDocumentTextInfo as WordObjectModelTextInfo
 
 		i = WordObjectModelTextInfo(self.obj, None, _rangeObj=r)
 		return i.locationText
@@ -272,7 +272,7 @@ class WordDocumentTextInfo(UIATextInfo):
 			UIAFormatUnits=UIAFormatUnits,
 		)
 
-	def _get_controlFieldNVDAObjectClass(self):
+	def _get_controlFieldAslanObjectClass(self):
 		return WordDocumentNode
 
 	def _getControlFieldForUIAObject(
@@ -513,7 +513,7 @@ class WordDocumentTextInfo(UIATextInfo):
 				fields.insert(index + 1, "")
 			break
 		##7971: Microsoft Word exposes list bullets as part of the actual text.
-		# This then confuses NVDA's braille cursor routing as it expects that there is a one-to-one mapping between characters in the text string and   unit character moves.
+		# This then confuses Aslan's braille cursor routing as it expects that there is a one-to-one mapping between characters in the text string and   unit character moves.
 		# Therefore, detect when at the start of a list, and strip the bullet from the text string, placing it in the text's formatField as line-prefix.
 		listItemStarted = False
 		lastFormatField = None
@@ -528,7 +528,7 @@ class WordDocumentTextInfo(UIATextInfo):
 				lastFormatField = field.field
 			elif listItemStarted and isinstance(field, str):
 				# This is the first text string within the list.
-				# Remove the text up to the first space, and store it as line-prefix which NVDA will appropriately speak/braille as a bullet.
+				# Remove the text up to the first space, and store it as line-prefix which Aslan will appropriately speak/braille as a bullet.
 				try:
 					spaceIndex = field.index(" ")
 				except ValueError:
@@ -543,7 +543,7 @@ class WordDocumentTextInfo(UIATextInfo):
 			else:
 				# Not a controlStart, formatChange or text string. Nothing to do.
 				break
-		# Fill in page number attributes where NVDA expects
+		# Fill in page number attributes where Aslan expects
 		# Get page number from control field (automation ID), which is reliable.
 		# Only use page numbers from control fields, not format fields,
 		# as format fields may have invalid values from Custom Attributes API.
@@ -676,7 +676,7 @@ class WordDocumentTextInfo(UIATextInfo):
 
 		if self.obj.WinwordApplicationObject:
 			# When Word object model is available we honour Word's options to report distances so that what is
-			# reported by NVDA matches Word's UI (rulers, paragraph formatting dialog, etc.)
+			# reported by Aslan matches Word's UI (rulers, paragraph formatting dialog, etc.)
 			# Default seem to be inch or centimeters for Western countries localization of Word and characters for
 			# east Asian localisations.
 			return self.obj.getLocalizedMeasurementTextForPointSize(val)
@@ -687,7 +687,7 @@ class WordDocumentTextInfo(UIATextInfo):
 
 
 class WordBrowseModeDocument(UIABrowseModeDocument):
-	def _shouldSetFocusToObj(self, obj: NVDAObject) -> bool:
+	def _shouldSetFocusToObj(self, obj: AslanObject) -> bool:
 		# Ignore strange editable text fields surrounding most inner fields (links, table cells etc)
 		if obj.role == controlTypes.Role.EDITABLETEXT and obj.UIAAutomationId.startswith(
 			"UIA_AutomationId_Word_Content",
@@ -710,9 +710,9 @@ class WordBrowseModeDocument(UIABrowseModeDocument):
 		return super(WordBrowseModeDocument, self).shouldPassThrough(obj, reason=reason)
 
 	def script_tab(self, gesture):
-		oldBookmark = self.rootNVDAObject.makeTextInfo(textInfos.POSITION_SELECTION).bookmark
+		oldBookmark = self.rootAslanObject.makeTextInfo(textInfos.POSITION_SELECTION).bookmark
 		gesture.send()
-		noTimeout, newInfo = self.rootNVDAObject._hasCaretMoved(oldBookmark, timeout=1)
+		noTimeout, newInfo = self.rootAslanObject._hasCaretMoved(oldBookmark, timeout=1)
 		if not newInfo:
 			return
 		info = self.makeTextInfo(textInfos.POSITION_SELECTION)
@@ -803,7 +803,7 @@ class WordDocument(UIADocumentWithTableNavigation, WordDocumentNode, WordDocumen
 	]
 
 	def event_UIA_notification(self, activityId=None, **kwargs):
-		# In recent Word 365 releases, UIA notification will cause NVDA to announce edit functions
+		# In recent Word 365 releases, UIA notification will cause Aslan to announce edit functions
 		# such as "delete back word" when Control+Backspace is pressed or font attributes are toggled.
 		if activityId in self.suppressedActivityIds:
 			return
@@ -878,7 +878,7 @@ class WordDocument(UIADocumentWithTableNavigation, WordDocumentNode, WordDocumen
 		braille.handler.handleCaretMove(self)
 
 	@script(
-		gesture="kb:NVDA+alt+c",
+		gesture="kb:Aslan+alt+c",
 		# Translators: a description for a script that reports the comment at the caret.
 		description=_(
 			# Translators: a description for a script that reports the comment at the caret.
@@ -907,7 +907,7 @@ class WordDocument(UIADocumentWithTableNavigation, WordDocumentNode, WordDocumen
 			ui.message(_("No comments"))
 		return
 
-	@script(gesture="kb:NVDA+shift+c")
+	@script(gesture="kb:Aslan+shift+c")
 	def script_setColumnHeader(self, gesture):
 		ui.message(
 			_(
@@ -918,7 +918,7 @@ class WordDocument(UIADocumentWithTableNavigation, WordDocumentNode, WordDocumen
 			),
 		)
 
-	@script(gesture="kb:NVDA+shift+r")
+	@script(gesture="kb:Aslan+shift+r")
 	def script_setRowHeader(self, gesture):
 		ui.message(
 			_(

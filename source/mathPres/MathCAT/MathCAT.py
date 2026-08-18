@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited, Neil Soiffer, Ryan McCleary, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import re
 from collections.abc import Generator
@@ -16,7 +16,7 @@ from typing import TYPE_CHECKING, Type
 
 import braille
 import braille.regions.base
-import braille.regions.NVDAObject
+import braille.regions.AslanObject
 import config
 import gui
 import libmathcat_py as libmathcat
@@ -30,7 +30,7 @@ from keyboardHandler import KeyboardInputGesture
 from globalCommands import SCRCAT_MATH_NAV
 from logHandler import log
 from scriptHandler import script
-from NVDAState import ReadPaths
+from AslanState import ReadPaths
 
 from speech.commands import (
 	BeepCommand,
@@ -53,11 +53,11 @@ from ._navNodeMapping import (
 	removeSyntheticIdsFromMathMl,
 )
 from .preferences import applyUserPreferences
-from .speech import convertSSMLTextForNVDA
+from .speech import convertSSMLTextForAslan
 
 if TYPE_CHECKING:
 	from locationHelper import RectLTRB
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 
 
 class MathCATError(Exception):
@@ -69,21 +69,21 @@ def _callMathCAT(func, /, *args, **kwargs):
 	try:
 		return func(*args, **kwargs)
 	except BaseException as exc:
-		# PanicException is BaseException; pyo3_runtime is not importable in NVDA's layout.
+		# PanicException is BaseException; pyo3_runtime is not importable in Aslan's layout.
 		if type(exc).__name__ == "PanicException" and type(exc).__module__ == "pyo3_runtime":
 			raise MathCATError(str(exc)) from exc
 		raise
 
 
-class MathCATInteraction(mathPres.MathInteractionNVDAObject):
-	"""An NVDA object used to interact with MathML."""
+class MathCATInteraction(mathPres.MathInteractionAslanObject):
+	"""An Aslan object used to interact with MathML."""
 
 	__gestures = {}
 
 	# Put MathML or other formats on the clipboard.
 	# MathML is put on the clipboard using the two formats below (defined by MathML spec)
 	# We use both formats because some apps may only use one or the other
-	# Note: filed https://github.com/nvaccess/nvda/issues/13240 to make this usable outside of MathCAT
+	# Note: filed https://github.com/nvaccess/aslan/issues/13240 to make this usable outside of MathCAT
 	CF_MathML: int = windll.user32.RegisterClipboardFormatW("MathML")
 	CF_MathML_Presentation: int = windll.user32.RegisterClipboardFormatW(
 		"MathML Presentation",
@@ -93,7 +93,7 @@ class MathCATInteraction(mathPres.MathInteractionNVDAObject):
 		self,
 		provider: mathPres.MathPresentationProvider | None = None,
 		mathMl: str | None = None,
-		sourceObj: "NVDAObject | None" = None,
+		sourceObj: "AslanObject | None" = None,
 	) -> None:
 		"""Initialize the MathCATInteraction object.
 
@@ -118,7 +118,7 @@ class MathCATInteraction(mathPres.MathInteractionNVDAObject):
 		super(MathCATInteraction, self).reportFocus()
 		try:
 			text: str = libmathcat.DoNavigateCommand("ZoomIn")
-			speech.speak(convertSSMLTextForNVDA(text))
+			speech.speak(convertSSMLTextForAslan(text))
 			self._shouldUpdateMathHighlight = True
 		except Exception:
 			log.exception()
@@ -139,7 +139,7 @@ class MathCATInteraction(mathPres.MathInteractionNVDAObject):
 		if not sourceObj:
 			return None
 		# Avoid importing ia2Web at startup.
-		from NVDAObjects.IAccessible.ia2Web import Math as Ia2WebMath
+		from AslanObjects.IAccessible.ia2Web import Math as Ia2WebMath
 
 		if not isinstance(sourceObj, Ia2WebMath):
 			return None
@@ -173,7 +173,7 @@ class MathCATInteraction(mathPres.MathInteractionNVDAObject):
 		review: bool = False,
 	) -> Generator[braille.regions.base.Region, None, None]:
 		"""Yields braille.Region objects for this MathCATInteraction object."""
-		yield braille.regions.NVDAObject.NVDAObjectRegion(self, appendText=" ")
+		yield braille.regions.AslanObject.AslanObjectRegion(self, appendText=" ")
 		region: braille.regions.base.Region = braille.regions.base.Region()
 		region.focusToHardLeft = True
 		try:
@@ -181,7 +181,7 @@ class MathCATInteraction(mathPres.MathInteractionNVDAObject):
 		except Exception:
 			log.exception()
 			# Translators: this message alerts users to an error in brailling math.
-			ui.message(pgettext("math", "Error in brailling math: see NVDA error log for details"))
+			ui.message(pgettext("math", "Error in brailling math: see Aslan error log for details"))
 			region.rawText = ""
 
 		yield region
@@ -193,7 +193,7 @@ class MathCATInteraction(mathPres.MathInteractionNVDAObject):
 		"""
 		try:
 			text = libmathcat.DoNavigateCommand(commandName)
-			speech.speak(convertSSMLTextForNVDA(text))
+			speech.speak(convertSSMLTextForAslan(text))
 		except Exception:
 			log.exception()
 			# Translators: this message alerts users to an error in navigating math.
@@ -433,11 +433,11 @@ class MathCAT(mathPres.MathPresentationProvider):
 			if self._addSounds():
 				return (
 					[BeepCommand(800, 25)]
-					+ convertSSMLTextForNVDA(libmathcat.GetSpokenText())
+					+ convertSSMLTextForAslan(libmathcat.GetSpokenText())
 					+ [BeepCommand(600, 15)]
 				)
 			else:
-				return convertSSMLTextForNVDA(libmathcat.GetSpokenText())
+				return convertSSMLTextForAslan(libmathcat.GetSpokenText())
 
 		except Exception:
 			log.exception()
@@ -480,7 +480,7 @@ class MathCAT(mathPres.MathPresentationProvider):
 	def _startMathInteraction(
 		self,
 		mathml: str,
-		sourceObj: "NVDAObject | None" = None,
+		sourceObj: "AslanObject | None" = None,
 	) -> None:
 		"""Start interacting with a MathML string.
 
@@ -511,7 +511,7 @@ class MathCAT(mathPres.MathPresentationProvider):
 	def interactWithMathMlFromSource(
 		self,
 		mathml: str,
-		sourceObj: "NVDAObject",
+		sourceObj: "AslanObject",
 	) -> None:
 		"""Interact with MathML from the given source object.
 

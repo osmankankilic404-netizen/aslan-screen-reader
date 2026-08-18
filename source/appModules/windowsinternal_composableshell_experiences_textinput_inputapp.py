@@ -1,10 +1,10 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2025 NV Access Limited, Joseph Lee
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 """App module for Windows 10/11 Modern Keyboard aka new touch keyboard panel.
-The chief feature is allowing NVDA to announce selected emoji
+The chief feature is allowing Aslan to announce selected emoji
 when using the keyboard to search for and select one.
 Other features include reporting candidates for misspellings if suggestions for hardware keyboard is selected,
 and managing cloud clipboard paste.
@@ -21,15 +21,15 @@ import ui
 import config
 import winVersion
 import controlTypes
-from NVDAObjects.UIA import UIA, XamlEditableText, ListItem
-from NVDAObjects.behaviors import CandidateItem as CandidateItemBehavior, EditableTextWithAutoSelectDetection
-from NVDAObjects import NVDAObject
+from AslanObjects.UIA import UIA, XamlEditableText, ListItem
+from AslanObjects.behaviors import CandidateItem as CandidateItemBehavior, EditableTextWithAutoSelectDetection
+from AslanObjects import AslanObject
 
 
 class ImeCandidateUI(UIA):
 	"""
 	The UIAutomation-based IME candidate UI (such as for  the modern Chinese Microsoft Quick input).
-	This class ensures NVDA is notified of the first selected item when the UI is shown.
+	This class ensures Aslan is notified of the first selected item when the UI is shown.
 	"""
 
 	def event_show(self):
@@ -63,7 +63,7 @@ class ImeCandidateUI(UIA):
 class ImeCandidateItem(CandidateItemBehavior, UIA):
 	"""
 	A UIAutomation-based IME candidate Item (such as for  the modern Chinese Microsoft Quick input).
-	This class  presents Ime candidate items in the standard way NVDA does for all other IMEs.
+	This class  presents Ime candidate items in the standard way Aslan does for all other IMEs.
 	E.g. reports entire candidate page content if it is new or has changed pages,
 	And reports the currently selected item, including symbol descriptions.
 	"""
@@ -149,9 +149,9 @@ class NavigationMenuItem(ListItem):
 			or focus.UIAAutomationId.startswith("item-")
 		):
 			return
-		# Manipulate NVDA's focus object.
+		# Manipulate Aslan's focus object.
 		if (
-			# #16346: NVDA is stuck in a nonexistent edit field (location is None).
+			# #16346: Aslan is stuck in a nonexistent edit field (location is None).
 			not any(focus.location)
 			# #16347: focus is once again stuck in top-level modern keyboard window
 			# after switching to clipboard history from other emoji panel screens.
@@ -172,9 +172,9 @@ class AppModule(appModuleHandler.AppModule):
 	# Turn off browse mode by default so clipboard history entry menu items can be announced when tabbed to.
 	disableBrowseModeByDefault: bool = True
 
-	def event_UIA_elementSelected(self, obj: NVDAObject, nextHandler: Callable[[], None]):
+	def event_UIA_elementSelected(self, obj: AslanObject, nextHandler: Callable[[], None]):
 		# Logic for the following items is handled by overlay classes
-		# #18236: for others, event_selection method from base NVDA object will be invoked,
+		# #18236: for others, event_selection method from base Aslan object will be invoked,
 		# and on Windows 11, this causes speech repetitions because emoji panel takes system focus
 		# if the event handler is allowed to run through its course.
 		# Therefore pass these events straight on.
@@ -373,7 +373,7 @@ class AppModule(appModuleHandler.AppModule):
 
 	def event_UIA_notification(
 		self,
-		obj: NVDAObject,
+		obj: AslanObject,
 		nextHandler: Callable[[], None],
 		displayString: str | None = None,
 		activityId: str | None = None,
@@ -390,7 +390,7 @@ class AppModule(appModuleHandler.AppModule):
 			displayString = obj.name
 		ui.message(displayString)
 
-	def event_gainFocus(self, obj: NVDAObject, nextHandler: Callable[[], None]):
+	def event_gainFocus(self, obj: AslanObject, nextHandler: Callable[[], None]):
 		# #16347: focus gets stuck in Modern keyboard when clipboard history closes in Windows 11.
 		if (
 			winVersion.getWinVer() >= winVersion.WIN11
@@ -403,7 +403,7 @@ class AppModule(appModuleHandler.AppModule):
 			return
 		nextHandler()
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if isinstance(obj, UIA):
 			if obj.role == controlTypes.Role.LISTITEM:
 				if (
@@ -432,16 +432,16 @@ class AppModule(appModuleHandler.AppModule):
 			):
 				clsList.insert(0, ImeCandidateUI)
 			# #13104: newer revisions of Windows 11 build 22000 moves focus to emoji search field.
-			# However this means NVDA's own edit field scripts will override emoji panel commands.
+			# However this means Aslan's own edit field scripts will override emoji panel commands.
 			# Therefore remove text field movement commands so emoji panel commands can be used directly.
 			elif obj.UIAAutomationId == "Windows.Shell.InputApp.FloatingSuggestionUI.DelegationTextBox":
 				clsList.remove(EditableTextWithAutoSelectDetection)
 				clsList.remove(XamlEditableText)
 
-	def event_NVDAObject_init(self, obj: NVDAObject) -> None:
+	def event_AslanObject_init(self, obj: AslanObject) -> None:
 		# #17308: recent Windows 11 builds raise live region change event when clipboard history closes,
-		# causing NVDA to report data item text such as clipboard history entries.
-		# Therefore, tell NVDA to veto this event at the object level, otherwise focus change handling breaks
+		# causing Aslan to report data item text such as clipboard history entries.
+		# Therefore, tell Aslan to veto this event at the object level, otherwise focus change handling breaks
 		# due to live region change event being queued.
 		if obj.role == controlTypes.Role.DATAITEM and obj.parent.role in (
 			controlTypes.Role.TABLEROW,  # Clipboard history item

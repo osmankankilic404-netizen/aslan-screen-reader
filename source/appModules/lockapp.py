@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2022 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -16,10 +16,10 @@ import controlTypes
 import eventHandler
 import inputCore
 from logHandler import log
-from NVDAObjects import NVDAObject
-from NVDAObjects.lockscreen import LockScreenObject
-from NVDAObjects.UIA import UIA
-import NVDAState
+from AslanObjects import AslanObject
+from AslanObjects.lockscreen import LockScreenObject
+from AslanObjects.UIA import UIA
+import AslanState
 from utils.security import getSafeScripts
 from winAPI.sessionTracking import isLockScreenModeActive
 
@@ -33,9 +33,9 @@ Refer to usages of `winAPI.sessionTracking.isLockScreenModeActive`.
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	if attrName == "LockAppObject" and NVDAState._allowDeprecatedAPI():
+	if attrName == "LockAppObject" and AslanState._allowDeprecatedAPI():
 		log.warning(
-			"lockapp.LockAppObject is deprecated, use NVDAObjects.lockscreen.LockScreenObject instead.",
+			"lockapp.LockAppObject is deprecated, use AslanObjects.lockscreen.LockScreenObject instead.",
 		)
 		return LockScreenObject
 	raise AttributeError(f"module {repr(__name__)} has no attribute {repr(attrName)}")
@@ -53,10 +53,10 @@ class AppModule(appModuleHandler.AppModule):
 	Deprecated, use utils.security.getSafeScripts() instead.
 	"""
 
-	def chooseNVDAObjectOverlayClasses(
+	def chooseAslanObjectOverlayClasses(
 		self,
-		obj: NVDAObject,
-		clsList: List[NVDAObject],
+		obj: AslanObject,
+		clsList: List[AslanObject],
 	) -> None:
 		if (
 			isinstance(obj, UIA)
@@ -67,13 +67,13 @@ class AppModule(appModuleHandler.AppModule):
 
 		if not isLockScreenModeActive():
 			log.debugWarning(
-				"LockApp is being initialized but NVDA does not expect Windows to be locked. "
-				"DynamicNVDAObjectType may have failed to apply LockScreenObject. "
+				"LockApp is being initialized but Aslan does not expect Windows to be locked. "
+				"DynamicAslanObjectType may have failed to apply LockScreenObject. "
 				"This means session lock state tracking has failed. ",
 			)
 			clsList.insert(0, LockScreenObject)
 
-	def event_foreground(self, obj: NVDAObject, nextHandler: Callable[[], None]):
+	def event_foreground(self, obj: AslanObject, nextHandler: Callable[[], None]):
 		"""Set mouse object explicitly before continuing to the next handler.
 		This is to prevent the mouse focus remaining on the desktop when locking the screen.
 		"""

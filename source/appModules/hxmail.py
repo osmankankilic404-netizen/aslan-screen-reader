@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2016-2022 NV Access Limited, Joseph Lee
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -9,14 +9,14 @@ import controlTypes
 import appModuleHandler
 from comtypes import COMError
 import UIAHandler
-from NVDAObjects.UIA.wordDocument import WordDocument
+from AslanObjects.UIA.wordDocument import WordDocument
 
 
 class MailWordDocumentTreeInterceptor(WordDocument.treeInterceptorClass):
 	def _get_isAlive(self):
 		return (
 			super(MailWordDocumentTreeInterceptor, self).isAlive
-			and self.rootNVDAObject.shouldCreateTreeInterceptor
+			and self.rootAslanObject.shouldCreateTreeInterceptor
 		)
 
 
@@ -37,7 +37,7 @@ class MailWordDocument(WordDocument):
 			"ReadingPaneModern",
 		)
 		walker = UIAHandler.handler.clientObject.createTreeWalker(condition)
-		# #9341: when Mail app exits, tree interceptor isn't cleaned up properly ,raising COM error exception and causing NVDA to go silent.
+		# #9341: when Mail app exits, tree interceptor isn't cleaned up properly ,raising COM error exception and causing Aslan to go silent.
 		try:
 			parent = walker.NormalizeElement(self.UIAElement)
 		except COMError:
@@ -55,6 +55,6 @@ class MailWordDocument(WordDocument):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if WordDocument in clsList:
 			clsList.insert(0, MailWordDocument)

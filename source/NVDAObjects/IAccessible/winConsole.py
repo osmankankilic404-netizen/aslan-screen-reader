@@ -1,11 +1,11 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2007-2020 NV Access Limited, Bill Dengler
 
 import config
 
-from NVDAObjects.behaviors import KeyboardHandlerBasedTypedCharSupport
+from AslanObjects.behaviors import KeyboardHandlerBasedTypedCharSupport
 from winVersion import getWinVer, WIN10_1607
 
 from . import IAccessible
@@ -25,7 +25,7 @@ class EnhancedLegacyWinConsole(KeyboardHandlerBasedTypedCharSupport, winConsole.
 
 class LegacyWinConsole(winConsole.WinConsole, IAccessible):
 	"""
-	NVDA's original console support, used by default on Windows versions
+	Aslan's original console support, used by default on Windows versions
 	before 1607.
 	"""
 

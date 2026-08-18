@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, Joseph Lee, Babbage B.V., Davy Kager, Bram Duvigneau, Leonard de Ruijter, Burman's Computer and Education Ltd., Julien Cochuyt
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ from editableText import EditableText
 from utils.security import objectBelowLockScreenAndWindowsIsLocked
 
 if TYPE_CHECKING:
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 
 from .base import Region
 from ..constants import TEXT_SEPARATOR
@@ -22,7 +22,7 @@ from .properties import getPropertiesBraille
 from ._routing import _routingShouldMoveSystemCaret
 
 
-def NVDAObjectHasUsefulText(obj: "NVDAObject") -> bool:
+def AslanObjectHasUsefulText(obj: "AslanObject") -> bool:
 	"""Does obj contain useful text to display in braille
 
 	:param obj: object to check
@@ -40,19 +40,19 @@ def NVDAObjectHasUsefulText(obj: "NVDAObject") -> bool:
 	return False
 
 
-class NVDAObjectRegion(Region):
-	"""A region to provide a braille representation of an NVDAObject.
-	This region will update based on the current state of the associated NVDAObject.
+class AslanObjectRegion(Region):
+	"""A region to provide a braille representation of an AslanObject.
+	This region will update based on the current state of the associated AslanObject.
 	A cursor routing request will activate the object's default action.
 	"""
 
-	def __init__(self, obj: "NVDAObject", appendText: str = ""):
+	def __init__(self, obj: "AslanObject", appendText: str = ""):
 		"""Constructor.
-		@param obj: The associated NVDAObject.
-		@param appendText: Text which should always be appended to the NVDAObject text, useful if this region will always precede other regions.
+		@param obj: The associated AslanObject.
+		@param appendText: Text which should always be appended to the AslanObject text, useful if this region will always precede other regions.
 		"""
 		if objectBelowLockScreenAndWindowsIsLocked(obj):
-			raise RuntimeError("NVDA object is secure and should not be initialized as a braille region")
+			raise RuntimeError("Aslan object is secure and should not be initialized as a braille region")
 		super().__init__()
 		self.obj = obj
 		self.appendText = appendText
@@ -95,7 +95,7 @@ class NVDAObjectRegion(Region):
 			placeholder=placeholderValue,
 			hasDetails=bool(obj.annotations),
 			detailsRoles=detailsRoles,
-			value=obj.value if not NVDAObjectHasUsefulText(obj) else None,
+			value=obj.value if not AslanObjectHasUsefulText(obj) else None,
 			states=obj.states,
 			description=description,
 			keyboardShortcut=obj.keyboardShortcut if presConfig["reportKeyboardShortcuts"] else None,
@@ -116,7 +116,7 @@ class NVDAObjectRegion(Region):
 				except (NotImplementedError, LookupError):
 					pass
 		self.rawText = text + self.appendText
-		super(NVDAObjectRegion, self).update()
+		super(AslanObjectRegion, self).update()
 
 	def routeTo(self, braillePos):
 		try:
@@ -125,8 +125,8 @@ class NVDAObjectRegion(Region):
 			pass
 
 
-class ReviewNVDAObjectRegion(NVDAObjectRegion):
-	"""A region to provide a braille representation of an NVDAObject when braille is tethered to review.
+class ReviewAslanObjectRegion(AslanObjectRegion):
+	"""A region to provide a braille representation of an AslanObject when braille is tethered to review.
 	This region behaves very similar to its base class.
 	However, when the move system caret when routing review cursor braille setting is active,
 	pressing a routing key will first focus the object before executing the default action.

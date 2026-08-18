@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2026 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton and others.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -57,7 +57,7 @@ class RemoteClient:
 	def __init__(
 		self,
 	):
-		log.info("Initializing NVDA Remote client")
+		log.info("Initializing Aslan Remote client")
 		self.keyModifiers = set()
 		self.hostPendingModifiers = set()
 		self.hostPendingNonmodifiers = None
@@ -233,7 +233,7 @@ class RemoteClient:
 			and configuration.getRemoteConfig()["ui"]["confirmDisconnectAsFollower"]
 		):
 			if core._hasShutdownBeenTriggered:
-				log.info("NVDA is shutting down, skipping remote disconnect confirmation dialog.")
+				log.info("Aslan is shutting down, skipping remote disconnect confirmation dialog.")
 			else:
 				confirmation_buttons = (
 					DefaultButton.YES,
@@ -331,7 +331,7 @@ class RemoteClient:
 			The retry loop must not be stopped here,
 			as unattended autoconnect relies on it (see #20131).
 			This is logged as a warning rather than an error,
-			as NVDA has not given up on the connection.
+			as Aslan has not given up on the connection.
 		"""
 		if self.followerTransport is None or self.followerTransport.successfulConnects > 0:
 			return
@@ -342,7 +342,7 @@ class RemoteClient:
 				pgettext(
 					"remote",
 					# Translators: Reported when connecting as the controlled computer fails.
-					# NVDA will keep trying to connect in the background.
+					# Aslan will keep trying to connect in the background.
 					"Unable to connect to the Remote Access server. Retrying",
 				),
 			)
@@ -667,7 +667,7 @@ class RemoteClient:
 			# Releasing these keys alone could cause an action, which is most likely not what the user wants.
 			# Send special reserved vkcode VK_NONE (0xff)
 			# to notify the remote computer's key state that something happened.
-			# This allows gestures which would cause an action if `NVDA` and the non-modifier key were removed
+			# This allows gestures which would cause an action if `Aslan` and the non-modifier key were removed
 			# to be used to toggle between controling the local and remote computers.
 			self.leaderTransport.send(
 				RemoteMessageType.KEY,

@@ -1,10 +1,10 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2026 NV Access Limited, Joseph Lee, Łukasz Golonka, Cyrille Bougot, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Language and localization support.
-This module assists in NVDA going global through language services
+This module assists in Aslan going global through language services
 such as converting Windows locale ID's to friendly names and presenting available languages.
 """
 
@@ -39,7 +39,7 @@ LCID_NONE = 0  # 0 used instead of None for backwards compatibility.
 LANGS_WITHOUT_TRANSLATIONS: frozenset[str] = frozenset(("en",))
 
 _language: str | None = None
-"""Language of NVDA's UI.
+"""Language of Aslan's UI.
 """
 
 installedTranslation: weakref.ReferenceType | None = None
@@ -53,8 +53,8 @@ _LCID_TO_LOCALE_NAME_OVERRIDES = {
 	0x7C92: "ckb",  # Central Kurdish
 }
 """
-Map Windows locale identifiers to the language codes NVDA uses,
-for identifiers where NVDA's code differs from the one reported by Windows.
+Map Windows locale identifiers to the language codes Aslan uses,
+for identifiers where Aslan's code differs from the one reported by Windows.
 Checked before `winKernel.LCIDToLocaleName`.
 """
 
@@ -101,7 +101,7 @@ def normalizeLocaleForWin32(localeName: str) -> str:
 	as a separator between country name and alternate order specifiers.
 	For example locales using alternate sorts see:
 	https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-lcid/e6a54e86-9660-44fa-a005-d00da97722f2
-	While NVDA does not support locales requiring multiple sorting orders users may still have their Windows
+	While Aslan does not support locales requiring multiple sorting orders users may still have their Windows
 	set to such locale and if all underscores were replaced unconditionally
 	we would be unable to generate Python locale from their default UI language.
 	"""
@@ -117,7 +117,7 @@ def localeNameToWindowsLCID(localeName: str) -> int:
 	@returns: a Windows LCID or L{LCID_NONE} if it could not be retrieved.
 	"""
 	# Windows Vista (NT 6.0) and later is able to convert locale names to LCIDs.
-	# Because NVDA supports Windows 7 (NT 6.1) SP1 and later, just use it directly.
+	# Because Aslan supports Windows 7 (NT 6.1) SP1 and later, just use it directly.
 	localeName = normalizeLocaleForWin32(localeName)
 	LCID = winBindings.kernel32.LocaleNameToLCID(localeName, 0)
 	# #6259: In Windows 10, LOCALE_CUSTOM_UNSPECIFIED is returned for any locale name unknown to Windows.
@@ -132,7 +132,7 @@ def windowsLCIDToLocaleName(lcid: int) -> str | None:
 	"""
 	Gets a normalized locale from a Windows LCID.
 
-	NVDA should avoid relying on LCIDs in future, as they have been deprecated by MS:
+	Aslan should avoid relying on LCIDs in future, as they have been deprecated by MS:
 	https://docs.microsoft.com/en-us/globalization/locale/locale-names
 	"""
 	localeName = _LCID_TO_LOCALE_NAME_OVERRIDES.get(lcid)
@@ -145,7 +145,7 @@ def windowsLCIDToLocaleName(lcid: int) -> str | None:
 def getLanguageDescription(language: str) -> str | None:
 	"""Finds out the description (localized full name) of a given local name"""
 	if language == "Windows":
-		# Translators: the label for the Windows default NVDA interface language.
+		# Translators: the label for the Windows default Aslan interface language.
 		return _("User default")
 	desc: str | None = None
 	LCID = localeNameToWindowsLCID(language)
@@ -171,7 +171,7 @@ def getLanguageDescription(language: str) -> str | None:
 	return desc
 
 
-def englishLanguageNameFromNVDALocale(localeName: str) -> str | None:
+def englishLanguageNameFromAslanLocale(localeName: str) -> str | None:
 	"""Returns either English name of the given language  using `GetLocaleInfoEx` or None
 	if the given locale is not known to Windows."""
 	localeName = normalizeLocaleForWin32(localeName)
@@ -204,7 +204,7 @@ def englishLanguageNameFromNVDALocale(localeName: str) -> str | None:
 	return None
 
 
-def englishCountryNameFromNVDALocale(localeName: str) -> str | None:
+def englishCountryNameFromAslanLocale(localeName: str) -> str | None:
 	"""Returns either English name of the given country using GetLocaleInfoEx or None
 	if the given locale is not known to Windows."""
 	localeName = normalizeLocaleForWin32(localeName)
@@ -223,7 +223,7 @@ def englishCountryNameFromNVDALocale(localeName: str) -> str | None:
 	return None
 
 
-def ansiCodePageFromNVDALocale(localeName: str) -> str | None:
+def ansiCodePageFromAslanLocale(localeName: str) -> str | None:
 	"""Returns either ANSI code page for a given locale using GetLocaleInfoEx or None
 	if the given locale is not known to Windows."""
 	localeName = normalizeLocaleForWin32(localeName)
@@ -231,9 +231,9 @@ def ansiCodePageFromNVDALocale(localeName: str) -> str | None:
 	# even though documentation states that in case of an unknown locale 0 is returned.
 	# This means that it is impossible to differentiate locales that are unknown
 	# and locales using 1252 as ANSI code page.
-	# Use `englishCountryNameFromNVDALocale` to determine if the given locale is supported or not
+	# Use `englishCountryNameFromAslanLocale` to determine if the given locale is supported or not
 	# before attempting to retrieve code page.
-	if not englishCountryNameFromNVDALocale(localeName):
+	if not englishCountryNameFromAslanLocale(localeName):
 		return None
 	buffLength = winBindings.kernel32.GetLocaleInfoEx(localeName, LOCALE.IDEFAULTANSICODEPAGE, None, 0)
 	if buffLength:
@@ -248,13 +248,13 @@ def ansiCodePageFromNVDALocale(localeName: str) -> str | None:
 	return None
 
 
-def listNVDALocales() -> list[str]:
-	# Make a list of all the locales found in NVDA's locale dir
+def listAslanLocales() -> list[str]:
+	# Make a list of all the locales found in Aslan's locale dir
 	localesDir = os.path.join(globalVars.appDir, "locale")
 	locales = [
 		x
 		for x in os.listdir(localesDir)
-		if os.path.isfile(os.path.join(localesDir, x, "LC_MESSAGES", "nvda.mo"))
+		if os.path.isfile(os.path.join(localesDir, x, "LC_MESSAGES", "aslan.mo"))
 	]
 	# Make sure that en (english) is in the list as it may not have any locale files, but is default
 	if "en" not in locales:
@@ -270,7 +270,7 @@ def getAvailableLanguages(presentational: bool = False) -> list[tuple[str, str]]
 	"""generates a list of locale names, plus their full localized language and country names.
 	@param presentational: whether this is meant to be shown alphabetically by language description
 	"""
-	locales = listNVDALocales()
+	locales = listAslanLocales()
 	# Prepare a 2-tuple list of language code and human readable language description.
 	langs = [(lc, getLanguageDescription(lc)) for lc in locales]
 	# Translators: The pattern defining how languages are displayed and sorted in in the general
@@ -314,9 +314,9 @@ def _createGettextTranslation(
 	localeName: str,
 ) -> tuple[(None | gettext.GNUTranslations | gettext.NullTranslations), (str | None)]:
 	if localeName in LANGS_WITHOUT_TRANSLATIONS:
-		return gettext.translation("nvda", fallback=True), localeName
+		return gettext.translation("aslan", fallback=True), localeName
 	try:
-		trans = gettext.translation("nvda", localedir="locale", languages=[localeName])
+		trans = gettext.translation("aslan", localedir="locale", languages=[localeName])
 		return trans, localeName
 	except IOError:
 		log.debugWarning(f"couldn't set the translation service locale to {localeName}")
@@ -328,7 +328,7 @@ def setLanguage(lang: str) -> None:
 	Sets the following using `lang` such as "en", "ru_RU", or "es-ES". Use "Windows" to use the system locale
 	 - the windows locale for the thread (fallback to system locale)
 	 - the translation service (fallback to English)
-	 - Current NVDA language (match the translation service)
+	 - Current Aslan language (match the translation service)
 	 - the python locale for the thread (match the translation service, fallback to system default)
 	"""
 	global _language
@@ -337,7 +337,7 @@ def setLanguage(lang: str) -> None:
 		localeName = getWindowsLanguage()
 	else:
 		localeName = lang
-		# Set the windows locale for this thread (NVDA core) to this locale.
+		# Set the windows locale for this thread (Aslan core) to this locale.
 		LCID = localeNameToWindowsLCID(lang)
 		if winBindings.kernel32.SetThreadLocale(LCID) == 0:
 			log.debugWarning(f"couldn't set windows thread locale to {lang}")
@@ -358,7 +358,7 @@ def setLanguage(lang: str) -> None:
 
 
 def localeStringFromLocaleCode(localeCode: str) -> str:
-	"""Given an NVDA locale such as 'en' or or a Windows locale such as 'pl_PL'
+	"""Given an Aslan locale such as 'en' or or a Windows locale such as 'pl_PL'
 	creates a locale representation in a standard form for Win32
 	which can be safely passed to Python's `setlocale`.
 	The required format is:
@@ -366,11 +366,11 @@ def localeStringFromLocaleCode(localeCode: str) -> str:
 	Raises exception if the given locale is not known to Windows.
 	"""
 	normalizedLocaleCode = normalizeLocaleForWin32(localeCode)
-	langName = englishLanguageNameFromNVDALocale(normalizedLocaleCode)
+	langName = englishLanguageNameFromAslanLocale(normalizedLocaleCode)
 	if langName is None:
 		raise ValueError(f"Locale code {localeCode} not supported by Windows")
-	countryName = englishCountryNameFromNVDALocale(normalizedLocaleCode)
-	codePage = ansiCodePageFromNVDALocale(normalizedLocaleCode)
+	countryName = englishCountryNameFromAslanLocale(normalizedLocaleCode)
+	codePage = ansiCodePageFromAslanLocale(normalizedLocaleCode)
 	return f"{langName}_{countryName}.{codePage}"
 
 
@@ -393,8 +393,8 @@ def _setPythonLocale(localeString: str) -> bool:
 def setLocale(localeName: str) -> None:
 	"""
 	Set python's locale using a `localeName` such as "en", "ru_RU", or "es-ES".
-	Will fallback on current NVDA language if it cannot be set and finally fallback to the system locale.
-	Passing NVDA locales straight to python `locale.setlocale` does now work since it tries to normalize the
+	Will fallback on current Aslan language if it cannot be set and finally fallback to the system locale.
+	Passing Aslan locales straight to python `locale.setlocale` does now work since it tries to normalize the
 	parameter using `locale.normalize` which results in locales unknown to Windows (Python issue 37945).
 	For example executing: `locale.setlocale(locale.LC_ALL, "pl")`
 	results in locale being set to `('pl_PL', 'ISO8859-2')`
@@ -422,7 +422,7 @@ def setLocale(localeName: str) -> None:
 	if localeString and _setPythonLocale(localeString):
 		return
 	# As a final fallback try setting locale just to the English name of the given language.
-	localeFromLang = englishLanguageNameFromNVDALocale(localeName)
+	localeFromLang = englishLanguageNameFromAslanLocale(localeName)
 	if localeFromLang and _setPythonLocale(localeFromLang):
 		return
 	# Either Windows does not know the locale, or Python is unable to handle it.

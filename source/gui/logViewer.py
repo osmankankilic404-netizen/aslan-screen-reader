@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2008-2024 NV Access Limited, Cyrille Bougot
 
-"""Provides functionality to view the NVDA log."""
+"""Provides functionality to view the Aslan log."""
 
 import wx
 import globalVars
@@ -20,13 +20,13 @@ class LogViewer(
 	gui.contextHelp.ContextHelpMixin,
 	wx.Frame,  # wxPython does not seem to call base class initializer, put last in MRO
 ):
-	"""The NVDA log viewer GUI."""
+	"""The Aslan log viewer GUI."""
 
 	helpId = "LogViewer"
 
 	def __init__(self, parent):
-		# Translators: The title of the NVDA log viewer window.
-		super(LogViewer, self).__init__(parent, wx.ID_ANY, _("NVDA Log Viewer"))
+		# Translators: The title of the Aslan log viewer window.
+		super(LogViewer, self).__init__(parent, wx.ID_ANY, _("Aslan Log Viewer"))
 		self.Bind(wx.EVT_ACTIVATE, self.onActivate)
 		self.Bind(wx.EVT_CLOSE, self.onClose)
 		mainSizer = wx.BoxSizer(wx.VERTICAL)
@@ -47,17 +47,17 @@ class LogViewer(
 
 		menuBar = wx.MenuBar()
 		menu = wx.Menu()
-		# Translators: The label for a menu item in NVDA log viewer to refresh log messages.
+		# Translators: The label for a menu item in Aslan log viewer to refresh log messages.
 		item = menu.Append(wx.ID_ANY, _("Refresh	F5"))
 		self.Bind(wx.EVT_MENU, self.refresh, item)
-		# Translators: The label for a menu item in NVDA log viewer to save log file.
+		# Translators: The label for a menu item in Aslan log viewer to save log file.
 		item = menu.Append(wx.ID_SAVEAS, _("Save &as...	Ctrl+S"))
 		self.Bind(wx.EVT_MENU, self.onSaveAsCommand, item)
 		menu.AppendSeparator()
-		# Translators: The label for a menu item in NVDA log viewer to exit.
+		# Translators: The label for a menu item in Aslan log viewer to exit.
 		item = menu.Append(wx.ID_EXIT, _("E&xit"))
 		self.Bind(wx.EVT_MENU, self.onClose, item)
-		# Translators: The title of a menu in NVDA Log Viewer.
+		# Translators: The title of a menu in Aslan Log Viewer.
 		menuBar.Append(menu, _("Log"))
 		self.SetMenuBar(menuBar)
 
@@ -92,9 +92,9 @@ class LogViewer(
 
 	def onSaveAsCommand(self, evt):
 		filename = wx.FileSelector(
-			# Translators: Label of a menu item in NVDA Log Viewer.
+			# Translators: Label of a menu item in Aslan Log Viewer.
 			_("Save As"),
-			default_filename="nvda.log",
+			default_filename="aslan.log",
 			flags=wx.FD_SAVE | wx.FD_OVERWRITE_PROMPT,
 			parent=self,
 		)
@@ -106,7 +106,7 @@ class LogViewer(
 				f.write(self.outputCtrl.GetValue())
 		except (IOError, OSError) as e:
 			gui.messageBox(
-				# Translators: Dialog text presented when NVDA cannot save a log file.
+				# Translators: Dialog text presented when Aslan cannot save a log file.
 				_("Error saving log: %s") % e.strerror,
 				# Translators: the title of an error message dialog
 				_("Error"),

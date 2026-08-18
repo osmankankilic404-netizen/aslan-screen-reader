@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # mathType.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2014-2020 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.

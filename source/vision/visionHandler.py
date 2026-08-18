@@ -1,5 +1,5 @@
 # vision/visionHandler.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2018-2022 NV Access Limited, Babbage B.V., Cyrille Bougot
@@ -81,7 +81,7 @@ class VisionHandler(AutoPropertyObject):
 
 		* It keeps track of active vision enhancement _providers in the L{_providers} dictionary.
 		* It processes initialization and termination of providers.
-		* It receives certain events from the core of NVDA,
+		* It receives certain events from the core of Aslan,
 			delegating them to the appropriate extension points.
 	"""
 
@@ -102,10 +102,10 @@ class VisionHandler(AutoPropertyObject):
 	_allProviders: List[providerInfo.ProviderInfo] = []
 
 	def _getBuiltInProviderIds(self):
-		from visionEnhancementProviders.NVDAHighlighter import NVDAHighlighterSettings
+		from visionEnhancementProviders.AslanHighlighter import AslanHighlighterSettings
 
 		return [
-			NVDAHighlighterSettings.getId(),
+			AslanHighlighterSettings.getId(),
 		]
 
 	def _updateAllProvidersList(self):
@@ -281,7 +281,7 @@ class VisionHandler(AutoPropertyObject):
 		try:
 			self.initialFocus()
 		except Exception:
-			# #8877: initialFocus might fail because NVDA tries to focus
+			# #8877: initialFocus might fail because Aslan tries to focus
 			# an object for which property fetching raises an exception.
 			# We should handle this more gracefully, since this is no reason
 			# to stop a provider from loading successfully.
@@ -289,7 +289,7 @@ class VisionHandler(AutoPropertyObject):
 		try:
 			self.initialNavigatorObject()
 		except Exception:
-			# initialNavigatorObject might fail in case NVDA's current navigator object is an object
+			# initialNavigatorObject might fail in case Aslan's current navigator object is an object
 			# for which property fetching raises an exception.
 			# We should handle this more gracefully, since this is no reason
 			# to stop a provider from loading successfully.

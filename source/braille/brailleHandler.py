@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, Joseph Lee, Babbage B.V., Davy Kager, Bram Duvigneau, Leonard de Ruijter, Burman's Computer and Education Ltd., Julien Cochuyt
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from __future__ import annotations
 
@@ -49,7 +49,7 @@ from utils.security import objectBelowLockScreenAndWindowsIsLocked, post_session
 from winAPI.secureDesktop import post_secureDesktopStateChange
 
 if TYPE_CHECKING:
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 	from speech.types import SpeechSequence
 
 
@@ -80,7 +80,7 @@ from .extensions import (
 	pre_writeCells,
 )
 from .regions.base import TextRegion
-from .regions.NVDAObject import NVDAObjectRegion
+from .regions.AslanObject import AslanObjectRegion
 from .regions.textInfo import TextInfoRegion
 from .regions.focus import getFocusContextRegions, getFocusRegions
 
@@ -114,7 +114,7 @@ class BrailleHandler(baseObject.AutoPropertyObject):
 	queuedWrite: Optional[List[int]] = None
 	queuedWriteLock: threading.Lock
 	ackTimerHandle: int
-	_regionsPendingUpdate: Set[Union[NVDAObjectRegion, TextInfoRegion]]
+	_regionsPendingUpdate: Set[Union[AslanObjectRegion, TextInfoRegion]]
 	"""
 	Regions pending an update.
 	Regions are added by L{handleUpdate} and L{handleCaretMove} and cleared in L{_handlePendingUpdate}.
@@ -780,7 +780,7 @@ class BrailleHandler(baseObject.AutoPropertyObject):
 
 		self._autoScrollCallLater.Restart()
 
-	def handleGainFocus(self, obj: "NVDAObject", shouldAutoTether: bool = True) -> None:
+	def handleGainFocus(self, obj: "AslanObject", shouldAutoTether: bool = True) -> None:
 		if not self.enabled or config.conf["braille"]["mode"] == BrailleMode.SPEECH_OUTPUT.value:
 			return
 		if objectBelowLockScreenAndWindowsIsLocked(obj):
@@ -833,7 +833,7 @@ class BrailleHandler(baseObject.AutoPropertyObject):
 
 	def handleCaretMove(
 		self,
-		obj: "NVDAObject",
+		obj: "AslanObject",
 		shouldAutoTether: bool = True,
 	) -> None:
 		if not self.enabled or config.conf["braille"]["mode"] == BrailleMode.SPEECH_OUTPUT.value:
@@ -906,7 +906,7 @@ class BrailleHandler(baseObject.AutoPropertyObject):
 	# e.g. the time remaining. Therefore, update the dialog when a contained progress bar changes.
 	def _handleProgressBarUpdate(
 		self,
-		obj: "NVDAObject",
+		obj: "AslanObject",
 	) -> None:
 		if objectBelowLockScreenAndWindowsIsLocked(obj):
 			return
@@ -921,7 +921,7 @@ class BrailleHandler(baseObject.AutoPropertyObject):
 				self.handleUpdate(obj)
 				return
 
-	def handleUpdate(self, obj: "NVDAObject") -> None:
+	def handleUpdate(self, obj: "AslanObject") -> None:
 		if not self.enabled:
 			return
 		if objectBelowLockScreenAndWindowsIsLocked(obj):
@@ -939,10 +939,10 @@ class BrailleHandler(baseObject.AutoPropertyObject):
 			if self._tether != TetherTo.FOCUS.value:
 				return
 			# Late import to avoid circular import.
-			from NVDAObjects import NVDAObject
+			from AslanObjects import AslanObject
 
 			if (
-				isinstance(obj, NVDAObject)
+				isinstance(obj, AslanObject)
 				and obj.role == controlTypes.Role.PROGRESSBAR
 				and obj.isInForeground
 			):
@@ -976,7 +976,7 @@ class BrailleHandler(baseObject.AutoPropertyObject):
 			else:
 				self.handleReviewMove(shouldAutoTether=False)
 		except Exception:
-			# #8877: initialDisplay might fail because NVDA tries to focus
+			# #8877: initialDisplay might fail because Aslan tries to focus
 			# an object for which property fetching raises an exception.
 			log.debugWarning("Error in initial display", exc_info=True)
 

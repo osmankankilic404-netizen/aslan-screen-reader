@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2025 NV Access Limited, Cary-rowen
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -11,8 +11,8 @@ from ctypes import (
 )
 import json
 from winBindings.gdi32 import RGBQUAD
-import NVDAHelper
-from NVDAHelper.localWin10 import (
+import AslanHelper
+from AslanHelper.localWin10 import (
 	uwpOcr_getLanguages,
 	uwpOcr_initialize,
 	uwpOcr_recognize,
@@ -25,7 +25,7 @@ import languageHandler
 from utils import _deprecate
 
 __getattr__ = _deprecate.handleDeprecations(
-	_deprecate.MovedSymbol("uwpOcr_Callback", "NVDAHelper.localWin10"),
+	_deprecate.MovedSymbol("uwpOcr_Callback", "AslanHelper.localWin10"),
 )
 
 
@@ -33,7 +33,7 @@ def getLanguages():
 	"""Return the available recognition languages.
 	@return: A list of language codes suitable to be passed to L{UwpOcr}'s constructor.
 		These need to be normalized with L{languageHandler.normalizeLanguage}
-		for use as NVDA language codes.
+		for use as Aslan language codes.
 	@rtype: list of str
 	"""
 	langs = uwpOcr_getLanguages()
@@ -42,26 +42,26 @@ def getLanguages():
 
 def getInitialLanguage():
 	"""Get the language to use the first time UWP OCR is used.
-	The NVDA interface language is used if a matching OCR language is available.
+	The Aslan interface language is used if a matching OCR language is available.
 	Otherwise, this falls back to the first available language.
 	"""
-	nvdaLang = languageHandler.getLanguage()
+	aslanLang = languageHandler.getLanguage()
 	ocrLangs = getLanguages()
-	return _getInitialLanguage(nvdaLang, ocrLangs)
+	return _getInitialLanguage(aslanLang, ocrLangs)
 
 
-def _getInitialLanguage(nvdaLang, ocrLangs):
+def _getInitialLanguage(aslanLang, ocrLangs):
 	# Try the full language code.
 	for lang in ocrLangs:
 		normLang = languageHandler.normalizeLanguage(lang)
-		if nvdaLang == normLang:
+		if aslanLang == normLang:
 			return lang
 	# Try the language code without country.
-	nvdaLangPrimary = nvdaLang.split("_", 1)[0]
+	aslanLangPrimary = aslanLang.split("_", 1)[0]
 	for lang in ocrLangs:
 		# Don't need to normalize here because the primary code is
 		# the same when normalized.
-		if lang.startswith(nvdaLangPrimary):
+		if lang.startswith(aslanLangPrimary):
 			return lang
 	# Fall back to the first OCR language.
 	if len(ocrLangs) >= 1:
@@ -110,7 +110,7 @@ class UwpOcr(ContentRecognizer):
 			self.language = language
 		else:
 			self.language = getConfigLanguage()
-		self._dll = NVDAHelper.getHelperLocalWin10Dll()
+		self._dll = AslanHelper.getHelperLocalWin10Dll()
 
 	def recognize(self, pixels, imgInfo, onResult):
 		self._onResult = onResult

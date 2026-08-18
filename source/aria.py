@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2009-2022 NV Access Limited, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -8,7 +8,7 @@ from enum import Enum
 import controlTypes
 
 
-ariaRolesToNVDARoles: Dict[str, controlTypes.Role] = {
+ariaRolesToAslanRoles: Dict[str, controlTypes.Role] = {
 	"description": controlTypes.Role.STATICTEXT,  # Not in ARIA 1.1 spec
 	"alert": controlTypes.Role.ALERT,
 	"alertdialog": controlTypes.Role.DIALOG,
@@ -68,7 +68,7 @@ ariaRolesToNVDARoles: Dict[str, controlTypes.Role] = {
 	"insertion": controlTypes.Role.INSERTED_CONTENT,
 }
 
-ariaSortValuesToNVDAStates: Dict[str, controlTypes.State] = {
+ariaSortValuesToAslanStates: Dict[str, controlTypes.State] = {
 	"descending": controlTypes.State.SORTED_DESCENDING,
 	"ascending": controlTypes.State.SORTED_ASCENDING,
 	"other": controlTypes.State.SORTED,
@@ -91,8 +91,8 @@ landmarkRoles: Dict[str, str] = {
 	"form": pgettext("aria", "form"),
 }
 
-ariaRolesToNVDARoles.update(
-	{role: controlTypes.Role.LANDMARK for role in landmarkRoles if role not in ariaRolesToNVDARoles},
+ariaRolesToAslanRoles.update(
+	{role: controlTypes.Role.LANDMARK for role in landmarkRoles if role not in ariaRolesToAslanRoles},
 )
 
 htmlNodeNameToAriaRoles: Dict[str, str] = {
@@ -115,7 +115,7 @@ class AriaLivePoliteness(str, Enum):
 	ASSERTIVE = "assertive"
 
 
-ariaHaspopupValuesToNVDAStates: Dict[str, controlTypes.State] = {
+ariaHaspopupValuesToAslanStates: Dict[str, controlTypes.State] = {
 	"true": controlTypes.State.HASPOPUP,
 	"menu": controlTypes.State.HASPOPUP,
 	"dialog": controlTypes.State.HASPOPUP_DIALOG,

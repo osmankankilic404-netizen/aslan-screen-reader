@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022 NV Access Limited, Rob Meredith
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -204,7 +204,7 @@ Paragraph 3.
 		# I can only assume that BasicTextProvider behaves differently than other TextInfos,
 		# as it starts at the beginning of the last paragraph, "Paragraph 3."
 		# You can see the difference by pasting the above paragraph in Notepad,
-		# and walking backwards through it in the NVDA Console.
+		# and walking backwards through it in the Aslan Console.
 		# paragraphHelper._moveTextInfoToSingleLineBreakParagraph(False, ti)
 		for x in range(len(lines) - 2, -1, -1):
 			line = lines[x] + "\n"

@@ -1,29 +1,29 @@
-# Create NVDA Development Environment
+# Create Aslan Development Environment
 
 ## Getting the Source Code
 
-The NVDA project uses the [git](https://www.git-scm.com/) version control system for its source code and documentation.
+The Aslan project uses the [git](https://www.git-scm.com/) version control system for its source code and documentation.
 
-The NVDA repository is located at <https://github.com/nvaccess/nvda>.
+The Aslan repository is located at <https://github.com/nvaccess/aslan>.
 
-If you plan on contributing to NVDA, you will need to [fork and clone](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repository.
+If you plan on contributing to Aslan, you will need to [fork and clone](https://docs.github.com/en/get-started/quickstart/fork-a-repo) the repository.
 
 After forking the repository into your user account (`YOUR-USERNAME`), clone with `--recursive` to fetch all required submodules.
 
 ```sh
-git clone --recursive https://github.com/YOUR-USERNAME/nvda.git
+git clone --recursive https://github.com/YOUR-USERNAME/aslan.git
 ```
 
 ### Keeping the fork in sync
 
 When you fork the repository, GitHub will create a copy of the master branch.
 However, this branch will not be updated when the NV Access master branch is updated.
-To ensure your work is always based on the latest commit in the `nvaccess/nvda` master branch, it is recommended that your master branch be linked to the `nvaccess/nvda` master branch, rather than the master branch in your GitHub fork.
+To ensure your work is always based on the latest commit in the `nvaccess/aslan` master branch, it is recommended that your master branch be linked to the `nvaccess/aslan` master branch, rather than the master branch in your GitHub fork.
 You can do this from the command line as follows:
 
 ```sh
 # Add a remote for the NV Access repository.
-git remote add nvaccess https://github.com/nvaccess/nvda.git
+git remote add nvaccess https://github.com/nvaccess/aslan.git
 # Fetch the NV Access branches.
 git fetch nvaccess
 # Switch to the local master branch.
@@ -36,12 +36,12 @@ git pull
 
 ## Supported Operating Systems
 
-At a minimum, running and building NVDA from source requires Windows 10 (Version 1507).
+At a minimum, running and building Aslan from source requires Windows 10 (Version 1507).
 We recommend Windows 11 to work with features under active support, and if you need to use Windows 10, use Version 22H2.
 
 ## Dependencies
 
-The NVDA source depends on several other packages to run correctly.
+The Aslan source depends on several other packages to run correctly.
 
 ### Installed Dependencies
 
@@ -61,11 +61,11 @@ Install the python version listed in [.python-versions](../../.python-versions)
 * Microsoft Visual Studio 2022 or 2026
   * To replicate the production build environment, use the [version of Visual Studio 2022 that GitHub Actions is using](https://github.com/actions/runner-images/tree/main/images/windows).
   * If you don't use the Visual Studio IDE itself, you can download the [build tools](https://aka.ms/vs/17/release/vs_BuildTools.exe).
-  * If you do intend to use the Visual Studio IDE (not required for NVDA development), you can download [the community version](https://aka.ms/vs/17/release/vs_Community.exe).
+  * If you do intend to use the Visual Studio IDE (not required for Aslan development), you can download [the community version](https://aka.ms/vs/17/release/vs_Community.exe).
     * The Professional and Enterprise versions are also supported.
     * Preview or insiders versions are *not* supported.
 * When installing Visual Studio, additional components must be included:
-  * You can automatically fetch these using [NVDAs .vsconfig](../../.vsconfig) using the [import feature of the VS installer](https://learn.microsoft.com/en-us/visualstudio/install/import-export-installation-configurations?view=vs-2022#import-a-configuration).
+  * You can automatically fetch these using [Aslans .vsconfig](../../.vsconfig) using the [import feature of the VS installer](https://learn.microsoft.com/en-us/visualstudio/install/import-export-installation-configurations?view=vs-2022#import-a-configuration).
   * In the list on the Workloads tab, in the Desktop grouping:
     * Desktop development with C++.
       * Once selected, ensure "C++ Clang tools for Windows" is included under the optional grouping.
@@ -107,7 +107,7 @@ The following build time dependencies are included in the miscDeps git submodule
 
 #### VS Code
 
-* If you use [Visual Studio Code](https://code.visualstudio.com/) as your integrated development environment, you get the benefit of our [prepopulated workspace configuration](https://github.com/nvaccess/vscode-nvda/), which is included as a submodule.
+* If you use [Visual Studio Code](https://code.visualstudio.com/) as your integrated development environment, you get the benefit of our [prepopulated workspace configuration](https://github.com/nvaccess/vscode-aslan/), which is included as a submodule.
   If you do not wish to use the pre-populated VS Code workspace configuration, you can unregister the `.vscode` submodule.
 
   ```sh
@@ -122,7 +122,7 @@ The following build time dependencies are included in the miscDeps git submodule
 
 ### Python dependencies
 
-NVDA and its build system also depend on an extensive list of Python packages.
+Aslan and its build system also depend on an extensive list of Python packages.
 They are all listed with their specific versions in the `pyproject.toml` file in the root of this repository.
 However, the build system takes care of fetching these itself when needed.
 These packages will be installed into an isolated Python virtual environment within this repository, and will not affect your system-wide set of packages.
@@ -131,4 +131,4 @@ These packages will be installed into an isolated Python virtual environment wit
 
 The following dependencies aren't needed by most people:
 
-* To generate [developer documentation for nvdaHelper](./buildingDevDocumentation.md#building-nvdahelper-developer-documentation): [Doxygen Windows installer](http://www.doxygen.nl/download.html), version 1.8.15.
+* To generate [developer documentation for aslanHelper](./buildingDevDocumentation.md#building-aslanhelper-developer-documentation): [Doxygen Windows installer](http://www.doxygen.nl/download.html), version 1.8.15.

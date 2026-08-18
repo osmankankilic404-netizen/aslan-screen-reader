@@ -1,10 +1,10 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Babbage B.V., Davy Kager, Bill Dengler, Julien Cochuyt,
 # Joseph Lee, Dawid Pieper, mltony, Bram Duvigneau, Cyrille Bougot, Rob Meredith,
 # Burman's Computer and Education Ltd., Leonard de Ruijter, Łukasz Golonka, Cary-rowen,
 # Wang Chong, Kefas Lungu
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from io import StringIO
 from configobj import ConfigObj
@@ -18,7 +18,7 @@ latestSchemaVersion = 25
 
 #: The configuration specification string
 #: @type: String
-configSpecString = f"""# NVDA Configuration File
+configSpecString = f"""# Aslan Configuration File
 schemaVersion = integer(min=0, default={latestSchemaVersion})
 [general]
 	language = string(default="Windows")
@@ -192,12 +192,12 @@ schemaVersion = integer(min=0, default={latestSchemaVersion})
 
 #Keyboard settings
 [keyboard]
-	# NVDAModifierKeys: Integer value combining single-bit value:
+	# AslanModifierKeys: Integer value combining single-bit value:
 	# 1: CapsLock
 	# 2: NumpadInsert
 	# 4: ExtendedInsert
 	# Default = 6: NumpadInsert + ExtendedInsert
-	NVDAModifierKeys = integer(1, 7, default=6)
+	AslanModifierKeys = integer(1, 7, default=6)
 	keyboardLayout = string(default="desktop")
 	# 0: Off, 1: Only in edit controls, 2: Always
 	speakTypedCharacters = integer(default=1,min=0,max=2)

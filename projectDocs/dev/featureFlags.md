@@ -1,6 +1,6 @@
 # Feature Flags
 
-NVDA makes judicious use of feature flags to enable and disable features that are in early development.
+Aslan makes judicious use of feature flags to enable and disable features that are in early development.
 The following are provided to streamline the creation of new feature flags:
 
 * A config spec type
@@ -13,7 +13,7 @@ A boolean feature, must have 3 states selectable by the user:
 
 * `True`
 * `False`
-* `Default` (NVDA developer recommendation)
+* `Default` (Aslan developer recommendation)
 
 This allows a choice between the following use-cases to be made at any point in time:
 
@@ -21,14 +21,14 @@ This allows a choice between the following use-cases to be made at any point in 
 An early adopter may choose to do this to test the feature and provide feedback.
 * **Explicitly opt-out** of the feature, regardless of the default behavior.
 A user may find the pre-existing behavior acceptable, and wants the maximum delay to adopt the new feature.
-They may be prioritising stability, or anticipating this feature flag receives a permanent home in NVDA settings.
-* **Explicitly choose the default** (NVDA developer recommended) behavior.
+They may be prioritising stability, or anticipating this feature flag receives a permanent home in Aslan settings.
+* **Explicitly choose the default** (Aslan developer recommended) behavior.
 Noting, that in this case it is important that the user must be able to select one of the other options first,
 and return to the default behavior at any point in time.
 
 This should be possible while still allowing developers to change the behaviour
 of the default option.
-The development process might require that initially NVDA is released with
+The development process might require that initially Aslan is released with
 the feature disabled by default.
 In this case only testers, or the most curious users are expected to opt-in temporarily.
 As the feature improves, bugs are fixed, edge cases are handled, and the UX is improved,
@@ -40,7 +40,7 @@ stable.
 
 ## Feature Flag Enum
 
-To aid static typing in NVDA, `enum` classes are used.
+To aid static typing in Aslan, `enum` classes are used.
 `BoolFlag` is provided, the majority of feature flags are expected to use this.
 However, if more values are required (E.G. `AllowUiaInMSWord` has options `WHEN_NECESSARY`, `WHERE_SUITABLE`, `ALWAYS`, in addition to `DEFAULT`), then a new `enum` class can be defined.
 Adding the enum class to the `featureFlagEnums.py` file will automatically expose it for use in the config spec (see the next section).
@@ -60,11 +60,11 @@ class AllowUiaInMSWordFlag(DisplayStringEnum):
 		"""
 		# To prevent duplication, self.DEFAULT is not included here.
 		return {
-			# Translators: Label for an option in NVDA settings.
+			# Translators: Label for an option in Aslan settings.
 			self.WHEN_NECESSARY: _("Only when necessary"),
-			# Translators: Label for an option in NVDA settings.
+			# Translators: Label for an option in Aslan settings.
 			self.WHERE_SUITABLE: _("Where suitable"),
-			# Translators: Label for an option in NVDA settings.
+			# Translators: Label for an option in Aslan settings.
 			self.ALWAYS: _("ALWAYS"),
 		}
 
@@ -105,7 +105,7 @@ if flagValue == AllowUiaInMSWordFlag.ALWAYS:
 
 ## GUI
 
-A control (`gui.nvdaControls.FeatureFlagCombo`) is provided to simplify exposing the feature flag to the user.
+A control (`gui.aslanControls.FeatureFlagCombo`) is provided to simplify exposing the feature flag to the user.
 
 ### Usage:
 
@@ -118,7 +118,7 @@ Note the comments in the example:
 
 ```python
 import collections
-from gui import nvdaControls, guiHelper
+from gui import aslanControls, guiHelper
 import config
 import wx
 
@@ -131,12 +131,12 @@ vbufGroup = guiHelper.BoxSizerHelper(vbufSizer, sizer=vbufSizer)
 sHelper.addItem(vbufGroup)
 
 # creation
-self.newOptionForUsersCombo: nvdaControls.FeatureFlagCombo = vbufGroup.addLabeledControl(
+self.newOptionForUsersCombo: aslanControls.FeatureFlagCombo = vbufGroup.addLabeledControl(
     labelText=_(
         # Translators: Explanation of what the control does and where it is used.
         "New option for users"
     ),
-    wxCtrlClass=nvdaControls.FeatureFlagCombo,
+    wxCtrlClass=aslanControls.FeatureFlagCombo,
     keyPath=["virtualBuffers", "newOptionForUsers"], # The path of keys, see config spec.
     conf=config.conf, # The configObj instance, allows getting / setting the value
 )

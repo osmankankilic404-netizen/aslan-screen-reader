@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2006-2025 NV Access Limited, Peter Vágner, Aleksey Sadovoy, Babbage B.V., Cyrille Bougot
@@ -25,13 +25,13 @@ import ui
 from keyLabels import localizedKeyLabels
 from logHandler import log
 import config
-from config.configFlags import NVDAKey
+from config.configFlags import AslanKey
 import api
 import winInputHook
 import inputCore
 import tones
 import core
-import NVDAState
+import AslanState
 from contextlib import contextmanager
 import threading
 import winBindings.kernel32
@@ -39,7 +39,7 @@ import winKernel
 from winBindings import user32
 
 if typing.TYPE_CHECKING:
-	from NVDAObjects import NVDAObject  # noqa: F401
+	from AslanObjects import AslanObject  # noqa: F401
 	from watchdog import WatchdogObserver
 
 _watchdogObserver: typing.Optional["WatchdogObserver"] = None
@@ -86,11 +86,11 @@ def _toUnicodeEx(
 
 
 # Fake vk codes.
-# These constants should be assigned to the name that NVDA will use for the key.
+# These constants should be assigned to the name that Aslan will use for the key.
 VK_WIN = "windows"
-VK_NVDA = "NVDA"
+VK_Aslan = "Aslan"
 
-#: Keys which have been trapped by NVDA and should not be passed to the OS.
+#: Keys which have been trapped by Aslan and should not be passed to the OS.
 trappedKeys = set()
 #: Tracks the number of keys passed through by request of the user.
 #: If -1, pass through is disabled.
@@ -98,12 +98,12 @@ trappedKeys = set()
 passKeyThroughCount = -1
 #: The last key down passed through by request of the user.
 lastPassThroughKeyDown = None
-#: The last NVDA modifier key that was pressed with no subsequent key presses.
-lastNVDAModifier = None
-#: When the last NVDA modifier key was released.
-lastNVDAModifierReleaseTime = None
-#: Indicates that the NVDA modifier's special functionality should be bypassed until a key is next released.
-bypassNVDAModifier = False
+#: The last Aslan modifier key that was pressed with no subsequent key presses.
+lastAslanModifier = None
+#: When the last Aslan modifier key was released.
+lastAslanModifierReleaseTime = None
+#: Indicates that the Aslan modifier's special functionality should be bypassed until a key is next released.
+bypassAslanModifier = False
 #: The modifiers currently being pressed.
 currentModifiers = set()
 #: A counter which is incremented each time a key is pressed.
@@ -111,9 +111,9 @@ currentModifiers = set()
 #: @type: int
 keyCounter = 0
 #: The current sticky NVDa modifier key.
-stickyNVDAModifier = None
-#: Whether the sticky NVDA modifier is locked.
-stickyNVDAModifierLocked = False
+stickyAslanModifier = None
+#: Whether the sticky Aslan modifier is locked.
+stickyAslanModifierLocked = False
 
 _ignoreInjectionLock = threading.Lock()
 
@@ -134,20 +134,20 @@ def passNextKeyThrough():
 		passKeyThroughCount = 0
 
 
-def isNVDAModifierKey(vkCode: int, extended: bool) -> bool:
+def isAslanModifierKey(vkCode: int, extended: bool) -> bool:
 	if (
-		(config.conf["keyboard"]["NVDAModifierKeys"] & NVDAKey.NUMPAD_INSERT)
+		(config.conf["keyboard"]["AslanModifierKeys"] & AslanKey.NUMPAD_INSERT)
 		and vkCode == winUser.VK_INSERT
 		and not extended
 	):
 		return True
 	elif (
-		(config.conf["keyboard"]["NVDAModifierKeys"] & NVDAKey.EXTENDED_INSERT)
+		(config.conf["keyboard"]["AslanModifierKeys"] & AslanKey.EXTENDED_INSERT)
 		and vkCode == winUser.VK_INSERT
 		and extended
 	):
 		return True
-	elif (config.conf["keyboard"]["NVDAModifierKeys"] & NVDAKey.CAPS_LOCK) and vkCode == winUser.VK_CAPITAL:
+	elif (config.conf["keyboard"]["AslanModifierKeys"] & AslanKey.CAPS_LOCK) and vkCode == winUser.VK_CAPITAL:
 		return True
 	else:
 		return False
@@ -155,35 +155,35 @@ def isNVDAModifierKey(vkCode: int, extended: bool) -> bool:
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	if attrName == "SUPPORTED_NVDA_MODIFIER_KEYS" and NVDAState._allowDeprecatedAPI():
+	if attrName == "SUPPORTED_Aslan_MODIFIER_KEYS" and AslanState._allowDeprecatedAPI():
 		log.warning(
-			"keyboardHandler.SUPPORTED_NVDA_MODIFIER_KEYS is deprecated with no direct replacement. "
-			"Consider using the class config.configFlags.NVDAKey instead.",
+			"keyboardHandler.SUPPORTED_Aslan_MODIFIER_KEYS is deprecated with no direct replacement. "
+			"Consider using the class config.configFlags.AslanKey instead.",
 		)
 		return ("capslock", "numpadinsert", "insert")
 	raise AttributeError(f"module {repr(__name__)} has no attribute {repr(attrName)}")
 
 
-def getNVDAModifierKeys() -> List[Tuple[int, Optional[bool]]]:
+def getAslanModifierKeys() -> List[Tuple[int, Optional[bool]]]:
 	keys = []
-	if config.conf["keyboard"]["NVDAModifierKeys"] & NVDAKey.EXTENDED_INSERT:
+	if config.conf["keyboard"]["AslanModifierKeys"] & AslanKey.EXTENDED_INSERT:
 		keys.append(vkCodes.byName["insert"])
-	if config.conf["keyboard"]["NVDAModifierKeys"] & NVDAKey.NUMPAD_INSERT:
+	if config.conf["keyboard"]["AslanModifierKeys"] & AslanKey.NUMPAD_INSERT:
 		keys.append(vkCodes.byName["numpadinsert"])
-	if config.conf["keyboard"]["NVDAModifierKeys"] & NVDAKey.CAPS_LOCK:
+	if config.conf["keyboard"]["AslanModifierKeys"] & AslanKey.CAPS_LOCK:
 		keys.append(vkCodes.byName["capslock"])
 	return keys
 
 
-def shouldUseToUnicodeEx(focus: Optional["NVDAObject"] = None):
+def shouldUseToUnicodeEx(focus: Optional["AslanObject"] = None):
 	"Returns whether to use ToUnicodeEx to determine typed characters."
 	if not focus:
 		focus = api.getFocusObject()
-	from NVDAObjects.window import Window
-	from NVDAObjects.behaviors import KeyboardHandlerBasedTypedCharSupport
+	from AslanObjects.window import Window
+	from AslanObjects.behaviors import KeyboardHandlerBasedTypedCharSupport
 
 	return (
-		# The focused NVDA object should be a real window
+		# The focused Aslan object should be a real window
 		isinstance(focus, Window)
 		# This is only possible in Windows 10 1607 and above
 		and winVersion.getWinVer() >= winVersion.WIN10_1607
@@ -214,15 +214,15 @@ def internal_keyDownEvent(vkCode, scanCode, extended, injected):
 	gestureExecuted = False
 	try:
 		global \
-			lastNVDAModifier, \
-			lastNVDAModifierReleaseTime, \
-			bypassNVDAModifier, \
+			lastAslanModifier, \
+			lastAslanModifierReleaseTime, \
+			bypassAslanModifier, \
 			passKeyThroughCount, \
 			lastPassThroughKeyDown, \
 			currentModifiers, \
 			keyCounter, \
-			stickyNVDAModifier, \
-			stickyNVDAModifierLocked
+			stickyAslanModifier, \
+			stickyAslanModifierLocked
 		# Injected keys should be ignored in some cases.
 		if injected and (ignoreInjected or not config.conf["keyboard"]["handleInjectedKeys"]):
 			return True
@@ -240,58 +240,58 @@ def internal_keyDownEvent(vkCode, scanCode, extended, injected):
 
 		keyCounter += 1
 		stickyKeysFlags = winUser.getSystemStickyKeys().dwFlags
-		if stickyNVDAModifier and not stickyKeysFlags & winUser.SKF_STICKYKEYSON:
+		if stickyAslanModifier and not stickyKeysFlags & winUser.SKF_STICKYKEYSON:
 			# Sticky keys has been disabled,
-			# so clear the sticky NVDA modifier.
-			currentModifiers.discard(stickyNVDAModifier)
-			stickyNVDAModifier = None
-			stickyNVDAModifierLocked = False
+			# so clear the sticky Aslan modifier.
+			currentModifiers.discard(stickyAslanModifier)
+			stickyAslanModifier = None
+			stickyAslanModifierLocked = False
 		gesture = KeyboardInputGesture(currentModifiers, vkCode, scanCode, extended)
 		if not (stickyKeysFlags & winUser.SKF_STICKYKEYSON) and (
-			bypassNVDAModifier
+			bypassAslanModifier
 			or (
-				keyCode == lastNVDAModifier
-				and lastNVDAModifierReleaseTime
+				keyCode == lastAslanModifier
+				and lastAslanModifierReleaseTime
 				and (
-					time.time() - lastNVDAModifierReleaseTime
+					time.time() - lastAslanModifierReleaseTime
 					< config.conf["keyboard"]["multiPressTimeout"] / 1000
 				)
 			)
 		):
-			# The user wants the key to serve its normal function instead of acting as an NVDA modifier key.
+			# The user wants the key to serve its normal function instead of acting as an Aslan modifier key.
 			# There may be key repeats, so ensure we do this until they stop.
-			bypassNVDAModifier = True
-			gesture.isNVDAModifierKey = False
-		lastNVDAModifierReleaseTime = None
-		if gesture.isNVDAModifierKey:
-			lastNVDAModifier = keyCode
+			bypassAslanModifier = True
+			gesture.isAslanModifierKey = False
+		lastAslanModifierReleaseTime = None
+		if gesture.isAslanModifierKey:
+			lastAslanModifier = keyCode
 			if stickyKeysFlags & winUser.SKF_STICKYKEYSON:
-				if keyCode == stickyNVDAModifier:
-					if stickyKeysFlags & winUser.SKF_TRISTATE and not stickyNVDAModifierLocked:
-						# The NVDA modifier is being locked.
-						stickyNVDAModifierLocked = True
+				if keyCode == stickyAslanModifier:
+					if stickyKeysFlags & winUser.SKF_TRISTATE and not stickyAslanModifierLocked:
+						# The Aslan modifier is being locked.
+						stickyAslanModifierLocked = True
 						if stickyKeysFlags & winUser.SKF_AUDIBLEFEEDBACK:
 							tones.beep(1984, 60)
 						return False
 					else:
-						# The NVDA modifier is being unlatched/unlocked.
-						stickyNVDAModifier = None
-						stickyNVDAModifierLocked = False
+						# The Aslan modifier is being unlatched/unlocked.
+						stickyAslanModifier = None
+						stickyAslanModifierLocked = False
 						if stickyKeysFlags & winUser.SKF_AUDIBLEFEEDBACK:
 							tones.beep(496, 60)
 						return False
 				else:
-					# The NVDA modifier is being latched.
-					if stickyNVDAModifier:
-						# Clear the previous sticky NVDA modifier.
-						currentModifiers.discard(stickyNVDAModifier)
-						stickyNVDAModifierLocked = False
-					stickyNVDAModifier = keyCode
+					# The Aslan modifier is being latched.
+					if stickyAslanModifier:
+						# Clear the previous sticky Aslan modifier.
+						currentModifiers.discard(stickyAslanModifier)
+						stickyAslanModifierLocked = False
+					stickyAslanModifier = keyCode
 					if stickyKeysFlags & winUser.SKF_AUDIBLEFEEDBACK:
 						tones.beep(1984, 60)
 		else:
-			# Another key was pressed after the last NVDA modifier key, so it should not be passed through on the next press.
-			lastNVDAModifier = None
+			# Another key was pressed after the last Aslan modifier key, so it should not be passed through on the next press.
+			lastAslanModifier = None
 		if gesture.isModifier:
 			if (
 				gesture.speechEffectWhenExecuted in (gesture.SPEECHEFFECT_PAUSE, gesture.SPEECHEFFECT_RESUME)
@@ -300,10 +300,10 @@ def internal_keyDownEvent(vkCode, scanCode, extended, injected):
 				# Ignore key repeats for the pause speech key to avoid speech stuttering as it continually pauses and resumes.
 				return True
 			currentModifiers.add(keyCode)
-		elif stickyNVDAModifier and not stickyNVDAModifierLocked:
-			# A non-modifier was pressed, so unlatch the NVDA modifier.
-			currentModifiers.discard(stickyNVDAModifier)
-			stickyNVDAModifier = None
+		elif stickyAslanModifier and not stickyAslanModifierLocked:
+			# A non-modifier was pressed, so unlatch the Aslan modifier.
+			currentModifiers.discard(stickyAslanModifier)
+			stickyAslanModifier = None
 
 		if _watchdogObserver.isAttemptingRecovery:
 			# When attempting recovery only process modifiers, but do not execute gesture.
@@ -315,8 +315,8 @@ def internal_keyDownEvent(vkCode, scanCode, extended, injected):
 			trappedKeys.add(keyCode)
 			return False
 		except inputCore.NoInputGestureAction:
-			if gesture.isNVDAModifierKey:
-				# Never pass the NVDA modifier key to the OS.
+			if gesture.isAslanModifierKey:
+				# Never pass the Aslan modifier key to the OS.
 				trappedKeys.add(keyCode)
 				return False
 	except:  # noqa: E722
@@ -332,7 +332,7 @@ def internal_keyDownEvent(vkCode, scanCode, extended, injected):
 			# And we only want to do this if the gesture did not result in an executed action
 			and not gestureExecuted
 			# and not if this gesture is a modifier key
-			and not isNVDAModifierKey(vkCode, extended)
+			and not isAslanModifierKey(vkCode, extended)
 			and vkCode not in KeyboardInputGesture.NORMAL_MODIFIER_KEYS
 		):
 			keyStates = (ctypes.c_ubyte * 256)()
@@ -368,9 +368,9 @@ def internal_keyUpEvent(vkCode, scanCode, extended, injected):
 		return False
 	try:
 		global \
-			lastNVDAModifier, \
-			lastNVDAModifierReleaseTime, \
-			bypassNVDAModifier, \
+			lastAslanModifier, \
+			lastAslanModifierReleaseTime, \
+			bypassAslanModifier, \
 			passKeyThroughCount, \
 			lastPassThroughKeyDown, \
 			currentModifiers
@@ -393,14 +393,14 @@ def internal_keyUpEvent(vkCode, scanCode, extended, injected):
 				passKeyThroughCount = -1
 			return True
 
-		if lastNVDAModifier and keyCode == lastNVDAModifier:
-			# The last pressed NVDA modifier key is being released and there were no key presses in between.
+		if lastAslanModifier and keyCode == lastAslanModifier:
+			# The last pressed Aslan modifier key is being released and there were no key presses in between.
 			# The user may want to press it again quickly to pass it through.
-			lastNVDAModifierReleaseTime = time.time()
-		# If we were bypassing the NVDA modifier, stop doing so now, as there will be no more repeats.
-		bypassNVDAModifier = False
+			lastAslanModifierReleaseTime = time.time()
+		# If we were bypassing the Aslan modifier, stop doing so now, as there will be no more repeats.
+		bypassAslanModifier = False
 
-		if keyCode != stickyNVDAModifier:
+		if keyCode != stickyAslanModifier:
 			currentModifiers.discard(keyCode)
 
 		# help inputCore  manage its sayAll state for keyboard modifiers -- inputCore itself has no concept of key releases
@@ -495,9 +495,9 @@ class KeyboardInputGesture(inputCore.InputGesture):
 	#: All possible keyboard layouts, where layout names are mapped to localised layout names.
 	#: @type: dict
 	LAYOUTS = {
-		# Translators: One of the keyboard layouts for NVDA.
+		# Translators: One of the keyboard layouts for Aslan.
 		"desktop": _("desktop"),
-		# Translators: One of the keyboard layouts for NVDA.
+		# Translators: One of the keyboard layouts for Aslan.
 		"laptop": _("laptop"),
 	}
 
@@ -546,15 +546,15 @@ class KeyboardInputGesture(inputCore.InputGesture):
 		# #4226: Numlock must always be handled normally otherwise the Keyboard controller and Windows can get out of synk wih each other in regard to this key state.
 		return self.vkCode == winUser.VK_NUMLOCK
 
-	def _get_isNVDAModifierKey(self):
-		return isNVDAModifierKey(self.vkCode, self.isExtended)
+	def _get_isAslanModifierKey(self):
+		return isAslanModifierKey(self.vkCode, self.isExtended)
 
 	def _get_isModifier(self):
-		return self.vkCode in self.NORMAL_MODIFIER_KEYS or self.isNVDAModifierKey
+		return self.vkCode in self.NORMAL_MODIFIER_KEYS or self.isAslanModifierKey
 
 	def _get_mainKeyName(self):
-		if self.isNVDAModifierKey:
-			return "NVDA"
+		if self.isAslanModifierKey:
+			return "Aslan"
 
 		name = self.getVkName(self.vkCode, self.isExtended)
 		if name:
@@ -584,8 +584,8 @@ class KeyboardInputGesture(inputCore.InputGesture):
 	def _get_modifierNames(self):
 		modTexts = []
 		for modVk, modExt in self.generalizedModifiers:
-			if isNVDAModifierKey(modVk, modExt):
-				modTexts.append("NVDA")
+			if isAslanModifierKey(modVk, modExt):
+				modTexts.append("Aslan")
 			else:
 				modTexts.append(self.getVkName(modVk, None))
 		return modTexts
@@ -666,7 +666,7 @@ class KeyboardInputGesture(inputCore.InputGesture):
 	def _get_inputHelpCharacter(self) -> str | None:
 		"""Returns the character this gesture should additionally report in input help mode."""
 		# Commands keep original behavior, even if they also produce a printable character.
-		if any(isNVDAModifierKey(mod, ext) for mod, ext in self.modifiers) or self.script:
+		if any(isAslanModifierKey(mod, ext) for mod, ext in self.modifiers) or self.script:
 			return None
 
 		char = self.character
@@ -767,8 +767,8 @@ class KeyboardInputGesture(inputCore.InputGesture):
 		# Now actually execute the script.
 		super().executeScript(script)
 
-	#: The maximum amount of time (in ms) to wait for keys injected by NVDA to be
-	#: received by NVDA.
+	#: The maximum amount of time (in ms) to wait for keys injected by Aslan to be
+	#: received by Aslan.
 	_INJECTION_WAIT_TIMEOUT: int = 10
 
 	def send(self):
@@ -784,7 +784,7 @@ class KeyboardInputGesture(inputCore.InputGesture):
 					continue
 				vk = winUser.VK_LWIN
 			elif vk == winUser.VK_NUMLOCK:
-				# Numlock is considered a modifier by NVDA but never by the OS.
+				# Numlock is considered a modifier by Aslan but never by the OS.
 				continue
 			elif winUser.getKeyState(vk) & 32768:
 				# Already down.
@@ -809,7 +809,7 @@ class KeyboardInputGesture(inputCore.InputGesture):
 			for vk, scan, ext in reversed(keys):
 				winUser.keybd_event(vk, scan, ext + 2, 0)
 			if handleInjectedKeys:
-				# Wait for the keys to be received by NVDA. We don't do this if
+				# Wait for the keys to be received by Aslan. We don't do this if
 				# handleInjectedKeys is disabled because we just ignore all injected keys
 				# in that case.
 				winKernel.waitForSingleObject(_injectionDoneEvent, self._INJECTION_WAIT_TIMEOUT)
@@ -831,8 +831,8 @@ class KeyboardInputGesture(inputCore.InputGesture):
 			if keyName == VK_WIN:
 				vk = winUser.VK_LWIN
 				ext = False
-			elif keyName.lower() == VK_NVDA.lower():
-				vk, ext = getNVDAModifierKeys()[0]
+			elif keyName.lower() == VK_Aslan.lower():
+				vk, ext = getAslanModifierKeys()[0]
 			elif len(keyName) == 1:
 				ext = False
 				requiredMods, vk = winUser.VkKeyScanEx(keyName, getInputHkl())
@@ -877,9 +877,9 @@ class KeyboardInputGesture(inputCore.InputGesture):
 		main = None
 		numlock = None
 		try:
-			# If present, the NVDA key should appear first.
-			keys.remove("nvda")
-			names.append("NVDA")
+			# If present, the Aslan key should appear first.
+			keys.remove("aslan")
+			names.append("Aslan")
 		except KeyError:
 			pass
 		for key in keys:
@@ -913,8 +913,8 @@ inputCore.registerGestureSource("kb", KeyboardInputGesture)
 def injectRawKeyboardInput(isPress, code, isExtended):
 	"""Inject raw input from a system keyboard that is not handled natively by Windows.
 	For example, this might be used for input from a QWERTY keyboard on a braille display.
-	NVDA will treat the key as if it had been pressed on a normal system keyboard.
-	If it is not handled by NVDA, it will be sent to the operating system.
+	Aslan will treat the key as if it had been pressed on a normal system keyboard.
+	If it is not handled by Aslan, it will be sent to the operating system.
 	@param isPress: Whether the key is being pressed.
 	@type isPress: bool
 	@param code: The scan code (PC set 1) of the key.
@@ -924,7 +924,7 @@ def injectRawKeyboardInput(isPress, code, isExtended):
 	"""
 	mapScan = code
 	if isExtended:
-		# Change what we pass to MapVirtualKeyEx, but don't change what NVDA gets.
+		# Change what we pass to MapVirtualKeyEx, but don't change what Aslan gets.
 		mapScan |= 0xE000
 	vkCode = user32.MapVirtualKeyEx(mapScan, winUser.MAPVK_VSC_TO_VK_EX, getInputHkl())
 	flags = 0

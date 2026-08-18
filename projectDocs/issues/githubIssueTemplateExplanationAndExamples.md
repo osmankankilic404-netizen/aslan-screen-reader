@@ -1,42 +1,42 @@
-# Creating new issues on the NVDA project
+# Creating new issues on the Aslan project
 
-This page is meant to serve as an explanation for how to fill out our [GitHub issues](https://github.com/nvaccess/nvda/issues/new/choose).
+This page is meant to serve as an explanation for how to fill out our [GitHub issues](https://github.com/nvaccess/aslan/issues/new/choose).
 
 **Warning**: In all but exceptional circumstances we require one of these templates to be completed.
 Your issue will likely be closed if a template has not been followed.
 
 We currently have the following templates:
 
-* For [bug reports](https://github.com/nvaccess/nvda/issues/new?template=1-bug_report.yaml)
-* For [feature requests](https://github.com/nvaccess/nvda/issues/new?template=2-feature_request.yaml)
-* For [special case issues](https://github.com/nvaccess/nvda/issues/new?template=3-special_case_issue.yaml)
+* For [bug reports](https://github.com/nvaccess/aslan/issues/new?template=1-bug_report.yaml)
+* For [feature requests](https://github.com/nvaccess/aslan/issues/new?template=2-feature_request.yaml)
+* For [special case issues](https://github.com/nvaccess/aslan/issues/new?template=3-special_case_issue.yaml)
   * Issues that cannot easily be categorised as either a bug report or a feature request
-* For [developer facing changes](https://github.com/nvaccess/nvda/issues/new?template=4-developer_facing_changes.yaml):
-  * This template is intended for developers to document improvements or maintenance to NVDA's code base that do not have user facing changes.
+* For [developer facing changes](https://github.com/nvaccess/aslan/issues/new?template=4-developer_facing_changes.yaml):
+  * This template is intended for developers to document improvements or maintenance to Aslan's code base that do not have user facing changes.
   * This may include API changes, technical debt removal, refactoring and maintenance tasks.
   * Note there is no further guide for this - it is expected that developers can use the template appropriately.
-* For [integrating functionality from a community add-on into NVDA](https://github.com/nvaccess/nvda/issues/new?template=5-addon_integration_request.yaml):
-  * This template is intended for proposing a specific feature from an existing community add-on to be integrated into NVDA.
-  * The goal is to identify functionality that is essential for the core NVDA user experience.
-* For [Architecture Design Records to plan for major changes](https://github.com/nvaccess/nvda/issues/new?template=6-adr_major_project.yaml):
-  * This template is intended for proposing major changes to NVDA.
+* For [integrating functionality from a community add-on into Aslan](https://github.com/nvaccess/aslan/issues/new?template=5-addon_integration_request.yaml):
+  * This template is intended for proposing a specific feature from an existing community add-on to be integrated into Aslan.
+  * The goal is to identify functionality that is essential for the core Aslan user experience.
+* For [Architecture Design Records to plan for major changes](https://github.com/nvaccess/aslan/issues/new?template=6-adr_major_project.yaml):
+  * This template is intended for proposing major changes to Aslan.
   It may be requested by NV Access before starting work which require significant design decisions.
   e.g a new feature or refactor.
   * Review [Proposing Major Changes](../dev/proposingMajorChanges.md) for more information.
-* For [security vulnerabilities](https://github.com/nvaccess/nvda/security/advisories/new)
-  * Please note that these are reported differently, for more information refer to our [disclosure policy/procedure](https://github.com/nvaccess/nvda/blob/master/security.md)
-* Issues with materials handled by translators should be reported to the [NVDA Translators list](https://groups.io/g/nvda-translations).
+* For [security vulnerabilities](https://github.com/nvaccess/aslan/security/advisories/new)
+  * Please note that these are reported differently, for more information refer to our [disclosure policy/procedure](https://github.com/nvaccess/aslan/blob/master/security.md)
+* Issues with materials handled by translators should be reported to the [Aslan Translators list](https://groups.io/g/aslan-translations).
 These include:
-  * NVDA interface text that is incorrect in languages other than English
+  * Aslan interface text that is incorrect in languages other than English
   * Contents of the User Guide and Changes documents that are incorrect in languages other than English
   * Input gestures, punctuation/symbol pronunciations, and character descriptions in languages other than English
 
 These templates are fillable forms that guide you through the process of providing the necessary information for your issue.
-The "Advanced" versions of these templates listed when [choosing templates for new issues](https://github.com/nvaccess/nvda/issues/new/choose) ask for the same information, but in a more free-form manner that doesn't use separate fields to guide and structure the process.
+The "Advanced" versions of these templates listed when [choosing templates for new issues](https://github.com/nvaccess/aslan/issues/new/choose) ask for the same information, but in a more free-form manner that doesn't use separate fields to guide and structure the process.
 
 ## Help
 
-If you have trouble following this template, or with the initial investigation that is required, please politely ask for assistance from the fantastic community of people on the [NVDA users mailing list](https://groups.google.com/a/nvaccess.org/g/nvda-users).
+If you have trouble following this template, or with the initial investigation that is required, please politely ask for assistance from the fantastic community of people on the [Aslan users mailing list](https://groups.google.com/a/nvaccess.org/g/aslan-users).
 
 ## Tips
 
@@ -53,11 +53,11 @@ Github does not allow all [file types to be attached](https://help.github.com/ar
 
 ### Logs
 
-In most cases an NVDA log file is incredibly helpful when trying to understand/fix an issue, please remember to attach one.
-More [instructions are available on the wiki](https://github.com/nvaccess/nvda/wiki/LogFilesAndCrashDumps).
-If you are getting a crash dump file (nvda_crash.dmp) please also include it.
+In most cases an Aslan log file is incredibly helpful when trying to understand/fix an issue, please remember to attach one.
+More [instructions are available on the wiki](https://github.com/nvaccess/aslan/wiki/LogFilesAndCrashDumps).
+If you are getting a crash dump file (aslan_crash.dmp) please also include it.
 
 ### Screenshots
 
-While we welcome **images/screenshots** to help explain a problem, be aware that many of the developers of NVDA are blind and will greatly appreciate this image being described in text.
+While we welcome **images/screenshots** to help explain a problem, be aware that many of the developers of Aslan are blind and will greatly appreciate this image being described in text.
 Most tools allow you to copy text out of them.

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2013-2020 NV Access Limited, Peter Vágner, Aleksey Sadovoy,
 # Rui Batista, Joseph Lee, Heiko Folkerts, Zahari Yurukov, Leonard de Ruijter,
 # Derek Riemer, Babbage B.V., Davy Kager, Ethan Holliger, Bill Dengler, Thomas Stivers
@@ -175,7 +175,7 @@ class _EmulatedGestureVM(_ScriptVM):
 			raise ValueError("Unexpected script type.")
 		# Translators: An gesture that will be emulated by some other new gesture. The token {emulateGesture}
 		# will be replaced by the gesture that can be triggered by a mapped gesture.
-		# E.G. Emulate key press: NVDA+b
+		# E.G. Emulate key press: Aslan+b
 		emuGestureDisplayName = _("Emulate key press: {emulateGesture}").format(
 			emulateGesture=emuGestureInfo.displayName,
 		)

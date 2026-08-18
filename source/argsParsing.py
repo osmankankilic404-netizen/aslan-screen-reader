@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2024-2026 NV Access Limited, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import argparse
 import sys
@@ -34,7 +34,7 @@ class NoConsoleOptionParser(argparse.ArgumentParser):
 		winUser.MessageBox(0, self.format_help(), "Help", 0)
 
 	def error(self, message: str):
-		"""Shows an error in a standard Windows message dialog, and then exits NVDA"""
+		"""Shows an error in a standard Windows message dialog, and then exits Aslan"""
 		out = ""
 		out = self.format_usage()
 		out += f"\nerror: {message}"
@@ -60,19 +60,19 @@ def stringToLang(value: str) -> str:
 		normalizedLang = "Windows"
 	else:
 		normalizedLang = languageHandler.normalizeLanguage(value)
-	possibleLangNames = languageHandler.listNVDALocales()
+	possibleLangNames = languageHandler.listAslanLocales()
 	if normalizedLang is not None and normalizedLang in possibleLangNames:
 		return normalizedLang
 	raise argparse.ArgumentTypeError(f"Language code should be one of:\n{', '.join(possibleLangNames)}.")
 
 
 _parser: NoConsoleOptionParser | None = None
-"""The arguments parser used by NVDA.
+"""The arguments parser used by Aslan.
 """
 
 
-def _createNVDAArgParser() -> NoConsoleOptionParser:
-	"""Create a parser to process NVDA option arguments."""
+def _createAslanArgParser() -> NoConsoleOptionParser:
+	"""Create a parser to process Aslan option arguments."""
 
 	parser = NoConsoleOptionParser(formatter_class=_WideParserHelpFormatter, allow_abbrev=False)
 	quitGroup = parser.add_mutually_exclusive_group()
@@ -82,7 +82,7 @@ def _createNVDAArgParser() -> NoConsoleOptionParser:
 		action="store_true",
 		dest="quit",
 		default=False,
-		help="Quit already running copy of NVDA",
+		help="Quit already running copy of Aslan",
 	)
 	parser.add_argument(
 		"-k",
@@ -90,7 +90,7 @@ def _createNVDAArgParser() -> NoConsoleOptionParser:
 		action="store_true",
 		dest="check_running",
 		default=False,
-		help="Report whether NVDA is running via the exit code; 0 if running, 1 if not running",
+		help="Report whether Aslan is running via the exit code; 0 if running, 1 if not running",
 	)
 	parser.add_argument(
 		"-f",
@@ -98,7 +98,7 @@ def _createNVDAArgParser() -> NoConsoleOptionParser:
 		dest="logFileName",
 		type=str,
 		help="The file to which log messages should be written.\n"
-		'Default destination is "%%TEMP%%\\nvda.log".\n'
+		'Default destination is "%%TEMP%%\\aslan.log".\n'
 		"Logging is always disabled if secure mode is enabled.\n",
 	)
 	parser.add_argument(
@@ -118,7 +118,7 @@ def _createNVDAArgParser() -> NoConsoleOptionParser:
 		dest="configPath",
 		default=None,
 		type=str,
-		help="The path where all settings for NVDA are stored.\n"
+		help="The path where all settings for Aslan are stored.\n"
 		"The default value is forced if secure mode is enabled.\n",
 	)
 	parser.add_argument(
@@ -128,7 +128,7 @@ def _createNVDAArgParser() -> NoConsoleOptionParser:
 		default=None,
 		type=stringToLang,
 		help=(
-			"Override the configured NVDA language.\n"
+			"Override the configured Aslan language.\n"
 			'Set to "Windows" for current user default, "en" for English, etc.'
 		),
 	)
@@ -148,7 +148,7 @@ def _createNVDAArgParser() -> NoConsoleOptionParser:
 		action="store_true",
 		dest="secure",
 		default=False,
-		help="Starts NVDA in secure mode",
+		help="Starts Aslan in secure mode",
 	)
 	parser.add_argument(
 		"-d",
@@ -189,21 +189,21 @@ def _createNVDAArgParser() -> NoConsoleOptionParser:
 		action="store_true",
 		dest="install",
 		default=False,
-		help="Installs NVDA (starting the new copy after installation)",
+		help="Installs Aslan (starting the new copy after installation)",
 	)
 	installGroup.add_argument(
 		"--install-silent",
 		action="store_true",
 		dest="installSilent",
 		default=False,
-		help="Installs NVDA silently (does not start the new copy after installation).",
+		help="Installs Aslan silently (does not start the new copy after installation).",
 	)
 	installGroup.add_argument(
 		"--create-portable",
 		action="store_true",
 		dest="createPortable",
 		default=False,
-		help="Creates a portable copy of NVDA (and starts the new copy).\n"
+		help="Creates a portable copy of Aslan (and starts the new copy).\n"
 		"Requires `--portable-path` to be specified.\n",
 	)
 	installGroup.add_argument(
@@ -211,7 +211,7 @@ def _createNVDAArgParser() -> NoConsoleOptionParser:
 		action="store_true",
 		dest="createPortableSilent",
 		default=False,
-		help="Creates a portable copy of NVDA (without starting the new copy).\n"
+		help="Creates a portable copy of Aslan (without starting the new copy).\n"
 		"This option suppresses warnings when writing to non-empty directories "
 		"and may overwrite files without warning.\n"
 		"Requires --portable-path to be specified.\n",
@@ -236,7 +236,7 @@ def _createNVDAArgParser() -> NoConsoleOptionParser:
 		type=stringToBool,
 		dest="enableStartOnLogon",
 		default=None,
-		help="When installing, enable NVDA's start on the logon screen",
+		help="When installing, enable Aslan's start on the logon screen",
 	)
 	parser.add_argument(
 		"--copy-portable-config",
@@ -253,7 +253,7 @@ def _createNVDAArgParser() -> NoConsoleOptionParser:
 	# (Older versions always required the --secure option to start in secure mode.)
 	# If this occurs, the user will see an obscure error,
 	# but that's far better than a major security hazzard.
-	# If this option is provided, NVDA will not replace an already running instance (#10179)
+	# If this option is provided, Aslan will not replace an already running instance (#10179)
 	parser.add_argument(
 		"--ease-of-access",
 		action="store_true",
@@ -267,5 +267,5 @@ def _createNVDAArgParser() -> NoConsoleOptionParser:
 def getParser() -> NoConsoleOptionParser:
 	global _parser
 	if not _parser:
-		_parser = _createNVDAArgParser()
+		_parser = _createAslanArgParser()
 	return _parser

@@ -1,11 +1,11 @@
-# NVDAObjects/IAccessible/qt.py
-# A part of NonVisual Desktop Access (NVDA)
+# AslanObjects/IAccessible/qt.py
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2019 NV Access Limited, Babbage B.V.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 import controlTypes
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.IAccessible import IAccessible
 import eventHandler
 from scriptHandler import isScriptWaiting
 

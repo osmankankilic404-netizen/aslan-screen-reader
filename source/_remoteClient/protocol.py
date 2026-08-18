@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2025 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton and others.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -42,13 +42,13 @@ class RemoteMessageType(StrEnum):
 	VERSION_MISMATCH = "version_mismatch"
 	PING = "ping"
 	ERROR = "error"
-	NVDA_NOT_CONNECTED = (
-		"nvda_not_connected"  # This was added in version 2 but never implemented on the server
+	Aslan_NOT_CONNECTED = (
+		"aslan_not_connected"  # This was added in version 2 but never implemented on the server
 	)
 
 
 SERVER_PORT = 6837
-URL_PREFIX = "nvdaremote://"
+URL_PREFIX = "aslanremote://"
 
 
 def addressToHostPort(addr) -> tuple:

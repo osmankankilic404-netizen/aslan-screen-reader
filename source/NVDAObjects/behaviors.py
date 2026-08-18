@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2006-2026 NV Access Limited, Peter Vágner, Joseph Lee, Bill Dengler,
@@ -19,7 +19,7 @@ import controlTypes
 import speech
 import characterProcessing
 import config
-from . import NVDAObject, NVDAObjectTextInfo
+from . import AslanObject, AslanObjectTextInfo
 import textInfos
 import editableText
 from logHandler import log
@@ -41,7 +41,7 @@ from config.configFlags import (
 from speech.extensions import pre_speechCanceled
 
 
-class ProgressBar(NVDAObject):
+class ProgressBar(AslanObject):
 	progressValueCache = {}  # key is made of "speech" or "beep" and an x,y coordinate, value is the last percentage
 
 	def event_valueChange(self):
@@ -89,7 +89,7 @@ class ProgressBar(NVDAObject):
 			self.progressValueCache["speech,%d,%d" % (x, y)] = percentage
 
 
-class Dialog(NVDAObject):
+class Dialog(AslanObject):
 	"""Overrides the description property to obtain dialog text."""
 
 	@classmethod
@@ -173,12 +173,12 @@ class Dialog(NVDAObject):
 			):
 				# This is almost certainly the label for the next object, so skip it.
 				continue
-			isNameIncluded = child.TextInfo is NVDAObjectTextInfo or childRole in (
+			isNameIncluded = child.TextInfo is AslanObjectTextInfo or childRole in (
 				controlTypes.Role.LABEL,
 				controlTypes.Role.STATICTEXT,
 			)
 			childText = child.makeTextInfo(textInfos.POSITION_ALL).text
-			if not childText or childText.isspace() and child.TextInfo is not NVDAObjectTextInfo:
+			if not childText or childText.isspace() and child.TextInfo is not AslanObjectTextInfo:
 				childText = child.basicText
 				isNameIncluded = True
 			if not isNameIncluded:
@@ -205,8 +205,8 @@ class Dialog(NVDAObject):
 		return res
 
 
-class InputFieldWithSuggestions(NVDAObject):
-	"""Allows NVDA to announce appearance/disappearance of suggestions as content is entered.
+class InputFieldWithSuggestions(AslanObject):
+	"""Allows Aslan to announce appearance/disappearance of suggestions as content is entered.
 	This is used in various places, including Windows 10 search edit fields and others.
 	Subclasses should provide L{event_suggestionsOpened} and can optionally override L{event_suggestionsClosed}.
 	These events are fired when suggestions appear and disappear, respectively.
@@ -215,7 +215,7 @@ class InputFieldWithSuggestions(NVDAObject):
 	def event_suggestionsOpened(self):
 		"""Called when suggestions appear when text is entered e.g. search suggestions.
 		Subclasses should provide custom implementations if possible.
-		By default NVDA will announce appearance of suggestions using speech, braille or a sound will be played.
+		By default Aslan will announce appearance of suggestions using speech, braille or a sound will be played.
 		"""
 		# Translators: Announced in braille when suggestions appear when search term is entered
 		# in various search fields such as Start search box in Windows 10.
@@ -226,7 +226,7 @@ class InputFieldWithSuggestions(NVDAObject):
 	def event_suggestionsClosed(self):
 		"""Called when suggestions list or container is closed.
 		Subclasses should provide custom implementations if possible.
-		By default NVDA will announce this via speech, braille or via a sound.
+		By default Aslan will announce this via speech, braille or via a sound.
 		"""
 		if config.conf["presentation"]["reportAutoSuggestionsWithSound"]:
 			nvwave.playWaveFile(os.path.join(globalVars.appDir, "waves", "suggestionsClosed.wav"))
@@ -239,7 +239,7 @@ class InputFieldWithSuggestions(NVDAObject):
 			self.event_suggestionsClosed()
 
 
-class EditableTextBase(editableText.EditableText, NVDAObject):
+class EditableTextBase(editableText.EditableText, AslanObject):
 	"""Provides scripts to report appropriately when moving the caret in editable text fields.
 	This does not handle selection changes.
 	To handle selection changes, use either L{EditableTextWithAutoSelectDetection} or L{EditableTextWithoutAutoSelectDetection}.
@@ -248,7 +248,7 @@ class EditableTextBase(editableText.EditableText, NVDAObject):
 	shouldFireCaretMovementFailedEvents = True
 
 	def initOverlayClass(self):
-		# #4264: the caret_newLine script can only be bound for processes other than NVDA's process
+		# #4264: the caret_newLine script can only be bound for processes other than Aslan's process
 		# As Pressing enter on an edit field can cause modal dialogs to appear,
 		# yet gesture.send and api.processPendingEvents may call.wx.yield which ends in a freeze.
 		if self.announceNewLineText and self.processID != globalVars.appPid:
@@ -372,7 +372,7 @@ class EditableTextWithoutAutoSelectDetection(
 	initOverlayClass = editableText.EditableTextWithoutAutoSelectDetection.initClass
 
 
-class LiveText(NVDAObject):
+class LiveText(AslanObject):
 	"""An object for which new text should be reported automatically.
 	These objects present text as a single chunk
 	and only fire an event indicating that some part of the text has changed; i.e. they don't provide the new text.
@@ -383,7 +383,7 @@ class LiveText(NVDAObject):
 	#: The time to wait before fetching text after a change event.
 	STABILIZE_DELAY = 0
 	# If the text is live, this is definitely content.
-	presentationType = NVDAObject.presType_content
+	presentationType = AslanObject.presType_content
 
 	MAX_LINES: int = 100
 	"""The maximum number of lines that will be reported when a large number of lines are queued.
@@ -599,7 +599,7 @@ class EnhancedTermTypedCharSupport(Terminal):
 	#: to support password suppression.
 	_supportsTextChange = True
 	#: A queue of typed characters, to be dispatched on C{textChange}.
-	#: This queue allows NVDA to suppress typed passwords when needed.
+	#: This queue allows Aslan to suppress typed passwords when needed.
 	_queuedChars = []
 	#: Whether the last typed character is a tab.
 	#: If so, we should temporarily disable filtering as completions may
@@ -663,7 +663,7 @@ class EnhancedTermTypedCharSupport(Terminal):
 		gesture.send()
 
 	def _dispatchQueue(self):
-		"""Sends queued typedCharacter events through to NVDA."""
+		"""Sends queued typedCharacter events through to Aslan."""
 		while self._queuedChars:
 			ch = self._queuedChars.pop(0)
 			super().event_typedCharacter(ch)
@@ -672,11 +672,11 @@ class EnhancedTermTypedCharSupport(Terminal):
 class KeyboardHandlerBasedTypedCharSupport(EnhancedTermTypedCharSupport):
 	"""An EnhancedTermTypedCharSupport object that provides typed character support for
 	console applications via keyboardHandler events.
-	These events are queued from NVDA's global keyboard hook.
+	These events are queued from Aslan's global keyboard hook.
 	Therefore, an event is fired for every single character that is being typed,
 	even when a character is not written to the console (e.g. in read only console applications).
 	This approach is an alternative to monitoring the console output for
-	characters close to the caret, or injecting in-process with NVDAHelper.
+	characters close to the caret, or injecting in-process with AslanHelper.
 	This class does not implement any specific functionality by itself.
 	Rather, it instructs keyboardHandler to use the toUnicodeEx Windows function, in particular
 	the flag to preserve keyboard state available in Windows 10 1607
@@ -685,7 +685,7 @@ class KeyboardHandlerBasedTypedCharSupport(EnhancedTermTypedCharSupport):
 	pass
 
 
-class CandidateItem(NVDAObject):
+class CandidateItem(AslanObject):
 	def getFormattedCandidateName(self, number, candidate):
 		if config.conf["inputComposition"]["alwaysIncludeShortCharacterDescriptionInCandidateName"]:
 			describedSymbols = []
@@ -762,7 +762,7 @@ class CandidateItem(NVDAObject):
 		return self.visibleCandidateItemsText
 
 
-class RowWithFakeNavigation(NVDAObject):
+class RowWithFakeNavigation(AslanObject):
 	"""Provides table navigation commands for a row which doesn't support them natively.
 	The cells must be exposed as children and they must support the table cell properties.
 	"""
@@ -787,7 +787,7 @@ class RowWithFakeNavigation(NVDAObject):
 		self._moveToColumn(cell)
 
 	@script(
-		# Translators: The description of an NVDA command.
+		# Translators: The description of an Aslan command.
 		description=_("Moves the navigator object to the next column"),
 		gesture="kb:control+alt+rightArrow",
 		canPropagate=True,
@@ -806,7 +806,7 @@ class RowWithFakeNavigation(NVDAObject):
 		self._moveToColumn(new)
 
 	@script(
-		# Translators: The description of an NVDA command.
+		# Translators: The description of an Aslan command.
 		description=_("Moves the navigator object to the previous column"),
 		gesture="kb:control+alt+leftArrow",
 		canPropagate=True,
@@ -839,7 +839,7 @@ class RowWithFakeNavigation(NVDAObject):
 		row.setFocus()
 
 	@script(
-		# Translators: The description of an NVDA command.
+		# Translators: The description of an Aslan command.
 		description=_("Moves the navigator object and focus to the next row"),
 		gesture="kb:control+alt+downArrow",
 		canPropagate=True,
@@ -848,7 +848,7 @@ class RowWithFakeNavigation(NVDAObject):
 		self._moveToRow(self.next)
 
 	@script(
-		# Translators: The description of an NVDA command.
+		# Translators: The description of an Aslan command.
 		description=_("Moves the navigator object and focus to the previous row"),
 		gesture="kb:control+alt+upArrow",
 		canPropagate=True,
@@ -858,7 +858,7 @@ class RowWithFakeNavigation(NVDAObject):
 
 	@script(
 		description=_(
-			# Translators: The description of an NVDA command.
+			# Translators: The description of an Aslan command.
 			"Moves the navigator object to the first column",
 		),
 		gesture="kb:Control+Alt+Home",
@@ -872,7 +872,7 @@ class RowWithFakeNavigation(NVDAObject):
 
 	@script(
 		description=_(
-			# Translators: The description of an NVDA command.
+			# Translators: The description of an Aslan command.
 			"Moves the navigator object to the last column",
 		),
 		gesture="kb:Control+Alt+End",
@@ -880,7 +880,7 @@ class RowWithFakeNavigation(NVDAObject):
 	)
 	def script_moveToLastColumn(self, gesture):
 		new = self.lastChild
-		# In some cases, e.g. in NVDA symbol pronounciation llist view lastChild returns none.
+		# In some cases, e.g. in Aslan symbol pronounciation llist view lastChild returns none.
 		if not new and len(self.children) > 0:
 			new = self.children[-1]
 		while new and new.location and new.location.width == 0:
@@ -889,7 +889,7 @@ class RowWithFakeNavigation(NVDAObject):
 
 	@script(
 		description=_(
-			# Translators: The description of an NVDA command.
+			# Translators: The description of an Aslan command.
 			"Moves the navigator object and focus to the first row",
 		),
 		gesture="kb:Control+Alt+PageUp",
@@ -900,7 +900,7 @@ class RowWithFakeNavigation(NVDAObject):
 
 	@script(
 		description=_(
-			# Translators: The description of an NVDA command.
+			# Translators: The description of an Aslan command.
 			"Moves the navigator object and focus to the last row",
 		),
 		gesture="kb:Control+Alt+PageDown",
@@ -910,7 +910,7 @@ class RowWithFakeNavigation(NVDAObject):
 		self._moveToRow(self.parent.lastChild)
 
 
-class RowWithoutCellObjects(NVDAObject):
+class RowWithoutCellObjects(AslanObject):
 	"""An abstract class which creates cell objects for table rows which don't natively expose them.
 	Subclasses must override L{_getColumnContent} and can optionally override L{_getColumnHeader}
 	to retrieve information about individual columns and L{_getColumnLocation} to support mouse or
@@ -962,7 +962,7 @@ class RowWithoutCellObjects(NVDAObject):
 		return self._makeCell(index + 1)
 
 
-class _FakeTableCell(NVDAObject):
+class _FakeTableCell(AslanObject):
 	role = controlTypes.Role.TABLECELL
 
 	def __init__(self, parent=None, column=None):
@@ -975,7 +975,7 @@ class _FakeTableCell(NVDAObject):
 			pass
 		self.processID = parent.processID
 		try:
-			# HACK: Some NVDA code depends on window properties, even for non-Window objects.
+			# HACK: Some Aslan code depends on window properties, even for non-Window objects.
 			self.windowHandle = parent.windowHandle
 			self.windowClassName = parent.windowClassName
 			self.windowControlID = parent.windowControlID
@@ -1020,7 +1020,7 @@ class _FakeTableCell(NVDAObject):
 		)
 
 
-class FocusableUnfocusableContainer(NVDAObject):
+class FocusableUnfocusableContainer(AslanObject):
 	"""Makes an unfocusable container focusable using its first focusable descendant.
 	One instance where this is useful is ARIA applications on the web where the author hasn't set a tabIndex.
 	"""
@@ -1034,7 +1034,7 @@ class FocusableUnfocusableContainer(NVDAObject):
 				break
 
 
-class ToolTip(NVDAObject):
+class ToolTip(AslanObject):
 	"""Provides information about an item over which the user is hovering a cursor.
 	The object should fire a show event when it appears.
 	"""
@@ -1051,7 +1051,7 @@ class ToolTip(NVDAObject):
 		)
 
 
-class Notification(NVDAObject):
+class Notification(AslanObject):
 	"""Informs the user of non-critical information that does not require immediate action.
 	This is primarily for notifications displayed in the system notification area, and for Windows 8 and later, toasts.
 	The object should fire a alert or show event when the user should be notified.
@@ -1069,7 +1069,7 @@ class Notification(NVDAObject):
 	event_show = event_alert
 
 
-class WebDialog(NVDAObject):
+class WebDialog(AslanObject):
 	"""
 	A dialog that will use a treeInterceptor if its parent currently does.
 	This  can be used to ensure that dialogs on the web get browseMode by default, unless inside an ARIA application

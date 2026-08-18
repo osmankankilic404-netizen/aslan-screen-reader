@@ -1,12 +1,12 @@
-# Copyright Headers in NVDA Source Code
+# Copyright Headers in Aslan Source Code
 
-In NVDA files, which are licensed under the terms of a modified GNU General Public License, use the following copyright header:
+In Aslan files, which are licensed under the terms of a modified GNU General Public License, use the following copyright header:
 
 ```py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) <CREATED YEAR>-<LAST UPDATED YEAR> NV Access Limited, <YOUR NAME>
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 ```
 
 Replacing:
@@ -22,7 +22,7 @@ This allows someone to use them (or parts of them) as-is.
 In this case use the following header:
 
 ```py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) <CREATED YEAR>-<LAST UPDATED YEAR> NV Access Limited, <YOUR NAME>
 # This file may be used under the terms of the GNU Lesser General Public License, version 2.1 or later.
 # For more details see: https://www.gnu.org/licenses/lgpl-2.1.html
@@ -30,5 +30,5 @@ In this case use the following header:
 
 In some files an older style of referring to the contributors is used.
 The contributors is not a list of names and may just say something like:
-`Copyright (C) 2006-2024 NVDA Contributors`.
+`Copyright (C) 2006-2024 Aslan Contributors`.
 We suggest referring to the git logs to identify specific authors.

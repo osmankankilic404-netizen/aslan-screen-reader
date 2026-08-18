@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2012-2026 NV Access Limited, Beqa Gozalishvili, Joseph Lee,
@@ -16,7 +16,7 @@ from addonHandler import Addon
 from logHandler import log
 import addonHandler
 from . import guiHelper
-from . import nvdaControls
+from . import aslanControls
 from .dpiScalingHelper import DpiScalingHelperMixinWithoutInit
 import gui.contextHelp
 import ui
@@ -25,14 +25,14 @@ import systemUtils
 
 def promptUserForRestart():
 	restartMessage = _(
-		# Translators: A message asking the user if they wish to restart NVDA
+		# Translators: A message asking the user if they wish to restart Aslan
 		# as addons have been added, enabled/disabled or removed.
 		"Changes were made to add-ons. "
-		"You must restart NVDA for these changes to take effect. "
+		"You must restart Aslan for these changes to take effect. "
 		"Would you like to restart now?",
 	)
-	# Translators: Title for message asking if the user wishes to restart NVDA as addons have been added or removed.
-	restartTitle = _("Restart NVDA")
+	# Translators: Title for message asking if the user wishes to restart Aslan as addons have been added or removed.
+	restartTitle = _("Restart Aslan")
 	result = gui.messageBox(
 		message=restartMessage,
 		caption=restartTitle,
@@ -46,13 +46,13 @@ def promptUserForRestart():
 			core.restart()
 
 
-class ConfirmAddonInstallDialog(nvdaControls.MessageDialog):
+class ConfirmAddonInstallDialog(aslanControls.MessageDialog):
 	def __init__(self, parent, title, message, showAddonInfoFunction):
 		super().__init__(
 			parent,
 			title,
 			message,
-			dialogType=nvdaControls.MessageDialog.DIALOG_TYPE_WARNING,
+			dialogType=aslanControls.MessageDialog.DIALOG_TYPE_WARNING,
 		)
 		self._showAddonInfoFunction = showAddonInfoFunction
 
@@ -84,13 +84,13 @@ class ConfirmAddonInstallDialog(nvdaControls.MessageDialog):
 		noButton.Bind(wx.EVT_BUTTON, lambda evt: self.EndModal(wx.NO))
 
 
-class ErrorAddonInstallDialog(nvdaControls.MessageDialog):
+class ErrorAddonInstallDialog(aslanControls.MessageDialog):
 	def __init__(self, parent, title, message, showAddonInfoFunction):
 		super().__init__(
 			parent,
 			title,
 			message,
-			dialogType=nvdaControls.MessageDialog.DIALOG_TYPE_ERROR,
+			dialogType=aslanControls.MessageDialog.DIALOG_TYPE_ERROR,
 		)
 		self._showAddonInfoFunction = showAddonInfoFunction
 
@@ -122,7 +122,7 @@ def installAddon(parentWindow: wx.Window, addonPath: str) -> bool:  # noqa: C901
 	@note See also L{addonStore.install.installAddon}
 	"""
 	from gui.addonStoreGui.controls.messageDialogs import (
-		_showAddonRequiresNVDAUpdateDialog,
+		_showAddonRequiresAslanUpdateDialog,
 		_showConfirmAddonInstallDialog,
 		_shouldInstallWhenAddonTooOldDialog,
 	)
@@ -141,7 +141,7 @@ def installAddon(parentWindow: wx.Window, addonPath: str) -> bool:  # noqa: C901
 		return False  # Exit early, can't install an invalid bundle
 
 	if not bundle._hasGotRequiredSupport:
-		_showAddonRequiresNVDAUpdateDialog(parentWindow, bundle._addonGuiModel)
+		_showAddonRequiresAslanUpdateDialog(parentWindow, bundle._addonGuiModel)
 		return False  # Exit early, addon does not have required support
 	elif bundle.canOverrideCompatibility:
 		shouldInstall, rememberChoice = _shouldInstallWhenAddonTooOldDialog(
@@ -264,11 +264,11 @@ def _performExternalAddonBundleInstall(
 
 
 def handleRemoteAddonInstall(addonPath: str):
-	# Add-ons cannot be installed into a Windows store version of NVDA
+	# Add-ons cannot be installed into a Windows store version of Aslan
 	if config.isAppX:
 		gui.messageBox(
-			# Translators: The message displayed when an add-on cannot be installed due to NVDA running as a Windows Store app
-			_("Add-ons cannot be installed in the Windows Store version of NVDA"),
+			# Translators: The message displayed when an add-on cannot be installed due to Aslan running as a Windows Store app
+			_("Add-ons cannot be installed in the Windows Store version of Aslan"),
 			# Translators: The title of a dialog presented when an error occurs.
 			_("Error"),
 			wx.OK | wx.ICON_ERROR,
@@ -340,7 +340,7 @@ class IncompatibleAddonsDialog(
 		introText = _(
 			# Translators: The title of the Incompatible Addons Dialog.
 			# {version} will be replaced with the API version number.
-			"The following add-ons are incompatible with NVDA version {version}."
+			"The following add-ons are incompatible with Aslan version {version}."
 			" These add-ons can not be enabled."
 			" Please contact the add-on author for further assistance.",
 		).format(version=addonAPIVersion.formatForGUI(self._APIVersion))
@@ -351,7 +351,7 @@ class IncompatibleAddonsDialog(
 		entriesLabel = _("Incompatible add-ons")
 		self.addonsList = sHelper.addLabeledControl(
 			entriesLabel,
-			nvdaControls.AutoWidthColumnListCtrl,
+			aslanControls.AutoWidthColumnListCtrl,
 			style=wx.LC_REPORT | wx.LC_SINGLE_SEL,
 		)
 
@@ -367,7 +367,7 @@ class IncompatibleAddonsDialog(
 		self.aboutButton = buttonSizer.addButton(self, label=_("&About add-on..."))
 		self.aboutButton.Disable()
 		self.aboutButton.Bind(wx.EVT_BUTTON, self.onAbout)
-		# Translators: The close button on an NVDA dialog. This button will dismiss the dialog.
+		# Translators: The close button on an Aslan dialog. This button will dismiss the dialog.
 		button = buttonSizer.addButton(self, label=_("&Close"), id=wx.ID_CLOSE)
 		self.Bind(wx.EVT_CLOSE, self.onClose)
 		sHelper.addDialogDismissButtons(buttonSizer, separated=True)

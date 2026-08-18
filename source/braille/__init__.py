@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, Joseph Lee, Babbage B.V., Davy Kager, Bram Duvigneau, Leonard de Ruijter, Burman's Computer and Education Ltd., Julien Cochuyt
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from __future__ import annotations
 
@@ -51,9 +51,9 @@ __getattr__ = handleDeprecations(
 	MovedSymbol("RegionWithPositions", "braille.regions.base"),
 	MovedSymbol("TextRegion", "braille.regions.base"),
 	MovedSymbol("rindex", "braille.regions.base"),
-	MovedSymbol("NVDAObjectRegion", "braille.regions.NVDAObject"),
-	MovedSymbol("ReviewNVDAObjectRegion", "braille.regions.NVDAObject"),
-	MovedSymbol("NVDAObjectHasUsefulText", "braille.regions.NVDAObject"),
+	MovedSymbol("AslanObjectRegion", "braille.regions.AslanObject"),
+	MovedSymbol("ReviewAslanObjectRegion", "braille.regions.AslanObject"),
+	MovedSymbol("AslanObjectHasUsefulText", "braille.regions.AslanObject"),
 	MovedSymbol("TextInfoRegion", "braille.regions.textInfo"),
 	MovedSymbol("CursorManagerRegion", "braille.regions.textInfo"),
 	MovedSymbol("ReviewTextInfoRegion", "braille.regions.textInfo"),

@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Christopher Pross, Cary-rowen
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Unit tests for the addonStore.network module."""
 
@@ -11,7 +11,7 @@ import unittest
 from unittest.mock import patch, MagicMock
 
 from addonStore.network import AddonFileDownloader
-from NVDAState import WritePaths
+from AslanState import WritePaths
 
 
 def _makeAddonData() -> MagicMock:
@@ -43,14 +43,14 @@ class TestAddonFileDownloaderInit(unittest.TestCase):
 
 	def tearDown(self):
 		if self.downloader is not None and self.downloader._executor is not None:
-			with patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=False):
+			with patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=False):
 				self.downloader.cancelAll()
 
 	@patch("addonStore.network.log.error")
 	@patch("addonStore.network.pathlib.Path.mkdir")
 	@patch("addonStore.network.os.path.exists", return_value=True)
 	@patch("addonStore.network.shutil.rmtree", side_effect=OSError("locked by cloud sync"))
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=True)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=True)
 	def test_init_rmtreeOSError_doesNotCrashAndLogsError(
 		self,
 		mockShouldWrite: MagicMock,
@@ -71,7 +71,7 @@ class TestAddonFileDownloaderInit(unittest.TestCase):
 	@patch("addonStore.network.pathlib.Path.mkdir")
 	@patch("addonStore.network.os.path.exists", return_value=True)
 	@patch("addonStore.network.shutil.rmtree")
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=True)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=True)
 	def test_init_rmtreeSucceeds_downloadsDirectoryCleanedAndRecreated(
 		self,
 		mockShouldWrite: MagicMock,
@@ -87,7 +87,7 @@ class TestAddonFileDownloaderInit(unittest.TestCase):
 	@patch("addonStore.network.pathlib.Path.mkdir")
 	@patch("addonStore.network.os.path.exists", return_value=False)
 	@patch("addonStore.network.shutil.rmtree")
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=True)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=True)
 	def test_init_downloadDirNotExists_rmtreeNotCalledButMkdirCalled(
 		self,
 		mockShouldWrite: MagicMock,
@@ -102,7 +102,7 @@ class TestAddonFileDownloaderInit(unittest.TestCase):
 
 	@patch("addonStore.network.pathlib.Path.mkdir")
 	@patch("addonStore.network.shutil.rmtree")
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=False)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=False)
 	def test_init_shouldNotWriteToDisk_rmtreeNotCalled(
 		self,
 		mockShouldWrite: MagicMock,
@@ -123,7 +123,7 @@ class TestAddonFileDownloaderCancelAll(unittest.TestCase):
 
 	def tearDown(self):
 		if self.downloader is not None and self.downloader._executor is not None:
-			with patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=False):
+			with patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=False):
 				self.downloader.cancelAll()
 
 	def _createDownloader(self) -> None:
@@ -131,13 +131,13 @@ class TestAddonFileDownloaderCancelAll(unittest.TestCase):
 
 		shouldWriteToDisk is patched to False to skip __init__ rmtree.
 		"""
-		with patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=False):
+		with patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=False):
 			self.downloader = AddonFileDownloader()
 
 	@patch("addonStore.network.log.error")
 	@patch("addonStore.network.os.path.exists", return_value=True)
 	@patch("addonStore.network.shutil.rmtree", side_effect=OSError("access denied"))
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=True)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=True)
 	def test_cancelAll_rmtreeOSError_doesNotCrashAndLogsError(
 		self,
 		mockShouldWrite: MagicMock,
@@ -155,7 +155,7 @@ class TestAddonFileDownloaderCancelAll(unittest.TestCase):
 
 	@patch("addonStore.network.shutil.rmtree")
 	@patch("addonStore.network.os.path.exists", return_value=False)
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=True)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=True)
 	def test_cancelAll_dirNotExists_rmtreeNotCalled(
 		self,
 		mockShouldWrite: MagicMock,
@@ -169,7 +169,7 @@ class TestAddonFileDownloaderCancelAll(unittest.TestCase):
 
 	@patch("addonStore.network.os.path.exists", return_value=True)
 	@patch("addonStore.network.shutil.rmtree")
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=True)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=True)
 	def test_cancelAll_rmtreeSucceeds_directoryRemoved(
 		self,
 		mockShouldWrite: MagicMock,
@@ -182,7 +182,7 @@ class TestAddonFileDownloaderCancelAll(unittest.TestCase):
 		mockRmtree.assert_called_once_with(WritePaths.addonStoreDownloadDir)
 
 	@patch("addonStore.network.shutil.rmtree")
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=False)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=False)
 	def test_cancelAll_shouldNotWriteToDisk_rmtreeNotCalled(
 		self,
 		mockShouldWrite: MagicMock,
@@ -193,7 +193,7 @@ class TestAddonFileDownloaderCancelAll(unittest.TestCase):
 		self.downloader.cancelAll()
 		mockRmtree.assert_not_called()
 
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=False)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=False)
 	def test_cancelAll_whenExecutorAlreadyNone_doesNotCrash(
 		self,
 		mockShouldWrite: MagicMock,
@@ -205,7 +205,7 @@ class TestAddonFileDownloaderCancelAll(unittest.TestCase):
 		self.assertIsNone(self.downloader._executor)
 
 	@patch("addonStore.network.ThreadPoolExecutor")
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=False)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=False)
 	def test_downloadAfterCancelAll_recreatesExecutor(
 		self,
 		mockShouldWrite: MagicMock,
@@ -235,7 +235,7 @@ class TestAddonFileDownloaderCancelAll(unittest.TestCase):
 		self.assertEqual(self.downloader.progress[addonData], 0)
 
 	@patch("addonStore.network.ThreadPoolExecutor")
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=False)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=False)
 	def test_downloadAfterCancelAll_runningAttemptDoesNotReplaceNewAttemptState(
 		self,
 		mockShouldWrite: MagicMock,
@@ -275,7 +275,7 @@ class TestAddonFileDownloaderCancelAll(unittest.TestCase):
 		onCompleteFirst.assert_not_called()
 
 	@patch("addonStore.network.ThreadPoolExecutor")
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=False)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=False)
 	def test_download_progressRemovalCancelsActiveAttempt(
 		self,
 		mockShouldWrite: MagicMock,
@@ -302,7 +302,7 @@ class TestAddonFileDownloaderCancelAll(unittest.TestCase):
 	@patch("addonStore.network.os.path.exists", side_effect=[False, True, False])
 	@patch("addonStore.network.shutil.rmtree")
 	@patch("addonStore.network.ThreadPoolExecutor")
-	@patch("addonStore.network.NVDAState.shouldWriteToDisk", return_value=True)
+	@patch("addonStore.network.AslanState.shouldWriteToDisk", return_value=True)
 	def test_downloadAfterCancelAll_recreatesDownloadDirectory(
 		self,
 		mockShouldWrite: MagicMock,

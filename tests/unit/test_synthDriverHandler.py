@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2021-2024 NV Access Limited, Leonard de Ruijter, Cyrille Bougot
@@ -101,7 +101,7 @@ class test_synthDriverHandler(unittest.TestCase):
 		"""
 		Ensures that if oneCore supports the current language, setSynth("auto") uses "oneCore".
 		"""
-		# test setup ensures current NVDA language is supported for oneCore
+		# test setup ensures current Aslan language is supported for oneCore
 		synthDriverHandler.setSynth(None)  # reset the synth so there is no fallback
 		synthDriverHandler.setSynth("auto")
 		self.assertEqual(synthDriverHandler.getSynth().name, "oneCore")

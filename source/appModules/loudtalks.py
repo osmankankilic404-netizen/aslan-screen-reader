@@ -1,15 +1,15 @@
 # appModules/loudtalks.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2010 Peter Vagner <peter.v@datagate.sk>
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 import appModuleHandler
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.IAccessible import IAccessible
 import oleacc
-from NVDAObjects.IAccessible.sysListView32 import ListItem
+from AslanObjects.IAccessible.sysListView32 import ListItem
 import controlTypes
-from NVDAObjects.window import Window
+from AslanObjects.window import Window
 
 
 class loudTalksLink(Window):
@@ -29,7 +29,7 @@ class loudTalksContactListItem(ListItem):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if obj.role == controlTypes.Role.WINDOW:
 			return
 		if obj.windowClassName == "UrlStaticWndClass":

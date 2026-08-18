@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2023 NV Access Limited, Joseph Lee, Łukasz Golonka, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -175,7 +175,7 @@ class AccumulatingDecider(HandlerRegistrar[Callable[..., bool]]):
 	should be done.
 	In contrast with L{Decider} all handlers are executed and then results are returned.
 	For example, normally user should be warned about all command line parameters
-	which are unknown to NVDA, but this extension point can be used to pass each unknown parameter
+	which are unknown to Aslan, but this extension point can be used to pass each unknown parameter
 	to all add-ons since one of them may want to process some command line arguments.
 
 	First, an AccumulatingDecider is created with a default decision  :

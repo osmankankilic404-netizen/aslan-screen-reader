@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Babbage B.V., Cyrille Bougot, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import typing
 from typing import (
@@ -53,11 +53,11 @@ import config
 import controlTypes
 from controlTypes import TextPosition
 from controlTypes.formatFields import FontSize, TextAlign
-from NVDAObjects.window import Window
-from NVDAObjects import NVDAObject, NVDAObjectTextInfo, InvalidNVDAObject  # noqa: F401
-import NVDAObjects.JAB
+from AslanObjects.window import Window
+from AslanObjects import AslanObject, AslanObjectTextInfo, InvalidAslanObject  # noqa: F401
+import AslanObjects.JAB
 import eventHandler
-from NVDAObjects.behaviors import (
+from AslanObjects.behaviors import (
 	ProgressBar,  # noqa: F401
 	Dialog,
 	EditableTextWithAutoSelectDetection,
@@ -66,14 +66,14 @@ from NVDAObjects.behaviors import (
 	Notification,  # noqa: F401
 )  # noqa: F401
 from locationHelper import RectLTWH
-import NVDAHelper
+import AslanHelper
 
 
 # Custom object ID used for clipboard pane in some versions of MS Office
 MSO_COLLECT_AND_PASTE_OBJECT_ID = 21
 
 
-def getNVDAObjectFromEvent(hwnd, objectID, childID):
+def getAslanObjectFromEvent(hwnd, objectID, childID):
 	try:
 		accHandle = IAccessibleHandler.accessibleObjectFromEvent(hwnd, objectID, childID)
 	except WindowsError:
@@ -91,7 +91,7 @@ def getNVDAObjectFromEvent(hwnd, objectID, childID):
 	return obj
 
 
-def getNVDAObjectFromPoint(x, y):
+def getAslanObjectFromPoint(x, y):
 	accHandle = IAccessibleHandler.accessibleObjectFromPoint(x, y)
 	if not accHandle:
 		return None
@@ -509,7 +509,7 @@ class IA2TextTextInfo(textInfos.offsets.OffsetsTextInfo):
 
 class IAccessible(Window):
 	"""
-	the NVDAObject for IAccessible
+	the AslanObject for IAccessible
 	@ivar IAccessibleChildID: the IAccessible object's child ID
 	@type IAccessibleChildID: int
 	"""
@@ -569,7 +569,7 @@ class IAccessible(Window):
 		kwargs["IAccessibleObject"] = acc[0]
 		kwargs["IAccessibleChildID"] = acc[1]
 		if objID:
-			# We know the event parameters, so pass them to the NVDAObject.
+			# We know the event parameters, so pass them to the AslanObject.
 			kwargs["event_windowHandle"] = windowHandle
 			kwargs["event_objectID"] = objID
 			kwargs["event_childID"] = 0
@@ -585,7 +585,7 @@ class IAccessible(Window):
 		if self.role in (controlTypes.Role.APPLICATION, controlTypes.Role.DIALOG) and not self.isFocusable:
 			# Make unfocusable applications focusable.
 			# This is particularly useful for ARIA applications.
-			# We use the NVDAObject role instead of IAccessible role here
+			# We use the AslanObject role instead of IAccessible role here
 			# because of higher API classes; e.g. MSHTML.
 			clsList.insert(0, FocusableUnfocusableContainer)
 
@@ -607,8 +607,8 @@ class IAccessible(Window):
 				classString = classString[1:]
 				# #8712: Python 3 wants a dot (.) when loading a module from the same folder via relative imports, and this is done via package argument.
 				mod = importlib.import_module(
-					"NVDAObjects.IAccessible.%s" % modString,
-					package="NVDAObjects.IAccessible",
+					"AslanObjects.IAccessible.%s" % modString,
+					package="AslanObjects.IAccessible",
 				)
 				newCls = getattr(mod, classString)
 			elif classString:
@@ -637,7 +637,7 @@ class IAccessible(Window):
 
 				clsList.append(SpellCheckErrorField)
 			else:
-				from NVDAObjects.window.winword import WordDocument_WwN
+				from AslanObjects.window.winword import WordDocument_WwN
 
 				clsList.append(WordDocument_WwN)
 		elif windowClassName == "DirectUIHWND" and role == oleacc.ROLE_SYSTEM_TOOLBAR:
@@ -677,7 +677,7 @@ class IAccessible(Window):
 
 				clsList.append(SDM)
 		elif windowClassName == "DirectUIHWND" and role == oleacc.ROLE_SYSTEM_TEXT:
-			from NVDAObjects.window import DisplayModelEditableText
+			from AslanObjects.window import DisplayModelEditableText
 
 			clsList.append(DisplayModelEditableText)
 		elif windowClassName in ("ListBox", "ComboLBox") and role == oleacc.ROLE_SYSTEM_LISTITEM:
@@ -742,7 +742,7 @@ class IAccessible(Window):
 			if pDoc:
 				self._ITextDocumentObject = pDoc
 				self.editAPIVersion = 2
-				from NVDAObjects.window.edit import Edit
+				from AslanObjects.window.edit import Edit
 
 				clsList.append(Edit)
 
@@ -815,7 +815,7 @@ class IAccessible(Window):
 			except COMError as e:
 				log.debugWarning("accLocation failed: %s" % e)
 		if not windowHandle:
-			raise InvalidNVDAObject("Can't get a window handle from IAccessible")
+			raise InvalidAslanObject("Can't get a window handle from IAccessible")
 
 		if isinstance(IAccessibleObject, IA2.IAccessible2):
 			try:
@@ -855,7 +855,7 @@ class IAccessible(Window):
 		except COMError:
 			pass
 		if None not in (event_windowHandle, event_objectID, event_childID):
-			IAccessibleHandler.liveNVDAObjectTable[(event_windowHandle, event_objectID, event_childID)] = self
+			IAccessibleHandler.liveAslanObjectTable[(event_windowHandle, event_objectID, event_childID)] = self
 
 	def isDuplicateIAccessibleEvent(self, obj):
 		"""Compaires the object of an event to self to see if the event should be treeted as duplicate."""
@@ -1064,8 +1064,8 @@ class IAccessible(Window):
 			IARole = IARole.split(",")[0].lower()
 			log.debug("IARole: %s" % IARole)
 		# must not create interdependence between role and states properties. Use IARole / IAStates.
-		NVDARole = IAccessibleHandler.calculateNvdaRole(IARole, self.IAccessibleStates)
-		return NVDARole
+		AslanRole = IAccessibleHandler.calculateNvdaRole(IARole, self.IAccessibleStates)
+		return AslanRole
 
 	# #2569: Don't cache role,
 	# as it relies on other properties which might change when overlay classes are applied.
@@ -1988,7 +1988,7 @@ class IAccessible(Window):
 		# due to caching of baseObject.AutoPropertyObject, do not attempt to return a generator.
 		return tuple(detailsRelsGen)
 
-	def _get_controllerFor(self) -> list[NVDAObject]:
+	def _get_controllerFor(self) -> list[AslanObject]:
 		if isinstance(self.IAccessibleObject, IA2.IAccessible2):
 			control = self._getIA2RelationFirstTarget(IAccessibleHandler.RelationType.CONTROLLER_FOR)
 			if control:
@@ -2261,12 +2261,12 @@ class IAccessible(Window):
 			return False
 
 	def summarizeInProcess(self) -> str:
-		"""Uses nvdaInProcUtils to get the text for an IAccessible.
+		"""Uses aslanInProcUtils to get the text for an IAccessible.
 		Can be used without a virtual buffer loaded.
 		"""
 		text = BSTR()
-		log.debug("Calling nvdaInProcUtils_getTextFromIAccessible")
-		res = NVDAHelper.localLib.nvdaInProcUtils_getTextFromIAccessible(
+		log.debug("Calling aslanInProcUtils_getTextFromIAccessible")
+		res = AslanHelper.localLib.aslanInProcUtils_getTextFromIAccessible(
 			# [in] handle_t bindingHandle
 			self.appModule.helperLocalBindingHandle,
 			# [in] const unsigned long hwnd
@@ -2282,7 +2282,7 @@ class IAccessible(Window):
 			True,
 		)
 		if res != 0:
-			log.error(f"Error calling nvdaInProcUtils_getTextFromIAccessible, res: {res}")
+			log.error(f"Error calling aslanInProcUtils_getTextFromIAccessible, res: {res}")
 			raise ctypes.WinError(res)
 		return text.value
 
@@ -2356,16 +2356,16 @@ class ShellDocObjectView(IAccessible):
 class JavaVMRoot(IAccessible):
 	def _get_firstChild(self):
 		jabContext = JABHandler.JABContext(hwnd=self.windowHandle)
-		return NVDAObjects.JAB.JAB(jabContext=jabContext)
+		return AslanObjects.JAB.JAB(jabContext=jabContext)
 
 	def _get_lastChild(self):
 		jabContext = JABHandler.JABContext(hwnd=self.windowHandle)
-		return NVDAObjects.JAB.JAB(jabContext=jabContext)
+		return AslanObjects.JAB.JAB(jabContext=jabContext)
 
 	def _get_children(self):
 		children = []
 		jabContext = JABHandler.JABContext(hwnd=self.windowHandle)
-		obj = NVDAObjects.JAB.JAB(jabContext=jabContext)
+		obj = AslanObjects.JAB.JAB(jabContext=jabContext)
 		if obj:
 			children.append(obj)
 		return children
@@ -2412,7 +2412,7 @@ CHAR_RTL_MARK = "\u200f"
 
 class TrayClockWClass(IAccessible):
 	"""
-	Based on NVDAObject but the role is changed to clock.
+	Based on AslanObject but the role is changed to clock.
 	Depending on the version of Windows name or value contains left-to-right or right-to-left characters, so remove them from both.
 	"""
 

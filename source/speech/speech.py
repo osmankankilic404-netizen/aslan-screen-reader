@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2006-2025 NV Access Limited, Peter Vágner, Aleksey Sadovoy, Babbage B.V., Bill Dengler,
@@ -83,7 +83,7 @@ from utils.security import objectBelowLockScreenAndWindowsIsLocked
 from utils.displayString import DisplayStringIntEnum
 
 if typing.TYPE_CHECKING:
-	import NVDAObjects
+	import AslanObjects
 	from speechXml import MarkCallbackT
 
 _speechState: Optional["SpeechState"] = None
@@ -104,12 +104,12 @@ class SpeechMode(DisplayStringIntEnum):
 		return {
 			# Translators: Name of the speech mode which disables speech output.
 			self.off: pgettext("speechModes", "off"),
-			# Translators: Name of the speech mode which will cause NVDA to beep instead of speaking.
+			# Translators: Name of the speech mode which will cause Aslan to beep instead of speaking.
 			self.beeps: pgettext("speechModes", "beeps"),
-			# Translators: Name of the speech mode which causes NVDA to speak normally.
+			# Translators: Name of the speech mode which causes Aslan to speak normally.
 			self.talk: pgettext("speechModes", "talk"),
 			# Translators: Name of the on-demand speech mode,
-			# in which NVDA only speaks in response to commands that report content.
+			# in which Aslan only speaks in response to commands that report content.
 			self.onDemand: pgettext("speechModes", "on-demand"),
 		}
 
@@ -482,7 +482,7 @@ def _getSpellingSpeechWithoutCharMode(
 		locale = defaultLanguage
 
 	if not text:
-		# Translators: This is spoken when NVDA moves to an empty line.
+		# Translators: This is spoken when Aslan moves to an empty line.
 		yield _("blank")
 		return
 	if not text.isspace():
@@ -554,8 +554,8 @@ def _getSpellingSpeechWithoutCharMode(
 def getSingleCharDescriptionDelayMS() -> int:
 	"""
 	@returns: 1 second, a default delay for delayed character descriptions.
-	In the future, this should fetch its value from a user defined NVDA idle time.
-	Blocked by: https://github.com/nvaccess/nvda/issues/13915
+	In the future, this should fetch its value from a user defined Aslan idle time.
+	Blocked by: https://github.com/nvaccess/aslan/issues/13915
 	"""
 	return 1000
 
@@ -673,7 +673,7 @@ def getCharDescListFromText(text, locale):
 
 
 def speakObjectProperties(
-	obj: "NVDAObjects.NVDAObject",
+	obj: "AslanObjects.AslanObject",
 	reason: OutputReason = OutputReason.QUERY,
 	_prefixSpeechCommand: Optional[SpeechCommand] = None,
 	priority: Optional[Spri] = None,
@@ -693,7 +693,7 @@ def speakObjectProperties(
 # Note: when working on getObjectPropertiesSpeech, look for opportunities to simplify
 # and move logic out into smaller helper functions.
 def getObjectPropertiesSpeech(  # noqa: C901
-	obj: "NVDAObjects.NVDAObject",
+	obj: "AslanObjects.AslanObject",
 	reason: OutputReason = OutputReason.QUERY,
 	_prefixSpeechCommand: Optional[SpeechCommand] = None,
 	**allowedProperties,
@@ -711,7 +711,7 @@ def getObjectPropertiesSpeech(  # noqa: C901
 			if positionInfo is None:
 				positionInfo = obj.positionInfo
 		elif value and name == "current":
-			# getPropertiesSpeech names this "current", but the NVDAObject property is
+			# getPropertiesSpeech names this "current", but the AslanObject property is
 			# named "isCurrent", it's type should always be controltypes.IsCurrent
 			newPropertyValues["current"] = obj.isCurrent
 
@@ -862,7 +862,7 @@ def speakObject(
 
 
 def getObjectSpeech(
-	obj: "NVDAObjects.NVDAObject",
+	obj: "AslanObjects.AslanObject",
 	reason: OutputReason = OutputReason.QUERY,
 	_prefixSpeechCommand: Optional[SpeechCommand] = None,
 ) -> SpeechSequence:
@@ -875,12 +875,12 @@ def getObjectSpeech(
 	shouldReportTextContent = not (
 		# focusEntered or mouse should never present text content
 		reason in (OutputReason.FOCUSENTERED, OutputReason.MOUSE)
-		# The rootNVDAObject of a browseMode document in browse mode (not passThrough)
+		# The rootAslanObject of a browseMode document in browse mode (not passThrough)
 		# should never present text content
 		or (
 			isinstance(obj.treeInterceptor, browseMode.BrowseModeDocumentTreeInterceptor)
 			and not obj.treeInterceptor.passThrough
-			and obj == obj.treeInterceptor.rootNVDAObject
+			and obj == obj.treeInterceptor.rootAslanObject
 		)
 		# objects that do not report as having navigableText should not report their text content either
 		or not obj._hasNavigableText
@@ -3182,7 +3182,7 @@ def clearTypedWordBuffer() -> None:
 
 
 def isSpeaking() -> bool:
-	"""Whether NVDA is currently producing speech audio.
+	"""Whether Aslan is currently producing speech audio.
 	True if the synth driver has reported it is mid-utterance
 	and speech is neither paused nor disabled.
 	"""

@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, Joseph Lee, Babbage B.V., Davy Kager, Bram Duvigneau, Leonard de Ruijter, Burman's Computer and Education Ltd., Julien Cochuyt
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ from logHandler import log
 from utils.security import objectBelowLockScreenAndWindowsIsLocked
 
 if TYPE_CHECKING:
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 
 import braille
 
@@ -39,14 +39,14 @@ class TextInfoRegion(Region):
 	pendingCaretUpdate = False  #: True if the cursor should be updated for this region on the display
 	allowPageTurns = True  #: True if a page turn should be tried when a TextInfo cannot move anymore and the object supports page turns.
 
-	def __init__(self, obj: "NVDAObject"):
+	def __init__(self, obj: "AslanObject"):
 		if objectBelowLockScreenAndWindowsIsLocked(obj):
-			raise RuntimeError("NVDA object is secure and should not be initialized as a braille region")
+			raise RuntimeError("Aslan object is secure and should not be initialized as a braille region")
 		super().__init__()
 		self.obj = obj
 
 	def _isMultiline(self):
-		# A region's object can either be an NVDAObject or a tree interceptor.
+		# A region's object can either be an AslanObject or a tree interceptor.
 		# Tree interceptors should always be multiline.
 		from treeInterceptorHandler import TreeInterceptor
 
@@ -106,7 +106,7 @@ class TextInfoRegion(Region):
 			# Separate this field text from the rest of the text.
 			text = TEXT_SEPARATOR + text
 		textLen = len(text)
-		# Fields are reported in NVDA's language
+		# Fields are reported in Aslan's language
 		fieldLanguage = languageHandler.getLanguage()
 		rawTextLen = len(self.rawText)
 		lastLanguage = self._getLanguageAtPos(rawTextLen)
@@ -505,7 +505,7 @@ class ReviewTextInfoRegion(TextInfoRegion):
 			# DisplayModelTextInfo without a caret, e.g. IAccessible.ContentGenericClient.
 			# In this case, we can at least emulate a kind of caret
 			# by trying to focus the object at start of the range.
-			obj = info.NVDAObjectAtStart
+			obj = info.AslanObjectAtStart
 			if not objectBelowLockScreenAndWindowsIsLocked(obj) and obj.isFocusable and not obj.hasFocus:
 				obj.setFocus()
 		else:

@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2018-2025 NV Access Limited, Łukasz Golonka
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -10,16 +10,16 @@ import eventHandler
 import core
 import api
 import UIAHandler
-from NVDAObjects import NVDAObject
-from NVDAObjects.UIA import UIA
+from AslanObjects import AslanObject
+from AslanObjects.UIA import UIA
 import winUser
 import controlTypes
 import appModuleHandler
 from scriptHandler import script
-from NVDAObjects.window import DisplayModelEditableText
-from NVDAObjects.window.edit import UnidentifiedEdit
-from NVDAObjects.window import Window
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.window import DisplayModelEditableText
+from AslanObjects.window.edit import UnidentifiedEdit
+from AslanObjects.window import Window
+from AslanObjects.IAccessible import IAccessible
 
 
 class Excel6(Window):
@@ -78,17 +78,17 @@ class BrokenDataValidationSysListView32(UIA):
 		return False
 
 	@classmethod
-	def matchesNVDAObject(cls, obj: NVDAObject) -> bool:
-		"""Identifies if the given NVDAObject is a broken data validation SysListView32 control."""
+	def matchesAslanObject(cls, obj: AslanObject) -> bool:
+		"""Identifies if the given AslanObject is a broken data validation SysListView32 control."""
 		if isinstance(obj, UIA) and obj.UIAIsWindowElement and cls.windowMatches(obj.windowHandle):
 			return True
 		return False
 
-	def _get_parent(self) -> NVDAObject:
+	def _get_parent(self) -> AslanObject:
 		return api.getDesktopObject()
 
 	def _correctFocus(self):
-		eventHandler.queueEvent("gainFocus", NVDAObject.objectWithFocus())
+		eventHandler.queueEvent("gainFocus", AslanObject.objectWithFocus())
 
 	@script(
 		gestures=["kb:enter", "kb:space", "kb:escape"],
@@ -118,8 +118,8 @@ class AppModule(appModuleHandler.AppModule):
 			return True
 		return False
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
-		if BrokenDataValidationSysListView32.matchesNVDAObject(obj):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
+		if BrokenDataValidationSysListView32.matchesAslanObject(obj):
 			clsList.insert(0, BrokenDataValidationSysListView32)
 			return
 		windowClass = obj.windowClassName

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2014-2025 NV Access Limited, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -29,12 +29,12 @@ connected physical device.
 ### Life-cycle
 - Constructing / showing the BrailleViewer
 	- On startup via L{core.doStartupDialogs}
-	- Via NVDA (tools) menu via L{Mainframe.onToggleSpeechViewerCommand}
+	- Via Aslan (tools) menu via L{Mainframe.onToggleSpeechViewerCommand}
 - Hiding / destroying the BrailleViewer
-	- On exit of NVDA.
-	- Via NVDA (tools) menu via L{Mainframe.onToggleSpeechViewerCommand}
+	- On exit of Aslan.
+	- Via Aslan (tools) menu via L{Mainframe.onToggleSpeechViewerCommand}
 	- When the Window receives a close event. This means the GUI must be able to call-back to clean up
-	BrailleHandler and the NVDA tools menu. This callback happens via the L{postBrailleViewerToolToggledAction}
+	BrailleHandler and the Aslan tools menu. This callback happens via the L{postBrailleViewerToolToggledAction}
 
 ### Number of cells shown
 The default (40) is set in L{createBrailleViewerTool}.

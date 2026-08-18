@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Peter Vágner, Aleksey Sadovoy, Patrick Zajda, Joseph Lee,
 # Babbage B.V., Mozilla Corporation, Julien Cochuyt, Leonard de Ruijter, Cyrille Bougot
 # This file is covered by the GNU General Public License.
@@ -31,10 +31,10 @@ import tempfile
 import comtypes.client
 import baseObject
 from logHandler import log
-import NVDAHelper
+import AslanHelper
 import winKernel
 import config
-import NVDAObjects  # Catches errors before loading default appModule
+import AslanObjects  # Catches errors before loading default appModule
 import api
 import appModules
 import exceptions
@@ -62,7 +62,7 @@ __getattr__ = _deprecate.handleDeprecations(
 		"winBindings.kernel32",
 	),
 	_deprecate.MovedSymbol(
-		"NVDAProcessID",
+		"AslanProcessID",
 		"globalVars",
 		"appPid",
 	),
@@ -82,7 +82,7 @@ post_appSwitch = extensionPoints.Action()
 _executableNamesToAppModsAddons: Dict[str, str] = dict()
 """AppModules registered with a given binary by add-ons are placed here.
 We cannot use l{appModules.EXECUTABLE_NAMES_TO_APP_MODS} for modules included in add-ons,
-since appModules in add-ons should take precedence over the one bundled in NVDA.
+since appModules in add-ons should take precedence over the one bundled in Aslan.
 """
 
 
@@ -156,7 +156,7 @@ def getAppNameFromProcessID(processID: int, includeExt: bool = False) -> str:
 	@returns: application name
 	"""
 	if processID == globalVars.appPid:
-		return "nvda.exe" if includeExt else "nvda"
+		return "aslan.exe" if includeExt else "aslan"
 	FSnapshotHandle = winBindings.kernel32.CreateToolhelp32Snapshot(2, 0)
 	FProcessEntry32 = winBindings.kernel32.PROCESSENTRY32W()
 	FProcessEntry32.dwSize = ctypes.sizeof(FProcessEntry32)
@@ -230,8 +230,8 @@ def getProcessHandleFromProcessId(processId: int, fallBackToTopLevelWindowEnumer
 	return processHandle
 
 
-def getAppModuleForNVDAObject(obj: NVDAObjects.NVDAObject) -> AppModule:
-	if not isinstance(obj, NVDAObjects.NVDAObject):
+def getAppModuleForAslanObject(obj: AslanObjects.AslanObject) -> AppModule:
+	if not isinstance(obj, AslanObjects.AslanObject):
 		return
 	mod = getAppModuleFromProcessID(obj.processID)
 	# #14403: For some apps it is not possible to get a process handle,
@@ -337,9 +337,9 @@ def reloadAppModules():
 				key: getattr(mod, key)
 				for key in (
 					"processID",
-					# #2892: We must save nvdaHelperRemote handles, as we can't reinitialize without a foreground/focus event.
+					# #2892: We must save aslanHelperRemote handles, as we can't reinitialize without a foreground/focus event.
 					# Also, if there is an active context handle such as a loaded buffer,
-					# nvdaHelperRemote can't reinit until that handle dies.
+					# aslanHelperRemote can't reinit until that handle dies.
 					"helperLocalBindingHandle",
 					"_inprocRegistrationHandle",
 					# #5380: We must save config profile triggers so they can be cleaned up correctly.
@@ -349,7 +349,7 @@ def reloadAppModules():
 				if hasattr(mod, key)
 			},
 		)
-		# #2892: Don't disconnect from nvdaHelperRemote during termination.
+		# #2892: Don't disconnect from aslanHelperRemote during termination.
 		mod._helperPreventDisconnect = True
 	terminate()
 	del appModules
@@ -365,9 +365,9 @@ def reloadAppModules():
 		pid = entry.pop("processID")
 		mod = getAppModuleFromProcessID(pid)
 		mod.__dict__.update(entry)
-	# The appModule property for existing NVDAObjects will now be None, since their AppModule died.
+	# The appModule property for existing AslanObjects will now be None, since their AppModule died.
 	# Force focus, navigator, etc. objects to re-fetch,
-	# since NVDA depends on the appModule property for these.
+	# since Aslan depends on the appModule property for these.
 	for obj in itertools.chain((api.getFocusObject(), api.getNavigatorObject()), api.getFocusAncestors()):
 		try:
 			del obj._appModuleRef
@@ -421,13 +421,13 @@ def handleAppSwitch(oldMods, newMods):
 			except exceptions.CallCancelled:
 				pass
 
-	nvdaGuiLostFocus = nextStage and nextStage[-1].appName == "nvda"
+	aslanGuiLostFocus = nextStage and nextStage[-1].appName == "aslan"
 	if (
-		not nvdaGuiLostFocus
-		and (not oldMods or oldMods[-1].appName != "nvda")
-		and newMods[-1].appName == "nvda"
+		not aslanGuiLostFocus
+		and (not oldMods or oldMods[-1].appName != "aslan")
+		and newMods[-1].appName == "aslan"
 	):
-		# NVDA's GUI just got focus.
+		# Aslan's GUI just got focus.
 		import gui
 
 		if gui.shouldConfigProfileTriggersBeSuspended():
@@ -451,7 +451,7 @@ def handleAppSwitch(oldMods, newMods):
 			trigger = mod._configProfileTrigger = AppProfileTrigger(mod.appName)
 			trigger.enter()
 
-	if nvdaGuiLostFocus:
+	if aslanGuiLostFocus:
 		import gui
 
 		if not gui.shouldConfigProfileTriggersBeSuspended():
@@ -478,10 +478,10 @@ class AppModule(baseObject.ScriptableObject):
 	App modules can implement and bind gestures to scripts.
 	These bindings will only take effect while an object in the associated application has focus.
 	See L{ScriptableObject} for details.
-	App modules can also receive NVDAObject events for objects within the associated application.
+	App modules can also receive AslanObject events for objects within the associated application.
 	This is done by implementing methods called C{event_eventName},
 	where C{eventName} is the name of the event; e.g. C{event_gainFocus}.
-	These event methods take two arguments: the NVDAObject on which the event was fired
+	These event methods take two arguments: the AslanObject on which the event was fired
 	and a callable taking no arguments which calls the next event handler.
 
 	Some executables host many different applications; e.g. javaw.exe.
@@ -494,7 +494,7 @@ class AppModule(baseObject.ScriptableObject):
 	Alternatively, it can raise C{LookupError} if a name couldn't be determined.
 	"""
 
-	#: Whether NVDA should sleep while in this application (e.g. the application is self-voicing).
+	#: Whether Aslan should sleep while in this application (e.g. the application is self-voicing).
 	#: If C{True}, all  events and script requests inside this application are silently dropped.
 	#: @type: bool
 	sleepMode = False
@@ -567,7 +567,7 @@ class AppModule(baseObject.ScriptableObject):
 		* Package info for hosted apps
 		* File version info for other apps and for some hosted apps
 		"""
-		# Sometimes (I.E. when NVDA starts) handle is 0, so stop if it is the case
+		# Sometimes (I.E. when Aslan starts) handle is 0, so stop if it is the case
 		if not self.processHandle:
 			raise RuntimeError("processHandle is 0")
 		# Some apps such as File Explorer says it is an immersive process but error 15700 is shown.
@@ -606,7 +606,7 @@ class AppModule(baseObject.ScriptableObject):
 
 	_liveForEver: bool = False
 	"""
-	Set to true when NVDA cannot get enough permissions to successfully verify if the process is dead.
+	Set to true when Aslan cannot get enough permissions to successfully verify if the process is dead.
 	E.g. Security software such as 1Password which blocks the SYNCHRONIZE access right.
 	"""
 
@@ -649,19 +649,19 @@ class AppModule(baseObject.ScriptableObject):
 		if self.helperLocalBindingHandle:
 			winBindings.rpcrt4.RpcBindingFree(ctypes.byref(self.helperLocalBindingHandle))
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
-		"""Choose NVDAObject overlay classes for a given NVDAObject.
-		This is called when an NVDAObject is being instantiated after L{NVDAObjects.NVDAObject.findOverlayClasses} has been called on the API-level class.
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
+		"""Choose AslanObject overlay classes for a given AslanObject.
+		This is called when an AslanObject is being instantiated after L{AslanObjects.AslanObject.findOverlayClasses} has been called on the API-level class.
 		This allows an AppModule to add or remove overlay classes.
-		See L{NVDAObjects.NVDAObject.findOverlayClasses} for details about overlay classes.
+		See L{AslanObjects.AslanObject.findOverlayClasses} for details about overlay classes.
 		@param obj: The object being created.
-		@type obj: L{NVDAObjects.NVDAObject}
+		@type obj: L{AslanObjects.AslanObject}
 		@param clsList: The list of classes, which will be modified by this method if appropriate.
-		@type clsList: list of L{NVDAObjects.NVDAObject}
+		@type clsList: list of L{AslanObjects.AslanObject}
 		"""
 
 	# optimisation: Make it easy to detect that this hasn't been overridden.
-	chooseNVDAObjectOverlayClasses._isBase = True
+	chooseAslanObjectOverlayClasses._isBase = True
 
 	def _get_appPath(self):
 		"""Returns the full path for the executable e.g. 'C:\\Windows\\explorer.exe' for Explorer.
@@ -794,7 +794,7 @@ class AppModule(baseObject.ScriptableObject):
 		returns C{True} if the UIA implementation of the given window must be used, regardless whether native or not.
 		This function is the counterpart of and takes precedence over L{isBadUIAWindow}.
 		If both functions return C{False}, the decision of whether to use UIA for the window is left to core.
-		Warning: this may be called outside of NVDA's main thread, therefore do not try accessing NVDAObjects and such, rather just check window  class names.
+		Warning: this may be called outside of Aslan's main thread, therefore do not try accessing AslanObjects and such, rather just check window  class names.
 		"""
 		return False
 
@@ -804,13 +804,13 @@ class AppModule(baseObject.ScriptableObject):
 		This function is the counterpart of L{isGoodUIAWindow}.
 		When both functions return C{True}, L{isGoodUIAWindow} takes precedence.
 		If both functions return C{False}, the decision of whether to use UIA for the window is left to core.
-		Warning: this may be called outside of NVDA's main thread, therefore do not try accessing NVDAObjects and such, rather just check window  class names.
+		Warning: this may be called outside of Aslan's main thread, therefore do not try accessing AslanObjects and such, rather just check window  class names.
 		"""
 		return False
 
 	def shouldProcessUIAPropertyChangedEvent(self, sender, propertyId):
 		"""
-		Determines whether NVDA should process a UIA property changed event.
+		Determines whether Aslan should process a UIA property changed event.
 		Returning False will cause the event to be dropped completely. This can be
 		used to work around UIA implementations which flood events and cause poor
 		performance.
@@ -829,7 +829,7 @@ class AppModule(baseObject.ScriptableObject):
 		activityId: str = "",
 	) -> bool:
 		"""
-		Determines whether NVDA should process a UIA notification event.
+		Determines whether Aslan should process a UIA notification event.
 
 		By default, events from elements with window handle value set
 		and traversable back to the desktop will be accepted.
@@ -840,10 +840,10 @@ class AppModule(baseObject.ScriptableObject):
 
 		:param sender: UIA element raising the notification event.
 		:param notificationKind: notification kind such as activity completion.
-		:param notificationProcessing: how NVDA should process notifications such as canceling speech.
+		:param notificationProcessing: how Aslan should process notifications such as canceling speech.
 		:param displayString: notification content/text.
 		:param activityId: notification description.
-		:return: Whether NVDA components including ap modules and NVDA objects should process notification events.
+		:return: Whether Aslan components including ap modules and Aslan objects should process notification events.
 		"""
 		import UIAHandler
 
@@ -856,9 +856,9 @@ class AppModule(baseObject.ScriptableObject):
 		"""
 		path = os.path.join(
 			tempfile.gettempdir(),
-			"nvda_crash_%s_%d.dmp" % (self.appName, self.processID),
+			"aslan_crash_%s_%d.dmp" % (self.appName, self.processID),
 		)
-		NVDAHelper.localLib.nvdaInProcUtils_dumpOnCrash(
+		AslanHelper.localLib.aslanInProcUtils_dumpOnCrash(
 			self.helperLocalBindingHandle,
 			path,
 		)
@@ -871,11 +871,11 @@ class AppModule(baseObject.ScriptableObject):
 		If C{None} is returned, L{GlobalCommands.script_reportStatusLine} will
 		in turn resort to reading the bottom line of text written to the
 		display.
-		@rtype: NVDAObject
+		@rtype: AslanObject
 		"""
 		raise NotImplementedError()
 
-	def getStatusBarText(self, obj: NVDAObjects.NVDAObject) -> str:
+	def getStatusBarText(self, obj: AslanObjects.AslanObject) -> str:
 		"""Get the text from the given status bar.
 		If C{NotImplementedError} is raised, L{api.getStatusBarText} will resort to
 		retrieve the name of the status bar and the names and values of all of its children.
@@ -885,7 +885,7 @@ class AppModule(baseObject.ScriptableObject):
 	def _get_statusBarTextInfo(self):
 		"""Retrieve a L{TextInfo} positioned at the status bar of the application.
 		This is used by L{GlobalCommands.script_reportStatusLine} in cases where
-		L{api.getStatusBar} could not locate a proper L{NVDAObject} for the
+		L{api.getStatusBar} could not locate a proper L{AslanObject} for the
 		status bar.
 		For this method to get called, L{_get_statusBar} must return C{None}.
 		@rtype: TextInfo
@@ -897,7 +897,7 @@ class AppModule(baseObject.ScriptableObject):
 
 	def _get_devInfo(self) -> List[str]:
 		"""Information about this appModule useful to developers.
-		For an NVDAObject, its appModule devInfo is appended to NVDAObject.devInfo.
+		For an AslanObject, its appModule devInfo is appended to AslanObject.devInfo.
 		Subclasses may extend this, calling the superclass property first.
 		@return: A list of text strings providing information about this appModule useful to developers.
 		"""

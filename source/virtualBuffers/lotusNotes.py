@@ -1,12 +1,12 @@
 # virtualBuffers/lotusNotes.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2010-2012 NV Access Limited
 
 from . import VirtualBuffer, VirtualBufferTextInfo
 import controlTypes
-import NVDAObjects.IAccessible
+import AslanObjects.IAccessible
 import winUser
 import mouseHandler
 import IAccessibleHandler
@@ -29,26 +29,26 @@ class LotusNotesRichText_TextInfo(VirtualBufferTextInfo):
 class LotusNotesRichText(VirtualBuffer):
 	TextInfo = LotusNotesRichText_TextInfo
 
-	def __init__(self, rootNVDAObject):
-		super(LotusNotesRichText, self).__init__(rootNVDAObject, backendName="lotusNotesRichText")
+	def __init__(self, rootAslanObject):
+		super(LotusNotesRichText, self).__init__(rootAslanObject, backendName="lotusNotesRichText")
 
 	def __contains__(self, obj):
-		return winUser.isDescendantWindow(self.rootNVDAObject.windowHandle, obj.windowHandle)
+		return winUser.isDescendantWindow(self.rootAslanObject.windowHandle, obj.windowHandle)
 
 	def _get_isAlive(self):
 		if self.isLoading:
 			return True
-		root = self.rootNVDAObject
+		root = self.rootAslanObject
 		if not root:
 			return False
 		if not winUser.isWindow(root.windowHandle) or root.role == controlTypes.Role.UNKNOWN:
 			return False
 		return True
 
-	def getNVDAObjectFromIdentifier(self, docHandle, ID):
-		return NVDAObjects.IAccessible.getNVDAObjectFromEvent(docHandle, winUser.OBJID_CLIENT, ID)
+	def getAslanObjectFromIdentifier(self, docHandle, ID):
+		return AslanObjects.IAccessible.getAslanObjectFromEvent(docHandle, winUser.OBJID_CLIENT, ID)
 
-	def getIdentifierFromNVDAObject(self, obj):
+	def getIdentifierFromAslanObject(self, obj):
 		return obj.windowHandle, obj.event_childID
 
 	# Older implementation of this function, overriden later in this file by a second definition of the same
@@ -88,7 +88,7 @@ class LotusNotesRichText(VirtualBuffer):
 			return None
 		return attrs
 
-	def _activateNVDAObject(self, obj):
+	def _activateAslanObject(self, obj):
 		try:
 			obj.doAction()
 			return

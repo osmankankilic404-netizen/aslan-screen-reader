@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2025 NV Access Limited, Peter Vagner, Davy Kager, Mozilla Corporation, Google LLC,
 # Leonard de Ruijter
 # This file is covered by the GNU General Public License.
@@ -40,7 +40,7 @@ import winBindings.advapi32
 import winBindings.rpcrt4
 import winBindings.shlwapi
 import globalVars
-from NVDAState import ReadPaths
+from AslanState import ReadPaths
 
 from . import localLib
 import winVersion
@@ -75,9 +75,9 @@ def _setDllFuncPointer(dll, name, cfunc):
 	cast(getattr(dll, name), POINTER(c_void_p)).contents.value = cast(cfunc, c_void_p).value  # noqa: F405
 
 
-# Implementation of nvdaController methods
+# Implementation of aslanController methods
 @WINFUNCTYPE(c_long, c_wchar_p)
-def nvdaController_speakText(text):
+def aslanController_speakText(text):
 	focus = api.getFocusObject()
 	if focus.sleepMode == focus.SLEEP_FULL:
 		return -1
@@ -87,11 +87,11 @@ def nvdaController_speakText(text):
 	return SystemErrorCodes.SUCCESS
 
 
-# C901 'nvdaController_speakSsml' is too complex
-# Note: when working on nvdaController_speakSsml, look for opportunities to simplify
+# C901 'aslanController_speakSsml' is too complex
+# Note: when working on aslanController_speakSsml, look for opportunities to simplify
 # and move logic out into smaller helper functions.
 @WINFUNCTYPE(c_long, c_wchar_p, c_int, c_int, c_bool)
-def nvdaController_speakSsml(  # noqa: C901
+def aslanController_speakSsml(  # noqa: C901
 	ssml: str,
 	symbolLevel: "SymbolLevel",
 	priority: "SpeechPriority",
@@ -173,7 +173,7 @@ def nvdaController_speakSsml(  # noqa: C901
 					case False:
 						return SystemErrorCodes.CANCELLED
 					case str() as name:
-						localLib.nvdaController_onSsmlMarkReached(name)
+						localLib.aslanController_onSsmlMarkReached(name)
 					case _ as unknown:
 						log.error(f"Unknown item in SSML mark queue: {unknown}")
 		finally:
@@ -183,7 +183,7 @@ def nvdaController_speakSsml(  # noqa: C901
 
 
 @WINFUNCTYPE(c_long)
-def nvdaController_cancelSpeech():
+def aslanController_cancelSpeech():
 	focus = api.getFocusObject()
 	if focus.sleepMode == focus.SLEEP_FULL:
 		return -1
@@ -194,7 +194,7 @@ def nvdaController_cancelSpeech():
 
 
 @WINFUNCTYPE(c_long, c_wchar_p)
-def nvdaController_brailleMessage(text: str) -> SystemErrorCodes:
+def aslanController_brailleMessage(text: str) -> SystemErrorCodes:
 	focus = api.getFocusObject()
 	if focus.sleepMode == focus.SLEEP_FULL:
 		return -1
@@ -206,7 +206,7 @@ def nvdaController_brailleMessage(text: str) -> SystemErrorCodes:
 
 
 @WINFUNCTYPE(c_long, POINTER(c_bool))
-def nvdaController_isSpeaking(pSpeaking: _Pointer[c_bool]) -> int:
+def aslanController_isSpeaking(pSpeaking: _Pointer[c_bool]) -> int:
 	if not pSpeaking:
 		return SystemErrorCodes.INVALID_PARAMETER.value
 	import speech
@@ -250,7 +250,7 @@ def _lookupKeyboardLayoutNameWithHexString(layoutString):
 
 
 @WINFUNCTYPE(c_long, c_wchar_p)
-def nvdaControllerInternal_requestRegistration(uuidString):
+def aslanControllerInternal_requestRegistration(uuidString):
 	pid = c_long()
 	winBindings.rpcrt4.I_RpcBindingInqLocalClientPID(None, byref(pid))
 	pid = pid.value
@@ -263,10 +263,10 @@ def nvdaControllerInternal_requestRegistration(uuidString):
 		log.error("Could not bind to inproc rpc server for pid %d" % pid)
 		return -1
 	registrationHandle = HANDLE()
-	res = localLib.nvdaInProcUtils_registerNVDAProcess(bindingHandle, byref(registrationHandle))  # noqa: F405
+	res = localLib.aslanInProcUtils_registerAslanProcess(bindingHandle, byref(registrationHandle))  # noqa: F405
 	if res != 0 or not registrationHandle:
 		log.error(
-			"Could not register NVDA with inproc rpc server for pid %d, res %d, registrationHandle %s"
+			"Could not register Aslan with inproc rpc server for pid %d, res %d, registrationHandle %s"
 			% (pid, res, registrationHandle),
 		)
 		winBindings.rpcrt4.RpcBindingFree(byref(bindingHandle))
@@ -284,7 +284,7 @@ def nvdaControllerInternal_requestRegistration(uuidString):
 
 
 @WINFUNCTYPE(c_long, c_wchar_p, c_wchar_p)
-def nvdaControllerInternal_reportLiveRegion(text: str, politeness: str):
+def aslanControllerInternal_reportLiveRegion(text: str, politeness: str):
 	assert isinstance(text, str), "Text isn't a string"
 	assert isinstance(politeness, str), "Politeness isn't a string"
 	if not config.conf["presentation"]["reportDynamicContentChanges"]:
@@ -301,12 +301,12 @@ def nvdaControllerInternal_reportLiveRegion(text: str, politeness: str):
 		politenessValue = AriaLivePoliteness(politeness.lower())
 	except ValueError:
 		log.error(
-			f"nvdaControllerInternal_reportLiveRegion got unknown politeness of {politeness}",
+			f"aslanControllerInternal_reportLiveRegion got unknown politeness of {politeness}",
 			exc_info=True,
 		)
 		return -1
 	if politenessValue == AriaLivePoliteness.OFF:
-		log.error(f"nvdaControllerInternal_reportLiveRegion got unexpected politeness of {politeness}")
+		log.error(f"aslanControllerInternal_reportLiveRegion got unexpected politeness of {politeness}")
 	queueHandler.queueFunction(
 		queueHandler.eventQueue,
 		speech.speakText,
@@ -322,7 +322,7 @@ def nvdaControllerInternal_reportLiveRegion(text: str, politeness: str):
 
 
 @WINFUNCTYPE(c_long, c_long, c_long, c_long, c_long, c_long)
-def nvdaControllerInternal_displayModelTextChangeNotify(hwnd, left, top, right, bottom):
+def aslanControllerInternal_displayModelTextChangeNotify(hwnd, left, top, right, bottom):
 	import displayModel
 
 	displayModel.textChangeNotify(hwnd, left, top, right, bottom)
@@ -330,9 +330,9 @@ def nvdaControllerInternal_displayModelTextChangeNotify(hwnd, left, top, right, 
 
 
 @WINFUNCTYPE(c_long, c_long, c_long, c_long, c_long, c_long)
-def nvdaControllerInternal_drawFocusRectNotify(hwnd, left, top, right, bottom):
+def aslanControllerInternal_drawFocusRectNotify(hwnd, left, top, right, bottom):
 	import eventHandler
-	from NVDAObjects.window import Window
+	from AslanObjects.window import Window
 
 	focus = api.getFocusObject()
 	if isinstance(focus, Window) and hwnd == focus.windowHandle:
@@ -341,7 +341,7 @@ def nvdaControllerInternal_drawFocusRectNotify(hwnd, left, top, right, bottom):
 
 
 @WINFUNCTYPE(c_long, c_long, c_long, c_wchar_p)
-def nvdaControllerInternal_logMessage(level, pid, message):
+def aslanControllerInternal_logMessage(level, pid, message):
 	if not log.isEnabledFor(level):
 		return 0
 	if pid:
@@ -349,7 +349,7 @@ def nvdaControllerInternal_logMessage(level, pid, message):
 
 		codepath = "RPC process %s (%s)" % (pid, getAppNameFromProcessID(pid, includeExt=True))
 	else:
-		codepath = "NVDAHelperLocal"
+		codepath = "AslanHelperLocal"
 	log._log(level, message, [], codepath=codepath)
 	return 0
 
@@ -357,8 +357,8 @@ def nvdaControllerInternal_logMessage(level, pid, message):
 def handleInputCompositionEnd(result):
 	import speech
 	import characterProcessing
-	from NVDAObjects.inputComposition import InputComposition
-	from NVDAObjects.IAccessible.mscandui import ModernCandidateUICandidateItem
+	from AslanObjects.inputComposition import InputComposition
+	from AslanObjects.IAccessible.mscandui import ModernCandidateUICandidateItem
 
 	focus = api.getFocusObject()
 	result = result.lstrip("\u3000 ")
@@ -397,8 +397,8 @@ def handleInputCompositionEnd(result):
 
 def handleInputCompositionStart(compositionString, selectionStart, selectionEnd, isReading):
 	import speech
-	from NVDAObjects.inputComposition import InputComposition
-	from NVDAObjects.behaviors import CandidateItem
+	from AslanObjects.inputComposition import InputComposition
+	from AslanObjects.behaviors import CandidateItem
 
 	focus = api.getFocusObject()
 	if focus.parent and isinstance(focus.parent, InputComposition):
@@ -418,7 +418,7 @@ def handleInputCompositionStart(compositionString, selectionStart, selectionEnd,
 		return 0
 	if not isinstance(focus, InputComposition):
 		parent = api.getDesktopObject().objectWithFocus()
-		# #5640: Although we want to use the most correct focus (I.e. OS, not NVDA), if they are the same, we definitely want to use the original instance, so that state such as auto selection is maintained.
+		# #5640: Although we want to use the most correct focus (I.e. OS, not Aslan), if they are the same, we definitely want to use the original instance, so that state such as auto selection is maintained.
 		if parent == focus:
 			parent = focus
 		curInputComposition = InputComposition(parent=parent)
@@ -431,9 +431,9 @@ def handleInputCompositionStart(compositionString, selectionStart, selectionEnd,
 
 
 @WINFUNCTYPE(c_long, c_wchar_p, c_int, c_int, c_int)
-def nvdaControllerInternal_inputCompositionUpdate(compositionString, selectionStart, selectionEnd, isReading):
-	from NVDAObjects.inputComposition import InputComposition
-	from NVDAObjects.IAccessible.mscandui import ModernCandidateUICandidateItem
+def aslanControllerInternal_inputCompositionUpdate(compositionString, selectionStart, selectionEnd, isReading):
+	from AslanObjects.inputComposition import InputComposition
+	from AslanObjects.IAccessible.mscandui import ModernCandidateUICandidateItem
 
 	if selectionStart == -1:
 		queueHandler.queueFunction(queueHandler.eventQueue, handleInputCompositionEnd, compositionString)
@@ -457,7 +457,7 @@ def nvdaControllerInternal_inputCompositionUpdate(compositionString, selectionSt
 def handleInputCandidateListUpdate(candidatesString, selectionIndex, inputMethod):
 	candidateStrings = candidatesString.split("\n")
 	import speech
-	from NVDAObjects.inputComposition import CandidateItem
+	from AslanObjects.inputComposition import CandidateItem
 
 	focus = api.getFocusObject()
 	if not (0 <= selectionIndex < len(candidateStrings)):
@@ -499,7 +499,7 @@ def handleInputCandidateListUpdate(candidatesString, selectionIndex, inputMethod
 
 
 @WINFUNCTYPE(c_long, c_wchar_p, c_long, c_wchar_p)
-def nvdaControllerInternal_inputCandidateListUpdate(candidatesString, selectionIndex, inputMethod):
+def aslanControllerInternal_inputCandidateListUpdate(candidatesString, selectionIndex, inputMethod):
 	queueHandler.queueFunction(
 		queueHandler.eventQueue,
 		handleInputCandidateListUpdate,
@@ -572,7 +572,7 @@ def handleInputConversionModeUpdate(oldFlags, newFlags, lcid):
 
 
 @WINFUNCTYPE(c_long, c_long, c_long, c_ulong)
-def nvdaControllerInternal_inputConversionModeUpdate(oldFlags, newFlags, lcid):
+def aslanControllerInternal_inputConversionModeUpdate(oldFlags, newFlags, lcid):
 	queueHandler.queueFunction(
 		queueHandler.eventQueue,
 		handleInputConversionModeUpdate,
@@ -584,7 +584,7 @@ def nvdaControllerInternal_inputConversionModeUpdate(oldFlags, newFlags, lcid):
 
 
 @WINFUNCTYPE(c_long, c_long)
-def nvdaControllerInternal_IMEOpenStatusUpdate(opened):
+def aslanControllerInternal_IMEOpenStatusUpdate(opened):
 	if opened:
 		# Translators: a message when the IME open status changes to opened
 		message = _("IME opened")
@@ -598,7 +598,7 @@ def nvdaControllerInternal_IMEOpenStatusUpdate(opened):
 
 
 @WINFUNCTYPE(c_long, c_long, c_ulong, c_wchar_p)
-def nvdaControllerInternal_inputLangChangeNotify(threadID, hkl, layoutString):
+def aslanControllerInternal_inputLangChangeNotify(threadID, hkl, layoutString):
 	global lastLanguageID, lastLayoutString
 	languageID = winUser.LOWORD(hkl)
 	# Simple case where there is no change
@@ -609,11 +609,11 @@ def nvdaControllerInternal_inputLangChangeNotify(threadID, hkl, layoutString):
 	# So also handle focus object being None as well as checking for sleepMode
 	if not focus or focus.sleepMode:
 		return 0
-	import NVDAObjects.window
+	import AslanObjects.window
 
 	# Generally we should not allow input lang changes from threads that are not focused.
 	# But threadIDs for console windows are always wrong so don't ignore for those.
-	if not isinstance(focus, NVDAObjects.window.Window) or (
+	if not isinstance(focus, AslanObjects.window.Window) or (
 		threadID != focus.windowThreadID and focus.windowClassName != "ConsoleWindowClass"
 	):
 		return 0
@@ -669,7 +669,7 @@ def nvdaControllerInternal_inputLangChangeNotify(threadID, hkl, layoutString):
 
 
 @WINFUNCTYPE(c_long, c_wchar)
-def nvdaControllerInternal_typedCharacterNotify(ch):
+def aslanControllerInternal_typedCharacterNotify(ch):
 	focus = api.getFocusObject()
 	if focus.windowClassName != "ConsoleWindowClass":
 		eventHandler.queueEvent("typedCharacter", focus, ch=ch)
@@ -677,7 +677,7 @@ def nvdaControllerInternal_typedCharacterNotify(ch):
 
 
 @WINFUNCTYPE(c_long, c_int, c_int)
-def nvdaControllerInternal_vbufChangeNotify(rootDocHandle, rootID):
+def aslanControllerInternal_vbufChangeNotify(rootDocHandle, rootID):
 	import virtualBuffers
 
 	virtualBuffers.VirtualBuffer.changeNotify(rootDocHandle, rootID)
@@ -685,12 +685,12 @@ def nvdaControllerInternal_vbufChangeNotify(rootDocHandle, rootID):
 
 
 @WINFUNCTYPE(c_long, c_wchar_p)
-def nvdaControllerInternal_installAddonPackageFromPath(addonPath):
+def aslanControllerInternal_installAddonPackageFromPath(addonPath):
 	if globalVars.appArgs.launcher:
 		log.debugWarning("Unable to install add-on into launcher.")
 		return
 	if globalVars.appArgs.secure:
-		log.debugWarning("Unable to install add-on into secure copy of NVDA.")
+		log.debugWarning("Unable to install add-on into secure copy of Aslan.")
 		return
 	if isLockScreenModeActive():
 		log.debugWarning("Unable to install add-on while Windows is locked.")
@@ -704,9 +704,9 @@ def nvdaControllerInternal_installAddonPackageFromPath(addonPath):
 
 
 @WINFUNCTYPE(c_long)
-def nvdaControllerInternal_openConfigDirectory():
+def aslanControllerInternal_openConfigDirectory():
 	if globalVars.appArgs.secure:
-		log.debugWarning("Unable to open user config directory for secure copy of NVDA.")
+		log.debugWarning("Unable to open user config directory for secure copy of Aslan.")
 		return
 	if isLockScreenModeActive():
 		log.debugWarning("Unable to open user config directory while Windows is locked.")
@@ -718,10 +718,10 @@ def nvdaControllerInternal_openConfigDirectory():
 
 
 @WINFUNCTYPE(c_long, c_wchar_p)
-def nvdaControllerInternal_handleRemoteURL(url):
+def aslanControllerInternal_handleRemoteURL(url):
 	"""Handles a remote URL request from the slave process.
 
-	:param url: The nvdaremote:// URL to process
+	:param url: The aslanremote:// URL to process
 	:return: 0 on success, -1 on failure
 	"""
 	from _remoteClient import connectionInfo, _remoteClient as client
@@ -766,7 +766,7 @@ class _RemoteLoader:
 		# Therefore, explicitly specify our own process token, which causes them to be inherited.
 		token = winKernel.OpenProcessToken(winKernel.GetCurrentProcess(), winKernel.MAXIMUM_ALLOWED)
 		try:
-			loaderPath = os.path.join(loaderDir, "nvdaHelperRemoteLoader.exe")
+			loaderPath = os.path.join(loaderDir, "aslanHelperRemoteLoader.exe")
 			log.debug(f"Starting {loaderPath}")
 			winKernel.CreateProcessAsUser(token, None, loaderPath, None, None, True, 0, None, None, si, pi)
 			# We don't need the thread handle.
@@ -802,68 +802,68 @@ def initialize() -> None:
 	if res:
 		lastLayoutString = buf.value
 	for name, func in [
-		("nvdaController_speakText", nvdaController_speakText),
-		("nvdaController_speakSsml", nvdaController_speakSsml),
-		("nvdaController_cancelSpeech", nvdaController_cancelSpeech),
-		("nvdaController_brailleMessage", nvdaController_brailleMessage),
-		("nvdaController_isSpeaking", nvdaController_isSpeaking),
-		("nvdaControllerInternal_requestRegistration", nvdaControllerInternal_requestRegistration),
-		("nvdaControllerInternal_reportLiveRegion", nvdaControllerInternal_reportLiveRegion),
-		("nvdaControllerInternal_inputLangChangeNotify", nvdaControllerInternal_inputLangChangeNotify),
-		("nvdaControllerInternal_typedCharacterNotify", nvdaControllerInternal_typedCharacterNotify),
+		("aslanController_speakText", aslanController_speakText),
+		("aslanController_speakSsml", aslanController_speakSsml),
+		("aslanController_cancelSpeech", aslanController_cancelSpeech),
+		("aslanController_brailleMessage", aslanController_brailleMessage),
+		("aslanController_isSpeaking", aslanController_isSpeaking),
+		("aslanControllerInternal_requestRegistration", aslanControllerInternal_requestRegistration),
+		("aslanControllerInternal_reportLiveRegion", aslanControllerInternal_reportLiveRegion),
+		("aslanControllerInternal_inputLangChangeNotify", aslanControllerInternal_inputLangChangeNotify),
+		("aslanControllerInternal_typedCharacterNotify", aslanControllerInternal_typedCharacterNotify),
 		(
-			"nvdaControllerInternal_displayModelTextChangeNotify",
-			nvdaControllerInternal_displayModelTextChangeNotify,
+			"aslanControllerInternal_displayModelTextChangeNotify",
+			aslanControllerInternal_displayModelTextChangeNotify,
 		),
-		("nvdaControllerInternal_logMessage", nvdaControllerInternal_logMessage),
-		("nvdaControllerInternal_inputCompositionUpdate", nvdaControllerInternal_inputCompositionUpdate),
-		("nvdaControllerInternal_inputCandidateListUpdate", nvdaControllerInternal_inputCandidateListUpdate),
-		("nvdaControllerInternal_IMEOpenStatusUpdate", nvdaControllerInternal_IMEOpenStatusUpdate),
+		("aslanControllerInternal_logMessage", aslanControllerInternal_logMessage),
+		("aslanControllerInternal_inputCompositionUpdate", aslanControllerInternal_inputCompositionUpdate),
+		("aslanControllerInternal_inputCandidateListUpdate", aslanControllerInternal_inputCandidateListUpdate),
+		("aslanControllerInternal_IMEOpenStatusUpdate", aslanControllerInternal_IMEOpenStatusUpdate),
 		(
-			"nvdaControllerInternal_inputConversionModeUpdate",
-			nvdaControllerInternal_inputConversionModeUpdate,
+			"aslanControllerInternal_inputConversionModeUpdate",
+			aslanControllerInternal_inputConversionModeUpdate,
 		),
-		("nvdaControllerInternal_vbufChangeNotify", nvdaControllerInternal_vbufChangeNotify),
+		("aslanControllerInternal_vbufChangeNotify", aslanControllerInternal_vbufChangeNotify),
 		(
-			"nvdaControllerInternal_installAddonPackageFromPath",
-			nvdaControllerInternal_installAddonPackageFromPath,
+			"aslanControllerInternal_installAddonPackageFromPath",
+			aslanControllerInternal_installAddonPackageFromPath,
 		),
-		("nvdaControllerInternal_drawFocusRectNotify", nvdaControllerInternal_drawFocusRectNotify),
-		("nvdaControllerInternal_openConfigDirectory", nvdaControllerInternal_openConfigDirectory),
-		("nvdaControllerInternal_handleRemoteURL", nvdaControllerInternal_handleRemoteURL),
+		("aslanControllerInternal_drawFocusRectNotify", aslanControllerInternal_drawFocusRectNotify),
+		("aslanControllerInternal_openConfigDirectory", aslanControllerInternal_openConfigDirectory),
+		("aslanControllerInternal_handleRemoteURL", aslanControllerInternal_handleRemoteURL),
 	]:
 		try:
 			_setDllFuncPointer(localLib.dll, f"_{name}", func)
 		except AttributeError as e:
 			log.error(
-				"nvdaHelperLocal function pointer for %s could not be found, possibly old nvdaHelperLocal dll"
+				"aslanHelperLocal function pointer for %s could not be found, possibly old aslanHelperLocal dll"
 				% name,
 				exc_info=True,
 			)
 			raise e
-	localLib.nvdaHelperLocal_initialize(globalVars.appArgs.secure)
-	# The rest of this function (to do with injection) only applies if NVDA is not running as a Windows store application
+	localLib.aslanHelperLocal_initialize(globalVars.appArgs.secure)
+	# The rest of this function (to do with injection) only applies if Aslan is not running as a Windows store application
 	if config.isAppX:
 		log.info("Remote injection disabled due to running as a Windows Store Application")
 		return
-	# Load nvdaHelperRemote.dll
+	# Load aslanHelperRemote.dll
 	h = winBindings.kernel32.LoadLibraryEx(
-		ReadPaths.nvdaHelperRemoteDll,
+		ReadPaths.aslanHelperRemoteDll,
 		0,
 		# Using an altered search path is necessary here
-		# As NVDAHelperRemote needs to locate dependent dlls in the same directory
+		# As AslanHelperRemote needs to locate dependent dlls in the same directory
 		# such as IAccessible2proxy.dll.
 		winKernel.LOAD_WITH_ALTERED_SEARCH_PATH,
 	)
 	if not h:
-		log.critical("Error loading nvdaHelperRemote.dll: %s" % WinError())  # noqa: F405
+		log.critical("Error loading aslanHelperRemote.dll: %s" % WinError())  # noqa: F405
 		return
-	_remoteLib = CDLL("nvdaHelperRemote", handle=h)  # noqa: F405
+	_remoteLib = CDLL("aslanHelperRemote", handle=h)  # noqa: F405
 	if _remoteLib.injection_initialize() == 0:
-		raise RuntimeError("Error initializing NVDAHelperRemote")
+		raise RuntimeError("Error initializing AslanHelperRemote")
 	if not _remoteLib.installIA2Support():
 		log.error("Error installing IA2 support")
-	# Manually start the in-process manager thread for this NVDA main thread now, as a slow system can cause this action to confuse WX
+	# Manually start the in-process manager thread for this Aslan main thread now, as a slow system can cause this action to confuse WX
 	_remoteLib.initInprocManagerThreadIfNeeded()
 	arch = winVersion.getWinVer().processorArchitecture
 	if arch == "AMD64":
@@ -889,7 +889,7 @@ def terminate():
 		if not _remoteLib.uninstallIA2Support():
 			log.debugWarning("Error uninstalling IA2 support")
 		if _remoteLib.injection_terminate() == 0:
-			raise RuntimeError("Error terminating NVDAHelperRemote")
+			raise RuntimeError("Error terminating AslanHelperRemote")
 		_remoteLib = None
 		if _remoteLoaderAMD64:
 			_remoteLoaderAMD64.terminate()
@@ -897,20 +897,20 @@ def terminate():
 		if _remoteLoaderARM64:
 			_remoteLoaderARM64.terminate()
 			_remoteLoaderARM64 = None
-	localLib.nvdaHelperLocal_terminate()
+	localLib.aslanHelperLocal_terminate()
 
 
 def getHelperLocalWin10Dll():
-	"""Get a ctypes WinDLL instance for the nvdaHelperLocalWin10 dll.
+	"""Get a ctypes WinDLL instance for the aslanHelperLocalWin10 dll.
 	This is a C++/CX dll used to provide access to certain UWP functionality.
 	"""
-	return windll[ReadPaths.nvdaHelperLocalWin10Dll]
+	return windll[ReadPaths.aslanHelperLocalWin10Dll]
 
 
 def _bstrReturn(address: int) -> str:
 	"""Handle a BSTR returned from a ctypes function call.
 	This includes freeing the memory.
-	This is needed for nvdaHelperLocalWin10 functions which return a BSTR.
+	This is needed for aslanHelperLocalWin10 functions which return a BSTR.
 	"""
 	# comtypes.BSTR.from_address seems to cause a crash for some reason. Not sure why.
 	# Just access the string ourselves.
@@ -924,33 +924,33 @@ def _bstrReturn(address: int) -> str:
 __getattr__ = _deprecate.handleDeprecations(
 	_deprecate.MovedSymbol(
 		"LOCAL_WIN10_DLL_PATH",
-		"NVDAState",
+		"AslanState",
 		"ReadPaths",
-		"nvdaHelperLocalWin10Dll",
+		"aslanHelperLocalWin10Dll",
 	),
 	_deprecate.MovedSymbol(
 		"versionedLibPath",
-		"NVDAState",
+		"AslanState",
 		"ReadPaths",
 		"versionedLibX86Path",
 	),
 	_deprecate.MovedSymbol(
 		"coreArchLibPath",
-		"NVDAState",
+		"AslanState",
 		"ReadPaths",
 		"coreArchLibPath",
 	),
 	_deprecate.MovedSymbol(
 		"generateBeep",
-		"NVDAHelper.localLib",
+		"AslanHelper.localLib",
 	),
 	_deprecate.MovedSymbol(
 		"VBuf_getTextInRange",
-		"NVDAHelper.localLib",
+		"AslanHelper.localLib",
 	),
 	_deprecate.MovedSymbol(
-		"nvdaController_onSsmlMarkReached",
-		"NVDAHelper.localLib",
+		"aslanController_onSsmlMarkReached",
+		"AslanHelper.localLib",
 	),
 	_deprecate.RemovedSymbol("bstrReturn", _bstrReturn),
 )

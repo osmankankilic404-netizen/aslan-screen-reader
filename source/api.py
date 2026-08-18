@@ -1,11 +1,11 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, James Teh, Michael Curran, Peter Vagner, Derek Riemer,
 # Davy Kager, Babbage B.V., Leonard de Ruijter, Joseph Lee, Accessolutions, Julien Cochuyt, hwf1324
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
 
-"""General functions for NVDA
-Functions should mostly refer to getting an object (NVDAObject) or a position (TextInfo).
+"""General functions for Aslan
+Functions should mostly refer to getting an object (AslanObject) or a position (TextInfo).
 """
 
 import typing
@@ -17,8 +17,8 @@ import globalVars
 from logHandler import log
 import ui
 import treeInterceptorHandler
-import NVDAObjects
-from NVDAObjects.window import Window
+import AslanObjects
+from AslanObjects.window import Window
 import winUser
 import controlTypes
 import eventHandler
@@ -36,7 +36,7 @@ if typing.TYPE_CHECKING:
 	import documentBase
 
 
-def getFocusObject() -> NVDAObjects.NVDAObject:
+def getFocusObject() -> AslanObjects.AslanObject:
 	"""
 	Gets the current object with focus.
 	@returns: the object with focus
@@ -44,29 +44,29 @@ def getFocusObject() -> NVDAObjects.NVDAObject:
 	return globalVars.focusObject
 
 
-def getForegroundObject() -> NVDAObjects.NVDAObject:
+def getForegroundObject() -> AslanObjects.AslanObject:
 	"""Gets the current foreground object.
 	This (cached) object is the (effective) top-level "window" (hwnd).
 	EG a Dialog rather than the focused control within the dialog.
 	The cache is updated as queued events are processed, as such there will be a delay between the winEvent
-	and this function matching. However, within NVDA this should be used in order to be in sync with other
+	and this function matching. However, within Aslan this should be used in order to be in sync with other
 	functions such as "getFocusAncestors".
 	@returns: the current foreground object
 	"""
 	return globalVars.foregroundObject
 
 
-def setForegroundObject(obj: NVDAObjects.NVDAObject) -> bool:
+def setForegroundObject(obj: AslanObjects.AslanObject) -> bool:
 	"""Stores the given object as the current foreground object.
 	Note: does not cause the operating system to change the foreground window,
-		but simply allows NVDA to keep track of what the foreground window is.
+		but simply allows Aslan to keep track of what the foreground window is.
 		Alternative names for this function may have been:
 		- setLastForegroundWindow
 		- setLastForegroundEventObject
 	@param obj: the object that will be stored as the current foreground object
 	"""
-	if not isinstance(obj, NVDAObjects.NVDAObject):
-		log.error("Object is not a valid NVDAObject")
+	if not isinstance(obj, AslanObjects.AslanObject):
+		log.error("Object is not a valid AslanObject")
 		return False
 	if objectBelowLockScreenAndWindowsIsLocked(obj):
 		return False
@@ -77,16 +77,16 @@ def setForegroundObject(obj: NVDAObjects.NVDAObject) -> bool:
 # C901 'setFocusObject' is too complex
 # Note: when working on setFocusObject, look for opportunities to simplify
 # and move logic out into smaller helper functions.
-def setFocusObject(obj: NVDAObjects.NVDAObject) -> bool:  # noqa: C901
+def setFocusObject(obj: AslanObjects.AslanObject) -> bool:  # noqa: C901
 	"""Stores an object as the current focus object.
 	Note: this does not physically change the window with focus in the operating system,
-	but allows NVDA to keep track of the correct object.
+	but allows Aslan to keep track of the correct object.
 	Before overriding the last object,
 	this function calls event_loseFocus on the object to notify it that it is losing focus.
 	@param obj: the object that will be stored as the focus object
 	"""
-	if not isinstance(obj, NVDAObjects.NVDAObject):
-		log.error("Object is not a valid NVDAObject")
+	if not isinstance(obj, AslanObjects.AslanObject):
+		log.error("Object is not a valid AslanObject")
 		return False
 	if objectBelowLockScreenAndWindowsIsLocked(obj):
 		return False
@@ -96,7 +96,7 @@ def setFocusObject(obj: NVDAObjects.NVDAObject) -> bool:  # noqa: C901
 	else:
 		oldTreeInterceptor = None
 	oldFocusLine = globalVars.focusAncestors
-	# add the old focus to the old focus ancestors, but only if its not None (is none at NVDA initialization)
+	# add the old focus to the old focus ancestors, but only if its not None (is none at Aslan initialization)
 	if globalVars.focusObject:
 		oldFocusLine.append(globalVars.focusObject)
 	oldAppModules = [o.appModule for o in oldFocusLine if o and o.appModule]
@@ -199,7 +199,7 @@ def getFocusDifferenceLevel():
 
 
 def getFocusAncestors():
-	"""An array of NVDAObjects that are all parents of the object which currently has focus"""
+	"""An array of AslanObjects that are all parents of the object which currently has focus"""
 	return globalVars.focusAncestors
 
 
@@ -208,10 +208,10 @@ def getMouseObject():
 	return globalVars.mouseObject
 
 
-def setMouseObject(obj: NVDAObjects.NVDAObject) -> bool:
-	"""Tells NVDA to remember the given object as the object that is directly under the mouse"""
-	if not isinstance(obj, NVDAObjects.NVDAObject):
-		log.error("Object is not a valid NVDAObject")
+def setMouseObject(obj: AslanObjects.AslanObject) -> bool:
+	"""Tells Aslan to remember the given object as the object that is directly under the mouse"""
+	if not isinstance(obj, AslanObjects.AslanObject):
+		log.error("Object is not a valid AslanObject")
 		return False
 	if objectBelowLockScreenAndWindowsIsLocked(obj):
 		return False
@@ -219,15 +219,15 @@ def setMouseObject(obj: NVDAObjects.NVDAObject) -> bool:
 	return True
 
 
-def getDesktopObject() -> NVDAObjects.NVDAObject:
+def getDesktopObject() -> AslanObjects.AslanObject:
 	"""Get the desktop object"""
 	return globalVars.desktopObject
 
 
-def setDesktopObject(obj: NVDAObjects.NVDAObject) -> None:
-	"""Tells NVDA to remember the given object as the desktop object.
+def setDesktopObject(obj: AslanObjects.AslanObject) -> None:
+	"""Tells Aslan to remember the given object as the desktop object.
 	We cannot prevent setting this when objectBelowLockScreenAndWindowsIsLocked is True,
-	as NVDA needs to set the desktopObject on start, and NVDA may start from the lockscreen.
+	as Aslan needs to set the desktopObject on start, and Aslan may start from the lockscreen.
 	"""
 	globalVars.desktopObject = obj
 
@@ -261,13 +261,13 @@ def setReviewPosition(
 	if isinstance(reviewObj, treeInterceptorHandler.DocumentTreeInterceptor):
 		# reviewPosition.obj can be a number of classes, e.g.
 		# CursorManager, DocumentWithTableNavigation, EditableText.
-		# We can only handle the NVDAObject case.
-		reviewObj = reviewObj.rootNVDAObject
+		# We can only handle the AslanObject case.
+		reviewObj = reviewObj.rootAslanObject
 
-	if isinstance(reviewObj, NVDAObjects.NVDAObject):
+	if isinstance(reviewObj, AslanObjects.AslanObject):
 		# reviewPosition.obj can be a number of classes, e.g.
 		# CursorManager, DocumentWithTableNavigation, EditableText.
-		# We can only handle the NVDAObject case.
+		# We can only handle the AslanObject case.
 		if objectBelowLockScreenAndWindowsIsLocked(reviewObj):
 			return False
 	else:
@@ -291,7 +291,7 @@ def setReviewPosition(
 	return True
 
 
-def getNavigatorObject() -> NVDAObjects.NVDAObject:
+def getNavigatorObject() -> AslanObjects.AslanObject:
 	"""Gets the current navigator object.
 	Navigator objects can be used to navigate around the operating system (with the numpad),
 	without moving the focus.
@@ -304,17 +304,17 @@ def getNavigatorObject() -> NVDAObjects.NVDAObject:
 		obj = globalVars.reviewPosition.obj
 	else:
 		try:
-			obj = globalVars.reviewPosition.NVDAObjectAtStart
+			obj = globalVars.reviewPosition.AslanObjectAtStart
 		except (NotImplementedError, LookupError):
 			obj = globalVars.reviewPosition.obj
-	nextObj = getattr(obj, "rootNVDAObject", None) or obj
+	nextObj = getattr(obj, "rootAslanObject", None) or obj
 	if objectBelowLockScreenAndWindowsIsLocked(nextObj):
 		return globalVars.navigatorObject
 	globalVars.navigatorObject = nextObj
 	return globalVars.navigatorObject
 
 
-def setNavigatorObject(obj: NVDAObjects.NVDAObject, isFocus: bool = False) -> bool:
+def setNavigatorObject(obj: AslanObjects.AslanObject, isFocus: bool = False) -> bool:
 	"""Sets an object to be the current navigator object.
 	Navigator objects can be used to navigate around the operating system (with the numpad),
 	without moving the focus.
@@ -324,8 +324,8 @@ def setNavigatorObject(obj: NVDAObjects.NVDAObject, isFocus: bool = False) -> bo
 	@param isFocus: true if the navigator object was set due to a focus change.
 	"""
 
-	if not isinstance(obj, NVDAObjects.NVDAObject):
-		log.error("Object is not a valid NVDAObject")
+	if not isinstance(obj, AslanObjects.AslanObject):
+		log.error("Object is not a valid AslanObject")
 		return False
 	if objectBelowLockScreenAndWindowsIsLocked(obj):
 		return False
@@ -371,8 +371,8 @@ def createStateList(states):
 	return [x for x in [1 << y for y in range(32)] if x & states]
 
 
-def moveMouseToNVDAObject(obj):
-	"""Moves the mouse to the given NVDA object's position"""
+def moveMouseToAslanObject(obj):
+	"""Moves the mouse to the given Aslan object's position"""
 	location = obj.location
 	if location:
 		winUser.setCursorPos(*location.center)
@@ -435,7 +435,7 @@ def getClipData():
 		return winUser.getClipboardData(winUser.CF_UNICODETEXT) or ""
 
 
-def getStatusBar() -> Optional[NVDAObjects.NVDAObject]:
+def getStatusBar() -> Optional[AslanObjects.AslanObject]:
 	"""Obtain the status bar for the current foreground object.
 	@return: The status bar object or C{None} if no status bar was found.
 	"""
@@ -464,7 +464,7 @@ def getStatusBarText(obj):
 	"""Get the text from a status bar.
 	This includes the name of the status bar and the names and values of all of its children.
 	@param obj: The status bar.
-	@type obj: L{NVDAObjects.NVDAObject}
+	@type obj: L{AslanObjects.AslanObject}
 	@return: The status bar text.
 	@rtype: str
 	"""
@@ -496,23 +496,23 @@ def filterFileName(name):
 	return name
 
 
-def isNVDAObject(obj: Any) -> bool:
-	"""Returns whether the supplied object is a L{NVDAObjects.NVDAObject}"""
-	return isinstance(obj, NVDAObjects.NVDAObject)
+def isAslanObject(obj: Any) -> bool:
+	"""Returns whether the supplied object is a L{AslanObjects.AslanObject}"""
+	return isinstance(obj, AslanObjects.AslanObject)
 
 
-fakeNVDAObjectClasses: set[type[NVDAObjects.NVDAObject]] = set()
+fakeAslanObjectClasses: set[type[AslanObjects.AslanObject]] = set()
 """
-A collection used to register fake NVDAObject classes.
+A collection used to register fake AslanObject classes.
 
-These classes are treated as virtual NVDAObjects, and may not correspond to actual controls.
+These classes are treated as virtual AslanObjects, and may not correspond to actual controls.
 For instance, content recognition results.
 """
 
 
-def isFakeNVDAObject(obj: Any) -> bool:
-	"""Returns whether the supplied object is a fake :class:`NVDAObjects.NVDAObject`."""
-	return isinstance(obj, tuple(fakeNVDAObjectClasses))
+def isFakeAslanObject(obj: Any) -> bool:
+	"""Returns whether the supplied object is a fake :class:`AslanObjects.AslanObject`."""
+	return isinstance(obj, tuple(fakeAslanObjectClasses))
 
 
 def isCursorManager(obj: Any) -> bool:
@@ -525,13 +525,13 @@ def isTreeInterceptor(obj: Any) -> bool:
 	return isinstance(obj, treeInterceptorHandler.TreeInterceptor)
 
 
-def isObjectInActiveTreeInterceptor(obj: NVDAObjects.NVDAObject) -> bool:
-	"""Returns whether the supplied L{NVDAObjects.NVDAObject} is
+def isObjectInActiveTreeInterceptor(obj: AslanObjects.AslanObject) -> bool:
+	"""Returns whether the supplied L{AslanObjects.AslanObject} is
 	in an active L{treeInterceptorHandler.TreeInterceptor},
 	i.e. a tree interceptor that is not in pass through mode.
 	"""
 	return bool(
-		isinstance(obj, NVDAObjects.NVDAObject)
+		isinstance(obj, AslanObjects.AslanObject)
 		and obj.treeInterceptor
 		and not obj.treeInterceptor.passThrough,
 	)
@@ -541,19 +541,19 @@ def getCaretPosition() -> "textInfos.TextInfo":
 	"""Gets a text info at the position of the caret."""
 	textContainerObj = getCaretObject()
 	if not textContainerObj:
-		raise RuntimeError("No Caret Object available, this is expected while NVDA is still starting up.")
+		raise RuntimeError("No Caret Object available, this is expected while Aslan is still starting up.")
 	return textContainerObj.makeTextInfo("caret")
 
 
 def getCaretObject() -> "documentBase.TextContainerObject":
 	"""Gets the object which contains the caret.
-	This is normally the NVDAObject with focus, unless it has a browse mode tree interceptor to return instead.
+	This is normally the AslanObject with focus, unless it has a browse mode tree interceptor to return instead.
 	@return: The object containing the caret.
-	@note: Note: this may not be the NVDA Object closest to the caret, EG an edit text box may have focus,
-	and contain multiple NVDAObjects closer to the caret position, consider instead:
+	@note: Note: this may not be the Aslan Object closest to the caret, EG an edit text box may have focus,
+	and contain multiple AslanObjects closer to the caret position, consider instead:
 		ti = getCaretPosition()
 		ti.expand(textInfos.UNIT_CHARACTER)
-		closestObj = ti.NVDAObjectAtStart
+		closestObj = ti.AslanObjectAtStart
 	"""
 	obj = getFocusObject()
 	ti = obj.treeInterceptor

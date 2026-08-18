@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2024 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -24,64 +24,64 @@ VolumeTupleT = tuple[float, float]
 @unique
 class SoundSplitState(DisplayStringIntEnum):
 	OFF = 0
-	NVDA_BOTH_APPS_BOTH = 1
-	NVDA_LEFT_APPS_RIGHT = 2
-	NVDA_LEFT_APPS_BOTH = 3
-	NVDA_RIGHT_APPS_LEFT = 4
-	NVDA_RIGHT_APPS_BOTH = 5
-	NVDA_BOTH_APPS_LEFT = 6
-	NVDA_BOTH_APPS_RIGHT = 7
+	Aslan_BOTH_APPS_BOTH = 1
+	Aslan_LEFT_APPS_RIGHT = 2
+	Aslan_LEFT_APPS_BOTH = 3
+	Aslan_RIGHT_APPS_LEFT = 4
+	Aslan_RIGHT_APPS_BOTH = 5
+	Aslan_BOTH_APPS_LEFT = 6
+	Aslan_BOTH_APPS_RIGHT = 7
 
 	@property
 	def _displayStringLabels(self) -> dict[IntEnum, str]:
 		return {
 			# Translators: Sound split state
 			SoundSplitState.OFF: pgettext("SoundSplit", "Sound split disabled"),
-			SoundSplitState.NVDA_BOTH_APPS_BOTH: pgettext(
+			SoundSplitState.Aslan_BOTH_APPS_BOTH: pgettext(
 				"SoundSplit",
 				# Translators: Sound split state
-				"NVDA in both channels and applications in both channels",
+				"Aslan in both channels and applications in both channels",
 			),
 			# Translators: Sound split state
-			SoundSplitState.NVDA_LEFT_APPS_RIGHT: _("NVDA on the left and applications on the right"),
+			SoundSplitState.Aslan_LEFT_APPS_RIGHT: _("Aslan on the left and applications on the right"),
 			# Translators: Sound split state
-			SoundSplitState.NVDA_LEFT_APPS_BOTH: _("NVDA on the left and applications in both channels"),
+			SoundSplitState.Aslan_LEFT_APPS_BOTH: _("Aslan on the left and applications in both channels"),
 			# Translators: Sound split state
-			SoundSplitState.NVDA_RIGHT_APPS_LEFT: _("NVDA on the right and applications on the left"),
+			SoundSplitState.Aslan_RIGHT_APPS_LEFT: _("Aslan on the right and applications on the left"),
 			# Translators: Sound split state
-			SoundSplitState.NVDA_RIGHT_APPS_BOTH: _("NVDA on the right and applications in both channels"),
+			SoundSplitState.Aslan_RIGHT_APPS_BOTH: _("Aslan on the right and applications in both channels"),
 			# Translators: Sound split state
-			SoundSplitState.NVDA_BOTH_APPS_LEFT: _("NVDA in both channels and applications on the left"),
+			SoundSplitState.Aslan_BOTH_APPS_LEFT: _("Aslan in both channels and applications on the left"),
 			# Translators: Sound split state
-			SoundSplitState.NVDA_BOTH_APPS_RIGHT: _("NVDA in both channels and applications on the right"),
+			SoundSplitState.Aslan_BOTH_APPS_RIGHT: _("Aslan in both channels and applications on the right"),
 		}
 
 	def getAppVolume(self) -> VolumeTupleT:
 		match self:
 			case (
-				SoundSplitState.NVDA_BOTH_APPS_BOTH
-				| SoundSplitState.NVDA_LEFT_APPS_BOTH
-				| SoundSplitState.NVDA_RIGHT_APPS_BOTH
+				SoundSplitState.Aslan_BOTH_APPS_BOTH
+				| SoundSplitState.Aslan_LEFT_APPS_BOTH
+				| SoundSplitState.Aslan_RIGHT_APPS_BOTH
 			):
 				return (1.0, 1.0)
-			case SoundSplitState.NVDA_RIGHT_APPS_LEFT | SoundSplitState.NVDA_BOTH_APPS_LEFT:
+			case SoundSplitState.Aslan_RIGHT_APPS_LEFT | SoundSplitState.Aslan_BOTH_APPS_LEFT:
 				return (1.0, 0.0)
-			case SoundSplitState.NVDA_LEFT_APPS_RIGHT | SoundSplitState.NVDA_BOTH_APPS_RIGHT:
+			case SoundSplitState.Aslan_LEFT_APPS_RIGHT | SoundSplitState.Aslan_BOTH_APPS_RIGHT:
 				return (0.0, 1.0)
 			case _:
 				raise RuntimeError(f"Unexpected or unknown state {self=}")
 
-	def getNVDAVolume(self) -> VolumeTupleT:
+	def getAslanVolume(self) -> VolumeTupleT:
 		match self:
 			case (
-				SoundSplitState.NVDA_BOTH_APPS_BOTH
-				| SoundSplitState.NVDA_BOTH_APPS_LEFT
-				| SoundSplitState.NVDA_BOTH_APPS_RIGHT
+				SoundSplitState.Aslan_BOTH_APPS_BOTH
+				| SoundSplitState.Aslan_BOTH_APPS_LEFT
+				| SoundSplitState.Aslan_BOTH_APPS_RIGHT
 			):
 				return (1.0, 1.0)
-			case SoundSplitState.NVDA_LEFT_APPS_RIGHT | SoundSplitState.NVDA_LEFT_APPS_BOTH:
+			case SoundSplitState.Aslan_LEFT_APPS_RIGHT | SoundSplitState.Aslan_LEFT_APPS_BOTH:
 				return (1.0, 0.0)
-			case SoundSplitState.NVDA_RIGHT_APPS_LEFT | SoundSplitState.NVDA_RIGHT_APPS_BOTH:
+			case SoundSplitState.Aslan_RIGHT_APPS_LEFT | SoundSplitState.Aslan_RIGHT_APPS_BOTH:
 				return (0.0, 1.0)
 			case _:
 				raise RuntimeError(f"Unexpected or unknown state {self=}")
@@ -159,8 +159,8 @@ def _unregisterCallback() -> None:
 class _VolumeSetter(AudioSessionNotification):
 	leftVolume: float
 	rightVolume: float
-	leftNVDAVolume: float
-	rightNVDAVolume: float
+	leftAslanVolume: float
+	rightAslanVolume: float
 	foundSessionWithNot2Channels: bool = False
 
 	def on_session_created(self, new_session: AudioSession):
@@ -177,8 +177,8 @@ class _VolumeSetter(AudioSessionNotification):
 			channelVolume.SetChannelVolume(0, self.leftVolume, None)
 			channelVolume.SetChannelVolume(1, self.rightVolume, None)
 		else:
-			channelVolume.SetChannelVolume(0, self.leftNVDAVolume, None)
-			channelVolume.SetChannelVolume(1, self.rightNVDAVolume, None)
+			channelVolume.SetChannelVolume(0, self.leftAslanVolume, None)
+			channelVolume.SetChannelVolume(1, self.rightAslanVolume, None)
 
 
 def _setSoundSplitState(state: SoundSplitState, initial: bool = False) -> dict:
@@ -189,11 +189,11 @@ def _setSoundSplitState(state: SoundSplitState, initial: bool = False) -> dict:
 		else:
 			# Disabling sound split via command or via settings
 			# We need to restore volume of all applications, but then don't set up callback for future audio sessions
-			state = SoundSplitState.NVDA_BOTH_APPS_BOTH
+			state = SoundSplitState.Aslan_BOTH_APPS_BOTH
 			applyToFuture = False
 	leftVolume, rightVolume = state.getAppVolume()
-	leftNVDAVolume, rightNVDAVolume = state.getNVDAVolume()
-	volumeSetter = _VolumeSetter(leftVolume, rightVolume, leftNVDAVolume, rightNVDAVolume)
+	leftAslanVolume, rightAslanVolume = state.getAslanVolume()
+	volumeSetter = _VolumeSetter(leftVolume, rightVolume, leftAslanVolume, rightAslanVolume)
 	_applyToAllAudioSessions(volumeSetter, applyToFuture=applyToFuture)
 	return {
 		"foundSessionWithNot2Channels": volumeSetter.foundSessionWithNot2Channels,

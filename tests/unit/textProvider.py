@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2017-2023 NV Access Limited, Leonard de Ruijter
@@ -8,8 +8,8 @@
 See the L{BasicTextProvider} class.
 """
 
-from NVDAObjects import NVDAObjectTextInfo
-from .objectProvider import PlaceholderNVDAObject
+from AslanObjects import AslanObjectTextInfo
+from .objectProvider import PlaceholderAslanObject
 import textInfos
 from textInfos.offsets import Offsets
 import textUtils
@@ -17,7 +17,7 @@ import cursorManager
 from typing import Tuple
 
 
-class BasicTextInfo(NVDAObjectTextInfo):
+class BasicTextInfo(AslanObjectTextInfo):
 	# Most of our code use UTF-16 as internal encoding.
 	# Mimic this behavior, so we can also implicitly test textUtils module code
 	encoding = textUtils.WCHAR_ENCODING
@@ -26,7 +26,7 @@ class BasicTextInfo(NVDAObjectTextInfo):
 		return f"{self.__class__.__name__} {self._get_offsets()!r}"
 
 	def _getStoryLength(self):
-		# NVDAObjectTextInfo will just return the str length of the story text,.
+		# AslanObjectTextInfo will just return the str length of the story text,.
 		# As we are using a custom encoding for this TextInfo, this is incorrect.
 		return textUtils.getOffsetConverter(self.encoding)(self._getStoryText()).encodedStringLength
 
@@ -51,8 +51,8 @@ class BasicTextInfo(NVDAObjectTextInfo):
 		return obj
 
 
-class BasicTextProvider(PlaceholderNVDAObject):
-	"""An NVDAObject which makes TextInfos based on a provided string of text.
+class BasicTextProvider(PlaceholderAslanObject):
+	"""An AslanObject which makes TextInfos based on a provided string of text.
 	Example usage:
 	>>> obj = BasicTextProvider(text="abcd")
 	>>> ti = obj.makeTextInfo(textInfos.POSITION_CARET)

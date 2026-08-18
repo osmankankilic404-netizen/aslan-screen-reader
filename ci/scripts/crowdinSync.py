@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # based on file from https://github.com/jcsteh/osara
 # Copyright (C) 2023-2024 NV Access Limited, James Teh
 # This file may be used under the terms of the GNU General Public License, version 2 or later.

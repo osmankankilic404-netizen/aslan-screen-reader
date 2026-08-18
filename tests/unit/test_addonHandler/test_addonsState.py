@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2023-2026 NV Access Limited, Łukasz Golonka
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -156,7 +156,7 @@ class TestSerialization(unittest.TestCase):
 	def test_saveRaisesWhenShouldNotWriteToDisk(self):
 		state = addonHandler.AddonsState()
 		state.fromDict({"disabledAddons": ["someAddon"]})
-		with patch("NVDAState.shouldWriteToDisk", return_value=False):
+		with patch("AslanState.shouldWriteToDisk", return_value=False):
 			with self.assertRaises(RuntimeError):
 				state._save(self.statePath)
 

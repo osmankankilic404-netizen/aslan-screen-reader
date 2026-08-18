@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Babbage B.V., Bill Dengler, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -16,8 +16,8 @@ import api  # noqa: F401
 import config  # noqa: F401
 import displayModel
 import eventHandler  # noqa: F401
-from NVDAObjects import NVDAObject
-from NVDAObjects.behaviors import EditableText, EditableTextWithoutAutoSelectDetection, LiveText
+from AslanObjects import AslanObject
+from AslanObjects.behaviors import EditableText, EditableTextWithoutAutoSelectDetection, LiveText
 import watchdog
 from locationHelper import RectLTWH
 from diffHandler import prefer_difflib
@@ -33,7 +33,7 @@ def isUsableWindow(windowHandle):
 		return False
 	# #7345-followup: A hung application is flagged by the system (IsHungAppWindow)
 	# slightly before its DWM ghost window is created. Treat it as unusable as soon
-	# as it is flagged so NVDA stops attempting blocking cross-process calls into it
+	# as it is flagged so Aslan stops attempting blocking cross-process calls into it
 	# (which otherwise freeze the core until the watchdog cancels them ~6s later),
 	# and so child windows of the hung app (which have no ghost of their own) are
 	# also covered.
@@ -65,9 +65,9 @@ class WindowProcessHandleContainer(object):
 		winKernel.closeHandle(self.processHandle)
 
 
-class Window(NVDAObject):
+class Window(AslanObject):
 	"""
-	An NVDAObject for a window
+	An AslanObject for a window
 	@ivar windowHandle: The window's handle
 	@type windowHandle: int
 	@ivar windowClassName: the window's class
@@ -92,7 +92,7 @@ class Window(NVDAObject):
 			return
 		# Likewise once the system flags the application as not responding: any higher
 		# API (UIA/MSAA/JAB) would make a synchronous cross-process call that blocks
-		# until the app recovers. Falling back to a plain Window object here keeps NVDA
+		# until the app recovers. Falling back to a plain Window object here keeps Aslan
 		# responsive instead of freezing the core until the watchdog intervenes.
 		if winUser.isHungAppWindow(windowHandle):
 			return
@@ -107,18 +107,18 @@ class Window(NVDAObject):
 		import JABHandler
 
 		if JABHandler.isJavaWindow(windowHandle):
-			import NVDAObjects.JAB
+			import AslanObjects.JAB
 
-			yield NVDAObjects.JAB.JAB
+			yield AslanObjects.JAB.JAB
 		import UIAHandler
 
 		if UIAHandler.handler and UIAHandler.handler.isUIAWindow(windowHandle):
-			import NVDAObjects.UIA
+			import AslanObjects.UIA
 
-			yield NVDAObjects.UIA.UIA
-		import NVDAObjects.IAccessible
+			yield AslanObjects.UIA.UIA
+		import AslanObjects.IAccessible
 
-		yield NVDAObjects.IAccessible.IAccessible
+		yield AslanObjects.IAccessible.IAccessible
 
 	def findOverlayClasses(self, clsList):
 		windowClassName = self.normalizeWindowClassName(self.windowClassName)

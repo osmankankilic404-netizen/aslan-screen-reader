@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2025 NV Access Limited, Peter Vagner, Davy Kager, Mozilla Corporation, Google LLC,
 # Leonard de Ruijter
 # This file is covered by the GNU General Public License.
@@ -38,7 +38,7 @@ from comtypes import (
 	GUID,
 )
 from comtypes.automation import VARIANT
-import NVDAState
+import AslanState
 from winBindings.mmeapi import WAVEFORMATEX
 
 
@@ -46,17 +46,17 @@ DWORD_PTR = c_size_t
 LRESULT = c_ssize_t
 
 
-dll = cdll.LoadLibrary(NVDAState.ReadPaths.nvdaHelperLocalDll)
+dll = cdll.LoadLibrary(AslanState.ReadPaths.aslanHelperLocalDll)
 
-nvdaHelperLocal_initialize = dll.nvdaHelperLocal_initialize
-nvdaHelperLocal_initialize.restype = c_voidp
-nvdaHelperLocal_initialize.argtypes = (
+aslanHelperLocal_initialize = dll.aslanHelperLocal_initialize
+aslanHelperLocal_initialize.restype = c_voidp
+aslanHelperLocal_initialize.argtypes = (
 	c_bool,  # secureMode
 )
 
-nvdaHelperLocal_terminate = dll.nvdaHelperLocal_terminate
-nvdaHelperLocal_terminate.restype = None
-nvdaHelperLocal_terminate.argtypes = ()
+aslanHelperLocal_terminate = dll.aslanHelperLocal_terminate
+aslanHelperLocal_terminate.restype = None
+aslanHelperLocal_terminate.argtypes = ()
 
 createRemoteBindingHandle = dll.createRemoteBindingHandle
 createRemoteBindingHandle.restype = HANDLE
@@ -88,22 +88,22 @@ generateBeep.argtypes = (
 	c_int,  # right
 )
 
-nvdaInProcUtils_registerNVDAProcess = dll.nvdaInProcUtils_registerNVDAProcess
-nvdaInProcUtils_registerNVDAProcess.restype = c_int  # error_status_t
-nvdaInProcUtils_registerNVDAProcess.argtypes = (
+aslanInProcUtils_registerAslanProcess = dll.aslanInProcUtils_registerAslanProcess
+aslanInProcUtils_registerAslanProcess.restype = c_int  # error_status_t
+aslanInProcUtils_registerAslanProcess.argtypes = (
 	HANDLE,  # bindingHandle
 	POINTER(c_void_p),  # registrationhandle
 )
 
-nvdaInProcUtils_unregisterNVDAProcess = dll.nvdaInProcUtils_unregisterNVDAProcess
-nvdaInProcUtils_unregisterNVDAProcess.restype = c_int  # error_status_t
-nvdaInProcUtils_unregisterNVDAProcess.argtypes = (
+aslanInProcUtils_unregisterAslanProcess = dll.aslanInProcUtils_unregisterAslanProcess
+aslanInProcUtils_unregisterAslanProcess.restype = c_int  # error_status_t
+aslanInProcUtils_unregisterAslanProcess.argtypes = (
 	POINTER(c_void_p),  # registrationhandle
 )
 
-nvdaInProcUtils_winword_expandToLine = dll.nvdaInProcUtils_winword_expandToLine
-nvdaInProcUtils_winword_expandToLine.restype = c_int  # error_status_t
-nvdaInProcUtils_winword_expandToLine.argtypes = (
+aslanInProcUtils_winword_expandToLine = dll.aslanInProcUtils_winword_expandToLine
+aslanInProcUtils_winword_expandToLine.restype = c_int  # error_status_t
+aslanInProcUtils_winword_expandToLine.argtypes = (
 	HANDLE,  # IDL_handle
 	c_ulong,  # windowHandle
 	c_int,  # offset
@@ -111,9 +111,9 @@ nvdaInProcUtils_winword_expandToLine.argtypes = (
 	POINTER(c_int),  # lineEnd
 )
 
-nvdaInProcUtils_winword_getTextInRange = dll.nvdaInProcUtils_winword_getTextInRange
-nvdaInProcUtils_winword_getTextInRange.restype = c_int  # error_status_t
-nvdaInProcUtils_winword_getTextInRange.argtypes = (
+aslanInProcUtils_winword_getTextInRange = dll.aslanInProcUtils_winword_getTextInRange
+aslanInProcUtils_winword_getTextInRange.restype = c_int  # error_status_t
+aslanInProcUtils_winword_getTextInRange.argtypes = (
 	HANDLE,  # IDL_handle
 	c_ulong,  # windowHandle
 	c_int,  # startOffset
@@ -122,9 +122,9 @@ nvdaInProcUtils_winword_getTextInRange.argtypes = (
 	POINTER(BSTR),  # text
 )
 
-nvdaInProcUtils_winword_moveByLine = dll.nvdaInProcUtils_winword_moveByLine
-nvdaInProcUtils_winword_moveByLine.restype = c_int  # error_status_t
-nvdaInProcUtils_winword_moveByLine.argtypes = (
+aslanInProcUtils_winword_moveByLine = dll.aslanInProcUtils_winword_moveByLine
+aslanInProcUtils_winword_moveByLine.restype = c_int  # error_status_t
+aslanInProcUtils_winword_moveByLine.argtypes = (
 	HANDLE,  # IDL_handle
 	c_ulong,  # windowHandle
 	c_int,  # offset
@@ -132,9 +132,9 @@ nvdaInProcUtils_winword_moveByLine.argtypes = (
 	POINTER(c_int),  # newOffset
 )
 
-nvdaInProcUtils_sysListView32_getGroupInfo = dll.nvdaInProcUtils_sysListView32_getGroupInfo
-nvdaInProcUtils_sysListView32_getGroupInfo.restype = c_int  # error_status_t
-nvdaInProcUtils_sysListView32_getGroupInfo.argtypes = (
+aslanInProcUtils_sysListView32_getGroupInfo = dll.aslanInProcUtils_sysListView32_getGroupInfo
+aslanInProcUtils_sysListView32_getGroupInfo.restype = c_int  # error_status_t
+aslanInProcUtils_sysListView32_getGroupInfo.argtypes = (
 	HANDLE,  # IDL_handle
 	c_ulong,  # windowHandle
 	c_int,  # groupIndex
@@ -143,9 +143,9 @@ nvdaInProcUtils_sysListView32_getGroupInfo.argtypes = (
 	POINTER(c_int),  # state
 )
 
-nvdaInProcUtils_sysListView32_getColumnContent = dll.nvdaInProcUtils_sysListView32_getColumnContent
-nvdaInProcUtils_sysListView32_getColumnContent.restype = c_int  # error_status_t
-nvdaInProcUtils_sysListView32_getColumnContent.argtypes = (
+aslanInProcUtils_sysListView32_getColumnContent = dll.aslanInProcUtils_sysListView32_getColumnContent
+aslanInProcUtils_sysListView32_getColumnContent.restype = c_int  # error_status_t
+aslanInProcUtils_sysListView32_getColumnContent.argtypes = (
 	HANDLE,  # IDL_handle
 	c_ulong,  # windowHandle
 	c_int,  # item
@@ -153,9 +153,9 @@ nvdaInProcUtils_sysListView32_getColumnContent.argtypes = (
 	POINTER(BSTR),  # text
 )
 
-nvdaInProcUtils_sysListView32_getColumnLocation = dll.nvdaInProcUtils_sysListView32_getColumnLocation
-nvdaInProcUtils_sysListView32_getColumnLocation.restype = c_int  # error_status_t
-nvdaInProcUtils_sysListView32_getColumnLocation.argtypes = (
+aslanInProcUtils_sysListView32_getColumnLocation = dll.aslanInProcUtils_sysListView32_getColumnLocation
+aslanInProcUtils_sysListView32_getColumnLocation.restype = c_int  # error_status_t
+aslanInProcUtils_sysListView32_getColumnLocation.argtypes = (
 	HANDLE,  # IDL_handle
 	c_ulong,  # windowHandle
 	c_int,  # item
@@ -163,42 +163,42 @@ nvdaInProcUtils_sysListView32_getColumnLocation.argtypes = (
 	POINTER(RECT),  # location
 )
 
-nvdaInProcUtils_sysListView32_getColumnHeader = dll.nvdaInProcUtils_sysListView32_getColumnHeader
-nvdaInProcUtils_sysListView32_getColumnHeader.restype = c_int  # error_status_t
-nvdaInProcUtils_sysListView32_getColumnHeader.argtypes = (
+aslanInProcUtils_sysListView32_getColumnHeader = dll.aslanInProcUtils_sysListView32_getColumnHeader
+aslanInProcUtils_sysListView32_getColumnHeader.restype = c_int  # error_status_t
+aslanInProcUtils_sysListView32_getColumnHeader.argtypes = (
 	HANDLE,  # IDL_handle
 	c_ulong,  # windowHandle
 	c_int,  # subItem
 	POINTER(BSTR),  # text
 )
 
-nvdaInProcUtils_sysListView32_getColumnOrderArray = dll.nvdaInProcUtils_sysListView32_getColumnOrderArray
-nvdaInProcUtils_sysListView32_getColumnOrderArray.restype = c_int  # error_status_t
-nvdaInProcUtils_sysListView32_getColumnOrderArray.argtypes = (
+aslanInProcUtils_sysListView32_getColumnOrderArray = dll.aslanInProcUtils_sysListView32_getColumnOrderArray
+aslanInProcUtils_sysListView32_getColumnOrderArray.restype = c_int  # error_status_t
+aslanInProcUtils_sysListView32_getColumnOrderArray.argtypes = (
 	HANDLE,  # IDL_handle
 	c_ulong,  # windowHandle
 	c_int,  # columnCount
 	POINTER(c_int),  # columnOrderArray
 )
 
-nvdaInProcUtils_getActiveObject = dll.nvdaInProcUtils_getActiveObject
-nvdaInProcUtils_getActiveObject.restype = c_int  # error_status_t
-nvdaInProcUtils_getActiveObject.argtypes = (
+aslanInProcUtils_getActiveObject = dll.aslanInProcUtils_getActiveObject
+aslanInProcUtils_getActiveObject.restype = c_int  # error_status_t
+aslanInProcUtils_getActiveObject.argtypes = (
 	HANDLE,  # bindingHandle
 	c_wchar_p,  # progid
 	POINTER(POINTER(IUnknown)),  # ppUnknown
 )
 
-nvdaInProcUtils_dumpOnCrash = dll.nvdaInProcUtils_dumpOnCrash
-nvdaInProcUtils_dumpOnCrash.restype = c_int  # error_status_t
-nvdaInProcUtils_dumpOnCrash.argtypes = (
+aslanInProcUtils_dumpOnCrash = dll.aslanInProcUtils_dumpOnCrash
+aslanInProcUtils_dumpOnCrash.restype = c_int  # error_status_t
+aslanInProcUtils_dumpOnCrash.argtypes = (
 	HANDLE,  # bindingHandle
 	c_wchar_p,  # minidumpPath
 )
 
-nvdaInProcUtils_IA2Text_findContentDescendant = dll.nvdaInProcUtils_IA2Text_findContentDescendant
-nvdaInProcUtils_IA2Text_findContentDescendant.restype = c_int  # error_status_t
-nvdaInProcUtils_IA2Text_findContentDescendant.argtypes = (
+aslanInProcUtils_IA2Text_findContentDescendant = dll.aslanInProcUtils_IA2Text_findContentDescendant
+aslanInProcUtils_IA2Text_findContentDescendant.restype = c_int  # error_status_t
+aslanInProcUtils_IA2Text_findContentDescendant.argtypes = (
 	HANDLE,  # bindingHandle
 	c_ulong,  # hwnd
 	c_long,  # parentID
@@ -207,9 +207,9 @@ nvdaInProcUtils_IA2Text_findContentDescendant.argtypes = (
 	POINTER(c_long),  # descendantOffset
 )
 
-nvdaInProcUtils_getTextFromIAccessible = dll.nvdaInProcUtils_getTextFromIAccessible
-nvdaInProcUtils_getTextFromIAccessible.restype = c_int  # error_status_t
-nvdaInProcUtils_getTextFromIAccessible.argtypes = (
+aslanInProcUtils_getTextFromIAccessible = dll.aslanInProcUtils_getTextFromIAccessible
+aslanInProcUtils_getTextFromIAccessible.restype = c_int  # error_status_t
+aslanInProcUtils_getTextFromIAccessible.argtypes = (
 	HANDLE,  # bindingHandle
 	c_ulong,  # hwnd
 	c_long,  # parentID
@@ -218,9 +218,9 @@ nvdaInProcUtils_getTextFromIAccessible.argtypes = (
 	c_bool,  # includeTopLevelText
 )
 
-nvdaInProcUtils_outlook_getMAPIProp = dll.nvdaInProcUtils_outlook_getMAPIProp
-nvdaInProcUtils_outlook_getMAPIProp.restype = c_int  # error_status_t
-nvdaInProcUtils_outlook_getMAPIProp.argtypes = (
+aslanInProcUtils_outlook_getMAPIProp = dll.aslanInProcUtils_outlook_getMAPIProp
+aslanInProcUtils_outlook_getMAPIProp.restype = c_int  # error_status_t
+aslanInProcUtils_outlook_getMAPIProp.argtypes = (
 	HANDLE,  # IDL_handle
 	c_long,  # threadID
 	POINTER(IUnknown),  # mapiObject
@@ -246,9 +246,9 @@ class EXCEL_CELLINFO(Structure):
 	]
 
 
-nvdaInProcUtils_excel_getCellInfos = dll.nvdaInProcUtils_excel_getCellInfos
-nvdaInProcUtils_excel_getCellInfos.restype = c_int  # error_status_t
-nvdaInProcUtils_excel_getCellInfos.argtypes = (
+aslanInProcUtils_excel_getCellInfos = dll.aslanInProcUtils_excel_getCellInfos
+aslanInProcUtils_excel_getCellInfos.restype = c_int  # error_status_t
+aslanInProcUtils_excel_getCellInfos.argtypes = (
 	HANDLE,  # IDL_handle
 	c_ulong,  # windowHandle
 	BSTR,  # rangeAddress
@@ -634,9 +634,9 @@ wasSilence_terminate = dll.wasSilence_terminate
 wasSilence_terminate.restype = None
 wasSilence_terminate.argtypes = ()
 
-nvdaController_onSsmlMarkReached = dll.nvdaController_onSsmlMarkReached
-nvdaController_onSsmlMarkReached.restype = c_ulong
-nvdaController_onSsmlMarkReached.argtypes = (c_wchar_p,)
+aslanController_onSsmlMarkReached = dll.aslanController_onSsmlMarkReached
+aslanController_onSsmlMarkReached.restype = c_ulong
+aslanController_onSsmlMarkReached.argtypes = (c_wchar_p,)
 
 calculateCharacterBoundaries = dll.calculateCharacterBoundaries
 calculateCharacterBoundaries.restype = c_bool

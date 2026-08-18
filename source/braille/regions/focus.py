@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, Joseph Lee, Babbage B.V., Davy Kager, Bram Duvigneau, Leonard de Ruijter, Burman's Computer and Education Ltd., Julien Cochuyt
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from __future__ import annotations
 
@@ -17,12 +17,12 @@ import config
 from utils.security import objectBelowLockScreenAndWindowsIsLocked
 
 if TYPE_CHECKING:
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 
 
 from .base import Region
 from ..constants import CONTEXTPRES_CHANGEDCONTEXT, TEXT_SEPARATOR
-from .NVDAObject import NVDAObjectRegion, NVDAObjectHasUsefulText, ReviewNVDAObjectRegion
+from .AslanObject import AslanObjectRegion, AslanObjectHasUsefulText, ReviewAslanObjectRegion
 from .textInfo import (
 	CursorManagerRegion,
 	ReviewCursorManagerRegion,
@@ -47,7 +47,7 @@ def invalidateCachedFocusAncestors(index):
 
 
 def getFocusContextRegions(
-	obj: "NVDAObject",
+	obj: "AslanObject",
 	oldFocusRegions: Optional[List[Region]] = None,
 ) -> Generator[Region, None, None]:
 	if objectBelowLockScreenAndWindowsIsLocked(obj):
@@ -60,8 +60,8 @@ def getFocusContextRegions(
 
 	ancestorsEnd = len(ancestors)
 	if isinstance(obj, TreeInterceptor):
-		obj = obj.rootNVDAObject
-		# We only want the ancestors of the buffer's root NVDAObject.
+		obj = obj.rootAslanObject
+		# We only want the ancestors of the buffer's root AslanObject.
 		if obj != api.getFocusObject():
 			# Search backwards through the focus ancestors to find the index of obj.
 			for index, ancestor in zip(range(len(ancestors) - 1, 0, -1), reversed(ancestors)):
@@ -106,7 +106,7 @@ def getFocusContextRegions(
 	for index, parent in enumerate(ancestors[newAncestorsStart:ancestorsEnd], newAncestorsStart):
 		if not parent.isPresentableFocusAncestor:
 			continue
-		region = NVDAObjectRegion(parent, appendText=TEXT_SEPARATOR)
+		region = AslanObjectRegion(parent, appendText=TEXT_SEPARATOR)
 		region._focusAncestorIndex = index
 		if (
 			config.conf["braille"]["focusContextPresentation"] == CONTEXTPRES_CHANGEDCONTEXT
@@ -124,7 +124,7 @@ def getFocusContextRegions(
 
 
 def getFocusRegions(
-	obj: "NVDAObject",
+	obj: "AslanObject",
 	review: bool = False,
 ) -> Generator[Region, None, None]:
 	if objectBelowLockScreenAndWindowsIsLocked(obj):
@@ -142,20 +142,20 @@ def getFocusRegions(
 
 	# Late import to avoid circular import.
 	from cursorManager import CursorManager
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 	from treeInterceptorHandler import DocumentTreeInterceptor, TreeInterceptor
 
 	if isinstance(obj, CursorManager):
 		region2 = (ReviewCursorManagerRegion if review else CursorManagerRegion)(obj)
 	elif isinstance(obj, DocumentTreeInterceptor) or (
-		isinstance(obj, NVDAObject) and NVDAObjectHasUsefulText(obj)
+		isinstance(obj, AslanObject) and AslanObjectHasUsefulText(obj)
 	):
 		region2 = (ReviewTextInfoRegion if review else TextInfoRegion)(obj)
 	else:
 		region2 = None
 	if isinstance(obj, TreeInterceptor):
-		obj = obj.rootNVDAObject
-	region = (ReviewNVDAObjectRegion if review else NVDAObjectRegion)(
+		obj = obj.rootAslanObject
+	region = (ReviewAslanObjectRegion if review else AslanObjectRegion)(
 		obj,
 		appendText=TEXT_SEPARATOR if region2 else "",
 	)

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2006-2025 NV Access Limited, Peter Vágner, Aleksey Sadovoy, Babbage B.V., Bill Dengler,
@@ -157,7 +157,7 @@ from .sayAll import initialize as sayAllInitialize
 
 
 def initialize():
-	"""Loads and sets the synth driver configured in nvda.ini.
+	"""Loads and sets the synth driver configured in aslan.ini.
 	Initializes the state of speech and initializes the sayAllHandler
 	"""
 	synthDriverHandler.initialize()

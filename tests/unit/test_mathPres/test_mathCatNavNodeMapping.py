@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Ryan McCleary
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Unit tests for MathCAT NavNode mapping helpers."""
 
@@ -17,7 +17,7 @@ from mathPres._mathMlNode import MathMlNodeInfo, MathMlNodeRectInfo
 from mathPres.MathCAT import _navNodeMapping as navNodeMapping
 
 if TYPE_CHECKING:
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 
 
 class TestMathCatNavNodeMapping(unittest.TestCase):
@@ -46,7 +46,7 @@ class TestMathCatNavNodeMapping(unittest.TestCase):
 	def test_addNavigationIdsToMathMl_preservesAuthorIdsAndAvoidsPrefixCollisions(self) -> None:
 		mathml = (
 			'<math id="author-root">'
-			'<mrow id="nvda-math-node-author">'
+			'<mrow id="aslan-math-node-author">'
 			'<mi href="#author-root">x</mi>'
 			"</mrow>"
 			"</math>"
@@ -60,21 +60,21 @@ class TestMathCatNavNodeMapping(unittest.TestCase):
 		mi = mrow.find("mi")
 		assert mi is not None
 		self.assertEqual(root.attrib, {"id": "author-root"})
-		self.assertEqual(mrow.attrib, {"id": "nvda-math-node-author"})
+		self.assertEqual(mrow.attrib, {"id": "aslan-math-node-author"})
 		self.assertEqual(
 			mi.attrib,
 			{
 				"href": "#author-root",
-				"id": "nvda-math-node-1-0-0",
-				"data-nvda-math-id-added": "true",
+				"id": "aslan-math-node-1-0-0",
+				"data-aslan-math-id-added": "true",
 			},
 		)
 		self.assertEqual(
 			nodeInfoById,
 			{
 				"author-root": MathMlNodeInfo(path=(), tag="math"),
-				"nvda-math-node-author": MathMlNodeInfo(path=(0,), tag="mrow"),
-				"nvda-math-node-1-0-0": MathMlNodeInfo(path=(0, 0), tag="mi"),
+				"aslan-math-node-author": MathMlNodeInfo(path=(0,), tag="mrow"),
+				"aslan-math-node-1-0-0": MathMlNodeInfo(path=(0, 0), tag="mi"),
 			},
 		)
 
@@ -89,23 +89,23 @@ class TestMathCatNavNodeMapping(unittest.TestCase):
 					(0,): MathMlNodeRectInfo(path=(0,), tag="mstyle", rect=mismatchedRect),
 				}
 
-		sourceObj = cast("NVDAObject", FakeIa2WebMath())
-		fakeIa2WebModule = ModuleType("NVDAObjects.IAccessible.ia2Web")
+		sourceObj = cast("AslanObject", FakeIa2WebMath())
+		fakeIa2WebModule = ModuleType("AslanObjects.IAccessible.ia2Web")
 		setattr(fakeIa2WebModule, "Math", FakeIa2WebMath)
-		with patch.dict(sys.modules, {"NVDAObjects.IAccessible.ia2Web": fakeIa2WebModule}):
+		with patch.dict(sys.modules, {"AslanObjects.IAccessible.ia2Web": fakeIa2WebModule}):
 			result, rectsById = navNodeMapping.prepareMathMlForNavigation(
 				"<math><mrow><mi>x</mi></mrow></math>",
 				sourceObj,
 			)
 
 		root = ElementTree.fromstring(result)
-		self.assertEqual(root.get("id"), "nvda-math-node-root")
-		self.assertEqual(rectsById, {"nvda-math-node-root": rootRect})
+		self.assertEqual(root.get("id"), "aslan-math-node-root")
+		self.assertEqual(rectsById, {"aslan-math-node-root": rootRect})
 
 	def test_removeSyntheticIdsFromMathMl(self):
 		testCases = [
 			(
-				'<math><mi id="nvda-math-node-0" data-nvda-math-id-added="true">x</mi></math>',
+				'<math><mi id="aslan-math-node-0" data-aslan-math-id-added="true">x</mi></math>',
 				{},
 			),
 			(

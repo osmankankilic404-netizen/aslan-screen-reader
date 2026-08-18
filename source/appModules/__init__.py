@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2009-2025 NV Access Limited, Łukasz Golonka, Joseph Lee, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -64,7 +64,7 @@ EXECUTABLE_NAMES_TO_APP_MODS: dict[str, str] = {
 }
 
 """Maps names of the executables to the names of the appModule which should be loaded for the given program.
-Note that this map is used only for appModules included in NVDA
+Note that this map is used only for appModules included in Aslan
 and appModules registered by add-ons are placed in a different one.
 This mapping is needed since:
 - Names of some programs are incompatible with the Python's import system (they contain a dot or a plus)

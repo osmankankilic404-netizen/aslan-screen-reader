@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Yogesh Kumar, Manish Agrawal, Joseph Lee, Davy Kager,
 # Babbage B.V., Leonard de Ruijter
 # This file is covered by the GNU General Public License.
@@ -13,7 +13,7 @@ from scriptHandler import script
 import winBindings.kernel32
 import winKernel
 import comHelper
-import NVDAHelper
+import AslanHelper
 import winUser
 from logHandler import log
 import textInfos
@@ -28,20 +28,20 @@ import config
 from config.configFlags import ReportTableHeaders
 import speech
 import ui
-from NVDAObjects.IAccessible import IAccessible
-from NVDAObjects.window import Window
-from NVDAObjects.window.winword import (
+from AslanObjects.IAccessible import IAccessible
+from AslanObjects.window import Window
+from AslanObjects.window.winword import (
 	WordDocument as BaseWordDocument,
 	WordDocumentTreeInterceptor,
 	BrowseModeWordDocumentTextInfo,
 	WordDocumentTextInfo,
 )
-from NVDAObjects.IAccessible.winword import WordDocument
-from NVDAObjects.IAccessible.MSHTML import MSHTML
-from NVDAObjects.behaviors import RowWithFakeNavigation, Dialog
-from NVDAObjects.UIA import UIA
-from NVDAObjects.UIA.wordDocument import WordDocument as UIAWordDocument
-from NVDAObjects import NVDAObject
+from AslanObjects.IAccessible.winword import WordDocument
+from AslanObjects.IAccessible.MSHTML import MSHTML
+from AslanObjects.behaviors import RowWithFakeNavigation, Dialog
+from AslanObjects.UIA import UIA
+from AslanObjects.UIA.wordDocument import WordDocument as UIAWordDocument
+from AslanObjects import AslanObject
 import languageHandler
 from typing import Generator
 import documentBase
@@ -140,7 +140,7 @@ class AppModule(appModuleHandler.AppModule):
 		gui.mainFrame.prePopup()
 		d.Show()
 		self._hasTriedoutlookAppSwitch = True
-		# Make sure NVDA detects and reports focus on the waiting dialog
+		# Make sure Aslan detects and reports focus on the waiting dialog
 		api.processPendingEvents()
 		try:
 			comtypes.client.PumpEvents(1)
@@ -183,7 +183,7 @@ class AppModule(appModuleHandler.AppModule):
 			return True
 		return False
 
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		role = obj.role
 		windowClassName = obj.windowClassName
 		controlID = obj.windowControlID
@@ -213,7 +213,7 @@ class AppModule(appModuleHandler.AppModule):
 		) and role == controlTypes.Role.UNKNOWN:
 			obj.role = controlTypes.Role.LISTITEM
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if UIAWordDocument in clsList:
 			# Overlay class for Outlook message viewer when UI Automation for MS Word is enabled.
 			clsList.insert(0, OutlookUIAWordDocument)
@@ -329,7 +329,7 @@ class AddressBookEntry(IAccessible):
 			self.bindGesture(gesture, "moveByEntry")
 
 
-class ContactEditField(NVDAObject):
+class ContactEditField(AslanObject):
 	@script(gestures=["kb:escape"])
 	def script_hide(self, gesture):
 		"""The auto-complete list is getting closed, set focus back to the edit field."""
@@ -551,7 +551,7 @@ class UIAGridRow(RowWithFakeNavigation, UIA):
 				mapiObject = None
 			if mapiObject:
 				v = comtypes.automation.VARIANT()
-				res = NVDAHelper.localLib.nvdaInProcUtils_outlook_getMAPIProp(
+				res = AslanHelper.localLib.aslanInProcUtils_outlook_getMAPIProp(
 					self.appModule.helperLocalBindingHandle,
 					self.windowThreadID,
 					mapiObject,
@@ -697,9 +697,9 @@ class MailViewerTreeInterceptor(WordDocumentTreeInterceptor):
 	TextInfo = MailViewerTreeInterceptorTextInfo
 
 	def script_tab(self, gesture):
-		bookmark = self.rootNVDAObject.makeTextInfo(textInfos.POSITION_SELECTION).bookmark
+		bookmark = self.rootAslanObject.makeTextInfo(textInfos.POSITION_SELECTION).bookmark
 		gesture.send()
-		info, caretMoved = self.rootNVDAObject._hasCaretMoved(bookmark)
+		info, caretMoved = self.rootAslanObject._hasCaretMoved(bookmark)
 		if not caretMoved:
 			return
 		info = self.makeTextInfo(textInfos.POSITION_SELECTION)

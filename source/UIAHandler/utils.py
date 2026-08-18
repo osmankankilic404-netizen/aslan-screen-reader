@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2021 NV Access Limited, Bill Dengler
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -417,7 +417,7 @@ def _shouldUseWindowsTerminalNotifications() -> bool:
 def _getCachedWindowHandleFromEvent(sender: "UIAHandler.UIA.IUIAutomationElement") -> int | None:
 	"""Get the native window handle for a UIA event's sender element.
 
-	This only ever reads the I{cached} native window handle. NVDA registers all event
+	This only ever reads the I{cached} native window handle. Aslan registers all event
 	handler groups with a cache request that includes
 	C{UIA_NativeWindowHandlePropertyId}, so the sender arrives pre-cached and this read
 	is local: it must never trigger a cross-process call, which is what makes it safe to
@@ -442,7 +442,7 @@ def _shouldSkipEventForHungWindow(sender: "UIAHandler.UIA.IUIAutomationElement")
 
 	When an application stops responding, any live cross-process COM call against its
 	elements blocks until the app is killed, raising a flood of COMErrors out of the
-	UIA event handlers and leaving NVDA partially dead. Detecting the hung window up
+	UIA event handlers and leaving Aslan partially dead. Detecting the hung window up
 	front (cheaply, from the cached handle) lets us drop the event before touching any
 	live property. This mirrors the existing, unconditional ghost-window handling:
 	there is no legitimate reason to keep polling a not-responding window.

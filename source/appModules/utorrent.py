@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # appModules/utorrent.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2010 James Teh <jamie@jantrid.net>
@@ -12,9 +12,9 @@ import api
 import controlTypes
 import displayModel
 from logHandler import log
-from NVDAObjects.IAccessible import IAccessible
-from NVDAObjects.window import Window
-from NVDAObjects.IAccessible.sysListView32 import ListItem
+from AslanObjects.IAccessible import IAccessible
+from AslanObjects.window import Window
+from AslanObjects.IAccessible.sysListView32 import ListItem
 import locationHelper
 
 
@@ -62,7 +62,7 @@ class TorrentContentsListItem(ListItem):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		role = obj.role
 		if role == controlTypes.Role.WINDOW:
 			return

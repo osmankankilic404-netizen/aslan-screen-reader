@@ -1,4 +1,4 @@
-from NVDAObjects import behaviors
+from AslanObjects import behaviors
 import controlTypes
 from . import IAccessible
 

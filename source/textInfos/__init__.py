@@ -1,13 +1,13 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Babbage B.V., Accessolutions, Julien Cochuyt, Cyrille Bougot,
 # Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Framework for accessing text content in widgets.
 The core component of this framework is the L{TextInfo} class.
 In order to access text content for a widget, a L{TextInfo} implementation is required.
-A default implementation, L{NVDAObjects.NVDAObjectTextInfo}, is used to enable text review of information about a widget which does not have or support text content.
+A default implementation, L{AslanObjects.AslanObjectTextInfo}, is used to enable text review of information about a widget which does not have or support text content.
 """
 
 from abc import abstractmethod
@@ -36,7 +36,7 @@ from utils.urlUtils import _LinkData
 
 if typing.TYPE_CHECKING:
 	import documentBase  # noqa: F401 used for type checking only
-	import NVDAObjects
+	import AslanObjects
 
 
 SpeechSequence = List[Union[Any, str]]
@@ -592,19 +592,19 @@ class TextInfo(baseObject.AutoPropertyObject):
 		"""
 		raise NotImplementedError
 
-	#: Typing information for auto-property: _get_NVDAObjectAtStart
-	NVDAObjectAtStart: "NVDAObjects.NVDAObject"
+	#: Typing information for auto-property: _get_AslanObjectAtStart
+	AslanObjectAtStart: "AslanObjects.AslanObject"
 
-	def _get_NVDAObjectAtStart(self) -> "NVDAObjects.NVDAObject":
-		"""Get the NVDAObject related to the start of the range.
-		Usually it is just the owner NVDAObject, but in the case of virtualBuffers it may be a descendant object.
-		@returns: the NVDAObject at the start
+	def _get_AslanObjectAtStart(self) -> "AslanObjects.AslanObject":
+		"""Get the AslanObject related to the start of the range.
+		Usually it is just the owner AslanObject, but in the case of virtualBuffers it may be a descendant object.
+		@returns: the AslanObject at the start
 		"""
 		return self.obj
 
-	def _get_focusableNVDAObjectAtStart(self):
-		"""retreaves the deepest focusable NVDAObject related to the start of the range. Usually it is just the owner NVDAObject, but in the case of virtualBuffers it may be a descendant object.
-		@returns: the NVDAObject at the start
+	def _get_focusableAslanObjectAtStart(self):
+		"""retreaves the deepest focusable AslanObject related to the start of the range. Usually it is just the owner AslanObject, but in the case of virtualBuffers it may be a descendant object.
+		@returns: the AslanObject at the start
 		"""
 		return self.obj
 
@@ -752,7 +752,7 @@ class TextInfo(baseObject.AutoPropertyObject):
 		.. seealso:: GitHub issues #14779 (graphics inside links) and #17363 (nested elements).
 		"""
 		self.expand(UNIT_CHARACTER)
-		obj: NVDAObjects.NVDAObject = self.NVDAObjectAtStart
+		obj: AslanObjects.AslanObject = self.AslanObjectAtStart
 
 		# Special handling for graphics inside links (#14779).
 		if obj.role == controlTypes.role.Role.GRAPHIC:
@@ -988,7 +988,7 @@ class TextInfo(baseObject.AutoPropertyObject):
 		raise RuntimeError("Infinite loop during binary search.")
 
 	def _get_location(self) -> locationHelper.RectLTWH:
-		return self.NVDAObjectAtStart.location
+		return self.AslanObjectAtStart.location
 
 
 RE_EOL = re.compile("\r\n|[\n\r]")

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2013-2022 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,8 +12,8 @@ import api
 from baseObject import ScriptableObject
 import winUser
 from logHandler import log
-from NVDAObjects import NVDAObject, NVDAObjectTextInfo
-from NVDAObjects.window import Window
+from AslanObjects import AslanObject, AslanObjectTextInfo
+from AslanObjects.window import Window
 from treeInterceptorHandler import DocumentTreeInterceptor
 from displayModel import DisplayModelTextInfo
 import textInfos
@@ -23,8 +23,8 @@ import config
 def getObjectPosition(obj):
 	"""
 	Fetches a TextInfo instance suitable for reviewing the text in  the given object.
-	@param obj: the NVDAObject to review
-	@type obj: L{NVDAObject}
+	@param obj: the AslanObject to review
+	@type obj: L{AslanObject}
 	@return: the TextInfo instance and the Scriptable object the TextInfo instance is referencing, or None on error.
 	@rtype: (L{TextInfo},L{ScriptableObject})
 	"""
@@ -36,18 +36,18 @@ def getObjectPosition(obj):
 			pos = obj.makeTextInfo(textInfos.POSITION_FIRST)
 		except (NotImplementedError, RuntimeError):
 			log.debugWarning(
-				"%s does not support POSITION_FIRST, falling back to NVDAObjectTextInfo" % obj.TextInfo,
+				"%s does not support POSITION_FIRST, falling back to AslanObjectTextInfo" % obj.TextInfo,
 			)
-			# First position not supported either, return first position from a generic NVDAObjectTextInfo
-			return NVDAObjectTextInfo(obj, textInfos.POSITION_FIRST), obj
+			# First position not supported either, return first position from a generic AslanObjectTextInfo
+			return AslanObjectTextInfo(obj, textInfos.POSITION_FIRST), obj
 	return pos, pos.obj
 
 
 def getDocumentPosition(obj):
 	"""
 	Fetches a TextInfo instance suitable for reviewing the text in  the given object's L{TreeInterceptor}, positioned at the object.
-	@param obj: the NVDAObject to review
-	@type obj: L{NVDAObject}
+	@param obj: the AslanObject to review
+	@type obj: L{AslanObject}
 	@return: the TextInfo instance and the Scriptable object the TextInfo instance is referencing, or None on error.
 	@rtype: (L{TextInfo},L{ScriptableObject})
 	"""
@@ -63,8 +63,8 @@ def getDocumentPosition(obj):
 def getScreenPosition(obj):
 	"""
 	Fetches a TextInfo instance suitable for reviewing the screen, positioned at the given object's coordinates.
-	@param obj: the NVDAObject to review
-	@type obj: L{NVDAObject}
+	@param obj: the AslanObject to review
+	@type obj: L{AslanObject}
 	@return: the TextInfo instance and the Scriptable object the TextInfo instance is referencing, or None on error.
 	@rtype: (L{TextInfo},L{ScriptableObject})
 	"""
@@ -96,10 +96,10 @@ modes = [
 _currentMode = 0
 
 
-def getPositionForCurrentMode(obj: NVDAObject) -> Union[textInfos.TextInfo, ScriptableObject]:
+def getPositionForCurrentMode(obj: AslanObject) -> Union[textInfos.TextInfo, ScriptableObject]:
 	"""
 	Fetches a TextInfo instance suitable for reviewing the text in or around the given object, according to the current review mode.
-	@param obj: the NVDAObject to review
+	@param obj: the AslanObject to review
 	@return: the TextInfo instance and the Scriptable object the TextInfo instance is referencing, or None on error.
 	"""
 	mode = _currentMode
@@ -163,8 +163,8 @@ def nextMode(prev=False, startMode=None):
 def handleCaretMove(pos):
 	"""
 	Instructs the review position to be updated due to caret movement.
-	@param pos: Either a TextInfo instance at the caret position, or an NVDAObject or TeeInterceptor who's caret position should be retreaved.
-	@type pos: L{textInfos.TextInfo} or L{NVDAObject} or L{TreeInterceptor}
+	@param pos: Either a TextInfo instance at the caret position, or an AslanObject or TeeInterceptor who's caret position should be retreaved.
+	@type pos: L{textInfos.TextInfo} or L{AslanObject} or L{TreeInterceptor}
 	"""
 	if not config.conf["reviewCursor"]["followCaret"]:
 		return
@@ -175,7 +175,7 @@ def handleCaretMove(pos):
 		info = None
 		obj = pos
 	mode = getCurrentMode()
-	if isinstance(obj, NVDAObject):
+	if isinstance(obj, AslanObject):
 		if not mode == "object" or obj != api.getNavigatorObject():
 			return
 	elif isinstance(obj, DocumentTreeInterceptor):

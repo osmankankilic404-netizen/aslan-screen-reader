@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2007-2021 NV Access Limited, Babbage B.V.
@@ -9,7 +9,7 @@ from utils.displayString import DisplayStringStrEnum
 
 
 class IsCurrent(DisplayStringStrEnum):
-	"""Values to use within NVDA to denote 'current' values.
+	"""Values to use within Aslan to denote 'current' values.
 	These describe if an item is the current item within a particular kind of selection.
 	EG aria-current
 	"""

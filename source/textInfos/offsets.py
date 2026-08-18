@@ -1,15 +1,15 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Babbage B.V., Leonard de Ruijter, Wang Chong
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from abc import abstractmethod
 import re
 import ctypes
 import unicodedata
-import NVDAHelper
+import AslanHelper
 import config.featureFlagEnums
-import NVDAState
+import AslanState
 import config
 from config.featureFlag import FeatureFlag
 import textInfos
@@ -63,7 +63,7 @@ class _OffsetsTextInfoMeta(type(textInfos.TextInfo)):
 		type.__setattr__(self, "_useUniscribeOverride", legacyUseUniscribe)
 
 	def __getattribute__(self, name: str) -> Any:
-		if name != "useUniscribe" or not NVDAState._allowDeprecatedAPI():
+		if name != "useUniscribe" or not AslanState._allowDeprecatedAPI():
 			return super().__getattribute__(name)
 		_warnUseUniscribeDeprecated()
 		override = _getUseUniscribeClassOverride(self)
@@ -72,7 +72,7 @@ class _OffsetsTextInfoMeta(type(textInfos.TextInfo)):
 		return type.__getattribute__(self, "charSegFlag") == CharSegFlag.UNISCRIBE
 
 	def __setattr__(self, name: str, value: Any) -> None:
-		if name != "useUniscribe" or not NVDAState._allowDeprecatedAPI():
+		if name != "useUniscribe" or not AslanState._allowDeprecatedAPI():
 			return super().__setattr__(name, value)
 		_warnUseUniscribeDeprecated()
 		type.__setattr__(self, "_useUniscribeOverride", bool(value))
@@ -215,7 +215,7 @@ class OffsetsTextInfo(textInfos.TextInfo, metaclass=_OffsetsTextInfoMeta):
 	_useUniscribeOverride: bool | None = None
 
 	def _getDeprecatedUseUniscribe(self) -> bool:
-		if not NVDAState._allowDeprecatedAPI():
+		if not AslanState._allowDeprecatedAPI():
 			raise AttributeError(f"'{type(self).__name__}' object has no attribute 'useUniscribe'")
 		_warnUseUniscribeDeprecated()
 		override = self._getUseUniscribeCompatOverride()
@@ -226,7 +226,7 @@ class OffsetsTextInfo(textInfos.TextInfo, metaclass=_OffsetsTextInfoMeta):
 		)
 
 	def _setDeprecatedUseUniscribe(self, value: bool) -> None:
-		if not NVDAState._allowDeprecatedAPI():
+		if not AslanState._allowDeprecatedAPI():
 			raise AttributeError(f"'{type(self).__name__}' object has no attribute 'useUniscribe'")
 		_warnUseUniscribeDeprecated()
 		self._useUniscribeOverride = bool(value)
@@ -324,7 +324,7 @@ class OffsetsTextInfo(textInfos.TextInfo, metaclass=_OffsetsTextInfoMeta):
 		except NotImplementedError:
 			# Getting bounding rectangles is not implemented.
 			# Therefore, we need to create a bounding rectangle with points.
-			# This, though less accurate, is acceptable for use cases within NVDA.
+			# This, though less accurate, is acceptable for use cases within Aslan.
 			getLocationFromOffset = self._getPointFromOffset
 			startLocation = getLocationFromOffset(startOffset)
 		inclusiveEndOffset = self._endOffset - 1
@@ -336,7 +336,7 @@ class OffsetsTextInfo(textInfos.TextInfo, metaclass=_OffsetsTextInfoMeta):
 			pass
 		# If the inclusive end offset is greater than the start offset, we are working with a range.
 		# If not, i.e. the range only contains one character, we have only one location to deal with.
-		obj = self.obj.rootNVDAObject if isinstance(self.obj, TreeInterceptor) else self.obj
+		obj = self.obj.rootAslanObject if isinstance(self.obj, TreeInterceptor) else self.obj
 		for i in range(100):
 			objLocation = obj.location
 			if objLocation:
@@ -451,9 +451,9 @@ class OffsetsTextInfo(textInfos.TextInfo, metaclass=_OffsetsTextInfoMeta):
 		@param relOffset: the character offset within the text string at which to calculate the bounds.
 		"""
 		if unit is textInfos.UNIT_WORD:
-			helperFunc = NVDAHelper.localLib.calculateWordOffsets
+			helperFunc = AslanHelper.localLib.calculateWordOffsets
 		elif unit is textInfos.UNIT_CHARACTER:
-			helperFunc = NVDAHelper.localLib.calculateCharacterOffsets
+			helperFunc = AslanHelper.localLib.calculateCharacterOffsets
 		else:
 			raise NotImplementedError(f"Unit: {unit}")
 		relStart = ctypes.c_int()
@@ -590,10 +590,10 @@ class OffsetsTextInfo(textInfos.TextInfo, metaclass=_OffsetsTextInfoMeta):
 	def _getOffsetFromPoint(self, x, y):
 		raise NotImplementedError
 
-	def _getNVDAObjectFromOffset(self, offset):
+	def _getAslanObjectFromOffset(self, offset):
 		return self.obj
 
-	def _getOffsetsFromNVDAObject(self, obj):
+	def _getOffsetsFromAslanObject(self, obj):
 		if obj == self.obj:
 			return 0, self._getStoryLength()
 		raise LookupError
@@ -605,13 +605,13 @@ class OffsetsTextInfo(textInfos.TextInfo, metaclass=_OffsetsTextInfoMeta):
 		super(OffsetsTextInfo, self).__init__(obj, position)
 		self.wordSegConf: FeatureFlag = config.conf["documentNavigation"]["wordSegmentationStandard"]
 
-		from NVDAObjects import NVDAObject
+		from AslanObjects import AslanObject
 
 		if isinstance(position, locationHelper.Point):
 			offset = self._getOffsetFromPoint(position.x, position.y)
 			position = Offsets(offset, offset)
-		elif isinstance(position, NVDAObject):
-			start, end = self._getOffsetsFromNVDAObject(position)
+		elif isinstance(position, AslanObject):
+			start, end = self._getOffsetsFromAslanObject(position)
 			position = textInfos.offsets.Offsets(start, end)
 
 		if type(position) is type(self):
@@ -638,8 +638,8 @@ class OffsetsTextInfo(textInfos.TextInfo, metaclass=_OffsetsTextInfoMeta):
 		else:
 			raise NotImplementedError("position: %s not supported" % position)
 
-	def _get_NVDAObjectAtStart(self):
-		return self._getNVDAObjectFromOffset(self._startOffset)
+	def _get_AslanObjectAtStart(self):
+		return self._getAslanObjectFromOffset(self._startOffset)
 
 	def _getUnitOffsets(self, unit: str, offset: int) -> tuple[int, int]:
 		"""Gets the start and end offsets of the unit containing the given offset.
@@ -791,7 +791,7 @@ class OffsetsTextInfo(textInfos.TextInfo, metaclass=_OffsetsTextInfoMeta):
 		"""
 		return True
 
-	if NVDAState._allowDeprecatedAPI():
+	if AslanState._allowDeprecatedAPI():
 
 		def _get_allowMoveToOffsetPastEnd(self) -> bool:
 			log.warning(
@@ -901,7 +901,7 @@ class OffsetsTextInfo(textInfos.TextInfo, metaclass=_OffsetsTextInfoMeta):
 	def _getFirstVisibleOffset(self):
 		obj = self.obj
 		if isinstance(obj, TreeInterceptor):
-			obj = obj.rootNVDAObject
+			obj = obj.rootAslanObject
 		if obj.hasIrrelevantLocation:
 			raise LookupError("Object is off screen, invisible or has no location")
 		return self._getOffsetFromPoint(*obj.location.topLeft)
@@ -909,7 +909,7 @@ class OffsetsTextInfo(textInfos.TextInfo, metaclass=_OffsetsTextInfoMeta):
 	def _getLastVisibleOffset(self):
 		obj = self.obj
 		if isinstance(obj, TreeInterceptor):
-			obj = obj.rootNVDAObject
+			obj = obj.rootAslanObject
 		if obj.hasIrrelevantLocation:
 			raise LookupError("Object is off screen, invisible or has no location")
 		exclusiveX, exclusiveY = obj.location.bottomRight

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Peter Vágner, Joseph Lee
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -18,14 +18,14 @@ from buildVersion import (
 	version,
 )
 
-gettext.install("nvda")
+gettext.install("aslan")
 from glob import glob  # noqa: E402
 import fnmatch  # noqa: E402
 
 # versionInfo names must be imported after Gettext
 # Suppress E402 (module level import not at top of file)
 from versionInfo import (  # noqa: E402
-	copyright as NVDAcopyright,  # copyright is a reserved python keyword
+	copyright as Aslancopyright,  # copyright is a reserved python keyword
 	description,
 )
 from py2exe import freeze  # noqa: E402
@@ -149,7 +149,7 @@ def getLocaleDataFiles():
 	wxDir = wx.__path__[0]
 	localeMoFiles = set()
 	for f in glob("locale/*/LC_MESSAGES"):
-		localeMoFiles.add((f, (os.path.join(f, "nvda.mo"),)))
+		localeMoFiles.add((f, (os.path.join(f, "aslan.mo"),)))
 		wxMoFile = os.path.join(wxDir, f, "wxstd.mo")
 		if os.path.isfile(wxMoFile):
 			localeMoFiles.add((f, (wxMoFile,)))
@@ -161,8 +161,8 @@ def getLocaleDataFiles():
 			if os.path.isfile(wxMoFile):
 				localeMoFiles.add((f, (wxMoFile,)))
 	localeDicFiles = [(os.path.dirname(f), (f,)) for f in glob("locale/*/*.dic")]
-	NVDALocaleGestureMaps = [(os.path.dirname(f), (f,)) for f in glob("locale/*/gestures.ini")]
-	return list(localeMoFiles) + localeDicFiles + NVDALocaleGestureMaps
+	AslanLocaleGestureMaps = [(os.path.dirname(f), (f,)) for f in glob("locale/*/gestures.ini")]
+	return list(localeMoFiles) + localeDicFiles + AslanLocaleGestureMaps
 
 
 def getRecursiveDataFiles(dest: str, source: str, excludes: tuple = ()) -> list[tuple[str, list[str]]]:
@@ -192,30 +192,30 @@ def _genManifestTemplate(shouldHaveUIAccess: bool) -> tuple[int, int, bytes]:
 
 _py2ExeWindows = [
 	{
-		"script": "nvda.pyw",
-		"dest_base": "nvda_noUIAccess",
-		"icon_resources": [(1, "images/nvda.ico")],
+		"script": "aslan.pyw",
+		"dest_base": "aslan_noUIAccess",
+		"icon_resources": [(1, "images/aslan.ico")],
 		"other_resources": [_genManifestTemplate(shouldHaveUIAccess=False)],
 		"version_info": {
 			"version": formatBuildVersionString(),
-			"description": "NVDA application (no UIAccess)",
+			"description": "Aslan application (no UIAccess)",
 			"product_name": name,
 			"product_version": version,
-			"copyright": NVDAcopyright,
+			"copyright": Aslancopyright,
 			"company_name": publisher,
 		},
 	},
-	# The nvda_uiAccess target will be added at runtime if required.
+	# The aslan_uiAccess target will be added at runtime if required.
 	{
-		"script": "nvda_slave.pyw",
-		"icon_resources": [(1, "images/nvda.ico")],
+		"script": "aslan_slave.pyw",
+		"icon_resources": [(1, "images/aslan.ico")],
 		"other_resources": [_genManifestTemplate(shouldHaveUIAccess=False)],
 		"version_info": {
 			"version": formatBuildVersionString(),
 			"description": name,
 			"product_name": name,
 			"product_version": version,
-			"copyright": NVDAcopyright,
+			"copyright": Aslancopyright,
 			"company_name": publisher,
 		},
 	},
@@ -224,16 +224,16 @@ if _partialArgs.uiAccess:
 	_py2ExeWindows.insert(
 		1,
 		{
-			"script": "nvda.pyw",
-			"dest_base": "nvda_uiAccess",
-			"icon_resources": [(1, "images/nvda.ico")],
+			"script": "aslan.pyw",
+			"dest_base": "aslan_uiAccess",
+			"icon_resources": [(1, "images/aslan.ico")],
 			"other_resources": [_genManifestTemplate(shouldHaveUIAccess=True)],
 			"version_info": {
 				"version": formatBuildVersionString(),
-				"description": "NVDA application (has UIAccess)",
+				"description": "Aslan application (has UIAccess)",
 				"product_name": name,
 				"product_version": version,
-				"copyright": NVDAcopyright,
+				"copyright": Aslancopyright,
 				"company_name": publisher,
 			},
 		},
@@ -246,7 +246,7 @@ freeze(
 		"description": description,
 		"product_name": name,
 		"product_version": version,
-		"copyright": NVDAcopyright,
+		"copyright": Aslancopyright,
 		"company_name": publisher,
 	},
 	windows=_py2ExeWindows,
@@ -255,10 +255,10 @@ freeze(
 			"script": "l10nUtil.py",
 			"version_info": {
 				"version": formatBuildVersionString(),
-				"description": "NVDA Localization Utility",
+				"description": "Aslan Localization Utility",
 				"product_name": name,
 				"product_version": version,
-				"copyright": NVDAcopyright,
+				"copyright": Aslancopyright,
 				"company_name": publisher,
 			},
 		},
@@ -293,13 +293,13 @@ freeze(
 			"tomli",
 		],
 		"packages": [
-			"NVDAObjects",
+			"AslanObjects",
 			# As of py2exe 0.11.0.0 if the forcibly included package contains subpackages
 			# they need to be listed explicitly (py2exe issue 113).
-			"NVDAObjects.IAccessible",
-			"NVDAObjects.JAB",
-			"NVDAObjects.UIA",
-			"NVDAObjects.window",
+			"AslanObjects.IAccessible",
+			"AslanObjects.JAB",
+			"AslanObjects.UIA",
+			"AslanObjects.window",
 			# detect-secrets loads plugins and filters dynamically using pkgutil/importlib,
 			# so the relevant packages must be bundled explicitly for frozen builds.
 			"detect_secrets",
@@ -333,7 +333,7 @@ freeze(
 			"pymdownx",
 		],
 		"includes": [
-			"nvdaBuiltin",
+			"aslanBuiltin",
 			# #3368: bisect was implicitly included with Python 2.7.3, but isn't with 2.7.5.
 			"bisect",
 			# robotremoteserver (for system tests) depends on xmlrpc.server
@@ -386,8 +386,8 @@ freeze(
 			else []
 		)
 		+ getRecursiveDataFiles(
-			"include/nvda-mathcat/assets/Rules",
-			"../include/nvda-mathcat/assets/Rules",
+			"include/aslan-mathcat/assets/Rules",
+			"../include/aslan-mathcat/assets/Rules",
 		)
 		+ getRecursiveDataFiles(
 			"synthDrivers",

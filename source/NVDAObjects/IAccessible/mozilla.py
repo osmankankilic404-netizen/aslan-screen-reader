@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2006-2022 NV Access Limited, Peter Vágner
@@ -23,7 +23,7 @@ import winUser
 import controlTypes
 from . import IAccessible, WindowRoot
 from logHandler import log
-from NVDAObjects.behaviors import RowWithFakeNavigation
+from AslanObjects.behaviors import RowWithFakeNavigation
 from . import ia2Web
 
 
@@ -41,7 +41,7 @@ class MozAnnotationTarget(AnnotationTarget):
 		# this may diverge in Firefox in the future.
 		from .chromium import supportedAriaDetailsRoles
 
-		detailsRole = IAccessibleHandler.IAccessibleRolesToNVDARoles.get(
+		detailsRole = IAccessibleHandler.IAccessibleRolesToAslanRoles.get(
 			self._target.IAccessibleRole,
 		)
 		# return a supported details role
@@ -103,7 +103,7 @@ class Mozilla(ia2Web.Ia2Web):
 
 	def _get_descriptionFrom(self) -> controlTypes.DescriptionFrom:
 		"""Firefox does not yet support 'description-from' attribute (which informs
-		NVDA of the source of accDescription after the name/description computation
+		Aslan of the source of accDescription after the name/description computation
 		is complete. However, a primary use-case can be supported via the IA2attribute
 		'description' which is exposed by Firefox and tells us the value of the "aria-description"
 		attribute. If the value of accDescription matches, we can infer that the source
@@ -147,7 +147,7 @@ class Mozilla(ia2Web.Ia2Web):
 
 	def _get_detailsSummary(self) -> Optional[str]:
 		log.warning(
-			"NVDAObject.detailsSummary is deprecated. Use NVDAObject.annotations instead.",
+			"AslanObject.detailsSummary is deprecated. Use AslanObject.annotations instead.",
 			stack_info=True,
 		)
 		# just take the first for now.
@@ -155,7 +155,7 @@ class Mozilla(ia2Web.Ia2Web):
 
 	def _get_detailsRole(self) -> Optional[controlTypes.Role]:
 		log.warning(
-			"NVDAObject.detailsRole is deprecated. Use NVDAObject.annotations instead.",
+			"AslanObject.detailsRole is deprecated. Use AslanObject.annotations instead.",
 			stack_info=True,
 		)
 		# just take the first target for now.
@@ -164,7 +164,7 @@ class Mozilla(ia2Web.Ia2Web):
 	@property
 	def hasDetails(self) -> bool:
 		log.warning(
-			"NVDAObject.hasDetails is deprecated. Use NVDAObject.annotations instead.",
+			"AslanObject.hasDetails is deprecated. Use AslanObject.annotations instead.",
 			stack_info=True,
 		)
 		return bool(self.annotations)
@@ -241,7 +241,7 @@ class TextLeaf(Mozilla):
 
 def findExtraOverlayClasses(obj, clsList):
 	"""Determine the most appropriate class if this is a Mozilla object.
-	This works similarly to L{NVDAObjects.NVDAObject.findOverlayClasses} except that it never calls any other findOverlayClasses method.
+	This works similarly to L{AslanObjects.AslanObject.findOverlayClasses} except that it never calls any other findOverlayClasses method.
 	"""
 	if not isinstance(obj.IAccessibleObject, IA2.IAccessible2):
 		return
@@ -290,7 +290,7 @@ def findExtraOverlayClasses(obj, clsList):
 	)
 
 
-#: Maps IAccessible roles to NVDAObject overlay classes.
+#: Maps IAccessible roles to AslanObject overlay classes.
 _IAccessibleRolesToOverlayClasses = {
 	IA2.IA2_ROLE_EMBEDDED_OBJECT: EmbeddedObject,
 	"embed": EmbeddedObject,

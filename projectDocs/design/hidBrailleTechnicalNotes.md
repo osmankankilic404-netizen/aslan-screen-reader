@@ -77,7 +77,7 @@ Capabilities of buttons and values include such things as their Usage and Usage 
 * For each data structure fetched, call `SetupDiGetDeviceInterfaceDetail` to get a `SP_DEVICE_INTERFACE_DETAIL_DATA` structure.
 * The `SP_DEVICE_INTERFACE_DETAIL_DATA` structure's devicePath member  is the path that should be used to open the device for reading / writing later.
 * Some other properties such as hardwareID may be required to further identify the device, these can be fetched with `SetupDiGetDeviceRegistryProperty`.
-* For an implementation see `listHidDevices` in NVDA's source/hwPortUtils.py
+* For an implementation see `listHidDevices` in Aslan's source/hwPortUtils.py
 
 #### Opening a HID device
 
@@ -85,7 +85,7 @@ Capabilities of buttons and values include such things as their Usage and Usage 
  Note overlapped IO is possible; See `CreateFile` documentation.
   * If this device may need to be opened by other processes at the same time, you will want to specify `FILE_SHARE_READ | FILE_SHARE_WRITE` as well.
 * Once the open device handle is no longer needed, it can be closed with `CloseHandle`.
-* For an implementation see the `Hid` class in NVDA's source/hwIo/base.py
+* For an implementation see the `Hid` class in Aslan's source/hwIo/base.py
 
 #### Fetching device attributes
 

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Dinesh Kaushal, Siddhartha Gupta, Accessolutions, Julien Cochuyt,
 # Cyrille Bougot, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
@@ -24,7 +24,7 @@ import time
 import winsound
 import re
 import uuid
-import NVDAHelper
+import AslanHelper
 import oleacc
 import ui
 import speech
@@ -46,15 +46,15 @@ import mouseHandler
 from displayModel import DisplayModelTextInfo
 import controlTypes
 from controlTypes import TextPosition, TextAlign, VerticalTextAlign
-from NVDAHelper.localLib import EXCEL_CELLINFO
+from AslanHelper.localLib import EXCEL_CELLINFO
 from . import Window
-from .. import NVDAObjectTextInfo
+from .. import AslanObjectTextInfo
 import scriptHandler
 from scriptHandler import script
 import browseMode
 import vision
 from utils.displayString import DisplayStringIntEnum
-import NVDAState
+import AslanState
 from globalCommands import SCRCAT_SYSTEMCARET
 from ._msOffice import MsoHyperlink
 from typing import TYPE_CHECKING
@@ -139,7 +139,7 @@ def __getattr__(attrName: str) -> Any:
 			1: "default",
 		},
 	}
-	if NVDAState._allowDeprecatedAPI():
+	if AslanState._allowDeprecatedAPI():
 		if attrName in _deprecatedConstantsMap:
 			replacementSymbol = _deprecatedConstantsMap[attrName]
 			log.warning(
@@ -150,7 +150,7 @@ def __getattr__(attrName: str) -> Any:
 			return replacementSymbol
 		elif attrName == "ExcelCellInfo":
 			warnings.warn(
-				"NVDAObjects.window.excel.ExcelCellInfo is deprecated. Use NVDAHelper.localLib.EXCEL_CELLINFO instead.",
+				"AslanObjects.window.excel.ExcelCellInfo is deprecated. Use AslanHelper.localLib.EXCEL_CELLINFO instead.",
 				DeprecationWarning,
 				stacklevel=2,
 			)
@@ -585,31 +585,31 @@ class ExcelBrowseModeTreeInterceptor(browseMode.BrowseModeTreeInterceptor):
 	# This treeInterceptor starts in focus mode, thus escape should not switch back to browse mode
 	disableAutoPassThrough = True
 
-	def __init__(self, rootNVDAObject):
-		super(ExcelBrowseModeTreeInterceptor, self).__init__(rootNVDAObject)
+	def __init__(self, rootAslanObject):
+		super(ExcelBrowseModeTreeInterceptor, self).__init__(rootAslanObject)
 		# Note, as _set_passThrough has logic to handle braille and vision updates which are unnecessary when
 		# initializing this tree interceptor, we set the private _passThrough variable here, which is enough.
 		self._passThrough = True
 		browseMode.reportPassThrough.last = True
 
-	def _get_currentNVDAObject(self):
+	def _get_currentAslanObject(self):
 		obj = api.getFocusObject()
 		return obj if obj.treeInterceptor is self else None
 
 	def _get_isAlive(self):
-		if not winUser.isWindow(self.rootNVDAObject.windowHandle):
+		if not winUser.isWindow(self.rootAslanObject.windowHandle):
 			return False
 		try:
 			return (
-				self.rootNVDAObject.excelWorksheetObject.name
-				== self.rootNVDAObject.excelApplicationObject.activeSheet.name
+				self.rootAslanObject.excelWorksheetObject.name
+				== self.rootAslanObject.excelApplicationObject.activeSheet.name
 			)
 		except (COMError, AttributeError, NameError):
 			log.debugWarning("could not compare sheet names", exc_info=True)
 			return False
 
 	def navigationHelper(self, direction):
-		excelWindowObject = self.rootNVDAObject.excelWindowObject
+		excelWindowObject = self.rootAslanObject.excelWindowObject
 		cellPosition = excelWindowObject.activeCell
 		try:
 			if direction == "left":
@@ -644,13 +644,13 @@ class ExcelBrowseModeTreeInterceptor(browseMode.BrowseModeTreeInterceptor):
 		if isMerged:
 			cellPosition = cellPosition.MergeArea(1)
 			obj = ExcelMergedCell(
-				windowHandle=self.rootNVDAObject.windowHandle,
+				windowHandle=self.rootAslanObject.windowHandle,
 				excelWindowObject=excelWindowObject,
 				excelCellObject=cellPosition,
 			)
 		else:
 			obj = ExcelCell(
-				windowHandle=self.rootNVDAObject.windowHandle,
+				windowHandle=self.rootAslanObject.windowHandle,
 				excelWindowObject=excelWindowObject,
 				excelCellObject=cellPosition,
 			)
@@ -693,12 +693,12 @@ class ExcelBrowseModeTreeInterceptor(browseMode.BrowseModeTreeInterceptor):
 	def __contains__(self, obj):
 		# Anything that is not in this window, or is not of ExcelBase (E.g. an Office chart) is not in this treeInterceptor.
 		return isinstance(obj, ExcelBase) and winUser.isDescendantWindow(
-			self.rootNVDAObject.windowHandle,
+			self.rootAslanObject.windowHandle,
 			obj.windowHandle,
 		)
 
 	def _get_selection(self):
-		return self.rootNVDAObject._getSelection()
+		return self.rootAslanObject._getSelection()
 
 	def _set_selection(self, info):
 		super(ExcelBrowseModeTreeInterceptor, self)._set_selection(info)
@@ -711,35 +711,35 @@ class ExcelBrowseModeTreeInterceptor(browseMode.BrowseModeTreeInterceptor):
 		if nodeType == "chart":
 			return ChartExcelCollectionQuicknavIterator(
 				nodeType,
-				self.rootNVDAObject.excelWorksheetObject,
+				self.rootAslanObject.excelWorksheetObject,
 				direction,
 				None,
 			).iterate()
 		elif nodeType == "comment":
 			return CommentExcelCellInfoQuicknavIterator(
 				nodeType,
-				self.rootNVDAObject,
+				self.rootAslanObject,
 				direction,
 				None,
 			).iterate()
 		elif nodeType == "formula":
 			return FormulaExcelCellInfoQuicknavIterator(
 				nodeType,
-				self.rootNVDAObject,
+				self.rootAslanObject,
 				direction,
 				None,
 			).iterate()
 		elif nodeType == "sheet":
 			return SheetsExcelCollectionQuicknavIterator(
 				nodeType,
-				self.rootNVDAObject.excelWorksheetObject,
+				self.rootAslanObject.excelWorksheetObject,
 				direction,
 				None,
 			).iterate()
 		elif nodeType == "formField":
 			return ExcelFormControlQuicknavIterator(
 				nodeType,
-				self.rootNVDAObject.excelWorksheetObject,
+				self.rootAslanObject.excelWorksheetObject,
 				direction,
 				None,
 				self,
@@ -785,7 +785,7 @@ class EditCommentDialog(
 
 
 class ExcelBase(Window):
-	"""A base that all Excel NVDAObjects inherit from, which contains some useful methods."""
+	"""A base that all Excel AslanObjects inherit from, which contains some useful methods."""
 
 	@staticmethod
 	def excelWindowObjectFromWindow(windowHandle):
@@ -815,7 +815,7 @@ class ExcelBase(Window):
 			return
 		obj = Window(windowHandle=w, chooseBestAPI=False)
 		if not obj:
-			log.debugWarning("Could not instanciate NVDAObject for ancestor window")
+			log.debugWarning("Could not instanciate AslanObject for ancestor window")
 			return
 		threadID = obj.windowThreadID
 		while not eventHandler.isPendingEvents("gainFocus"):
@@ -1342,7 +1342,7 @@ class ExcelWorksheet(ExcelBase):
 		)
 
 
-class ExcelCellTextInfo(NVDAObjectTextInfo):
+class ExcelCellTextInfo(AslanObjectTextInfo):
 	def _getFormatFieldAndOffsets(self, offset, formatConfig, calculateOffsets=True):
 		formatField = textInfos.FormatField()
 		versionMajor = int(self.obj.excelCellObject.Application.Version.split(".")[0])
@@ -1453,7 +1453,7 @@ NVCELLINFOFLAG_ALL = 0xFFFF
 
 
 class NvCellState(enum.IntEnum):
-	# These values must match NvCellState in `nvdaHelper/remote/excel/constants.h`
+	# These values must match NvCellState in `aslanHelper/remote/excel/constants.h`
 	EXPANDED = (1 << 1,)
 	COLLAPSED = (1 << 2,)
 	LINKED = (1 << 3,)
@@ -1581,7 +1581,7 @@ class ExcelCellInfoQuicknavIterator(object, metaclass=abc.ABCMeta):
 		cellInfos = (EXCEL_CELLINFO * count)()
 		numCellsFetched = ctypes.c_long()
 		address = collectionObject.address(True, True, xlA1, True)
-		NVDAHelper.localLib.nvdaInProcUtils_excel_getCellInfos(
+		AslanHelper.localLib.aslanInProcUtils_excel_getCellInfos(
 			self.document.appModule.helperLocalBindingHandle,
 			self.document.windowHandle,
 			BSTR(convertAddressToLocal(worksheet.Application, address)),
@@ -1624,7 +1624,7 @@ class ExcelCell(ExcelBase):
 		ci = EXCEL_CELLINFO()
 		numCellsFetched = ctypes.c_long()
 		address = self.excelCellObject.address(True, True, xlA1, True)
-		res = NVDAHelper.localLib.nvdaInProcUtils_excel_getCellInfos(
+		res = AslanHelper.localLib.aslanInProcUtils_excel_getCellInfos(
 			self.appModule.helperLocalBindingHandle,
 			self.windowHandle,
 			BSTR(convertAddressToLocal(self.excelCellObject.Application, address)),
@@ -1678,7 +1678,7 @@ class ExcelCell(ExcelBase):
 			"header for any cell lower and to the right of it within this region. Pressing twice will forget the "
 			"current column header for this cell.",
 		),
-		gesture="kb:NVDA+shift+c",
+		gesture="kb:Aslan+shift+c",
 		category=SCRCAT_SYSTEMCARET,
 	)
 	def script_setColumnHeader(self, gesture):
@@ -1709,7 +1709,7 @@ class ExcelCell(ExcelBase):
 			"for any cell lower and to the right of it within this region. Pressing twice will forget the current "
 			"row header for this cell.",
 		),
-		gesture="kb:NVDA+shift+r",
+		gesture="kb:Aslan+shift+r",
 		category=SCRCAT_SYSTEMCARET,
 	)
 	def script_setRowHeader(self, gesture):
@@ -1930,7 +1930,7 @@ class ExcelCell(ExcelBase):
 			# Translators: the description for a script for Excel
 			"Reports the note on the current cell. If pressed twice, presents the information in browse mode",
 		),
-		gesture="kb:NVDA+alt+c",
+		gesture="kb:Aslan+alt+c",
 		category=SCRCAT_SYSTEMCARET,
 		speakOnDemand=True,
 	)
@@ -2360,39 +2360,39 @@ class ExcelFormControlQuickNavItem(ExcelQuickNavItem):
 			)
 		return self._label
 
-	_nvdaObj = None
+	_aslanObj = None
 
 	@property
-	def nvdaObj(self):
-		if self._nvdaObj:
-			return self._nvdaObj
+	def aslanObj(self):
+		if self._aslanObj:
+			return self._aslanObj
 		formControlType = self.excelItemObject.formControlType
 		if formControlType == xlListBox:
-			self._nvdaObj = ExcelFormControlListBox(
-				windowHandle=self.treeInterceptorObj.rootNVDAObject.windowHandle,
-				parent=self.treeInterceptorObj.rootNVDAObject,
+			self._aslanObj = ExcelFormControlListBox(
+				windowHandle=self.treeInterceptorObj.rootAslanObject.windowHandle,
+				parent=self.treeInterceptorObj.rootAslanObject,
 				excelFormControlObject=self.excelItemObject,
 			)
 		elif formControlType == xlDropDown:
-			self._nvdaObj = ExcelFormControlDropDown(
-				windowHandle=self.treeInterceptorObj.rootNVDAObject.windowHandle,
-				parent=self.treeInterceptorObj.rootNVDAObject,
+			self._aslanObj = ExcelFormControlDropDown(
+				windowHandle=self.treeInterceptorObj.rootAslanObject.windowHandle,
+				parent=self.treeInterceptorObj.rootAslanObject,
 				excelFormControlObject=self.excelItemObject,
 			)
 		elif formControlType in (xlScrollBar, xlSpinner):
-			self._nvdaObj = ExcelFormControlScrollBar(
-				windowHandle=self.treeInterceptorObj.rootNVDAObject.windowHandle,
-				parent=self.treeInterceptorObj.rootNVDAObject,
+			self._aslanObj = ExcelFormControlScrollBar(
+				windowHandle=self.treeInterceptorObj.rootAslanObject.windowHandle,
+				parent=self.treeInterceptorObj.rootAslanObject,
 				excelFormControlObject=self.excelItemObject,
 			)
 		else:
-			self._nvdaObj = ExcelFormControl(
-				windowHandle=self.treeInterceptorObj.rootNVDAObject.windowHandle,
-				parent=self.treeInterceptorObj.rootNVDAObject,
+			self._aslanObj = ExcelFormControl(
+				windowHandle=self.treeInterceptorObj.rootAslanObject.windowHandle,
+				parent=self.treeInterceptorObj.rootAslanObject,
 				excelFormControlObject=self.excelItemObject,
 			)
-		self._nvdaObj.treeInterceptor = self.treeInterceptorObj
-		return self._nvdaObj
+		self._aslanObj.treeInterceptor = self.treeInterceptorObj
+		return self._aslanObj
 
 	def __lt__(self, other):
 		return self.formControlObjectIndex < other.formControlObjectIndex
@@ -2403,7 +2403,7 @@ class ExcelFormControlQuickNavItem(ExcelQuickNavItem):
 		if self.treeInterceptorObj.passThrough:
 			self.treeInterceptorObj.passThrough = False
 			browseMode.reportPassThrough(self.treeInterceptorObj)
-		eventHandler.queueEvent("gainFocus", self.nvdaObj)
+		eventHandler.queueEvent("gainFocus", self.aslanObj)
 
 	@property
 	def isAfterSelection(self):

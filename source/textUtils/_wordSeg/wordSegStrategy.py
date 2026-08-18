@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025-2026 NV Access Limited, Wang Chong, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from ctypes import (
 	ArgumentError,
@@ -23,10 +23,10 @@ import unicodedata
 import brailleTables
 import config
 import languageHandler
-import NVDAHelper
+import AslanHelper
 import textUtils
 from textUtils import icu
-from NVDAState import ReadPaths
+from AslanState import ReadPaths
 from logHandler import log
 
 
@@ -181,7 +181,7 @@ class WordSegmentationStrategy(ABC):
 
 
 class UniscribeWordSegmentationStrategy(WordSegmentationStrategy):
-	"""Windows Uniscribe-based segmentation (calls NVDAHelper.localLib.calculateWordOffsets)."""
+	"""Windows Uniscribe-based segmentation (calls AslanHelper.localLib.calculateWordOffsets)."""
 
 	# Copied from OffsetsTextInfo to preserve existing Uniscribe behavior.
 	def _calculateUniscribeOffsets(
@@ -197,7 +197,7 @@ class UniscribeWordSegmentationStrategy(WordSegmentationStrategy):
 		:param relOffset: the character offset within the text string at which to calculate the bounds.
 		"""
 
-		helperFunc = NVDAHelper.localLib.calculateWordOffsets
+		helperFunc = AslanHelper.localLib.calculateWordOffsets
 
 		relStart = c_int()
 		relEnd = c_int()

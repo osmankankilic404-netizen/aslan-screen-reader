@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2024 NV Access Limited, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -66,7 +66,7 @@ class _TableCell:
 class TextContainerObject(AutoPropertyObject):
 	"""
 	An object that contains text which can be accessed via a call to a makeTextInfo method.
-	E.g. NVDAObjects, BrowseModeDocument TreeInterceptors.
+	E.g. AslanObjects, BrowseModeDocument TreeInterceptors.
 	"""
 
 	def _get_TextInfo(self):
@@ -87,7 +87,7 @@ class TextContainerObject(AutoPropertyObject):
 class DocumentWithTableNavigation(TextContainerObject, ScriptableObject):
 	"""
 	A document that supports standard table navigiation comments (E.g. control+alt+arrows to move between table cells).
-	The document could be an NVDAObject, or a BrowseModeDocument treeIntercepter for example.
+	The document could be an AslanObject, or a BrowseModeDocument treeIntercepter for example.
 	"""
 
 	_lastTableSelection: Optional[_TableSelection] = None
@@ -600,8 +600,8 @@ class DocumentWithTableNavigation(TextContainerObject, ScriptableObject):
 		"kb:control+alt+pageDown": "lastRow",
 		"kb:control+alt+home": "firstColumn",
 		"kb:control+alt+end": "lastColumn",
-		"kb:NVDA+control+alt+rightArrow": "sayAllRow",
-		"kb:NVDA+control+alt+downArrow": "sayAllColumn",
-		"kb:NVDA+control+alt+leftArrow": "speakRow",
-		"kb:NVDA+control+alt+upArrow": "speakColumn",
+		"kb:Aslan+control+alt+rightArrow": "sayAllRow",
+		"kb:Aslan+control+alt+downArrow": "sayAllColumn",
+		"kb:Aslan+control+alt+leftArrow": "speakRow",
+		"kb:Aslan+control+alt+upArrow": "speakColumn",
 	}

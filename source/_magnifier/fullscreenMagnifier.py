@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025-2026 NV Access Limited, Antoine Haffreingue, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """
 Full-screen magnifier module.
@@ -85,7 +85,7 @@ class FullScreenMagnifier(Magnifier):
 			raise MagnifierStartError(
 				pgettext(
 					"magnifier",
-					# Translators: Message when NVDA's Magnifier cannot start because another magnifier is already running.
+					# Translators: Message when Aslan's Magnifier cannot start because another magnifier is already running.
 					"Cannot start magnifier. Another magnifier application may already be running.",
 				),
 			)

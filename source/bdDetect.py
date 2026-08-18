@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2013-2025 NV Access Limited, Babbage B.V., Leonard de Ruijter, Christian Comaschi
@@ -8,7 +8,7 @@ This allows devices to be automatically detected and used when they become avail
 as well as providing utilities to query for possible devices for a particular driver.
 To support detection for a driver, devices need to be associated
 using the C{add*} functions.
-Drivers distributed with NVDA do this at the bottom of this module.
+Drivers distributed with Aslan do this at the bottom of this module.
 For drivers in add-ons, this must be done in a global plugin.
 """
 
@@ -25,7 +25,7 @@ from typing import (
 from collections import OrderedDict
 from collections.abc import Callable, Generator, Iterable, Iterator
 import hwPortUtils
-import NVDAState
+import AslanState
 import braille
 import braille.display
 import braille.display.driver
@@ -74,7 +74,7 @@ class _DeviceTypeMeta(type):
 
 	def __getattr__(cls, name: str) -> ProtocolType | CommunicationType:
 		repl = cls._mapping.get(name)
-		if repl is not None and NVDAState._allowDeprecatedAPI():
+		if repl is not None and AslanState._allowDeprecatedAPI():
 			log.warning(
 				f"{cls.__name__}.{name} is deprecated. Use {repl.__class__.__name__}.{repl} instead.",
 			)
@@ -91,10 +91,10 @@ class DeviceType(metaclass=_DeviceTypeMeta):
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	if attrName == "DETECT_USB" and NVDAState._allowDeprecatedAPI():
+	if attrName == "DETECT_USB" and AslanState._allowDeprecatedAPI():
 		log.warning(f"{attrName} is deprecated.")
 		return 1
-	if attrName == "DETECT_BLUETOOTH" and NVDAState._allowDeprecatedAPI():
+	if attrName == "DETECT_BLUETOOTH" and AslanState._allowDeprecatedAPI():
 		log.warning(f"{attrName} is deprecated.")
 		return 2
 	_deprecatedConstantsMap = {
@@ -103,7 +103,7 @@ def __getattr__(attrName: str) -> Any:
 		"KEY_BLUETOOTH": CommunicationType.BLUETOOTH,
 		"KEY_CUSTOM": ProtocolType.CUSTOM,
 	}
-	if attrName in _deprecatedConstantsMap and NVDAState._allowDeprecatedAPI():
+	if attrName in _deprecatedConstantsMap and AslanState._allowDeprecatedAPI():
 		replacementSymbol = _deprecatedConstantsMap[attrName]
 		log.warning(
 			f"{attrName} is deprecated. "

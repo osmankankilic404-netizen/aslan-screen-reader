@@ -1,22 +1,22 @@
-# NVDA NVDA_VERSION Brukermanual
+# Aslan Aslan_VERSION Brukermanual
 
 [TOC]
 
-<!-- KC:title: NVDA NVDA_VERSION Tastaturkommandoer Hurtigreferanse -->
+<!-- KC:title: Aslan Aslan_VERSION Tastaturkommandoer Hurtigreferanse -->
 
 
 
 ## introduksjon {#Introduction}
 
-Velkommen til NVDA!
+Velkommen til Aslan!
 
-NonVisual Desktop Access (NVDA) er en gratis skjermleser for Microsoft Windows-operativsystemet. Den er laget med åpen kildekode.
-NVDA gir tilbakemeldinger via syntetisk tale og punktskrift, og gjør blinde og svaksynte personer i stand til å bruke datamaskiner som kjører Windows til samme pris som det seende personer betaler.
-NVDA er utviklet av [NV Access](https://www.nvaccess.org/), med bidrag fra fellesskapet.
+NonVisual Desktop Access (Aslan) er en gratis skjermleser for Microsoft Windows-operativsystemet. Den er laget med åpen kildekode.
+Aslan gir tilbakemeldinger via syntetisk tale og punktskrift, og gjør blinde og svaksynte personer i stand til å bruke datamaskiner som kjører Windows til samme pris som det seende personer betaler.
+Aslan er utviklet av [NV Access](https://www.nvaccess.org/), med bidrag fra fellesskapet.
 
 ### Generelle funksjoner {#GeneralFeatures}
 
-NVDA lar blinde og svaksynte få tilgang til og bruke Windows operativsystem og mange tredjeparts programmer.
+Aslan lar blinde og svaksynte få tilgang til og bruke Windows operativsystem og mange tredjeparts programmer.
 
 Blant de viktigste funksjonene er:
 
@@ -37,29 +37,29 @@ Blant de viktigste funksjonene er:
 ### Internasjonalisering {#Internationalization}
 
 Det er viktig at mennesker hvor som helst i verden, uansett hvilket språk de snakker, får lik tilgang til teknologi.
-Foruten engelsk, har NVDA blitt oversatt til 54 språk, inkludert: afrikaans, albansk, amharisk, arabisk, aragonsk, bulgarsk, burmansk, dansk, farsi, finsk, fransk, galisisk, georgisk, gresk, hebraisk, hindi, irsk, islandsk, italiensk, japansk, kannada, katalansk, kinesisk (tradisjonell og forenklet), kirgisisk, kroatisk, kurdisk, litauisk, makedonsk, mongolsk, nederlandsk, nepali, norsk, polsk, portugisisk (Brasil og Portugal), punjabi, rumensk, russisk, serbisk, slovakisk, slovensk, spansk (Colombia og Spania), svensk, tamil, thai, tsjekkisk, tyrkisk, tysk (Tyskland og Sveits), ukrainsk, ungarsk og vietnamesisk.
+Foruten engelsk, har Aslan blitt oversatt til 54 språk, inkludert: afrikaans, albansk, amharisk, arabisk, aragonsk, bulgarsk, burmansk, dansk, farsi, finsk, fransk, galisisk, georgisk, gresk, hebraisk, hindi, irsk, islandsk, italiensk, japansk, kannada, katalansk, kinesisk (tradisjonell og forenklet), kirgisisk, kroatisk, kurdisk, litauisk, makedonsk, mongolsk, nederlandsk, nepali, norsk, polsk, portugisisk (Brasil og Portugal), punjabi, rumensk, russisk, serbisk, slovakisk, slovensk, spansk (Colombia og Spania), svensk, tamil, thai, tsjekkisk, tyrkisk, tysk (Tyskland og Sveits), ukrainsk, ungarsk og vietnamesisk.
 
 ### Talesyntesestøtte {#SpeechSynthesizerSupport}
 
-Foruten å formidle meldinger og brukergrensesnitt på flere språk, kan NVDA også la brukeren lese innhold på alle språk, så lenge hun/han har en talesyntese som kan snakke det språket.
+Foruten å formidle meldinger og brukergrensesnitt på flere språk, kan Aslan også la brukeren lese innhold på alle språk, så lenge hun/han har en talesyntese som kan snakke det språket.
 
-Med NVDA følger [eSpeak NG](https://github.com/espeak-ng/espeak-ng), en flerspråklig talesyntese som er gratis og laget med åpen kildekode.
+Med Aslan følger [eSpeak NG](https://github.com/espeak-ng/espeak-ng), en flerspråklig talesyntese som er gratis og laget med åpen kildekode.
 
-Informasjon om andre talesynteser som NVDA støtter finnes i [Støttede talesynteser](#SupportedSpeechSynths)-seksjonen.
+Informasjon om andre talesynteser som Aslan støtter finnes i [Støttede talesynteser](#SupportedSpeechSynths)-seksjonen.
 
 ### Punktskriftstøtte {#BrailleSupport}
 
-For brukere som har leselist, kan NVDA gi informasjon i punktskrift. Skriving av både uforkortet og forkortet punktskrift via et punktskrifttastatur støttes også.
+For brukere som har leselist, kan Aslan gi informasjon i punktskrift. Skriving av både uforkortet og forkortet punktskrift via et punktskrifttastatur støttes også.
 
 Se seksjonen [Støttede leselister](#SupportedBrailleDisplays) for informasjon om de støttede leselistene.
 
-NVDA støtter punktskrift for mange språk, inkludert fullskrift, kortskrift og datapunktskrift.
+Aslan støtter punktskrift for mange språk, inkludert fullskrift, kortskrift og datapunktskrift.
 
 ### Lisens og kopibeskyttelse {#LicenseAndCopyright}
 
-NVDA er kopibeskyttet NVDA_COPYRIGHT_YEARS NVDA bidragsytere.
+Aslan er kopibeskyttet Aslan_COPYRIGHT_YEARS Aslan bidragsytere.
 
-NVDA dekkes av GNU General Public License (versjon 2).
+Aslan dekkes av GNU General Public License (versjon 2).
 Du er fri til å dele eller endre denne programvaren på alle måter du vil så lenge lisensen medfølger, og du gjør all kildekode tilgjengelig for alle som ønsker den.
 Dette gjelder både originale og modifiserte eksemplarer av denne programvaren, samt eventuelle avledede verk.
 For ytterligere opplysninger, kan du [se den fullstendige lisensen.](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
@@ -67,81 +67,81 @@ For ytterligere opplysninger, kan du [se den fullstendige lisensen.](https://www
 ## Systemkrav {#SystemRequirements}
 
 * Operativsystem: Alle 32- og 64-bits versjoner av Windows 7, Windows 8, Windows 8.1 og Windows 10, og alle serveroperativsystemer fra og med Windows Server 2008 R2.
-* For Windows 7 krever NVDA Service Pack 1 eller høyere.
-* For Windows Server 2008 R2 krever NVDA Service Pack 1 eller høyere.
+* For Windows 7 krever Aslan Service Pack 1 eller høyere.
+* For Windows Server 2008 R2 krever Aslan Service Pack 1 eller høyere.
 * Minne: 256 mb RAM eller mer
 * Prosessorhastighet: 1,0 GHz eller høyere
 * Omtrent 90 MB lagringsplass.
 
-## Få tak i og installer NVDA {#GettingAndSettingUpNVDA}
+## Få tak i og installer Aslan {#GettingAndSettingUpAslan}
 
-Hvis du ennå ikke har fått tak i en kopi av NVDA, kan du laste den ned fra [www.nvaccess.org](NVDA_URL).
+Hvis du ennå ikke har fått tak i en kopi av Aslan, kan du laste den ned fra [www.nvaccess.org](Aslan_URL).
 
-Gå til nedlastingssiden. Der finner du en lenke for å laste ned den nyeste versjonen av NVDA.
+Gå til nedlastingssiden. Der finner du en lenke for å laste ned den nyeste versjonen av Aslan.
 
-Når du kjører fila du akkurat har lastet ned, vil den starte en midlertidig kopi av NVDA. Du vil så bli spurt om du ønsker å installere NVDA, lage en flyttbar kopi eller bare fortsette å bruke den midlertidige kopien.
+Når du kjører fila du akkurat har lastet ned, vil den starte en midlertidig kopi av Aslan. Du vil så bli spurt om du ønsker å installere Aslan, lage en flyttbar kopi eller bare fortsette å bruke den midlertidige kopien.
 
-Dersom du planlegger å alltid bruke NVDA på denne datamaskinen, bør du velge å installere NVDA. Å installere NVDA gir tilgang til ekstra funksjonalitet slik som automatisk start etter innlogging, muligheten til å lese påloggingsvinduet og andre sikre skjermer i Windows (som ikke kan gjøres med portable eller midlertidige kopier) og oppretting av snarveier i startmenyen og på skrivebordet.
+Dersom du planlegger å alltid bruke Aslan på denne datamaskinen, bør du velge å installere Aslan. Å installere Aslan gir tilgang til ekstra funksjonalitet slik som automatisk start etter innlogging, muligheten til å lese påloggingsvinduet og andre sikre skjermer i Windows (som ikke kan gjøres med portable eller midlertidige kopier) og oppretting av snarveier i startmenyen og på skrivebordet.
 
-Fra den installerte kopien av NVDA kan du selv lage en flyttbar kopi når du måtte ønske det. Hvis du ønsker å ta NVDA med deg på en USB-minnepenn eller et annet skrivbart medium, bør du lage en flyttbar kopi.
+Fra den installerte kopien av Aslan kan du selv lage en flyttbar kopi når du måtte ønske det. Hvis du ønsker å ta Aslan med deg på en USB-minnepenn eller et annet skrivbart medium, bør du lage en flyttbar kopi.
 
 Den portable kopien kan også installeres på en datamaskin på et senere tidspunkt.
 
-Om du imidlertid skulle ønske å kopiere NVDA til et ikke skrivbart medium som for eksempel en CD, bør du bare kopiere pakken du har lastet ned.
+Om du imidlertid skulle ønske å kopiere Aslan til et ikke skrivbart medium som for eksempel en CD, bør du bare kopiere pakken du har lastet ned.
 
 Kjøring av en flyttbar kopi direkte fra et ikke skrivbart medium støttes ikke.
 
-Bruk av en midlertidig kopi av NVDA er også en mulighet (for eksempel for å demonstrere programvaren), selv å det å starte NVDA på denne måten hver gang kan bli nokså tidkrevende.
+Bruk av en midlertidig kopi av Aslan er også en mulighet (for eksempel for å demonstrere programvaren), selv å det å starte Aslan på denne måten hver gang kan bli nokså tidkrevende.
 
 ### Begrensninger i flyttbar og midlertidig utgave {#PortableAndTemporaryCopyRestrictions}
 
-Bortsett fra manglende mulighet for å kunne starte automatisk under og/eller etter innlogging, har flyttbare og midlertidige kopier av NVDA også disse begrensningene:
+Bortsett fra manglende mulighet for å kunne starte automatisk under og/eller etter innlogging, har flyttbare og midlertidige kopier av Aslan også disse begrensningene:
 
-* kan ikke samhandle med programmer som kjører med administrative privilegier, med mindre NVDA også kjøres med slike privilegier (ikke anbefalt).
+* kan ikke samhandle med programmer som kjører med administrative privilegier, med mindre Aslan også kjøres med slike privilegier (ikke anbefalt).
 * kan ikke lese brukerkontokontrollskjermer (UAC) når du starter et program med administrative privilegier.
 * Windows 8 og senere: kan ikke støtte inndata fra berøringsskjerm.
 * Windows 8 og senere: kan ikke tilby nettmodus og uttale av skrevne bokstaver i apper fra Windows Store.
 * Windows 8 og senere: lyddemping støttes ikke.
 
-## Installere NVDA {#InstallingNVDA}
+## Installere Aslan {#InstallingAslan}
 
-Hvis du installerer NVDA direkte fra pakken du har lastet ned, kan du trykke på knappen "Installer NVDA".
+Hvis du installerer Aslan direkte fra pakken du har lastet ned, kan du trykke på knappen "Installer Aslan".
 
-Hvis du alt har lukket denne dialogen eller ønsker å installere fra en flyttbar kopi, velger du menyelementet "Installer NVDA" som du finner under "Verktøy" i NVDA-menyen.
+Hvis du alt har lukket denne dialogen eller ønsker å installere fra en flyttbar kopi, velger du menyelementet "Installer Aslan" som du finner under "Verktøy" i Aslan-menyen.
 
-Installasjonsdialogen som vises, vil bekrefte om du ønsker å installere NVDA og om denne installasjonen vil oppdatere en tidligere installasjon.
+Installasjonsdialogen som vises, vil bekrefte om du ønsker å installere Aslan og om denne installasjonen vil oppdatere en tidligere installasjon.
 
-Ved å trykke på "Fortsett"-knappen starter du installasjonen av NVDA.
+Ved å trykke på "Fortsett"-knappen starter du installasjonen av Aslan.
 
 Det finnes også noen få valg i denne dialogen som blir forklart nedenfor.
 
 Så snart installasjonen er fullført, vil du få ei melding om at installasjonen var vellykket.
 
-Trykk på OK-knappen for å starte den nylig installerte kopien av NVDA.
+Trykk på OK-knappen for å starte den nylig installerte kopien av Aslan.
 
 #### Start i Windows pålogging {#StartAtWindowsLogon}
 
-Dette valget lar deg avgjøre om NVDA skal starte automatisk eller ikke når du er i innloggingsvinduet i Windows, før du har skrevet inn et passord. Dette gjelder også for brukerkontokontroll og andre sikre skjermer.
+Dette valget lar deg avgjøre om Aslan skal starte automatisk eller ikke når du er i innloggingsvinduet i Windows, før du har skrevet inn et passord. Dette gjelder også for brukerkontokontroll og andre sikre skjermer.
 
 #### Lag snarvei på skrivebordet (ctrl+alt+n) {#CreateDesktopShortcut}
 
-Dette valget lar deg avgjøre om NVDA skal lage en snarvei på skrivebordet for å starte NVDA. Velger du at snarveien skal opprettes, blir det også knyttet en hurtigtast, Ctrl+Alt+n, til den. Med denne hurtigtasten kan du starte NVDA når du vil.
+Dette valget lar deg avgjøre om Aslan skal lage en snarvei på skrivebordet for å starte Aslan. Velger du at snarveien skal opprettes, blir det også knyttet en hurtigtast, Ctrl+Alt+n, til den. Med denne hurtigtasten kan du starte Aslan når du vil.
 
 #### Kopier flyttbar konfigurasjon til gjeldende brukerkonto {#CopyPortableConfigurationToCurrentUserAccount}
 
-Dette er et valg som er tilgjengelig bare når du installerer fra en flyttbar kopi av NVDA. Installerer du fra pakken du har lastet ned, finner du ikke denne muligheten.
+Dette er et valg som er tilgjengelig bare når du installerer fra en flyttbar kopi av Aslan. Installerer du fra pakken du har lastet ned, finner du ikke denne muligheten.
 
-Dette valget lar deg avgjøre om brukerkonfigurasjonen fra den kjørende kopien av NVDA skal kopieres til konfigurasjonen for den innloggede brukeren på PC-en, for bruk med den installerte kopien av NVDA. Dette vil ikke kopiere konfigurasjonen for andre brukere av PC-en, og det vil heller ikke kopiere innstillinger til systemkonfigurasjonen for bruk i Windows pålogging eller på andre sikre skjermer.
+Dette valget lar deg avgjøre om brukerkonfigurasjonen fra den kjørende kopien av Aslan skal kopieres til konfigurasjonen for den innloggede brukeren på PC-en, for bruk med den installerte kopien av Aslan. Dette vil ikke kopiere konfigurasjonen for andre brukere av PC-en, og det vil heller ikke kopiere innstillinger til systemkonfigurasjonen for bruk i Windows pålogging eller på andre sikre skjermer.
 
 ### Lag en flyttbar kopi {#CreatingAPortableCopy}
 
-Hvis du vil lage en flyttbar kopi direkte fra NVDAs nedlastingsfil, trykker du rett og slett på "Lag flyttbar kopi".
+Hvis du vil lage en flyttbar kopi direkte fra Aslans nedlastingsfil, trykker du rett og slett på "Lag flyttbar kopi".
 
-Hvis du alt har lukket denne dialogen, eller hvis du kjører en installert kopi av NVDA, velger du menyelementet Lag flyttbar kopi som du finner under Verktøy i NVDA-menyen.
+Hvis du alt har lukket denne dialogen, eller hvis du kjører en installert kopi av Aslan, velger du menyelementet Lag flyttbar kopi som du finner under Verktøy i Aslan-menyen.
 
 Dialogen som da vises, lar deg velge hvor den flyttbare kopien skal lages. Dette kan være i ei mappe på harddisken din, eller et sted på en USB-minnepinne eller et annet flyttbart medium.
 
-Det er også mulig å velge om NVDA skal kopiere den påloggende brukerens gjeldende NVDA-konfigurasjon for bruk med den nye, flyttbare kopien av NVDA. Dette valget er bare tilgjengelig når du lager en flyttbar kopi fra en installert kopi av NVDA, men ikke fra den nedlastede pakken.
+Det er også mulig å velge om Aslan skal kopiere den påloggende brukerens gjeldende Aslan-konfigurasjon for bruk med den nye, flyttbare kopien av Aslan. Dette valget er bare tilgjengelig når du lager en flyttbar kopi fra en installert kopi av Aslan, men ikke fra den nedlastede pakken.
 
 Trykk på Fortsett for å lage den flyttbare kopien.
 
@@ -149,65 +149,65 @@ Så snart den nye kopien er laget, vil det dukke opp ei melding som forteller de
 
 Trykk på OK for å fjerne denne dialogen.
 
-## Kom i gang med NVDA {#GettingStartedWithNVDA}
-### Start NVDA {#LaunchingNVDA}
+## Kom i gang med Aslan {#GettingStartedWithAslan}
+### Start Aslan {#LaunchingAslan}
 
-Hvis du har installert NVDA med installasjonsprogrammet, er det å starte NVDA så enkelt som enten å trykke Ctrl+Alt+n, eller velge NVDA fra NVDA-menyen under Programmer på startmenyen.
+Hvis du har installert Aslan med installasjonsprogrammet, er det å starte Aslan så enkelt som enten å trykke Ctrl+Alt+n, eller velge Aslan fra Aslan-menyen under Programmer på startmenyen.
 
-I tillegg kan du også skrive NVDA i dialogboksen Kjør, og trykke Enter.
+I tillegg kan du også skrive Aslan i dialogboksen Kjør, og trykke Enter.
 
-Du kan også sende noen [kommandolinjeparametre](#CommandLineOptions) som tillater deg å starte NVDA på nytt (-r), avslutte NVDA (-q), slå av programtillegg (--disable-addons), osv.
+Du kan også sende noen [kommandolinjeparametre](#CommandLineOptions) som tillater deg å starte Aslan på nytt (-r), avslutte Aslan (-q), slå av programtillegg (--disable-addons), osv.
 
-For installerte kopier lagrer NVDA som standard konfigurasjonen i "roaming"-appdatamappa under gjeldende bruker, "C:\Users\<bruker>\AppData\Roaming"). Dette kan endres slik at NVDA isteden laster konfigurasjonen fra den lokale appdata-mappa. Se seksjonen om [systemparametre](#SystemWideParameters) for flere detaljer.
+For installerte kopier lagrer Aslan som standard konfigurasjonen i "roaming"-appdatamappa under gjeldende bruker, "C:\Users\<bruker>\AppData\Roaming"). Dette kan endres slik at Aslan isteden laster konfigurasjonen fra den lokale appdata-mappa. Se seksjonen om [systemparametre](#SystemWideParameters) for flere detaljer.
 
-For å starte den flyttbare versjonen, går du til mappa du pakket NVDA ut i, og trykker enter. Du kan også dobbeltklikke på nvda.exe.
+For å starte den flyttbare versjonen, går du til mappa du pakket Aslan ut i, og trykker enter. Du kan også dobbeltklikke på aslan.exe.
 
-Når NVDA starter, vil du først høre en stigende tonerekke (som forteller deg at NVDA lastes).
-Avhengig av hvor rask maskinen er, eller hvis du kjører NVDA fra et USB-minne eller annet langsommere medium, kan det ta litt tid å starte NVDA.
-Hvis det tar ekstra lang tid, bør NVDA si "Laster NVDA. Vennligst vent..."
+Når Aslan starter, vil du først høre en stigende tonerekke (som forteller deg at Aslan lastes).
+Avhengig av hvor rask maskinen er, eller hvis du kjører Aslan fra et USB-minne eller annet langsommere medium, kan det ta litt tid å starte Aslan.
+Hvis det tar ekstra lang tid, bør Aslan si "Laster Aslan. Vennligst vent..."
 
-Hvis du ikke hører noe av dette, eller du hører Windows' feilmeldingslyd, eller en synkende tonerekke, betyr dette at NVDA har en feil. Kanskje du da vil sende en feilrapport til utviklerne? Vennligst sjekk NVDAs nettside for hvordan du gjør dette.
+Hvis du ikke hører noe av dette, eller du hører Windows' feilmeldingslyd, eller en synkende tonerekke, betyr dette at Aslan har en feil. Kanskje du da vil sende en feilrapport til utviklerne? Vennligst sjekk Aslans nettside for hvordan du gjør dette.
 
 #### Velkomstdialog {#WelcomeDialog}
 
-Når NVDA starter for første gang, vil du bli møtt av en dialogboks som gir deg litt grunnleggende informasjon om NVDA-spesialtasten og NVDA-menyen. (Vennligst se nærmere avsnittene om disse temaene.)
+Når Aslan starter for første gang, vil du bli møtt av en dialogboks som gir deg litt grunnleggende informasjon om Aslan-spesialtasten og Aslan-menyen. (Vennligst se nærmere avsnittene om disse temaene.)
 
 Dialogboksen inneholder også en kombinasjonsboks og tre avkryssingsbokser.
 
 Kombinasjonsboksen lar deg velge tastaturoppsett.
 
-Den første avkryssingsboksen lar deg kontrollere om NVDA skal bruke CapsLock som en NVDA-valgtast.
+Den første avkryssingsboksen lar deg kontrollere om Aslan skal bruke CapsLock som en Aslan-valgtast.
 
-Den andre avkryssingsboksen lar deg avgjøre om NVDA skal starte automatisk etter at du har logget inn i Windows. Dette valget er bare tilgjengelig i installerte kopier av NVDA.
+Den andre avkryssingsboksen lar deg avgjøre om Aslan skal starte automatisk etter at du har logget inn i Windows. Dette valget er bare tilgjengelig i installerte kopier av Aslan.
 
-Den tredje avkryssingsboksen lar deg kontrollere om denne velkomstdialogen skal vises hver gang NVDA starter.
+Den tredje avkryssingsboksen lar deg kontrollere om denne velkomstdialogen skal vises hver gang Aslan starter.
 
-### Om tastaturkommandoer i NVDA {#AboutNVDAKeyboardCommands}
-#### NVDA-tasten {#TheNVDAModifierKey}
+### Om tastaturkommandoer i Aslan {#AboutAslanKeyboardCommands}
+#### Aslan-tasten {#TheAslanModifierKey}
 
-NVDA-spesifikke tastaturkommandoer utføres vanligvis ved å trykke en spesiell tast kalt NVDA-tasten, sammen med én eller flere andre taster. Unntak fra dette er først og fremst kommandoer for tekstlesing med stasjonært tastaturoppsett, der en bare bruker tastene på det numeriske tastaturet, men det finnes noen andre unntak også.
+Aslan-spesifikke tastaturkommandoer utføres vanligvis ved å trykke en spesiell tast kalt Aslan-tasten, sammen med én eller flere andre taster. Unntak fra dette er først og fremst kommandoer for tekstlesing med stasjonært tastaturoppsett, der en bare bruker tastene på det numeriske tastaturet, men det finnes noen andre unntak også.
 
-NVDA kan konfigureres slik at enten insert-tasten på det numeriske tastaturet, den utvidede insert-tasten eller CapsLock-tasten kan brukes som NVDA-tast.
+Aslan kan konfigureres slik at enten insert-tasten på det numeriske tastaturet, den utvidede insert-tasten eller CapsLock-tasten kan brukes som Aslan-tast.
 
-Som standard er begge insert-tastene definert som NVDA-taster.
+Som standard er begge insert-tastene definert som Aslan-taster.
 
-Hvis du ønsker at en av NVDA-tastene skal opptre som opprinnelig tast (for eksempel fordi du ønsker å trykke CapsLock når du har satt CapsLock til å være NVDA-tast) kan du trykke på tasten to ganger i rask rekkefølge.
+Hvis du ønsker at en av Aslan-tastene skal opptre som opprinnelig tast (for eksempel fordi du ønsker å trykke CapsLock når du har satt CapsLock til å være Aslan-tast) kan du trykke på tasten to ganger i rask rekkefølge.
 
 #### Tastaturoppsett {#KeyboardLayouts}
 
-NVDA leveres for tida med to sett med tastaturkommandoer, også kjent som tastaturoppsett: stasjonært og bærbart tastaturoppsett.
+Aslan leveres for tida med to sett med tastaturkommandoer, også kjent som tastaturoppsett: stasjonært og bærbart tastaturoppsett.
 
-Som standard er NVDA satt opp til å bruke stasjonært tastaturoppsett. Du kan enkelt bytte til bærbart tastaturoppsett under kategorien Tastatur i [NVDA-innstillinger](#NVDASettings), som du finner under Brukervalg i NVDA-menyen.
+Som standard er Aslan satt opp til å bruke stasjonært tastaturoppsett. Du kan enkelt bytte til bærbart tastaturoppsett under kategorien Tastatur i [Aslan-innstillinger](#AslanSettings), som du finner under Brukervalg i Aslan-menyen.
 
 Stasjonært tastaturoppsett gjør omfattende bruk av insert-tastene (med NumLock av).
 
 Selv om mange bærbare PC-er ikke har noe fysisk numerisk tastatur, er det vanlig at de kan emulere numerisk tastatur ved å holde nede FN-tasten mens en trykker bokstaver, tall og tegn på høyre side av tastaturet (7, 8, 9, u, i, o, j, k, l osv.). Om dette ikke lar seg gjøre på din bærbare PC, eller om du ikke får slått av NumLock, kan det være lurt av deg å bytte til bærbart tastaturoppsett i stedet.
 
-### Berøringsgester i NVDA {#NVDATouchGestures}
+### Berøringsgester i Aslan {#AslanTouchGestures}
 
-Kjører du NVDA på en enhet med berøringsskjerm og bruker Windows 8 eller høyere, kan du også kontrollere NVDA direkte via berøringsgester.
+Kjører du Aslan på en enhet med berøringsskjerm og bruker Windows 8 eller høyere, kan du også kontrollere Aslan direkte via berøringsgester.
 
-Så lenge NVDA kjører, vil all berøring av skjermen gå direkte til NVDA. Derfor vil handlinger som kan utføres normalt uten NVDA ikke fungere.
+Så lenge Aslan kjører, vil all berøring av skjermen gå direkte til Aslan. Derfor vil handlinger som kan utføres normalt uten Aslan ikke fungere.
 
 #### Utforsk skjermen {#ExploringTheScreen}
 
@@ -217,7 +217,7 @@ Du kan også holde fingeren på skjermen og flytte den rundt for å få opplest 
 
 #### Berøringsgester {#TouchGestures}
 
-Når NVDA-kommandoer blir beskrevet seinere i denne brukerhåndboka, vil de ofte også inneholde en berøringsgest som kan brukes for å aktivere kommandoen på berøringsskjermen.
+Når Aslan-kommandoer blir beskrevet seinere i denne brukerhåndboka, vil de ofte også inneholde en berøringsgest som kan brukes for å aktivere kommandoen på berøringsskjermen.
 Her følger noen instruksjoner for hvordan du utfører de ulike berøringsgestene.
 
 ##### Trykk {#toc25}
@@ -226,7 +226,7 @@ Trykk raskt på skjermen med én eller flere fingrer.
 
 Å trykke én gang med én finger er kjent som et trykk. Å trykke med to fingrer samtidig er kjent som et tofingertrykk, osv.
 
-Hvis samme trykk-kommando blir utført raskt flere ganger etter hverandre, vil NVDA oppfatte dette som en multitrykkgest. Å trykke to ganger vil altså ressultere i et dobbelttrykk. Tre trykk etter hverandre vil resultere i et trippeltrykk, osv.
+Hvis samme trykk-kommando blir utført raskt flere ganger etter hverandre, vil Aslan oppfatte dette som en multitrykkgest. Å trykke to ganger vil altså ressultere i et dobbelttrykk. Tre trykk etter hverandre vil resultere i et trippeltrykk, osv.
 
 Disse multitrykkgestene gjenkjenner selvfølgelig også hvor mange fingrer som ble brukt, så det er mulig å ha gester som trippeltrykk med to fingrer, trykk med fire fingrer osv.
 
@@ -240,11 +240,11 @@ Akkurat som ved trykk, kan mer enn én finger brukes for å utføre gesten. Derf
 
 #### Berøringsmodi {#TouchModes}
 
-Siden det er langt flere NVDA-kommandoer enn mulige berøringsgester, har NVDA flere berøringsmodi du kan veksle mellom, og som gjør ulike undergrupper av kommandoer tilgjengelige.
+Siden det er langt flere Aslan-kommandoer enn mulige berøringsgester, har Aslan flere berøringsmodi du kan veksle mellom, og som gjør ulike undergrupper av kommandoer tilgjengelige.
 
 De to modiene er tekstmodus og objektmodus.
 
-Visse NVDA-kommandoer som oppgis i denne brukermanualen kan ha en berøringsmodus oppgitt i klammer etter berøringsgesten. For eksempel betyr sveip opp (tekstmodus) at kommandoen blir utført når du sveiper opp, men bare når du er i tekstmodus.
+Visse Aslan-kommandoer som oppgis i denne brukermanualen kan ha en berøringsmodus oppgitt i klammer etter berøringsgesten. For eksempel betyr sveip opp (tekstmodus) at kommandoen blir utført når du sveiper opp, men bare når du er i tekstmodus.
 
 Hvis en kommando ikke har en modus knyttet til seg, vil det si at kommandoen fungerer uansett modus.
 
@@ -256,30 +256,30 @@ For å bytte mellom modi, trykker du med tre fingrer.
 
 Skjermtastaturet brukes til å skrive tekst og kommandoer fra en berøringsskjerm. Når du har fokus på et skrivefelt, henter du fram skjermtastaturet ved å dobbelttrykke på ikonet for skjermtastaturet nederst på skjermen. For nettbrett som Microsoft Surface Pro er skjermtastaturet alltid tilgjengelig så lenge et tastatur ikke er tilkoblet. For å ta bort skjermtastaturet kan du dobbelttrykke på ikonet for skjermtastatur eller flytte bort fra skrivefeltet.
 
-For å finne taster på skjermtastaturet når skjermtastaturet er aktivt, flytter du fingeren til der skjermtastaturet er (normalt nederst på skjermen). Der bruker du én finger til å navigere omkring på skrivebordet. Når du finner tasten du vil trykke på, dobbelttrykker du eller løfter fingeren, avhengig av hvilket valg du har gjort i [kategorien Innstillinger for berøringsinteraksjon](#TouchInteraction) i NVDA-innstillingene.
+For å finne taster på skjermtastaturet når skjermtastaturet er aktivt, flytter du fingeren til der skjermtastaturet er (normalt nederst på skjermen). Der bruker du én finger til å navigere omkring på skrivebordet. Når du finner tasten du vil trykke på, dobbelttrykker du eller løfter fingeren, avhengig av hvilket valg du har gjort i [kategorien Innstillinger for berøringsinteraksjon](#TouchInteraction) i Aslan-innstillingene.
 
 #### Tastaturhjelp {#InputHelpMode}
 
-Mange NVDA-kommandoer er nevnt gjennom hele resten av denne brukermanualen, men en enkel måte å utforske alle de forskjellige tastaturkommandoene på er å slå på tastaturhjelp.
+Mange Aslan-kommandoer er nevnt gjennom hele resten av denne brukermanualen, men en enkel måte å utforske alle de forskjellige tastaturkommandoene på er å slå på tastaturhjelp.
 
-For å slå på tastaturhjelp, trykker du NVDA+1.
-For å slå den av, trykker du NVDA+1 en gang til.
+For å slå på tastaturhjelp, trykker du Aslan+1.
+For å slå den av, trykker du Aslan+1 en gang til.
 
 Når tastaturhjelp er slått på, vil hvert tastetrykk du utfører på tastaturet eller hver gest du utfører på en berøringsskjerm gi som respons handlingen og hva den gjør (hvis den gjør noe).
 
 Tastene vil ikke utføre sin funksjon når du er i tastaturhjelpmodus, slik at du kan trykke hvilke taster du vil.
 
-### NVDA-menyen {#TheNVDAMenu}
+### Aslan-menyen {#TheAslanMenu}
 
-NVDA-menyen lar deg kontrollere NVDAs innstillinger, hjelp, lagre/tilbakestille konfigurasjonen, endre taleordlister, få tilgang til flere verktøy og å avslutte NVDA.
+Aslan-menyen lar deg kontrollere Aslans innstillinger, hjelp, lagre/tilbakestille konfigurasjonen, endre taleordlister, få tilgang til flere verktøy og å avslutte Aslan.
 
-For å gå til NVDA-menyen fra hvor som helst i Windows mens NVDA kjører, trykker du NVDA+n.
-Du kan også gå til NVDA-menyen via systemstatusfeltet i Windows.
-Enten høyreklikk på NVDA-ikonet i systemstatusfeltet, eller få tilgang til systemstatusfeltet ved å trykke Win+b, pil ned til NVDA-ikonet og trykk deretter på meny-tasten. Den finner du rett til venstre for høyre Ctrl-tast på de fleste tastaturer.
+For å gå til Aslan-menyen fra hvor som helst i Windows mens Aslan kjører, trykker du Aslan+n.
+Du kan også gå til Aslan-menyen via systemstatusfeltet i Windows.
+Enten høyreklikk på Aslan-ikonet i systemstatusfeltet, eller få tilgang til systemstatusfeltet ved å trykke Win+b, pil ned til Aslan-ikonet og trykk deretter på meny-tasten. Den finner du rett til venstre for høyre Ctrl-tast på de fleste tastaturer.
 
 Når menyen vises, kan du bruke piltastene til å navigere i den, og enter-tasten for å aktivere et element.
 
-### Grunnleggende NVDA-kommandoer {#BasicNVDACommands}
+### Grunnleggende Aslan-kommandoer {#BasicAslanCommands}
 
 <!-- KC:beginInclude -->
 
@@ -287,12 +287,12 @@ Når menyen vises, kan du bruke piltastene til å navigere i den, og enter-taste
 |---|---|---|---|---|
 |Stopp tale |Ctrl |Ctrl |Trykk med to fingrer |Slutter øyeblikkelig å snakke|
 |Pause tale |Skift |Skift |ingen |Pauser øyeblikkelig tale. Ved å trykke igjen vil talen fortsette der den slapp (hvis pause støttes av gjeldende talesyntese)|
-|NVDA-meny |NVDA+n |NVDA-n |Dobbelttrykk med to fingrer |Åpner NVDA-menyen slik at du får tilgang til innstillinger, verktøy og hjelp osv.|
-|Bytt talemodus |NVDA+s |NVDA+s |ingen |Bytter talemodus mellom tale, pip og av.|
-|Slå av/på tastaturhjelpmodus |NVDA+1 |NVDA+1 |ingen |Når du trykker en tast i denne modusen vil tasten bli lest sammen med beskrivelse av eventuell NVDA-kommando tilknyttet den|
-|Avslutt NVDA |NVDA+q |NVDA+q |ingen |Avslutter NVDA|
-|Slipp neste tast gjennom |NVDA+F2 |NVDA+F2 |ingen |Lar NVDA slippe neste tastetrykk rett gjennom til det aktive programmet, selv om det normalt er håndtert som en NVDA-tastekommando|
-|Slå programdvalemodus på/av |NVDA+Skift+s |NVDA+Skift+z |ingen |Dvalemodus deaktiverer alle NVDA-kommandoer og tale/punktskrift for det gjeldende programmet. Dette er mest nyttig i programmer som har sin egen tale eller skjermleserfunksjon. Trykk denne kommandoen på nytt for å deaktivere dvalemodus.|
+|Aslan-meny |Aslan+n |Aslan-n |Dobbelttrykk med to fingrer |Åpner Aslan-menyen slik at du får tilgang til innstillinger, verktøy og hjelp osv.|
+|Bytt talemodus |Aslan+s |Aslan+s |ingen |Bytter talemodus mellom tale, pip og av.|
+|Slå av/på tastaturhjelpmodus |Aslan+1 |Aslan+1 |ingen |Når du trykker en tast i denne modusen vil tasten bli lest sammen med beskrivelse av eventuell Aslan-kommando tilknyttet den|
+|Avslutt Aslan |Aslan+q |Aslan+q |ingen |Avslutter Aslan|
+|Slipp neste tast gjennom |Aslan+F2 |Aslan+F2 |ingen |Lar Aslan slippe neste tastetrykk rett gjennom til det aktive programmet, selv om det normalt er håndtert som en Aslan-tastekommando|
+|Slå programdvalemodus på/av |Aslan+Skift+s |Aslan+Skift+z |ingen |Dvalemodus deaktiverer alle Aslan-kommandoer og tale/punktskrift for det gjeldende programmet. Dette er mest nyttig i programmer som har sin egen tale eller skjermleserfunksjon. Trykk denne kommandoen på nytt for å deaktivere dvalemodus.|
 
 ### Rapportering av systeminformasjon {#ReportingSystemInformation}
 
@@ -300,15 +300,15 @@ Når menyen vises, kan du bruke piltastene til å navigere i den, og enter-taste
 
 | Navn |Tast |Beskrivelse|
 |---|---|---|
-|Rapporter dato/klokkeslett |NVDA+F12 |Ett trykk rapporterer gjeldende tid, to trykk rapporterer dato|
-|Rapporter batteristatus |NVDA+Skift+b |Rapporterer batteristatus, dvs. om strøm er i bruk eller nåværende ladeprosent.|
-|Rapporter tekst i utklippstavle |NVDA+c |Rapporterer tekst i utklippstavlen hvis det er noen.|
+|Rapporter dato/klokkeslett |Aslan+F12 |Ett trykk rapporterer gjeldende tid, to trykk rapporterer dato|
+|Rapporter batteristatus |Aslan+Skift+b |Rapporterer batteristatus, dvs. om strøm er i bruk eller nåværende ladeprosent.|
+|Rapporter tekst i utklippstavle |Aslan+c |Rapporterer tekst i utklippstavlen hvis det er noen.|
 
 <!-- KC:endInclude -->
 
-## Navigere med NVDA {#NavigatingWithNVDA}
+## Navigere med Aslan {#NavigatingWithAslan}
 
-NVDA lar deg utforske og navigere i systemet på flere måter, inkludert både normal samhandling og lesing.
+Aslan lar deg utforske og navigere i systemet på flere måter, inkludert både normal samhandling og lesing.
 
 ### Objekter {#Objects}
 
@@ -318,17 +318,17 @@ Hvert program og selve operativsystemet består av mange objekter. Et objekt er 
 
 Systemfokus, også kjent som fokus, er [objektet](#Objects) som mottar tastetrykk som trykkes på tastaturet. For eksempel, hvis du skriver i et redigerbart tekstfelt, er tekstfeltet i fokus.
 
-Den vanligste måten å navigere rundt i Windows med NVDA, er å ganske enkelt flytte systemfokus ved hjelp av standard tastaturkommandoer i Windows. Eksempler på dette kan være å trykke Tab og Skift+Tab for å gå fram og tilbake mellom kontrollene, trykke Alt for å komme til menylinjen og deretter bruke piltastene for å navigere i menyer, og trykke Alt+Tab for å flytte mellom kjørende programmer. Mens du gjør dette, vil NVDA gi informasjon om objektet som har fokus, slik som navn, type, verdi, tilstand, beskrivelse, tastatursnarvei og informasjon om posisjon.
+Den vanligste måten å navigere rundt i Windows med Aslan, er å ganske enkelt flytte systemfokus ved hjelp av standard tastaturkommandoer i Windows. Eksempler på dette kan være å trykke Tab og Skift+Tab for å gå fram og tilbake mellom kontrollene, trykke Alt for å komme til menylinjen og deretter bruke piltastene for å navigere i menyer, og trykke Alt+Tab for å flytte mellom kjørende programmer. Mens du gjør dette, vil Aslan gi informasjon om objektet som har fokus, slik som navn, type, verdi, tilstand, beskrivelse, tastatursnarvei og informasjon om posisjon.
 
 Det er noen viktige kommandoer som er nyttige når du flytter sammen med Systemfokus:
 <!-- KC:beginInclude -->
 
 | Navn |Stasjonær tast |Bærbar tast |Beskrivelse|
 |---|---|---|---|
-|Les gjeldende fokus |NVDA+Tab |NVDA+Tab |Leser gjeldende objekt eller kontroll som har systemfokus. Ved å trykke to ganger staves informasjonen|
-|Les tittel |NVDA+t |NVDA+t |Leser tittelen på det aktive vinduet. Ved å trykke to ganger staves informasjonen. Ved å trykke tre ganger kopieres den til utklippstavlen|
-|Les det aktive vinduet |NVDA+b |NVDA+b |Leser alle kontrollene i det aktive vinduet (nyttig for dialoger)|
-|Les statuslinje |NVDA+End |NVDA+Skift+End |Leser Statuslinjen hvis NVDA finner en, og flytter navigasjonsobjektet til denne plasseringen. Ved å trykke to ganger staves informasjonen. Ved å trykke tre ganger kopieres den til utklippstavlen|
+|Les gjeldende fokus |Aslan+Tab |Aslan+Tab |Leser gjeldende objekt eller kontroll som har systemfokus. Ved å trykke to ganger staves informasjonen|
+|Les tittel |Aslan+t |Aslan+t |Leser tittelen på det aktive vinduet. Ved å trykke to ganger staves informasjonen. Ved å trykke tre ganger kopieres den til utklippstavlen|
+|Les det aktive vinduet |Aslan+b |Aslan+b |Leser alle kontrollene i det aktive vinduet (nyttig for dialoger)|
+|Les statuslinje |Aslan+End |Aslan+Skift+End |Leser Statuslinjen hvis Aslan finner en, og flytter navigasjonsobjektet til denne plasseringen. Ved å trykke to ganger staves informasjonen. Ved å trykke tre ganger kopieres den til utklippstavlen|
 
 <!-- KC:endInclude -->
 
@@ -338,16 +338,16 @@ Når [objekter](#Objects) som tillater navigering og/eller redigering av tekst e
 
 Når fokus er på et objekt som har systemmarkør, kan du bruke piltastene, side opp, side ned, home, end osv. for å bevege deg rundt i teksten.
 Du kan også endre teksten om kontrollen støtter redigering.
-NVDA vil annonsere det når du flytter mellom tegn, ord og linje, og vil også opplyse når du markerer eller avmarkerer tekst.
+Aslan vil annonsere det når du flytter mellom tegn, ord og linje, og vil også opplyse når du markerer eller avmarkerer tekst.
 
-NVDA har følgende tastaturkommandoer i tilknytning til systemmarkøren:
+Aslan har følgende tastaturkommandoer i tilknytning til systemmarkøren:
 <!-- KC:beginInclude -->
 
 | Navn |Stasjonær tast |Bærbar tast |Beskrivelse|
 |---|---|---|---|
-|Si alle |NVDA+Pil ned |NVDA+a |Starter lesing fra systemmarkørens gjeldende posisjon, og flytter systemmarkøren under lesing|
-|Les gjeldende linje |NVDA+Pil opp |NVDA+l |Leser linjen der systemmarkøren befinner seg. Ved å trykke to ganger staves linjen. Ved å trykke tre ganger staves linjen med tegnbeskrivelse.|
-|Les gjeldende valgt tekst |NVDA+Skift+Pil opp |NVDA+Skift+s |Leser teksten som for øyeblikket er markert|
+|Si alle |Aslan+Pil ned |Aslan+a |Starter lesing fra systemmarkørens gjeldende posisjon, og flytter systemmarkøren under lesing|
+|Les gjeldende linje |Aslan+Pil opp |Aslan+l |Leser linjen der systemmarkøren befinner seg. Ved å trykke to ganger staves linjen. Ved å trykke tre ganger staves linjen med tegnbeskrivelse.|
+|Les gjeldende valgt tekst |Aslan+Skift+Pil opp |Aslan+Skift+s |Leser teksten som for øyeblikket er markert|
 |Neste setning |Alt+PilNed |Alt+PilNed |Flytter markøren til neste setning og leser den. (støttes bare i|
 
 Microsoft Word og Outlook) |
@@ -373,7 +373,7 @@ Det meste av tiden vil du arbeide med programmer ved hjelp av kommandoer som fly
 
 Objektnavigasjon lar deg flytte mellom og få informasjon om de enkelte [objekter](#Objects).
 
-Når du flytter til et objekt, vil NVDA annonsere det på samme måte som NVDA også annonserer systemfokus.
+Når du flytter til et objekt, vil Aslan annonsere det på samme måte som Aslan også annonserer systemfokus.
 For å lese all tekst slik den vises på skjermen, kan du i stedet bruke [flatlesing](#ScreenReview).
 
 I stedet for å måtte flytte fram og tilbake mellom hvert enkelt objekt på systemet, er objektene organisert hierarkisk. Dette betyr at noen objekter inneholder andre objekter, og du må flytte inni dem for å få tilgang til de objektene de inneholder. For eksempel inneholder en liste listeelementer, så du må flytte inne i listen for å få tilgang til elementene den inneholder.
@@ -398,15 +398,15 @@ Ved objektnavigering bruker du følgende taster:
 
 | Navn |Stasjonær tast |Bærbar tast |Berøring |Beskrivelse|
 |---|---|---|---|---|
-|Les gjeldende objekt |NVDA+Numerisk 5 |NVDA+Ctrl+o |ingen |Leser det gjeldende navigasjonsobjektet. Ved å trykke to ganger staves informasjonen, og trykker du tre ganger kopieres objektets navn og verdi til utklippstavlen.|
-|Gå til innholdsobjektet |NVDA+Numerisk 8 |NVDA+Skift+Pil opp |Sveip opp (objektmodus) |Flytter til objektet som inneholder gjeldende navigasjonsobjekt|
-|Gå til forrige objekt |NVDA+Numerisk 4 |NVDA+Skift+Pil venstre |Sveip mot venstre (objektmodus) |Flytter til objektet før den gjeldende navigasjonsobjektet|
-|Gå til neste objekt |NVDA+Numerisk 6 |NVDA+Skift+Pil høyre |Sveip mot høyre (objektmodus) |Flytter til objektet etter gjeldende navigasjonsobjekt|
-|Gå til første beholderobjekt |NVDA+Numerisk 2 |NVDA+Skift+Pil ned |Sveip ned (objektmodus) |Flytter til det første innholdsobjektet i det gjeldende navigasjonsobjektet|
-|Gå til fokusobjekt |NVDA+Numerisk minus |NVDA+Slett bakover |ingen |Flytter til objektet som for øyeblikket har systemfokus, og plasserer også lesemarkøren i posisjonen for systemmarkøren, hvis den vises|
-|Aktiver nåværende navigasjonsobjekt |NVDA+Numerisk Enter |NVDA+Enter |Dobbelttrykk |Aktiverer gjeldende navigasjonsobjekt (som å klikke med musen eller trykke mellomrom når den har systemfokus)|
-|Flytt systemfokus eller markør til gjeldende leseposisjon |NVDA+Skift+Numerisk minus |NVDA+Skift+Slett bakover |ingen |Flytter systemfokus til gjeldende navigasjonsobjekt når kommandoen trykkes én gang. Trykkes kommandoen to ganger, flyttes systemmarkøren til posisjonen for lesemarkøren|
-|Rapporter om lesemarkørens plassering |NVDA+Numerisk Del |NVDA+Del |ingen |Leser informasjon om tekst eller objekt ved lesemarkøren. Dette kan for eksempel omfatte hvor i dokumentet en er (i prosent), avstand fra kanten av arket eller eksakt skjermposisjon. Ved å trykke to ganger kan en få flere detaljer|
+|Les gjeldende objekt |Aslan+Numerisk 5 |Aslan+Ctrl+o |ingen |Leser det gjeldende navigasjonsobjektet. Ved å trykke to ganger staves informasjonen, og trykker du tre ganger kopieres objektets navn og verdi til utklippstavlen.|
+|Gå til innholdsobjektet |Aslan+Numerisk 8 |Aslan+Skift+Pil opp |Sveip opp (objektmodus) |Flytter til objektet som inneholder gjeldende navigasjonsobjekt|
+|Gå til forrige objekt |Aslan+Numerisk 4 |Aslan+Skift+Pil venstre |Sveip mot venstre (objektmodus) |Flytter til objektet før den gjeldende navigasjonsobjektet|
+|Gå til neste objekt |Aslan+Numerisk 6 |Aslan+Skift+Pil høyre |Sveip mot høyre (objektmodus) |Flytter til objektet etter gjeldende navigasjonsobjekt|
+|Gå til første beholderobjekt |Aslan+Numerisk 2 |Aslan+Skift+Pil ned |Sveip ned (objektmodus) |Flytter til det første innholdsobjektet i det gjeldende navigasjonsobjektet|
+|Gå til fokusobjekt |Aslan+Numerisk minus |Aslan+Slett bakover |ingen |Flytter til objektet som for øyeblikket har systemfokus, og plasserer også lesemarkøren i posisjonen for systemmarkøren, hvis den vises|
+|Aktiver nåværende navigasjonsobjekt |Aslan+Numerisk Enter |Aslan+Enter |Dobbelttrykk |Aktiverer gjeldende navigasjonsobjekt (som å klikke med musen eller trykke mellomrom når den har systemfokus)|
+|Flytt systemfokus eller markør til gjeldende leseposisjon |Aslan+Skift+Numerisk minus |Aslan+Skift+Slett bakover |ingen |Flytter systemfokus til gjeldende navigasjonsobjekt når kommandoen trykkes én gang. Trykkes kommandoen to ganger, flyttes systemmarkøren til posisjonen for lesemarkøren|
+|Rapporter om lesemarkørens plassering |Aslan+Numerisk Del |Aslan+Del |ingen |Leser informasjon om tekst eller objekt ved lesemarkøren. Dette kan for eksempel omfatte hvor i dokumentet en er (i prosent), avstand fra kanten av arket eller eksakt skjermposisjon. Ved å trykke to ganger kan en få flere detaljer|
 
 <!-- KC:endInclude -->
 
@@ -414,7 +414,7 @@ Merk: Numeriske taster (taster på talltastaturet) krever at NumLock-tasten er s
 
 ### Lese tekst {#ReviewingText}
 
-NVDA lar deg lese innholdet [på skjermen](#ScreenReview), i gjeldende [dokument](#DocumentReview) eller i gjeldende [object](#ObjectReview) tegn for tegn, ord for ord eller linje for linje.
+Aslan lar deg lese innholdet [på skjermen](#ScreenReview), i gjeldende [dokument](#DocumentReview) eller i gjeldende [object](#ObjectReview) tegn for tegn, ord for ord eller linje for linje.
 
 Dette er mest nyttig på steder (inkludert Windows ledetekst) der det ikke finnes [systemmarkør](#SystemCaret).
 For eksempel kan du bruke den til å lese teksten i en lang informasjonmelding i en dialog.
@@ -430,23 +430,23 @@ Følgende kommandoer er tilgjengelige for lesing av tekst:
 
 | Navn |Stasjonær tast |Bærbar tast |Berøring |Beskrivelse|
 |---|---|---|---|---|
-|Gå til øverste linje i lesing |Skift+Numerisk 7 |NVDA+Ctrl+Home |ingen |Flytter lesemarkøren til øverste linje i teksten|
-|Gå til forrige linje i lesing |Numerisk 7 |NVDA+Pil opp |bla opp (tekstmodus) |Flytter lesemarkøren til forrige tekstlinje|
-|Les gjeldende linje i lesing |Numpad8 |NVDA+Skift+punktum |ingen |Les gjeldende tekstlinje der lesemarkøren er plassert. Ved å trykke to ganger staves linjen. Hvis du trykker tre ganger, staves linjen med tegnbeskrivelser.|
-|Gå til neste linje i lesing |Numerisk 9 |NVDA+Pil ned |bla ned (tekstmodus) |Flytt lesemarkøren til neste tekstlinje|
-|Gå til nederste linje i lesing |Skift+Numerisk 9 |NVDA+Ctrl+End |ingen |Flytter lesemarkøren til siste linje av teksten|
-|Gå til forrige ord i lesing |Numerisk 4 |NVDA+Ctrl?Pil venstre |bla med to fingrer mot venstre (tekstmodus) |Flytter lesemarkøren til forrige ord i teksten|
-|Les gjeldende ord i lesing |Numerisk 5 |NVDA+Ctrl+punktum |ingen |Les gjeldende ord i teksten der lesemarkøren er plassert. Ved å trykke to ganger staves ordet. Hvis du trykker tre ganger, staves ordet med tegnbeskrivelser.|
-|Gå til neste ord i lesing |Numerisk 6 |NVDA+Ctrl+Pil høyre |bla med to fingrer mot høyre (tekstmodus) |Flytt lesemarkøren til neste ord i teksten|
-|Gå til starten av linjen i lesing |Skift+Numerisk 1 |NVDA+Home |none |Flytter lesemarkøren til begynnelsen av linjen i teksten|
-|Gå til forrige tegn i lesing |Numerisk 1 |NVDA+Pil venstre |bla mot venstre (tekstmodus) |Flytter lesemarkøren til forrige tegn på den gjeldende linjen i teksten|
-|Les gjeldende tegn i lesing |Numerisk 2 |NVDA+punktum |ingen |Les gjeldende tegn på linjen der lesemarkøren er plassert. Ved å trykke to ganger leses en beskrivelse eller eksempel på det tegnet. Hvis du trykker tre ganger, leses den numeriske verdien av tegnet i desimal og heksadesimal.|
-|Gå til neste tegn i lesing |Numerisk 3 |NVDA+Pil høyre |bla mot høyre (tekstmodus) |Flytter lesemarkøren til neste tegn på gjeldende linje i teksten|
-|Gå til slutten av linjen i lesing |Skift+Numerisk 3 |NVDA+End |ingen |Flytter lesemarkøren til slutten av gjeldende linje i teksten|
-|Si alle ved lesing |Numerisk pluss |NVDA+Skift+a |Bla ned med tre fingrer (tekstmodus) |Leser fra gjeldende posisjon av lesemarkøren, og følger under lesing|
-|Velg og kopier fra lesemarkøren |NVDA+F9 |NVDA+F9 |ingen |Starter velg og kopier-prosessen fra den gjeldende posisjonen til lesemarkøren. Selve handlingen blir ikke utført før du forteller NVDA hvor slutten på det valgte tekstområdet er|
-|Velg og kopier til lesemarkøren |NVDA+F10 |NVDA+F10 |ingen |Ved første trykk velges tekst fra det tidligere satte startmerket fram til og med gjeldende posisjon for lesemarkøren. Etter å ha trykket på tasten en gang til, vil teksten bli kopiert til utklippstavlen i Windows|
-|Les tekstformatering |NVDA+f |NVDA+f |ingen |Les formateringen av teksten der lesemarkøren befinner seg. Ved å trykke to ganger vises informasjonen i nettmodus|
+|Gå til øverste linje i lesing |Skift+Numerisk 7 |Aslan+Ctrl+Home |ingen |Flytter lesemarkøren til øverste linje i teksten|
+|Gå til forrige linje i lesing |Numerisk 7 |Aslan+Pil opp |bla opp (tekstmodus) |Flytter lesemarkøren til forrige tekstlinje|
+|Les gjeldende linje i lesing |Numpad8 |Aslan+Skift+punktum |ingen |Les gjeldende tekstlinje der lesemarkøren er plassert. Ved å trykke to ganger staves linjen. Hvis du trykker tre ganger, staves linjen med tegnbeskrivelser.|
+|Gå til neste linje i lesing |Numerisk 9 |Aslan+Pil ned |bla ned (tekstmodus) |Flytt lesemarkøren til neste tekstlinje|
+|Gå til nederste linje i lesing |Skift+Numerisk 9 |Aslan+Ctrl+End |ingen |Flytter lesemarkøren til siste linje av teksten|
+|Gå til forrige ord i lesing |Numerisk 4 |Aslan+Ctrl?Pil venstre |bla med to fingrer mot venstre (tekstmodus) |Flytter lesemarkøren til forrige ord i teksten|
+|Les gjeldende ord i lesing |Numerisk 5 |Aslan+Ctrl+punktum |ingen |Les gjeldende ord i teksten der lesemarkøren er plassert. Ved å trykke to ganger staves ordet. Hvis du trykker tre ganger, staves ordet med tegnbeskrivelser.|
+|Gå til neste ord i lesing |Numerisk 6 |Aslan+Ctrl+Pil høyre |bla med to fingrer mot høyre (tekstmodus) |Flytt lesemarkøren til neste ord i teksten|
+|Gå til starten av linjen i lesing |Skift+Numerisk 1 |Aslan+Home |none |Flytter lesemarkøren til begynnelsen av linjen i teksten|
+|Gå til forrige tegn i lesing |Numerisk 1 |Aslan+Pil venstre |bla mot venstre (tekstmodus) |Flytter lesemarkøren til forrige tegn på den gjeldende linjen i teksten|
+|Les gjeldende tegn i lesing |Numerisk 2 |Aslan+punktum |ingen |Les gjeldende tegn på linjen der lesemarkøren er plassert. Ved å trykke to ganger leses en beskrivelse eller eksempel på det tegnet. Hvis du trykker tre ganger, leses den numeriske verdien av tegnet i desimal og heksadesimal.|
+|Gå til neste tegn i lesing |Numerisk 3 |Aslan+Pil høyre |bla mot høyre (tekstmodus) |Flytter lesemarkøren til neste tegn på gjeldende linje i teksten|
+|Gå til slutten av linjen i lesing |Skift+Numerisk 3 |Aslan+End |ingen |Flytter lesemarkøren til slutten av gjeldende linje i teksten|
+|Si alle ved lesing |Numerisk pluss |Aslan+Skift+a |Bla ned med tre fingrer (tekstmodus) |Leser fra gjeldende posisjon av lesemarkøren, og følger under lesing|
+|Velg og kopier fra lesemarkøren |Aslan+F9 |Aslan+F9 |ingen |Starter velg og kopier-prosessen fra den gjeldende posisjonen til lesemarkøren. Selve handlingen blir ikke utført før du forteller Aslan hvor slutten på det valgte tekstområdet er|
+|Velg og kopier til lesemarkøren |Aslan+F10 |Aslan+F10 |ingen |Ved første trykk velges tekst fra det tidligere satte startmerket fram til og med gjeldende posisjon for lesemarkøren. Etter å ha trykket på tasten en gang til, vil teksten bli kopiert til utklippstavlen i Windows|
+|Les tekstformatering |Aslan+f |Aslan+f |ingen |Les formateringen av teksten der lesemarkøren befinner seg. Ved å trykke to ganger vises informasjonen i nettmodus|
 
 <!-- KC:endInclude -->
 
@@ -461,18 +461,18 @@ Oppsettet er illustrert slik:
 
 ### Lesemodi {#ReviewModes}
 
-NVDAs [kommandoer for tekstlesing](#ReviewingText) kan vise innhold innenfor gjeldende navigasjonsobjekt, gjeldende dokument eller skjerm, avhengig av hvilket lesemodus som er valgt.
-Lesemodi er en erstatning for det eldre konseptet Flat lesing i NVDA.
+Aslans [kommandoer for tekstlesing](#ReviewingText) kan vise innhold innenfor gjeldende navigasjonsobjekt, gjeldende dokument eller skjerm, avhengig av hvilket lesemodus som er valgt.
+Lesemodi er en erstatning for det eldre konseptet Flat lesing i Aslan.
 Følgende kommandoer veksler mellom lesemodi:
 <!-- KC:beginInclude -->
 
 | Navn |Stasjonær tast |Bærbar tast |Berøring |Beskrivelse|
 |---|---|---|---|---|
-|Bytt til neste lesemodus |NVDA+numerisk 7 |NVDA+PageUp |bla opp med to fingrer |Bytter til neste tilgjengelige|
+|Bytt til neste lesemodus |Aslan+numerisk 7 |Aslan+PageUp |bla opp med to fingrer |Bytter til neste tilgjengelige|
 
 lesemodus |
 
-|Bytt til forrige lesemodus |NVDA+numerisk 1 |NVDA+PageDown |bla ned med to fingrer |Bytter til forrige tilgjengelige lesemodus|
+|Bytt til forrige lesemodus |Aslan+numerisk 1 |Aslan+PageDown |bla ned med to fingrer |Bytter til forrige tilgjengelige lesemodus|
 
 <!-- KC:endInclude -->
 
@@ -488,7 +488,7 @@ Når du bytter fra objektlesing til dokumentlesing, blir lesemarkøren plassert 
 
 Når du flytter deg omkring i dokumentet med lesekommandoer, blir navigasjonsobjektet automatisk oppdatert til objektet som for øyeblikket finnes i posisjonen for lesemarkøren.
 
-Merk at NVDA vil bytte automatisk fra objektlesing til dokumentlesing når du navigerer i dokumenter i nettmodus.
+Merk at Aslan vil bytte automatisk fra objektlesing til dokumentlesing når du navigerer i dokumenter i nettmodus.
 
 #### Skjermlesing {#ScreenReview}
 
@@ -498,45 +498,45 @@ Når du bytter til modus for skjermlesing, settes lesemarkøren i skjermposisjon
 
 Når du flytter deg omkring i dokumentet med lesekommandoer, blir navigasjonsobjektet automatisk oppdatert til objektet som for øyeblikket finnes i skjermposisjonen for lesemarkøren.
 
-Merk at i enkelte nyere programmer vil NVDA ikke kunne se teksten som vises på skjermen, enten hele teksten eller deler av den. Dette skyldes nyere teknologier for oppbygging av skjermbildet som det nå er umulig for NVDA å støtte.
+Merk at i enkelte nyere programmer vil Aslan ikke kunne se teksten som vises på skjermen, enten hele teksten eller deler av den. Dette skyldes nyere teknologier for oppbygging av skjermbildet som det nå er umulig for Aslan å støtte.
 
 ### Navigere med musen {#NavigatingWithTheMouse}
 
-Når du beveger musen, leser NVDA som standard den teksten som er under muspekeren når pekeren beveger seg over den.
-Når dette er støttet, vil NVDA lese det omkringliggende tekstavsnittet, men enkelte kontroller kan bare leses som linje.
+Når du beveger musen, leser Aslan som standard den teksten som er under muspekeren når pekeren beveger seg over den.
+Når dette er støttet, vil Aslan lese det omkringliggende tekstavsnittet, men enkelte kontroller kan bare leses som linje.
 
-NVDA kan konfigureres til også å lese typen [objekt](#Objects) under musen når den beveger seg (f.eks liste, knapp, etc.). Dette kan være nyttig for helt blinde brukere, siden teksten i noen tilfeller ikke er nok.
+Aslan kan konfigureres til også å lese typen [objekt](#Objects) under musen når den beveger seg (f.eks liste, knapp, etc.). Dette kan være nyttig for helt blinde brukere, siden teksten i noen tilfeller ikke er nok.
 
-NVDA gir brukerne en måte å forstå hvor musen er plassert i forhold til dimensjonene på skjermen ved å indikere muspekerens koordinater som pipelyder. Jo høyere musen er på skjermen, jo høyere på toneskalaen er pipene. Jo lenger til venstre eller høyre musen er plassert på skjermen, desto lenger til venstre eller høyre vil lyden bli avspilt (forutsatt at brukeren har stereohøyttalere eller hodetelefoner).
+Aslan gir brukerne en måte å forstå hvor musen er plassert i forhold til dimensjonene på skjermen ved å indikere muspekerens koordinater som pipelyder. Jo høyere musen er på skjermen, jo høyere på toneskalaen er pipene. Jo lenger til venstre eller høyre musen er plassert på skjermen, desto lenger til venstre eller høyre vil lyden bli avspilt (forutsatt at brukeren har stereohøyttalere eller hodetelefoner).
 
-Disse ekstra musfunksjonene er ikke aktivert som standard i NVDA. Hvis du ønsker å dra nytte av dem, kan du konfigurere dem fra kategorien [Musinnstillinger](#MouseSettings), som finnes i innstillingsmenyen i NVDA.
+Disse ekstra musfunksjonene er ikke aktivert som standard i Aslan. Hvis du ønsker å dra nytte av dem, kan du konfigurere dem fra kategorien [Musinnstillinger](#MouseSettings), som finnes i innstillingsmenyen i Aslan.
 
-Selv om en fysisk mus eller styreflate bør brukes til å navigere med musen, har NVDA noen få tastekommandoer knyttet til mus:
+Selv om en fysisk mus eller styreflate bør brukes til å navigere med musen, har Aslan noen få tastekommandoer knyttet til mus:
 <!-- KC:beginInclude -->
 
 | Navn |Stasjonær tast |Bærbar tast |Beskrivelse|
 |---|---|---|---|
-|Klikk med venstre musknapp |Numerisk skråstrek |NVDA+PilVenstre |Klikker på venstre musknapp én gang. Dobbeltklikk kan utføres ved å trykke på denne tasten to ganger i rask rekkefølge|
-|Lås venstre musknapp |Skift+Numerisk skråstrek |NVDA+Skift+Pil venstre |Låser venstre musknapp nede. Trykk igjen for å slippe den. Når du drar musen, trykker du denne tasten for å låse den venstre knappen nede og deretter flytte musen enten fysisk eller ved å bruke en av de andre kommandoene for flytting av musen|
-|Klikk høyre musknapp |Numerisk stjerne |NVDA+Pil høyre |Klikker på høyre musknapp én gang.|
-|Lås høyre musknapp |Skift+Numerisk stjerne |NVDA+Skift+Pil høyre |Låser høyre musknapp nede. Trykk igjen for å slippe den. Når du drar musen, trykker du denne tasten for å låse den høyre knappen nede og deretter flytte musen enten fysisk eller ved å bruke en av de andre kommandoene for flytting av musen|
-|Flytt musen til gjeldende navigasjonsobjekt |NVDA+Numerisk skråstrek |NVDA+Skift+m |Flytter muspekeren til posisjonen til det gjeldende navigasjonsobjektet og lesemarkøren|
-|Naviger til objektet under musen |NVDA+Numerisk stjerne |NVDA+Skift+n |Sett navigasjonsobjektet til objektet i posisjonen til muspekeren|
+|Klikk med venstre musknapp |Numerisk skråstrek |Aslan+PilVenstre |Klikker på venstre musknapp én gang. Dobbeltklikk kan utføres ved å trykke på denne tasten to ganger i rask rekkefølge|
+|Lås venstre musknapp |Skift+Numerisk skråstrek |Aslan+Skift+Pil venstre |Låser venstre musknapp nede. Trykk igjen for å slippe den. Når du drar musen, trykker du denne tasten for å låse den venstre knappen nede og deretter flytte musen enten fysisk eller ved å bruke en av de andre kommandoene for flytting av musen|
+|Klikk høyre musknapp |Numerisk stjerne |Aslan+Pil høyre |Klikker på høyre musknapp én gang.|
+|Lås høyre musknapp |Skift+Numerisk stjerne |Aslan+Skift+Pil høyre |Låser høyre musknapp nede. Trykk igjen for å slippe den. Når du drar musen, trykker du denne tasten for å låse den høyre knappen nede og deretter flytte musen enten fysisk eller ved å bruke en av de andre kommandoene for flytting av musen|
+|Flytt musen til gjeldende navigasjonsobjekt |Aslan+Numerisk skråstrek |Aslan+Skift+m |Flytter muspekeren til posisjonen til det gjeldende navigasjonsobjektet og lesemarkøren|
+|Naviger til objektet under musen |Aslan+Numerisk stjerne |Aslan+Skift+n |Sett navigasjonsobjektet til objektet i posisjonen til muspekeren|
 
 <!-- KC:endInclude -->
 
 ## Nettmodus {#BrowseMode}
 
-Komplekse skrivebeskyttede dokumenter som nettsider leses i NVDA i det vi kaller nettmodus.
+Komplekse skrivebeskyttede dokumenter som nettsider leses i Aslan i det vi kaller nettmodus.
 Dette gjelder dokumenter i Mozilla Firefox, Microsoft Internet Explorer, Mozilla Thunderbird, HTML-meldinger i Microsoft Outlook, Google Chrome, Adobe Reader og Adobe Flash. Du kan også velge å bruke nettmodus i Microsoft Word.
 
 I nettmodus er innholdet i dokumentet tilgjengelig i en flat representasjon som du kan navigere i med piltastene som om det var et vanlig tekstdokument.
-Alle NVDAs tastekommandoer for [systemmarkør](#SystemCaret) vil fungere i denne modusen, f.eks si alle, les formatering, tabellnavigeringskommandoene osv.
+Alle Aslans tastekommandoer for [systemmarkør](#SystemCaret) vil fungere i denne modusen, f.eks si alle, les formatering, tabellnavigeringskommandoene osv.
 Informasjon som hvorvidt teksten er en lenke, overskrift, osv. blir opplyst sammen med teksten når du flytter deg rundt i dokumentet.
 
 Noen ganger trenger du å kommunisere direkte med kontroller i disse dokumentene. For eksempel må du gjøre dette for redigerbare tekstfelt og lister, slik at du kan skrive tegn og bruke piltastene til å arbeide med kontrollen. Dette gjør du ved å bytte til fokusmodus, hvor nesten alle tastetrykk blir sendt til kontrollen.
 
-I nettmodus vil NVDA som standard automatisk bytte til fokusmodus hvis du flytter til eller klikker på en kontroll som krever det.
+I nettmodus vil Aslan som standard automatisk bytte til fokusmodus hvis du flytter til eller klikker på en kontroll som krever det.
 Motsatt vil det å flytte til eller klikke på en kontroll som ikke krever fokusmodus bytte tilbake til nettmodus.
 Du kan også trykke på Enter eller mellomrom for å bytte til fokusmodus i kontroller som krever det.
 Ved å trykke escape byttes det tilbake til nettmodus.
@@ -546,19 +546,19 @@ I tillegg kan du manuelt aktivere fokusmodus. Den vil forbli aktiv inntil du vel
 
 | Navn |Tast |Beskrivelse|
 |---|---|---|
-|Veksle mellom nett-/fokusmodus |NVDA+Space |Veksler mellom fokusmodus og nettmodus|
+|Veksle mellom nett-/fokusmodus |Aslan+Space |Veksler mellom fokusmodus og nettmodus|
 |Avslutt fokusmodus |Escape |Bytter tilbake til nettmodus hvis fokusmodus tidligere ble satt til automatisk|
-|Oppdater nettmodusdokument |NVDA+F5 |Oppdaterer gjeldende dokumentinnhold (nyttig hvis vist innhold synes å mangle i dokumentet. Ikke tilgjengelig i Microsoft Word og Outlook.)|
-|Finn |NVDA+Ctrl+f |Åpner en dialogboks der du kan skrive inn tekst du vil finne i det gjeldende dokumentet|
-|Finn neste |NVDA+F3 |Finner neste forekomst av teksten i dokumentet som du tidligere søkte etter|
-|Finn forrige |NVDA+Skift+F3 |Finner forrige forekomst av teksten i dokumentet som du tidligere søkte etter|
-|Åpne lang beskrivelse |NVDA+d |Åpner et nytt vindu som inneholder en lang beskrivelse av elementet du er på, hvis det har en slik beskrivelse.|
+|Oppdater nettmodusdokument |Aslan+F5 |Oppdaterer gjeldende dokumentinnhold (nyttig hvis vist innhold synes å mangle i dokumentet. Ikke tilgjengelig i Microsoft Word og Outlook.)|
+|Finn |Aslan+Ctrl+f |Åpner en dialogboks der du kan skrive inn tekst du vil finne i det gjeldende dokumentet|
+|Finn neste |Aslan+F3 |Finner neste forekomst av teksten i dokumentet som du tidligere søkte etter|
+|Finn forrige |Aslan+Skift+F3 |Finner forrige forekomst av teksten i dokumentet som du tidligere søkte etter|
+|Åpne lang beskrivelse |Aslan+d |Åpner et nytt vindu som inneholder en lang beskrivelse av elementet du er på, hvis det har en slik beskrivelse.|
 
 <!-- KC:endInclude -->
 
 ### Enkeltbokstavnavigasjon {#SingleLetterNavigation}
 
-For raskere navigasjon, tilbyr NVDA også enkelttegn-tastekommandoer for å hoppe til bestemte felt i dokumentet når en er i nettmodus.
+For raskere navigasjon, tilbyr Aslan også enkelttegn-tastekommandoer for å hoppe til bestemte felt i dokumentet når en er i nettmodus.
 
 Merk at ikke alle disse kommandoene støttes for alle typer dokumenter.
 
@@ -598,9 +598,9 @@ For å gå til begynnelsen eller slutten av beholderelementer som lister og tabe
 
 <!-- KC:endInclude -->
 
-Noen nettapplikasjoner som Gmail, Twitter og Facebook bruker enkeltbokstaver som hurtigtaster. Hvis du ønsker å benytte disse mens du fortsatt vil bruke piltastene for å lese i nettmodus, kan du deaktivere kommandoene for enkeltbokstavnavigasjon i NVDA midlertidig.
+Noen nettapplikasjoner som Gmail, Twitter og Facebook bruker enkeltbokstaver som hurtigtaster. Hvis du ønsker å benytte disse mens du fortsatt vil bruke piltastene for å lese i nettmodus, kan du deaktivere kommandoene for enkeltbokstavnavigasjon i Aslan midlertidig.
 <!-- KC:beginInclude -->
-For å slå enkeltbokstavnavigasjon på eller av for gjeldende dokument, trykker du NVDA+Skift+Mellomrom.
+For å slå enkeltbokstavnavigasjon på eller av for gjeldende dokument, trykker du Aslan+Skift+Mellomrom.
 <!-- KC:endInclude -->
 
 ### Elementlisten {#ElementsList}
@@ -612,14 +612,14 @@ Radioknapper lar deg bytte mellom de ulike elementtypene. Det er også et redige
 
 | Navn |Tast |Beskrivelse|
 |---|---|---|
-|Nettmodus elementliste |NVDA+F7 |Lister ulike typer elementer i det gjeldende dokumentet|
+|Nettmodus elementliste |Aslan+F7 |Lister ulike typer elementer i det gjeldende dokumentet|
 
 <!-- KC:endInclude -->
 
 ### Innebygde objekter {#ImbeddedObjects}
 
 Sider kan inkludere rikt innhold ved hjelp av teknologier som Adobe Flash, Oracle Java og HTML5, så vel som applikasjoner og dialoger.
-Når disse blir oppdaget i nettmodus, vil NVDA opplyse "innebygd objekt", "applikasjon" eller "dialog", ut fra hva som er relevant.
+Når disse blir oppdaget i nettmodus, vil Aslan opplyse "innebygd objekt", "applikasjon" eller "dialog", ut fra hva som er relevant.
 Du kan flytte deg raskt til dem med enkeltbokstavkommandoene o og Skift+o.
 For å samhandle med disse objektene kan du trykke Enter på dem.
 
@@ -629,24 +629,24 @@ En tastekommando er tilgjengelig for å gå tilbake til den opprinnelige siden s
 
 | Navn |Tast |Beskrivelse|
 |---|---|---|
-|Gå til innhold i nettmodusdokument |NVDA+Ctrl+Mellomrom |Flytter fokus ut av det nåværende innebygde objektet, og inn i dokumentet som inneholder det|
+|Gå til innhold i nettmodusdokument |Aslan+Ctrl+Mellomrom |Flytter fokus ut av det nåværende innebygde objektet, og inn i dokumentet som inneholder det|
 
 <!-- KC:endInclude -->
 
 ## Lese matematisk innhold {#ReadingMath}
 
-Ved hjelp av MathPlayer 4 fra Design Science kan NVDA lese og interaktivt navigere i matematisk innhold som støttes. Dette forutsetter at MathPlayer 4 er installert på PC-en.
+Ved hjelp av MathPlayer 4 fra Design Science kan Aslan lese og interaktivt navigere i matematisk innhold som støttes. Dette forutsetter at MathPlayer 4 er installert på PC-en.
 
 MathPlayer er tilgjengelig som en gratis nedlasting fra: https://www.dessci.com/en/products/mathplayer/
 
-NVDA støtter følgende typer matematisk innhold:
+Aslan støtter følgende typer matematisk innhold:
 
 * MathML i Mozilla Firefox, Microsoft Internet Explorer og Google Chrome.
 * Design Science MathType i Microsoft Word og PowerPoint. MathType må være installert for at dette skal fungere. Prøveversjonen er tilstrekkelig.
 * MathML i Adobe Reader.
 Merk at dette ikke er en offisiell standard ennå, så det finnes for tiden ingen offentlig tilgjengelig programvare som kan produsere dette innholdet.
 * Matematikk i Kindle for PC for bøker med tilgjengelig matematikk.
-Når du leser et dokument, vil NVDA uttale tilgjengelig matematisk innhold når det dukker opp. Bruker du leselist, vil matematisk innhold også bli vist i punktskrift.
+Når du leser et dokument, vil Aslan uttale tilgjengelig matematisk innhold når det dukker opp. Bruker du leselist, vil matematisk innhold også bli vist i punktskrift.
 
 ++ Interaktiv navigasjon ++[InteractiveNavigation]
 Om du arbeider primært med tale, vil du antakelig i de fleste tilfeller ønske å utforsske uttrykket i mindre segmenter, heller enn å høre hele uttrykket på én gang.
@@ -663,7 +663,7 @@ Som standard følger lesemarkøren systemmarkøren, så du kan normalt benytte s
 
 | Navn |Tast |Beskrivelse|
 |---|---|---|
-|Samhandle med matematisk innhold |NVDA+Alt+m |Starter samhandling med matematisk innhold.|
+|Samhandle med matematisk innhold |Aslan+Alt+m |Starter samhandling med matematisk innhold.|
 
 <!-- KC:endInclude -->
 Her kan du bruke MathPlayer-kommandoer, slik som piltastene, for å utforske uttrykket. For eksempel kan du flytte deg gjennom uttrykket ved hjelp av pil venstre og pil høyre, og du kan zoome deg inn på en del av uttrykket med pil ned.
@@ -675,11 +675,11 @@ Når du ønsker å returnere til dokumentet, trykker du rett og slett på Escape
 
 ## Punktskrift {#Braille}
 
-Har du tilgang til en leselist, kan NVDA presentere informasjon i punktskrift. Om leselisten har et punktskrifttastatur, kan du også skrive inn uforkortet og forkortet punktskrift.
+Har du tilgang til en leselist, kan Aslan presentere informasjon i punktskrift. Om leselisten har et punktskrifttastatur, kan du også skrive inn uforkortet og forkortet punktskrift.
 
-Vennligst se delen [Støttede leselister](#SupportedBrailleDisplays) for informasjon om leselistene NVDA har støtte for.
+Vennligst se delen [Støttede leselister](#SupportedBrailleDisplays) for informasjon om leselistene Aslan har støtte for.
 
-Du kan konfigurere punktskrift ved å bruke [Punktskrift-kategorien](#BrailleSettings) i [NVDAs Innstillinger-dialog](#NVDASettings).
+Du kan konfigurere punktskrift ved å bruke [Punktskrift-kategorien](#BrailleSettings) i [Aslans Innstillinger-dialog](#AslanSettings).
 
 ### Forkortinger for kontrolltype, situasjon og landemerke {#BrailleAbbreviations}
 
@@ -777,9 +777,9 @@ Til slutt er følgende forkortinger for landemerker definert:
 
 ### Skrive punktskrift {#BrailleInput}
 
-NVDA støtter skriving av både uforkortet og forkortet punktskrift via et punktskrifttastatur.
+Aslan støtter skriving av både uforkortet og forkortet punktskrift via et punktskrifttastatur.
 
-Du kan velge oversettingstabellen som oversetter fra punktskrift til tekst ved hjelp av innstillingen [inndatatabell](#BrailleSettingsInputTable) i kategorien Punktskrift som du finner i [NVDAs Innstillinger](#NVDASettings)-dialog.
+Du kan velge oversettingstabellen som oversetter fra punktskrift til tekst ved hjelp av innstillingen [inndatatabell](#BrailleSettingsInputTable) i kategorien Punktskrift som du finner i [Aslans Innstillinger](#AslanSettings)-dialog.
 Skriver du uforkortet punktskrift, settes teksten inn så snart den er skrevet. Skriver du forkortet punktskrift, settes teksten inn så snart du trykker mellomrom eller Enter når du har skrevet et ord.
 
 Legg merke til at oversettingen bare gjelder ordet du skriver i punktskrift, og ikke omfatter eksisterende tekst. Hvis du for eksempel benytter en punktskrifttabell som begynner tall med talltegn og du flytter markøren til slutten av et tall, vil du måtte skrive talltegn igjen for å skrive flere tall.
@@ -794,9 +794,9 @@ Ved å trykke punkt 7 og 8 oversettes skrevet punktskrift, men uten å legge til
 
 Når forfattere ikke bidrar med tilstrekkelig informasjon til at en skjermleserbruker skal kunne finne ut av innholdet i noe, kan ulike verktøy brukes for å forsøke å gjenkjenne innholdet i et bilde.
 
-NVDA støtter funksjonaliteten for optisk tegngjenkjenning (OCR) som er bygd inn i Windows 10 for å gjenkjenne tekst fra bilder. Det finnes også verktøy for gjenkjenning av innhold i NVDA-tillegg.
+Aslan støtter funksjonaliteten for optisk tegngjenkjenning (OCR) som er bygd inn i Windows 10 for å gjenkjenne tekst fra bilder. Det finnes også verktøy for gjenkjenning av innhold i Aslan-tillegg.
 
-Når du bruker en kommando for innholdsgjenkjenning, gjenkjenner NVDA innholdet fra gjeldende [navigasjonsobjekt](#ObjectNavigation).
+Når du bruker en kommando for innholdsgjenkjenning, gjenkjenner Aslan innholdet fra gjeldende [navigasjonsobjekt](#ObjectNavigation).
 
 Som standard følger navigasjonsobjektet systemfokus eller markøren i nettmodus, så du kan vanligvis bare flytte fokus eller nettmodusmarkøren slik du vil. Hvis du for eksempel flytter nettmodusmarkøren til en grafikk, vil gjenkjenningsverktøyet gjenkjenne innholdet fra grafikken som standard. Imidlertid ønsker du kanskje å kunne bruke objektnavigasjon direkte for å eksempelvis gjenkjenne innholdet i et helt programvindu.
 
@@ -808,24 +808,24 @@ Et trykk på Escape forkaster gjenkjenningsresultatet.
 
 ### Windows 10 OCR {#Win10Ocr}
 
-Windows 10 inkluderer OCR for mange språk. NVDA kan bruke dette til å gjenkjenne tekst fra bilder eller utilgjengelige programmer.
+Windows 10 inkluderer OCR for mange språk. Aslan kan bruke dette til å gjenkjenne tekst fra bilder eller utilgjengelige programmer.
 
-Du kan sette språket som skal brukes for tekstgjenkjenning i kategorien [Windows 10 OCR](#Win10OcrSettings) i dialogen for [innstillinger i NVDAs](#NVDASettings).
+Du kan sette språket som skal brukes for tekstgjenkjenning i kategorien [Windows 10 OCR](#Win10OcrSettings) i dialogen for [innstillinger i Aslans](#AslanSettings).
 
 Du kan legge til flere språk ved å åpne Startmenyen, velge Innstillinger, velge Tid & språk, deretter velge Region & språk og til slutt velge Legg til språk.
 
 <!-- KC:beginInclude -->
-For å gjenkjenne teksten i gjeldende navigasjonsobjekt med Windows 10 OCR: Trykk NVDA+r.
+For å gjenkjenne teksten i gjeldende navigasjonsobjekt med Windows 10 OCR: Trykk Aslan+r.
 <!-- KC:endInclude -->
 
 ## Applikasjonsspesifike funksjoner {#ApplicationSpecificFeatures}
 
-NVDA tilbyr sine egne ekstra funksjoner for enkelte programmer for å gjøre visse oppgaver enklere eller for å gi tilgang til funksjonalitet som ellers ikke er tilgjengelig for brukere med skjermleser.
+Aslan tilbyr sine egne ekstra funksjoner for enkelte programmer for å gjøre visse oppgaver enklere eller for å gi tilgang til funksjonalitet som ellers ikke er tilgjengelig for brukere med skjermleser.
 
 ### Microsoft Word {#MicrosoftWord}
 #### Automatisk lesing av kolonne- og radoverskrifter {#WordAutomaticColumnAndRowHeaderReading}
 
-NVDA er i stand til å annonsere relevante rad- og kolonneoverskrifter automatisk når en navigerer i tabeller i Microsoft Word. Dette krever først og fremst at valget Rapporter rad- og kolonneoverskrifter i tabeller er slått på. Dette valget finner du under Innstillinger for dokumentformatering i [Innstillinger](#NVDASettings)-dialogen i NVDA. Dernest må NVDA vite hvilken rad eller kolonne som inneholder overskriftene i en angitt tabell.
+Aslan er i stand til å annonsere relevante rad- og kolonneoverskrifter automatisk når en navigerer i tabeller i Microsoft Word. Dette krever først og fremst at valget Rapporter rad- og kolonneoverskrifter i tabeller er slått på. Dette valget finner du under Innstillinger for dokumentformatering i [Innstillinger](#AslanSettings)-dialogen i Aslan. Dernest må Aslan vite hvilken rad eller kolonne som inneholder overskriftene i en angitt tabell.
 
 Etter at du har flyttet til første celle i kolonnen eller raden som inneholder overskriftene, bruker du en av følgende kommandoer:
 
@@ -833,8 +833,8 @@ Etter at du har flyttet til første celle i kolonnen eller raden som inneholder 
 
 | Navn |Tast |Beskrivelse|
 |---|---|---|
-|Sett kolonneoverskrifter |NVDA+Skift+c |Trykker du kommandoen én gang, forteller du NVDA at dette er første overskriftscelle på raden som inneholder kolonneoverskrifter som skal annonseres automatisk når du flytter mellom kolonner nedenfor denne raden. Trykker du to ganger, fjerner du denne innstillingen.|
-|Sett radoverskrifter |NVDA+Skift+r |Trykker du kommandoen én gang, forteller du NVDA at dette er første overskriftscelle i kolonnen som inneholder radoverskrifter som skal|
+|Sett kolonneoverskrifter |Aslan+Skift+c |Trykker du kommandoen én gang, forteller du Aslan at dette er første overskriftscelle på raden som inneholder kolonneoverskrifter som skal annonseres automatisk når du flytter mellom kolonner nedenfor denne raden. Trykker du to ganger, fjerner du denne innstillingen.|
+|Sett radoverskrifter |Aslan+Skift+r |Trykker du kommandoen én gang, forteller du Aslan at dette er første overskriftscelle i kolonnen som inneholder radoverskrifter som skal|
 
 annonseres automatisk når du flytter mellom rader etter denne kolonnen. Trykker du to ganger, fjerner du denne innstillingen. |
 <!-- KC:endInclude -->
@@ -848,7 +848,7 @@ Dette betyr at brukere av andre skjermlesere som åpner dokumentet på et seiner
 Akkurat som på Internett, kan nettmodus også brukes i Microsoft Word for at du skal kunne bruke funksjoner som Hurtignavigasjon og Elementlisten.
 
 <!-- KC:beginInclude -->
-For å slå Nettmodus på og av i Microsoft Word, trykker du NVDA+mellomrom.
+For å slå Nettmodus på og av i Microsoft Word, trykker du Aslan+mellomrom.
 <!-- KC:endInclude -->
 
 For mer informasjon om Nettmodus og Hurtignavigasjon, kan du se delen om [Nettmodus](#BrowseMode).
@@ -856,21 +856,21 @@ For mer informasjon om Nettmodus og Hurtignavigasjon, kan du se delen om [Nettmo
 ##### Elementlisten {#WordElementsList}
 
 <!-- KC:beginInclude -->
-Når du er i Nettmodus i Microsoft Word, får du tilgang til Elementlisten ved å trykke NVDA+f7.
+Når du er i Nettmodus i Microsoft Word, får du tilgang til Elementlisten ved å trykke Aslan+f7.
 <!-- KC:endInclude -->
 Elementlisten kan liste overskrifter, lenker, merknader (som inkluderer kommentarer og sporendringer) og feil (for tiden begrenset til stavefeil).
 
 #### Rapportering av kommentarer {#WordReportingComments}
 
 <!-- KC:beginInclude -->
-For å få lest eventuelle kommentarer i gjeldende markørposisjon, trykker du NVDA+Alt+c.
+For å få lest eventuelle kommentarer i gjeldende markørposisjon, trykker du Aslan+Alt+c.
 <!-- KC:endInclude -->
-Alle kommentarer i dokumentet, sammen med andre sporede endringer, kan også listes i NVDAs elementliste når du velger Merknader som type.
+Alle kommentarer i dokumentet, sammen med andre sporede endringer, kan også listes i Aslans elementliste når du velger Merknader som type.
 
 ### Microsoft Excel {#MicrosoftExcel}
 #### Automatisk lesing av kolonne- og radoverskrifter {#ExcelAutomaticColumnAndRowHeaderReading}
 
-NVDA er i stand til å annonsere relevante rad- og kolonneoverskrifter automatisk når en navigerer i arbeidsark i Microsoft Excel. Dette krever først og fremst at valget Rapporter rad- og kolonneoverskrifter i tabeller er slått på. Dette valget finner du under Innstillinger for dokumentformatering i [Innstillinger](#NVDASettings)-dialogen i NVDA. Dernest må NVDA vite hvilken rad eller kolonne som inneholder overskriftene.
+Aslan er i stand til å annonsere relevante rad- og kolonneoverskrifter automatisk når en navigerer i arbeidsark i Microsoft Excel. Dette krever først og fremst at valget Rapporter rad- og kolonneoverskrifter i tabeller er slått på. Dette valget finner du under Innstillinger for dokumentformatering i [Innstillinger](#AslanSettings)-dialogen i Aslan. Dernest må Aslan vite hvilken rad eller kolonne som inneholder overskriftene.
 
 Etter at du har flyttet til første celle i kolonnen eller raden som inneholder overskriftene, bruker du en av følgende kommandoer:
 
@@ -878,8 +878,8 @@ Etter at du har flyttet til første celle i kolonnen eller raden som inneholder 
 
 | Navn |Tast |Beskrivelse|
 |---|---|---|
-|Sett kolonneoverskrifter |NVDA+Skift+c |Trykker du kommandoen én gang, forteller du NVDA at dette er første overskriftscelle på raden som inneholder kolonneoverskrifter som skal annonseres automatisk når du flytter mellom kolonner nedenfor denne raden. Trykker du to ganger, fjerner du denne innstillingen.|
-|Sett radoverskrifter |NVDA+Skift+r |Trykker du kommandoen én gang, forteller du NVDA at dette er første overskriftscelle i kolonnen som inneholder radoverskrifter som skal|
+|Sett kolonneoverskrifter |Aslan+Skift+c |Trykker du kommandoen én gang, forteller du Aslan at dette er første overskriftscelle på raden som inneholder kolonneoverskrifter som skal annonseres automatisk når du flytter mellom kolonner nedenfor denne raden. Trykker du to ganger, fjerner du denne innstillingen.|
+|Sett radoverskrifter |Aslan+Skift+r |Trykker du kommandoen én gang, forteller du Aslan at dette er første overskriftscelle i kolonnen som inneholder radoverskrifter som skal|
 
 annonseres automatisk når du flytter mellom rader etter denne kolonnen. Trykker du to ganger, fjerner du denne innstillingen. |
 <!-- KC:endInclude -->
@@ -890,10 +890,10 @@ Dette betyr at brukere av andre skjermlesere som åpner arbeidsboka på et seine
 
 ##### Elementlisten {#ExcelElementsList}
 
-Akkurat som på nettet, har NVDA en elementliste for Microsoft Excel som lar deg liste og få tilgang til ulike typer informasjon.
+Akkurat som på nettet, har Aslan en elementliste for Microsoft Excel som lar deg liste og få tilgang til ulike typer informasjon.
 
 <!-- KC:beginInclude -->
-For å få tilgang til Elementlisten i Excel, trykker du NVDA+F7.
+For å få tilgang til Elementlisten i Excel, trykker du Aslan+F7.
 <!-- KC:endInclude -->
 
 Disse typene informasjon er tilgjengelige i Elementlisten:
@@ -914,16 +914,16 @@ Velger du et skjemafelt og trykker Enter eller Gå til-knappen på det, flytter 
 #### Rapportere kommentarer {#ExcelReportingComments}
 
 <!-- KC:beginInclude -->
-For å få lest eventuelle kommentarer i gjeldende celle med fokus, trykker du NVDA+Alt+c.
+For å få lest eventuelle kommentarer i gjeldende celle med fokus, trykker du Aslan+Alt+c.
 <!-- KC:endInclude -->
 
-Alle kommentarer i arbeidsarket kan også listes i NVDAs elementliste.
+Alle kommentarer i arbeidsarket kan også listes i Aslans elementliste.
 
 #### Lese beskyttede celler {#ExcelReadingProtectedCells}
 
 Hvis en arbeidsbok har blitt beskyttet, kan det være umulig å flytte fokus til bestemte celler som har blitt låst for redigering.
 <!-- KC:beginInclude -->
-For å tillate flytting til låste celler, bytter du til nettmodus ved å trykke NVDA+mellomrom, og deretter bruker du standard forflytningskommandoer i Excel
+For å tillate flytting til låste celler, bytter du til nettmodus ved å trykke Aslan+mellomrom, og deretter bruker du standard forflytningskommandoer i Excel
 som piltastene til å flytte omkring til alle celler i gjeldende arbeidsark.
 <!-- KC:endInclude -->
 
@@ -941,7 +941,7 @@ For mer informasjon om nettmodus og enkeltbokstavnavigasjon, viser vi til delen 
 
 | Navn |Tast |Beskrivelse|
 |---|---|---|
-|Slå på/av lesing av foredragsholders notater |Ctrl+Skift+s |Når du kjører en presentasjon, vil denne kommandoen bytte mellom foredragsholders notater for gjeldende bilde og innholdet i bildet. Dette påvirker bare det NVDA leser, og ikke det som vises på skjermen.|
+|Slå på/av lesing av foredragsholders notater |Ctrl+Skift+s |Når du kjører en presentasjon, vil denne kommandoen bytte mellom foredragsholders notater for gjeldende bilde og innholdet i bildet. Dette påvirker bare det Aslan leser, og ikke det som vises på skjermen.|
 
 <!-- KC:endInclude -->
 
@@ -965,7 +965,7 @@ Merk at hurtigtastene ovenfor bare fungerer med standard formateringsstreng for 
 
 | Navn |Tast |Beskrivelse|
 |---|---|---|
-|Les siste melding |NVDA+Ctrl+1-4 |Leser en av de siste meldingene, avhengig av tallet trykket. F.eks vil NVDA+Ctrl+2 lese nest nyeste melding.|
+|Les siste melding |Aslan+Ctrl+1-4 |Leser en av de siste meldingene, avhengig av tallet trykket. F.eks vil Aslan+Ctrl+2 lese nest nyeste melding.|
 
 <!-- KC:endInclude -->
 
@@ -987,13 +987,13 @@ Når du er i en samtale:
 
 | Navn |Tast |Beskrivelse|
 |---|---|---|
-|Les melding |NVDA+Ctrl+1-0 |Leser og flytter lesemarkøren til en nylig melding, avhengig av tallet som er trykket; f.eks. vil NVDA+Ctrl+2 lese nest nyeste melding.|
+|Les melding |Aslan+Ctrl+1-0 |Leser og flytter lesemarkøren til en nylig melding, avhengig av tallet som er trykket; f.eks. vil Aslan+Ctrl+2 lese nest nyeste melding.|
 
 <!-- KC:endInclude -->
 
 ### Kindle for PC {#Kindle}
 
-NVDA støtter lesing av og navigering i bøker i Amazon Kindle for PC. Denne funksjonaliteten er bare tilgjengelig med bøker merket med "Screen Reader: Supported", og dette kan du sjekke på detaljsiden for boka.
+Aslan støtter lesing av og navigering i bøker i Amazon Kindle for PC. Denne funksjonaliteten er bare tilgjengelig med bøker merket med "Screen Reader: Supported", og dette kan du sjekke på detaljsiden for boka.
 
 Nettmodus benyttes for å lese boka. Dette slås på automatisk når du åpner en bok eller setter fokus på bokområdet.
 
@@ -1005,7 +1005,7 @@ Du kan manuelt bla til neste side med pageDown-tasten og til forrige side med pa
 Enkeltbokstavnavigasjon støttes for lenker og grafikker, men bare innenfor gjeldende side.
 Navigering på lenker omfatter også fotnoter.
 
-NVDA tilbyr tidlig støtte for lesing og interaktiv navigasjon av matematisk innhold for bøker med tilgjengelig matematikk.
+Aslan tilbyr tidlig støtte for lesing og interaktiv navigasjon av matematisk innhold for bøker med tilgjengelig matematikk.
 
 Vennligst se delen [Lese matematisk innhold](#ReadingMath) for mer informasjon.
 
@@ -1024,7 +1024,7 @@ Om du gjør dette uten å ha valgt tekst, vil valg bli vist for ordet under mark
 
 Du kan legge til et notat angående et ord eller en tekstpassasje. For å gjøre dette, velger du først relevant tekst og går til alternativene for utvalget, som beskrevet ovenfor. Velg deretter Legg til notat.
 
-Når du leser i nettmodus, vil NVDA referere til disse notatene som kommentarer.
+Når du leser i nettmodus, vil Aslan referere til disse notatene som kommentarer.
 
 For å se på, redigere eller slette et notat:
 
@@ -1044,11 +1044,11 @@ Når du er i tabellvisningen over bøker som er lagt til:
 
 <!-- KC:endInclude -->
 
-## Konfigurere NVDA {#ConfiguringNVDA}
+## Konfigurere Aslan {#ConfiguringAslan}
 
-Det meste av konfigureringen kan gjøres ved hjelp av dialogbokser som du får tilgang til via undermenyen Preferanser i NVDA-menyen.
+Det meste av konfigureringen kan gjøres ved hjelp av dialogbokser som du får tilgang til via undermenyen Preferanser i Aslan-menyen.
 
-Mange av disse innstillingene finner du i dialogen [Innstillinger i NVDA](#NVDASettings).
+Mange av disse innstillingene finner du i dialogen [Innstillinger i Aslan](#AslanSettings).
 
 I alle dialogbokser trykker du på knappen OK for å akseptere eventuelle endringer du har gjort. For å avbryte eventuelle endringer trykker du på knappen Avbryt eller på Escape-tasten.
 
@@ -1056,10 +1056,10 @@ I noen dialoger kan du trykke på knappen Bruk for at innstillingene skal tas i 
 
 Noen innstillinger kan også endres ved hjelp av hurtigtaster. Disse er oppgitt, der det er relevant, i delene nedenfor.
 
-### NVDA-innstillinger {#NVDASettings}
+### Aslan-innstillinger {#AslanSettings}
 
 <!-- KC:settingsSection: || Navn | Stasjonær tast | Bærbar tast | Beskrivelse | -->
-NVDAs innstillingsdialog inneholder mange konfigurasjonsparametre som kan endres.
+Aslans innstillingsdialog inneholder mange konfigurasjonsparametre som kan endres.
 
 Denne dialogen inneholder en liste med flere kategorier med innstillinger du kan velge fra.
 
@@ -1067,104 +1067,104 @@ Når du velger en kategori, vil flere innstillinger knyttet til denne kategorien
 
 Vil du lagre innstillingene dine og lukke innstillingsdialogen, kan du trykke på OK-knappen.
 
-Noen innstillingskategorier har tilordnede hurtigtaster. Trykker du på en slik hurtigtast, blir NVDAs innstillingsdialog åpnet i nettopp den kategorien du har valgt.
+Noen innstillingskategorier har tilordnede hurtigtaster. Trykker du på en slik hurtigtast, blir Aslans innstillingsdialog åpnet i nettopp den kategorien du har valgt.
 
 Som standard kan du ikke nå alle kategorier med hurtigtastkommandoer.
 
 Ønsker du å få tilgang til kategorier som ikke har en tilordnet hurtigtast, kan du benytte dialogen [Inndatabevegelser](#InputGestures) for å legge til en tilpasset bevegelse som en tastaturkommando eller berøringsbevegelse for den kategorien.
 
-Innstillingskategoriene som du finner i innstillingsdialogen i NVDA blir beskrevet nedenfor.
+Innstillingskategoriene som du finner i innstillingsdialogen i Aslan blir beskrevet nedenfor.
 
-#### Generelt (NVDA+Ctrl+g) {#GeneralSettings}
+#### Generelt (Aslan+Ctrl+g) {#GeneralSettings}
 
-Kategorien Generelt i NVDAs innstillingsdialog inneholder valg for NVDAs generelle oppførsel, som hvilket språk som skal benyttes i grensesnittet og om NVDA skal se etter oppdateringer.
+Kategorien Generelt i Aslans innstillingsdialog inneholder valg for Aslans generelle oppførsel, som hvilket språk som skal benyttes i grensesnittet og om Aslan skal se etter oppdateringer.
 
 Denne kategorien inneholder disse valgene:
 
 ##### Språk {#GeneralSettingsLanguage}
 
-Dette er en kombinasjonsboks som lar deg velge språket som NVDAs brukergrensesnitt og meldinger skal vises i. Det er mange språk å velge mellom, men standardvalg er "Brukerstandard, Windows". Denne innstillingen ber NVDA bruke språket som for øyeblikket er valgt i Windows.
+Dette er en kombinasjonsboks som lar deg velge språket som Aslans brukergrensesnitt og meldinger skal vises i. Det er mange språk å velge mellom, men standardvalg er "Brukerstandard, Windows". Denne innstillingen ber Aslan bruke språket som for øyeblikket er valgt i Windows.
 
-Legg merke til at NVDA må startes på nytt når språket endres. NVDA vil spørre deg om du ønsker å starte NVDA på nytt hvis du endrer innstillingen, og lagre endringene dine.
+Legg merke til at Aslan må startes på nytt når språket endres. Aslan vil spørre deg om du ønsker å starte Aslan på nytt hvis du endrer innstillingen, og lagre endringene dine.
 
-Trykk på OK, og NVDA vil starte på nytt.
+Trykk på OK, og Aslan vil starte på nytt.
 
 ##### Lagre konfigurasjon ved avslutning {#GeneralSettingsSaveConfig}
 
-Denne innstillingen er en avkryssingsboks som, hvis den er avkrysset, vil be NVDA lagre gjeldende konfigurasjon automatisk når du avslutter NVDA.
+Denne innstillingen er en avkryssingsboks som, hvis den er avkrysset, vil be Aslan lagre gjeldende konfigurasjon automatisk når du avslutter Aslan.
 
-##### Vis avslutningsalternativer når NVDA avsluttes {#GeneralSettingsShowExitOptions}
+##### Vis avslutningsalternativer når Aslan avsluttes {#GeneralSettingsShowExitOptions}
 
 Dette valget er en avkryssingsboks som lar deg velge om det skal vises en dialog med spørsmål om hvilken handling du vil utføre når du avslutter NvDA.
-Om du setter kryss her, vil en dialog dukke opp når du forsøker å avslutte NVDA. Den vil spørre deg om du ønsker å avslutte, starte på nytt, starte på nytt med tillegg deaktivert, eller installere ventende oppdateringer (hvis noen finnes).
+Om du setter kryss her, vil en dialog dukke opp når du forsøker å avslutte Aslan. Den vil spørre deg om du ønsker å avslutte, starte på nytt, starte på nytt med tillegg deaktivert, eller installere ventende oppdateringer (hvis noen finnes).
 
-Lar du avkryssingsboksen stå tom, vil NVDA avslutte umiddelbart uten spørsmål.
+Lar du avkryssingsboksen stå tom, vil Aslan avslutte umiddelbart uten spørsmål.
 
-##### Spill av lyd når NVDA startes eller avsluttes {#GeneralSettingsPlaySounds}
+##### Spill av lyd når Aslan startes eller avsluttes {#GeneralSettingsPlaySounds}
 
-Dette valget er en avkryssingsboks som, hvis den er avkrysset, ber NVDA spille av lyder når den startes eller avsluttes.
+Dette valget er en avkryssingsboks som, hvis den er avkrysset, ber Aslan spille av lyder når den startes eller avsluttes.
 
 ##### Loggnivå {#GeneralSettingsLogLevel}
 
-Dette er en kombinasjonsboks som lar deg avgjøre hvor mye NVDA logger når den kjører.
+Dette er en kombinasjonsboks som lar deg avgjøre hvor mye Aslan logger når den kjører.
 
 Generelt bør ikke brukerne ha behov for å endre denne innstillinger, siden ikke for mye blir logget som standard. Skulle du som bruker likevel ønske å logge mer informasjon, for eksempel i forbindelse med en feilrapport, kan denne innstillingen være nyttig.
 
-##### Start NVDA automatisk når jeg har logget inn i Windows {#GeneralSettingsStartAfterLogOn}
+##### Start Aslan automatisk når jeg har logget inn i Windows {#GeneralSettingsStartAfterLogOn}
 
-Hvis dette valget er slått på, vil NVDA starte automatisk så snart du har logget inn i Windows.
+Hvis dette valget er slått på, vil Aslan starte automatisk så snart du har logget inn i Windows.
 
-Dette valget er bare tilgjengelig i installerte kopier av NVDA.
+Dette valget er bare tilgjengelig i installerte kopier av Aslan.
 
-##### Bruk NVDA i innloggingsvinduet i Windows (krever administratorrettigheter) {#GeneralSettingsStartOnLogOnScreen}
+##### Bruk Aslan i innloggingsvinduet i Windows (krever administratorrettigheter) {#GeneralSettingsStartOnLogOnScreen}
 
-Slå på dette valget hvis du logger inn i Windows ved å oppgi brukernavn og passord, og behøver skjermleserstøtte i innloggingsvinduet. Da vil NVDA starte automatisk i innloggingsvinduet når Windows starter.
+Slå på dette valget hvis du logger inn i Windows ved å oppgi brukernavn og passord, og behøver skjermleserstøtte i innloggingsvinduet. Da vil Aslan starte automatisk i innloggingsvinduet når Windows starter.
 
-Dette valget er bare tilgjengelig i installerte kopier av NVDA.
+Dette valget er bare tilgjengelig i installerte kopier av Aslan.
 
 ##### Bruk gjeldende lagrede innstillinger i innloggingsvinduet og på andre sikre skjermer (krever administratorrettigheter {#GeneralSettingsCopySettings}
 
-Ved å trykke på denne knappen kopieres de gjeldende lagrede brukerinnstillingene i NVDA til NVDAs mappe for systeminnstillinger. NVDA vil da benytte disse innstillingene når NVDA kjøres i innloggingsvinduet, i dialogen for brukerkontokontroll og på andre sikre skjermer i Windows.
+Ved å trykke på denne knappen kopieres de gjeldende lagrede brukerinnstillingene i Aslan til Aslans mappe for systeminnstillinger. Aslan vil da benytte disse innstillingene når Aslan kjøres i innloggingsvinduet, i dialogen for brukerkontokontroll og på andre sikre skjermer i Windows.
 
-For å være sikker på at alle innstillinger dine blir overført, bør du først lagre innstillingene ved enten å trykke NVDA+Ctrl+c eller velge Lagre innstillinger i NVDA-menyen.
+For å være sikker på at alle innstillinger dine blir overført, bør du først lagre innstillingene ved enten å trykke Aslan+Ctrl+c eller velge Lagre innstillinger i Aslan-menyen.
 
-Dette valget er bare tilgjengelig i installerte kopier av NVDA.
+Dette valget er bare tilgjengelig i installerte kopier av Aslan.
 
-##### Se etter oppdateringer for NVDA automatisk {#GeneralSettingsCheckForUpdates}
+##### Se etter oppdateringer for Aslan automatisk {#GeneralSettingsCheckForUpdates}
 
-Hvis dette er slått på, vil NVDA automatisk se etter oppdaterte versjoner av NVDA og fortelle deg det hvis en oppdatering er tilgjengelig.
+Hvis dette er slått på, vil Aslan automatisk se etter oppdaterte versjoner av Aslan og fortelle deg det hvis en oppdatering er tilgjengelig.
 
-Du kan også se etter oppdateringer manuelt. Det gjør du ved å velge Se etter oppdateringer under Hjelp i NVDA-menyen.
+Du kan også se etter oppdateringer manuelt. Det gjør du ved å velge Se etter oppdateringer under Hjelp i Aslan-menyen.
 
-Når NVDA ser etter oppdateringer, manuelt eller automatisk, må NVDA sende litt informasjon til oppdateringsserveren for å kunne motta riktig oppdatering til systemet ditt. Følgende informasjon blir alltid sendt:
+Når Aslan ser etter oppdateringer, manuelt eller automatisk, må Aslan sende litt informasjon til oppdateringsserveren for å kunne motta riktig oppdatering til systemet ditt. Følgende informasjon blir alltid sendt:
 
-* Gjeldende versjon av NVDA
+* Gjeldende versjon av Aslan
 * Versjon av operativsystemet
 * Om operativsystemet er 64- eller 32-biters
 
-##### La NVDA-prosjektet få tilgang til bruksstatistikk for NVDA {#GeneralSettingsGatherUsageStats}
+##### La Aslan-prosjektet få tilgang til bruksstatistikk for Aslan {#GeneralSettingsGatherUsageStats}
 
 Hvis dette er aktivert, vil NV Access benytte informasjon fra Se etter oppdateringer for å spore antallet brukere, inkludert visse demografiske verdier slik som operativsystem og opprinnelsesland.
 Vær oppmerksom på at selv om din IP-adresse vil bli brukt til å avgjøre landet ditt under oppdateringssjekken, blir aldri IP-adressen beholdt.
 Bortsett fra informasjonen som er påkrevd for å se etter oppdateringer, sendes også følgende ekstra informasjon:
 
-* Språket som brukes i NVDAs grensesnitt
-* Om denne kopien av NVDA er flyttbar eller installert
+* Språket som brukes i Aslans grensesnitt
+* Om denne kopien av Aslan er flyttbar eller installert
 * Navnet på gjeldende talesyntese som er i bruk (inkludert navnet på tillegget driveren kommer fra)
 * Navnet på gjeldende leselist som er i bruk (inkludert navnet på tillegget driveren kommer fra)
 * Gjeldende punktskrifttabell for utdata (hvis punktskrift benyttes)
 
-Denne informasjonen hjelper NV Access i stor grad med å prioritere framtidig utvikling av NVDA.
+Denne informasjonen hjelper NV Access i stor grad med å prioritere framtidig utvikling av Aslan.
 
 ##### Varsle om ventende oppdatering ved oppstart {#GeneralSettingsNotifyPendingUpdates}
 
-Hvis dette er slått på, vil NVDA si ifra ved oppstart når det finnes en ventende oppdatering. Du får også et valg om å installere den.
+Hvis dette er slått på, vil Aslan si ifra ved oppstart når det finnes en ventende oppdatering. Du får også et valg om å installere den.
 
-Du kan også installere en ventende oppdatering selv fra Avslutt NVDA-dialogen (hvis aktivert), fra NVDA-menyen eller når du ser etter en oppdatering fra Hjelp-menyen.
+Du kan også installere en ventende oppdatering selv fra Avslutt Aslan-dialogen (hvis aktivert), fra Aslan-menyen eller når du ser etter en oppdatering fra Hjelp-menyen.
 
-#### Taleinnstillinger (NVDA+Ctrl+v) {#SpeechSettings}
+#### Taleinnstillinger (Aslan+Ctrl+v) {#SpeechSettings}
 
-Kategorien Tale i NVDAs innstillingsdialog inneholder valg som lar deg endre både talesyntese og stemmekarakteristika for den valgte talesyntesen.
+Kategorien Tale i Aslans innstillingsdialog inneholder valg som lar deg endre både talesyntese og stemmekarakteristika for den valgte talesyntesen.
 
 Ønsker du en raskere, alternativ måte for å kunne kontrollere stemmeparametre fra hvor som helst, bør du se på delen [Innstillingsring for talesyntese](#SynthSettingsRing).
 
@@ -1174,9 +1174,9 @@ Kategorien Taleinnstillinger inneholder følgende valg:
 
 Det første valget i kategorien Taleinnstillinger er knappen Endre ... Med denne knappen aktiverer du dialogen [Velg talesyntese](#SelectSynthesizer), der du kan velge aktiv talesyntese og enhet for utdata.
 
-Denne dialogen åpnes oppå innstillingsdialogen i NVDA.
+Denne dialogen åpnes oppå innstillingsdialogen i Aslan.
 
-Når du lagrer eller avbryter innstillingene i Velg talesyntese, går du tilbake til NVDAs innstillingsdialog.
+Når du lagrer eller avbryter innstillingene i Velg talesyntese, går du tilbake til Aslans innstillingsdialog.
 
 ##### Stemme {#SpeechSettingsVoice}
 
@@ -1213,7 +1213,7 @@ Dette valget er en skyvebryter som lar deg velge hvor mye bøyning (stigning og 
 
 ##### Skift språk automatisk {#SpeechSettingsLanguageSwitching}
 
-Denne avkryssingsboksen lar deg avgjøre om NVDA skal skifte talesyntesespråk automatisk hvis teksten som lesess, spesifiserer språket sitt.
+Denne avkryssingsboksen lar deg avgjøre om Aslan skal skifte talesyntesespråk automatisk hvis teksten som lesess, spesifiserer språket sitt.
 
 Denne funksjonen er slått på som standard.
 
@@ -1231,7 +1231,7 @@ Dette valget er slått av som standard.
 
 ##### Nivå for tegnsetting/symbol {#SpeechSettingsSymbolLevel}
 
-Tast: NVDA+p
+Tast: Aslan+p
 
 Dette lar deg velge nivå for tegnsetting og andre symboler som skal uttales som ord.
 
@@ -1241,9 +1241,9 @@ Dette valget gjelder for samtlige talesynteser, ikke bare for den som er aktiv f
 
 ##### Stol på stemmens språk ved behandling av tegn og symboler {#SpeechSettingsTrust}
 
-Dette valget forteller NVDA hvorvidt NVDA skal stole på språket til gjeldende stemme ved behandling av symboler og bokstaver. Valget er slått på som standard.
+Dette valget forteller Aslan hvorvidt Aslan skal stole på språket til gjeldende stemme ved behandling av symboler og bokstaver. Valget er slått på som standard.
 
-Finner du ut at NVDA leser tegnsetting på feil språk for en bestemt talesyntese eller stemme, kan det være du vil slå av dette valget for å tvinge NVDA til å bruke den globale språkinnstillingen sin i stedet.
+Finner du ut at Aslan leser tegnsetting på feil språk for en bestemt talesyntese eller stemme, kan det være du vil slå av dette valget for å tvinge Aslan til å bruke den globale språkinnstillingen sin i stedet.
 
 ##### Tonehøydeendring for stor bokstav i prosent {#SpeechSettingsCapPitchChange}
 
@@ -1255,13 +1255,13 @@ Vil du ikke ha noen tonehøydeendring, bør du la verdien være 0.
 
 ##### Si "stor" før store bokstaver {#SpeechSettingsSayCapBefore}
 
-Dette valget er en avkryssingsboks som, når den er avkrysset, gjør at NVDA sier ordet "stor" før en stor bokstav. Dette gjelder når bokstavene uttales individuelt, som ved staving.
+Dette valget er en avkryssingsboks som, når den er avkrysset, gjør at Aslan sier ordet "stor" før en stor bokstav. Dette gjelder når bokstavene uttales individuelt, som ved staving.
 
-Normalt øker NVDA tonehøyden litt for stor bokstav, men noen talesynteser støtter ikke dette helt godt. I slike tilfeller kan dette valget kanskje være nyttig.
+Normalt øker Aslan tonehøyden litt for stor bokstav, men noen talesynteser støtter ikke dette helt godt. I slike tilfeller kan dette valget kanskje være nyttig.
 
 ##### Pip for store bokstaver {#SpeechSettingsBeepForCaps}
 
-Hvis denne avkryssingsboksen er avkrysset, vil NVDA lage et lite pip hver gang den oppdager en stor bokstav for seg selv.
+Hvis denne avkryssingsboksen er avkrysset, vil Aslan lage et lite pip hver gang den oppdager en stor bokstav for seg selv.
 
 Som med avkryssingsboksen "Si "stor" før store bokstaver" kan dette være nyttig for talesynteser som ikke klarer å endre tonehøyde ved store bokstaver.
 
@@ -1279,67 +1279,67 @@ Imidlertid håndterer ikke enkelte talesynteser basert på Microsoft Speech API 
 
 Har du problemer med uttalen av enkeltbokstaver, kan du forsøke å slå av dette valget.
 
-#### Velg talesyntese (NVDA+Ctrl+s) {#SelectSynthesizer}
+#### Velg talesyntese (Aslan+Ctrl+s) {#SelectSynthesizer}
 
-Talesyntese-dialogen, som kan åpnes ved å aktivere knappen Endre ... i talekategorien i NVDAs innstillingsdialog, lar deg velge hvilken talesyntese NVDA skal snakke med.
+Talesyntese-dialogen, som kan åpnes ved å aktivere knappen Endre ... i talekategorien i Aslans innstillingsdialog, lar deg velge hvilken talesyntese Aslan skal snakke med.
 
-Så snart du har valgt den talesyntesen du ønsker å bruke, kan du trykke på OK, og NVDA laster umiddelbart inn den valgte talesyntesen.
-Skulle det oppstå en feil ved innlasting av den nye talesyntesen, vil NVDA varsle deg med en melding, og deretter fortsette å bruke den gamle talesyntesen.
+Så snart du har valgt den talesyntesen du ønsker å bruke, kan du trykke på OK, og Aslan laster umiddelbart inn den valgte talesyntesen.
+Skulle det oppstå en feil ved innlasting av den nye talesyntesen, vil Aslan varsle deg med en melding, og deretter fortsette å bruke den gamle talesyntesen.
 
 ##### Talesyntese {#SelectSynthesizerSynthesizer}
 
-Dette valget lar deg avgjøre hvilken talesyntese du vil at NVDA skal bruke for taleutdata.
+Dette valget lar deg avgjøre hvilken talesyntese du vil at Aslan skal bruke for taleutdata.
 
-Se i delen [Støttede talesynteser](#SupportedSpeechSynths) for å finne en liste over talesynteser NVDA støtter..
+Se i delen [Støttede talesynteser](#SupportedSpeechSynths) for å finne en liste over talesynteser Aslan støtter..
 
-Et spesielt element som alltid vil være til stede i denne listen, er "Ingen tale". Dette vil la deg bruke NVDA uten noen som helst form for tale.
+Et spesielt element som alltid vil være til stede i denne listen, er "Ingen tale". Dette vil la deg bruke Aslan uten noen som helst form for tale.
 
-Dette valget kan være nyttig for en som ønsker å bruke NVDA bare med punktskrift, eller for utviklere som bare vil benytte taleviseren.
+Dette valget kan være nyttig for en som ønsker å bruke Aslan bare med punktskrift, eller for utviklere som bare vil benytte taleviseren.
 
 ##### Enhet for utdata {#SelectSynthesizerOutputDevice}
 
-Dette valget lar deg velge hvilket lydkort NVDA skal instruere den valgte talesyntesen om å snakke gjennom.
+Dette valget lar deg velge hvilket lydkort Aslan skal instruere den valgte talesyntesen om å snakke gjennom.
 
 <!-- KC:setting -->
 
 ##### Modus for lyddemping {#SelectSynthesizerDuckingMode}
 
-Tast: NVDA+Skift+d
+Tast: Aslan+Skift+d
 
-I Windows 8 og nyere, lar dette valget deg velge om NVDA skal senke lydnivået på andre programmer når NVDA snakker, eller hele tiden mens NVDA er i gang.
+I Windows 8 og nyere, lar dette valget deg velge om Aslan skal senke lydnivået på andre programmer når Aslan snakker, eller hele tiden mens Aslan er i gang.
 
-* Ingen lyddemping: NVDA vil aldri senke lydnivået på annen lyd.
-* Demp annen lyd ved tale og lyd fra NVDA: NVDA vil bare senke nivået på annen lyd når NVDA snakker eller spiller av lyd. Dette fungerer kanskje ikke for alle talesynteser.
-* Demp alltid annen lyd: NVDA vil holde lydnivået på annen lyd lavere så lenge NVDA er i gang.
+* Ingen lyddemping: Aslan vil aldri senke lydnivået på annen lyd.
+* Demp annen lyd ved tale og lyd fra Aslan: Aslan vil bare senke nivået på annen lyd når Aslan snakker eller spiller av lyd. Dette fungerer kanskje ikke for alle talesynteser.
+* Demp alltid annen lyd: Aslan vil holde lydnivået på annen lyd lavere så lenge Aslan er i gang.
 
-Dette valget er bare tilgjengelig dersom NVDA er installert. Det er ikke mulig å støtte lyddemping i flyttbare eller midlertidige kopier av NVDA.
+Dette valget er bare tilgjengelig dersom Aslan er installert. Det er ikke mulig å støtte lyddemping i flyttbare eller midlertidige kopier av Aslan.
 
 #### Innstillingsringen for talesyntese {#SynthSettingsRing}
 
-Hvis du ønsker å endre taleinnstillingene raskt, uten å gå via talekategorien i NVDAs innstillingsdialog, finnes det noen tastekommandoer i NVDA som lar deg bevege deg gjennom de vanligste taleinnstillingene. Disse kommandoene er tilgjengelige uansett hvor du er, så lenge NVDA kjører:
+Hvis du ønsker å endre taleinnstillingene raskt, uten å gå via talekategorien i Aslans innstillingsdialog, finnes det noen tastekommandoer i Aslan som lar deg bevege deg gjennom de vanligste taleinnstillingene. Disse kommandoene er tilgjengelige uansett hvor du er, så lenge Aslan kjører:
 <!-- KC:beginInclude -->
 
 | Navn |Stasjonær tast |Bærbar tast |Beskrivelse|
 |---|---|---|---|
-|Gå til neste talesynteseinnstilling |NVDA+Ctrl+PilHøyre |NVDA+Skift+Ctrl+PilHøyre |Går til neste tilgjengelige talesynteseinnstilling etter den gjeldende, og begynner fra begynnelsen igjen etter den siste|
-|Gå til forrige talesynteseinnstilling |NVDA+Ctrl+PilVenstre |NVDA+Skift+Ctrl+PilVenstre |Går til neste tilgjengelige talesynteseinnstilling før den gjeldende, og begynner fra slutten igjen etter den første|
-|Øk gjeldende talesynteseinnstilling |NVDA+Ctrl+PilOpp |NVDA+Skift+Ctrl+PilOpp |øker den gjeldende talesynteseinnstillingen du er på, f.eks. øker talehastigheten, velger neste stemme, øker lydnivået|
-|Reduser gjeldende talesynteseinnstilling |NVDA+Ctrl+PilNed |NVDA+Skift+Ctrl+PilNed |reduserer den gjeldende talesynteseinnstillingen du er på, f.eks. reduserer talehastigheten, velger forrige stemme, reduserer lydnivået|
+|Gå til neste talesynteseinnstilling |Aslan+Ctrl+PilHøyre |Aslan+Skift+Ctrl+PilHøyre |Går til neste tilgjengelige talesynteseinnstilling etter den gjeldende, og begynner fra begynnelsen igjen etter den siste|
+|Gå til forrige talesynteseinnstilling |Aslan+Ctrl+PilVenstre |Aslan+Skift+Ctrl+PilVenstre |Går til neste tilgjengelige talesynteseinnstilling før den gjeldende, og begynner fra slutten igjen etter den første|
+|Øk gjeldende talesynteseinnstilling |Aslan+Ctrl+PilOpp |Aslan+Skift+Ctrl+PilOpp |øker den gjeldende talesynteseinnstillingen du er på, f.eks. øker talehastigheten, velger neste stemme, øker lydnivået|
+|Reduser gjeldende talesynteseinnstilling |Aslan+Ctrl+PilNed |Aslan+Skift+Ctrl+PilNed |reduserer den gjeldende talesynteseinnstillingen du er på, f.eks. reduserer talehastigheten, velger forrige stemme, reduserer lydnivået|
 
 <!-- KC:endInclude -->
 
 #### Punktskrift {#BrailleSettings}
 
-Kategorien Punktskrift i NVDAs innstillingsdialog inneholder valg som lar deg endre flere aspekter ved bruk av punktskrift for inn- og utdata.
+Kategorien Punktskrift i Aslans innstillingsdialog inneholder valg som lar deg endre flere aspekter ved bruk av punktskrift for inn- og utdata.
 
 Denne kategorien inneholder disse valgene:
 
 ##### Endre leselist {#BrailleSettingsChange}
 
-Knappen Endre ... i kategorien Punktskrift i NVDAs innstillingsdialog aktiverer dialogen [Velg leselist](#SelectBrailleDisplay). Denne dialogen lar deg velge den aktive leselisten.
+Knappen Endre ... i kategorien Punktskrift i Aslans innstillingsdialog aktiverer dialogen [Velg leselist](#SelectBrailleDisplay). Denne dialogen lar deg velge den aktive leselisten.
 
-Denne dialogen åpner seg over NVDAs innstillingsdialog.
-::Lagrer eller avbryter du innstillingene i dialogen Velg leselist, vil du gå tilbake til NVDAs innstillingsdialog.
+Denne dialogen åpner seg over Aslans innstillingsdialog.
+::Lagrer eller avbryter du innstillingene i dialogen Velg leselist, vil du gå tilbake til Aslans innstillingsdialog.
 
 ##### Utdatatabell {#BrailleSettingsOutputTable}
 
@@ -1399,24 +1399,24 @@ Valgindikatoren er ikke berørt av dette valget. Den er alltid punkt 7 og 8 uten
 
 ##### Tidsavbrudd for melding (sek) {#BrailleSettingsMessageTimeout}
 
-Dette valget er et numerisk felt som kontrollerer hvor lenge meldinger i NVDA vises på leselisten.
+Dette valget er et numerisk felt som kontrollerer hvor lenge meldinger i Aslan vises på leselisten.
 
 Ved å spesifisere 0, slås visning av meldinger av fullstendig.
 
 ##### Vis meldinger uten tidsavbrudd {#BrailleSettingsNoMessageTimeout}
 
-Dette valget lar NVDA vise meldinger på leselisten uten at de forsvinner automatisk etter en viss tid.
+Dette valget lar Aslan vise meldinger på leselisten uten at de forsvinner automatisk etter en viss tid.
 
 <!-- KC:setting -->
 
 ##### Knytt punktskrift til {#BrailleTether}
 
-Tast: NVDA+Ctrl+t
+Tast: Aslan+Ctrl+t
 
 Dette valget lar deg avgjøre hvorvidt leselisten skal følge systemfokus, navigasjonsobjektet/lesemarkøren, eller begge.
 
-Når "automatisk" er valgt, vil NVDA følge systemfokus og -markøren som standard.
-I dette tilfellet, når navigasjonsobjektets eller lesemarkørens posisjon endres som følge av eksplisitt brukersamhandling, vil NVDA knytte seg midlertidig til lesemarkør, til fokus eller markør endres.
+Når "automatisk" er valgt, vil Aslan følge systemfokus og -markøren som standard.
+I dette tilfellet, når navigasjonsobjektets eller lesemarkørens posisjon endres som følge av eksplisitt brukersamhandling, vil Aslan knytte seg midlertidig til lesemarkør, til fokus eller markør endres.
 
 ##### Les avsnittsvis {#BrailleSettingsReadByParagraph}
 
@@ -1438,44 +1438,44 @@ Hvis dette valget er avslått, vil så mye som mulig av ordet på slutten av les
 
 ##### Presentasjon av fokuskontekst {#BrailleSettingsFocusContextPresentation}
 
-Dette valget lar deg avgjøre hvilken kontekstinformasjon NVDA vil vise på leselisten når et objekt får fokus.
+Dette valget lar deg avgjøre hvilken kontekstinformasjon Aslan vil vise på leselisten når et objekt får fokus.
 
 Kontekstinformasjon refererer til hierarkiet av objekter som inneholder fokus.
 
 Når du for eksempel fokuserer på et listeelement, er dette listeelementet en del av en liste. Denne listen kan være en del av en dialog, osv.
 
-Se delen om [objektnavigasjon](#ObjectNavigation) for mer informasjon om hierarkiet som gjelder objekter i NVDA.
+Se delen om [objektnavigasjon](#ObjectNavigation) for mer informasjon om hierarkiet som gjelder objekter i Aslan.
 
-Når innstillingen er satt til å fylle leselisten for endringer i kontekst, vil NVDA forsøke å vise så mye kontekstinformasjon som mulig på leselisten, men bare om de delene av konteksten som har blitt endret.
+Når innstillingen er satt til å fylle leselisten for endringer i kontekst, vil Aslan forsøke å vise så mye kontekstinformasjon som mulig på leselisten, men bare om de delene av konteksten som har blitt endret.
 
-Når det gjelder eksempelet ovenfor, vil dette si at når du endrer fokus til listen, vil NVDA vise listeelementet på leselisten. Om det er nok ledig plass på leselisten, vil NVDA videre forsøke å vise at listeelementet er en del av en liste.
-Om du så begynner å gå gjennom listen ved hjelp av piltastene, er det forutsatt at du er oppmerksom på at du fortsatt er i listen. Følgelig vil NVDA bare vise det fokuserte listeelementet for de gjenværende elementene i listen.
+Når det gjelder eksempelet ovenfor, vil dette si at når du endrer fokus til listen, vil Aslan vise listeelementet på leselisten. Om det er nok ledig plass på leselisten, vil Aslan videre forsøke å vise at listeelementet er en del av en liste.
+Om du så begynner å gå gjennom listen ved hjelp av piltastene, er det forutsatt at du er oppmerksom på at du fortsatt er i listen. Følgelig vil Aslan bare vise det fokuserte listeelementet for de gjenværende elementene i listen.
 
 Hvis du vil lese konteksten igjen, for eksempel at du er i en liste og at listen er del av en dialog, må du bla leselisten bakover.
 
-Når dette valget er satt til å alltid fylle leselisten, vil NVDA forsøke å vise så mye kontekstinformasjon på leselisten som mulig, uavhengig av om du har sett den samme kontekstinformasjonen før eller ikke.
+Når dette valget er satt til å alltid fylle leselisten, vil Aslan forsøke å vise så mye kontekstinformasjon på leselisten som mulig, uavhengig av om du har sett den samme kontekstinformasjonen før eller ikke.
 
-Dette har den fordelen at NVDA vil få plass til så mye informasjon som mulig på leselisten.
+Dette har den fordelen at Aslan vil få plass til så mye informasjon som mulig på leselisten.
 
 Ulempen ved dette er at det alltid vil være en forskjell i posisjonen hvor fokuset begynner på leselisten. Dette kan gjøre det vanskelig å for eksempel skumme raskt gjennom en lang liste med elementer, fordi du hele tiden må flytte fingeren for å finne begynnelsen på elementet.
 
-Dette var standard i NVDA 2017.2 og tidligere.
+Dette var standard i Aslan 2017.2 og tidligere.
 
-Når du setter innstillingen for presentasjon av fokuskontekst til å bare vise kontekstinformasjonen når du blar bakover, vil NVDA aldri vise kontekstinformasjon på leselisten som standard.
+Når du setter innstillingen for presentasjon av fokuskontekst til å bare vise kontekstinformasjonen når du blar bakover, vil Aslan aldri vise kontekstinformasjon på leselisten som standard.
 
-For å holde oss til eksempelet ovenfor, vil NVDA vise at du har satt fokus på et listeelement.
+For å holde oss til eksempelet ovenfor, vil Aslan vise at du har satt fokus på et listeelement.
 
 For at du da skal kunne lese konteksten, for eksempel at du er i en liste og at listen er en del av en dialog, må du bla bakover med leselisten.
 
 For å kunne bytte presentasjon av fokuskontekst fra hvor som helst, kan du definere en tilpasset gest ved hjelp av dialogen [Inndatagester](#InputGestures).
 
-#### Velg leselist (NVDA+Ctrl+a) {#SelectBrailleDisplay}
+#### Velg leselist (Aslan+Ctrl+a) {#SelectBrailleDisplay}
 
-Dialogen Velg leselist, som kan åpnes ved å aktivere knappen Endre ... i dialogen Punktskrift i NVDAs innstillingsdialog, lar deg velge hvilken leselist NVDA skal benytte for å vise punktskrift.
+Dialogen Velg leselist, som kan åpnes ved å aktivere knappen Endre ... i dialogen Punktskrift i Aslans innstillingsdialog, lar deg velge hvilken leselist Aslan skal benytte for å vise punktskrift.
 
-Når du har valgt leselisten du vil bruke, kan du trykke på OK, og NVDA vil laste inn valgt leselist.
+Når du har valgt leselisten du vil bruke, kan du trykke på OK, og Aslan vil laste inn valgt leselist.
 
-Om det oppstår feil ved lasting av leselistdriveren, vil NVDA varsle deg om det med en melding, og vil fortsette å benytte den tidligere leselisten, hvis det finnes noen.
+Om det oppstår feil ved lasting av leselistdriveren, vil Aslan varsle deg om det med en melding, og vil fortsette å benytte den tidligere leselisten, hvis det finnes noen.
 
 ##### Leselist {#SelectBrailleDisplayDisplay}
 
@@ -1493,58 +1493,58 @@ Dette valget vil, dersom det er tilgjengelig, la deg velge hvilken port eller ty
 
 Dette er en kombinasjonsboks med de valgene som er tilgjengelig for leselisten din.
 
-Som standard skal NVDA oppdage port automatisk. Dette betyr at tilkoblingen til punktskriftenheten vil bli etablert automatisk ved at NVDA søker etter tilgjengelige USB- og bluetooth-enheter på PC-en din.
+Som standard skal Aslan oppdage port automatisk. Dette betyr at tilkoblingen til punktskriftenheten vil bli etablert automatisk ved at Aslan søker etter tilgjengelige USB- og bluetooth-enheter på PC-en din.
 
 Imidlertid vil du kunne velge hvilken port som skal brukes for noen leselister.
 
-Vanlige alternativer er "automatisk" (som instruerer NVDA om å benytte prosedyren for automatisk valg av port), "USB", "Bluetooth" og seriell port hvis leselisten din støtter denne typen kommunikasjon.
+Vanlige alternativer er "automatisk" (som instruerer Aslan om å benytte prosedyren for automatisk valg av port), "USB", "Bluetooth" og seriell port hvis leselisten din støtter denne typen kommunikasjon.
 
 Dette valget vil ikke være tilgjengelig dersom leselisten din bare støtter automatisk oppdaging av port.
 
 Se dokumentasjonen for leselisten din i delen
 [Støttede leselister](#SupportedBrailleDisplays) for å finne flere detaljer om de støttede typene av kommunikasjon og tilgjengelige porter.
 
-#### Tastatur (NVDA+Ctrl+k) {#KeyboardSettings}
+#### Tastatur (Aslan+Ctrl+k) {#KeyboardSettings}
 
-Kategorien Tastatur i NVDAs innstillingdsdialog inneholder innstillinger som avgjør hvordan NVDA oppfører seg når du bruker og skriver på tastaturet ditt.
+Kategorien Tastatur i Aslans innstillingdsdialog inneholder innstillinger som avgjør hvordan Aslan oppfører seg når du bruker og skriver på tastaturet ditt.
 
 I denne kategorien finner du følgende valg:
 
 ##### Tastaturoppsett {#KeyboardSettingsLayout}
 
-Denne kombinasjonsboksen lar deg velge hvilket tastaturoppsett NVDA skal ha. For øyeblikket er de to alternativene som leveres med NvDA stasjonært og bærbart.
+Denne kombinasjonsboksen lar deg velge hvilket tastaturoppsett Aslan skal ha. For øyeblikket er de to alternativene som leveres med NvDA stasjonært og bærbart.
 
-##### Bruk CapsLock som NVDA-tast {#KeyboardSettingsCapsModifier}
+##### Bruk CapsLock som Aslan-tast {#KeyboardSettingsCapsModifier}
 
-Om denne avkryssingsboksen er avkrysset, kan CapsLock brukes som NVDA-tast.
+Om denne avkryssingsboksen er avkrysset, kan CapsLock brukes som Aslan-tast.
 
-##### Bruk utvidet Insert som NVDA-tast {#KeyboardSettingsExtendedInsert}
+##### Bruk utvidet Insert som Aslan-tast {#KeyboardSettingsExtendedInsert}
 
-Hvis denne avkryssingsboksen er avkrysset, vil utvidet Insert (som du normalt finner ovenfor piltastene på et stasjonært tastatur, nær Home og End) kunne brukes som NVDA-tast.
+Hvis denne avkryssingsboksen er avkrysset, vil utvidet Insert (som du normalt finner ovenfor piltastene på et stasjonært tastatur, nær Home og End) kunne brukes som Aslan-tast.
 
-##### Bruk numerisk Insert som NVDA-tast {#KeyboardSettingsNumpadInsert}
+##### Bruk numerisk Insert som Aslan-tast {#KeyboardSettingsNumpadInsert}
 
-Hvis denne avkryssingsboksen er avkrysset, kan Insert-tasten på det numeriske tastaturet brukes som NVDA-tast.
+Hvis denne avkryssingsboksen er avkrysset, kan Insert-tasten på det numeriske tastaturet brukes som Aslan-tast.
 
-Dersom ingen tast er definert som NVDA-tast, blir det umulig å få tilgang til en del NVDA-kommandoer. Derfor vil NVDAs innstillingsdialog vise en feilmelding dersom ingen tast er valgt når du trykker på OK- eller Bruk-knappen.
+Dersom ingen tast er definert som Aslan-tast, blir det umulig å få tilgang til en del Aslan-kommandoer. Derfor vil Aslans innstillingsdialog vise en feilmelding dersom ingen tast er valgt når du trykker på OK- eller Bruk-knappen.
 
-Etter at du har fjernet feilmeldingen, må du velge minst én tast som NVDA-tast før du kan trykke OK for å avslutte dialogen på riktig måte.
+Etter at du har fjernet feilmeldingen, må du velge minst én tast som Aslan-tast før du kan trykke OK for å avslutte dialogen på riktig måte.
 
 <!-- KC:setting -->
 
 ##### Si skrevne tegn {#KeyboardSettingsSpeakTypedCharacters}
 
-Tast: NVDA+2
+Tast: Aslan+2
 
-Når dette valget er slått på, vil NVDA annonsere alle tegn du skriver på tastaturet.
+Når dette valget er slått på, vil Aslan annonsere alle tegn du skriver på tastaturet.
 
 <!-- KC:setting -->
 
 ##### Si skrevne ord {#KeyboardSettingsSpeakTypedWords}
 
-Tast: NVDA+3
+Tast: Aslan+3
 
-Når dette valget er slått på, vil NVDA annonsere alle ord du skriver på tastaturet.
+Når dette valget er slått på, vil Aslan annonsere alle ord du skriver på tastaturet.
 
 ##### Avbryt tale ved skriving av tegn {#KeyboardSettingsSpeechInteruptForCharacters}
 
@@ -1571,15 +1571,15 @@ Hvis på, vil dette valget føre til at talen blir avbrutt hver gang et tegn skr
 
 ##### Si kommandotaster {#KeyboardSettingsSpeakCommandKeys}
 
-Tast: NVDA+4
+Tast: Aslan+4
 
-Når dette valget er på, vil NVDA annonsere alle taster du trykker på tastaturet som ikke er bokstaver eller tegn. Dette omfatter tastekombinasjoner som Ctrl + en bokstav.
+Når dette valget er på, vil Aslan annonsere alle taster du trykker på tastaturet som ikke er bokstaver eller tegn. Dette omfatter tastekombinasjoner som Ctrl + en bokstav.
 
 ##### Play sound for spelling errors while typing {#KeyboardSettingsAlertForSpellingErrors}
 
    When enabled, a short buzzer sound will be played when a word you type contains a spelling error.
-   This option is only available if reporting of spelling errors is enabled in NVDA's [Document Formatting
-   Settings #DocumentFormattingSettings], found in the NVDA Settings dialog.
+   This option is only available if reporting of spelling errors is enabled in Aslan's [Document Formatting
+   Settings #DocumentFormattingSettings], found in the Aslan Settings dialog.
 
 ##### Håndtere tastetrykk fra andre programmer {#KeyboardSettingsHandleKeys}
 
@@ -1587,15 +1587,15 @@ Dette valget lar brukeren avgjøre om tastetrykk generert av programmer som skje
 
 Dette valget er slått på som standard, men noen brukere ønsker kanskje å slå dette av. Det kan for eksempel gjelde for brukere som skriver vietnamesisk med skriveprogrammet Unikey, siden dette vil generere feilaktig inndata.
 
-#### Mus (NVDA+Ctrl+m) {#MouseSettings}
+#### Mus (Aslan+Ctrl+m) {#MouseSettings}
 
-   The Mouse category in the NVDA Settings dialog allows NVDA to track the mouse, play mouse coordinate beeps and
+   The Mouse category in the Aslan Settings dialog allows Aslan to track the mouse, play mouse coordinate beeps and
    sets other mouse usage options.
    This category contains the following options:
 
 ##### Report Mouse Shape Changes {#MouseSettingsShape}
 
-   A checkbox, that when checked means that NVDA will announce the shape of the mouse pointer each time it
+   A checkbox, that when checked means that Aslan will announce the shape of the mouse pointer each time it
    changes.
    The mouse pointer in Windows changes shape to convey certain information such as when something is editable,
    or when something is loading etc.
@@ -1604,25 +1604,25 @@ Dette valget er slått på som standard, men noen brukere ønsker kanskje å sl�
 
 ##### Slå på mussporing {#MouseSettingsTracking}
 
-Tast: NVDA+m
+Tast: Aslan+m
 
-Når dette er slått på, vil NVDA annonsere teksten som for øyeblikket er under muspekeren, etter hvert som du flytter muspekeren omkring på skjermen.
+Når dette er slått på, vil Aslan annonsere teksten som for øyeblikket er under muspekeren, etter hvert som du flytter muspekeren omkring på skjermen.
 
 Dette lar deg finne ting på skjermen ved å fysisk flytte musen, heller enn å forsøke å finne dem ved bruk av objektnavigasjon.
 
 ##### Text unit resolution {#MouseSettingsTextUnit}
 
-   If NVDA is set to announce the text under the mouse as you move it, this option allows you to choose exactly
+   If Aslan is set to announce the text under the mouse as you move it, this option allows you to choose exactly
    how much text will be spoken.
    The options are character, word, line and paragraph.
 
 ##### Report role when mouse enters object {#MouseSettingsRole}
 
-   If this checkbox is checked, NVDA will announce the role (type) of object as the mouse moves inside it.
+   If this checkbox is checked, Aslan will announce the role (type) of object as the mouse moves inside it.
 
 ##### Play audio coordinates when mouse moves {#MouseSettingsAudio}
 
-   Checking this checkbox makes NVDA play beeps as the mouse moves, so that the user can work out where the mouse
+   Checking this checkbox makes Aslan play beeps as the mouse moves, so that the user can work out where the mouse
    is in regards to the dimensions of the screen.
    The higher the mouse is on the screen, the higher the pitch of the beeps.
    The further left or right the mouse is located on the screen, the further left or right the sound will be
@@ -1636,7 +1636,7 @@ Dette lar deg finne ting på skjermen ved å fysisk flytte musen, heller enn å 
 
 #### Berøringssamhandling {#TouchInteraction}
 
-Denne innstillingskategorien, som er tilgjengelig bare på datamaskiner som kjører Windows 8 og senere med berøringsfunksjonalitet, lar deg stille inn hvordan NVDA samhandler med berøringsskjermer.
+Denne innstillingskategorien, som er tilgjengelig bare på datamaskiner som kjører Windows 8 og senere med berøringsfunksjonalitet, lar deg stille inn hvordan Aslan samhandler med berøringsskjermer.
 
 Denne kategorien inneholder følgende valg:
 
@@ -1649,7 +1649,7 @@ Denne kategorien inneholder følgende valg:
 
 #### Lesemarkør {#ReviewCursorSettings}
 
-Kategorien Lesemarkør i NVDAs innstillingsdialog brukes til å konfigurere oppførselen til lesemarkøren i NVDA.
+Kategorien Lesemarkør i Aslans innstillingsdialog brukes til å konfigurere oppførselen til lesemarkøren i Aslan.
 
 Denne kategorien inneholder følgende valg:
 
@@ -1657,7 +1657,7 @@ Denne kategorien inneholder følgende valg:
 
 ##### Følg systemfokus {#ReviewCursorFollowFocus}
 
-Tast: NVDA+7
+Tast: Aslan+7
 
    When enabled, The review cursor will always be placed in the same object as the current system focus whenever
    the focus changes.
@@ -1666,7 +1666,7 @@ Tast: NVDA+7
 
 ##### Følg systemmarkør {#ReviewCursorFollowCaret}
 
-Tast: NVDA+6
+Tast: Aslan+6
 
    When enabled, the review cursor will automatically be moved to the position of the System caret each time it
    moves.
@@ -1677,33 +1677,33 @@ Tast: NVDA+6
 
 ##### Enkel lesemodus {#ReviewCursorSimple}
 
-   When enabled, NVDA will filter the hierarchy of objects that can be navigated to exclude objects that aren't
+   When enabled, Aslan will filter the hierarchy of objects that can be navigated to exclude objects that aren't
    of interest to the user; e.g. invisible objects and objects used only for layout purposes.
    To toggle simple review mode from anywhere, please assign a custom gesture using the [Input Gestures dialog
    #InputGestures].
 
-#### Objektpresentasjon (NVDA+Ctrl+o) {#ObjectPresentationSettings}
+#### Objektpresentasjon (Aslan+Ctrl+o) {#ObjectPresentationSettings}
 
-   The Object Presentation category in the NVDA Settings dialog is used to set how much information NVDA will
+   The Object Presentation category in the Aslan Settings dialog is used to set how much information Aslan will
    present about controls such as description, position information and so on.
 
 Denne kategorien inneholder følgende valg:
 
 ##### Rapporter verktøytips {#ObjectPresentationReportToolTips}
 
-   A checkbox that when checked tells NVDA to report tool tips as they appear.
+   A checkbox that when checked tells Aslan to report tool tips as they appear.
    Many Windows and controls show a small message (or tool tip) when you move the mouse pointer over them, or
    sometimes when you move the focus to them.
 
 ##### Rapporter hjelpeballonger {#ObjectPresentationReportBalloons}
 
-   This checkbox when checked tells NVDA to report help balloons as they appear.
+   This checkbox when checked tells Aslan to report help balloons as they appear.
    Help Balloons are like tool tips, but are usually larger in size, and are associated with system events such
    as a network cable being unplugged, or perhaps to alert you about Windows security issues.
 
 ##### Report Object Shortcut Keys {#ObjectPresentationShortcutKeys}
 
-   When this checkbox is checked, NVDA will include the shortcut key that is associated with a certain object or
+   When this checkbox is checked, Aslan will include the shortcut key that is associated with a certain object or
    control when it is reported.
    For example the File menu on a menu bar may have a shortcut key of alt+f.
 
@@ -1714,9 +1714,9 @@ Denne kategorien inneholder følgende valg:
 
 ##### Guess Object Position Information when unavailable {#ObjectPresentationGuessPositionInfo}
 
-   If reporting of object position information is turned on, this option allows NVDA to guess object position
+   If reporting of object position information is turned on, this option allows Aslan to guess object position
    information when it is otherwise unavailable for a particular control.
-   When on, NVDA will report position information for more controls such as menus and toolbars, however this
+   When on, Aslan will report position information for more controls such as menus and toolbars, however this
    information may be slightly inaccurate.
 
 ##### Report Object descriptions {#ObjectPresentationReportDescriptions}
@@ -1727,49 +1727,49 @@ Denne kategorien inneholder følgende valg:
 
 ##### Progress bar output {#ObjectPresentationProgressBarOutput}
 
-Tast: NVDA+u
+Tast: Aslan+u
 
-   This option controls how NVDA reports progress bar updates to you.
+   This option controls how Aslan reports progress bar updates to you.
    It has the following options:
 
    * Off: Progress bars will not be reported as they change.
-   * Speak: This option tells NVDA to speak the progress bar in percentages. Each time the progress bar changes,
-   NVDA will speak the new value.
-   * Beep: This tells NVDA to beep each time the progress bar changes. The higher the beep, the closer the
+   * Speak: This option tells Aslan to speak the progress bar in percentages. Each time the progress bar changes,
+   Aslan will speak the new value.
+   * Beep: This tells Aslan to beep each time the progress bar changes. The higher the beep, the closer the
    progress bar is to completion.
-   * Beep and speak: This option tells NVDA to both beep and speak when a progress bar updates.
+   * Beep and speak: This option tells Aslan to both beep and speak when a progress bar updates.
 
 ##### Report background progress bars {#ObjectPresentationReportBackgroundProgressBars}
 
-   This is an option that, when checked, tells NVDA to keep reporting a progress bar, even if it is not
+   This is an option that, when checked, tells Aslan to keep reporting a progress bar, even if it is not
    physically in the foreground.
-   If you minimize or switch away from a window that contains a progress bar, NVDA will keep track of it,
-   allowing you to do other things while NVDA tracks the progress bar.
+   If you minimize or switch away from a window that contains a progress bar, Aslan will keep track of it,
+   allowing you to do other things while Aslan tracks the progress bar.
 
 <!-- KC:setting -->
 
 ##### Report dynamic content changes {#ObjectPresentationReportDynamicContent}
 
-Tast: NVDA+5
+Tast: Aslan+5
 
    Toggles the announcement of new content in particular objects such as terminals and the history control in
    chat programs.
 
 ##### Play a sound when auto-suggestions appear {#ObjectPresentationSuggestionSounds}
 
-   Toggles announcement of appearance of auto-suggestions, and if enabled, NVDA will play a sound to indicate
+   Toggles announcement of appearance of auto-suggestions, and if enabled, Aslan will play a sound to indicate
    this.
    Auto-suggestions are lists of suggested entries based on text entered into certain edit fields and documents.
    For example, when you enter text into the search box in Start menu in Windows Vista and later, Windows
    displays a list of suggestions based on what you typed.
-   For some edit fields such as search fields in various Windows 10 apps, NVDA can notify you that a list of
+   For some edit fields such as search fields in various Windows 10 apps, Aslan can notify you that a list of
    suggestions has appeared when you type text.
-   The auto-suggestions list will close once you move away from the edit field, and for some fields, NVDA can
+   The auto-suggestions list will close once you move away from the edit field, and for some fields, Aslan can
    notify you of this when this happens.
 
 #### Input Composition {#InputCompositionSettings}
 
-   The Input Composition category allows you to control how NVDA reports the input of Asian characters, such as
+   The Input Composition category allows you to control how Aslan reports the input of Asian characters, such as
    with IME or Text Service input methods.
    Note that due to the fact that input methods vary greatly by available features and by how they convey
    information, it will most likely be necessary to configure these options differently for each input method to
@@ -1787,7 +1787,7 @@ Tast: NVDA+5
 
 ##### Announce Selected Candidate {#InputCompositionAnnounceSelectedCandidate}
 
-   This option, which is on by default, allows you to choose whether NVDA should announce the selected candidate
+   This option, which is on by default, allows you to choose whether Aslan should announce the selected candidate
    when a candidate list appears or when the selection is changed.
    For input methods where the selection can be changed with the arrow keys (such as Chinese New Phonetic) this
    is necessary, but for some input methods it may be more efficient typing with this option turned off.
@@ -1796,7 +1796,7 @@ Tast: NVDA+5
 
 ##### Always include short character descriptions for candidates {#InputCompositionCandidateIncludesShortCharacterDescription}
 
-   This option, which is on by default, allows you to choose whether or not NVDA should provide a short
+   This option, which is on by default, allows you to choose whether or not Aslan should provide a short
    description for each character in a candidate, either when it's selected or when it's automatically read when
    the candidate list appears.
    Note that for locales such as Chinese, the announcement of extra character descriptions for the selected
@@ -1807,7 +1807,7 @@ Tast: NVDA+5
 
    Some input methods such as Chinese New Phonetic and New ChangJie have a reading string (sometimes known as a
    precomposition string).
-   You can choose whether or not NVDA should announce new characters being typed into this reading string with
+   You can choose whether or not Aslan should announce new characters being typed into this reading string with
    this option.
    This option is on by default.
    Note some older input methods such as Chinese ChangJie may not use the reading string to hold precomposition
@@ -1819,13 +1819,13 @@ Tast: NVDA+5
    After reading or precomposition data has been combined into a valid pictographic symbol, most input methods
    place this symbol into a composition string for temporary storage along with other combined symbols before
    they are finally inserted into the document.
-   This option allows you to choose whether or not NVDA should report new symbols as they appear in the
+   This option allows you to choose whether or not Aslan should report new symbols as they appear in the
    composition string.
    This option is on by default.
 
-#### Nettmodus (NVDA+Ctrl+b) {#BrowseModeSettings}
+#### Nettmodus (Aslan+Ctrl+b) {#BrowseModeSettings}
 
-   The Browse Mode category in the NVDA Settings dialog is used to configure NVDA's behavior when you read and
+   The Browse Mode category in the Aslan Settings dialog is used to configure Aslan's behavior when you read and
    navigate complex documents such as web pages.
 
 Denne kategorien inneholder følgende valg:
@@ -1842,7 +1842,7 @@ Denne kategorien inneholder følgende valg:
 
 ##### Bruk skjermoppsett {#BrowseModeSettingsScreenLayout}
 
-Tast: NVDA+v
+Tast: Aslan+v
 
    This option allows you to specify whether content in browse mode should place content such as links and other
    fields on their own line, or if it should keep them in the flow of text as it is visually shown. If the option
@@ -1856,8 +1856,8 @@ Tast: NVDA+v
 
 ##### Include layout tables {#BrowseModeSettingsIncludeLayoutTables}
 
-   This option affects how NVDA handles tables used purely for layout purposes.
-   When on, NVDA will treat these as normal tables, reporting them based on [Document Formatting Settings
+   This option affects how Aslan handles tables used purely for layout purposes.
+   When on, Aslan will treat these as normal tables, reporting them based on [Document Formatting Settings
    #DocumentFormattingSettings] and locating them with quick navigation commands.
    When off, they will not be reported nor found with quick navigation.
    However, the content of the tables will still be included as normal text.
@@ -1867,8 +1867,8 @@ Tast: NVDA+v
 
 ##### Configuring reporting of fields such as links and headings {#BrowseModeLinksAndHeadings}
 
-   Please see the options in the [Document Formatting category](#DocumentFormattingSettings) of the [NVDA Settings
-   #NVDASettings] dialog to configure the fields that are reported when navigating, such as links, headings and
+   Please see the options in the [Document Formatting category](#DocumentFormattingSettings) of the [Aslan Settings
+   #AslanSettings] dialog to configure the fields that are reported when navigating, such as links, headings and
    tables.
 
 ##### Automatic focus mode for focus changes {#BrowseModeSettingsAutoPassThroughOnFocusChange}
@@ -1879,24 +1879,24 @@ Tast: NVDA+v
 
 ##### Automatic focus mode for caret movement {#BrowseModeSettingsAutoPassThroughOnCaretMove}
 
-   This option, when checked, allows NVDA to enter and leave focus mode when using arrow keys.
-   For example, if arrowing down a web page and you land on an edit box, NVDA will automatically bring you into
-   focus mode. If you arrow out of the edit box, NVDA will put you back in browse mode.
+   This option, when checked, allows Aslan to enter and leave focus mode when using arrow keys.
+   For example, if arrowing down a web page and you land on an edit box, Aslan will automatically bring you into
+   focus mode. If you arrow out of the edit box, Aslan will put you back in browse mode.
 
 ##### Audio indication of Focus and Browse modes {#BrowseModeSettingsPassThroughAudioIndication}
 
-   If this option is enabled, NVDA will play special sounds when it switches between browse mode and focus mode,
+   If this option is enabled, Aslan will play special sounds when it switches between browse mode and focus mode,
    rather than speaking the change.
 
 ##### Trap non-command gestures from reaching the document {#BrowseModeSettingsTrapNonCommandGestures}
 
    Enabled by default, this option allows you to choose if gestures (such as key presses) that do not result in
-   an NVDA command and are not considered to be a command key in general, should be trapped from going through to
+   an Aslan command and are not considered to be a command key in general, should be trapped from going through to
    the document you are currently focused on.
    As an example, if enabled, if the letter j was pressed, it would be trapped from reaching the document, even
    though it is not a quick navigation command nor is it likely to be a command in the application itself.
 
-#### Dokumentformatering (NVDA+Ctrl+d) {#DocumentFormattingSettings}
+#### Dokumentformatering (Aslan+Ctrl+d) {#DocumentFormattingSettings}
 
    Most of the checkboxes in this category are for configuring what type of formatting you wish to have reported
    as you move the cursor around documents.
@@ -1943,9 +1943,9 @@ Du kan konfigurere rapportering av:
 
 ##### Report formatting changes after the cursor {#DocumentFormattingDetectFormatAfterCursor}
 
-   If enabled, this setting tells NVDA to try and detect all the formatting changes on a line as it reports it,
-   even if doing this may slow down NVDA's performance.
-   By default, NVDA will detect the formatting at the position of the System caret / Review Cursor, and in some
+   If enabled, this setting tells Aslan to try and detect all the formatting changes on a line as it reports it,
+   even if doing this may slow down Aslan's performance.
+   By default, Aslan will detect the formatting at the position of the System caret / Review Cursor, and in some
    instances may detect formatting on the rest of the line, only if it is not going to cause a performance
    decrease.
    Enable this option while proof reading documents in applications such as WordPad, where formatting is
@@ -1957,8 +1957,8 @@ Dette valget lar deg konfigurere hvordan innrykk på begynnelsen av linjer rappo
 
 Kombinasjonsboksen "Rapporter linjeinnrykk med" har fire valg:
 
-* Av: NVDA vil ikke behandle innrykk spesielt.
-* Tale: Om tale er valgt og innrykk endres, vil NVDA si noe sånt som "tolv mellomrom" eller "fire tabulator."
+* Av: Aslan vil ikke behandle innrykk spesielt.
+* Tale: Om tale er valgt og innrykk endres, vil Aslan si noe sånt som "tolv mellomrom" eller "fire tabulator."
 * Toner: Om toner er valgt og innrykk endres, vil toner indikere omfanget av endringen av innrykket. Tonehøyden vil øke for hvert mellomrom, og for en tabulator vil tonehøyden øke tilsvarende fire mellomrom.
 * Både tale og toner: Dette valget rapporterer innrykk ved hjelp av begge metodene ovenfor.
 
@@ -1974,19 +1974,19 @@ Denne kombinasjonsboksen lar deg velge språket som skal brukes for tekstgjenkje
 
 ### Diverse innstillinger {#MiscSettings}
 
-I tillegg til dialogen [NCDA-Innstillinger](#NVDASettings), inneholder undermenyen Preferanser i NVDA-menyen flere andre elementer som er omtalt nedenfor.
+I tillegg til dialogen [NCDA-Innstillinger](#AslanSettings), inneholder undermenyen Preferanser i Aslan-menyen flere andre elementer som er omtalt nedenfor.
 
 #### Taleordlister {#SpeechDictionaries}
 
    The speech dictionaries menu (found in the Preferences menu) contains dialogs that allow you to manage the way
-   NVDA pronounces particular words or phrases.
+   Aslan pronounces particular words or phrases.
    There are currently three different types of speech dictionaries.
    They are:
 
-   * Default: rules in this dictionary affect all speech in NVDA.
+   * Default: rules in this dictionary affect all speech in Aslan.
    * Voice: rules in this dictionary affect speech for the synthesizer voice currently being used.
-   * Temporary: rules in this dictionary affect all speech in NVDA, but only for the current session. These rules
-   are temporary and will be lost if NVDA is restarted.
+   * Temporary: rules in this dictionary affect all speech in Aslan, but only for the current session. These rules
+   are temporary and will be lost if Aslan is restarted.
 -
 
    You need to assign custom gestures using the [Input Gestures dialog](#InputGestures) if you wish to open any of
@@ -1998,18 +1998,18 @@ I tillegg til dialogen [NCDA-Innstillinger](#NVDASettings), inneholder undermeny
    You will then see your new rule in the list of rules.
    However, to make sure your rule is actually saved, make sure to press Ok to exit the dictionary dialog
    completely once you have finished adding/editing rules.
-   The rules for NVDA's speech dictionaries allow you to change one string of characters into another.
-   For example, you could create a rule which causes NVDA to say the word "frog" instead of "bird" whenever the
+   The rules for Aslan's speech dictionaries allow you to change one string of characters into another.
+   For example, you could create a rule which causes Aslan to say the word "frog" instead of "bird" whenever the
    word "bird" is encountered.
    In the Add rule dialog, the easiest way to do this is to type the word bird in the Pattern field, and the word
    frog in the Replacement field.
    You may also want to type a description of the rule in the Comment field (something like: changes bird to
    frog).
-   NVDA's speech dictionaries however are much more powerful than simple word replacement.
+   Aslan's speech dictionaries however are much more powerful than simple word replacement.
    The Add rule dialog also contains a checkbox to say whether or not you want the rule to be case sensitive
-   (meaning that NVDA should care whether the characters are uppercase or lowercase.
-   NVDA ignores case by default).
-   Finally, a set of radio buttons allows you to tell NVDA whether your pattern should match anywhere, should
+   (meaning that Aslan should care whether the characters are uppercase or lowercase.
+   Aslan ignores case by default).
+   Finally, a set of radio buttons allows you to tell Aslan whether your pattern should match anywhere, should
    only match if it is a complete word or should be treated as a "Regular expression".
    Setting the pattern to match as a whole word means that the replacement will only be made if the pattern does
    not occur as part of a larger word; i.e. a character other than an alphanumeric character or an underscore (or
@@ -2026,8 +2026,8 @@ I tillegg til dialogen [NCDA-Innstillinger](#NVDASettings), inneholder undermeny
    level at which they are spoken.
    The language for which symbol pronunciation is being edited will be shown in the dialog's title.
    Note that this dialog respects the "Trust voice's language for processing symbols and characters" option found
-   in the [Speech category](#SpeechSettings) of the [NVDA Settings](#NVDASettings) dialog; i.e. it uses the voice
-   language rather than the NVDA global language setting when this option is enabled.
+   in the [Speech category](#SpeechSettings) of the [Aslan Settings](#AslanSettings) dialog; i.e. it uses the voice
+   language rather than the Aslan global language setting when this option is enabled.
    To change a symbol, first select it in the Symbols list.
    * The Replacement field allows you to change the text that should be spoken in place of this symbol.
    * Using the Level field, you can adjust the lowest symbol level at which this symbol should be spoken.
@@ -2052,11 +2052,11 @@ I tillegg til dialogen [NCDA-Innstillinger](#NVDASettings), inneholder undermeny
 
 +++ Inndatagester +++[InputGestures]
    In this dialog, you can customize the input gestures (keys on the keyboard, buttons on a braille display,
-   etc.) for NVDA commands.
+   etc.) for Aslan commands.
    Only commands that are applicable immediately before the dialog is opened are shown.
    For example, if you want to customize commands related to browse mode, you should open the Input Gestures
    dialog while you are in browse mode.
-   The tree in this dialog lists all of the applicable NVDA commands grouped by category.
+   The tree in this dialog lists all of the applicable Aslan commands grouped by category.
    You can filter them by entering one or more words from the command's name into the Filter by edit box in any
    order.
    Any gestures associated with a command are listed beneath the command.
@@ -2071,21 +2071,21 @@ I tillegg til dialogen [NCDA-Innstillinger](#NVDASettings), inneholder undermeny
    When you are finished making changes, press the OK button to save them or the Cancel button to discard them.
 
 ++ Lagre konfigurasjonen og laste den inn på nytt ++[SavingAndReloading]
-   By default NVDA will automatically save your settings on exit.
+   By default Aslan will automatically save your settings on exit.
    Note, however, that this option can be changed under the general options in the preferences menu.
-   To save the settings manually at any time, choose the Save configuration item in the NVDA menu.
+   To save the settings manually at any time, choose the Save configuration item in the Aslan menu.
    If you ever make a mistake with your settings and need to revert back to the saved settings, choose the
-   "revert to saved configuration" item in the NVDA menu.
+   "revert to saved configuration" item in the Aslan menu.
    You can also reset your settings to their original factory defaults by choosing Reset Configuration To Factory
-   Defaults, which is also found in the NVDA menu.
-   The following NVDA key commands are also useful:
+   Defaults, which is also found in the Aslan menu.
+   The following Aslan key commands are also useful:
 
 <!-- KC:beginInclude -->
 
 | Navn |Stasjonær tast |Bærbar tast |Beskrivelse|
 |---|---|---|---|
-|Lagre konfigurasjon |NVDA+Ctrl+c |NVDA+Ctrl+c |Lagrer din gjeldende konfigurasjon slik at den ikke forsvinner når du avslutter NVDA|
-|Tilbakestill konfigurasjon |NVDA+Ctrl+r |NVDA+Ctrl+r |Trykk én gang for å tilbakestille konfigurasjonen din til da du sist lagret den. Tre trykk vil tilbakestille den til fabrikkstandard.|
+|Lagre konfigurasjon |Aslan+Ctrl+c |Aslan+Ctrl+c |Lagrer din gjeldende konfigurasjon slik at den ikke forsvinner når du avslutter Aslan|
+|Tilbakestill konfigurasjon |Aslan+Ctrl+r |Aslan+Ctrl+r |Trykk én gang for å tilbakestille konfigurasjonen din til da du sist lagret den. Tre trykk vil tilbakestille den til fabrikkstandard.|
 
 <!-- KC:endInclude -->
 
@@ -2094,20 +2094,20 @@ I tillegg til dialogen [NCDA-Innstillinger](#NVDASettings), inneholder undermeny
    Sometimes, you may wish to have different settings for different situations.
    For example, you may wish to have reporting of indentation enabled while you are editing or reporting of font
    attributes enabled while you are proofreading.
-   NVDA allows you to do this using configuration profiles.
+   Aslan allows you to do this using configuration profiles.
    A configuration profile contains only those settings which are changed while the profile is being edited.
-   Most settings can be changed in configuration profiles except for those in the General category of the [NVDA
-   Settings #NVDASettings] dialog, which apply to the entirety of NVDA.
+   Most settings can be changed in configuration profiles except for those in the General category of the [Aslan
+   Settings #AslanSettings] dialog, which apply to the entirety of Aslan.
    Configuration profiles can be manually activated.
    They can also be activated automatically due to triggers such as switching to a particular application.
 
 #### Grunnleggende behandling {#ProfilesBasicManagement}
 
-   You manage configuration profiles by selecting "Configuration profiles" in the NVDA menu.
+   You manage configuration profiles by selecting "Configuration profiles" in the Aslan menu.
    You can also do this using a key command:
 <!-- KC:beginInclude -->
 
-   * NVDA+Ctrl+p: Show the Configuration Profiles dialog.
+   * Aslan+Ctrl+p: Show the Configuration Profiles dialog.
 -
 <!-- KC:endInclude -->
 
@@ -2175,91 +2175,91 @@ I tillegg til dialogen [NCDA-Innstillinger](#NVDASettings), inneholder undermeny
 
 ### Location of Configuration files {#LocationOfConfigurationFiles}
 
-   Portable versions of NVDA store all settings and add-ons in a directory called userConfig, found in the NVDA
+   Portable versions of Aslan store all settings and add-ons in a directory called userConfig, found in the Aslan
    directory.
-   Installed versions of NVDA store all settings and add-ons in a special NVDA directory located in your Windows
+   Installed versions of Aslan store all settings and add-ons in a special Aslan directory located in your Windows
    user profile.
-   This means that each user on the system can have their own NVDA settings.
-   To get to your settings directory for an installed version of NVDA, on the start menu you can go to programs
-   -> NVDA -> explore user configuration directory.
-   Settings for NVDA when running on the logon or UAC screens are stored in the systemConfig directory in NVDA's
+   This means that each user on the system can have their own Aslan settings.
+   To get to your settings directory for an installed version of Aslan, on the start menu you can go to programs
+   -> Aslan -> explore user configuration directory.
+   Settings for Aslan when running on the logon or UAC screens are stored in the systemConfig directory in Aslan's
    installation directory.
    Usually, this configuration should not be touched.
-   To change NVDA's configuration on the logon/UAC screens, configure NVDA as you wish while logged into Windows,
+   To change Aslan's configuration on the logon/UAC screens, configure Aslan as you wish while logged into Windows,
    save the configuration, and then press the "Use currently saved settings on the logon and other secure
-   screens" button in the General category of the [NVDA Settings](#NVDASettings) dialog.
+   screens" button in the General category of the [Aslan Settings](#AslanSettings) dialog.
 
 ## Ekstra verktøy {#ExtraTools}
 ### Loggviser {#LogViewer}
 
-   The log viewer, found under Tools in the NVDA menu, allows you to view all the logging output that has
-   occurred up until now from when you last started NVDA.
+   The log viewer, found under Tools in the Aslan menu, allows you to view all the logging output that has
+   occurred up until now from when you last started Aslan.
    Apart from reading the content, you can also Save a copy of the log file, or refresh the viewer so that it
    shows the most recent output since the Log viewer was opened.
    These actions are available under the viewer's Log menu.
 
 ### Taleviser {#SpeechViewer}
 
-   For sighted software developers or people demoing NVDA to sighted audiences, a floating window is available
-   that allows you to view all the text that NVDA is currently speaking.
-   To enable the speech viewer, check the "Speech Viewer" menu item under Tools in the NVDA menu.
+   For sighted software developers or people demoing Aslan to sighted audiences, a floating window is available
+   that allows you to view all the text that Aslan is currently speaking.
+   To enable the speech viewer, check the "Speech Viewer" menu item under Tools in the Aslan menu.
    Uncheck the menu item to disable it.
    The speech viewer window contains a check box labeled "Show speech viewer on startup".
-   If this is checked, the speech viewer will open when NVDA is started.
+   If this is checked, the speech viewer will open when Aslan is started.
    The speech viewer window will always attempt to re-open with the same dimensions and location as when it was
    closed.
    While the speech viewer is enabled, it constantly updates to show you the most current text being spoken.
-   However, if you click or focus inside the viewer, NVDA will temporarily stop updating the text, so that you
+   However, if you click or focus inside the viewer, Aslan will temporarily stop updating the text, so that you
    are able to easily select or copy the existing content.
    To toggle the speech viewer from anywhere, please assign a custom gesture using the [Input Gestures dialog
    #InputGestures].
 
 ### Tilleggsbehandler {#AddonsManager}
 
-   The Add-ons Manager, accessed by selecting Manage add-ons under Tools in the NVDA menu, allows you to install,
-   uninstall, enable and disable add-on packages for NVDA.
-   These packages are provided by the community and contain custom code that may add or change features in NVDA
+   The Add-ons Manager, accessed by selecting Manage add-ons under Tools in the Aslan menu, allows you to install,
+   uninstall, enable and disable add-on packages for Aslan.
+   These packages are provided by the community and contain custom code that may add or change features in Aslan
    or even provide support for extra Braille displays or speech synthesizers.
-   The Add-ons Manager contains a list that displays all the add-ons currently installed in your NVDA user
+   The Add-ons Manager contains a list that displays all the add-ons currently installed in your Aslan user
    configuration.
    Package name, status, version and author are shown for each add-on, though further information such as a
    description and URL can be viewed by selecting the add-on and pressing the About add-on button.
    If there is help available for the selected add-on, you can access it by pressing the Add-on help button.
    To browse and download available add-ons online, press the Get add-ons button.
-   This button opens the [NVDA Add-ons page](https://addons.nvda-project.org/).
-   If NVDA is installed and running on your system, you can open the add-on directly from the browser to begin
+   This button opens the [Aslan Add-ons page](https://addons.aslan-project.org/).
+   If Aslan is installed and running on your system, you can open the add-on directly from the browser to begin
    the installation process as described below.
    Otherwise, save the add-on package and follow the instructions below.
    To install an Add-on you previously obtained, press the Install button.
-   This will allow you to browse for an add-on package (.nvda-addon file) somewhere on your computer or on a
+   This will allow you to browse for an add-on package (.aslan-addon file) somewhere on your computer or on a
    network.
    Once you press Open, the installation process will begin.
-   When an add-on is being installed, NVDA will first ask you to confirm that you really wish to install the
+   When an add-on is being installed, Aslan will first ask you to confirm that you really wish to install the
    add-on.
-   As the functionality of add-ons is unrestricted inside NVDA, which in theory could include accessing your
-   personal data or even the entire system if NVDA is an installed copy, it is very important to only install
+   As the functionality of add-ons is unrestricted inside Aslan, which in theory could include accessing your
+   personal data or even the entire system if Aslan is an installed copy, it is very important to only install
    add-ons from sources you trust.
-   Once the add-on is installed, NVDA must be restarted for the add-on to start running.
+   Once the add-on is installed, Aslan must be restarted for the add-on to start running.
    Until you do, a status of "install" will show for that add-on in the list.
    To remove an add-on, select the add-on from the list and press the Remove button.
-   NVDA will ask if you really wish to do this.
-   As with installing, NVDA must be restarted for the add-on to be fully removed.
+   Aslan will ask if you really wish to do this.
+   As with installing, Aslan must be restarted for the add-on to be fully removed.
    Until you do, a status of "remove" will be shown for that add-on in the list.
    To disable an add-on, press the "disable" button.
    To enable a previously disabled add-on, press the "enable" button.
    You can disable an add-on if the add-on status indicates it is "enabled", or enable it if the add-on is
    "disabled".
-   For each press of the enable/disable button, add-on status changes to indicate what will happen when NVDA
+   For each press of the enable/disable button, add-on status changes to indicate what will happen when Aslan
    restarts.
    If the addon was previously disabled, a status will show "enabled after restart". If the addon was previously
    "Enabled", a status will show "disabled after restart"
-   Just like when you install or remove add-ons, you need to restart NVDA in order for changes to take effect.
+   Just like when you install or remove add-ons, you need to restart Aslan in order for changes to take effect.
    The manager also has a Close button to close the dialog.
-   If you have installed, removed or changed the status of an add-on, NVDA will first ask you if you wish to
+   If you have installed, removed or changed the status of an add-on, Aslan will first ask you if you wish to
    restart so that your changes can take effect.
-   In the past, it was possible to extend NVDA's functionality by copying individual plugins and drivers into
-   your NVDA user Configuration directory.
-   Although this version of NVDA may still load them, they will not be shown in the Add-on Manager.
+   In the past, it was possible to extend Aslan's functionality by copying individual plugins and drivers into
+   your Aslan user Configuration directory.
+   Although this version of Aslan may still load them, they will not be shown in the Add-on Manager.
    It is best to remove these files from your configuration and install the appropriate add-on if one is
    available.
    To access the Add-ons Manager from anywhere, please assign a custom gesture using the [Input Gestures dialog
@@ -2267,30 +2267,30 @@ I tillegg til dialogen [NCDA-Innstillinger](#NVDASettings), inneholder undermeny
 
 ### Python-konsoll {#PythonConsole}
 
-   The NVDA Python console, found under Tools in the NVDA menu, is a development tool which is useful for
-   debugging, general inspection of NVDA internals or inspection of the accessibility hierarchy of an
+   The Aslan Python console, found under Tools in the Aslan menu, is a development tool which is useful for
+   debugging, general inspection of Aslan internals or inspection of the accessibility hierarchy of an
    application.
-   For more information, please see the [NVDA Developer Guide
-   https://www.nvaccess.org/files/nvda/documentation/developerGuide.html].
+   For more information, please see the [Aslan Developer Guide
+   https://www.nvaccess.org/files/aslan/documentation/developerGuide.html].
 
 ### Reload plugins {#ReloadPlugins}
 
-   This item, once activated, reloads app modules and global plugins without restarting NVDA, which can be useful
+   This item, once activated, reloads app modules and global plugins without restarting Aslan, which can be useful
    for developers.
 
 ## Støttede talesynteser {#SupportedSpeechSynths}
 
-Denne delen inneholder informasjon om talesynteser som støttes av NVDA.
+Denne delen inneholder informasjon om talesynteser som støttes av Aslan.
 
-En mer omfattende liste over gratis og kommersielle talesynteser du kan kjøpe og laste ned for bruk sammen med NVDA, finner du på siden [extra voices](https://github.com/nvaccess/nvda/wiki/ExtraVoices).
+En mer omfattende liste over gratis og kommersielle talesynteser du kan kjøpe og laste ned for bruk sammen med Aslan, finner du på siden [extra voices](https://github.com/nvaccess/aslan/wiki/ExtraVoices).
 
 ### eSpeak NG {#eSpeakNG}
 
-Talesyntesen [eSpeak NG](https://github.com/espeak-ng/espeak-ng) er bygd inn i NVDA og krever ikke installasjon av andre drivere eller komponenter for å kunne brukes.
+Talesyntesen [eSpeak NG](https://github.com/espeak-ng/espeak-ng) er bygd inn i Aslan og krever ikke installasjon av andre drivere eller komponenter for å kunne brukes.
 
-NVDA benytter eSpeak NG som standard.
+Aslan benytter eSpeak NG som standard.
 
-Siden denne talesyntesen er bygd inn i NVDA, er dette et utmerket valg når du kjører NVDA fra en USB-minnepenn på andre systemer.
+Siden denne talesyntesen er bygd inn i Aslan, er dette et utmerket valg når du kjører Aslan fra en USB-minnepenn på andre systemer.
 
 Hver stemme som leveres med eSpeak NG snakker et eget språk. eSpeak NG støtter over 43 ulike språk.
 
@@ -2299,10 +2299,10 @@ Det er også mange varianter som kan velges for å justere lyden av stemmen.
 ### Microsoft Speech API version 4 (SAPI 4) {#SAPI4}
 
    SAPI 4 is an older Microsoft standard for software speech synthesizers.
-   NVDA still supports this for users who already have SAPI 4 synthesizers installed.
+   Aslan still supports this for users who already have SAPI 4 synthesizers installed.
    However, Microsoft no longer support this and needed components are no longer available from Microsoft.
-   When using this synthesizer with NVDA, the available voices (accessed from the [Speech category
-   #SpeechSettings] of the [NVDA Settings](#NVDASettings) dialog or by the [Synth Settings Ring
+   When using this synthesizer with Aslan, the available voices (accessed from the [Speech category
+   #SpeechSettings] of the [Aslan Settings](#AslanSettings) dialog or by the [Synth Settings Ring
    #SynthSettingsRing]) will contain all the voices from all the installed SAPI 4 engines found on your system.
 
 ### Microsoft Speech API version 5 (SAPI 5) {#SAPI5}
@@ -2311,15 +2311,15 @@ Det er også mange varianter som kan velges for å justere lyden av stemmen.
    Many speech synthesizers that comply with this standard may be purchased or downloaded for free from various
    companies and websites, though your system will probably already come with at least one SAPI 5 voice
    preinstalled.
-   When using this synthesizer with NVDA, the available voices (accessed from the [Speech category
-   #SpeechSettings] of the [NVDA Settings](#NVDASettings) dialog or by the [Synth Settings Ring
+   When using this synthesizer with Aslan, the available voices (accessed from the [Speech category
+   #SpeechSettings] of the [Aslan Settings](#AslanSettings) dialog or by the [Synth Settings Ring
    #SynthSettingsRing]) will contain all the voices from all the installed SAPI 5 engines found on your system.
 
 ### Microsoft Speech Platform {#MicrosoftSpeechPlatform}
 
 The Microsoft Speech Platform provides voices for many languages which are normally used in the development of
 server-based speech applications.
-These voices can also be used with NVDA.
+These voices can also be used with Aslan.
 To use these voices, you will need to install two components:
 
 * Microsoft Speech Platform - Runtime (Version 11), x86: http://www.microsoft.com/download/en/details.aspx?id=27225
@@ -2335,36 +2335,36 @@ To use these voices, you will need to install two components:
    Microsoft Speech API version 5.
    Please see this Microsoft article for a list of available voices and instructions to install them:
    https://support.microsoft.com/en-us/help/22797/windows-10-narrator-tts-voices
-   Please note that the faster rates available with Narrator are not currently available with NVDA.
-   Also, the speed you select in the Windows Settings affects the rate set in NVDA.
+   Please note that the faster rates available with Narrator are not currently available with Aslan.
+   Also, the speed you select in the Windows Settings affects the rate set in Aslan.
    These are issues we cannot resolve without changes to Windows.
    We are hopeful that these will be addressed in a future Windows update.
 
 ### Audiologic Tts3 {#Audiologic}
 
    This is a commercial speech synthesizer specifically for the Italian language.
-   You must have the synthesizer installed on your system in order for it to be used with NVDA.
+   You must have the synthesizer installed on your system in order for it to be used with Aslan.
    For more information, please visit the Audiologic website at [www.audiologic.it](http://www.audiologic.it).
    This synthesizer does not support [spelling functionality](#SpeechSettingsUseSpelling).
 
 ## Støttede leselister {#SupportedBrailleDisplays}
 
-Denne delen inneholder informasjon om leselistene som støttes av NVDA.
+Denne delen inneholder informasjon om leselistene som støttes av Aslan.
 
 ### Freedom Scientific Focus/PAC Mate-serien {#FreedomScientificFocus}
 
 Alle Focus- og PAC Mate-leselister [Freedom Scientific](http://www.freedomscientific.com/) støttes når de er tilkoblet via USB eller bluetooth.
-Freedom Scientific sine leselistdrivere må være installert på systemet ditt for at NVDA skal fungere med disse leselistene.
+Freedom Scientific sine leselistdrivere må være installert på systemet ditt for at Aslan skal fungere med disse leselistene.
 Hvis du ikke alt har driverne, kan du få tak i dem her: http://www2.freedomscientific.com/downloads/focus-40-blue/focus-40-14-blue-downloads.asp.
 Sellv om denne siden bare omtaler Focus Blue-leselistene, vil driverne støtte samtlige Focus- og PAC Mate-leselister fra Freedom Scientific.
 
-Om systemet ditt kjører 64 bit Windows og driverne allerede er blitt installert av en annen skjermleser, vil du antakelig fortsatt behøve å installere driverne fra denne lenken, ettersom filene NVDA har bruk for antakelig ikke ble installert av den andre skjermleseren.
+Om systemet ditt kjører 64 bit Windows og driverne allerede er blitt installert av en annen skjermleser, vil du antakelig fortsatt behøve å installere driverne fra denne lenken, ettersom filene Aslan har bruk for antakelig ikke ble installert av den andre skjermleseren.
 
-Som standard kan NVDA oppdage og koble seg til disse leselistene enten via USB eller bluetooth.
+Som standard kan Aslan oppdage og koble seg til disse leselistene enten via USB eller bluetooth.
 
-Når du konfigurerer leselisten, kan du imidlertid eksplisitt velge "USB" eller "Bluetooth"-port for å begrense hvilken tilkoblingstype som skal brukes. Dette kan være nyttig hvis du vil koble Focus-leselisten til NVDA via bluetooth, men samtidig kunne lade den via USB fra PC-en.
+Når du konfigurerer leselisten, kan du imidlertid eksplisitt velge "USB" eller "Bluetooth"-port for å begrense hvilken tilkoblingstype som skal brukes. Dette kan være nyttig hvis du vil koble Focus-leselisten til Aslan via bluetooth, men samtidig kunne lade den via USB fra PC-en.
 
-Her følger tastetilordningene for denne lesselisten med NVDA.
+Her følger tastetilordningene for denne lesselisten med Aslan.
 Vennligst se i dokumentasjonen for leselisten for å få en beskrivelse av hvor du finner disse tastene.
 <!-- KC:beginInclude -->
 
@@ -2403,7 +2403,7 @@ Vennligst se i dokumentasjonen for leselisten for å få en beskrivelse av hvor 
 |space key |brailleSpaceBar|
 |windows+d key (minimize all applications) |brailleSpaceBar+punkt1+punkt2+punkt3+punkt4+punkt5+punkt6|
 |Rapporter gjeldende linje |brailleSpaceBar+punkt1+punkt4|
-|NVDA menu |brailleSpaceBar+punkt1+punkt3+punkt4+punkt5|
+|Aslan menu |brailleSpaceBar+punkt1+punkt3+punkt4+punkt5|
 
 For nyere Focus-modeller som har vippeknapper (Focus 40, Focus 80 og Focus Blue):
 
@@ -2427,18 +2427,18 @@ Både ALVA BC640 og BC680-leselistene fra [Optelec](http://www.optelec.com/) kan
 
 Alternativt kan du koble til en eldre Optelec-leselist, som Braille Voyager, via en protokollkonverterer som leveres av Optelec.
    You do not need any specific drivers to be installed to use these displays.
-   Just plug in the display and configure NVDA to use it.
-   Note: NVDA might be unable to use an ALVA BC6 display over Bluetooth when it is paired using the ALVA
+   Just plug in the display and configure Aslan to use it.
+   Note: Aslan might be unable to use an ALVA BC6 display over Bluetooth when it is paired using the ALVA
    Bluetooth utility.
-   When you have paired your device using this utility and NVDA is unable to detect your device, we recommend you
+   When you have paired your device using this utility and Aslan is unable to detect your device, we recommend you
    to pair your ALVA display the regular way using the Windows Bluetooth settings.
    Note: while some of these displays do have a braille keyboard, they handle translation from braille to text
    themselves by default.
-   This means that NVDA's braille input system is not in use in the default situation (i.e. the input braille
+   This means that Aslan's braille input system is not in use in the default situation (i.e. the input braille
    table setting has no effect).
    For ALVA displays with recent firmware, it is possible to disable this HID keyboard simulation using an input
    gesture.
-   Following are key assignments for this display with NVDA.
+   Following are key assignments for this display with Aslan.
    Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -2467,7 +2467,7 @@ Alternativt kan du koble til en eldre Optelec-leselist, som Braille Voyager, via
 |Pil høyre |spRight|
 |Enter |spEnter, enter|
 |Rapporter dato/tid |sp1+sp2|
-|NVDA-meny |sp1+sp3|
+|Aslan-meny |sp1+sp3|
 |Win+d (minimer alle programmer) |sp1+sp4|
 |Win+b (fokus på systemkurv) |sp3+sp4|
 |Win |sp2+sp3, windows|
@@ -2483,17 +2483,17 @@ Alternativt kan du koble til en eldre Optelec-leselist, som Braille Voyager, via
 
 ### Handy Tech-leselister {#HandyTech}
 
-NVDA støtter de fleste leselister fra [Handy Tech](http://www.handytech.de/) når de er koblet til via USB, serieport eller bluetooth.
+Aslan støtter de fleste leselister fra [Handy Tech](http://www.handytech.de/) når de er koblet til via USB, serieport eller bluetooth.
    For older USB displays, you will need to install the USB drivers from Handy Tech on your system.
    The following displays are not supported out of the box, but can be used via [Handy Tech's universal driver
-   https://handytech.de/en/service/downloads-and-manuals/handy-tech-software/braille-display-drivers] and NVDA
+   https://handytech.de/en/service/downloads-and-manuals/handy-tech-software/braille-display-drivers] and Aslan
    add-on:
 
 * Braillino
 * Bookworm
 * Modular-leselister med internprogramvare versjon 1.13 eller lavere. Vær oppmerksom på at internprogramvaren på disse leselistene kan oppdateres.
 
-   Following are the key assignments for Handy Tech displays with NVDA.
+   Following are the key assignments for Handy Tech displays with Aslan.
    Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -2513,7 +2513,7 @@ NVDA støtter de fleste leselister fra [Handy Tech](http://www.handytech.de/) n�
 |Pil ned |joystickDown|
 |leftArrow key |joystickLeft|
 |rightArrow key |joystickRight|
-|NVDA-meny |b2+b4+b5+b6|
+|Aslan-meny |b2+b4+b5+b6|
 |Bytt punktskrift knyttet til |b2|
 |Bytt punktskriftmarkør |b1|
 |Bytt presentasjon av fokuskontekst |b7|
@@ -2525,8 +2525,8 @@ NVDA støtter de fleste leselister fra [Handy Tech](http://www.handytech.de/) n�
 
    The Lilli braille display available from [MDV](http://www.mdvbologna.it/) is supported.
    You do not need any specific drivers to be installed to use this display.
-   Just plug in the display and configure NVDA to use it.
-   Following are the key assignments for this display with NVDA.
+   Just plug in the display and configure Aslan to use it.
+   Following are the key assignments for this display with Aslan.
    Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -2563,7 +2563,7 @@ Refreshabraille og Orbit Reader 20 kan benytte HID hvis de konfigureres for det.
 
    The USB serial mode of the Orbit Reader 20 is currently only supported in Windows 10.
    USB HID should generally be used instead.
-   Following are the key assignments for these displays with NVDA.
+   Following are the key assignments for these displays with Aslan.
    Please see your display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -2591,7 +2591,7 @@ For leselister som har en joystick:
 
    The hedo ProfiLine USB from [hedo Reha-Technik](http://www.hedo.de/) is supported.
    You must first install the USB drivers provided by the manufacturer.
-   Following are the key assignments for this display with NVDA.
+   Following are the key assignments for this display with Aslan.
    Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -2611,7 +2611,7 @@ For leselister som har en joystick:
 
    The hedo MobilLine USB from [hedo Reha-Technik](http://www.hedo.de/) is supported.
    You must first install the USB drivers provided by the manufacturer.
-   Following are the key assignments for this display with NVDA.
+   Following are the key assignments for this display with Aslan.
    Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -2635,7 +2635,7 @@ For leselister som har en joystick:
    the manufacturer.
    USB drivers are not required if the protocol is set to OpenBraille.
    The BrailleNote Touch is also supported, and does not require any drivers to be installed.
-   Following are the key assignments for the Brailliant BI/B and BrailleNote touch displays with NVDA.
+   Following are the key assignments for the Brailliant BI/B and BrailleNote touch displays with Aslan.
    Please see the display's documentation for descriptions of where these keys can be found.
 
 #### Key assignments for All models {#toc219}
@@ -2661,7 +2661,7 @@ For leselister som har en joystick:
 |Enter |punkt8|
 |windows key |mellomrom+punkt3+punkt4|
 |Alt+Tab |mellomrom+punkt2+punkt3+punkt4+punkt5 (mellomrom+t)|
-|NVDA-meny |mellomrom+punkt1+punkt3+punkt4+punkt5 (mellomrom+n)|
+|Aslan-meny |mellomrom+punkt1+punkt3+punkt4+punkt5 (mellomrom+n)|
 |windows+d key (minimize all applications) |mellomrom+punkt1+punkt4+punkt5 (mellomrom+d)|
 |Say all |mellomrom+punkt1+punkt2+punkt3+punkt4+punkt5+punkt6|
 
@@ -2673,7 +2673,7 @@ For leselister som har en joystick:
 
 | Navn |Tast|
 |---|---|
-|NVDA-meny |c1+c3+c4+c5 (kommando n)|
+|Aslan-meny |c1+c3+c4+c5 (kommando n)|
 |windows+d key (minimize all applications) |c1+c4+c5 (command d)|
 |Say all |c1+c2+c3+c4+c5+c6|
 
@@ -2695,11 +2695,11 @@ For leselister som har en joystick:
 
 ### HIMS Braille Sense/Braille EDGE/Smart Beetle/Sync Braille-serien {#Hims}
 
-   NVDA supports Braille Sense, Braille EDGE, Smart Beetle and Sync Braille displays from [Hims
+   Aslan supports Braille Sense, Braille EDGE, Smart Beetle and Sync Braille displays from [Hims
    http://www.hims-inc.com/] when connected via USB or bluetooth.
    If connecting via USB, you will need to install the USB drivers from HIMS on your system.
    You can download these from here: http://www.himsintl.com/upload/HIMS_USB_Driver_v25.zip
-   Following are the key assignments for these displays with NVDA.
+   Following are the key assignments for these displays with Aslan.
    Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -2778,9 +2778,9 @@ Leselistene Seika Versjon 3, 4 og 5 (40 celler) og Seika80 (80 celler) fra [Nipp
 
 Du kan finner mer informasjon om disse leselistene her: http://www.seika-braille.com/.
 
-Du må først installere USB-driverne fra produsenten før disse leselistene kan brukes sammen med NVDA.
+Du må først installere USB-driverne fra produsenten før disse leselistene kan brukes sammen med Aslan.
 
-Følgende er tastetilordningene for disse leselistene med NVDA. Se i dokumentasjonen for disse leselistene for å få en beskrivelse av hvor de ulike tastene er å finne.
+Følgende er tastetilordningene for disse leselistene med Aslan. Se i dokumentasjonen for disse leselistene for å få en beskrivelse av hvor de ulike tastene er å finne.
 <!-- KC:beginInclude -->
 
 | Navn |Tast|
@@ -2794,7 +2794,7 @@ Følgende er tastetilordningene for disse leselistene med NVDA. Se i dokumentasj
 |Tab |b1|
 |Skift+Tab |b2|
 |Alt+Tab |b1+b2|
-|NVDA-meny |venstre+høyre|
+|Aslan-meny |venstre+høyre|
 |Route to braille cell |routing|
 
 <!-- KC:endInclude -->
@@ -2808,10 +2808,10 @@ Følgende leselister støttes:
 * BRAILLEX Trio (USB og bluetooth)
 * BRAILLEX Live 20, BRAILLEX Live og BRAILLEX Live Plus (USB and bluetooth)
 
-   If BrxCom is installed, NVDA will use BrxCom.
+   If BrxCom is installed, Aslan will use BrxCom.
    BrxCom is a tool that allows keyboard input from the braille display to function independently from a screen
    reader.
-   A new version of BrxCom which works with NVDA will be released by Papenmeier soon.
+   A new version of BrxCom which works with Aslan will be released by Papenmeier soon.
    Keyboard input is possible with the Trio and BRAILLEX Live models.
    Most devices have an Easy Access Bar (EAB) that allows intuitive and fast operation.
    The EAB can be moved in four directions where generally each direction has two switches.
@@ -2842,7 +2842,7 @@ Følgende leselister støttes:
 |dn |1 Step down|
 |dn2 |2 Steps down|
 
-   Following are the Papenmeier command assignments for NVDA:
+   Following are the Papenmeier command assignments for Aslan:
 
 <!-- KC:beginInclude -->
 
@@ -2926,7 +2926,7 @@ Følgende leselister støttes:
 |dn |1 Step down|
 |dn2 |2 Steps down|
 
-   Following are the Papenmeier command assignments for NVDA:
+   Following are the Papenmeier command assignments for Aslan:
 <!-- KC:beginInclude -->
    Devices with EAB:
 
@@ -2987,7 +2987,7 @@ BRAILLEX 2D Screen:
 
 ### HumanWare BrailleNote {#HumanWareBrailleNote}
 
-   NVDA supports the BrailleNote notetakers from [Humanware](http://www.humanware.com) when acting as a display
+   Aslan supports the BrailleNote notetakers from [Humanware](http://www.humanware.com) when acting as a display
    terminal for a screen reader.
    The following models are supported:
 
@@ -3002,21 +3002,21 @@ BRAILLEX 2D Screen:
    For BrailleNote QT, PC keyboard emulation isn't supported.
    You can also enter braille dots using the QT keyboard.
    Please check the braille terminal section of the BrailleNote manual guide for details.
-   If your device supports more than one type of connection, when connecting your BrailleNote to NVDA, you must
+   If your device supports more than one type of connection, when connecting your BrailleNote to Aslan, you must
    set the braille terminal port in braille terminal options.
    Please check the BrailleNote manual for details.
-   In NVDA, you may also need to set the port in the [Select Braille Display](#SelectBrailleDisplay) dialog.
+   In Aslan, you may also need to set the port in the [Select Braille Display](#SelectBrailleDisplay) dialog.
    If you are connecting via USB or bluetooth, you can set the port to "Automatic", "USB" or "Bluetooth",
    depending on the available choices.
    If connecting using a legacy serial port (or a USB to serial converter) or if none of the previous options
    appear, you must explicitly choose the communication port to be used from the list of hardware ports.
    Before connecting your BrailleNote Apex using its USB client interface, you must install the drivers provided
    by HumanWare.
-   On the BrailleNote Apex BT, you can use the scroll wheel located between dots 1 and 4 for various NVDA
+   On the BrailleNote Apex BT, you can use the scroll wheel located between dots 1 and 4 for various Aslan
    commands.
    The wheel consists of four directional dots, a center click button, and a wheel that spins clockwise or
    counterclockwise.
-   Following are the BrailleNote command assignments for NVDA.
+   Following are the BrailleNote command assignments for Aslan.
    Please check your BrailleNote's documentation to find where these keys are located.
 
 <!-- KC:beginInclude -->
@@ -3088,7 +3088,7 @@ Følgende er kommandoer knyttet til rullehjulet:
 
 ### EcoBraille {#EcoBraille}
 
-NVDA støtte EcoBraille-leselister fra [ONCE](http://www.once.es/).
+Aslan støtte EcoBraille-leselister fra [ONCE](http://www.once.es/).
 
 Følgende modeller støttes:
 
@@ -3097,7 +3097,7 @@ Følgende modeller støttes:
 * EcoBraille 80
 * EcoBraille Plus
 
-I NVDA kan du sette serieporten leselisten er koblet til i dialogen [Velg leselist](#SelectBrailleDisplay).
+I Aslan kan du sette serieporten leselisten er koblet til i dialogen [Velg leselist](#SelectBrailleDisplay).
    Following are the key assignments for EcoBraille displays.
    Please see the [EcoBraille documentation](ftp://ftp.once.es/pub/utt/bibliotecnia/Lineas_Braille/ECO/) for
    descriptions of where these keys can be found.
@@ -3144,7 +3144,7 @@ I NVDA kan du sette serieporten leselisten er koblet til i dialogen [Velg leseli
 
 ### Eurobraille Esys/Esytime/Iris leselister {#Eurobraille}
 
-   The Esys, Esytime and Iris displays from [Eurobraille](http://www.eurobraille.fr/) are supported by NVDA.
+   The Esys, Esytime and Iris displays from [Eurobraille](http://www.eurobraille.fr/) are supported by Aslan.
    Esys and Esytime-Evo devices are supported when connected via USB or bluetooth.
    Older Esytime devices only support USB.
    Iris displays can only be connected via a serial port.
@@ -3153,7 +3153,7 @@ I NVDA kan du sette serieporten leselisten er koblet til i dialogen [Velg leseli
    Iris and Esys displays have a braille keyboard with 10 keys.
    Of the two keys placed like a space bar, the left key is corresponding to the backspace key and the right key
    to the space key.
-   Following are the key assignments for these displays with NVDA.
+   Following are the key assignments for these displays with Aslan.
    Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -3238,9 +3238,9 @@ For å kunne bruke dette programmet, må du installere [BRLTTY for Windows](http
 
 Når du konfigurerer leselisten og porten som skal brukes, så følg nøye med på introduksjonene, særlig om du har en USB-leselist og allerede har installert produsentens drivere.
 
-For leselister som har punktskrifttastatur, støtter BRLTTY nå skriving av punktskrift selv. Derfor er NVDAs valg for inndatatabell ikke relevant i et slikt tilfelle.
+For leselister som har punktskrifttastatur, støtter BRLTTY nå skriving av punktskrift selv. Derfor er Aslans valg for inndatatabell ikke relevant i et slikt tilfelle.
 
-Her er BRLTTYs kommandotilordninger for NVDA. Vennligst se [BRLTTY key binding lists](http://mielke.cc/brltty/doc/KeyBindings/) for informasjon om hvordan BRLTTY-kommandoer er knyttet til knapper og kontroller på leselister.
+Her er BRLTTYs kommandotilordninger for Aslan. Vennligst se [BRLTTY key binding lists](http://mielke.cc/brltty/doc/KeyBindings/) for informasjon om hvordan BRLTTY-kommandoer er knyttet til knapper og kontroller på leselister.
 <!-- KC:beginInclude -->
 
 | Navn |BRLTTY-kommando|
@@ -3256,51 +3256,51 @@ Her er BRLTTYs kommandotilordninger for NVDA. Vennligst se [BRLTTY key binding l
 ## Avanserte temaer {#AdvancedTopics}
 ### Kommandolinjevalg {#CommandLineOptions}
 
-   NVDA can accept one or more additional options when it starts which alter its behavior.
+   Aslan can accept one or more additional options when it starts which alter its behavior.
    You can pass as many options as you need.
    These options can be passed when starting from a shortcut (in the shortcut properties), from the Run dialog
    (Start Menu -> Run or Windows+r) or from a Windows command console.
-   Options should be separated from the name of NVDA's executable file and from other options by spaces.
-   For example, the Desktop shortcut that NVDA creates during installation has the -r option, which tells NVDA to
+   Options should be separated from the name of Aslan's executable file and from other options by spaces.
+   For example, the Desktop shortcut that Aslan creates during installation has the -r option, which tells Aslan to
    close the currently running copy before starting the new one.
-   Another useful option is --disable-addons, which tells NVDA to suspend all running add-ons.
+   Another useful option is --disable-addons, which tells Aslan to suspend all running add-ons.
    This allows you to determine whether a problem is caused by an add-on and to recover from serious problems
    caused by add-ons.
-   As an example, you can exit the currently running copy of NVDA by entering the following in the Run dialog:
-   nvda -q
+   As an example, you can exit the currently running copy of Aslan by entering the following in the Run dialog:
+   aslan -q
    Some of the command line options have a short and a long version, while some of them have only a long version.
    For those which have a short version, you can combine them like this:
 
-|nvda -rm |This will exit the currently running copy of NVDA and will start a new copy with startup sounds|
+|aslan -rm |This will exit the currently running copy of Aslan and will start a new copy with startup sounds|
 
    disabled, etc. |
 
-|nvda -rm --disable-addons |Same as above, but with add-ons disabled|
+|aslan -rm --disable-addons |Same as above, but with add-ons disabled|
 
    Some of the command line options accept additional parameters; e.g. how detailed the logging should be or the
    path to the user configuration directory.
    Those parameters should be placed after the option, separated from the option by a space when using the short
    version or an equals sign (=) when using the long version; e.g.:
 
-|nvda -l 10 |Tells NVDA to start with log level set to debug|
-|nvda --log-file=c:\nvda.log |Tells NVDA to write its log to c:\nvda.log|
-|nvda --log-level=20 -f c:\nvda.log |Tells NVDA to start with log level set to info and to write its log to|
+|aslan -l 10 |Tells Aslan to start with log level set to debug|
+|aslan --log-file=c:\aslan.log |Tells Aslan to write its log to c:\aslan.log|
+|aslan --log-level=20 -f c:\aslan.log |Tells Aslan to start with log level set to info and to write its log to|
 
-   c:\nvda.log |
-   Following are the command line options for NVDA:
+   c:\aslan.log |
+   Following are the command line options for Aslan:
 
 | Short |Long |Beskrivelse|
 |---|---|---|
 |-h |--help |show command line help and exit|
-|-q |--quit |Quit already running copy of NVDA|
-|-r |--replace |Quit already running copy of NVDA and start this one|
-|-k |--check-running |Report whether NVDA is running via the exit code; 0 if running, 1 if not running|
+|-q |--quit |Quit already running copy of Aslan|
+|-r |--replace |Quit already running copy of Aslan and start this one|
+|-k |--check-running |Report whether Aslan is running via the exit code; 0 if running, 1 if not running|
 |-f LOGFILENAME |--log-file=LOGFILENAME |The file where log messages should be written to|
 |-l LOGLEVEL |--log-level=LOGLEVEL |The lowest level of message logged (debug 10, info 20, warning 30,|
 
    error 40, critical 50), default is warning |
 
-|-c CONFIGPATH |--config-path=CONFIGPATH |The path where all settings for NVDA are stored|
+|-c CONFIGPATH |--config-path=CONFIGPATH |The path where all settings for Aslan are stored|
 |-m |--minimal |No sounds, no interface, no start message, etc.|
 |-s |--secure |Secure mode (disable Python console)|
 |None |--disable-addons |Addons will have no effect|
@@ -3309,13 +3309,13 @@ Her er BRLTTYs kommandotilordninger for NVDA. Vennligst se [BRLTTY key binding l
    log level ( --loglevel, -l) argument given. |
 
 |None |--no-sr-flag |Don't change the global system screen reader flag|
-|None |--install |Installs NVDA (starting the newly installed copy)|
-|None |--install-silent |Silently installs NVDA (does not start the newly installed copy)|
-|None |--create-portable |Creates a portable copy of NVDA (starting the newly created copy). Requires|
+|None |--install |Installs Aslan (starting the newly installed copy)|
+|None |--install-silent |Silently installs Aslan (does not start the newly installed copy)|
+|None |--create-portable |Creates a portable copy of Aslan (starting the newly created copy). Requires|
 
    --portable-path to be specified |
 
-|None |--create-portable-silent |Creates a portable copy of NVDA (does not start the newly installed copy).|
+|None |--create-portable-silent |Creates a portable copy of Aslan (does not start the newly installed copy).|
 
    Requires --portable-path to be specified |
 
@@ -3323,17 +3323,17 @@ Her er BRLTTYs kommandotilordninger for NVDA. Vennligst se [BRLTTY key binding l
 
 ### Systeminnstillinger {#SystemWideParameters}
 
-   NVDA allows some values to be set in the system registry which alter the system wide behavior of NVDA.
+   Aslan allows some values to be set in the system registry which alter the system wide behavior of Aslan.
    These values are stored in the registry under one of the following keys:
 
-   * 32-bit system: "HKEY_LOCAL_MACHINE\SOFTWARE\nvda"
-   * 64-bit system: "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\nvda"
+   * 32-bit system: "HKEY_LOCAL_MACHINE\SOFTWARE\aslan"
+   * 64-bit system: "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\aslan"
 
    The following values can be set under this registry key:
 
 | Navn |Type |Possible values |Beskrivelse|
 |---|---|---|---|
-|configInLocalAppData |DWORD |0 (default) to disable, 1 to enable |If enabled, stores the NVDA user|
+|configInLocalAppData |DWORD |0 (default) to disable, 1 to enable |If enabled, stores the Aslan user|
 
    configuration in the local application data instead of the roaming application data |
 
@@ -3344,7 +3344,7 @@ Her er BRLTTYs kommandotilordninger for NVDA. Vennligst se [BRLTTY key binding l
 
 ## Mer informasjon {#FurtherInformation}
 
-Trenger du mer informasjon eller assistanse angående NVDA, anbefaler vi at du besøker NVDAs nettsted på NVDA_URL. Her vil du finne tilleggsdokumentasjon, så vel som teknisk støtte og ressurser fra NVDA-samfunnet.
+Trenger du mer informasjon eller assistanse angående Aslan, anbefaler vi at du besøker Aslans nettsted på Aslan_URL. Her vil du finne tilleggsdokumentasjon, så vel som teknisk støtte og ressurser fra Aslan-samfunnet.
 
-Dette nettstedet tilbyr også informasjon og ressurser angående utviklingen av NVDA.
+Dette nettstedet tilbyr også informasjon og ressurser angående utviklingen av Aslan.
 

@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited, Neil Soiffer, Ryan McCleary
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import re
 from speech.commands import (
@@ -47,9 +47,9 @@ RE_MATHML_SPEECH: re.Pattern = re.compile(
 )
 
 
-def convertSSMLTextForNVDA(text: str) -> list[str | SpeechCommand]:
+def convertSSMLTextForAslan(text: str) -> list[str | SpeechCommand]:
 	"""
-	Change the SSML in the text into NVDA's command structure.
+	Change the SSML in the text into Aslan's command structure.
 
 	:param text: The SSML text to convert.
 	:returns: A list of strings and SpeechCommand objects.
@@ -58,7 +58,7 @@ def convertSSMLTextForNVDA(text: str) -> list[str | SpeechCommand]:
 	# Assume that 0% is 80 wpm and 100% is 450 wpm and scale accordingly.
 
 	language: str = getLanguageToUse()
-	nvdaLanguage: str = toXmlLang(getCurrentLanguage())
+	aslanLanguage: str = toXmlLang(getCurrentLanguage())
 	synth: SynthDriver = getSynth()
 	# I tried the engines on a 180 word excerpt. The speeds do not change linearly and differ a it between engines
 	# At "50" espeak finished in 46 sec, sapi in 75 sec, and one core in 70; at '100' one core was much slower than the others
@@ -71,7 +71,7 @@ def convertSSMLTextForNVDA(text: str) -> list[str | SpeechCommand]:
 	# as of 7/23, oneCore voices do not implement the CharacterModeCommand despite it being in supported_commands
 	useCharacter: bool = CharacterModeCommand in supportedCommands and synth.name != "oneCore"
 	out: list[str | SpeechCommand] = []
-	if language != nvdaLanguage:
+	if language != aslanLanguage:
 		out.append(LangChangeCommand(language))
 
 	resetProsody: list[type["BaseProsodyCommand"]] = []
@@ -113,6 +113,6 @@ def convertSSMLTextForNVDA(text: str) -> list[str | SpeechCommand]:
 	# there is a bug in MS Word that concats the math and the next character outside of math, so we add a space
 	out.append(" ")
 
-	if language.casefold() != nvdaLanguage.casefold():
+	if language.casefold() != aslanLanguage.casefold():
 		out.append(LangChangeCommand(None))
 	return out

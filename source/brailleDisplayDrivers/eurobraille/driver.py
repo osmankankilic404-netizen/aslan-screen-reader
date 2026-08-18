@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2017-2023 NV Access Limited, Babbage B.V., Eurobraille
@@ -146,7 +146,7 @@ class BrailleDisplayDriver(braille.display.driver.BrailleDisplayDriver, Scriptab
 				if self.deviceType.startswith(("bnote", "bbook")):
 					# send identifier to bnote / bbook with current COM port
 					comportNumber = f"{int(re.match('.*?([0-9]+)$', port).group(1)):02d}"
-					identifier = f"NVDA/{comportNumber}".encode()
+					identifier = f"Aslan/{comportNumber}".encode()
 					log.debug(f"sending {identifier} to eurobraille display")
 					self._sendPacket(constants.EB_SYSTEM, constants.EB_CONNECTION_NAME, identifier)
 				break

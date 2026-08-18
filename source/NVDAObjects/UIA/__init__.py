@@ -1,8 +1,8 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2009-2026 NV Access Limited, Joseph Lee, Mohammad Suliman, Babbage B.V., Leonard de Ruijter,
 # Bill Dengler, Cyrille Bougot, Cary-rowen
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Support for UI Automation (UIA) controls."""
 
@@ -26,7 +26,7 @@ import numbers
 import oleacc
 import colors
 import languageHandler
-import NVDAState
+import AslanState
 import UIAHandler
 import UIAHandler.customProps
 import UIAHandler.customAnnotations
@@ -52,13 +52,13 @@ from UIAHandler.utils import (
 	UIATextRangeFromElement,
 	_shouldUseWindowsTerminalNotifications,
 )
-from NVDAObjects.window import Window
-from NVDAObjects import (
-	NVDAObject,
-	NVDAObjectTextInfo,
-	InvalidNVDAObject,
+from AslanObjects.window import Window
+from AslanObjects import (
+	AslanObject,
+	AslanObjectTextInfo,
+	InvalidAslanObject,
 )
-from NVDAObjects.behaviors import (
+from AslanObjects.behaviors import (
 	ProgressBar,
 	EditableTextBase,
 	EditableTextWithAutoSelectDetection,
@@ -73,7 +73,7 @@ import locationHelper
 import ui
 import winVersion
 from winBindings import user32
-import NVDAObjects
+import AslanObjects
 
 
 paragraphIndentIDs = {
@@ -93,11 +93,11 @@ textAlignLabels = {
 class UIATextInfo(textInfos.TextInfo):
 	_rangeObj: IUIAutomationTextRangeT
 
-	_cache_controlFieldNVDAObjectClass = True
+	_cache_controlFieldAslanObjectClass = True
 
-	def _get_controlFieldNVDAObjectClass(self):
+	def _get_controlFieldAslanObjectClass(self):
 		"""
-		The NVDAObject class to be used by the _getTextWithFieldsForUIARange method when instantiating NVDAObjects in order to generate control fields for content.
+		The AslanObject class to be used by the _getTextWithFieldsForUIARange method when instantiating AslanObjects in order to generate control fields for content.
 		L{UIA} is usually what you want, but if you know the class will always mutate to a certain subclass (E.g. WordDocumentNode) then performance gains can be made by returning the subclass here.
 		"""
 		return UIA
@@ -366,7 +366,7 @@ class UIATextInfo(textInfos.TextInfo):
 		Fetches formatting for the given UI Automation Text range.
 		@param textRange: the text range whos formatting should be fetched.
 		@param formatConfig: the types of formatting requested.
-		@type formatConfig: a dictionary of NVDA document formatting configuration keys
+		@type formatConfig: a dictionary of Aslan document formatting configuration keys
 			with values set to true for those types that should be fetched.
 		@param ignoreMixedValues: If True, formatting that is mixed according to UI Automation will not be included.
 			If False, L{UIAHandler.utils.MixedAttributeError} will be raised if UI Automation gives back
@@ -475,7 +475,7 @@ class UIATextInfo(textInfos.TextInfo):
 	# and move logic out into smaller helper functions.
 	def __init__(  # noqa: C901
 		self,
-		obj: NVDAObject,
+		obj: AslanObject,
 		position: str,
 		_rangeObj: Optional[IUIAutomationTextRangeT] = None,
 	):
@@ -546,7 +546,7 @@ class UIATextInfo(textInfos.TextInfo):
 	def __hash__(self):
 		return super().__hash__()
 
-	def _get_NVDAObjectAtStart(self):
+	def _get_AslanObjectAtStart(self):
 		e = self.UIAElementAtStart
 		if e:
 			return UIA(UIAElement=e) or self.obj
@@ -598,9 +598,9 @@ class UIATextInfo(textInfos.TextInfo):
 		endOfNode=False,
 	) -> textInfos.ControlField:
 		"""
-		Fetch control field information for the given UIA NVDAObject.
-		@param obj: the NVDAObject the control field is for.
-		@param isEmbedded: True if this NVDAObject is for a leaf node (has no useful children).
+		Fetch control field information for the given UIA AslanObject.
+		@param obj: the AslanObject the control field is for.
+		@param isEmbedded: True if this AslanObject is for a leaf node (has no useful children).
 		@param startOfNode: True if the control field represents the very start of this object.
 		@param endOfNode: True if the control field represents the very end of this object.
 		@return: The control field for this object
@@ -668,7 +668,7 @@ class UIATextInfo(textInfos.TextInfo):
 		"""
 		Yields format fields and text for the given UI Automation text range, split up by the first available UI Automation text unit that does not result in mixed attribute values.
 		@param textRange: the UI Automation text range to walk.
-		@param formatConfig: a dictionary of NVDA document formatting configuration keys
+		@param formatConfig: a dictionary of Aslan document formatting configuration keys
 			with values set to true for those types that should be fetched.
 		@param UIAFormatUnits: the UI Automation text units (in order of resolution) that should be used to split the text so as to avoid mixed attribute values. This is None by default.
 			If the parameter is a list of 1 or more units, The range will be split by the first unit in the list, and this method will be recursively run on each subrange, with the remaining units in this list given as the value of this parameter.
@@ -740,7 +740,7 @@ class UIATextInfo(textInfos.TextInfo):
 		:param rootElement: the highest ancestor that encloses the given text range. This function will not walk higher than this point.
 		:param textRange: the UI Automation text range whos content should be fetched.
 		:param formatConfig: the types of formatting requested.
-		:type formatConfig: a dictionary of NVDA document formatting configuration keys
+		:type formatConfig: a dictionary of Aslan document formatting configuration keys
 			with values set to true for those types that should be fetched.
 		:param includeRoot: If true, then a control start and end will be yielded for the root element.
 		:param alwaysWalkAncestors: If true then control fields will be yielded for any element enclosing the given text range, that is a descendant of the root element. If false then the root element may be  assumed to be the only ancestor.
@@ -830,14 +830,14 @@ class UIATextInfo(textInfos.TextInfo):
 		if debug:
 			log.debug("Generating controlFields for parents")
 		windowHandle = self.obj.windowHandle
-		controlFieldNVDAObjectClass = self.controlFieldNVDAObjectClass
+		controlFieldAslanObjectClass = self.controlFieldAslanObjectClass
 		for index, (parentElement, parentClipped) in enumerate(parentElements):
 			if debug:
 				log.debug("parentElement: %s" % parentElement.currentLocalizedControlType)
 			startOfNode = not parentClipped[0]
 			endOfNode = not parentClipped[1]
 			try:
-				obj = controlFieldNVDAObjectClass(
+				obj = controlFieldAslanObjectClass(
 					windowHandle=windowHandle,
 					UIAElement=parentElement,
 					initialUIACachedPropertyIDs=self._controlFieldUIACachedPropertyIDs,
@@ -1064,7 +1064,7 @@ class UIATextInfo(textInfos.TextInfo):
 		return self._getBoundingRectsFromUIARange(self._rangeObj)
 
 	def expand(self, unit: str) -> None:
-		UIAUnit = UIAHandler.getUIAUnitFromNVDAUnit(unit)
+		UIAUnit = UIAHandler.getUIAUnitFromAslanUnit(unit)
 		self._rangeObj.ExpandToEnclosingUnit(UIAUnit)
 
 	def move(
@@ -1073,7 +1073,7 @@ class UIATextInfo(textInfos.TextInfo):
 		direction: int,
 		endPoint: Optional[str] = None,
 	):
-		UIAUnit = UIAHandler.getUIAUnitFromNVDAUnit(unit)
+		UIAUnit = UIAHandler.getUIAUnitFromAslanUnit(unit)
 		if endPoint == "start":
 			res = self._rangeObj.MoveEndpointByUnit(
 				UIAHandler.TextPatternRangeEndpoint_Start,
@@ -1150,7 +1150,7 @@ class UIA(Window):
 	def _get__coreCycleUIAPropertyCacheElementCache(self):
 		"""
 		A dictionary per core cycle that is ready to map UIA property IDs to UIAElements with that property already cached.
-		An example of where multiple cache elements may exist would be where the UIA NVDAObject was instantiated with a UIA element already containing a UI Automation cache (appropriate for generating control fields) but another UIA NVDAObject property (E.g. states) has a set of UIA properties of its own which should be bulk-fetched, and did not exist in the original cache.
+		An example of where multiple cache elements may exist would be where the UIA AslanObject was instantiated with a UIA element already containing a UI Automation cache (appropriate for generating control fields) but another UIA AslanObject property (E.g. states) has a set of UIA properties of its own which should be bulk-fetched, and did not exist in the original cache.
 		"""
 		return {}
 
@@ -1238,7 +1238,7 @@ class UIA(Window):
 			and self.UIAElement.cachedFrameworkID == "WPF"
 			and self.role == controlTypes.Role.DATAITEM
 		):
-			from NVDAObjects.behaviors import RowWithFakeNavigation
+			from AslanObjects.behaviors import RowWithFakeNavigation
 
 			clsList.append(RowWithFakeNavigation)
 		elif UIAClassName == "NetUIDropdownAnchor":
@@ -1500,12 +1500,12 @@ class UIA(Window):
 				# Since there is a UIA text pattern, there is no need to use the win32 edit support at all.
 				# However, UIA classifies (rich) edit controls with a role of document and doesn't add a multiline state.
 				# Remove any win32 Edit class and insert EditBase to keep backwards compatibility with win32.
-				import NVDAObjects.window.edit
+				import AslanObjects.window.edit
 
 				for x in list(clsList):
-					if issubclass(x, NVDAObjects.window.edit.Edit):
+					if issubclass(x, AslanObjects.window.edit.Edit):
 						clsList.remove(x)
-						clsList.insert(0, NVDAObjects.window.edit.EditBase)
+						clsList.insert(0, AslanObjects.window.edit.EditBase)
 
 	@classmethod
 	def kwargsFromSuper(cls, kwargs, relation=None, ignoreNonNativeElementsWithFocus=True):
@@ -1573,10 +1573,10 @@ class UIA(Window):
 		initialUIACachedPropertyIDs: typing.Iterable[int] | None = None,
 	):
 		"""
-		An NVDAObject for a UI Automation element.
+		An AslanObject for a UI Automation element.
 		:param windowHandle: the window handle for this object.
 			When not given, the nearest window handle is located by walking the UIAElement's ancestry.
-		:param UIAElement: the UI Automation element that should be represented by this NVDAObject.
+		:param UIAElement: the UI Automation element that should be represented by this AslanObject.
 			The UI Automation element must have been created with a cache request that inherits from
 			UIAHandler.handler.baseCacheRequest.
 		:param initialUIACachedPropertyIDs: IDs of UI Automation properties the given UIAElement
@@ -1585,7 +1585,7 @@ class UIA(Window):
 			Cached values of these properties will be available for the remainder of the current
 			core cycle. After that, new values will be fetched.
 		:raises ValueError: if no UIAElement is given.
-		:raises InvalidNVDAObject: if no window handle is given and none can be located.
+		:raises InvalidAslanObject: if no window handle is given and none can be located.
 		"""
 		if not UIAElement:
 			raise ValueError("needs a UIA element")
@@ -1605,7 +1605,7 @@ class UIA(Window):
 				)
 			windowHandle = UIAHandler.handler.getNearestWindowHandle(UIAElement)
 		if not windowHandle:
-			raise InvalidNVDAObject("no windowHandle")
+			raise InvalidAslanObject("no windowHandle")
 		super(UIA, self).__init__(windowHandle=windowHandle)
 
 		self.initialUIACachedPropertyIDs = initialUIACachedPropertyIDs
@@ -1805,7 +1805,7 @@ class UIA(Window):
 			return self._TextInfo
 		textInfo = super(UIA, self).TextInfo
 		if (
-			textInfo is NVDAObjectTextInfo
+			textInfo is AslanObjectTextInfo
 			and self.UIAIsWindowElement
 			and self.role == controlTypes.Role.WINDOW
 		):
@@ -1889,7 +1889,7 @@ class UIA(Window):
 
 	def _get_liveRegionPoliteness(self):
 		try:
-			return UIAHandler.UIALiveSettingtoNVDAAriaLivePoliteness.get(
+			return UIAHandler.UIALiveSettingtoAslanAriaLivePoliteness.get(
 				self._getUIACacheablePropertyValue(UIAHandler.UIA.UIA_LiveSettingPropertyId),
 				super().liveRegionPoliteness,
 			)
@@ -1897,7 +1897,7 @@ class UIA(Window):
 			return super().liveRegionPoliteness
 
 	def _get_role(self):
-		role = UIAHandler.UIAControlTypesToNVDARoles.get(
+		role = UIAHandler.UIAControlTypesToAslanRoles.get(
 			self.UIAElement.cachedControlType,
 			controlTypes.Role.UNKNOWN,
 		)
@@ -2121,7 +2121,7 @@ class UIA(Window):
 
 	def _get_presentationType(self):
 		presentationType = super(UIA, self).presentationType
-		# UIA NVDAObjects can only be considered content if UI Automation considers them both a control and content.
+		# UIA AslanObjects can only be considered content if UI Automation considers them both a control and content.
 		if presentationType == self.presType_content and not (
 			self.UIAElement.cachedIsContentElement and self.UIAElement.cachedIsControlElement
 		):
@@ -2340,9 +2340,9 @@ class UIA(Window):
 			# not the actual app it is hosting.
 			# Therefore, to work around this, for console windows, we fallback to getting processID from the window
 			# rather than from UIA.
-			# Note that we can't do this hack in the WinConsoleUIA NVDAObject
+			# Note that we can't do this hack in the WinConsoleUIA AslanObject
 			# Because the appModule is already created and cached
-			# before the UIA NVDAObject is morphed into the specific WinConsoleUIA class.
+			# before the UIA AslanObject is morphed into the specific WinConsoleUIA class.
 			return super().processID
 		return self.UIAElement.cachedProcessId
 
@@ -2442,7 +2442,7 @@ class UIA(Window):
 	def scrollIntoView(self):
 		pass
 
-	def isDescendantOf(self, obj: "NVDAObjects.NVDAObject") -> bool:
+	def isDescendantOf(self, obj: "AslanObjects.AslanObject") -> bool:
 		if isinstance(obj, UIA):
 			# As both objects are UIA,
 			# We can search this object's ancestors for obj with a UIA treeWalker
@@ -2589,7 +2589,7 @@ class UIA(Window):
 			ui.message(dropTargetEffect)
 
 
-if NVDAState._allowDeprecatedAPI():
+if AslanState._allowDeprecatedAPI():
 
 	class InaccurateTextChangeEventEmittingEditableText(EditableTextBase, UIA):
 		"""InaccurateTextChangeEventEmittingEditableText is deprecated without a replacement."""
@@ -2749,7 +2749,7 @@ class _NetFrameworkWinFormsComboBox(UIA):
 class ComboBoxWithoutValuePattern(UIA):
 	"""A combo box without the Value pattern.
 	UIA combo boxes don't necessarily support the Value pattern unless they take arbitrary text values.
-	However, NVDA expects combo boxes to have a value and to fire valueChange events.
+	However, Aslan expects combo boxes to have a value and to fire valueChange events.
 	The value is obtained by retrieving the selected item's name.
 	The valueChange event is fired on this object by L{ListItem.event_stateChange}.
 	"""
@@ -2844,7 +2844,7 @@ class ToolTip(ToolTip, UIA):
 class WpfTextView(EditableTextBase, UIA):
 	"""WpfTextView fires name state changes once a second,
 	plus when IUIAutomationTextRange::GetAttributeValue is called.
-	This causes major lag when using this control with Braille in NVDA. (#2759)
+	This causes major lag when using this control with Braille in Aslan. (#2759)
 	For now just ignore the events.
 	"""
 
@@ -2888,7 +2888,7 @@ class SuggestionsList(UIA):
 class SuggestionListItem(UIA):
 	"""Recent Windows releases use suggestions lists for various things, including Start menu suggestions, Store, Settings app and so on.
 	Unlike suggestions list class, top suggestion is automatically selected.
-	Note that support for reporting the selection is now handled generically on the base NVDAObject.
+	Note that support for reporting the selection is now handled generically on the base AslanObject.
 	"""
 
 	role = controlTypes.Role.LISTITEM

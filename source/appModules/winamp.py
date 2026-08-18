@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2020 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -8,7 +8,7 @@ from ctypes.wintypes import *  # noqa: F403
 import winKernel
 import winUser
 from scriptHandler import isScriptWaiting
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.IAccessible import IAccessible
 import appModuleHandler
 import speech
 import controlTypes
@@ -58,11 +58,11 @@ def getRepeat():
 
 
 class AppModule(appModuleHandler.AppModule):
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		global hwndWinamp
 		hwndWinamp = winUser.FindWindow("Winamp v1.x", None)
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		windowClass = obj.windowClassName
 		if windowClass == "Winamp PE":
 			clsList.insert(0, winampPlaylistEditor)

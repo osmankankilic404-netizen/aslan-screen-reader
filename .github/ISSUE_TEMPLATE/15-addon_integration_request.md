@@ -8,7 +8,7 @@ labels: ["enhancement", "Addon/integration"]
 
 ### What problem does this functionality solve?
 
-### Why should this be in NVDA vs. remaining an add-on?
+### Why should this be in Aslan vs. remaining an add-on?
 
 ### Source Add-on Information
 * **Name of the source add-on:**

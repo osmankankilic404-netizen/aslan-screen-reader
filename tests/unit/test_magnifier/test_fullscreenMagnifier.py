@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025-2026 NV Access Limited, Antoine Haffreingue, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from unittest.mock import MagicMock, patch
 from _magnifier.config import ZoomLevel
@@ -348,7 +348,7 @@ class TestFullScreenMagnifierApi(_TestMagnifier):
 	def testCannotStartWhenWindowsMagnifierRunning(self):
 		"""
 		MagInitialize succeeds but MagSetFullscreenTransform fails: Windows Magnifier is running.
-		NVDA Magnifier must not start, must raise MagnifierStartError, and start no timer.
+		Aslan Magnifier must not start, must raise MagnifierStartError, and start no timer.
 		"""
 		self.mock_mag_fs.MagSetFullscreenTransform.side_effect = OSError("API in use by another magnifier")
 
@@ -361,7 +361,7 @@ class TestFullScreenMagnifierApi(_TestMagnifier):
 
 	def testCannotStartWhenMagInitializeFails(self):
 		"""
-		MagInitialize itself fails: NVDA Magnifier must not start and must raise MagnifierStartError.
+		MagInitialize itself fails: Aslan Magnifier must not start and must raise MagnifierStartError.
 		"""
 		self.mock_mag_fs.MagInitialize.side_effect = OSError("Cannot initialize magnification API")
 

@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2026 NV Access Limited, Łukasz Golonka, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Unit tests for the languageHandler module."""
 
@@ -30,8 +30,8 @@ def generateUnsupportedWindowsLocales():
 	since unsupported languages are different under different systems."""
 	unsupportedLangs = set()
 	for localeName in LANG_NAMES_TO_LOCALIZED_DESCS.keys():
-		# `languageHandler.englishCountryNameFromNVDALocale` returns `None` for locale unknown to Windows.
-		if not languageHandler.englishCountryNameFromNVDALocale(localeName):
+		# `languageHandler.englishCountryNameFromAslanLocale` returns `None` for locale unknown to Windows.
+		if not languageHandler.englishCountryNameFromAslanLocale(localeName):
 			unsupportedLangs.add(localeName)
 	return unsupportedLangs
 
@@ -69,10 +69,10 @@ class TestWindowsLCIDToLocaleName(unittest.TestCase):
 		self.assertEqual(languageHandler.windowsLCIDToLocaleName(LCID_ENGLISH_US), "en_US")
 
 	def test_overriddenLocale(self):
-		"""Ensures NVDA's own language code is returned for an LCID
+		"""Ensures Aslan's own language code is returned for an LCID
 		where it differs from the code reported by Windows.
 		Windows maps Central Kurdish to "ku-Arab-IQ",
-		whereas NVDA ships its translation under "ckb".
+		whereas Aslan ships its translation under "ckb".
 		"""
 		self.assertEqual(languageHandler.windowsLCIDToLocaleName(LCID_CENTRAL_KURDISH), "ckb")
 
@@ -117,68 +117,68 @@ class Test_GetLocaleInfoEx_Wrappers(unittest.TestCase):
 	}
 
 	def test_ValidEnglishLangNamesAreReturned(self):
-		"""Smoke tests `languageHandler.englishLanguageNameFromNVDALocale` with some known locale names"""
-		self.assertEqual(languageHandler.englishLanguageNameFromNVDALocale("en"), "English")
-		self.assertEqual(languageHandler.englishLanguageNameFromNVDALocale("de"), "German")
-		self.assertEqual(languageHandler.englishLanguageNameFromNVDALocale("ne"), "Nepali")
-		self.assertEqual(languageHandler.englishLanguageNameFromNVDALocale("pt-BR"), "Portuguese")
-		self.assertEqual(languageHandler.englishLanguageNameFromNVDALocale("de_CH"), "German")
+		"""Smoke tests `languageHandler.englishLanguageNameFromAslanLocale` with some known locale names"""
+		self.assertEqual(languageHandler.englishLanguageNameFromAslanLocale("en"), "English")
+		self.assertEqual(languageHandler.englishLanguageNameFromAslanLocale("de"), "German")
+		self.assertEqual(languageHandler.englishLanguageNameFromAslanLocale("ne"), "Nepali")
+		self.assertEqual(languageHandler.englishLanguageNameFromAslanLocale("pt-BR"), "Portuguese")
+		self.assertEqual(languageHandler.englishLanguageNameFromAslanLocale("de_CH"), "German")
 
 	def test_noLangNameFromUnknownLocale(self):
-		"""Smoke tests `languageHandler.englishLanguageNameFromNVDALocale`
+		"""Smoke tests `languageHandler.englishLanguageNameFromAslanLocale`
 		with locale names unknown to Windows"""
-		self.assertIsNone(languageHandler.englishLanguageNameFromNVDALocale("an"))
-		self.assertIsNone(languageHandler.englishLanguageNameFromNVDALocale("kmr"))
+		self.assertIsNone(languageHandler.englishLanguageNameFromAslanLocale("an"))
+		self.assertIsNone(languageHandler.englishLanguageNameFromAslanLocale("kmr"))
 
-	def test_englishLanguageNameFromNVDALocaleNonASCIILangNames(self):
-		"""Ensures that `languageHandler.englishLanguageNameFromNVDALocale`
+	def test_englishLanguageNameFromAslanLocaleNonASCIILangNames(self):
+		"""Ensures that `languageHandler.englishLanguageNameFromAslanLocale`
 		can deal with non ASCII language names returned from Windows."""
-		self.assertEqual(languageHandler.englishLanguageNameFromNVDALocale("nb"), "Norwegian")
-		self.assertEqual(languageHandler.englishLanguageNameFromNVDALocale("nb_NO"), "Norwegian")
+		self.assertEqual(languageHandler.englishLanguageNameFromAslanLocale("nb"), "Norwegian")
+		self.assertEqual(languageHandler.englishLanguageNameFromAslanLocale("nb_NO"), "Norwegian")
 
 	def test_ValidEnglishCountryNamesAreReturned(self):
-		"""Smoke tests `languageHandler.englishCountryNameFromNVDALocale` with some known locale names"""
-		self.assertEqual(languageHandler.englishCountryNameFromNVDALocale("en"), "United States")
-		self.assertEqual(languageHandler.englishCountryNameFromNVDALocale("de"), "Germany")
-		self.assertEqual(languageHandler.englishCountryNameFromNVDALocale("ne"), "Nepal")
-		self.assertEqual(languageHandler.englishCountryNameFromNVDALocale("pt-BR"), "Brazil")
-		self.assertEqual(languageHandler.englishCountryNameFromNVDALocale("pt-PT"), "Portugal")
-		self.assertEqual(languageHandler.englishCountryNameFromNVDALocale("de_CH"), "Switzerland")
+		"""Smoke tests `languageHandler.englishCountryNameFromAslanLocale` with some known locale names"""
+		self.assertEqual(languageHandler.englishCountryNameFromAslanLocale("en"), "United States")
+		self.assertEqual(languageHandler.englishCountryNameFromAslanLocale("de"), "Germany")
+		self.assertEqual(languageHandler.englishCountryNameFromAslanLocale("ne"), "Nepal")
+		self.assertEqual(languageHandler.englishCountryNameFromAslanLocale("pt-BR"), "Brazil")
+		self.assertEqual(languageHandler.englishCountryNameFromAslanLocale("pt-PT"), "Portugal")
+		self.assertEqual(languageHandler.englishCountryNameFromAslanLocale("de_CH"), "Switzerland")
 
 	def test_noCountryNameFromUnknownLocale(self):
-		"""Smoke tests `languageHandler.englishCountryNameFromNVDALocale`
+		"""Smoke tests `languageHandler.englishCountryNameFromAslanLocale`
 		with locale names unknown to Windows"""
-		self.assertIsNone(languageHandler.englishCountryNameFromNVDALocale("an"))
-		self.assertIsNone(languageHandler.englishCountryNameFromNVDALocale("kmr"))
+		self.assertIsNone(languageHandler.englishCountryNameFromAslanLocale("an"))
+		self.assertIsNone(languageHandler.englishCountryNameFromAslanLocale("kmr"))
 
-	def test_englishCountryNameFromNVDALocaleLocaleWithDot(self):
-		"""Ensures that `languageHandler.englishCountryNameFromNVDALocale` removes all dots
+	def test_englishCountryNameFromAslanLocaleLocaleWithDot(self):
+		"""Ensures that `languageHandler.englishCountryNameFromAslanLocale` removes all dots
 		from the affected country names."""
-		self.assertEqual(languageHandler.englishCountryNameFromNVDALocale("zh_HK"), "Hong Kong SAR")
+		self.assertEqual(languageHandler.englishCountryNameFromAslanLocale("zh_HK"), "Hong Kong SAR")
 
 	def test_validAnsiCodePagesAreReturned(self):
-		"""Smoke tests `languageHandler.ansiCodePageFromNVDALocale` with some known
+		"""Smoke tests `languageHandler.ansiCodePageFromAslanLocale` with some known
 		not Unicode only locale names"""
-		self.assertEqual(languageHandler.ansiCodePageFromNVDALocale("en"), "1252")
-		self.assertEqual(languageHandler.ansiCodePageFromNVDALocale("pl_PL"), "1250")
-		self.assertEqual(languageHandler.ansiCodePageFromNVDALocale("ja_JP"), "932")
-		self.assertEqual(languageHandler.ansiCodePageFromNVDALocale("de-CH"), "1252")
+		self.assertEqual(languageHandler.ansiCodePageFromAslanLocale("en"), "1252")
+		self.assertEqual(languageHandler.ansiCodePageFromAslanLocale("pl_PL"), "1250")
+		self.assertEqual(languageHandler.ansiCodePageFromAslanLocale("ja_JP"), "932")
+		self.assertEqual(languageHandler.ansiCodePageFromAslanLocale("de-CH"), "1252")
 
 	def test_noCodePageFromUnknownLocale(self):
-		"""Smoke tests `languageHandler.ansiCodePageFromNVDALocale`
+		"""Smoke tests `languageHandler.ansiCodePageFromAslanLocale`
 		with locale names unknown to Windows"""
-		self.assertIsNone(languageHandler.ansiCodePageFromNVDALocale("an"))
-		self.assertIsNone(languageHandler.ansiCodePageFromNVDALocale("kmr"))
+		self.assertIsNone(languageHandler.ansiCodePageFromAslanLocale("an"))
+		self.assertIsNone(languageHandler.ansiCodePageFromAslanLocale("kmr"))
 
 	def test_validAnsiCodePagesAreReturnedUnicodeOnlyLocales(self):
-		"""Smoke tests `languageHandler.ansiCodePageFromNVDALocale` with some known
+		"""Smoke tests `languageHandler.ansiCodePageFromAslanLocale` with some known
 		Unicode only locale names"""
 		self.assertIn(
-			languageHandler.ansiCodePageFromNVDALocale("hi"),
+			languageHandler.ansiCodePageFromAslanLocale("hi"),
 			self.POSSIBLE_CODE_PAGES_FOR_UNICODE_ONLY_LOCALES,
 		)
 		self.assertIn(
-			languageHandler.ansiCodePageFromNVDALocale("Ne"),
+			languageHandler.ansiCodePageFromAslanLocale("Ne"),
 			self.POSSIBLE_CODE_PAGES_FOR_UNICODE_ONLY_LOCALES,
 		)
 
@@ -194,7 +194,7 @@ class Test_languageHandler_setLocale(unittest.TestCase):
 
 	def setUp(self):
 		"""
-		`setLocale` doesn't change current NVDA language, so reset the locale using `setLanguage` to
+		`setLocale` doesn't change current Aslan language, so reset the locale using `setLanguage` to
 		the current language for each test.
 		"""
 		languageHandler.setLanguage(languageHandler.getLanguage())
@@ -202,7 +202,7 @@ class Test_languageHandler_setLocale(unittest.TestCase):
 	@classmethod
 	def tearDownClass(cls):
 		"""
-		`setLocale` doesn't change current NVDA language, so reset the locale using `setLanguage` to
+		`setLocale` doesn't change current Aslan language, so reset the locale using `setLanguage` to
 		the current language so the tests can continue normally.
 		"""
 		languageHandler.setLanguage(languageHandler.getLanguage())
@@ -227,9 +227,9 @@ class Test_languageHandler_setLocale(unittest.TestCase):
 				languageHandler.setLocale(localeName)
 				self.assertEqual(locale.setlocale(locale.LC_ALL), original_locale)
 
-	def test_NVDASupportedAndPythonSupportedLocale_LanguageCodeMatches(self):
+	def test_AslanSupportedAndPythonSupportedLocale_LanguageCodeMatches(self):
 		"""
-		Tests all the translatable languages that NVDA shows in the user preferences
+		Tests all the translatable languages that Aslan shows in the user preferences
 		excludes the locales that python doesn't support, as the expected behaviour is different.
 		"""
 		for localeName in TRANSLATABLE_LANGS - UNSUPPORTED_WIN_LANGUAGES:
@@ -247,7 +247,7 @@ class Test_languageHandler_setLocale(unittest.TestCase):
 					possibleVariants.add(lang_country.replace("65001", "utf8"))
 				if "_" in lang_country:
 					possibleVariants.add(languageHandler.localeStringFromLocaleCode(localeName.split("_")[0]))
-				possibleVariants.add(languageHandler.englishLanguageNameFromNVDALocale(localeName))
+				possibleVariants.add(languageHandler.englishLanguageNameFromAslanLocale(localeName))
 				self.assertIn(
 					current_locale,
 					possibleVariants,
@@ -294,10 +294,10 @@ class Test_LanguageHandler_SetLanguage(unittest.TestCase):
 		languageHandler.setLanguage(self._prevLang)
 		super().__init__(*args, **kwargs)
 
-	def test_NVDASupportedLanguages_LanguageIsSetCorrectly(self):
+	def test_AslanSupportedLanguages_LanguageIsSetCorrectly(self):
 		"""
-		Tests languageHandler.setLanguage, using all NVDA supported languages, which should do the following:
-		- set the translation service and current NVDA language
+		Tests languageHandler.setLanguage, using all Aslan supported languages, which should do the following:
+		- set the translation service and current Aslan language
 		- set the windows locale for the thread (fallback to system default)
 		- set the python locale for the thread (match the translation service, fallback to system default)
 		"""
@@ -305,7 +305,7 @@ class Test_LanguageHandler_SetLanguage(unittest.TestCase):
 			with self.subTest(localeName=localeName):
 				langOnly = localeName.split("_")[0]
 				languageHandler.setLanguage(localeName)
-				# check current NVDA language/translation service is set
+				# check current Aslan language/translation service is set
 				self.assertEqual(languageHandler.getLanguage(), localeName)
 
 				# check Windows thread is set
@@ -344,7 +344,7 @@ class Test_LanguageHandler_SetLanguage(unittest.TestCase):
 						possibleVariants.add(
 							languageHandler.localeStringFromLocaleCode(localeName.split("_")[0]),
 						)
-					possibleVariants.add(languageHandler.englishLanguageNameFromNVDALocale(localeName))
+					possibleVariants.add(languageHandler.englishLanguageNameFromAslanLocale(localeName))
 					self.assertIn(
 						locale.setlocale(locale.LC_ALL),
 						possibleVariants,
@@ -361,7 +361,7 @@ class Test_LanguageHandler_SetLanguage(unittest.TestCase):
 				languageHandler.setLanguage(localeName)
 
 
-class Test_language_Normalization_for_NVDA(unittest.TestCase):
+class Test_language_Normalization_for_Aslan(unittest.TestCase):
 	"""Set of unit tests for `languageHandler.normalizeLanguage`."""
 
 	def test_normalization_no_country_info(self):

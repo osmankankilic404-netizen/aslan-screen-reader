@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025 NV Access Limited, Joseph Lee
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -11,7 +11,7 @@ from typing import Callable
 import appModuleHandler
 import ui
 import winUser
-from NVDAObjects import NVDAObject
+from AslanObjects import AslanObject
 from winAPI.types import HWNDValT
 import UIAHandler
 
@@ -37,7 +37,7 @@ class AppModule(appModuleHandler.AppModule):
 
 	def event_UIA_notification(
 		self,
-		obj: NVDAObject,
+		obj: AslanObject,
 		nextHandler: Callable[[], None],
 		notificationKind: int | None = None,
 		notificationProcessing: int | None = None,

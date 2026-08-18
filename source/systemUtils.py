@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020-2026 NV Access Limited, Łukasz Golonka, Luke Davis, Leonard de Ruijter
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -37,7 +37,7 @@ import winUser
 import functools
 import shlobj
 from logHandler import log
-from NVDAState import WritePaths
+from AslanState import WritePaths
 from winBindings import advapi32, user32
 
 
@@ -57,7 +57,7 @@ def openUserConfigurationDirectory():
 def openDefaultConfigurationDirectory():
 	"""Opens the directory which would be used to store configuration by default.
 	Used as a fallback when trying to explore user config from the start menu,
-	and NVDA is not running."""
+	and Aslan is not running."""
 	import config
 
 	path = config.getUserDefaultConfigPath()

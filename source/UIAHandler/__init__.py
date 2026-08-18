@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, Joseph Lee, Babbage B.V., Leonard de Ruijter, Bill Dengler
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import ctypes
 import ctypes.wintypes
@@ -54,7 +54,7 @@ import textInfos
 from typing import Dict
 from queue import Queue
 import aria
-import NVDAHelper
+import AslanHelper
 from . import remote as UIARemote
 
 
@@ -155,7 +155,7 @@ windowsTerminalUIAClassNames = (
 	"WPFTermControl",
 )
 
-NVDAUnitsToUIAUnits: Dict[str, int] = {
+AslanUnitsToUIAUnits: Dict[str, int] = {
 	textInfos.UNIT_CHARACTER: UIA.TextUnit_Character,
 	textInfos.UNIT_WORD: UIA.TextUnit_Word,
 	textInfos.UNIT_LINE: UIA.TextUnit_Line,
@@ -167,16 +167,16 @@ NVDAUnitsToUIAUnits: Dict[str, int] = {
 }
 
 
-def getUIAUnitFromNVDAUnit(unit: str) -> int:
-	"""Translate an NVDA text unit constant to its UIA ``TextUnit`` equivalent.
+def getUIAUnitFromAslanUnit(unit: str) -> int:
+	"""Translate an Aslan text unit constant to its UIA ``TextUnit`` equivalent.
 	:raises NotImplementedError: if UIA has no equivalent unit.
 	"""
-	if (UIAUnit := NVDAUnitsToUIAUnits.get(unit)) is None:
+	if (UIAUnit := AslanUnitsToUIAUnits.get(unit)) is None:
 		raise NotImplementedError(f"UIA does not support the {unit!r} text unit")
 	return UIAUnit
 
 
-UIAControlTypesToNVDARoles = {
+UIAControlTypesToAslanRoles = {
 	UIA_ButtonControlTypeId: controlTypes.Role.BUTTON,  # noqa: F405
 	UIA_CalendarControlTypeId: controlTypes.Role.CALENDAR,  # noqa: F405
 	UIA_CheckBoxControlTypeId: controlTypes.Role.CHECKBOX,  # noqa: F405
@@ -218,13 +218,13 @@ UIAControlTypesToNVDARoles = {
 	UIA_SeparatorControlTypeId: controlTypes.Role.SEPARATOR,  # noqa: F405
 }
 
-UIALiveSettingtoNVDAAriaLivePoliteness: Dict[str, aria.AriaLivePoliteness] = {
+UIALiveSettingtoAslanAriaLivePoliteness: Dict[str, aria.AriaLivePoliteness] = {
 	UIA.Off: aria.AriaLivePoliteness.OFF,
 	UIA.Polite: aria.AriaLivePoliteness.POLITE,
 	UIA.Assertive: aria.AriaLivePoliteness.ASSERTIVE,
 }
 
-UIAPropertyIdsToNVDAEventNames = {
+UIAPropertyIdsToAslanEventNames = {
 	UIA.UIA_NamePropertyId: "nameChange",
 	UIA.UIA_HelpTextPropertyId: "descriptionChange",
 	UIA.UIA_ExpandCollapseExpandCollapseStatePropertyId: "stateChange",
@@ -245,7 +245,7 @@ globalEventHandlerGroupUIAPropertyIds = {
 }
 
 localEventHandlerGroupUIAPropertyIds = (
-	set(UIAPropertyIdsToNVDAEventNames) - globalEventHandlerGroupUIAPropertyIds
+	set(UIAPropertyIdsToAslanEventNames) - globalEventHandlerGroupUIAPropertyIds
 )
 
 UIALandmarkTypeIdsToLandmarkNames: Dict[int, str] = {
@@ -255,7 +255,7 @@ UIALandmarkTypeIdsToLandmarkNames: Dict[int, str] = {
 	UIA.UIA_SearchLandmarkTypeId: "search",
 }
 
-UIAEventIdsToNVDAEventNames: Dict[int, str] = {
+UIAEventIdsToAslanEventNames: Dict[int, str] = {
 	UIA.UIA_LiveRegionChangedEventId: "liveRegionChange",
 	UIA.UIA_SelectionItem_ElementSelectedEventId: "UIA_elementSelected",
 	UIA.UIA_MenuOpenedEventId: "gainFocus",
@@ -275,7 +275,7 @@ UIAEventIdsToNVDAEventNames: Dict[int, str] = {
 
 localEventHandlerGroupUIAEventIds = set()
 
-UIAEventIdsToNVDAEventNames.update(
+UIAEventIdsToAslanEventNames.update(
 	{
 		UIA.UIA_Text_TextSelectionChangedEventId: "caret",
 	},
@@ -286,12 +286,12 @@ localEventHandlerGroupUIAEventIds.update(
 	},
 )
 
-globalEventHandlerGroupUIAEventIds = set(UIAEventIdsToNVDAEventNames) - localEventHandlerGroupUIAEventIds
+globalEventHandlerGroupUIAEventIds = set(UIAEventIdsToAslanEventNames) - localEventHandlerGroupUIAEventIds
 
 ignoreWinEventsMap = {
-	UIA_AutomationPropertyChangedEventId: list(UIAPropertyIdsToNVDAEventNames.keys()),  # noqa: F405
+	UIA_AutomationPropertyChangedEventId: list(UIAPropertyIdsToAslanEventNames.keys()),  # noqa: F405
 }
-for id in UIAEventIdsToNVDAEventNames.keys():
+for id in UIAEventIdsToAslanEventNames.keys():
 	ignoreWinEventsMap[id] = [0]
 
 
@@ -475,7 +475,7 @@ class UIAHandler(COMObject):
 		if config.conf["UIA"]["enhancedEventProcessing"]:
 			if self._rateLimitedEventHandler:
 				log.debug("UIAHandler: Terminating enhanced event processing")
-				NVDAHelper.localLib.rateLimitedUIAEventHandler_terminate(self._rateLimitedEventHandler)
+				AslanHelper.localLib.rateLimitedUIAEventHandler_terminate(self._rateLimitedEventHandler)
 
 		# Terminate the MTA thread
 		MTAThreadHandle = ctypes.wintypes.HANDLE(
@@ -502,7 +502,7 @@ class UIAHandler(COMObject):
 				clsctx=CLSCTX_INPROC_SERVER,
 			)
 			# #7345: Instruct UIA to never map MSAA winEvents to UIA propertyChange events.
-			# These events are not needed by NVDA, and they can cause the UI Automation client library to become unresponsive if an application firing winEvents has a slow message pump.
+			# These events are not needed by Aslan, and they can cause the UI Automation client library to become unresponsive if an application firing winEvents has a slow message pump.
 			pfm = self.clientObject.proxyFactoryMapping
 			for index in range(pfm.count):
 				e = pfm.getEntry(index)
@@ -557,7 +557,7 @@ class UIAHandler(COMObject):
 			self.ReservedMixedAttributeValue = self.clientObject.ReservedMixedAttributeValue
 			if config.conf["UIA"]["enhancedEventProcessing"]:
 				handler = self._rateLimitedEventHandler = POINTER(IUnknown)()
-				NVDAHelper.localLib.rateLimitedUIAEventHandler_create(
+				AslanHelper.localLib.rateLimitedUIAEventHandler_create(
 					self.QueryInterface(IUnknown),
 					byref(self._rateLimitedEventHandler),
 				)
@@ -602,13 +602,13 @@ class UIAHandler(COMObject):
 			*self.clientObject.IntSafeArrayToNativeArray(
 				globalEventHandlerGroupUIAPropertyIds
 				if utils._shouldSelectivelyRegister()
-				else UIAPropertyIdsToNVDAEventNames,
+				else UIAPropertyIdsToAslanEventNames,
 			),
 		)
 		for eventId in (
 			globalEventHandlerGroupUIAEventIds
 			if utils._shouldSelectivelyRegister()
-			else UIAEventIdsToNVDAEventNames
+			else UIAEventIdsToAslanEventNames
 		):
 			self.globalEventHandlerGroup.AddAutomationEventHandler(
 				eventId,
@@ -776,7 +776,7 @@ class UIAHandler(COMObject):
 				log.debug("HandleAutomationEvent: Ignored MenuOpenedEvent while focus event pending")
 			return
 		if eventID == UIA.UIA_Text_TextChangedEventId:
-			# Use the cached class name: NVDA registers every event handler group with
+			# Use the cached class name: Aslan registers every event handler group with
 			# baseCacheRequest, which caches UIA_ClassNamePropertyId, so this avoids a
 			# slow (and, for an unresponsive app, hanging) live cross-process fetch on
 			# this high-frequency text-change path.
@@ -788,7 +788,7 @@ class UIAHandler(COMObject):
 					and sender.CachedClassName in windowsTerminalUIAClassNames
 				)
 			):
-				NVDAEventName = "textChange"
+				AslanEventName = "textChange"
 			else:
 				if _isDebug():
 					log.debugWarning(
@@ -797,78 +797,78 @@ class UIAHandler(COMObject):
 					)
 				return
 		else:
-			NVDAEventName = UIAEventIdsToNVDAEventNames.get(eventID, None)
-		if not NVDAEventName:
+			AslanEventName = UIAEventIdsToAslanEventNames.get(eventID, None)
+		if not AslanEventName:
 			if _isDebug():
 				log.debugWarning(f"HandleAutomationEvent: Don't know how to handle event {eventID}")
 			return
 		obj = None
 		focus = api.getFocusObject()
-		import NVDAObjects.UIA
+		import AslanObjects.UIA
 
-		if isinstance(focus, NVDAObjects.UIA.UIA) and self.clientObject.compareElements(
+		if isinstance(focus, AslanObjects.UIA.UIA) and self.clientObject.compareElements(
 			focus.UIAElement,
 			sender,
 		):
 			if _isDebug():
 				log.debug(
 					"handleAutomationEvent: element matches focus. "
-					f"Redirecting event to focus NVDAObject {focus}",
+					f"Redirecting event to focus AslanObject {focus}",
 				)
 			obj = focus
 		elif not self.isNativeUIAElement(sender):
 			if _isDebug():
 				log.debug(
-					f"HandleAutomationEvent: Ignoring event {NVDAEventName} for non native element",
+					f"HandleAutomationEvent: Ignoring event {AslanEventName} for non native element",
 				)
 			return
 		window = obj.windowHandle if obj else self.getNearestWindowHandle(sender)
 		if window:
 			if _isDebug():
 				log.debug(
-					f"Checking if should accept NVDA event {NVDAEventName} "
+					f"Checking if should accept Aslan event {AslanEventName} "
 					f"with window {self.getWindowHandleDebugString(window)}",
 				)
-			if not eventHandler.shouldAcceptEvent(NVDAEventName, windowHandle=window):
+			if not eventHandler.shouldAcceptEvent(AslanEventName, windowHandle=window):
 				if _isDebug():
 					log.debug(
-						f"HandleAutomationEvent: Ignoring event {NVDAEventName} for shouldAcceptEvent=False",
+						f"HandleAutomationEvent: Ignoring event {AslanEventName} for shouldAcceptEvent=False",
 					)
 				return
 		if not obj:
 			try:
-				obj = NVDAObjects.UIA.UIA(windowHandle=window, UIAElement=sender)
+				obj = AslanObjects.UIA.UIA(windowHandle=window, UIAElement=sender)
 			except Exception:
 				if _isDebug():
 					log.debugWarning(
-						f"HandleAutomationEvent: Exception while creating object for event {NVDAEventName}",
+						f"HandleAutomationEvent: Exception while creating object for event {AslanEventName}",
 						exc_info=True,
 					)
 				return
 			if not obj:
 				if _isDebug():
-					log.debug("handleAutomationEvent: No NVDAObject could be created")
+					log.debug("handleAutomationEvent: No AslanObject could be created")
 				return
 			if _isDebug():
 				log.debug(
 					f"handleAutomationEvent: created object {obj} ",
 				)
-		if (NVDAEventName == "gainFocus" and not obj.shouldAllowUIAFocusEvent) or (
-			NVDAEventName == "liveRegionChange" and not obj._shouldAllowUIALiveRegionChangeEvent
+		if (AslanEventName == "gainFocus" and not obj.shouldAllowUIAFocusEvent) or (
+			AslanEventName == "liveRegionChange" and not obj._shouldAllowUIALiveRegionChangeEvent
 		):
 			if _isDebug():
 				log.debug(
-					f"HandleAutomationEvent: Ignoring event {NVDAEventName} because ignored by object itself",
+					f"HandleAutomationEvent: Ignoring event {AslanEventName} because ignored by object itself",
 				)
 			return
 		if _isDebug():
 			log.debug(
-				f"handleAutomationEvent: queuing NVDA event {NVDAEventName} for NVDAObject {obj} ",
+				f"handleAutomationEvent: queuing Aslan event {AslanEventName} for AslanObject {obj} ",
 			)
-		eventHandler.queueEvent(NVDAEventName, obj)
+		eventHandler.queueEvent(AslanEventName, obj)
 
 	# The last UIAElement that received a UIA focus event
-	# This is updated no matter if this is a native element, the window is UIA blacklisted by NVDA, or  the element is proxied from MSAA
+	# This is updated no matter if this is a native element, the window is UIA blacklisted by Aslan, or  the element is proxied from MSAA
 	lastFocusedUIAElement = None
 
 	def IUIAutomationFocusChangedEventHandler_HandleFocusChangedEvent(self, sender):
@@ -897,9 +897,9 @@ class UIAHandler(COMObject):
 			if _isDebug():
 				log.debug(f"Ignoring for non native element {self.getUIAElementDebugString(sender)}")
 			return
-		import NVDAObjects.UIA
+		import AslanObjects.UIA
 
-		if isinstance(eventHandler.lastQueuedFocusObject, NVDAObjects.UIA.UIA):
+		if isinstance(eventHandler.lastQueuedFocusObject, AslanObjects.UIA.UIA):
 			lastFocusObj = eventHandler.lastQueuedFocusObject
 			# Ignore duplicate focus events.
 			# It seems that it is possible for compareElements to return True, even though the objects are different.
@@ -929,18 +929,18 @@ class UIAHandler(COMObject):
 				)
 			return
 		try:
-			obj = NVDAObjects.UIA.UIA(windowHandle=window, UIAElement=sender)
+			obj = AslanObjects.UIA.UIA(windowHandle=window, UIAElement=sender)
 		except Exception:
 			if _isDebug():
 				log.debugWarning(
-					"HandleFocusChangedEvent: Exception while creating NVDAObject ",
+					"HandleFocusChangedEvent: Exception while creating AslanObject ",
 					exc_info=True,
 				)
 			obj = None
 		if not obj:
 			if _isDebug():
 				log.debug(
-					"handleFocusChangedEvent: Could not create an NVDAObject ",
+					"handleFocusChangedEvent: Could not create an AslanObject ",
 				)
 			return
 		if _isDebug():
@@ -948,12 +948,12 @@ class UIAHandler(COMObject):
 		if not obj.shouldAllowUIAFocusEvent:
 			if _isDebug():
 				log.debug(
-					"HandleFocusChangedEvent: NVDAObject chose to ignore event ",
+					"HandleFocusChangedEvent: AslanObject chose to ignore event ",
 				)
 			return
 		if _isDebug():
 			log.debug(
-				f"handleFocusChangedEvent: Queuing NVDA gainFocus event for obj {obj} ",
+				f"handleFocusChangedEvent: Queuing Aslan gainFocus event for obj {obj} ",
 			)
 		eventHandler.queueEvent("gainFocus", obj)
 
@@ -997,8 +997,8 @@ class UIAHandler(COMObject):
 						f"at request of appModule {appMod.appName}",
 					)
 				return
-		NVDAEventName = UIAPropertyIdsToNVDAEventNames.get(propertyId, None)
-		if not NVDAEventName:
+		AslanEventName = UIAPropertyIdsToAslanEventNames.get(propertyId, None)
+		if not AslanEventName:
 			if _isDebug():
 				log.debugWarning(
 					f"HandlePropertyChangedEvent: Don't know how to handle property {propertyId}",
@@ -1006,49 +1006,49 @@ class UIAHandler(COMObject):
 			return
 		obj = None
 		focus = api.getFocusObject()
-		import NVDAObjects.UIA
+		import AslanObjects.UIA
 
-		if isinstance(focus, NVDAObjects.UIA.UIA) and self.clientObject.compareElements(
+		if isinstance(focus, AslanObjects.UIA.UIA) and self.clientObject.compareElements(
 			focus.UIAElement,
 			sender,
 		):
 			if _isDebug():
 				log.debug(
-					f"propertyChange event is for focus. Redirecting event to focus NVDAObject {focus}",
+					f"propertyChange event is for focus. Redirecting event to focus AslanObject {focus}",
 				)
 			obj = focus
 		elif not self.isNativeUIAElement(sender):
 			if _isDebug():
 				log.debug(
-					f"HandlePropertyChangedEvent: Ignoring event {NVDAEventName} for non native element",
+					f"HandlePropertyChangedEvent: Ignoring event {AslanEventName} for non native element",
 				)
 			return
 		window = obj.windowHandle if obj else self.getNearestWindowHandle(sender)
 		if window:
 			if _isDebug():
 				log.debug(
-					f"Checking if should accept NVDA event {NVDAEventName} "
+					f"Checking if should accept Aslan event {AslanEventName} "
 					f"with window {self.getWindowHandleDebugString(window)}",
 				)
-			if not eventHandler.shouldAcceptEvent(NVDAEventName, windowHandle=window):
+			if not eventHandler.shouldAcceptEvent(AslanEventName, windowHandle=window):
 				if _isDebug():
 					log.debug(
-						f"HandlePropertyChangedEvent: Ignoring event {NVDAEventName} for shouldAcceptEvent=False",
+						f"HandlePropertyChangedEvent: Ignoring event {AslanEventName} for shouldAcceptEvent=False",
 					)
 				return
 		if not obj:
 			try:
-				obj = NVDAObjects.UIA.UIA(windowHandle=window, UIAElement=sender)
+				obj = AslanObjects.UIA.UIA(windowHandle=window, UIAElement=sender)
 			except Exception:
 				if _isDebug():
 					log.debugWarning(
-						f"HandlePropertyChangedEvent: Exception while creating object for event {NVDAEventName}",
+						f"HandlePropertyChangedEvent: Exception while creating object for event {AslanEventName}",
 						exc_info=True,
 					)
 				return
 			if not obj:
 				if _isDebug():
-					log.debug(f"HandlePropertyChangedEvent: Ignoring event {NVDAEventName} because no object")
+					log.debug(f"HandlePropertyChangedEvent: Ignoring event {AslanEventName} because no object")
 				return
 			if _isDebug():
 				log.debug(
@@ -1056,9 +1056,9 @@ class UIAHandler(COMObject):
 				)
 		if _isDebug():
 			log.debug(
-				f"handlePropertyChangeEvent: queuing NVDA {NVDAEventName} event for NVDAObject {obj} ",
+				f"handlePropertyChangeEvent: queuing Aslan {AslanEventName} event for AslanObject {obj} ",
 			)
-		eventHandler.queueEvent(NVDAEventName, obj)
+		eventHandler.queueEvent(AslanEventName, obj)
 
 	def IUIAutomationNotificationEventHandler_HandleNotificationEvent(
 		self,
@@ -1118,10 +1118,10 @@ class UIAHandler(COMObject):
 					"HandleNotificationEvent: native window handle not found, "
 					f"using desktop window handle {window}",
 				)
-		import NVDAObjects.UIA
+		import AslanObjects.UIA
 
 		try:
-			obj = NVDAObjects.UIA.UIA(UIAElement=sender, windowHandle=window)
+			obj = AslanObjects.UIA.UIA(UIAElement=sender, windowHandle=window)
 		except Exception:
 			if _isDebug():
 				log.debugWarning(
@@ -1144,7 +1144,7 @@ class UIAHandler(COMObject):
 			return
 		if _isDebug():
 			log.debug(
-				f"Queuing UIA_notification NVDA event for NVDAObject {obj}",
+				f"Queuing UIA_notification Aslan event for AslanObject {obj}",
 			)
 		eventHandler.queueEvent(
 			"UIA_notification",
@@ -1176,10 +1176,10 @@ class UIAHandler(COMObject):
 					"sender's application is not responding",
 				)
 			return
-		import NVDAObjects.UIA
+		import AslanObjects.UIA
 
 		try:
-			obj = NVDAObjects.UIA.UIA(UIAElement=sender)
+			obj = AslanObjects.UIA.UIA(UIAElement=sender)
 		except Exception:
 			if _isDebug():
 				log.debugWarning(
@@ -1195,8 +1195,8 @@ class UIAHandler(COMObject):
 			return
 		if _isDebug():
 			log.debug(
-				"handleActiveTextPositionChange: Queuing UIA_activeTextPositionChanged NVDA event "
-				f"for NVDAObject {obj}",
+				"handleActiveTextPositionChange: Queuing UIA_activeTextPositionChanged Aslan event "
+				f"for AslanObject {obj}",
 			)
 		eventHandler.queueEvent("UIA_activeTextPositionChanged", obj, textRange=textRange)
 
@@ -1206,16 +1206,16 @@ class UIAHandler(COMObject):
 	def _isUIAWindowHelper(self, hwnd: int, isDebug=False) -> bool:  # noqa: C901
 		if isDebug:
 			log.debug(f"checking window {self.getWindowHandleDebugString(hwnd)}")
-		# UIA in NVDA's process freezes in Windows 7 and below
+		# UIA in Aslan's process freezes in Windows 7 and below
 		processID = winUser.getWindowThreadProcessID(hwnd)[0]
 		if globalVars.appPid == processID:
 			if isDebug:
-				log.debug("Window is from NVDA's process. Treating as non-UIA")
+				log.debug("Window is from Aslan's process. Treating as non-UIA")
 			return False
-		import NVDAObjects.window
+		import AslanObjects.window
 
 		rawWindowClass = winUser.getClassName(hwnd)
-		windowClass = NVDAObjects.window.Window.normalizeWindowClassName(rawWindowClass)
+		windowClass = AslanObjects.window.Window.normalizeWindowClassName(rawWindowClass)
 		# For certain window classes, we always want to use UIA.
 		if windowClass in goodUIAWindowClassNames:
 			if isDebug:
@@ -1251,7 +1251,7 @@ class UIAHandler(COMObject):
 			# Note that #7067 is not fixed for Office 2016 and never.
 			# Using IAccessible for NetUIHWND controls causes focus changes not to be reported
 			# when the ribbon is collapsed.
-			# Testing shows that these controls emits proper events but they are ignored by NVDA.
+			# Testing shows that these controls emits proper events but they are ignored by Aslan.
 			try:
 				isOfficeApp = appModule.productName.startswith(("Microsoft Office", "Microsoft Outlook"))
 				isOffice2013OrOlder = isOfficeApp and int(appModule.productVersion.split(".")[0]) < 16
@@ -1494,11 +1494,11 @@ class UIAHandler(COMObject):
 		if the element is the root of a Word document,
 		and the focus was previously in a NetUI container embedded in this Word document.
 		"""
-		import NVDAObjects.UIA
+		import AslanObjects.UIA
 
 		oldFocus = eventHandler.lastQueuedFocusObject
 		if (
-			isinstance(oldFocus, NVDAObjects.UIA.UIA)
+			isinstance(oldFocus, AslanObjects.UIA.UIA)
 			and getattr(oldFocus.UIAElement, "_isNetUIEmbeddedInWordDoc", False)
 			and element.CachedClassName == MS_WORD_DOCUMENT_WINDOW_CLASS
 			and element.CachedControlType == UIA.UIA_DocumentControlTypeId
@@ -1528,7 +1528,7 @@ class UIAHandler(COMObject):
 		if processID == globalVars.appPid:
 			if _isDebug():
 				log.debug(
-					"element is local to NVDA, treating as non-native.",
+					"element is local to Aslan, treating as non-native.",
 				)
 			return False
 		# Whether this is a native element depends on whether its window natively supports UIA.
@@ -1541,8 +1541,8 @@ class UIAHandler(COMObject):
 						f"windowHandle {self.getWindowHandleDebugString(windowHandle)}. ",
 					)
 				return True
-			# #12982: although NVDA by default may not treat this element's window as native UIA,
-			# E.g. it is proxied from MSAA, or NVDA has specifically black listed it,
+			# #12982: although Aslan by default may not treat this element's window as native UIA,
+			# E.g. it is proxied from MSAA, or Aslan has specifically black listed it,
 			# It may be an element from a NetUIcontainer embedded in a Word document,
 			# such as the MS Word Modern Comments side track pane.
 			# These elements are only exposed via UIA, and not MSAA,

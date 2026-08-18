@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Unit tests for Region language index tracking in the braille module."""
 
@@ -31,10 +31,10 @@ class _FakeInfo:
 
 
 def _makeTextInfoRegion() -> braille.regions.textInfo.TextInfoRegion:
-	"""Build a TextInfoRegion without going through __init__ (which requires an NVDAObject)."""
+	"""Build a TextInfoRegion without going through __init__ (which requires an AslanObject)."""
 	region = braille.regions.textInfo.TextInfoRegion.__new__(braille.regions.textInfo.TextInfoRegion)
 	braille.regions.base.Region.__init__(region)
-	# Force a deterministic default language so we don't depend on NVDA's configured locale.
+	# Force a deterministic default language so we don't depend on Aslan's configured locale.
 	region._languageIndexes = {0: "en"}
 	return region
 
@@ -42,7 +42,7 @@ def _makeTextInfoRegion() -> braille.regions.textInfo.TextInfoRegion:
 class TestLanguageIndexes(unittest.TestCase):
 	def test_freshRegion_defaultLanguageAtAnyPos(self):
 		"""A region returns the default language for any non-negative pos."""
-		# Stub default language so Region.__init__ doesn't depend on NVDA's configured locale.
+		# Stub default language so Region.__init__ doesn't depend on Aslan's configured locale.
 		with patch.object(braille.regions.base.Region, "_getDefaultRegionLanguage", return_value="en"):
 			region = braille.regions.base.Region()
 		self.assertEqual(region._getLanguageAtPos(0), "en")
@@ -92,7 +92,7 @@ class TestLanguageIndexes(unittest.TestCase):
 		formatConfig = {
 			"reportClickable": False,
 		}
-		# Stub helpers that would otherwise require a real NVDA environment.
+		# Stub helpers that would otherwise require a real Aslan environment.
 		with (
 			patch("braille.regions.textInfo.getFormatFieldBraille", return_value=""),
 			patch.object(
@@ -114,7 +114,7 @@ class TestLanguageIndexes(unittest.TestCase):
 
 		# Run only the resetting portion of `update` by making `_getSelection` raise immediately,
 		# then inspect state. The reset happens before `_getSelection` is called.
-		# Using side_effect to halt execution mid-method avoids needing the full NVDA environment
+		# Using side_effect to halt execution mid-method avoids needing the full Aslan environment
 		# that the rest of update() requires.
 		with (
 			patch.object(

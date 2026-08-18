@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Joseph Lee, Łukasz Golonka, Julien Cochuyt
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """App module for File Explorer (aka Windows shell, formerly Windows Explorer).
 Provides workarounds for controls such as identifying Start button, notification area and others.
@@ -20,11 +20,11 @@ import braille
 import braille.regions.properties
 import eventHandler
 import mouseHandler
-from NVDAObjects import NVDAObject
-from NVDAObjects.IAccessible import IAccessible, List
-from NVDAObjects.UIA import UIA
-from NVDAObjects.behaviors import ToolTip
-from NVDAObjects.window.edit import RichEdit50, Edit
+from AslanObjects import AslanObject
+from AslanObjects.IAccessible import IAccessible, List
+from AslanObjects.UIA import UIA
+from AslanObjects.behaviors import ToolTip
+from AslanObjects.window.edit import RichEdit50, Edit
 import config
 import ui
 from winAPI.types import HWNDValT
@@ -55,7 +55,7 @@ class SearchBoxClient(IAccessible):
 # Also used for desktop items
 class SysListView32EmittingDuplicateFocusEvents(IAccessible):
 	# #474: When focus moves to these items, an extra focus is fired on the parent
-	# However NVDA redirects it to the real focus.
+	# However Aslan redirects it to the real focus.
 	# But this means double focus events on the item, so filter the second one out
 	# #2988: Also seen when coming back to the Windows 7 desktop from different applications.
 	def _get_shouldAllowIAccessibleFocusEvent(self):
@@ -163,7 +163,7 @@ class StartButton(IAccessible):
 
 	def _get_states(self):
 		# #5178: Selection announcement should be suppressed.
-		# Borrowed from Mozilla objects in NVDAObjects/IAccessible/Mozilla.py.
+		# Borrowed from Mozilla objects in AslanObjects/IAccessible/Mozilla.py.
 		states = super(StartButton, self).states
 		states.discard(controlTypes.State.SELECTED)
 		return states
@@ -219,16 +219,16 @@ class AppModule(appModuleHandler.AppModule):
 		# Even though product version is wrong, use product name supplied by File Explorer.
 		productInfo = self._getExecutableFileInfo()
 		self.productName = productInfo[0]
-		# NVDA claims executable name is "explorer.exe" when in fact it is "explorer.exe.mui".
+		# Aslan claims executable name is "explorer.exe" when in fact it is "explorer.exe.mui".
 		# This means file information would not be accurate, returning the base Windows build.revision.
 		# Therefore, set product version to Windows major.minor.build.revision.
 		winVer = winVersion.getWinVer()
 		self.productVersion = f"{winVer.major}.{winVer.minor}.{winVer.build}.{winVer.revision}"
 
-	# C901 'chooseNVDAObjectOverlayClasses' is too complex
-	# Note: when working on chooseNVDAObjectOverlayClasses, look for opportunities to simplify
+	# C901 'chooseAslanObjectOverlayClasses' is too complex
+	# Note: when working on chooseAslanObjectOverlayClasses, look for opportunities to simplify
 	# and move logic out into smaller helper functions.
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):  # NOQA: C901
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):  # NOQA: C901
 		windowClass = obj.windowClassName
 		role = obj.role
 
@@ -335,7 +335,7 @@ class AppModule(appModuleHandler.AppModule):
 		return statusBar
 
 	@staticmethod
-	def _getStatusBarText(obj: NVDAObject) -> str:
+	def _getStatusBarText(obj: AslanObject) -> str:
 		# The expected status bar, as of Windows 10 20H2 at least, contains:
 		#  - A grouping with a single static text child presenting the total number of elements
 		#  - Optionally, a grouping with a single static text child presenting the number of
@@ -386,14 +386,14 @@ class AppModule(appModuleHandler.AppModule):
 			raise NotImplementedError
 		return ", ".join(parts)
 
-	def getStatusBarText(self, obj: NVDAObject) -> str:
+	def getStatusBarText(self, obj: AslanObject) -> str:
 		if isinstance(obj, UIA) or obj.UIAElement.cachedClassName == "StatusBarModuleInner":
 			return self._getStatusBarText(obj)
 		else:
 			# This is not the file explorer status bar. Resort to standard behavior.
 			raise NotImplementedError
 
-	def event_NVDAObject_init(self, obj: NVDAObject) -> None:
+	def event_AslanObject_init(self, obj: AslanObject) -> None:
 		windowClass = obj.windowClassName
 		role = obj.role
 
@@ -443,7 +443,7 @@ class AppModule(appModuleHandler.AppModule):
 		if wClass in ("ForegroundStaging", "LauncherTipWnd", "ApplicationManager_DesktopShellWindow"):
 			# #5116: The Windows 10 Task View fires foreground/focus on this weird invisible window
 			# and foreground staging screen before and after it appears.
-			# This causes NVDA to report "unknown", so ignore it.
+			# This causes Aslan to report "unknown", so ignore it.
 			# We can't do this using shouldAllowIAccessibleFocusEvent because this isn't checked for foreground.
 			# #8137: also seen when opening quick link menu (Windows+X) on Windows 8 and later.
 			return
@@ -456,7 +456,7 @@ class AppModule(appModuleHandler.AppModule):
 		if currentWinVer >= winVersion.WIN10_1903 and winUser.getClassName(hwnd) == "ApplicationFrameWindow":
 			return True
 		# #13506: Windows 11 UI elements such as Taskbar should be reclassified as UIA windows,
-		# letting NVDA announce shell elements when navigating with mouse and/or touch,
+		# letting Aslan announce shell elements when navigating with mouse and/or touch,
 		# notably when interacting with windows labeled "DesktopWindowXamlSource".
 		# WORKAROUND UNTIL A PERMANENT FIX IS FOUND ACROSS APPS
 		if (
@@ -496,7 +496,7 @@ class AppModule(appModuleHandler.AppModule):
 				return
 		nextHandler()
 
-	def event_UIA_elementSelected(self, obj: NVDAObject, nextHandler: Callable[[], None]):
+	def event_UIA_elementSelected(self, obj: AslanObject, nextHandler: Callable[[], None]):
 		# #14388: announce File Explorer tab switches (Windows 11 22H2 and later).
 		if (
 			obj.role == controlTypes.Role.TAB
@@ -536,7 +536,7 @@ class AppModule(appModuleHandler.AppModule):
 
 	def event_UIA_notification(
 		self,
-		obj: NVDAObject,
+		obj: AslanObject,
 		nextHandler: Callable[[], None],
 		notificationKind: int | None = None,
 		notificationProcessing: int | None = None,

@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2024-2026 NV Access Limited
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from collections.abc import Generator
 import tempfile
@@ -17,7 +17,7 @@ import difflib
 from dataclasses import dataclass
 import subprocess
 
-RAW_GITHUB_REPO_URL = "https://raw.githubusercontent.com/nvaccess/nvda"
+RAW_GITHUB_REPO_URL = "https://raw.githubusercontent.com/nvaccess/aslan"
 re_kcTitle = re.compile(r"^(<!--\s+KC:title:\s*)(.+?)(\s*-->)$")
 re_kcSettingsSection = re.compile(r"^(<!--\s+KC:settingsSection:\s*)(.+?)(\s*-->)$")
 # Comments that span a single line in their entirety

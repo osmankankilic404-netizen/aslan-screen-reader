@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from collections.abc import Generator
 import dataclasses
@@ -18,7 +18,7 @@ from typing import (
 from requests.structures import CaseInsensitiveDict
 
 import addonAPIVersion
-from NVDAState import WritePaths
+from AslanState import WritePaths
 
 from .channel import Channel
 from .scanResults import VirusTotalScanResults
@@ -58,7 +58,7 @@ class _AddonGUIModel(SupportsAddonState, SupportsVersionCheck, Protocol):
 	channel: Channel
 	homepage: str | None
 	changelog: str | None
-	minNVDAVersion: MajorMinorPatch
+	minAslanVersion: MajorMinorPatch
 	lastTestedVersion: MajorMinorPatch
 	legacy: bool
 	"""
@@ -67,12 +67,12 @@ class _AddonGUIModel(SupportsAddonState, SupportsVersionCheck, Protocol):
 	"""
 
 	@property
-	def minimumNVDAVersion(self) -> addonAPIVersion.AddonApiVersionT:
+	def minimumAslanVersion(self) -> addonAPIVersion.AddonApiVersionT:
 		"""In order to support SupportsVersionCheck"""
-		return self.minNVDAVersion
+		return self.minAslanVersion
 
 	@property
-	def lastTestedNVDAVersion(self) -> addonAPIVersion.AddonApiVersionT:
+	def lastTestedAslanVersion(self) -> addonAPIVersion.AddonApiVersionT:
 		"""In order to support SupportsVersionCheck"""
 		return self.lastTestedVersion
 
@@ -119,7 +119,7 @@ class _AddonStoreModel(_AddonGUIModel):
 	channel: Channel
 	homepage: str | None
 	changelog: str | None
-	minNVDAVersion: MajorMinorPatch
+	minAslanVersion: MajorMinorPatch
 	lastTestedVersion: MajorMinorPatch
 	legacy: bool
 	publisher: str
@@ -151,11 +151,11 @@ class _AddonStoreModel(_AddonGUIModel):
 		"""
 		Path where this add-on file should be cached,
 		after a successful download.
-		A file at this path may or may not be currently installed to the NVDA system.
+		A file at this path may or may not be currently installed to the Aslan system.
 		"""
 		return os.path.join(
 			WritePaths.addonStoreDownloadDir,
-			f"{self.name}-{self.addonVersionName}.nvda-addon",
+			f"{self.name}-{self.addonVersionName}.aslan-addon",
 		)
 
 	@property
@@ -206,7 +206,7 @@ class _AddonManifestModel(_AddonGUIModel):
 	addonVersionName: str
 	channel: Channel
 	homepage: Optional[str]
-	minNVDAVersion: MajorMinorPatch
+	minAslanVersion: MajorMinorPatch
 	lastTestedVersion: MajorMinorPatch
 	manifest: "AddonManifest"
 	legacy: bool = False
@@ -254,7 +254,7 @@ class AddonManifestModel(_AddonManifestModel):
 	addonVersionName: str
 	channel: Channel
 	homepage: Optional[str]
-	minNVDAVersion: MajorMinorPatch
+	minAslanVersion: MajorMinorPatch
 	lastTestedVersion: MajorMinorPatch
 	manifest: "AddonManifest"
 	legacy: bool = False
@@ -281,7 +281,7 @@ class InstalledAddonStoreModel(_AddonManifestModel, _AddonStoreModel):
 	URL: str
 	sha256: str
 	addonVersionNumber: MajorMinorPatch
-	minNVDAVersion: MajorMinorPatch
+	minAslanVersion: MajorMinorPatch
 	lastTestedVersion: MajorMinorPatch
 	reviewURL: str | None
 	submissionTime: int | None
@@ -320,7 +320,7 @@ class AddonStoreModel(_AddonStoreModel):
 	URL: str
 	sha256: str
 	addonVersionNumber: MajorMinorPatch
-	minNVDAVersion: MajorMinorPatch
+	minAslanVersion: MajorMinorPatch
 	lastTestedVersion: MajorMinorPatch
 	reviewURL: str | None
 	submissionTime: int | None
@@ -338,7 +338,7 @@ class CachedAddonsModel:
 	cacheHash: Optional[str]
 	cachedLanguage: str
 	# AddonApiVersionT or the string .network._LATEST_API_VER
-	nvdaAPIVersion: addonAPIVersion.AddonApiVersionT | str
+	aslanAPIVersion: addonAPIVersion.AddonApiVersionT | str
 
 
 def _createInstalledStoreModelFromData(addon: dict[str, Any]) -> InstalledAddonStoreModel:
@@ -354,7 +354,7 @@ def _createInstalledStoreModelFromData(addon: dict[str, Any]) -> InstalledAddonS
 		sourceURL=addon["sourceURL"],
 		URL=addon["URL"],
 		sha256=addon["sha256"],
-		minNVDAVersion=MajorMinorPatch(**addon["minNVDAVersion"]),
+		minAslanVersion=MajorMinorPatch(**addon["minAslanVersion"]),
 		lastTestedVersion=MajorMinorPatch(**addon["lastTestedVersion"]),
 		reviewURL=addon.get("reviewURL"),
 		submissionTime=addon.get("submissionTime"),
@@ -379,7 +379,7 @@ def _createStoreModelFromData(addon: dict[str, Any]) -> AddonStoreModel:
 		sourceURL=addon["sourceURL"],
 		URL=addon["URL"],
 		sha256=addon["sha256"],
-		minNVDAVersion=MajorMinorPatch(**addon["minNVDAVersion"]),
+		minAslanVersion=MajorMinorPatch(**addon["minAslanVersion"]),
 		lastTestedVersion=MajorMinorPatch(**addon["lastTestedVersion"]),
 		reviewURL=addon.get("reviewUrl"),
 		submissionTime=addon.get("submissionTime"),
@@ -398,8 +398,8 @@ def _createGUIModelFromManifest(addon: "AddonHandlerBaseModel") -> AddonManifest
 		channel=Channel.EXTERNAL,
 		addonVersionName=addon.version,
 		homepage=homepage,
-		minNVDAVersion=MajorMinorPatch(*addon.minimumNVDAVersion),
-		lastTestedVersion=MajorMinorPatch(*addon.lastTestedNVDAVersion),
+		minAslanVersion=MajorMinorPatch(*addon.minimumAslanVersion),
+		lastTestedVersion=MajorMinorPatch(*addon.lastTestedAslanVersion),
 		manifest=addon.manifest,
 	)
 

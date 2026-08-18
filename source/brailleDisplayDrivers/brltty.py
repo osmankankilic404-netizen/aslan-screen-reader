@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2008-2023 NV Access Limited, Babbage B.V, Bram Duvigneau
@@ -67,7 +67,7 @@ class BrailleDisplayDriver(braille.display.driver.BrailleDisplayDriver):
 		self._keyCheckTimer = wx.PyTimer(self._handleKeyPresses)
 		self._keyCheckTimer.Start(KEY_CHECK_INTERVAL)
 		# BRLTTY simulates key presses for braille typing keys, so let BRLTTY handle them.
-		# NVDA may eventually implement this itself, but there's no reason to deny BRLTTY users this functionality in the meantime.
+		# Aslan may eventually implement this itself, but there's no reason to deny BRLTTY users this functionality in the meantime.
 		self._con.ignoreKeys(brlapi.rangeType_type, (brlapi.KEY_TYPE_SYM,))
 
 	def terminate(self):

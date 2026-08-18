@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2021-2025 NV Access Limited, Łukasz Golonka, Bill Dengler
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -92,7 +92,7 @@ Logger = Callable[[str], None]
 def SetForegroundWindow(window: Window, logger: Logger) -> bool:
 	"""This may be unreliable, there are conditions on which processes can set the foreground window.
 	https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setforegroundwindow#remarks
-	Additionally, note that this code is run by the Robot Framework test runner, not NVDA.
+	Additionally, note that this code is run by the Robot Framework test runner, not Aslan.
 	"""
 	assert window is not None
 	assert bool(window.hwndVal)

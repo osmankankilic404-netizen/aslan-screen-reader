@@ -1,8 +1,8 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Joseph Lee, Derek Riemer, Davy Kager, Rob Meredith,
 # Marlon Brandão de Sousa, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """
 Implementation of cursor managers.
@@ -153,8 +153,8 @@ class FindDialog(
 	def onOk(self, evt):
 		text = self.findTextField.GetValue()
 		caseSensitive = self.caseSensitiveCheckBox.GetValue()
-		# We must use core.callLater rather than wx.CallLater to ensure that the callback runs within NVDA's core pump.
-		# If it didn't, and it directly or indirectly called wx.Yield, it could start executing NVDA's core pump from within the yield, causing recursion.
+		# We must use core.callLater rather than wx.CallLater to ensure that the callback runs within Aslan's core pump.
+		# If it didn't, and it directly or indirectly called wx.Yield, it could start executing Aslan's core pump from within the yield, causing recursion.
 		core.callLater(
 			100,
 			self.activeCursorManager.doFindText,
@@ -182,7 +182,7 @@ class CursorManager(documentBase.TextContainerObject, baseObject.ScriptableObjec
 	"""
 
 	# Whether or not 'gainFocus' events handled by this CursorManager should update the caret position.
-	# If NVDA fully manages the caret (such as for reviewCursorManagers and virtualBuffers) then they should.
+	# If Aslan fully manages the caret (such as for reviewCursorManagers and virtualBuffers) then they should.
 	# However if the caret is managed by the application,
 	# We trust that the application will move the caret itself if firing focus events on inner content.
 	_focusEventMustUpdateCaretPosition = False
@@ -252,7 +252,7 @@ class CursorManager(documentBase.TextContainerObject, baseObject.ScriptableObjec
 	):
 		if isScriptWaiting():
 			# Moving / reporting is quite costly, so we don't want to do it if there are more scripts waiting.
-			# Otherwise, NVDA could become unusable while it processes many backed up scripts.
+			# Otherwise, Aslan could become unusable while it processes many backed up scripts.
 			return
 		oldInfo = self.makeTextInfo(posConstant)
 		info = oldInfo.copy()
@@ -346,7 +346,7 @@ class CursorManager(documentBase.TextContainerObject, baseObject.ScriptableObjec
 
 		wx.CallAfter(run)
 
-	# Translators: Input help message for NVDA's find command.
+	# Translators: Input help message for Aslan's find command.
 	script_find.__doc__ = _("find a text string from the current cursor position")
 
 	@script(
@@ -354,7 +354,7 @@ class CursorManager(documentBase.TextContainerObject, baseObject.ScriptableObjec
 			# Translators: Input help message for find next command.
 			"find the next occurrence of the previously entered text string from the current cursor's position",
 		),
-		gesture="kb:NVDA+f3",
+		gesture="kb:Aslan+f3",
 		resumeSayAllMode=sayAll.CURSOR.CARET,
 	)
 	def script_findNext(self, gesture):
@@ -372,7 +372,7 @@ class CursorManager(documentBase.TextContainerObject, baseObject.ScriptableObjec
 			# Translators: Input help message for find previous command.
 			"find the previous occurrence of the previously entered text string from the current cursor's position",
 		),
-		gesture="kb:NVDA+shift+f3",
+		gesture="kb:Aslan+shift+f3",
 		resumeSayAllMode=sayAll.CURSOR.CARET,
 	)
 	def script_findPrevious(self, gesture):
@@ -698,7 +698,7 @@ class CursorManager(documentBase.TextContainerObject, baseObject.ScriptableObjec
 		"kb:shift+control+home": "selectToTopOfDocument",
 		"kb:control+a": "selectAll",
 		"kb:control+c": "copyToClipboard",
-		"kb:NVDA+Control+f": "find",
+		"kb:Aslan+Control+f": "find",
 		"kb:alt+upArrow": "moveBySentence_back",
 		"kb:alt+downArrow": "moveBySentence_forward",
 	}
@@ -725,7 +725,7 @@ class ReviewCursorManager(CursorManager):
 	Thus, the underlying text range need not support updating the caret or selection.
 	"""
 
-	# As NVDA manages the caret virtually,
+	# As Aslan manages the caret virtually,
 	# It is necessary for 'gainFocus' events to update the caret.
 	_focusEventMustUpdateCaretPosition = True
 

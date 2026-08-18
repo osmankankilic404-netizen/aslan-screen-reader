@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited, Cyrille Bougot, Cary-rowen
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Flags used to define the possible values for an option in the configuration.
 Use Flag.MEMBER.value to set a new value or compare with an option in the config;
@@ -26,13 +26,13 @@ if TYPE_CHECKING:
 
 
 @unique
-class NVDAKey(DisplayStringIntFlag):
-	"""IntFlag enumeration containing the possible config values for "Select NVDA Modifier Keys" option in
+class AslanKey(DisplayStringIntFlag):
+	"""IntFlag enumeration containing the possible config values for "Select Aslan Modifier Keys" option in
 	keyboard settings.
 
-	Use NVDAKey.MEMBER.value to compare with the config;
+	Use AslanKey.MEMBER.value to compare with the config;
 	the config stores a bitwise combination of one or more of these values.
-	use NVDAKey.MEMBER.displayString in the UI for a translatable description of this member.
+	use AslanKey.MEMBER.displayString in the UI for a translatable description of this member.
 	"""
 
 	CAPS_LOCK = 1
@@ -45,9 +45,9 @@ class NVDAKey(DisplayStringIntFlag):
 		from keyLabels import localizedKeyLabels
 
 		return {
-			NVDAKey.CAPS_LOCK: localizedKeyLabels["capslock"],
-			NVDAKey.NUMPAD_INSERT: localizedKeyLabels["numpadinsert"],
-			NVDAKey.EXTENDED_INSERT: localizedKeyLabels["insert"],
+			AslanKey.CAPS_LOCK: localizedKeyLabels["capslock"],
+			AslanKey.NUMPAD_INSERT: localizedKeyLabels["numpadinsert"],
+			AslanKey.EXTENDED_INSERT: localizedKeyLabels["insert"],
 		}
 
 
@@ -404,7 +404,7 @@ class RemoteServerType(DisplayStringFlag):
 		return {
 			# Translators: Use an existing Remote control server
 			RemoteServerType.EXISTING: pgettext("remote", "Use existing"),
-			# Translators: Use NVDA as the Remote control server
+			# Translators: Use Aslan as the Remote control server
 			RemoteServerType.LOCAL: pgettext("remote", "Host locally"),
 		}
 
@@ -426,17 +426,17 @@ class LoggingLevel(DisplayStringIntEnum):
 	@property
 	def _displayStringLabels(self) -> dict[int, str]:
 		return {
-			# Translators: One of the log levels of NVDA (the disabled mode turns off logging completely).
+			# Translators: One of the log levels of Aslan (the disabled mode turns off logging completely).
 			self.OFF: _("disabled"),
-			# Translators: One of the log levels of NVDA (the info mode shows info as NVDA runs).
+			# Translators: One of the log levels of Aslan (the info mode shows info as Aslan runs).
 			self.INFO: _("info"),
-			# Translators: One of the log levels of NVDA (the debug warning shows debugging messages and warnings as NVDA runs).
+			# Translators: One of the log levels of Aslan (the debug warning shows debugging messages and warnings as Aslan runs).
 			self.DEBUGWARNING: _("debug warning"),
-			# Translators: One of the log levels of NVDA (the input/output shows keyboard commands and/or braille commands as well as speech and/or braille output of NVDA).
+			# Translators: One of the log levels of Aslan (the input/output shows keyboard commands and/or braille commands as well as speech and/or braille output of Aslan).
 			self.IO: _("input/output"),
-			# Translators: One of the log levels of NVDA (the debug mode shows debug messages as NVDA runs).
+			# Translators: One of the log levels of Aslan (the debug mode shows debug messages as Aslan runs).
 			self.DEBUG: _("debug"),
-			# Translators: One of the log levels of NVDA (the "debug (unredacted)" mode mode logs debug messages
+			# Translators: One of the log levels of Aslan (the "debug (unredacted)" mode mode logs debug messages
 			# without redacting secrets).
 			self.DEBUG_UNREDACTED: _("debug (unredacted)"),
 		}
@@ -445,7 +445,7 @@ class LoggingLevel(DisplayStringIntEnum):
 @unique
 class PlayErrorSound(DisplayStringIntEnum):
 	"""Enumeration containing the possible config values to play a sound when an error is logged, depending on
-	NVDA version type.
+	Aslan version type.
 
 	Use PlayErrorSound.MEMBER.value to compare with the config;
 	use PlayErrorSound.MEMBER.displayString in the UI for a translatable description of this member.
@@ -461,7 +461,7 @@ class PlayErrorSound(DisplayStringIntEnum):
 			PlayErrorSound.ONLY_IN_TEST_VERSIONS: pgettext(
 				"advanced.playErrorSound",
 				# Translators: Label for a value in the Play a sound for logged errors combobox, in the Advanced settings.
-				"Only in NVDA test versions",
+				"Only in Aslan test versions",
 			),
 			# Translators: Label for a value in the Play a sound for logged errors combobox, in the Advanced settings.
 			PlayErrorSound.YES: pgettext("advanced.playErrorSound", "Yes"),

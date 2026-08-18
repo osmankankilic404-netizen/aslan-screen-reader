@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2008-2025 NV Access Limited, Leonard de Ruijter, Julien Cochuyt, Cyrille Bougot
 
-"""Provides an interactive Python console which can be run from within NVDA.
+"""Provides an interactive Python console which can be run from within Aslan.
 To use, call L{initialize} to create a singleton instance of the console GUI. This can then be accessed externally as L{consoleUI}.
 """
 
@@ -144,12 +144,12 @@ class CommandCompiler(codeop.CommandCompiler):
 
 
 class PythonConsole(code.InteractiveConsole, AutoPropertyObject):
-	"""An interactive Python console for NVDA which directs output to supplied functions.
+	"""An interactive Python console for Aslan which directs output to supplied functions.
 	This is necessary for a Python console with input/output other than stdin/stdout/stderr.
 	Input is always received via the L{push} method.
 	This console handles redirection of stdout and stderr and prevents clobbering of the gettext "_" builtin.
 	The console's namespace is populated with useful modules
-	and can be updated with a snapshot of NVDA's state using L{updateNamespaceSnapshotVars}.
+	and can be updated with a snapshot of Aslan's state using L{updateNamespaceSnapshotVars}.
 	"""
 
 	def __init__(self, outputFunc, setPromptFunc, exitFunc, echoFunc=None, **kwargs):
@@ -162,7 +162,7 @@ class PythonConsole(code.InteractiveConsole, AutoPropertyObject):
 		#: @type: dict
 		self.namespace = {}
 		self.initNamespace()
-		#: The variables last added to the namespace containing a snapshot of NVDA's state.
+		#: The variables last added to the namespace containing a snapshot of Aslan's state.
 		#: @type: Optional[dict]
 		self._namespaceSnapshotVars = None
 
@@ -246,9 +246,9 @@ class PythonConsole(code.InteractiveConsole, AutoPropertyObject):
 		)
 
 	def updateNamespaceSnapshotVars(self):
-		"""Update the console namespace with a snapshot of NVDA's current state.
+		"""Update the console namespace with a snapshot of Aslan's current state.
 		This creates/updates variables for the current focus, navigator object, etc.
-		Typically, used before the NVDA python console is opened, after which, calls
+		Typically, used before the Aslan python console is opened, after which, calls
 		to the 'api' module will refer to this new focus.
 		"""
 
@@ -283,7 +283,7 @@ class PythonConsole(code.InteractiveConsole, AutoPropertyObject):
 		self.namespace.update(self._namespaceSnapshotVars)
 
 	def removeNamespaceSnapshotVars(self):
-		"""Remove the variables from the console namespace containing the last snapshot of NVDA's state.
+		"""Remove the variables from the console namespace containing the last snapshot of Aslan's state.
 		This removes the variables added by L{updateNamespaceSnapshotVars}.
 		"""
 		if not self._namespaceSnapshotVars:
@@ -300,12 +300,12 @@ class ConsoleUI(
 	gui.contextHelp.ContextHelpMixin,
 	wx.Frame,  # wxPython does not seem to call base class initializer, put last in MRO
 ):
-	"""The NVDA Python console GUI."""
+	"""The Aslan Python console GUI."""
 
 	helpId = "PythonConsole"
 
 	def __init__(self, parent):
-		super().__init__(parent, wx.ID_ANY, _("NVDA Python Console"))
+		super().__init__(parent, wx.ID_ANY, _("Aslan Python Console"))
 		self.Bind(wx.EVT_ACTIVATE, self.onActivate)
 		self.Bind(wx.EVT_CLOSE, self.onClose)
 		mainSizer = wx.BoxSizer(wx.VERTICAL)
@@ -566,7 +566,7 @@ class ConsoleUI(
 
 
 def initialize():
-	"""Initialize the NVDA Python console GUI.
+	"""Initialize the Aslan Python console GUI.
 	This creates a singleton instance of the console GUI. This is accessible as L{consoleUI}. This may be manipulated externally.
 	"""
 	global consoleUI

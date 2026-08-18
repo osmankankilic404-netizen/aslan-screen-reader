@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2022-2025 NV Access Limited, Cyrille Bougot, Leonard de Ruijter
@@ -47,7 +47,7 @@ from config.profileUpgradeSteps import (
 	upgradeConfigFrom_21_to_22,
 )
 from config.configFlags import (
-	NVDAKey,
+	AslanKey,
 	ShowMessages,
 	ReportLineIndentation,
 	ReportCellBorders,
@@ -724,58 +724,58 @@ class Config_profileUpgradeSteps_upgradeConfigFrom_8_to_9_tetherTo(unittest.Test
 class Config_profileUpgradeSteps_upgradeConfigFrom_9_to_10(unittest.TestCase):
 	def _checkOldKeyRemoved(self, profile: configobj.ConfigObj) -> None:
 		with self.assertRaises(KeyError):
-			profile["keyboard"]["useCapsLockAsNVDAModifierKey"]
+			profile["keyboard"]["useCapsLockAsAslanModifierKey"]
 		with self.assertRaises(KeyError):
-			profile["keyboard"]["useNumpadInsertAsNVDAModifierKey"]
+			profile["keyboard"]["useNumpadInsertAsAslanModifierKey"]
 		with self.assertRaises(KeyError):
-			profile["keyboard"]["useExtendedInsertAsNVDAModifierKey"]
+			profile["keyboard"]["useExtendedInsertAsAslanModifierKey"]
 
 	def test_DefaultProfile_Unmodified(self):
-		"""Keyboard settings, NVDA Modifiers Keys option not modified in default profile."""
+		"""Keyboard settings, Aslan Modifiers Keys option not modified in default profile."""
 
 		configString = "[keyboard]"
 		profile = _loadProfile(configString)
 		upgradeConfigFrom_9_to_10(profile)
 		self._checkOldKeyRemoved(profile)
 		with self.assertRaises(KeyError):
-			profile["keyboard"]["NVDAModifierKeys"]
+			profile["keyboard"]["AslanModifierKeys"]
 
 	def test_DefaultProfile_setCapsLockTrue(self):
-		"""Keyboard settings, Caps Lock enabled as NVDA Modifier key in default profile; other keys remain enabled
+		"""Keyboard settings, Caps Lock enabled as Aslan Modifier key in default profile; other keys remain enabled
 		(default).
 		"""
 
 		configString = """
 [keyboard]
-	useCapsLockAsNVDAModifierKey = True
+	useCapsLockAsAslanModifierKey = True
 """
 		profile = _loadProfile(configString)
 		upgradeConfigFrom_9_to_10(profile)
 		self._checkOldKeyRemoved(profile)
 		self.assertEqual(
-			profile["keyboard"]["NVDAModifierKeys"],
-			NVDAKey.CAPS_LOCK.value | NVDAKey.NUMPAD_INSERT.value | NVDAKey.EXTENDED_INSERT.value,
+			profile["keyboard"]["AslanModifierKeys"],
+			AslanKey.CAPS_LOCK.value | AslanKey.NUMPAD_INSERT.value | AslanKey.EXTENDED_INSERT.value,
 		)
 
 	def test_DefaultProfile_setCapsLockTrueOtherFalse(self):
-		"""Keyboard settings, Caps Lock enabled as NVDA Modifier key in default profile; other keys disabled."""
+		"""Keyboard settings, Caps Lock enabled as Aslan Modifier key in default profile; other keys disabled."""
 
 		configString = """
 [keyboard]
-	useCapsLockAsNVDAModifierKey = True
-	useNumpadInsertAsNVDAModifierKey = False
-	useExtendedInsertAsNVDAModifierKey = False
+	useCapsLockAsAslanModifierKey = True
+	useNumpadInsertAsAslanModifierKey = False
+	useExtendedInsertAsAslanModifierKey = False
 """
 		profile = _loadProfile(configString)
 		upgradeConfigFrom_9_to_10(profile)
 		self._checkOldKeyRemoved(profile)
 		self.assertEqual(
-			profile["keyboard"]["NVDAModifierKeys"],
-			NVDAKey.CAPS_LOCK.value,
+			profile["keyboard"]["AslanModifierKeys"],
+			AslanKey.CAPS_LOCK.value,
 		)
 
 	def test_ManualProfile_setNumpadInsertFalseExtendedInsertFalse(self):
-		"""Keyboard settings, NVDA Modifier keys option set on:
+		"""Keyboard settings, Aslan Modifier keys option set on:
 		- numpad insert and extended insert explicitely disabled in the manual profile, while caps lock was still
 		enabled in default profile
 		- caps lock explicitely disabled in the default profile afterwards
@@ -786,20 +786,20 @@ class Config_profileUpgradeSteps_upgradeConfigFrom_9_to_10(unittest.TestCase):
 		See issue #14527 for full description.
 		"""
 
-		# Note that this config is not possible in default profile using only NVDA GUI options, i.e. not using
-		# Python console or manually editing nvda.ini.
+		# Note that this config is not possible in default profile using only Aslan GUI options, i.e. not using
+		# Python console or manually editing aslan.ini.
 		configString = """
 [keyboard]
-	useNumpadInsertAsNVDAModifierKey = False
-	useExtendedInsertAsNVDAModifierKey = False
+	useNumpadInsertAsAslanModifierKey = False
+	useExtendedInsertAsAslanModifierKey = False
 """
 		profile = _loadProfile(configString)
 		upgradeConfigFrom_9_to_10(profile)
 		self._checkOldKeyRemoved(profile)
-		# Check that Caps Lock is restored to avoid having no NVDA modifier key at all.
+		# Check that Caps Lock is restored to avoid having no Aslan modifier key at all.
 		self.assertEqual(
-			profile["keyboard"]["NVDAModifierKeys"],
-			NVDAKey.CAPS_LOCK.value,
+			profile["keyboard"]["AslanModifierKeys"],
+			AslanKey.CAPS_LOCK.value,
 		)
 
 
@@ -1061,7 +1061,7 @@ class Config_upgradeProfileSteps_upgradeProfileFrom_16_to_17(unittest.TestCase):
 		v15Config = """
 [remote]
 	[[connections]]
-		last_connected = nvdaremote:6837, 192.168.0.123:456
+		last_connected = aslanremote:6837, 192.168.0.123:456
 	[[controlserver]]
 		autoconnect = True
 		self_hosted = True
@@ -1070,14 +1070,14 @@ class Config_upgradeProfileSteps_upgradeProfileFrom_16_to_17(unittest.TestCase):
 		port = 31415
 		key = superSecurePassw0rd
 	[[seen_motds]]
-		nvdaremote.com:6837=7B502C3A1F48C8609AE212CDFB639DEE39673F5E
+		aslanremote.com:6837=7B502C3A1F48C8609AE212CDFB639DEE39673F5E
 	[[trusted_certs]]
 		sketchyServer.example.com:6837 = 64EC88CA00B268E5BA1A35678A1B5316D212F4F366B2477232534A8AECA37F3C
 """
 		expectedV16Config = {
 			"remote": {
 				"connections": {
-					"lastConnected": ["nvdaremote:6837", "192.168.0.123:456"],
+					"lastConnected": ["aslanremote:6837", "192.168.0.123:456"],
 				},
 				"controlServer": {
 					"autoconnect": "True",
@@ -1088,7 +1088,7 @@ class Config_upgradeProfileSteps_upgradeProfileFrom_16_to_17(unittest.TestCase):
 					"key": "superSecurePassw0rd",
 				},
 				"seenMOTDs": {
-					"nvdaremote.com:6837": "7B502C3A1F48C8609AE212CDFB639DEE39673F5E",
+					"aslanremote.com:6837": "7B502C3A1F48C8609AE212CDFB639DEE39673F5E",
 				},
 				"trustedCertificates": {
 					"sketchyServer.example.com:6837": "64EC88CA00B268E5BA1A35678A1B5316D212F4F366B2477232534A8AECA37F3C",

@@ -1,11 +1,11 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2025 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton and others.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 """Bridge Transport Module.
 
-Provides functionality to bridge two NVDA Remote transports together,
+Provides functionality to bridge two Aslan Remote transports together,
 enabling bidirectional message passing with filtering and routing.
 
 :param transport1: First transport instance to bridge
@@ -34,7 +34,7 @@ _CallbackT = Callable[..., None]
 
 
 class BridgeTransport:
-	"""A bridge between two NVDA Remote transport instances.
+	"""A bridge between two Aslan Remote transport instances.
 
 	Creates a bidirectional bridge between two Transport instances,
 	allowing them to exchange messages while providing message filtering capabilities.

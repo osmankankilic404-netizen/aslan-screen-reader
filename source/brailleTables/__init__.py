@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2008-2024 NV Access Limited, Joseph Lee, Babbage B.V., Julien Cochuyt, Leonard de Ruijter
@@ -88,7 +88,7 @@ _outputTableForLangs: dict[str, str] = dict()
 
 
 def getDefaultTableForCurLang(tableType: TableType) -> str:
-	"""Gets the file name of the braille table for the current NVDA language.
+	"""Gets the file name of the braille table for the current Aslan language.
 	:param tableType: INPUT (back-translation) or OUTPUT (translation).
 	:return: A L{BrailleTable} fileName.
 	"""
@@ -126,8 +126,8 @@ def addTable(
 	:param output: True if this table can be used for output, False if not.
 	:param input: True if this table can be used for input, False if not.
 	:param source: An identifier describing the source of the table.
-	:param inputForLangs: A set of languages available in NVDA or C{None}.
-	:param outputForLangs: A set of languages available in NVDA or C{None}.
+	:param inputForLangs: A set of languages available in Aslan or C{None}.
+	:param outputForLangs: A set of languages available in Aslan or C{None}.
 	"""
 	if not output and not input:
 		raise ValueError("input and output cannot both be False")

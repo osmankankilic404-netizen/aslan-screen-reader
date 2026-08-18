@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2016-2023 NV Access Limited, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""Utilities for converting NVDA speech sequences to XML and vice versa.
+"""Utilities for converting Aslan speech sequences to XML and vice versa.
 Several synthesizers accept XML, either SSML or their own schemas.
 L{SpeechXmlConverter} is the base class for conversion to XML.
 You can subclass this to support specific XML schemas.
@@ -76,13 +76,13 @@ RE_PERCENTAGE = re.compile(r"^(?P<percentage>\d+(\.\d+)?)%$")
 REPLACEMENT_CHAR = textUtils.REPLACEMENT_CHAR
 
 
-def toXmlLang(nvdaLang: str) -> str:
-	"""Convert an NVDA language to an XML language."""
-	return nvdaLang.replace("_", "-")
+def toXmlLang(aslanLang: str) -> str:
+	"""Convert an Aslan language to an XML language."""
+	return aslanLang.replace("_", "-")
 
 
 def toNvdaLang(xmlLang: str) -> str:
-	"""Convert an XML language to an NVDA language."""
+	"""Convert an XML language to an Aslan language."""
 	return xmlLang.replace("-", "_")
 
 
@@ -114,7 +114,7 @@ def _escapeXml(text):
 
 class XmlBalancer:
 	"""Generates balanced XML given a set of commands.
-	NVDA speech sequences are linear, but XML is hierarchical, which makes conversion challenging.
+	Aslan speech sequences are linear, but XML is hierarchical, which makes conversion challenging.
 	For example, a speech sequence might change the pitch, then change the volume, then reset the pitch to default.
 	In XML, resetting to default generally requires closing the tag, but that also requires closing the outer tag.
 	This class transparently handles these issues, balancing the XML as appropriate.
@@ -219,8 +219,8 @@ class XmlBalancer:
 
 
 class SpeechXmlConverter:
-	"""Base class for conversion of NVDA speech sequences to XML.
-	This class converts an NVDA speech sequence into XmlBalancer commands
+	"""Base class for conversion of Aslan speech sequences to XML.
+	This class converts an Aslan speech sequence into XmlBalancer commands
 	which can then be passed to L{XmlBalancer} to produce correct XML.
 
 	The L{generateBalancerCommands} method takes a speech sequence
@@ -266,7 +266,7 @@ class SpeechXmlConverter:
 
 
 class SsmlConverter(SpeechXmlConverter):
-	"""Converts an NVDA speech sequence to SSML."""
+	"""Converts an Aslan speech sequence to SSML."""
 
 	def __init__(self, defaultLanguage: str):
 		self.defaultLanguage = toXmlLang(defaultLanguage)
@@ -325,8 +325,8 @@ class SsmlConverter(SpeechXmlConverter):
 
 
 class SpeechXmlParser:
-	"""Base class for parsing of NVDA speech sequences from XML.
-	This class converts XML to an NVDA speech sequence.
+	"""Base class for parsing of Aslan speech sequences from XML.
+	This class converts XML to an Aslan speech sequence.
 
 	Callers can call L{convertFromXml} with XML to generate a speech sequence.
 
@@ -375,7 +375,7 @@ MarkCallbackT = Callable[[str], None]
 
 
 class SsmlParser(SpeechXmlParser):
-	"""Parses SSML into an NVDA speech sequence."""
+	"""Parses SSML into an Aslan speech sequence."""
 
 	def __init__(self, markCallback: MarkCallbackT | None = None):
 		"""Constructor.

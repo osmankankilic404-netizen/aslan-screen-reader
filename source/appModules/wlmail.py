@@ -1,6 +1,6 @@
 # appModules/wlmail.py
-# A part of NonVisual Desktop Access (NVDA)
-# Copyright (C) 2006-2010 NVDA Contributors <http://www.nvda-project.org/>
+# A part of NonVisual Desktop Access (Aslan)
+# Copyright (C) 2006-2010 Aslan Contributors <http://www.aslan-project.org/>
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
@@ -9,7 +9,7 @@ import controlTypes
 import api
 import winUser
 from keyboardHandler import KeyboardInputGesture
-from NVDAObjects.IAccessible.MSHTML import MSHTML
+from AslanObjects.IAccessible.MSHTML import MSHTML
 from . import msimn
 
 
@@ -29,7 +29,7 @@ class AboutBlankDocument(MSHTML):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if (
 			obj.windowClassName == "Internet Explorer_Server"
 			and obj.role == controlTypes.Role.DOCUMENT

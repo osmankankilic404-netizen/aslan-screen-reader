@@ -1,14 +1,14 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from locale import strxfrm
 import os.path
 
 import globalVars
 from logHandler import log
-from NVDAState import WritePaths
+from AslanState import WritePaths
 import synthDriverHandler
 
 from .types import DictionaryType, SpeechDictDefinition, VoiceSpeechDictDefinition
@@ -44,7 +44,7 @@ def _addSpeechDictionaries():
 				source=DictionaryType.TEMP,
 				mandatory=True,
 				# Translators: Title for the temporary speech dictionary (the dictionary that is active as long
-				# as NVDA is running).
+				# as Aslan is running).
 				displayName=_("Temporary dictionary"),
 			),
 			VoiceSpeechDictDefinition(),

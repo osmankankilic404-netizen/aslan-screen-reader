@@ -1,14 +1,14 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Leonard de Ruijter, Tobias Heath
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file:
-# https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file:
+# https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 
 """Unit tests for the UIAHandler hung-window guard.
 
 These cover the mechanism that drops UIA events from a not-responding
-application so it cannot freeze NVDA or flood the log.
+application so it cannot freeze Aslan or flood the log.
 """
 
 from unittest import TestCase
@@ -17,7 +17,7 @@ from unittest.mock import patch
 from comtypes import COMError
 
 import textInfos
-from UIAHandler import getUIAUnitFromNVDAUnit, NVDAUnitsToUIAUnits, utils
+from UIAHandler import getUIAUnitFromAslanUnit, AslanUnitsToUIAUnits, utils
 import winUser
 
 
@@ -52,16 +52,16 @@ class _FakeElement:
 		)
 
 
-class Test_getUIAUnitFromNVDAUnit(TestCase):
+class Test_getUIAUnitFromAslanUnit(TestCase):
 	def test_mappedUnitReturnsUIAUnit(self):
 		self.assertEqual(
-			getUIAUnitFromNVDAUnit(textInfos.UNIT_WORD),
-			NVDAUnitsToUIAUnits[textInfos.UNIT_WORD],
+			getUIAUnitFromAslanUnit(textInfos.UNIT_WORD),
+			AslanUnitsToUIAUnits[textInfos.UNIT_WORD],
 		)
 
 	def test_unmappedUnitRaisesNotImplementedError(self):
 		with self.assertRaises(NotImplementedError):
-			getUIAUnitFromNVDAUnit(textInfos.UNIT_SENTENCE)
+			getUIAUnitFromAslanUnit(textInfos.UNIT_SENTENCE)
 
 
 class Test_getCachedWindowHandleFromEvent(TestCase):

@@ -1,8 +1,8 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Peter Vágner, Aleksey Sadovoy,
 # Joseph Lee, Arnold Loubriat, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from collections import OrderedDict
 import pkgutil
@@ -498,7 +498,7 @@ def getSynthInstance(name: str, asDefault: bool = False):
 
 
 # The synthDrivers that should be used by default.
-# The first that successfully initializes will be used when config is set to auto (I.e. new installs of NVDA).
+# The first that successfully initializes will be used when config is set to auto (I.e. new installs of Aslan).
 defaultSynthPriorityList = ["oneCore", "espeak", "silence"]
 
 

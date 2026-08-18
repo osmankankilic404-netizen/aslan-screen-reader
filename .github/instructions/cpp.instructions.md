@@ -3,17 +3,17 @@ applyTo: **/*.cpp, **/*.h
 description: This file describes the C++ code style for the project.
 ---
 
-# C++ code guidelines for NVDA
+# C++ code guidelines for Aslan
 
 ## Security-specific review checks
 
-NVDA operates with `UIAccess` privileges, injects code into other processes and handles untrusted data.
+Aslan operates with `UIAccess` privileges, injects code into other processes and handles untrusted data.
 Scrutinize code for privilege escalation and data leaks.
 
 * Untrusted input & web parsing:
   * Validate that parsing of external structures (HTML, ARIA attributes, UIA/IA2 properties) handles malformed, excessively long or deeply nested inputs safely without causing infinite loops or memory crashes.
-* IPC and injected C++ code (`NVDAHelper`):
-  * Ensure data sent via RPC or IPC from injected processes to the main NVDA process is strictly validated for length and type.
+* IPC and injected C++ code (`AslanHelper`):
+  * Ensure data sent via RPC or IPC from injected processes to the main Aslan process is strictly validated for length and type.
   * Flag unsafe string handling, missing bounds checks or improper buffer allocations.
 
 ## Architecture / performance checks

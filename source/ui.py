@@ -1,8 +1,8 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, James Teh, Dinesh Kaushal, Davy Kager, André-Abush Clause,
 # Babbage B.V., Leonard de Ruijter, Michael Curran, Accessolutions, Julien Cochuyt, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """User interface functionality.
 This refers to the user interface presented by the screen reader alone, not the graphical user interface.
@@ -63,13 +63,13 @@ def _warnBrowsableMessageNotAvailableOnSecureScreens(title: str | None = None) -
 
 	if not title:
 		browsableMessageUnavailableMsg: str = _(
-			# Translators: This is the message for a warning shown if NVDA cannot open a browsable message window
+			# Translators: This is the message for a warning shown if Aslan cannot open a browsable message window
 			# when Windows is on a secure screen (sign-on screen / UAC prompt).
 			"This feature is unavailable while on secure screens such as the sign-on screen or UAC prompt.",
 		)
 	else:
 		browsableMessageUnavailableMsg: str = _(
-			# Translators: This is the message for a warning shown if NVDA cannot open a browsable message window
+			# Translators: This is the message for a warning shown if Aslan cannot open a browsable message window
 			# when Windows is on a secure screen (sign-on screen / UAC prompt). This prompt includes the title
 			# of the Window that could not be opened for context.
 			# The {title} will be replaced with the title.
@@ -82,7 +82,7 @@ def _warnBrowsableMessageNotAvailableOnSecureScreens(title: str | None = None) -
 	wx.CallAfter(
 		gui.messageBox,
 		browsableMessageUnavailableMsg,
-		# Translators: This is the title for a warning dialog, shown if NVDA cannot open a browsable message.
+		# Translators: This is the title for a warning dialog, shown if Aslan cannot open a browsable message.
 		caption=_("Feature unavailable."),
 		style=wx.ICON_ERROR | wx.OK,
 	)
@@ -108,7 +108,7 @@ def browseableMessage(
 	The message will be presented in an HTML document.
 
 	:param message: The message in either html or text.
-	:param title: The title for the message, defaults to "NVDA Message".
+	:param title: The title for the message, defaults to "Aslan Message".
 	:param isHtml: Whether the message is html, defaults to False.
 	:param closeButton: Whether to include a "close" button, defaults to False.
 	:param copyButton: Whether to include a "copy" (to clipboard) button, defaults to False.
@@ -122,8 +122,8 @@ def browseableMessage(
 		return
 
 	if title is None:
-		# Translators: The title for the dialog used to present general NVDA messages in browse mode.
-		title = _("NVDA Message")
+		# Translators: The title for the dialog used to present general Aslan messages in browse mode.
+		title = _("Aslan Message")
 
 	htmlPath = os.path.join(globalVars.appDir, "message.html")
 
@@ -150,7 +150,7 @@ def browseableMessage(
 			closesDialog=False,
 		)
 		# The WebView captures keyboard input, so the button's accelerator never reaches it. The HTML
-		# routes Alt+C to the same handler via the nvda-action://copy URL (see HtmlMessageDialog).
+		# routes Alt+C to the same handler via the aslan-action://copy URL (see HtmlMessageDialog).
 		dialog.registerAction(
 			"copy",
 			lambda: _copyBrowseableMessageToClipboard(dialog._messageControl.GetPageText()),
@@ -187,7 +187,7 @@ def delayedMessage(
 
 	In most cases, :func:`ui.message` should be preferred.
 	However, in cases where a message is presented at the same time as a UI change
-	(for instance as confirmation that the action performed by an item in the NVDA menu has been performed),
+	(for instance as confirmation that the action performed by an item in the Aslan menu has been performed),
 	this function may be needed so that the message is not immediately interrupted by the UI changing.
 
 	The message will be presented in both speech and braille.
@@ -226,7 +226,7 @@ def reportTextCopiedToClipboard(text: str | None = None):
 		# or the clipboard content did not match what was just copied.
 		message(_("Unable to copy"))
 		return
-	# Depending on the speech synthesizer, large amount of spoken text can freeze NVDA (#11843)
+	# Depending on the speech synthesizer, large amount of spoken text can freeze Aslan (#11843)
 	textLength = len(text)
 	if textLength < 1024:
 		spokenText = text

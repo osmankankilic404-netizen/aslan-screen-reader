@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -9,7 +9,7 @@ import os
 from typing import Any
 
 from logHandler import log
-import NVDAState
+import AslanState
 
 from .models.channel import UpdateChannel
 
@@ -50,7 +50,7 @@ class _AddonStoreSettings:
 
 	def __init__(self):
 		self._storeSettingsFile = os.path.join(
-			NVDAState.WritePaths.addonStoreDir,
+			AslanState.WritePaths.addonStoreDir,
 			self._CACHE_FILENAME,
 		)
 		self._showWarning = True
@@ -65,7 +65,7 @@ class _AddonStoreSettings:
 			return
 		except (json.JSONDecodeError, UnicodeDecodeError):
 			log.exception("Invalid add-on store settings")
-			if NVDAState.shouldWriteToDisk():
+			if AslanState.shouldWriteToDisk():
 				os.remove(self._storeSettingsFile)
 			return
 		else:
@@ -81,7 +81,7 @@ class _AddonStoreSettings:
 
 		except (KeyError, ValueError):
 			log.exception(f"Invalid add-on store cache:\n{settingsDict}")
-			if NVDAState.shouldWriteToDisk():
+			if AslanState.shouldWriteToDisk():
 				os.remove(self._storeSettingsFile)
 			return
 
@@ -98,7 +98,7 @@ class _AddonStoreSettings:
 				)
 
 	def save(self):
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			log.error("Shouldn't write to disk, not saving add-on store settings")
 			return
 		settingsDict = {

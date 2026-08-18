@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2025 NV Access Limited, James Teh, Leonard de Ruijter, Cyrille Bougot, Cary-rowen, hwf1324
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -7,7 +7,7 @@
 This module provides functionality to capture an image from the screen
 for the current navigator object, pass it to a content recognizer for recognition
 and present the result to the user so they can read it with cursor keys, etc.
-NVDA scripts or GUI call the L{recognizeNavigatorObject} function with the recognizer they wish to use.
+Aslan scripts or GUI call the L{recognizeNavigatorObject} function with the recognizer they wish to use.
 """
 
 import ctypes
@@ -15,8 +15,8 @@ from typing import Optional, Union, TYPE_CHECKING
 import api
 import ui
 import screenBitmap
-import NVDAObjects.window
-from NVDAObjects.behaviors import LiveText
+import AslanObjects.window
+from AslanObjects.behaviors import LiveText
 import controlTypes
 import browseMode
 import cursorManager
@@ -72,10 +72,10 @@ def _captureWithWgc(imageInfo: RecogImageInfo) -> ctypes.Array:
 	return _wgcCapture.captureImage(imageInfo)
 
 
-def _shouldBlockScreenCurtainEnable(focusObj: NVDAObjects.NVDAObject) -> bool:
+def _shouldBlockScreenCurtainEnable(focusObj: AslanObjects.AslanObject) -> bool:
 	"""Return whether enabling Screen Curtain should be blocked for an active recognition result."""
 	return (
-		isinstance(focusObj, RefreshableRecogResultNVDAObject)
+		isinstance(focusObj, RefreshableRecogResultAslanObject)
 		and focusObj.recognizer.allowAutoRefresh
 		and not _isWgcCaptureSupported()
 	)
@@ -92,8 +92,8 @@ def _captureImage(imageInfo: RecogImageInfo) -> ctypes.Array:
 	return _captureWithGdi(imageInfo)
 
 
-class RecogResultNVDAObject(cursorManager.CursorManager, NVDAObjects.window.Window):
-	"""Fake NVDAObject used to present a recognition result in a cursor manager.
+class RecogResultAslanObject(cursorManager.CursorManager, AslanObjects.window.Window):
+	"""Fake AslanObject used to present a recognition result in a cursor manager.
 	This allows the user to read the result with cursor keys, etc.
 	Pressing enter will activate (e.g. click) the text at the cursor.
 	Pressing escape dismisses the recognition result.
@@ -130,7 +130,7 @@ class RecogResultNVDAObject(cursorManager.CursorManager, NVDAObjects.window.Wind
 			# we want the cursor to move to the focus (#3145).
 			# However, we don't want this for recognition results, as these aren't focusable.
 			ti._enteringFromOutside = True
-		# This might get called from a background thread and all NVDA events must run in the main thread.
+		# This might get called from a background thread and all Aslan events must run in the main thread.
 		eventHandler.queueEvent("gainFocus", self)
 
 	def _get_hasFocus(self) -> bool:
@@ -153,7 +153,7 @@ class RecogResultNVDAObject(cursorManager.CursorManager, NVDAObjects.window.Wind
 
 	# The find commands are tricky to support because they pop up dialogs.
 	# This moves the focus, so we lose our fake focus.
-	# See https://github.com/nvaccess/nvda/pull/7361#issuecomment-314698991
+	# See https://github.com/nvaccess/aslan/pull/7361#issuecomment-314698991
 	def script_find(self, gesture):
 		# Translators: Reported when a user tries to use a find command when it isn't supported.
 		ui.message(_("Not supported in this document"))
@@ -173,8 +173,8 @@ class RecogResultNVDAObject(cursorManager.CursorManager, NVDAObjects.window.Wind
 	}
 
 
-class RefreshableRecogResultNVDAObject(RecogResultNVDAObject, LiveText):
-	"""NVDA Object that itself is responsible for fetching the recognizition result.
+class RefreshableRecogResultAslanObject(RecogResultAslanObject, LiveText):
+	"""Aslan Object that itself is responsible for fetching the recognizition result.
 	It is also able to refresh the result at intervals or on demand when the recognizer supports it.
 	"""
 
@@ -182,7 +182,7 @@ class RefreshableRecogResultNVDAObject(RecogResultNVDAObject, LiveText):
 		self,
 		recognizer: ContentRecognizer,
 		imageInfo: RecogImageInfo,
-		obj: Optional[NVDAObjects.NVDAObject] = None,
+		obj: Optional[AslanObjects.AslanObject] = None,
 	):
 		self.recognizer = recognizer
 		self.imageInfo = imageInfo
@@ -231,7 +231,7 @@ class RefreshableRecogResultNVDAObject(RecogResultNVDAObject, LiveText):
 	@script(
 		# Translators: Describes a command.
 		description=_("Refresh the recognition result"),
-		gesture="kb:NVDA+f5",
+		gesture="kb:Aslan+f5",
 	)
 	def script_refreshBuffer(self, gesture: "inputCore.InputGesture") -> None:
 		if self.recognizer.allowAutoRefresh:
@@ -284,8 +284,8 @@ class RefreshableRecogResultNVDAObject(RecogResultNVDAObject, LiveText):
 
 #: Keeps track of the recognition in progress, if any.
 _activeRecog = None
-# Register the fake NVDA object class.
-api.fakeNVDAObjectClasses.add(RecogResultNVDAObject)
+# Register the fake Aslan object class.
+api.fakeAslanObjectClasses.add(RecogResultAslanObject)
 
 
 def recognizeNavigatorObject(recognizer: ContentRecognizer):
@@ -294,7 +294,7 @@ def recognizeNavigatorObject(recognizer: ContentRecognizer):
 	@param recognizer: The content recognizer to use.
 	"""
 	global _activeRecog
-	if isinstance(api.getFocusObject(), RecogResultNVDAObject):
+	if isinstance(api.getFocusObject(), RecogResultAslanObject):
 		# Translators: Reported when content recognition (e.g. OCR) is attempted,
 		# but the user is already reading a content recognition result.
 		ui.message(_("Already in a content recognition result"))
@@ -332,5 +332,5 @@ def recognizeNavigatorObject(recognizer: ContentRecognizer):
 		_activeRecog.recognizer.cancel()
 	# Translators: Reporting when content recognition (e.g. OCR) begins.
 	ui.message(_("Recognizing"))
-	_activeRecog = RefreshableRecogResultNVDAObject(recognizer=recognizer, imageInfo=imgInfo)
+	_activeRecog = RefreshableRecogResultAslanObject(recognizer=recognizer, imageInfo=imgInfo)
 	_activeRecog.start()

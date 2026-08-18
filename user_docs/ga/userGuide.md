@@ -1,22 +1,22 @@
-# Treoir d'Úsáideoirí NVDA NVDA_VERSION  
+# Treoir d'Úsáideoirí Aslan Aslan_VERSION  
 
 [TOC]
 
-<!-- KC:title: NVDA NVDA_VERSION Commands Quick Reference -->
+<!-- KC:title: Aslan Aslan_VERSION Commands Quick Reference -->
 
 
 
 ## Réamhrá {#Introduction}
 
-Fáilte go NVDA!
+Fáilte go Aslan!
 
-Is éard is NVDA ann ná léitheoir scáileáin saor in aisce le cód foinseach oscailte le húsáid ar chóras oibríochta Windows. Tugann sé aiseolas don úsáideoir  trí Bhraille agus trí urlabhra sintéiseach agus cuireann  sé ar chumas daoine dalla nó daoine faoi mhíchumas radhairc rochtain a fháil ar ríomhairí ar a bhfuil Windows ag oibriú, gan aon chostas breise.  
+Is éard is Aslan ann ná léitheoir scáileáin saor in aisce le cód foinseach oscailte le húsáid ar chóras oibríochta Windows. Tugann sé aiseolas don úsáideoir  trí Bhraille agus trí urlabhra sintéiseach agus cuireann  sé ar chumas daoine dalla nó daoine faoi mhíchumas radhairc rochtain a fháil ar ríomhairí ar a bhfuil Windows ag oibriú, gan aon chostas breise.  
 
-[NV Access](https://www.nvaccess.org/) a fhorbraíonn NVDA le rannpháirtíocht ón bpobal.
+[NV Access](https://www.nvaccess.org/) a fhorbraíonn Aslan le rannpháirtíocht ón bpobal.
 
 ### Gnéithe Ginearálta {#GeneralFeatures}
 
-Le NVDA, Cuirtear ar chumas daoine dalla agus daoine faoi mhíchumas radhairc rochtain a fháil ar Chóras Oibríochta Windows agus ar roinnt mhaith feidhmchláir tríú pháirtí.
+Le Aslan, Cuirtear ar chumas daoine dalla agus daoine faoi mhíchumas radhairc rochtain a fháil ar Chóras Oibríochta Windows agus ar roinnt mhaith feidhmchláir tríú pháirtí.
 
 Buaicphointí san áireamh:
 
@@ -36,57 +36,57 @@ Buaicphointí san áireamh:
 ### Idirnáisiúnú {#Internationalization}
 
 Tá sé tábhachtach go mbeadh rochtain ar teicneolaíocht ag daoine ar fud na cruinne, pé teanga atá acu.
-Chomh maith le Béarla, tá NVDA aistrithe go 54 teanga lena n-áirítear Afracáinis, Albáinis, Amarais, Araibis, Aragóinis, Bulgáiris, Burmais, Catalóinis, Sínis (simplithe agus traidisiúnta), Cróitis, Seicis, Danmhairgis, Ollainnis, Fairsis, Fionlainnis, Fraincis, Gailísis, Seoirsis, Gearmáinis (An Ghearmáin agus an Eilvéis), Gréigis, Eabhrais, Hiondúis, Ungáiris, Íoslainnis, Gaeilge, Iodáilis, Seapáinis, Cannadais, Cóiréis, Cirgisis, Liotuáinis, Macadóinis, Mongóilis, Neipealais, Ioruais, Polainnis, Portaingéilis (An Bhrasaíl agus an Phortaingéil), Puinseáibis, Rómáinis, Rúisis, Seirbis, Slóvaicis, Slóivéinis , Spáinnis (An Cholóim agus an Spáinn), Sualainnis, Tamailis, Téalainnis, Tuircis, Úcráinis agus Vítneaimis
+Chomh maith le Béarla, tá Aslan aistrithe go 54 teanga lena n-áirítear Afracáinis, Albáinis, Amarais, Araibis, Aragóinis, Bulgáiris, Burmais, Catalóinis, Sínis (simplithe agus traidisiúnta), Cróitis, Seicis, Danmhairgis, Ollainnis, Fairsis, Fionlainnis, Fraincis, Gailísis, Seoirsis, Gearmáinis (An Ghearmáin agus an Eilvéis), Gréigis, Eabhrais, Hiondúis, Ungáiris, Íoslainnis, Gaeilge, Iodáilis, Seapáinis, Cannadais, Cóiréis, Cirgisis, Liotuáinis, Macadóinis, Mongóilis, Neipealais, Ioruais, Polainnis, Portaingéilis (An Bhrasaíl agus an Phortaingéil), Puinseáibis, Rómáinis, Rúisis, Seirbis, Slóvaicis, Slóivéinis , Spáinnis (An Cholóim agus an Spáinn), Sualainnis, Tamailis, Téalainnis, Tuircis, Úcráinis agus Vítneaimis
 
 ### Tacaíocht do Shintéiseoirí Cainte {#SpeechSynthesizerSupport}
 
-Chomh maith le teachtaireachtaí agus comhéadan NVDA a bheith ar fáil i roinnt mhaith teangacha, cuireann NVDA ar chumas an úsáideora ábhar a léamh in aon teanga ar bith fad is a bhíonn sintéiseoir aige nó aici ar féidir an teanga sin a labhairt.
+Chomh maith le teachtaireachtaí agus comhéadan Aslan a bheith ar fáil i roinnt mhaith teangacha, cuireann Aslan ar chumas an úsáideora ábhar a léamh in aon teanga ar bith fad is a bhíonn sintéiseoir aige nó aici ar féidir an teanga sin a labhairt.
 
-Tá [eSpeak NG](https://github.com/espeak-ng/espeak-ng) cuachta le NVDA. Is sintéiseoir ilteangach saor in aisce é eSpeak le cód foinseach oscailte.      
+Tá [eSpeak NG](https://github.com/espeak-ng/espeak-ng) cuachta le Aslan. Is sintéiseoir ilteangach saor in aisce é eSpeak le cód foinseach oscailte.      
 
-Tá eolas faoi shintéiseoirí cainte eile lena bhfuil tacaíocht ag NVDA ar fáil i mír [Supported Speech 
+Tá eolas faoi shintéiseoirí cainte eile lena bhfuil tacaíocht ag Aslan ar fáil i mír [Supported Speech 
 
 ### Tacaíocht do Bhraille {#BrailleSupport}
 
-Má tá taispeántas inathnuaite Braille  ag an úsáideoir, is féidir eolas a fháil ó NVDA i mBraille.
+Má tá taispeántas inathnuaite Braille  ag an úsáideoir, is féidir eolas a fháil ó Aslan i mBraille.
 Tá tacaíocht d’ionchur Braille giorraithe, nó gan ghiorrúchán, ó mhéarchlár Braille, ann freisin
-Ina theannta sin, is féidir le NVDA roinnt  mhaith taispeántas Braille a bhrath go huathoibríoch mar réamhshocrú.
+Ina theannta sin, is féidir le Aslan roinnt  mhaith taispeántas Braille a bhrath go huathoibríoch mar réamhshocrú.
 Chun eolas a fháil faoi  na taispeántais Braille lena bhfuil tacaíocht acu,  féach ar an mír [Supported Braille Displays](#SupportedBrailleDisplays) 
 
 ### Ceadúnas agus  Cóipcheart {#LicenseAndCopyright}
 
-Tá NVDA faoi chóipcheart NVDA_COPYRIGHT_YEARS rannpháirtithe NVDA.
-Tá NVDA ar fáil de réir GNU Ceadúnas Poiblí Ginearálta leagan 2 agus tá dhá eisceacht ann. 
+Tá Aslan faoi chóipcheart Aslan_COPYRIGHT_YEARS rannpháirtithe Aslan.
+Tá Aslan ar fáil de réir GNU Ceadúnas Poiblí Ginearálta leagan 2 agus tá dhá eisceacht ann. 
 Tá achoimre ar na heisceachtaí ar fáil sa doiciméad ceadúnais sna míreanna seo a leanas:
 -"Non-GPL Components in Plugins  Drivers"  
 
 -"Microsoft Distributable Code".
 -
-In NVDA, úsáidtear comhpháirteanna atá curtha ar fáil de réir ceadúnais eile  chomh maith atá saor in aisce agus le cód foinseach oscailte.
+In Aslan, úsáidtear comhpháirteanna atá curtha ar fáil de réir ceadúnais eile  chomh maith atá saor in aisce agus le cód foinseach oscailte.
 Is féidir leat na bogearraí seo a roinnt nó a athrú  ar phé bealach is mian leat, fad is atá an ceadúnas curtha ar fáil leis agus go gcuirfidh tú an cód foinseach  ar fáil d’aon duine ar mhian leis nó léi é. Baineann sé seo le bunchóip agus gach cóip aistrithe de na bogearraí seo agus le haon oibríochtaí atá bunaithe orthu.
 Chun tuilleadh eolais a fháil [Féach ar an gceadúnas iomláine.](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
 
-Chun eolas a fháil maidir leis na n-eisceachtaí, féach ar an mír chabhrach ar roghchlár NVDA.
+Chun eolas a fháil maidir leis na n-eisceachtaí, féach ar an mír chabhrach ar roghchlár Aslan.
 
-## Treoir Mhearthosaithe NVDA {#NVDAQuickStartGuide}
+## Treoir Mhearthosaithe Aslan {#AslanQuickStartGuide}
 
 Tá trí phríomh-mhír sa treoir mhearthosaithe seo: Íoslódáil, Suiteáil agus Úsáid.
 
-Ina dhiaidh sin, tá eolas faoi sainroghnaithe a athrú, conas páirt a ghlacadh i bpobal NVDA agus conas cabhair a fháil.
-Tá achoimre déanta sa treoir seo ar an eolas atá ar fáil i gcodanna eile de Threoir Úsáideora NVDA.
-Déan tagairt le do thoil do Threoir Úsáideora NVDA iomláine chun níos mó eolais a fháil.
+Ina dhiaidh sin, tá eolas faoi sainroghnaithe a athrú, conas páirt a ghlacadh i bpobal Aslan agus conas cabhair a fháil.
+Tá achoimre déanta sa treoir seo ar an eolas atá ar fáil i gcodanna eile de Threoir Úsáideora Aslan.
+Déan tagairt le do thoil do Threoir Úsáideora Aslan iomláine chun níos mó eolais a fháil.
 
-### NVDA a Shuiteáil {#GettingAndSettingUpNVDA}
+### Aslan a Shuiteáil {#GettingAndSettingUpAslan}
 
-Tá NVDA go hiomlán saor in aisce do gach duine.
+Tá Aslan go hiomlán saor in aisce do gach duine.
 Níl aon ghá le ceadúnas ná níl aon síntiús le híoc.
-Déantar nuashonrú ar NVDA 4 huaire sa bhliain ar an meán.
-Bíonn leagan NVDA is déanaí ar fáil i gcónaí ar an leathanach íoslódála   [NV Access website](NVDA_URL) 
+Déantar nuashonrú ar Aslan 4 huaire sa bhliain ar an meán.
+Bíonn leagan Aslan is déanaí ar fáil i gcónaí ar an leathanach íoslódála   [NV Access website](Aslan_URL) 
 
-Oibríonn NVDA leis na leaganacha go léir is deireanaí de Microsoft Windows.
+Oibríonn Aslan leis na leaganacha go léir is deireanaí de Microsoft Windows.
 Déan seiceáil ar [System Requirements](#SystemRequirements) chun na sonraí ar fad a fháil.
 
-#### Na Céimeanna chun NVDA a Íoslódáil {#StepsForDownloadingNVDA}
+#### Na Céimeanna chun Aslan a Íoslódáil {#StepsForDownloadingAslan}
 
 Glactar leis sna céimeanna seo go bhfuil eolas agat conas nascleanúint a dhéanamh ar shuíomh gréasáin.
 
@@ -99,22 +99,22 @@ https://www.nvaccess.org/download
 -Más gá an comhad  a chur ag rith de láimh, brúigh alt + n chun bogadh go dtí an limistéar fógra agus ansin brúigh alt + r chun an comhad a rith, nó déan na céimeanna atá de dhíth ag do bhrabhsálaí.
 -
 
-### NVDA a Chumrú {#SettingUpNVDA}
+### Aslan a Chumrú {#SettingUpAslan}
 
-Cuirfear tús le cóip shealadach de NVDA nuair a ritear an comhad a bhí íoslódáilte.
-Iarrfar ort ansin roghnú NVDA a shuiteáil, cóip inaistrithe a chruthú, nó  leanúint ar aghaidh leis an gcóip shealadach.
+Cuirfear tús le cóip shealadach de Aslan nuair a ritear an comhad a bhí íoslódáilte.
+Iarrfar ort ansin roghnú Aslan a shuiteáil, cóip inaistrithe a chruthú, nó  leanúint ar aghaidh leis an gcóip shealadach.
 
-Ní gá rochtain ar an idirlíon tar éis do NVDA a bheith íoslódáilte.
-Má tá rochtain ar an idirlíon ar fáil is féidir le NVDA seiceáil le haghaidh nuashonruithe ó am go chéile.
+Ní gá rochtain ar an idirlíon tar éis do Aslan a bheith íoslódáilte.
+Má tá rochtain ar an idirlíon ar fáil is féidir le Aslan seiceáil le haghaidh nuashonruithe ó am go chéile.
 
 #### Céimeanna chun an lainseálaí íoslódáilte a rith {#StepsForRunningTheDownloadLauncher}
 
-Is é "nvda_2022.1.exe", nó ainm cosúil leis seo,   an t-ainm atá ar an gcomhad cumruithe.
+Is é "aslan_2022.1.exe", nó ainm cosúil leis seo,   an t-ainm atá ar an gcomhad cumruithe.
 Déantar athrú ar an mbliain agus ar an uimhir chun an leagan reatha a chur in iúl.
 
 1. Rith an comhad íoslódáilte.
-Seinntear ceol agus cóip shealadach de NVDA á lódáil.
-Chomh luath agus a bheidh sé lódáilte, labhróidh NVDA ar feadh an phróisis.
+Seinntear ceol agus cóip shealadach de Aslan á lódáil.
+Chomh luath agus a bheidh sé lódáilte, labhróidh Aslan ar feadh an phróisis.
 1. Tiocfaidh an fhuinneog lainseálaithe aníos agus an comhaontú ceadúnais inti.
 Brúigh ar saighead síos chun an comhaontú ceadúnais a léamh más mian leat. 
 +Brúigh tab chun bhogadh go dtí an ticbhosca “I agree” agus ansin brúigh an spásbharra chun é a thiceáil.
@@ -122,37 +122,37 @@ Brúigh ar saighead síos chun an comhaontú ceadúnais a léamh más mian leat.
 
 Is iad seo a leanas na roghnúithe atá ar fáil:
 
-* "Suiteáil NVDA ar an ríomhaire seo:" Is é seo an príomhroghnú a bhfuil tóir air ag úsáideoirí.
-* "Cruthaigh Cóip Inaistrithe:" Ligeann sé seo NVDA a bheith chumraithe in aon fillteán gan é a shuiteáil.
+* "Suiteáil Aslan ar an ríomhaire seo:" Is é seo an príomhroghnú a bhfuil tóir air ag úsáideoirí.
+* "Cruthaigh Cóip Inaistrithe:" Ligeann sé seo Aslan a bheith chumraithe in aon fillteán gan é a shuiteáil.
 Tá sé seo úsáideach ar ríomhairí gan cheartuithe riaracháin, nó ar mhéaróg chuimhne chun í a thabhairt leat.
 Nuair a roghnaítear é seo, tabharfar deis duit dul tríd na céimeanna chun cóip inaistrithe a chruthú.
-Is é an príomheolas a bheidh uait ná ainm an fillteáin ina mbeidh NVDA suiteáilte.
+Is é an príomheolas a bheidh uait ná ainm an fillteáin ina mbeidh Aslan suiteáilte.
 * "Lean ar aghaidh:" Coimeádfar an chóip sheladach ar siúl.
 
 ### Srianta ar chóip sealadach nó ar chóip iniompartha {#PortableAndTemporaryCopyRestrictions}
 ## Tuilleadh Roghnaithe Cumraithe {#MoreSetupOptions}
-### NVDA a Shuiteáil {#InstallingNVDA}
+### Aslan a Shuiteáil {#InstallingAslan}
 #### Breiseáin Neamh-Chomhoiriúnacha {#InstallWithIncompatibleAddons}
-#### NVDA a úsáid agus tú ag logáil isteach ar Windows {#StartAtWindowsLogon}
+#### Aslan a úsáid agus tú ag logáil isteach ar Windows {#StartAtWindowsLogon}
 #### Aicearra méarchláir a chruthú (contrôle+alt+n) {#CreateDesktopShortcut}
 #### Cóipeáil an Chumraíocht Inaistrithe go dtí an Cuntas Reatha {#CopyPortableConfigurationToCurrentUserAccount}
 ### Cóip Inaistrithe a Chruthú {#CreatingAPortableCopy}
-## Ag tosú le NVDA {#GettingStartedWithNVDA}
-### NVDA a lainseáil {#LaunchingNVDA}
+## Ag tosú le Aslan {#GettingStartedWithAslan}
+### Aslan a lainseáil {#LaunchingAslan}
 #### Dialóg Fáilte {#WelcomeDialog}
 #### Dialóg Staitisticí Úsáide {#UsageStatsDialog}
-### Orduithe méarchláir NVDA {#AboutNVDAKeyboardCommands}
-#### Eochair mionathraithe NVDA {#TheNVDAModifierKey}
+### Orduithe méarchláir Aslan {#AboutAslanKeyboardCommands}
+#### Eochair mionathraithe Aslan {#TheAslanModifierKey}
 #### Leagan amach méarchláir {#KeyboardLayouts}
 #### An Scáileán a Thaiscéal {#ExploringTheScreen}
-### Gothaí Tadhail NVDA {#NVDATouchGestures}
+### Gothaí Tadhail Aslan {#AslanTouchGestures}
 #### Móid Tadhail {#TouchModes}
 #### Méarchlár Tadhail {#TouchKeyboard}
 ### Mód Chabhair Ionchuir {#InputHelpMode}
-### Roghchlár NVDA {#TheNVDAMenu}
-### Bunorduithe NVDA {#BasicNVDACommands}
+### Roghchlár Aslan {#TheAslanMenu}
+### Bunorduithe Aslan {#BasicAslanCommands}
 ### Tuairisciú ar Fhaisnéis Chórais {#ReportingSystemInformation}
-## Nascleanúint le NVDA {#NavigatingWithNVDA}
+## Nascleanúint le Aslan {#NavigatingWithAslan}
 ### Oibiachtaí {#Objects}
 ### Ag Nascleanúint le fócas an Chórais {#SystemFocus}
 ### Ag Nascleanúint le Carat an Chórais {#SystemCaret}
@@ -196,23 +196,23 @@ Is é an príomheolas a bheidh uait ná ainm an fillteáin ina mbeidh NVDA suite
 #### Nótaí Úsáideora {#KindleUserNotes}
 ### Azardi {#Azardi}
 ### Consól Windows {#WinConsole}
-## NVDA a Chumrú {#ConfiguringNVDA}
-### Socruithe NVDA {#NVDASettings}
-#### Ginearálta (NVDA+control+g) {#GeneralSettings}
-#### Socruithe Urlabhra (NVDA+control+v) {#SpeechSettings}
-#### Sintéiseoir a Roghnú (NVDA+control+s) {#SelectSynthesizer}
+## Aslan a Chumrú {#ConfiguringAslan}
+### Socruithe Aslan {#AslanSettings}
+#### Ginearálta (Aslan+control+g) {#GeneralSettings}
+#### Socruithe Urlabhra (Aslan+control+v) {#SpeechSettings}
+#### Sintéiseoir a Roghnú (Aslan+control+s) {#SelectSynthesizer}
 #### Fáinne Socruithe Sintéiseora {#SynthSettingsRing}
 #### Braille {#BrailleSettings}
-#### Select Roghnaigh Taispeántas Braille (NVDA+control+a) {#SelectBrailleDisplay}
+#### Select Roghnaigh Taispeántas Braille (Aslan+control+a) {#SelectBrailleDisplay}
 #### Amharc {#VisionSettings}
-#### Méarchlár (NVDA+control+k) {#KeyboardSettings}
-#### Luch (NVDA+control+m) {#MouseSettings}
+#### Méarchlár (Aslan+control+k) {#KeyboardSettings}
+#### Luch (Aslan+control+m) {#MouseSettings}
 #### Idirghníomhú Tadhail {#TouchInteraction}
 #### Cúrsóir Athbhreithnithe {#ReviewCursorSettings}
-#### Oibiachtaí a Chur i Láthair (NVDA+control+o) {#ObjectPresentationSettings}
+#### Oibiachtaí a Chur i Láthair (Aslan+control+o) {#ObjectPresentationSettings}
 #### Ionchur a Chruthú {#InputCompositionSettings}
-#### Mód Brabhsála (NVDA+control+b) {#BrowseModeSettings}
-#### Formáidiú Doiciméid (NVDA+control+d) {#DocumentFormattingSettings}
+#### Mód Brabhsála (Aslan+control+b) {#BrowseModeSettings}
+#### Formáidiú Doiciméid (Aslan+control+d) {#DocumentFormattingSettings}
 #### Nascleanúint Doiciméid {#DocumentNavigation}
 #### Socruithe Aithinte Optúla Carachtar {#Win10OcrSettings}
 #### Ardsocruithe {#AdvancedSettings}

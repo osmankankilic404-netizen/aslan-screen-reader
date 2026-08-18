@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2025 NV Access Limited, Peter Vágner, Cyrille Bougot, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import time
 import threading
@@ -12,7 +12,7 @@ from typing import (
 )
 import weakref
 import wx
-import NVDAHelper
+import AslanHelper
 import XMLFormatting
 import scriptHandler
 import api
@@ -100,7 +100,7 @@ class VirtualBufferQuickNavItem(browseMode.TextInfoQuickNavItem):
 		super(VirtualBufferQuickNavItem, self).__init__(itemType, document, textInfo)
 		docHandle = ctypes.c_int()
 		ID = ctypes.c_int()
-		NVDAHelper.localLib.VBuf_getIdentifierFromControlFieldNode(
+		AslanHelper.localLib.VBuf_getIdentifierFromControlFieldNode(
 			document.VBufHandle,
 			vbufNode,
 			ctypes.byref(docHandle),
@@ -111,7 +111,7 @@ class VirtualBufferQuickNavItem(browseMode.TextInfoQuickNavItem):
 
 	@property
 	def obj(self):
-		return self.document.getNVDAObjectFromIdentifier(*self.vbufFieldIdentifier)
+		return self.document.getAslanObjectFromIdentifier(*self.vbufFieldIdentifier)
 
 	@property
 	def label(self):
@@ -177,7 +177,7 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 		docHandle = ctypes.c_int()
 		ID = ctypes.c_int()
 		node = VBufRemote_nodeHandle_t()
-		NVDAHelper.localLib.VBuf_locateControlFieldNodeAtOffset(
+		AslanHelper.localLib.VBuf_locateControlFieldNodeAtOffset(
 			self.obj.VBufHandle,
 			offset,
 			ctypes.byref(startOffset),
@@ -192,7 +192,7 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 
 	def _getOffsetsFromFieldIdentifier(self, docHandle, ID):
 		node = VBufRemote_nodeHandle_t()
-		NVDAHelper.localLib.VBuf_getControlFieldNodeWithIdentifier(
+		AslanHelper.localLib.VBuf_getControlFieldNodeWithIdentifier(
 			self.obj.VBufHandle,
 			docHandle,
 			ID,
@@ -202,7 +202,7 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 			raise LookupError
 		start = ctypes.c_int()
 		end = ctypes.c_int()
-		NVDAHelper.localLib.VBuf_getFieldNodeOffsets(
+		AslanHelper.localLib.VBuf_getFieldNodeOffsets(
 			self.obj.VBufHandle,
 			node,
 			ctypes.byref(start),
@@ -211,29 +211,29 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 		return start.value, end.value
 
 	def _getBoundingRectFromOffset(self, offset):
-		o = self._getNVDAObjectFromOffset(offset)
+		o = self._getAslanObjectFromOffset(offset)
 		if not o:
-			raise LookupError("no NVDAObject at offset %d" % offset)
+			raise LookupError("no AslanObject at offset %d" % offset)
 		if o.hasIrrelevantLocation:
 			raise LookupError("Object is off screen, invisible or has no location")
 		return o.location
 
-	def _getNVDAObjectFromOffset(self, offset):
+	def _getAslanObjectFromOffset(self, offset):
 		try:
 			docHandle, ID = self._getFieldIdentifierFromOffset(offset)
 		except LookupError:
-			log.debugWarning("Couldn't get NVDAObject from offset %d" % offset)
+			log.debugWarning("Couldn't get AslanObject from offset %d" % offset)
 			return None
-		return self.obj.getNVDAObjectFromIdentifier(docHandle, ID)
+		return self.obj.getAslanObjectFromIdentifier(docHandle, ID)
 
-	def _getOffsetsFromNVDAObjectInBuffer(self, obj):
-		docHandle, ID = _normalizeIdentifier(*self.obj.getIdentifierFromNVDAObject(obj))
+	def _getOffsetsFromAslanObjectInBuffer(self, obj):
+		docHandle, ID = _normalizeIdentifier(*self.obj.getIdentifierFromAslanObject(obj))
 		return self._getOffsetsFromFieldIdentifier(docHandle, ID)
 
-	def _getOffsetsFromNVDAObject(self, obj):
+	def _getOffsetsFromAslanObject(self, obj):
 		while True:
 			try:
-				return self._getOffsetsFromNVDAObjectInBuffer(obj)
+				return self._getOffsetsFromAslanObjectInBuffer(obj)
 			except LookupError:
 				pass
 			# Interactive list/combo box/tree view descendants aren't rendered into the buffer, even though they are still considered part of it.
@@ -256,7 +256,7 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 	def _getSelectionOffsets(self):
 		start = ctypes.c_int()
 		end = ctypes.c_int()
-		NVDAHelper.localLib.VBuf_getSelectionOffsets(
+		AslanHelper.localLib.VBuf_getSelectionOffsets(
 			self.obj.VBufHandle,
 			ctypes.byref(start),
 			ctypes.byref(end),
@@ -264,7 +264,7 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 		return start.value, end.value
 
 	def _setSelectionOffsets(self, start, end):
-		NVDAHelper.localLib.VBuf_setSelectionOffsets(self.obj.VBufHandle, start, end)
+		AslanHelper.localLib.VBuf_setSelectionOffsets(self.obj.VBufHandle, start, end)
 
 	def _getCaretOffset(self):
 		return self._getSelectionOffsets()[0]
@@ -273,12 +273,12 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 		return self._setSelectionOffsets(offset, offset)
 
 	def _getStoryLength(self):
-		return NVDAHelper.localLib.VBuf_getTextLength(self.obj.VBufHandle)
+		return AslanHelper.localLib.VBuf_getTextLength(self.obj.VBufHandle)
 
 	def _getTextRange(self, start, end):
 		if start == end:
 			return ""
-		return NVDAHelper.localLib.VBuf_getTextInRange(self.obj.VBufHandle, start, end, False) or ""
+		return AslanHelper.localLib.VBuf_getTextInRange(self.obj.VBufHandle, start, end, False) or ""
 
 	def _getPlaceholderAttribute(self, attrs, placeholderAttrsKey):
 		"""Gets the placeholder attribute to be used.
@@ -330,7 +330,7 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 		return command
 
 	def _getFieldsInRange(self, start: int, end: int) -> textInfos.TextInfo.TextWithFieldsT:
-		text = NVDAHelper.localLib.VBuf_getTextInRange(self.obj.VBufHandle, start, end, True)
+		text = AslanHelper.localLib.VBuf_getTextInRange(self.obj.VBufHandle, start, end, True)
 		if not text:
 			return [""]
 		commandList = XMLFormatting.XMLTextParser().parse(text)
@@ -353,7 +353,7 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 		# Use VBuf_getBufferLineOffsets with out screen layout to find out the range of the current field
 		lineStart = ctypes.c_int()
 		lineEnd = ctypes.c_int()
-		NVDAHelper.localLib.VBuf_getLineOffsets(
+		AslanHelper.localLib.VBuf_getLineOffsets(
 			self.obj.VBufHandle,
 			offset,
 			0,
@@ -367,7 +367,7 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 	def _getLineOffsets(self, offset):
 		lineStart = ctypes.c_int()
 		lineEnd = ctypes.c_int()
-		NVDAHelper.localLib.VBuf_getLineOffsets(
+		AslanHelper.localLib.VBuf_getLineOffsets(
 			self.obj.VBufHandle,
 			offset,
 			config.conf["virtualBuffers"]["maxLineLength"],
@@ -380,7 +380,7 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 	def _getParagraphOffsets(self, offset):
 		lineStart = ctypes.c_int()
 		lineEnd = ctypes.c_int()
-		NVDAHelper.localLib.VBuf_getLineOffsets(
+		AslanHelper.localLib.VBuf_getLineOffsets(
 			self.obj.VBufHandle,
 			offset,
 			0,
@@ -469,7 +469,7 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 			docHandle = ctypes.c_int()
 			ID = ctypes.c_int()
 			node = VBufRemote_nodeHandle_t()
-			NVDAHelper.localLib.VBuf_locateControlFieldNodeAtOffset(
+			AslanHelper.localLib.VBuf_locateControlFieldNodeAtOffset(
 				self.obj.VBufHandle,
 				offset,
 				ctypes.byref(startOffset),
@@ -483,7 +483,7 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 			startOffset = ctypes.c_int()
 			endOffset = ctypes.c_int()
 			node = VBufRemote_nodeHandle_t()
-			NVDAHelper.localLib.VBuf_locateTextFieldNodeAtOffset(
+			AslanHelper.localLib.VBuf_locateTextFieldNodeAtOffset(
 				self.obj.VBufHandle,
 				offset,
 				ctypes.byref(startOffset),
@@ -505,33 +505,33 @@ class VirtualBufferTextInfo(browseMode.BrowseModeDocumentTextInfo, textInfos.off
 	def getMathMl(self, field):
 		docHandle = int(field["controlIdentifier_docHandle"])
 		nodeId = int(field["controlIdentifier_ID"])
-		obj = self.obj.getNVDAObjectFromIdentifier(docHandle, nodeId)
+		obj = self.obj.getAslanObjectFromIdentifier(docHandle, nodeId)
 		return obj.mathMl
 
 
 class VirtualBuffer(browseMode.BrowseModeDocumentTreeInterceptor):
 	TextInfo = VirtualBufferTextInfo
 
-	# As NVDA manages the caret virtually,
+	# As Aslan manages the caret virtually,
 	# It is necessary for 'gainFocus' events to update the caret.
 	_focusEventMustUpdateCaretPosition = True
 
 	#: Maps root identifiers (docHandle and ID) to buffers.
 	rootIdentifiers = weakref.WeakValueDictionary()
 
-	def __init__(self, rootNVDAObject, backendName=None):
-		super(VirtualBuffer, self).__init__(rootNVDAObject)
+	def __init__(self, rootAslanObject, backendName=None):
+		super(VirtualBuffer, self).__init__(rootAslanObject)
 		self.backendName = backendName
 		self.VBufHandle = None
 		self.isLoading = False
 		self.rootDocHandle, self.rootID = _normalizeIdentifier(
-			*self.getIdentifierFromNVDAObject(self.rootNVDAObject),
+			*self.getIdentifierFromAslanObject(self.rootAslanObject),
 		)
 		self.rootIdentifiers[self.rootDocHandle, self.rootID] = self
 
 	def prepare(self):
-		if not self.rootNVDAObject.appModule.helperLocalBindingHandle:
-			# #5758: If NVDA starts with a document already in focus, there will have been no focus event to inject nvdaHelper yet.
+		if not self.rootAslanObject.appModule.helperLocalBindingHandle:
+			# #5758: If Aslan starts with a document already in focus, there will have been no focus event to inject aslanHelper yet.
 			# So at very least don't try to prepare a virtualBuffer as it will fail.
 			# The user will most likely need to manually move focus away and back again to allow this virtualBuffer to work.
 			log.debugWarning(
@@ -566,9 +566,9 @@ class VirtualBuffer(browseMode.BrowseModeDocumentTreeInterceptor):
 		try:
 			if log.isEnabledFor(log.DEBUG):
 				startTime = time.time()
-			self.VBufHandle = NVDAHelper.localLib.VBufRemote_bufferHandle_t()
-			self.VBufHandle.value = NVDAHelper.localLib.VBuf_createBuffer(
-				self.rootNVDAObject.appModule.helperLocalBindingHandle,
+			self.VBufHandle = AslanHelper.localLib.VBufRemote_bufferHandle_t()
+			self.VBufHandle.value = AslanHelper.localLib.VBuf_createBuffer(
+				self.rootAslanObject.appModule.helperLocalBindingHandle,
 				self.rootDocHandle,
 				self.rootID,
 				self.backendName,
@@ -584,7 +584,7 @@ class VirtualBuffer(browseMode.BrowseModeDocumentTreeInterceptor):
 				"Buffer load took %.3f sec, %d chars"
 				% (
 					time.time() - startTime,
-					NVDAHelper.localLib.VBuf_getTextLength(self.VBufHandle),
+					AslanHelper.localLib.VBuf_getTextLength(self.VBufHandle),
 				),
 			)
 		queueHandler.queueFunction(queueHandler.eventQueue, self._loadBufferDone)
@@ -596,7 +596,7 @@ class VirtualBuffer(browseMode.BrowseModeDocumentTreeInterceptor):
 		if not success:
 			self.passThrough = True
 			return
-		textLength = NVDAHelper.localLib.VBuf_getTextLength(self.VBufHandle)
+		textLength = AslanHelper.localLib.VBuf_getTextLength(self.VBufHandle)
 		if textLength == 0:
 			log.debugWarning("Empty buffer. Waiting for documentLoadComplete event instead")
 			# Empty buffer.
@@ -627,15 +627,15 @@ class VirtualBuffer(browseMode.BrowseModeDocumentTreeInterceptor):
 		if self.VBufHandle is not None:
 			try:
 				watchdog.cancellableExecute(
-					NVDAHelper.localLib.VBuf_destroyBuffer,
+					AslanHelper.localLib.VBuf_destroyBuffer,
 					ctypes.byref(self.VBufHandle),
 				)
 			except WindowsError:
 				pass
 			self.VBufHandle = None
 
-	def isNVDAObjectPartOfLayoutTable(self, obj):
-		docHandle, ID = _normalizeIdentifier(*self.getIdentifierFromNVDAObject(obj))
+	def isAslanObjectPartOfLayoutTable(self, obj):
+		docHandle, ID = _normalizeIdentifier(*self.getIdentifierFromAslanObject(obj))
 		ID = str(ID)
 		info = self.makeTextInfo(obj)
 		info.collapse()
@@ -661,23 +661,23 @@ class VirtualBuffer(browseMode.BrowseModeDocumentTreeInterceptor):
 		return tableLayout
 
 	@abstractmethod
-	def getNVDAObjectFromIdentifier(self, docHandle, ID):
-		"""Retrieve an NVDAObject for a given node identifier.
+	def getAslanObjectFromIdentifier(self, docHandle, ID):
+		"""Retrieve an AslanObject for a given node identifier.
 		Subclasses must override this method.
 		@param docHandle: The document handle.
 		@type docHandle: int
 		@param ID: The ID of the node.
 		@type ID: int
-		@return: The NVDAObject.
-		@rtype: L{NVDAObjects.NVDAObject}
+		@return: The AslanObject.
+		@rtype: L{AslanObjects.AslanObject}
 		"""
 		raise NotImplementedError
 
 	@abstractmethod
-	def getIdentifierFromNVDAObject(self, obj):
-		"""Retreaves the virtualBuffer field identifier from an NVDAObject.
-		@param obj: the NVDAObject to retreave the field identifier from.
-		@type obj: L{NVDAObject}
+	def getIdentifierFromAslanObject(self, obj):
+		"""Retreaves the virtualBuffer field identifier from an AslanObject.
+		@param obj: the AslanObject to retreave the field identifier from.
+		@type obj: L{AslanObject}
 		@returns: a the field identifier as a doc handle and ID paire.
 		@rtype: 2-tuple.
 		"""
@@ -729,7 +729,7 @@ class VirtualBuffer(browseMode.BrowseModeDocumentTreeInterceptor):
 		while True:
 			try:
 				node = VBufRemote_nodeHandle_t()
-				NVDAHelper.localLib.VBuf_findNodeByAttributes(
+				AslanHelper.localLib.VBuf_findNodeByAttributes(
 					self.VBufHandle,
 					offset,
 					direction,
@@ -874,8 +874,8 @@ class VirtualBuffer(browseMode.BrowseModeDocumentTreeInterceptor):
 			return
 		braille.handler.handleUpdate(self)
 
-	def getControlFieldForNVDAObject(self, obj):
-		docHandle, objId = _normalizeIdentifier(*self.getIdentifierFromNVDAObject(obj))
+	def getControlFieldForAslanObject(self, obj):
+		docHandle, objId = _normalizeIdentifier(*self.getIdentifierFromAslanObject(obj))
 		objId = str(objId)
 		info = self.makeTextInfo(obj)
 		info.collapse()
@@ -888,16 +888,16 @@ class VirtualBuffer(browseMode.BrowseModeDocumentTreeInterceptor):
 				return item.field
 		raise LookupError
 
-	def _isNVDAObjectInApplication_noWalk(self, obj):
-		inApp = super(VirtualBuffer, self)._isNVDAObjectInApplication_noWalk(obj)
+	def _isAslanObjectInApplication_noWalk(self, obj):
+		inApp = super(VirtualBuffer, self)._isAslanObjectInApplication_noWalk(obj)
 		if inApp is not None:
 			return inApp
 		# If the object is in the buffer, it's definitely not in an application.
 		try:
-			docHandle, objId = _normalizeIdentifier(*self.getIdentifierFromNVDAObject(obj))
+			docHandle, objId = _normalizeIdentifier(*self.getIdentifierFromAslanObject(obj))
 		except:  # noqa: E722
 			log.debugWarning(
-				"getIdentifierFromNVDAObject failed. Object probably died while walking ancestors.",
+				"getIdentifierFromAslanObject failed. Object probably died while walking ancestors.",
 				exc_info=True,
 			)
 			return None
@@ -905,7 +905,7 @@ class VirtualBuffer(browseMode.BrowseModeDocumentTreeInterceptor):
 		if not self.VBufHandle:
 			return None
 		try:
-			NVDAHelper.localLib.VBuf_getControlFieldNodeWithIdentifier(
+			AslanHelper.localLib.VBuf_getControlFieldNodeWithIdentifier(
 				self.VBufHandle,
 				docHandle,
 				objId,
@@ -918,5 +918,5 @@ class VirtualBuffer(browseMode.BrowseModeDocumentTreeInterceptor):
 		return None
 
 	__gestures = {
-		"kb:NVDA+f5": "refreshBuffer",
+		"kb:Aslan+f5": "refreshBuffer",
 	}

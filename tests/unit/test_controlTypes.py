@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2017-2021 NV Access Limited, Babbage B.V.
@@ -10,7 +10,7 @@ import logging
 import unittest
 
 import controlTypes
-from . import PlaceholderNVDAObject
+from . import PlaceholderAslanObject
 from controlTypes.processAndLabelStates import _processNegativeStates, _processPositiveStates
 from controlTypes.formatFields import FontSize
 import logHandler
@@ -19,13 +19,13 @@ import logHandler
 class TestLabels(unittest.TestCase):
 	_noDisplayStringRoles = {}
 	_noDisplayStringStates = {
-		# HAS_ARIA_DETAILS is not used internally to NVDA, only exists for backwards
+		# HAS_ARIA_DETAILS is not used internally to Aslan, only exists for backwards
 		# compatibility of the add-on API
 		controlTypes.State.HAS_ARIA_DETAILS,
 		controlTypes.State.INDETERMINATE,
 	}
 	_noNegDisplayStringStates = {
-		# HAS_ARIA_DETAILS is not used internally to NVDA, only exists for backwards
+		# HAS_ARIA_DETAILS is not used internally to Aslan, only exists for backwards
 		# compatibility of the add-on API
 		controlTypes.State.HAS_ARIA_DETAILS,
 		controlTypes.State.INDETERMINATE,
@@ -73,7 +73,7 @@ class TestLabels(unittest.TestCase):
 
 class TestProcessStates(unittest.TestCase):
 	def setUp(self):
-		self.obj = PlaceholderNVDAObject()
+		self.obj = PlaceholderAslanObject()
 		self.obj.role = controlTypes.Role.CHECKBOX
 		self.obj.states = {
 			controlTypes.State.FOCUSABLE,
@@ -107,7 +107,7 @@ class TestProcessStates(unittest.TestCase):
 
 class TestStateOrder(unittest.TestCase):
 	def test_positiveMergedStatesOutput(self):
-		obj = PlaceholderNVDAObject()
+		obj = PlaceholderAslanObject()
 		obj.role = controlTypes.Role.CHECKBOX
 		obj.states = {
 			controlTypes.State.CHECKED,
@@ -128,7 +128,7 @@ class TestStateOrder(unittest.TestCase):
 		)
 
 	def test_negativeMergedStatesOutput(self):
-		obj = PlaceholderNVDAObject()
+		obj = PlaceholderAslanObject()
 		obj.role = controlTypes.Role.CHECKBOX
 		obj.states = {
 			controlTypes.State.FOCUSABLE,

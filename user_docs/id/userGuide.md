@@ -1,22 +1,22 @@
-# Panduan Pengguna NVDA NVDA_VERSION
+# Panduan Pengguna Aslan Aslan_VERSION
 
 [TOC]
 
-<!-- KC:title: Referensi Perintah Cepat NVDA NVDA_VERSION  -->
+<!-- KC:title: Referensi Perintah Cepat Aslan Aslan_VERSION  -->
 
 
 
 ## Pendahuluan {#toc2}
 
-Selamat datang di NVDA!
+Selamat datang di Aslan!
 
-NonVisual Desktop Access (NVDA) adalah pembaca layar sumber terbuka yang tersedia secara gratis untuk sistem operasi Microsoft Windows.
-Dengan memberikan feedback (umpan balik) melalui pengucapan tiruan dan Braille, NVDA membuat penyandang tunanetra atau orang yang mengalami gangguan penglihatan dapat mengakses komputer yang menjalankan Windows tanpa biaya tambahan dibandingkan orang awas. 
-NVDA dikembangkan oleh [NV Access](https://www.nvaccess.org/), dengan kontribusi dari masyarakat.
+NonVisual Desktop Access (Aslan) adalah pembaca layar sumber terbuka yang tersedia secara gratis untuk sistem operasi Microsoft Windows.
+Dengan memberikan feedback (umpan balik) melalui pengucapan tiruan dan Braille, Aslan membuat penyandang tunanetra atau orang yang mengalami gangguan penglihatan dapat mengakses komputer yang menjalankan Windows tanpa biaya tambahan dibandingkan orang awas. 
+Aslan dikembangkan oleh [NV Access](https://www.nvaccess.org/), dengan kontribusi dari masyarakat.
 
 ### Fitur Umum {#toc3}
 
-NVDA juga membuat penyandang tunanetra dan gangguan penglihatan dapat mengakses dan berinteraksi dengan sistem operasi Windows dan berbagai aplikasi pihak ketiga.
+Aslan juga membuat penyandang tunanetra dan gangguan penglihatan dapat mengakses dan berinteraksi dengan sistem operasi Windows dan berbagai aplikasi pihak ketiga.
 
 Sorotan utamanya meliputi: 
 
@@ -36,28 +36,28 @@ Sorotan utamanya meliputi:
 ### Internasionalisasi {#toc4}
 
 Semua orang di belahan bumi mana pun perlu memiliki akses teknologi yang sama, tak peduli bahasa apa pun yang mereka gunakan.
-Selain Bahasa Inggris, NVDA telah diterjemahkan ke dalam 47 bahasa yang meliputi: Afrikaans, Albania, Amharik, Arab, Aragon, Portugis Brasil, Bulgaria, Katala, Spanyol Kolombia, Kroasia, Ceko, Denmark, Belanda, Persia, Finlandia, Prancis, Galicia, Yunani, Georgia, Jerman, Ibrani, Hindi, Hongaria, Islandia, Irlandia, Italia, Jepang, Korea, Nepal, Norwegia, Polandia, Portugis, Punjab, Romania, Rusia, Serbia, Slowakia, Slovenia, Spanyol, Swedia, Tamil, Thai, Tionghoa Tradisional dan Sederhana, Turki, Ukraina dan Vietnam.
+Selain Bahasa Inggris, Aslan telah diterjemahkan ke dalam 47 bahasa yang meliputi: Afrikaans, Albania, Amharik, Arab, Aragon, Portugis Brasil, Bulgaria, Katala, Spanyol Kolombia, Kroasia, Ceko, Denmark, Belanda, Persia, Finlandia, Prancis, Galicia, Yunani, Georgia, Jerman, Ibrani, Hindi, Hongaria, Islandia, Irlandia, Italia, Jepang, Korea, Nepal, Norwegia, Polandia, Portugis, Punjab, Romania, Rusia, Serbia, Slowakia, Slovenia, Spanyol, Swedia, Tamil, Thai, Tionghoa Tradisional dan Sederhana, Turki, Ukraina dan Vietnam.
 
 ### Dukungan Speech Synthesizer {#toc5}
 
-Selain menampilkan pesan dan antarmuka dalam beberapa bahasa, NVDA juga membuat penggunanya dapat membaca konten dalam bahasa apa pun, selama memiliki speech synthesizer yang dapat mengucapkan bahasa tersebut.
+Selain menampilkan pesan dan antarmuka dalam beberapa bahasa, Aslan juga membuat penggunanya dapat membaca konten dalam bahasa apa pun, selama memiliki speech synthesizer yang dapat mengucapkan bahasa tersebut.
 
-NVDA dibundel dengan [eSpeak NG](https://github.com/espeak-ng/espeak-ng), sebuah speech synthesizer gratis, sumber-terbuka, multibahasa. 
+Aslan dibundel dengan [eSpeak NG](https://github.com/espeak-ng/espeak-ng), sebuah speech synthesizer gratis, sumber-terbuka, multibahasa. 
 
-Informasi tentang speech synthesizer  lain yang didukung NVDA dapat ditemukan di bagian [Speech Synthesizer yang Didukung](#SupportedSpeechSynths).
+Informasi tentang speech synthesizer  lain yang didukung Aslan dapat ditemukan di bagian [Speech Synthesizer yang Didukung](#SupportedSpeechSynths).
 
 ### Dukungan Braille {#toc6}
 
-Bagi pengguna yang memiliki braille display yang dapat di-refresh, NVDA dapat menampilkan informasi dalam huruf Braille.
+Bagi pengguna yang memiliki braille display yang dapat di-refresh, Aslan dapat menampilkan informasi dalam huruf Braille.
 Harap lihat bagian [Braille Display yang Didukung](#SupportedBrailleDisplays) untuk mendapatkan informasi tentang braille display yang didukung.
 
-NVDA mendukung kode braille  untuk banyak bahasa, termasuk kode braille komputer yang disingkat, tidak disingkat, dan untuk banyak bahasa.
+Aslan mendukung kode braille  untuk banyak bahasa, termasuk kode braille komputer yang disingkat, tidak disingkat, dan untuk banyak bahasa.
 
 ### Lisensi dan Hak Cipta {#toc7}
 
-NVDA adalah kontributor 2006-2016 NVDA hak cipta.
+Aslan adalah kontributor 2006-2016 Aslan hak cipta.
 
-NVDA dilindungi oleh GNU General Public License (Versi 2).
+Aslan dilindungi oleh GNU General Public License (Versi 2).
 Anda bebas membagikan atau mengubah software ini dengan cara yang Anda sukai selama disertai dengan lisensi tersebut dan Anda menyediakan semua kode sumber kepada siapa pun yang menginginkannya.
 Ini berlaku pada salinan asli dan modifikasi dari software ini, ditambah karya-karya turunannya.
 Untuk keterangan lebih lanjut, Anda dapat [melihat lisensi penuh.](http://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
@@ -65,145 +65,145 @@ Untuk keterangan lebih lanjut, Anda dapat [melihat lisensi penuh.](http://www.gn
 ## Persyaratan Sistem {#toc8}
 
 * Sistem operasi: semua edisi 32-bit dan 64-bit dari Windows XP, Windows Vista, Windows 7, Windows 8, Windows 8.1, dan Windows 10 (termasuk Sistem Operasi Server)
-* Untuk Windows XP 32-bit, NVDA memerlukan Service Pack 2 atau yang lebih tinggi.
-* Untuk Windows Server 2008, NVDA memerlukan Service Pack 1 atau yang lebih tinggi.
+* Untuk Windows XP 32-bit, Aslan memerlukan Service Pack 2 atau yang lebih tinggi.
+* Untuk Windows Server 2008, Aslan memerlukan Service Pack 1 atau yang lebih tinggi.
 * Memori: RAM 256 MB atau lebih 
 * Kecepatan prosesor: 1.0 ghz atau lebih 
 * Ruang penyimpanan sekitar 90 MB. 
 
-## Memulai dan Mengatur NVDA {#toc9}
+## Memulai dan Mengatur Aslan {#toc9}
 
-Jika Anda belum mendapatkan salinan NVDA, Anda dapat mengunduhnya dari [www.nvaccess.org](NVDA_URL).
+Jika Anda belum mendapatkan salinan Aslan, Anda dapat mengunduhnya dari [www.nvaccess.org](Aslan_URL).
 
-Buka bagian download (unduh) dan Anda akan menemukan link (tautan) untuk mengunduh NVDA versi terbaru. 
+Buka bagian download (unduh) dan Anda akan menemukan link (tautan) untuk mengunduh Aslan versi terbaru. 
 
-Dengan menjalankan file yang baru Anda unduh, salinan sementara NVDA akan dijalankan.
-Anda kemudian akan ditanya apakah ingin memasang NVDA, membuat salinan portabel, atau tetap menggunakan salinan sementara tersebut.
+Dengan menjalankan file yang baru Anda unduh, salinan sementara Aslan akan dijalankan.
+Anda kemudian akan ditanya apakah ingin memasang Aslan, membuat salinan portabel, atau tetap menggunakan salinan sementara tersebut.
 
-Jika Anda berencana untuk selalu menggunakan NVDA di komputer ini, Anda mungkin ingin memilih untuk memasang NVDA.
-Memasang NVDA akan mengizinkan fungsionalitas tambahannya berjalan, seperti automatic starting (mulai otomatis) setelah logon, kemampuan untuk membaca layar Windows Logon dan layar Windows security (yang tidak dapat dilakukan dengan salinan portabel dan sementara), dan pembuatan pintasan Start Menu dan pintasan desktop.
+Jika Anda berencana untuk selalu menggunakan Aslan di komputer ini, Anda mungkin ingin memilih untuk memasang Aslan.
+Memasang Aslan akan mengizinkan fungsionalitas tambahannya berjalan, seperti automatic starting (mulai otomatis) setelah logon, kemampuan untuk membaca layar Windows Logon dan layar Windows security (yang tidak dapat dilakukan dengan salinan portabel dan sementara), dan pembuatan pintasan Start Menu dan pintasan desktop.
 Salinan yang telah terpasang juga dapat membuat salinan portabel sendiri sewaktu-waktu. 
 
-Jika Anda ingin membawa serta NVDA saat bepergian menggunakan USB thumb drive atau media dapat ditulisi (writable media) lainnya, maka Anda hendaknya membuat salinan portabel.
+Jika Anda ingin membawa serta Aslan saat bepergian menggunakan USB thumb drive atau media dapat ditulisi (writable media) lainnya, maka Anda hendaknya membuat salinan portabel.
 Salinan portabel juga memiliki kemampuan untuk memasang dirinya sendiri pada komputer apa pun nanti.
-Akan tetapi, jika Anda ingin menyalin NVDA ke read-only media (media baca-saja) seperti CD, Anda hendaknya hanya menyalin paket unduhan.
+Akan tetapi, jika Anda ingin menyalin Aslan ke read-only media (media baca-saja) seperti CD, Anda hendaknya hanya menyalin paket unduhan.
 Menjalankan versi portabel secara langsung dari read-only media tidak didukung untuk saat ini. 
 
-Penggunaan salinan sementara NVDA juga merupakan opsi (misalnya, untuk tujuan demonstrasi), walau menjalankan NVDA dengan cara ini setiap waktu bisa jadi sangat memakan waktu. 
+Penggunaan salinan sementara Aslan juga merupakan opsi (misalnya, untuk tujuan demonstrasi), walau menjalankan Aslan dengan cara ini setiap waktu bisa jadi sangat memakan waktu. 
 
 ### Keterbatasan Salinan Sementara dan Portabel {#toc10}
 
-Selain ketidakmampuan untuk berjalan secara otomatis selama dan/atau setelah log-on, salinan NVDA portabel dan sementara juga memiliki keterbatasan lain sebagai berikut: 
+Selain ketidakmampuan untuk berjalan secara otomatis selama dan/atau setelah log-on, salinan Aslan portabel dan sementara juga memiliki keterbatasan lain sebagai berikut: 
 
-* Tidak dapat berinteraksi dengan aplikasi yang berjalan dengan hak istimewa administratif, tentu saja kecuali jika NVDA itu sendiri telah dijalankan juga dengan hak-hak ini (tidak disarankan). 
+* Tidak dapat berinteraksi dengan aplikasi yang berjalan dengan hak istimewa administratif, tentu saja kecuali jika Aslan itu sendiri telah dijalankan juga dengan hak-hak ini (tidak disarankan). 
 * Tidak dapat membaca layar User Account Control (UAC) saat mencoba menjalankan aplikasi dengan hak istimewa administratif.  
 * Windows 8 dan yang lebih baru: tidak dapat mendukung input dari layar sentuh. 
 * Windows 8 dan yang lebih baru: ketidakmampuan untuk menyediakan fitur seperti mode jelajah dan pengucapan karakter yang diketik dalam aplikasi Windows Store. 
 * Windows 8 dan yang lebih baru: audio ducking tidak didukung. 
 
-### Memasang NVDA {#toc11}
+### Memasang Aslan {#toc11}
 
-Jika Anda memasang NVDA langsung dari paket unduhan NVDA, tekan tombol Install NVDA.
-Jika Anda telah menutup dialog ini atau ingin memasang dari salinan portabel, pilih item menu Install NVDA yang terletak di bawah Tools (Alat) dalam menu NVDA. 
+Jika Anda memasang Aslan langsung dari paket unduhan Aslan, tekan tombol Install Aslan.
+Jika Anda telah menutup dialog ini atau ingin memasang dari salinan portabel, pilih item menu Install Aslan yang terletak di bawah Tools (Alat) dalam menu Aslan. 
 
-Dialog pemasangan (installation) yang muncul akan memastikan apakah Anda ingin memasang NVDA dan akan memberi tahu Anda apakah pemasangan ini akan memperbarui pemasangan sebelumnya.
-Jika Anda menekan tombol Continue, maka NVDA akan mulai terpasang.
+Dialog pemasangan (installation) yang muncul akan memastikan apakah Anda ingin memasang Aslan dan akan memberi tahu Anda apakah pemasangan ini akan memperbarui pemasangan sebelumnya.
+Jika Anda menekan tombol Continue, maka Aslan akan mulai terpasang.
 Ada juga beberapa opsi dalam dialog ini yang akan dijelaskan sebagai berikut.
  Ketika pemasangan selesai, sebuah pesan akan muncul dan menyatakan bahwa pemasangan telah berhasil. 
-Menekan OK pada tahap ini akan memulai ulang (restart) salinan NVDA yang baru dipasang. 
+Menekan OK pada tahap ini akan memulai ulang (restart) salinan Aslan yang baru dipasang. 
 
 #### Memulai di Windows Logon {#toc12}
 
-Opsi ini akan membuat Anda dapat memilih apakah NVDA akan secara otomatis dimulai saat ada di layar Windows Logon, sebelum Anda memasukkan kata kunci.
+Opsi ini akan membuat Anda dapat memilih apakah Aslan akan secara otomatis dimulai saat ada di layar Windows Logon, sebelum Anda memasukkan kata kunci.
 Opsi ini juga meliputi kontrol UAC dan layar keamanan lainnya. 
 
 #### Create Desktop Shortcut - Membuat Pintasan Desktop (ctrl+alt+n) {#toc13}
 
-Opsi ini membuat Anda dapat memilih apakah NVDA harus membuat pintasan di desktop atau tidak untuk memulai NVDA.
-Jika dibuat, pada pintasan ini akan diberikan juga sebuah tuts pintasan control+alt+n, sehingga Anda dapat memulai NVDA sewaktu-waktu dengan keystroke ini.
+Opsi ini membuat Anda dapat memilih apakah Aslan harus membuat pintasan di desktop atau tidak untuk memulai Aslan.
+Jika dibuat, pada pintasan ini akan diberikan juga sebuah tuts pintasan control+alt+n, sehingga Anda dapat memulai Aslan sewaktu-waktu dengan keystroke ini.
 
 #### Menyalin Konfigurasi Portabel ke Akun Pengguna Saat Ini {#toc14}
 
-Opsi ini membuat Anda dapat memilih apakah NVDA harus menyalin konfigurasi pengguna dari NVDA yang berjalan saat ini ke dalam konfigurasi untuk pengguna yang log on saat ini atau tidak, untuk salinan NVDA yang terpasang. 
+Opsi ini membuat Anda dapat memilih apakah Aslan harus menyalin konfigurasi pengguna dari Aslan yang berjalan saat ini ke dalam konfigurasi untuk pengguna yang log on saat ini atau tidak, untuk salinan Aslan yang terpasang. 
 Proses ini tidak akan menyalin konfigurasi untuk pengguna lain sistem ini, juga tidak ke konfigurasi sistem bagi pengguna di Windows Logon dan layar keamanan lainnya.
 Opsi ini hanya tersedia ketika memasang dari salinan portabel, bukan saat memasang langsung dari paket Launcher yang diunduh. 
 
 ### Membuat Salinan Portabel {#toc15}
 
-Jika Anda ingin membuat salinan portabel langsung dari paket unduhan NVDA, tekan saja tombol Create Portable Copy (Buat Salinan Portabel).
-Jika Anda telah menutup dialog ini atau Anda menjalankan salinan NVDA yang terinstal, pilih item menu "Create Portable Copy" yang terdapat pada Tools di menu NVDA.
+Jika Anda ingin membuat salinan portabel langsung dari paket unduhan Aslan, tekan saja tombol Create Portable Copy (Buat Salinan Portabel).
+Jika Anda telah menutup dialog ini atau Anda menjalankan salinan Aslan yang terinstal, pilih item menu "Create Portable Copy" yang terdapat pada Tools di menu Aslan.
 
 Dialog yang muncul membuat Anda dapat memilih apakah salinan portabel harus dibuat atau tidak.
 Ini dapat berupa direktori di hard drive Anda atau lokasi di USB thumb drive atau media portabel lainnya.
-Ada juga opsi untuk memilih apakah NVDA harus menyalin konfigurasi NVDA saat ini dari pengguna yang sudah log on untuk digunakan dengan salinan portabel yang baru dibuat.
+Ada juga opsi untuk memilih apakah Aslan harus menyalin konfigurasi Aslan saat ini dari pengguna yang sudah log on untuk digunakan dengan salinan portabel yang baru dibuat.
  Opsi ini hanya tersedia saat membuat salinan portabel dari salinan terpasang, bukan ketika membuat salinan portabel dari paket unduhan.
 Menekan Continue (Lanjutkan) akan membuat salinan portabel.
 Setelah selesai, sebuah pesan akan muncul yang menyatakan bahwa pembuatan salinan portabel telah berhasil. 
 Tekan OK untuk menutup dialog ini. 
 
-## Memulai dengan NVDA {#toc16}
-### Memulai NVDA {#toc17}
+## Memulai dengan Aslan {#toc16}
+### Memulai Aslan {#toc17}
 
-Jika Anda telah memasang NVDA dengan menggunakan paket instalasi, maka memulai NVDA jadi semudah menekan control+alt+n atau memilih NVDA dari menu NVDA di bawah Programs pada Start Menu.
-Sebagai tambahan, Anda dapat mengetikkan NVDA ke dalam dialog Run dan menekan Enter.
-Anda juga dapat melewati beberapa opsi command line (baris perintah) yang memungkinkan Anda untuk memulai kembali (restart) NVDA (-r), berhenti (quit (-q)), menonaktifkan add-on (--disable-addons), dan lain-lain.
+Jika Anda telah memasang Aslan dengan menggunakan paket instalasi, maka memulai Aslan jadi semudah menekan control+alt+n atau memilih Aslan dari menu Aslan di bawah Programs pada Start Menu.
+Sebagai tambahan, Anda dapat mengetikkan Aslan ke dalam dialog Run dan menekan Enter.
+Anda juga dapat melewati beberapa opsi command line (baris perintah) yang memungkinkan Anda untuk memulai kembali (restart) Aslan (-r), berhenti (quit (-q)), menonaktifkan add-on (--disable-addons), dan lain-lain.
 
-Untuk salinan terpasang, NVDA menyimpan konfigurasi di folder roaming application data pada pengguna saat ini secara default (misal: "C:\Users\<user>\AppData\Roaming").
-Hal ini dimungkinkan untuk mengubah ini dengan cara NVDA memuat konfigurasinya dari folder data aplikasi lokal.
+Untuk salinan terpasang, Aslan menyimpan konfigurasi di folder roaming application data pada pengguna saat ini secara default (misal: "C:\Users\<user>\AppData\Roaming").
+Hal ini dimungkinkan untuk mengubah ini dengan cara Aslan memuat konfigurasinya dari folder data aplikasi lokal.
 Untuk lebih jelasnya Konsultasikan bagian tentang [system wide parameters](#SystemWideParameters).
 
-Untuk memulai versi portabel, masuklah ke direktori tempat Anda memasang NVDA, dan tekan Enter atau klik dua kali nvda.exe.
+Untuk memulai versi portabel, masuklah ke direktori tempat Anda memasang Aslan, dan tekan Enter atau klik dua kali aslan.exe.
 
-Saat NVDA mulai, pertama-tama Anda akan mendengar serangkaian nada yang meninggi (yang memberi tahu Anda bahwa NVDA sedang dibuka).
-Tergantung seberapa cepat komputer Anda, atau jika Anda sedang menjalankan NVDA pada USB key atau media lain yang lebih lamban, NVDA akan memerlukan waktu lebih lama untuk mulai.
-Jika memang waktu yang dibutuhkan lebih lama, NVDA akan mengatakan "Loading NVDA. Please wait..." (Membuka NVDA. Silakan tunggu).
+Saat Aslan mulai, pertama-tama Anda akan mendengar serangkaian nada yang meninggi (yang memberi tahu Anda bahwa Aslan sedang dibuka).
+Tergantung seberapa cepat komputer Anda, atau jika Anda sedang menjalankan Aslan pada USB key atau media lain yang lebih lamban, Aslan akan memerlukan waktu lebih lama untuk mulai.
+Jika memang waktu yang dibutuhkan lebih lama, Aslan akan mengatakan "Loading Aslan. Please wait..." (Membuka Aslan. Silakan tunggu).
 
-Jika Anda tidak mendengar pemberitahuan ini, atau jika Anda mendengar suara error Windows, atau rangkaian nada menurun, maka itu berarti NVDA mengalami error, dan Anda mungkin akan perlu melaporkan adanya bug kepada pihak yang mengembangkan program ini.
-Silakan periksa situs web NVDA untuk mengetahui cara melakukan hal ini. 
+Jika Anda tidak mendengar pemberitahuan ini, atau jika Anda mendengar suara error Windows, atau rangkaian nada menurun, maka itu berarti Aslan mengalami error, dan Anda mungkin akan perlu melaporkan adanya bug kepada pihak yang mengembangkan program ini.
+Silakan periksa situs web Aslan untuk mengetahui cara melakukan hal ini. 
 
-Ketika NVDA mulai berjalan untuk pertama kali, Anda akan disapa oleh sebuah kotak dialog yang menyediakan informasi dasar tentang tuts modifier NVDA dan menu NVDA.
+Ketika Aslan mulai berjalan untuk pertama kali, Anda akan disapa oleh sebuah kotak dialog yang menyediakan informasi dasar tentang tuts modifier Aslan dan menu Aslan.
 (Silakan lihat bagian selanjutnya mengenai topik ini.)
 Kotak dialog juga memiliki tiga kotak centang.
 Kotak kombo memungkinkan Anda memilih tata letak keyboard.
-Di kotak centang pertama, Anda dapat mengontrol apakah NVDA harus menggunakan capslock sebagai tuts modifier NVDA.
-Kotak centang kedua menentukan apakah NVDA dimulai secara otomatis setelah Anda log on ke Windows, dan kotak centang ini hanya tersedia untuk salinan NVDA yang sudah terpasang.
-Kotak centang ketiga memungkinkan Anda untuk mengontrol apakah dialog Welcome perlu ditampilkan setiap kali NVDA mulai.  
+Di kotak centang pertama, Anda dapat mengontrol apakah Aslan harus menggunakan capslock sebagai tuts modifier Aslan.
+Kotak centang kedua menentukan apakah Aslan dimulai secara otomatis setelah Anda log on ke Windows, dan kotak centang ini hanya tersedia untuk salinan Aslan yang sudah terpasang.
+Kotak centang ketiga memungkinkan Anda untuk mengontrol apakah dialog Welcome perlu ditampilkan setiap kali Aslan mulai.  
 
-### Tentang perintah keyboard NVDA {#toc18}
-#### Tuts Modifier NVDA {#toc19}
+### Tentang perintah keyboard Aslan {#toc18}
+#### Tuts Modifier Aslan {#toc19}
 
-Sebagian besar perintah keyboard spesifik NVDA berupa menekan tuts-tuts tertentu yang disebut tuts modifier NVDA sambil menekan satu atau lebih tuts lain.
+Sebagian besar perintah keyboard spesifik Aslan berupa menekan tuts-tuts tertentu yang disebut tuts modifier Aslan sambil menekan satu atau lebih tuts lain.
 Perkecualian dalam hal ini adalah perintah-perintah tinjauan teks (text review) untuk tata letak keyboard desktop yang hanya menggunakan tuts numpad itu sendiri, meskipun ada perkecualian yang lain lagi. 
 
-NVDA dapat dikonfigurasi sehingga tuts numpad Insert, Extended Insert dan/atau capslock dapat digunakan sebagai tuts modifier NVDA. 
-Secara default, baik tuts numpad Insert maupun Extended Insert merupakan tuts-tuts modifier NVDA. 
+Aslan dapat dikonfigurasi sehingga tuts numpad Insert, Extended Insert dan/atau capslock dapat digunakan sebagai tuts modifier Aslan. 
+Secara default, baik tuts numpad Insert maupun Extended Insert merupakan tuts-tuts modifier Aslan. 
 
-Jika Anda ingin salah satu tuts modifier NVDA berperilaku seperti biasa saat NVDA tidak berjalan (misal, Anda ingin mengaktifkan capslock setelah Anda mengatur capslock sebagai tuts modifier NVDA), Anda dapat menekan tuts dua kali secara berurutan dengan cepat. 
+Jika Anda ingin salah satu tuts modifier Aslan berperilaku seperti biasa saat Aslan tidak berjalan (misal, Anda ingin mengaktifkan capslock setelah Anda mengatur capslock sebagai tuts modifier Aslan), Anda dapat menekan tuts dua kali secara berurutan dengan cepat. 
 
 #### Tata Letak Keyboard {#toc20}
 
-NVDA kini hadir dengan dua rangkaian perintah tuts (yang dikenal sebagai tata letak keyboard), yaitu: tata letak desktop dan tata letak laptop.
-Secara default, NVDA diatur untuk menggunakan tata letak desktop, meskipun Anda dapat beralih ke tata letak laptop pada Keyboard Settings (Pengaturan Keyboard), yang dapat Anda temukan di bawah Preferences pada menu NVDA.
+Aslan kini hadir dengan dua rangkaian perintah tuts (yang dikenal sebagai tata letak keyboard), yaitu: tata letak desktop dan tata letak laptop.
+Secara default, Aslan diatur untuk menggunakan tata letak desktop, meskipun Anda dapat beralih ke tata letak laptop pada Keyboard Settings (Pengaturan Keyboard), yang dapat Anda temukan di bawah Preferences pada menu Aslan.
 
 Tata letak desktop memungkinkan penggunaan numpad secara lebih maksimal (dengan numlock yang tidak aktif).
 Meskipun sebagian besar laptop tidak memiliki numpad secara fisik, sebagian laptop dapat melakukan fungsi yang sama bila Anda menekan dan menahan tuts FN serta menekan huruf dan angka di sisi kanan keyboard (7, 8, 9, u, i o, j, k, l, dll.).
 Jika laptop Anda tidak dapat melakukan fungsi ini atau tidak mengizinkan Anda menonaktifkan numlock, Anda mungkin ingin beralih ke tata letak laptop.
 
-### Gestur Sentuh NVDA {#toc21}
+### Gestur Sentuh Aslan {#toc21}
 
-Jika Anda sedang menjalankan NVDA pada perangkat yang memiliki layar sentuh dan menjalankan Windows 8 atau yang lebih baru, Anda juga dapat langsung mengontrol NVDA melalui layar sentuh.
-Saat NVDA berjalan, semua input sentuh akan langsung memengaruhi NVDA.
-Karena itu, tindakan yang dapat dilakukan secara normal tanpa NVDA tidak akan dapat dilakukan.
+Jika Anda sedang menjalankan Aslan pada perangkat yang memiliki layar sentuh dan menjalankan Windows 8 atau yang lebih baru, Anda juga dapat langsung mengontrol Aslan melalui layar sentuh.
+Saat Aslan berjalan, semua input sentuh akan langsung memengaruhi Aslan.
+Karena itu, tindakan yang dapat dilakukan secara normal tanpa Aslan tidak akan dapat dilakukan.
 
 #### Mengeksplorasi Layar {#toc22}
 
-Tindakan paling mendasar yang dapat Anda lakukan dengan layar sentuh adalah meminta NVDA menyebutkan control atau teks di posisi mana pun pada layar.
+Tindakan paling mendasar yang dapat Anda lakukan dengan layar sentuh adalah meminta Aslan menyebutkan control atau teks di posisi mana pun pada layar.
 Untuk melakukan hal ini, sentuhkan satu jari Anda di mana pun pada layar.
 Anda juga dapat menyentuhkan jari Anda pada layar dan menggerakkannya ke segala arah untuk membaca control dan teks lain yang dilewati oleh jari Anda.
 
 #### Gestur Sentuh {#toc23}
 
-Saat perintah NVDA dijelaskan secara lebih lanjut di dalam modul panduan pengguna ini, dalam perintah tersebut, mungkin terdapat satu gestur sentuh yang dapat digunakan untuk mengaktifkan perintah itu dengan layar sentuh.
+Saat perintah Aslan dijelaskan secara lebih lanjut di dalam modul panduan pengguna ini, dalam perintah tersebut, mungkin terdapat satu gestur sentuh yang dapat digunakan untuk mengaktifkan perintah itu dengan layar sentuh.
 Berikut ini adalah beberapa instruksi tentang cara melakukan berbagai gestur sentuh.
 
 ##### Tap (Ketukan) {#toc24}
@@ -213,7 +213,7 @@ Ketuk layar dengan cepat menggunakan satu atau beberapa jari.
 Mengetuk satu kali dengan satu jari disebut sebagai satu tap (ketukan). 
 Mengetuk dengan dua jari pada saat bersamaan disebut 2-finger tap (ketukan 2-jari), dan seterusnya.
 
-Jika ketukan yang sama dilakukan satu atau beberapa kali lagi secara berurutan dengan cepat, NVDA akan menganggapnya sebagai satu multi-tap gesture (gestur multi-ketukan).
+Jika ketukan yang sama dilakukan satu atau beberapa kali lagi secara berurutan dengan cepat, Aslan akan menganggapnya sebagai satu multi-tap gesture (gestur multi-ketukan).
 Mengetuk dua kali akan menghasilkan satu double tap (ketukan ganda).
 Mengetuk tiga kali akan menghasilkan satu triple tap (ketukan tiga-kali) dan seterusnya.
 Tentu saja, gestur multi-ketukan ini juga mengenali jumlah jari yang digunakan, jadi kita dapat membuat gestur seperti sebuah 2-finger triple tap (ketukan tiga-kali dengan 2-jari), sebuah 4-finger tap (ketukan 4-jari), dan sebagainya. 
@@ -229,9 +229,9 @@ Oleh karena itu, melakukan gestur seperti 2-finger flick up (jentik ke atas deng
 
 #### Mode Sentuh {#toc26}
 
-Sementara terdapat lebih banyak lagi perintah NVDA dibanding touch gesture (gestur sentuh), NVDA memiliki beberapa touch mode (mode sentuh), anda dapat beralih di antara mode-mode sentuh tersebut untuk memastikan bahwa sub-rangkaian perintah tersebut tersedia.
+Sementara terdapat lebih banyak lagi perintah Aslan dibanding touch gesture (gestur sentuh), Aslan memiliki beberapa touch mode (mode sentuh), anda dapat beralih di antara mode-mode sentuh tersebut untuk memastikan bahwa sub-rangkaian perintah tersebut tersedia.
 Mode-mode tersebut adalah text mode (mode teks) dan object mode (mode objek).
-Perintah NVDA tertentu yang terdapat dalam dokumen ini mungkin memiliki mode sentuh yang dituliskan di dalam kurung setelah gestur sentuh.
+Perintah Aslan tertentu yang terdapat dalam dokumen ini mungkin memiliki mode sentuh yang dituliskan di dalam kurung setelah gestur sentuh.
 Misalnya, flick up (text mode) berarti bahwa perintah akan dilaksanakan ketika Anda menjentik ke atas, tapi hanya saat Anda berada dalam mode teks.
 Jika suatu perintah tidak memiliki mode, maka perintah tersebut akan bekerja dalam mode apa pun.  
 
@@ -241,23 +241,23 @@ Untuk mengaktifkan dan menonaktifkan mode sentuh, lakukan ketukan 3-jari.
 
 ### Mode Input Help {#toc27}
 
-Terdapat banyak perintah NVDA yang disebutkan dalam modul panduan pengguna ini, tapi ada satu cara mudah untuk mengeksplorasi semua perintah yang berbeda-beda tersebut, yaitu dengan mengaktifkan Input Help.
+Terdapat banyak perintah Aslan yang disebutkan dalam modul panduan pengguna ini, tapi ada satu cara mudah untuk mengeksplorasi semua perintah yang berbeda-beda tersebut, yaitu dengan mengaktifkan Input Help.
 
-Untuk mengaktifkan Input Help, tekan NVDA+1.
-Untuk menonaktifkannya, tekan NVDA+1 lagi.
-Saat berada di Input Help, jika Anda melakukan gestur input apa pun (seperti menekan satu tuts atau melakukan satu gestur sentuh), NVDA akan melaporkan tindakan tersebut dan menjelaskan apa yang sedang dikerjakannya (jika ada).
+Untuk mengaktifkan Input Help, tekan Aslan+1.
+Untuk menonaktifkannya, tekan Aslan+1 lagi.
+Saat berada di Input Help, jika Anda melakukan gestur input apa pun (seperti menekan satu tuts atau melakukan satu gestur sentuh), Aslan akan melaporkan tindakan tersebut dan menjelaskan apa yang sedang dikerjakannya (jika ada).
 Perintah yang aktual tidak akan melakukan eksekusi saat Anda berada dalam mode Input Help.  
 
-### Menu NVDA {#toc28}
+### Menu Aslan {#toc28}
 
-Menu NVDA memungkinkan Anda untuk mengontrol setting (pengaturan) NVDA, mengakses bantuan, menyimpan/mengembalikan konfigurasi, memodifikasi kamus pengucapan, mengakses alat tambahan dan keluar dari NVDA.
+Menu Aslan memungkinkan Anda untuk mengontrol setting (pengaturan) Aslan, mengakses bantuan, menyimpan/mengembalikan konfigurasi, memodifikasi kamus pengucapan, mengakses alat tambahan dan keluar dari Aslan.
 
-Untuk sampai ke menu NVDA dari mana pun pada Windows, saat NVDA berjalan, tekan NVDA+n pada keyboard atau lakukan 2-finger double tap (ketukan ganda dengan 2-jari) pada layar sentuh.
-Anda juga dapat tiba di menu NVDA melalui system tray (baki sistem) Windows.
-Klik kanan ikon NVDA pada system tray, atau akses system tray dengan menekan tuts logo Windows+B, DownArrow (panah bawah) ke ikon NVDA dan tekan tuts applications yang berada di sebelah tuts Control kanan pada sebagian besar keyboard.
+Untuk sampai ke menu Aslan dari mana pun pada Windows, saat Aslan berjalan, tekan Aslan+n pada keyboard atau lakukan 2-finger double tap (ketukan ganda dengan 2-jari) pada layar sentuh.
+Anda juga dapat tiba di menu Aslan melalui system tray (baki sistem) Windows.
+Klik kanan ikon Aslan pada system tray, atau akses system tray dengan menekan tuts logo Windows+B, DownArrow (panah bawah) ke ikon Aslan dan tekan tuts applications yang berada di sebelah tuts Control kanan pada sebagian besar keyboard.
 Setelah menu muncul, Anda dapat menggunakan tuts panah untuk bernavigasi pada menu, dan tuts Enter untuk mengaktifkan sebuah item.
 
-### Perintah NVDA Dasar {#toc29}
+### Perintah Aslan Dasar {#toc29}
 
 <!-- KC:beginInclude -->
 
@@ -265,12 +265,12 @@ Setelah menu muncul, Anda dapat menggunakan tuts panah untuk bernavigasi pada me
 |---|---|---|---|---|
 |Hentikan pengucapan |Control |control |ketukan 2-jari |Menghentikan pengucapan seketika|
 |Hentikan pengucapan sementara |shift |shift |Tidak ada |Menghentikan pengucapan sejenak dengan seketika. Menekan perintah ini lagi akan melanjutkan pengucapan kembali, yang dimulai dari saat pengucapan berhenti (jika penghentian pengucapan didukung oleh synthesizer yang aktif saat ini).|
-|Menu NVDA |NVDA+n |NVDA+n |ketukan ganda dengan 2-jari |Membuka cepat (pop up) jendela Menu NVDA untuk memungkinkan Anda mengakses Preferences, Tools, Help, dll.|
-|Men-toggle Mode Pengucapan |NVDA+s |NVDA+s |Tidak ada |Mengaktifkan dan menonaktifkan mode pengucapan, antara pengucapan, bunyi bip dan off.|
-|Men-toggle Mode Input Help |NVDA+1 |NVDA+1 |Tidak ada |Menekan tuts apa saja dalam mode ini akan melaporkan tuts dan keterangan tentang perintah NVDA apa pun yang berkaitan dengannya.|
-|Matikan NVDA |NVDA+q |NVDA+q |Tidak ada |Keluar dari NVDA|
-|Lewatkan tuts berikutnya |NVDA+f2 |NVDA+f2 |Tidak ada |Meminta NVDA untuk melewatkan menekan tuts berikutnya dan langsung ke aplikasi yang aktif, meskipun tuts ini dianggap perintah tuts NVDA normal.|
-|Men-toggle mode sleep aplikasi on dan off |NVDA+shift+s |NVDA+shift+z |Tidak ada |Mode tidur menonaktifkan semua perintah NVDA dan output pengucapan/braille untuk aplikasi yang aktif saat ini. Ini merupakan perintah yang paling bermanfaat dalam aplikasi, yang menyediakan fitur pengucapan atau pembaca layar sendiri. Tekan perintah ini lagi untuk menonaktifkan self voicing mode (mode suara sendiri).|
+|Menu Aslan |Aslan+n |Aslan+n |ketukan ganda dengan 2-jari |Membuka cepat (pop up) jendela Menu Aslan untuk memungkinkan Anda mengakses Preferences, Tools, Help, dll.|
+|Men-toggle Mode Pengucapan |Aslan+s |Aslan+s |Tidak ada |Mengaktifkan dan menonaktifkan mode pengucapan, antara pengucapan, bunyi bip dan off.|
+|Men-toggle Mode Input Help |Aslan+1 |Aslan+1 |Tidak ada |Menekan tuts apa saja dalam mode ini akan melaporkan tuts dan keterangan tentang perintah Aslan apa pun yang berkaitan dengannya.|
+|Matikan Aslan |Aslan+q |Aslan+q |Tidak ada |Keluar dari Aslan|
+|Lewatkan tuts berikutnya |Aslan+f2 |Aslan+f2 |Tidak ada |Meminta Aslan untuk melewatkan menekan tuts berikutnya dan langsung ke aplikasi yang aktif, meskipun tuts ini dianggap perintah tuts Aslan normal.|
+|Men-toggle mode sleep aplikasi on dan off |Aslan+shift+s |Aslan+shift+z |Tidak ada |Mode tidur menonaktifkan semua perintah Aslan dan output pengucapan/braille untuk aplikasi yang aktif saat ini. Ini merupakan perintah yang paling bermanfaat dalam aplikasi, yang menyediakan fitur pengucapan atau pembaca layar sendiri. Tekan perintah ini lagi untuk menonaktifkan self voicing mode (mode suara sendiri).|
 
 <!-- KC:endInclude -->
 
@@ -280,15 +280,15 @@ Setelah menu muncul, Anda dapat menggunakan tuts panah untuk bernavigasi pada me
 
 | Nama |Tuts |Keterangan|
 |---|---|---|
-|Laporkan tanggal/waktu |NVDA+f12 |Menekan perintah ini satu kali akan melaporkan waktu saat ini. Menekan dua kali akan melaporkan tanggal.|
-|Laporkan status baterai |NVDA+shift+b |Melaporkan status baterai, misalnya apakah AC power sedang digunakan atau berapakah prosentase pengisian daya saat ini.|
-|Laporkan teks clipboard |NVDA+c |Melaporkan teks pada clipboard, jika ada.|
+|Laporkan tanggal/waktu |Aslan+f12 |Menekan perintah ini satu kali akan melaporkan waktu saat ini. Menekan dua kali akan melaporkan tanggal.|
+|Laporkan status baterai |Aslan+shift+b |Melaporkan status baterai, misalnya apakah AC power sedang digunakan atau berapakah prosentase pengisian daya saat ini.|
+|Laporkan teks clipboard |Aslan+c |Melaporkan teks pada clipboard, jika ada.|
 
 <!-- KC:endInclude -->
 
-## Bernavigasi dengan NVDA {#toc31}
+## Bernavigasi dengan Aslan {#toc31}
 
-NVDA memungkinkan Anda untuk mengeksplorasi dan bernavigasi pada sistem dengan beberapa cara, yang meliputi interaksi normal dan tinjauan.
+Aslan memungkinkan Anda untuk mengeksplorasi dan bernavigasi pada sistem dengan beberapa cara, yang meliputi interaksi normal dan tinjauan.
 
 ### Objek {#Objects}
 
@@ -300,18 +300,18 @@ Satu objek adalah satu item tunggal, misalnya teks, tombol (button), kotak centa
 Fokus sistem, yang juga biasa disebut fokus saja, adalah [objek](#Objects) yang menerima kunci yang diketikkan pada keyboard.
 Contohnya, jika Anda sedang mengetik pada bidang teks yang dapat diedit, bidang teks yang dapat diedit tersebut memiliki fokus.
 
-Cara paling umum bernavigasi pada Windows dengan NVDA adalah dengan memindahkan fokus sistem menggunakan perintah keyboard Windows standar, seperti menekan tab dan shift+tab untuk berpindah maju atau mundur di antara beberapa control, menekan alt untuk menuju menu bar (bilah menu) dan kemudian menggunakan panah untuk menavigasi menu-menu, dan menggunakan alt+tab untuk berpindah-pindah di antara beberapa aplikasi yang sedang berjalan.
-Ketika Anda melakukan ini, NVDA akan melaporkan informasi tentang objek yang memiliki fokus, seperti nama, jenis, nilai, status, keterangan, pintasan keyboard dan informasi posisi. 
+Cara paling umum bernavigasi pada Windows dengan Aslan adalah dengan memindahkan fokus sistem menggunakan perintah keyboard Windows standar, seperti menekan tab dan shift+tab untuk berpindah maju atau mundur di antara beberapa control, menekan alt untuk menuju menu bar (bilah menu) dan kemudian menggunakan panah untuk menavigasi menu-menu, dan menggunakan alt+tab untuk berpindah-pindah di antara beberapa aplikasi yang sedang berjalan.
+Ketika Anda melakukan ini, Aslan akan melaporkan informasi tentang objek yang memiliki fokus, seperti nama, jenis, nilai, status, keterangan, pintasan keyboard dan informasi posisi. 
 
 Terdapat beberapa perintah tuts yang berguna bagi Anda saat berpindah dengan fokus sistem:
 <!-- KC:beginInclude -->
 
 | Nama |Tuts Desktop |Tuts Laptop |Keterangan|
 |---|---|---|---|
-|Laporkan fokus saat ini |NVDA+tab |NVDA+tab |Menyebutkan objek atau control saat ini yang memiliki fokus sistem. Menekannya dua kali akan membuat NVDA menyebutkan informasi tentang objek atau control tersebut.|
-|Laporkan judul |NVDA+t |NVDA+t |Melaporkan judul jendela yang aktif saat ini. Menekannya dua kali akan membuat NVDA menyebutkan informasi tentang jendela tersebut. Menekannya tiga kali akan membuat NVDA menyalinnya ke clipboard.|
-|Bacakan jendela yang aktif |NVDA+b |NVDA+b |Membaca semua control dalam jendela yang aktif saat ini (berguna untuk dialog)|
-|Laporkan Bilah Status |NVDA+end |NVDA+shift+end |Melaporkan status bar jika NVDA menemukannya.  Perintah ini juga memindahkan objek navigator ke lokasi ini. Menekannya dua kali akan membuat NVDA menyebutkan informasi tentang status bar tersebut.|
+|Laporkan fokus saat ini |Aslan+tab |Aslan+tab |Menyebutkan objek atau control saat ini yang memiliki fokus sistem. Menekannya dua kali akan membuat Aslan menyebutkan informasi tentang objek atau control tersebut.|
+|Laporkan judul |Aslan+t |Aslan+t |Melaporkan judul jendela yang aktif saat ini. Menekannya dua kali akan membuat Aslan menyebutkan informasi tentang jendela tersebut. Menekannya tiga kali akan membuat Aslan menyalinnya ke clipboard.|
+|Bacakan jendela yang aktif |Aslan+b |Aslan+b |Membaca semua control dalam jendela yang aktif saat ini (berguna untuk dialog)|
+|Laporkan Bilah Status |Aslan+end |Aslan+shift+end |Melaporkan status bar jika Aslan menemukannya.  Perintah ini juga memindahkan objek navigator ke lokasi ini. Menekannya dua kali akan membuat Aslan menyebutkan informasi tentang status bar tersebut.|
 
 <!-- KC:endInclude -->
 
@@ -321,16 +321,16 @@ Jika satu [objek](#Objects) yang mengizinkan navigasi dan/atau pengeditan teks [
 
 Ketika fokus berada di objek yang memiliki system caret, Anda dapat menggunakan tuts panah, page up, page down, home, end, dll, untuk menelusuri teks.
 Anda juga dapat mengubah teks jika control mendukung pengeditan.
-NVDA akan memberi tahu saat Anda berpindah per karakter, kata atau baris, dan juga memberi tahu ketika Anda memilih dan membatalkan pilihan pada teks.
+Aslan akan memberi tahu saat Anda berpindah per karakter, kata atau baris, dan juga memberi tahu ketika Anda memilih dan membatalkan pilihan pada teks.
 
-NVDA menyediakan perintah tuts yang berhubungan dengan system caret berikut ini: 
+Aslan menyediakan perintah tuts yang berhubungan dengan system caret berikut ini: 
 <!-- KC:beginInclude -->
 
 | Nama |Tuts Desktop |Tuts Laptop |Keterangan|
 |---|---|---|---|
-|Baca semua |NVDA+downArrow |NVDA+a |Mulai membaca dari posisi system caret saat ini, memindahkannya seiring pergerakannya.|
-|Baca baris saat ini |NVDA+upArrow |NVDA+l |Membaca baris tempat system caret berada saat ini.  Menekannya dua kali akan membuat NVDA menyebutkan barisnya.|
-|Baca teks terpilih saat ini |NVDA+Shift+upArrow |NVDA+shift+s |Membaca teks yang terpilih saat ini|
+|Baca semua |Aslan+downArrow |Aslan+a |Mulai membaca dari posisi system caret saat ini, memindahkannya seiring pergerakannya.|
+|Baca baris saat ini |Aslan+upArrow |Aslan+l |Membaca baris tempat system caret berada saat ini.  Menekannya dua kali akan membuat Aslan menyebutkan barisnya.|
+|Baca teks terpilih saat ini |Aslan+Shift+upArrow |Aslan+shift+s |Membaca teks yang terpilih saat ini|
 |Kalimat berikutnya |alt+downArrow |alt+downArrow |Memindahkan caret (tanda sisipan) ke kalimat berikutnya dan menyebutkannya. (Hanya didukung di Microsoft Word dan Outlook)|
 |Kalimat sebelumnya |alt+upArrow |alt+upArrow |Memindahkan caret (tanda sisipan) ke kalimat sebelumnya dan menyebutkannya. (Hanya didukung di Microsoft Word dan Outlook)|
 
@@ -353,7 +353,7 @@ Anda mungkin juga ingin bekerja dengan [objek](#Objects) yang tidak dapat diakse
 Dalam kasus-kasus seperti ini, Anda dapat menggunakan navigasi objek.
 
 Navigasi objek memungkinkan Anda untuk berpindah di antara objek-objek dan mendapatkan informasi tentang masing-masing [objek](#Objects).
-Ketika Anda bergerak ke satu objek, NVDA akan melaporkannya dengan cara yang mirip dengan cara melaporkan fokus sistem.
+Ketika Anda bergerak ke satu objek, Aslan akan melaporkannya dengan cara yang mirip dengan cara melaporkan fokus sistem.
 Untuk cara meninjau seluruh teks saat teks tersebut muncul di layar, Anda dapat menggunakan [tinjauan layar](#ScreenReview).
 
 Anda tidak harus berpindah maju dan mundur di antara setiap objek pada sistem, karena objek-objek ini disusun secara hierarkis.
@@ -377,15 +377,15 @@ Untuk bernavigasi berdasarkan objek, gunakan perintah-perintah berikut ini:
 
 | Nama |Tuts Desktop |Tuts Laptop |Sentuh |Keterangan|
 |---|---|---|---|---|
-|Laporkan objek saat ini |NVDA+numpad5 |NVDA+shift+o |tidak ada |Melaporkan objek navigator yang aktif saat ini.  Menekan dua kali akan membuat NVDA menyebutkan informasi, dan menekan 3 kali akan menyalin nama dan nilai objek ini ke clipboard.|
-|Pindah ke objek yang berisi |NVDA+numpad8 |NVDA+shift+upArrow |jentik ke atas (mode objek) |Berpindah ke objek yang mengandung objek navigator yang aktif saat ini|
-|Pindah ke objek sebelumnya |NVDA+numpad4 |NVDA+shift+leftArrow |jentik ke kiri (mode objek) |Berpindah ke objek sebelum objek navigator yang aktif saat ini|
-|Pindah ke objek berikutnya |NVDA+numpad6 |NVDA+shift+rightArrow |jentik ke kanan (mode objek) |Berpindah ke objek setelah objek navigator yang aktif saat ini|
-|Pindah ke objek-berisi yang pertama |NVDA+numpad2 |NVDA+shift+downArrow |jentik ke bawah (mode objek) |Berpindah ke objek pertama yang dikandung oleh objek navigator yang aktif saat ini|
-|Pindah ke objek fokus |NVDA+numpadMinus |NVDA+backspace |tidak ada |Berpindah ke objek yang saat ini memiliki fokus sistem, dan juga menempatkan kursor tinjauan (review cursor) pada posisi system caret, jika diperlihatkan|
-|Aktifkan objek navigator saat ini |NVDA+numpadEnter |NVDA+enter |Double tap (Ketukan ganda) |Mengaktifkan objek navigator yang aktif saat ini (mirip mengklik dengan mouse atau menekan spasi saat objek navigator memiliki fokus sistem)|
-|Pindahkan fokus sistem atau caret ke posisi tinjauan saat ini |NVDA+shift+numpadMinus |NVDA+shift+backspace |tidak ada |Ditekan sekali akan memindahkan fokus sistem ke objek navigator saat ini. Ditekan dua kali akan memindahkan system caret ke posisi kursor tinjauan (review cursor).|
-|Laporkan lokasi kursor tinjauan |NVDA+numpadDelete |NVDA+delete |tidak ada |Melaporkan informasi tentang lokasi teks atau objek pada kursor tinjauan.  Misalnya prosentase seluruh dokumen, jarak dari sisi halaman atau posisi layar secara tepat.  Menekan dua kali akan membuat NVDA menyediakan informasi lebih detail.|
+|Laporkan objek saat ini |Aslan+numpad5 |Aslan+shift+o |tidak ada |Melaporkan objek navigator yang aktif saat ini.  Menekan dua kali akan membuat Aslan menyebutkan informasi, dan menekan 3 kali akan menyalin nama dan nilai objek ini ke clipboard.|
+|Pindah ke objek yang berisi |Aslan+numpad8 |Aslan+shift+upArrow |jentik ke atas (mode objek) |Berpindah ke objek yang mengandung objek navigator yang aktif saat ini|
+|Pindah ke objek sebelumnya |Aslan+numpad4 |Aslan+shift+leftArrow |jentik ke kiri (mode objek) |Berpindah ke objek sebelum objek navigator yang aktif saat ini|
+|Pindah ke objek berikutnya |Aslan+numpad6 |Aslan+shift+rightArrow |jentik ke kanan (mode objek) |Berpindah ke objek setelah objek navigator yang aktif saat ini|
+|Pindah ke objek-berisi yang pertama |Aslan+numpad2 |Aslan+shift+downArrow |jentik ke bawah (mode objek) |Berpindah ke objek pertama yang dikandung oleh objek navigator yang aktif saat ini|
+|Pindah ke objek fokus |Aslan+numpadMinus |Aslan+backspace |tidak ada |Berpindah ke objek yang saat ini memiliki fokus sistem, dan juga menempatkan kursor tinjauan (review cursor) pada posisi system caret, jika diperlihatkan|
+|Aktifkan objek navigator saat ini |Aslan+numpadEnter |Aslan+enter |Double tap (Ketukan ganda) |Mengaktifkan objek navigator yang aktif saat ini (mirip mengklik dengan mouse atau menekan spasi saat objek navigator memiliki fokus sistem)|
+|Pindahkan fokus sistem atau caret ke posisi tinjauan saat ini |Aslan+shift+numpadMinus |Aslan+shift+backspace |tidak ada |Ditekan sekali akan memindahkan fokus sistem ke objek navigator saat ini. Ditekan dua kali akan memindahkan system caret ke posisi kursor tinjauan (review cursor).|
+|Laporkan lokasi kursor tinjauan |Aslan+numpadDelete |Aslan+delete |tidak ada |Melaporkan informasi tentang lokasi teks atau objek pada kursor tinjauan.  Misalnya prosentase seluruh dokumen, jarak dari sisi halaman atau posisi layar secara tepat.  Menekan dua kali akan membuat Aslan menyediakan informasi lebih detail.|
 
 <!-- KC:endInclude -->
 
@@ -393,7 +393,7 @@ Catatan: tuts numpad mensyaratkan tuts numlock dinonaktifkan agar perintah ini d
 
 ### Meninjau Teks {#ReviewingText}
 
-NVDA memungkinkan Anda untuk membaca konten pada [layar](#ScreenReview), [dokumen](#DocumentReview) yang aktif saat ini atau [objek](#ObjectReview) yang aktif saat ini berdasarkan karakter, kata atau baris.
+Aslan memungkinkan Anda untuk membaca konten pada [layar](#ScreenReview), [dokumen](#DocumentReview) yang aktif saat ini atau [objek](#ObjectReview) yang aktif saat ini berdasarkan karakter, kata atau baris.
 Fungsi ini sangat bermanfaat di berbagai tempat (termasuk Windows command console) yang tidak memiliki [system caret](#SystemCaret).
 Sebagai contoh, Anda mungkin menggunakannya untuk meninjau teks informasi yang panjang dalam sebuah dialog.
 
@@ -409,23 +409,23 @@ Perintah-perintah berikut ini tersedia untuk meninjau teks:
 
 | Nama |Tuts Desktop |Tuts Laptop |Sentuh |Keterangan|
 |---|---|---|---|---|
-|Pindah ke baris teratas dalam tinjauan |shift+numpad7 |NVDA+control+home |tidak ada |Memindahkan kursor tinjauan ke baris teratas teks|
-|Pindah ke baris sebelumnya dalam tinjauan |numpad7 |NVDA+upArrow |jentik ke atas (mode teks) |Memindahkan kursor tinjauan ke baris sebelumnya pada teks|
-|Laporkan baris saat ini dalam tinjauan |numpad8 |NVDA+shift+. |tidak ada |Memberi tahu baris teks saat ini tempat kursor tinjauan diposisikan.  Menekannya dua kali akan membuat NVDA menyebutkan barisnya. Menekannya tiga kali akan membuat NVDA menyebutkan barisnya dengan menggunakan keterangan karakter.|
-|Pindah ke baris berikutnya dalam tinjauan |numpad9 |NVDA+downArrow |jentik ke bawah (mode teks) |Memindahkan kursor tinjauan ke baris teks berikutnya.|
-|Pindah ke baris terbawah dalam tinjauan |shift+numpad9 |NVDA+control+end |tidak ada |Memindahkan kursor tinjauan ke baris teks terbawah.|
-|Pindah ke kata sebelumnya dalam tinjauan |numpad4 |NVDA+control+leftArrow |jentik ke kiri dengan 2-jari (mode teks) |Memindahkan kursor tinjauan ke kata sebelumnya dalam teks.|
-|Laporkan kata saat ini dalam tinjauan |numpad5 |NVDA+control+. |tidak ada |Memberi tahu kata saat ini pada teks tempat kursor tinjauan diposisikan. Menekannya dua kali akan membuat NVDA menyebutkan kata tersebut. Menekannya tiga kali akan membuat NVDA menyebutkan kata tersebut dengan menggunakan keterangan karakter.|
-|Pindah ke kata berikutnya dalam tinjauan |numpad6 |NVDA+control+rightArrow |jentik ke kanan dengan 2-jari (mode teks) |Memindahkan kursor tinjauan ke kata berikutnya dalam teks.|
-|Pindah ke awal baris dalam tinjauan |shift+numpad1 |NVDA+home |tidak ada |Memindahkan kursor tinjauan ke awal baris saat ini dalam teks.|
-|Pindah ke karakter sebelumnya dalam tinjauan |numpad1 |NVDA+leftArrow |jentik ke kiri (mode teks) |Memindahkan kursor tinjauan ke karakter sebelumnya pada baris saat ini di dalam teks.|
-|Laporkan karakter saat ini dalam tinjauan |numpad2 |NVDA+. |tidak ada |Memberi tahu karakter saat ini pada baris teks tempat kursor tinjauan diposisikan. Menekannya dua kali akan membuat NVDA melaporkan keterangan atau contoh karakter tersebut.  Menekannya tiga kali akan membuat NVDA melaporkan nilai numerik karakter dalam desimal dan heksadesimal.|
-|Pindah ke karakter berikutnya dalam tinjauan |numpad3 |NVDA+rightArrow |jentik ke kanan (mode teks) |Memindahkan kursor tinjauan ke karakter berikutnya pada baris saat ini di dalam teks|
-|Pindah ke akhir baris dalam tinjauan |shift+numpad3 |NVDA+end |tidak ada |Memindahkan kursor tinjauan ke akhir baris saat ini dalam teks.|
-|Baca semua dengan tinjauan |numpadPlus |NVDA+shift+a |jentik ke bawah dengan 3-jari (mode teks) |Membaca dari posisi kursor tinjauan saat ini, memindahkannya seiring pergerakannya.|
-|Pilih lalu Salin dari kursor tinjauan |NVDA+f9 |NVDA+f9 |tidak ada |Mulai memilih lalu menyalin dari posisi kursor tinjauan saat ini.   Tindakan yang sebenarnya tidak dilakukan sampai Anda memberi tahu NVDA di mana akhir rangkaian teks.|
-|Pilih lalu Salin ke kursor tinjauan |NVDA+f10 |NVDA+f10 |tidak ada |Saat Anda menekan pertama kali, teks dipilih dari posisi start marker yang sudah diatur sebelumnya sampai dengan dan termasuk posisi kursor tinjauan saat ini. Setelah Anda menekan tuts ini untuk yang kedua kalinya, teks akan disalin ke clipboard Windows.|
-|Laporkan pemformatan teks |NVDA+f |NVDA+f |tidak ada |Melaporkan pemformatan teks di mana kursor tinjauan ditempatkan saat ini. Menekannya dua kali akan menampilkan informasi dalam mode jelajah.|
+|Pindah ke baris teratas dalam tinjauan |shift+numpad7 |Aslan+control+home |tidak ada |Memindahkan kursor tinjauan ke baris teratas teks|
+|Pindah ke baris sebelumnya dalam tinjauan |numpad7 |Aslan+upArrow |jentik ke atas (mode teks) |Memindahkan kursor tinjauan ke baris sebelumnya pada teks|
+|Laporkan baris saat ini dalam tinjauan |numpad8 |Aslan+shift+. |tidak ada |Memberi tahu baris teks saat ini tempat kursor tinjauan diposisikan.  Menekannya dua kali akan membuat Aslan menyebutkan barisnya. Menekannya tiga kali akan membuat Aslan menyebutkan barisnya dengan menggunakan keterangan karakter.|
+|Pindah ke baris berikutnya dalam tinjauan |numpad9 |Aslan+downArrow |jentik ke bawah (mode teks) |Memindahkan kursor tinjauan ke baris teks berikutnya.|
+|Pindah ke baris terbawah dalam tinjauan |shift+numpad9 |Aslan+control+end |tidak ada |Memindahkan kursor tinjauan ke baris teks terbawah.|
+|Pindah ke kata sebelumnya dalam tinjauan |numpad4 |Aslan+control+leftArrow |jentik ke kiri dengan 2-jari (mode teks) |Memindahkan kursor tinjauan ke kata sebelumnya dalam teks.|
+|Laporkan kata saat ini dalam tinjauan |numpad5 |Aslan+control+. |tidak ada |Memberi tahu kata saat ini pada teks tempat kursor tinjauan diposisikan. Menekannya dua kali akan membuat Aslan menyebutkan kata tersebut. Menekannya tiga kali akan membuat Aslan menyebutkan kata tersebut dengan menggunakan keterangan karakter.|
+|Pindah ke kata berikutnya dalam tinjauan |numpad6 |Aslan+control+rightArrow |jentik ke kanan dengan 2-jari (mode teks) |Memindahkan kursor tinjauan ke kata berikutnya dalam teks.|
+|Pindah ke awal baris dalam tinjauan |shift+numpad1 |Aslan+home |tidak ada |Memindahkan kursor tinjauan ke awal baris saat ini dalam teks.|
+|Pindah ke karakter sebelumnya dalam tinjauan |numpad1 |Aslan+leftArrow |jentik ke kiri (mode teks) |Memindahkan kursor tinjauan ke karakter sebelumnya pada baris saat ini di dalam teks.|
+|Laporkan karakter saat ini dalam tinjauan |numpad2 |Aslan+. |tidak ada |Memberi tahu karakter saat ini pada baris teks tempat kursor tinjauan diposisikan. Menekannya dua kali akan membuat Aslan melaporkan keterangan atau contoh karakter tersebut.  Menekannya tiga kali akan membuat Aslan melaporkan nilai numerik karakter dalam desimal dan heksadesimal.|
+|Pindah ke karakter berikutnya dalam tinjauan |numpad3 |Aslan+rightArrow |jentik ke kanan (mode teks) |Memindahkan kursor tinjauan ke karakter berikutnya pada baris saat ini di dalam teks|
+|Pindah ke akhir baris dalam tinjauan |shift+numpad3 |Aslan+end |tidak ada |Memindahkan kursor tinjauan ke akhir baris saat ini dalam teks.|
+|Baca semua dengan tinjauan |numpadPlus |Aslan+shift+a |jentik ke bawah dengan 3-jari (mode teks) |Membaca dari posisi kursor tinjauan saat ini, memindahkannya seiring pergerakannya.|
+|Pilih lalu Salin dari kursor tinjauan |Aslan+f9 |Aslan+f9 |tidak ada |Mulai memilih lalu menyalin dari posisi kursor tinjauan saat ini.   Tindakan yang sebenarnya tidak dilakukan sampai Anda memberi tahu Aslan di mana akhir rangkaian teks.|
+|Pilih lalu Salin ke kursor tinjauan |Aslan+f10 |Aslan+f10 |tidak ada |Saat Anda menekan pertama kali, teks dipilih dari posisi start marker yang sudah diatur sebelumnya sampai dengan dan termasuk posisi kursor tinjauan saat ini. Setelah Anda menekan tuts ini untuk yang kedua kalinya, teks akan disalin ke clipboard Windows.|
+|Laporkan pemformatan teks |Aslan+f |Aslan+f |tidak ada |Melaporkan pemformatan teks di mana kursor tinjauan ditempatkan saat ini. Menekannya dua kali akan menampilkan informasi dalam mode jelajah.|
 
 <!-- KC:endInclude -->
 
@@ -440,16 +440,16 @@ Tata letak tersebut diilustrasikan sebagai berikut:
 
 ### Mode Tinjauan {#ReviewModes}
 
-[Perintah tinjauan teks](#ReviewingText) NVDA dapat meninjau konten di dalam objek navigator saat ini, dokumen atau layar saat ini, tergantung pada mode tinjauan yang dipilih.
-Mode tinjauan adalah pengganti konsep Flat Review NVDA yang ada lebih awal. 
+[Perintah tinjauan teks](#ReviewingText) Aslan dapat meninjau konten di dalam objek navigator saat ini, dokumen atau layar saat ini, tergantung pada mode tinjauan yang dipilih.
+Mode tinjauan adalah pengganti konsep Flat Review Aslan yang ada lebih awal. 
 
 Perintah-perintah berikut ini digunakan untuk beralih di antara mode-mode tinjauan:  
 <!-- KC:beginInclude -->
 
 | Nama |Tuts Desktop |Tuts Laptop |Sentuh |Keterangan|
 |---|---|---|---|---|
-|Beralih ke mode tinjauan berikutnya |NVDA+numpad7 |NVDA+pageUp |jentik ke atas dengan 2-jari |Mengalihkan ke mode tinjauan berikutnya yang tersedia|
-|Beralih ke mode tinjauan sebelumnya |NVDA+numpad1 |NVDA+pageDown |jentik ke bawah dengan 2-jari |Mengalihkan ke mode tinjauan sebelumnya yang tersedia|
+|Beralih ke mode tinjauan berikutnya |Aslan+numpad7 |Aslan+pageUp |jentik ke atas dengan 2-jari |Mengalihkan ke mode tinjauan berikutnya yang tersedia|
+|Beralih ke mode tinjauan sebelumnya |Aslan+numpad1 |Aslan+pageDown |jentik ke bawah dengan 2-jari |Mengalihkan ke mode tinjauan sebelumnya yang tersedia|
 
 <!-- KC:endInclude -->
 
@@ -467,7 +467,7 @@ Mode tinjauan dokumen memungkinkan Anda untuk meninjau teks di seluruh dokumen.
 Ketika beralih dari tinjauan objek ke tinjauan dokumen, kursor tinjauan ada di dalam dokumen pada posisi objek navigator.
 Ketika menelusuri dokumen dengan perintah tinjauan, objek navigator secara otomatis diperbarui ke objek yang ditemukan pada posisi kursor tinjauan yang aktif saat ini.  
 
-Perhatikanlah bahwa NVDA akan beralih ke tinjauan dokumen dari tinjauan objek secara otomatis ketika menelusuri dokumen mode jelajah.  
+Perhatikanlah bahwa Aslan akan beralih ke tinjauan dokumen dari tinjauan objek secara otomatis ketika menelusuri dokumen mode jelajah.  
 
 #### Tinjauan Layar {#ScreenReview}
 
@@ -477,51 +477,51 @@ Ini mirip dengan tinjauan layar atau fungsi kursor mouse pada banyak pembaca lay
 Saat beralih ke mode tinjauan layar, kursor tinjauan ditempatkan pada posisi layar [objek navigator](#ObjectNavigation) yang aktif saat ini.
 Ketika menelusuri layar dengan perintah tinjauan, objek navigator secara otomatis diperbarui ke objek yang ditemukan pada posisi kursor tinjauan di layar.
 
-Perhatikanlah bahwa pada aplikasi yang lebih baru, NVDA mungkin tidak melihat sebagian atau semua teks yang ditampilkan pada layar karena menggunakan teknologi screen drawing yang lebih baru yang belum mendukung pada saat ini.  
+Perhatikanlah bahwa pada aplikasi yang lebih baru, Aslan mungkin tidak melihat sebagian atau semua teks yang ditampilkan pada layar karena menggunakan teknologi screen drawing yang lebih baru yang belum mendukung pada saat ini.  
 
 ### Bernavigasi dengan Mouse {#toc41}
 
-Ketika Anda bergerak dengan mouse, NVDA secara default akan melaporkan teks yang tepat berada di bawah penunjuk mouse ketika penunjuk bergerak di atasnya.
-Di mana didukung, NVDA akan membacakan paragraf di sekitar teks, meskipun beberapa control mungkin hanya membaca berdasarkan baris.  
+Ketika Anda bergerak dengan mouse, Aslan secara default akan melaporkan teks yang tepat berada di bawah penunjuk mouse ketika penunjuk bergerak di atasnya.
+Di mana didukung, Aslan akan membacakan paragraf di sekitar teks, meskipun beberapa control mungkin hanya membaca berdasarkan baris.  
 
-NVDA dapat dikonfigurasi untuk juga memberi tahu jenis [objek](#Objects) di bawah mouse saat mouse bergerak (misalnya daftar, tombol, dll.).
+Aslan dapat dikonfigurasi untuk juga memberi tahu jenis [objek](#Objects) di bawah mouse saat mouse bergerak (misalnya daftar, tombol, dll.).
 Ini mungkin berguna untuk penyandang tunanetra total, karena kadang-kadang, mendengarkan teks saja tidak cukup.  
 
-NVDA menyediakan cara bagi pengguna untuk mengetahui di mana mouse ditempatkan dalam dimensi layar dengan memperdengarkan bunyi bip untuk memberi tahu koordinat mouse saat ini.
+Aslan menyediakan cara bagi pengguna untuk mengetahui di mana mouse ditempatkan dalam dimensi layar dengan memperdengarkan bunyi bip untuk memberi tahu koordinat mouse saat ini.
 Semakin tinggi posisi mouse pada layar, semakin tinggi pitch (nada) bunyi bip tersebut. 
 Semakin mouse ditempatkan ke kiri atau kanan pada layar, semakin ke kiri atau ke kanan pula bunyi bip yang dimainkan (diasumsikan bahwa pengguna memiliki speaker stereo atau headphone).  
 
-Fitur ekstra mouse ini tidak diaktifkan secara default dalam NVDA.
-Jika Anda ingin memanfaatkannya, Anda dapat mengonfigurasinya dari dialog [Mouse settings (Pengaturan mouse)](#MouseSettings) yang dapat Anda temukan dalam menu Preferences NVDA. 
+Fitur ekstra mouse ini tidak diaktifkan secara default dalam Aslan.
+Jika Anda ingin memanfaatkannya, Anda dapat mengonfigurasinya dari dialog [Mouse settings (Pengaturan mouse)](#MouseSettings) yang dapat Anda temukan dalam menu Preferences Aslan. 
 
-Meskipun mouse fisik atau bantalan sentuh perlu digunakan untuk bernavigasi dengan mouse, NVDA memiliki beberapa perintah tuts yang berhubungan dengan mouse:  
+Meskipun mouse fisik atau bantalan sentuh perlu digunakan untuk bernavigasi dengan mouse, Aslan memiliki beberapa perintah tuts yang berhubungan dengan mouse:  
 <!-- KC:beginInclude -->
 
 | Nama |Tuts Desktop |Tuts Laptop |Keterangan|
 |---|---|---|---|
-|Klik kiri mouse |numpadDivide |NVDA+[ |Mengklik kiri mouse satu kali. Dobel klik biasa dapat dilakukan dengan menekan tuts ini dua kali secara berurutan dengan cepat.|
-|Kunci klik kiri mouse |shift+numpadDivide |NVDA+control+[ |Mengunci klik kiri mouse. Tekan lagi untuk membuka kuncinya. Untuk menyeret (drag) mouse, tekan tuts ini untuk mengunci tombol kiri mouse dan kemudian gerakkan mouse secara fisik atau gunakan salah satu dari mouse routing command (perintah perutean mouse)  yang lain.|
-|Klik kanan mouse |numpadMultiply |NVDA+] |Mengklik kanan mouse satu kali.|
-|Kunci klik kanan mouse |shift+numpadMultiply |NVDA+control+] |Mengunci klik kanan mouse. Tekan lagi untuk membuka kuncinya. Untuk menyeret (drag) mouse, tekan tuts ini untuk mengunci tombol kanan mouse dan kemudian gerakkan mouse secara fisik atau gunakan salah satu dari mouse routing command (perintah perutean mouse) yang lain.|
-|Move mouse to current navigator object (Gerakkan mouse ke objek navigator saat ini) |NVDA+numpadDivide |NVDA+shift+m |Memindahkan mouse ke lokasi objek navigator dan kursor tinjauan saat ini|
-|Bernavigasi ke objek di bawah mouse |NVDA+numpadMultiply |NVDA+shift+n |Mengatur objek navigasi ke objek yang berlokasi di posisi mouse.|
+|Klik kiri mouse |numpadDivide |Aslan+[ |Mengklik kiri mouse satu kali. Dobel klik biasa dapat dilakukan dengan menekan tuts ini dua kali secara berurutan dengan cepat.|
+|Kunci klik kiri mouse |shift+numpadDivide |Aslan+control+[ |Mengunci klik kiri mouse. Tekan lagi untuk membuka kuncinya. Untuk menyeret (drag) mouse, tekan tuts ini untuk mengunci tombol kiri mouse dan kemudian gerakkan mouse secara fisik atau gunakan salah satu dari mouse routing command (perintah perutean mouse)  yang lain.|
+|Klik kanan mouse |numpadMultiply |Aslan+] |Mengklik kanan mouse satu kali.|
+|Kunci klik kanan mouse |shift+numpadMultiply |Aslan+control+] |Mengunci klik kanan mouse. Tekan lagi untuk membuka kuncinya. Untuk menyeret (drag) mouse, tekan tuts ini untuk mengunci tombol kanan mouse dan kemudian gerakkan mouse secara fisik atau gunakan salah satu dari mouse routing command (perintah perutean mouse) yang lain.|
+|Move mouse to current navigator object (Gerakkan mouse ke objek navigator saat ini) |Aslan+numpadDivide |Aslan+shift+m |Memindahkan mouse ke lokasi objek navigator dan kursor tinjauan saat ini|
+|Bernavigasi ke objek di bawah mouse |Aslan+numpadMultiply |Aslan+shift+n |Mengatur objek navigasi ke objek yang berlokasi di posisi mouse.|
 
 <!-- KC:endInclude -->
 
 ## Mode Jelajah {#BrowseMode}
 
-Dokumen read-only (baca-saja) yang rumit seperti laman web dijelajah dalam NVDA dengan menggunakan mode jelajah.
+Dokumen read-only (baca-saja) yang rumit seperti laman web dijelajah dalam Aslan dengan menggunakan mode jelajah.
 Ini meliputi dokumen-dokumen pada Mozilla Firefox, Microsoft Internet Explorer, Mozilla Thunderbird, pesan HTML dalam Microsoft Outlook, Google Chrome, Adobe Reader dan Adobe Flash.
 Mode jelajah juga tersedia secara opsional untuk dokumen Microsoft Word. 
 
 Dalam mode jelajah, konten dokumen tersedia dalam representasi datar yang dapat dinavigasi dengan tuts kursor seolah-olah dokumen tersebut adalah dokumen teks.
-Semua perintah tuts [system caret](#SystemCaret) NVDA akan bekerja dalam mode ini, misalnya Say All (Baca Semua), Report Formatting (Laporkan Pemformatan), table navigation commands (perintah navigasi tabel), dll.
+Semua perintah tuts [system caret](#SystemCaret) Aslan akan bekerja dalam mode ini, misalnya Say All (Baca Semua), Report Formatting (Laporkan Pemformatan), table navigation commands (perintah navigasi tabel), dll.
 Informasi tentang apakah suatu teks adalah link (tautan), heading, dll. disebutkan bersama dengan teks ketika Anda bergerak. 
 
 Kadang-kadang Anda perlu berinteraksi secara langsung dengan control dalam dokumen-dokumen ini.
 Misalnya, Anda perlu berinteraksi dengan bidang teks yang dapat diedit serta daftar agar Anda dapat mengetik karakter dan menggunakan tuts kursor untuk bekerja dengan control.
 Anda dapat melakukan ini dengan cara beralih ke mode fokus, di mana hampir semua kunci dilintaskan ke control.
-Saat berada di mode jelajah, secara default, NVDA akan secara otomatis beralih ke mode fokus jika Anda menekan tab atau mengklik control tertentu yang mensyaratkannya.
+Saat berada di mode jelajah, secara default, Aslan akan secara otomatis beralih ke mode fokus jika Anda menekan tab atau mengklik control tertentu yang mensyaratkannya.
 Sebaliknya, menekan tab atau mengklik control yang tidak mensyaratkan mode fokus akan mengalihkan Anda kembali ke mode jelajah.
 Anda juga dapat menekan Enter atau spasi untuk beralih ke mode fokus pada control yang mensyaratkannya.
 Menekan Escape akan mengalihkan Anda kembali ke mode jelajah.
@@ -531,19 +531,19 @@ Sebagai tambahan, Anda dapat secara manual memaksa beralih ke mode fokus, yang m
 
 | Nama |Tuts |Keterangan|
 |---|---|---|
-|Men-toggle mode jelajah/fokus |NVDA+space |Mengaktifkan dan menonaktifkan antara mode fokus dan mode jelajah|
+|Men-toggle mode jelajah/fokus |Aslan+space |Mengaktifkan dan menonaktifkan antara mode fokus dan mode jelajah|
 |Keluar dari mode fokus |escape |Mengalihkan kembali ke mode jelajah jika sebelumnya telah dialihkan ke mode fokus secara otomatis|
-|Me-refresh dokumen mode jelajah |NVDA+f5 |Membuka kembali konten dokumen saat ini (perintah ini berguna jika konten tertentu tampaknya hilang dari dokumen.  Tidak tersedia di Microsoft Word dan Outlook).|
-|Find (Temukan) |NVDA+control+f |Membuka cepat sebuah dialog yang di dalamnya Anda dapat mengetikkan teks yang dicari di dalam dokumen yang aktif saat ini.|
-|Find next (Temukan yang berikutnya) |NVDA+f3 |Menemukan kata yang sama berikutnya; kata tersebut telah Anda cari sebelumnya pada teks dalam dokumen|
-|Find previous (Temukan yang sebelumnya) |NVDA+shift+f3 |Menemukan kata yang sama yang terdahulu; kata tersebut telah Anda cari sebelumnya pada teks dalam dokumen|
-|Open long description (Membuka keterangan yang panjang) |NVDA+d |Membuka jendela baru yang berisi keterangan panjang untuk elemen yang aktif saat ini, jika elemen tersebut memiliki keterangan tersebut.|
+|Me-refresh dokumen mode jelajah |Aslan+f5 |Membuka kembali konten dokumen saat ini (perintah ini berguna jika konten tertentu tampaknya hilang dari dokumen.  Tidak tersedia di Microsoft Word dan Outlook).|
+|Find (Temukan) |Aslan+control+f |Membuka cepat sebuah dialog yang di dalamnya Anda dapat mengetikkan teks yang dicari di dalam dokumen yang aktif saat ini.|
+|Find next (Temukan yang berikutnya) |Aslan+f3 |Menemukan kata yang sama berikutnya; kata tersebut telah Anda cari sebelumnya pada teks dalam dokumen|
+|Find previous (Temukan yang sebelumnya) |Aslan+shift+f3 |Menemukan kata yang sama yang terdahulu; kata tersebut telah Anda cari sebelumnya pada teks dalam dokumen|
+|Open long description (Membuka keterangan yang panjang) |Aslan+d |Membuka jendela baru yang berisi keterangan panjang untuk elemen yang aktif saat ini, jika elemen tersebut memiliki keterangan tersebut.|
 
 <!-- KC:endInclude -->
 
 ### Navigasi Satu-Huruf {#toc43}
 
-Saat berada di mode jelajah, untuk navigasi yang lebih cepat, NVDA menyediakan kunci satu-karakter guna melompat ke bidang tertentu dalam dokumen.
+Saat berada di mode jelajah, untuk navigasi yang lebih cepat, Aslan menyediakan kunci satu-karakter guna melompat ke bidang tertentu dalam dokumen.
 Perhatikanlah bahwa tidak semua perintah ini didukung di setiap jenis dokumen. 
 
 <!-- KC:beginInclude -->
@@ -582,9 +582,9 @@ Untuk berpindah ke awal atau akhir elemen yang berisi (containing element), sepe
 
 <!-- KC:endInclude -->
 Beberapa aplikasi web seperti Gmail, Twitter dan Facebook menggunakan satu huruf sebagai tuts pintasan.
-Jika Anda ingin menggunakannya sambil tetap menggunakan tuts kursor untuk membaca dalam mode jelajah, Anda dapat menonaktifkan tuts navigasi satu-huruf NVDA untuk sementara.
+Jika Anda ingin menggunakannya sambil tetap menggunakan tuts kursor untuk membaca dalam mode jelajah, Anda dapat menonaktifkan tuts navigasi satu-huruf Aslan untuk sementara.
 <!-- KC:beginInclude -->
-Untuk mengaktifkan dan menonaktifkan navigasi satu-huruf pada dokumen yang aktif saat ini, tekan NVDA+shift+space.
+Untuk mengaktifkan dan menonaktifkan navigasi satu-huruf pada dokumen yang aktif saat ini, tekan Aslan+shift+space.
 <!-- KC:endInclude -->
 
 ### Elements List (Daftar Elemen) {#toc44}
@@ -598,14 +598,14 @@ Setelah Anda memilih satu item, Anda dapat menggunakan tombol-tombol yang tersed
 
 | Nama |Tuts |Keterangan|
 |---|---|---|
-|Daftar elemen mode jelajah |NVDA+f7 |Menampilkan daftar tipe-tipe elemen dalam dokumen saat ini.|
+|Daftar elemen mode jelajah |Aslan+f7 |Menampilkan daftar tipe-tipe elemen dalam dokumen saat ini.|
 
 <!-- KC:endInclude -->
 
 ### Embedded Objects (Objek Tertanam) {#toc45}
 
 Halaman mungkin berisi rich content (konten kaya) yang menggunakan teknologi seperti Adobe Flash dan Sun Java, serta aplikasi dan dialog.
-Di tempat halaman-halaman ini ditemukan dalam mode jelajah, NVDA akan melaporkannya sebagai "embedded object" (objek tertanam), "application" (aplikasi) atau "dialog".
+Di tempat halaman-halaman ini ditemukan dalam mode jelajah, Aslan akan melaporkannya sebagai "embedded object" (objek tertanam), "application" (aplikasi) atau "dialog".
 Anda dapat dengan cepat berpindah menggunakan objek tertanam tuts navigasi huruf tunggal o dan shift+o.
 Anda dapat menekan Enter pada objek-objek ini untuk berinteraksi dengannya.
 Jika objek ini dapat diakses, Anda kemudian dapat menekan tab di sekitar objek dan berinteraksi dengannya seperti aplikasi yang lain.
@@ -614,17 +614,17 @@ Satu perintah tuts disediakan untuk kembali ke halaman asli yang mengandung obje
 
 | Nama |Tuts |Keterangan|
 |---|---|---|
-|Pindah ke dokumen mode jelajah yang berisi |NVDA+control+space |Memindahkan fokus keluar dari objek tertanam saat ini dan masuk ke dalam dokumen yang mengandung objek tertanam.|
+|Pindah ke dokumen mode jelajah yang berisi |Aslan+control+space |Memindahkan fokus keluar dari objek tertanam saat ini dan masuk ke dalam dokumen yang mengandung objek tertanam.|
 
 <!-- KC:endInclude -->
 
 ## Membaca Konten Matematika {#ReadingMath}
 
-Dengan menggunakan MathPlayer 4 dari Design Science, NVDA dapat membaca dan bernavigasi secara interaktif di dalam konten matematika yang didukung.
+Dengan menggunakan MathPlayer 4 dari Design Science, Aslan dapat membaca dan bernavigasi secara interaktif di dalam konten matematika yang didukung.
 Untuk dapat melakukan ini, Anda harus memasang MathPlayer 4 di komputer.
 MathPlayer dapat diunduh secara gratis di: http://www.dessci.com/en/products/mathplayer/
 
-NVDA mendukung tipe-tipe konten matematika berikut ini:  
+Aslan mendukung tipe-tipe konten matematika berikut ini:  
 
 * MathML pada Mozilla Firefox dan Microsoft Internet Explorer dan Google Chrome.
 * Design Science MathType pada Microsoft Word dan PowerPoint.
@@ -633,7 +633,7 @@ MathType perlu dipasang agar dapat digunakan. Versi percobaan sudah cukup memada
 Perhatikanlah bahwa ini belum menjadi standar resmi. Jadi untuk saat ini belum tersedia software untuk umum yang dapat menghasilkan konten ini.  
 * Matematika di Kindle pada PC untuk buku-buku Matematika aksesibel.
 
-Saat membaca sebuah dokumen, NVDA akan menyebutkan konten matematika yang didukung di tempat konten tersebut ditemukan.
+Saat membaca sebuah dokumen, Aslan akan menyebutkan konten matematika yang didukung di tempat konten tersebut ditemukan.
 Jika Anda menggunakan braille display, konten ini juga akan ditampilkan dalam braille.  
 
 ### Navigasi Interaktif {#toc47}
@@ -652,7 +652,7 @@ Secara default, kursor tinjauan mengikuti system caret, jadi Anda biasanya dapat
 
 | Nama |Tuts |Keterangan|
 |---|---|---|
-|Berinteraksi dengan konten matematika |NVDA+alt+m |Memulai interaksi dengan konten matematika|
+|Berinteraksi dengan konten matematika |Aslan+alt+m |Memulai interaksi dengan konten matematika|
 
 <!-- KC:endInclude -->
 
@@ -664,7 +664,7 @@ Jika Anda ingin kembali ke dokumen, tekan tuts Escape.
 
 ## Braille {#toc48}
 
-Jika Anda memiliki braille display, NVDA dapat menampilkan informasi dalam braille.
+Jika Anda memiliki braille display, Aslan dapat menampilkan informasi dalam braille.
 Jika braille display Anda memiliki keyboard tipe-Perkins, Anda juga bisa memasukkan braille contraction atau braille penuh. 
 
 Silakan lihat bagian [dukungan Braille Display](#SupportedBrailleDisplays) untuk informasi tentang braille display yang didukung.
@@ -766,7 +766,7 @@ Akhirnya, singkatan berikut untuk tengara didefinisikan:
 
 ### Input Braille {#toc50}
 
-NVDA mendukung masuknya braille tanpa kontrak dan kontrak melalui keyboard braille.
+Aslan mendukung masuknya braille tanpa kontrak dan kontrak melalui keyboard braille.
 Anda dapat memilih tabel terjemahan yang digunakan untuk menerjemahkan braille menjadi teks menggunakan pengaturan [Tabel Input](#BrailleInputTable) dalam dialog Pengaturan Braille (Braille Settings dialog).
 
 Jika braille yang tidak disingkat sedang digunakan, teks dimasukkan segera setelah di-enter.
@@ -783,10 +783,10 @@ Menekan dot 7 + dot 8 menerjemahkan input braille apapun, namun tanpa menambahka
 ## Content Recognition (Pengenalan Konten) {#toc51}
 
 Jika pengarang tidak memberikan informasi yang cukup bagi pengguna pembaca layar untuk menentukan isi sesuatu, berbagai alat dapat digunakan untuk mencoba mengenali konten dari gambar.
-NVDA mendukung fungsi optical character recognition (OCR) yang dibangun pada Windows 10 untuk mengenali teks dari gambar.
-Pengenal konten tambahan dapat disediakan di add-on NVDA.
+Aslan mendukung fungsi optical character recognition (OCR) yang dibangun pada Windows 10 untuk mengenali teks dari gambar.
+Pengenal konten tambahan dapat disediakan di add-on Aslan.
 
-Saat Anda menggunakan perintah pengenalan konten, NVDA mengenali konten dari objek navigator saat ini #ObjectNavigation].
+Saat Anda menggunakan perintah pengenalan konten, Aslan mengenali konten dari objek navigator saat ini #ObjectNavigation].
 Secara default, objek navigator mengikuti mode fokus sistem atau kursor mode jelajah, sehingga biasanya Anda hanya bisa memindahkan kursor mode fokus atau jelajah dimana diinginkan.
 Misalnya, jika Anda memindahkan kursor modus penjelajahan ke grafis, pengenalan akan mengenali konten dari grafik secara default.
 Namun, Anda mungkin ingin menggunakan navigasi objek secara langsung, misalnya mengenali isi keseluruhan jendela aplikasi.
@@ -798,32 +798,32 @@ Menekankan escape menolak hasil pengenalan.
 ### Windows 10 OCR {#Win10Ocr}
 
 Windows 10 menyertakan OCR untuk banyak bahasa.
-NVDA dapat menggunakan ini untuk mengenali teks dari gambar atau aplikasi yang tidak dapat diakses.
+Aslan dapat menggunakan ini untuk mengenali teks dari gambar atau aplikasi yang tidak dapat diakses.
 
 Anda dapat mengatur bahasa yang akan digunakan untuk pengenalan teks dalam dialog pengaturan [Windows 10 OCR #](Win10OcrSettings).
 Bahasa tambahan dapat diinstal dengan membuka menu Start, pilih Settings, pilih Time & Language -> Region & Language dan kemudian memilih "Add a language".
 
 <!-- KC:beginInclude -->
-Untuk mengenali teks pada objek navigator saat ini menggunakan Windows 10 OCR, tekan NVDA + r.
+Untuk mengenali teks pada objek navigator saat ini menggunakan Windows 10 OCR, tekan Aslan + r.
 <!-- KC:endInclude -->
 
 ## Fitur Tertentu pada Aplikasi {#toc53}
 
-NVDA menyediakan fitur tambahannya sendiri untuk beberapa aplikasi guna memastikan Anda dapat melakukan pekerjaan dengan lebih mudah, atau untuk menyediakan akses ke fungsi yang tidak aksesibel bagi pengguna program pembaca layar.
+Aslan menyediakan fitur tambahannya sendiri untuk beberapa aplikasi guna memastikan Anda dapat melakukan pekerjaan dengan lebih mudah, atau untuk menyediakan akses ke fungsi yang tidak aksesibel bagi pengguna program pembaca layar.
 
 ### Microsoft Word {#toc54}
 #### Pembacaan Judul Kolom dan Baris secara Otomatis {#toc55}
 
-NVDA dapat memberitahukan secara otomatis judul baris dan kolom saat bernavigasi pada tabel di Microsoft Word.
-Untuk melakukan ini, pertama-tama, opsi Report Table Row/Column Headers (Laporkan Judul Baris/Kolom Tabel) pada dialog Document Formatting (Pemformatan Dokumen) di NVDA harus diaktifkan.
-Kedua, NVDA perlu mengetahui baris atau kolom mana yang berisi judul pada tabel.
+Aslan dapat memberitahukan secara otomatis judul baris dan kolom saat bernavigasi pada tabel di Microsoft Word.
+Untuk melakukan ini, pertama-tama, opsi Report Table Row/Column Headers (Laporkan Judul Baris/Kolom Tabel) pada dialog Document Formatting (Pemformatan Dokumen) di Aslan harus diaktifkan.
+Kedua, Aslan perlu mengetahui baris atau kolom mana yang berisi judul pada tabel.
 Setelah pindah ke sel pertama dalam kolom atau baris yang berisi judul, gunakan salah satu perintah berikut ini:  
 <!-- KC:beginInclude -->
 
 | Nama |Tuts |Keterangan|
 |---|---|---|
-|Set column headers (Atur judul kolom) |NVDA+shift+c |Menekan perintah ini satu kali akan memberi tahu NVDA bahwa ini adalah sel judul pertama dalam satu baris yang berisi judul kolom, yang seharusnya disebutkan secara otomatis ketika berpindah di antara kolom-kolom di bawah baris ini. Menekannya dua kali akan membatalkan pengaturan.|
-|Set row headers (Atur judul baris) |NVDA+shift+r |Menekan perintah ini satu kali akan memberi tahu NVDA bahwa ini adalah sel judul pertama dalam satu kolom yang berisi judul baris, yang seharusnya disebutkan secara otomatis ketika berpindah di antara baris-baris setelah kolom ini. Menekannya dua kali akan membatalkan pengaturan.|
+|Set column headers (Atur judul kolom) |Aslan+shift+c |Menekan perintah ini satu kali akan memberi tahu Aslan bahwa ini adalah sel judul pertama dalam satu baris yang berisi judul kolom, yang seharusnya disebutkan secara otomatis ketika berpindah di antara kolom-kolom di bawah baris ini. Menekannya dua kali akan membatalkan pengaturan.|
+|Set row headers (Atur judul baris) |Aslan+shift+r |Menekan perintah ini satu kali akan memberi tahu Aslan bahwa ini adalah sel judul pertama dalam satu kolom yang berisi judul baris, yang seharusnya disebutkan secara otomatis ketika berpindah di antara baris-baris setelah kolom ini. Menekannya dua kali akan membatalkan pengaturan.|
 
 <!-- KC:endInclude -->
 Pengaturan ini akan disimpan di dalam dokumen sebagai bookmark (marka buku) yang kompatibel dengan program pembaca layar lain seperti Jaws.
@@ -833,37 +833,37 @@ Ini berarti bahwa pengguna pembaca layar lain yang membuka dokumen ini di kemudi
 
 Seperti di web, mode jelajah juga dapat digunakan di Microsoft Word sehingga Anda dapat menggunakan fitur seperti Quick Navigation (Navigasi Cepat) dan Elements List (Daftar Elemen).
 <!-- KC:beginInclude -->
-Untuk mengaktifkan dan menonaktifkan mode jelajah pada Microsoft Word, tekan NVDA+space.
+Untuk mengaktifkan dan menonaktifkan mode jelajah pada Microsoft Word, tekan Aslan+space.
 <!-- KC:endInclude -->
 Untuk informasi lebih lanjut mengenai mode jelajah dan Quick Navigation, silakan lihat [bagian Mode Jelajah](#BrowseMode).
 
 ##### Elements List (Daftar Elemen) {#toc57}
 
 <!-- KC:beginInclude -->
-Saat berada dalam mode jelajah di Microsoft Word, Anda dapat mengakses Elements List (Daftar Elemen) dengan menekan NVDA+f7.
+Saat berada dalam mode jelajah di Microsoft Word, Anda dapat mengakses Elements List (Daftar Elemen) dengan menekan Aslan+f7.
 <!-- KC:endInclude -->
 Elements List dapat berupa daftar heading, link (tautan) dan anotasi (yang meliputi komentar dan track changes).
 
 #### Melaporkan Komentar {#toc58}
 
 <!-- KC:beginInclude -->
-Untuk melaporkan komentar apa pun pada posisi caret saat ini, tekan NVDA+alt+c.
+Untuk melaporkan komentar apa pun pada posisi caret saat ini, tekan Aslan+alt+c.
 <!-- KC:endInclude -->
-Semua komentar untuk dokumen, bersama dengan perubahan lain yang terlacak, dapat juga dimasukkan ke dalam Elements List NVDA saat memilih Annotations sebagai tipe. 
+Semua komentar untuk dokumen, bersama dengan perubahan lain yang terlacak, dapat juga dimasukkan ke dalam Elements List Aslan saat memilih Annotations sebagai tipe. 
 
 ### Microsoft Excel {#toc59}
 #### Pembacaan Judul Kolom dan Baris secara Otomatis {#toc60}
 
-NVDA juga dapat memberitahukan secara otomatis judul baris dan kolom saat bernavigasi pada lembar kerja Excel.
-Untuk melakukan ini, pertama-tama, opsi Report Table Row/Column Headers (Laporkan Judul Baris/Kolom Tabel) pada dialog Document Formatting (Pemformatan Dokumen) di NVDA harus diaktifkan.
-Kedua, NVDA perlu mengetahui baris atau kolom mana yang berisi judul.
+Aslan juga dapat memberitahukan secara otomatis judul baris dan kolom saat bernavigasi pada lembar kerja Excel.
+Untuk melakukan ini, pertama-tama, opsi Report Table Row/Column Headers (Laporkan Judul Baris/Kolom Tabel) pada dialog Document Formatting (Pemformatan Dokumen) di Aslan harus diaktifkan.
+Kedua, Aslan perlu mengetahui baris atau kolom mana yang berisi judul.
 Setelah pindah ke sel pertama dalam kolom atau baris yang berisi judul, gunakan salah satu perintah berikut ini: 
 <!-- KC:beginInclude -->
 
 | Nama |Tuts |Keterangan|
 |---|---|---|
-|Set column headers (Atur judul kolom) |NVDA+shift+c |Menekan perintah ini satu kali akan memberi tahu NVDA bahwa ini adalah sel judul pertama dalam satu baris yang berisi judul kolom, yang seharusnya disebutkan secara otomatis ketika berpindah di antara kolom-kolom di bawah baris ini. Menekannya dua kali akan membatalkan pengaturan.|
-|Set row headers (Atur judul baris) |NVDA+shift+r |Menekan perintah ini satu kali akan memberi tahu NVDA bahwa ini adalah sel judul pertama dalam satu kolom yang berisi judul baris, yang seharusnya disebutkan secara otomatis ketika berpindah di antara baris-baris setelah kolom ini. Menekannya dua kali akan membatalkan pengaturan.|
+|Set column headers (Atur judul kolom) |Aslan+shift+c |Menekan perintah ini satu kali akan memberi tahu Aslan bahwa ini adalah sel judul pertama dalam satu baris yang berisi judul kolom, yang seharusnya disebutkan secara otomatis ketika berpindah di antara kolom-kolom di bawah baris ini. Menekannya dua kali akan membatalkan pengaturan.|
+|Set row headers (Atur judul baris) |Aslan+shift+r |Menekan perintah ini satu kali akan memberi tahu Aslan bahwa ini adalah sel judul pertama dalam satu kolom yang berisi judul baris, yang seharusnya disebutkan secara otomatis ketika berpindah di antara baris-baris setelah kolom ini. Menekannya dua kali akan membatalkan pengaturan.|
 
 <!-- KC:endInclude -->
 Pengaturan ini akan disimpan di dalam workbook sebagai istilah yang telah ditentukan, yang kompatibel dengan program pembaca layar lain seperti Jaws.
@@ -871,9 +871,9 @@ Ini berarti bahwa pengguna pembaca layar lain yang membuka workbook ini di kemud
 
 #### Elements List (Daftar Elemen) {#toc61}
 
-Seperti di web, NVDA memiliki Elements List (Daftar Elemen) untuk Microsoft Excel yang memungkinkan Anda untuk membuat daftar dan mengakses berbagai jenis informasi.
+Seperti di web, Aslan memiliki Elements List (Daftar Elemen) untuk Microsoft Excel yang memungkinkan Anda untuk membuat daftar dan mengakses berbagai jenis informasi.
 <!-- KC:beginInclude -->
-Untuk mengakses Elements List pada Excel, tekan NVDA+f7.
+Untuk mengakses Elements List pada Excel, tekan Aslan+f7.
 <!-- KC:endInclude -->
 Beberapa jenis informasi yang tersedia dalam Elements List adalah: 
 
@@ -895,15 +895,15 @@ Memilih satu bidang formulir dan menekan Enter atau tombol Move To akan memindah
 #### Melaporkan Komentar {#toc62}
 
 <!-- KC:beginInclude -->
-Untuk melaporkan komentar apa pun untuk sel terfokus saat ini, tekan NVDA+alt+c.
+Untuk melaporkan komentar apa pun untuk sel terfokus saat ini, tekan Aslan+alt+c.
 <!-- KC:endInclude -->
-Semua komentar untuk lembar kerja juga dapat dimasukkan ke dalam daftar di Elements List (Daftar Elemen) NVDA.
+Semua komentar untuk lembar kerja juga dapat dimasukkan ke dalam daftar di Elements List (Daftar Elemen) Aslan.
 
 #### Membaca Sel Terproteksi {#toc63}
 
 Jika satu workbook telah diproteksi, tidaklah mungkin untuk memindahkan fokus ke sel tertentu yang telah dikunci untuk pengeditan.
 <!-- KC:beginInclude -->
-Untuk memungkinkan Anda berpindah ke sel yang terkunci, beralihlah ke Browse Mode (Mode Jelajah) dengan menekan NVDA+space, kemudian gunakan perintah pindah standar pada Excel seperti tuts panah untuk menelusuri semua sel pada lembar kerja yang aktif saat ini.
+Untuk memungkinkan Anda berpindah ke sel yang terkunci, beralihlah ke Browse Mode (Mode Jelajah) dengan menekan Aslan+space, kemudian gunakan perintah pindah standar pada Excel seperti tuts panah untuk menelusuri semua sel pada lembar kerja yang aktif saat ini.
 <!-- KC:endInclude -->
 
 #### Form Field (Bidang Formulir) {#toc64}
@@ -919,7 +919,7 @@ Untuk informasi lebih lanjut mengenai mode jelajah dan navigasi satu-huruf, sila
 
 | Nama |Tuts |Keterangan|
 |---|---|---|
-|Men-toggle pembacaan Notes |control+shift+s |Saat slide show dijalankan, perintah ini akan mengaktifkan dan menonaktifkan pembacaan Notes (catatan) slide dan konten slide. Perintah ini hanya memengaruhi apa yang dibaca NVDA, bukan apa yang ditampilkan pada layar.|
+|Men-toggle pembacaan Notes |control+shift+s |Saat slide show dijalankan, perintah ini akan mengaktifkan dan menonaktifkan pembacaan Notes (catatan) slide dan konten slide. Perintah ini hanya memengaruhi apa yang dibaca Aslan, bukan apa yang ditampilkan pada layar.|
 
 <!-- KC:endInclude -->
 
@@ -941,7 +941,7 @@ Catatan:  Pintasan Report Remaining Time hanya bekerja dengan string pemformatan
 
 | Nama |Tuts |Keterangan|
 |---|---|---|
-|Report recent message (Laporkan pesan saat ini) |NVDA+control+1-4 |Melaporkan salah satu dari pesan-pesan terbaru, tergantung angka yang ditekan. Misalnya, menekan NVDA+control+2 akan membuat NVDA membacakan pesan terbaru kedua.|
+|Report recent message (Laporkan pesan saat ini) |Aslan+control+1-4 |Melaporkan salah satu dari pesan-pesan terbaru, tergantung angka yang ditekan. Misalnya, menekan Aslan+control+2 akan membuat Aslan membacakan pesan terbaru kedua.|
 
 <!-- KC:endInclude -->
 
@@ -963,13 +963,13 @@ Saat dalam percakapan:
 
 | Nama |Tuts |Keterangan|
 |---|---|---|
-|Review message (Tinjau pesan) |NVDA+control+1-0 |Melaporkan dan memindahkan kursor tinjauan ke satu pesan terbaru, tergantung angka yang ditekan. Misalnya, menekan NVDA+control+2 akan membuat NVDA membacakan pesan terbaru kedua.|
+|Review message (Tinjau pesan) |Aslan+control+1-0 |Melaporkan dan memindahkan kursor tinjauan ke satu pesan terbaru, tergantung angka yang ditekan. Misalnya, menekan Aslan+control+2 akan membuat Aslan membacakan pesan terbaru kedua.|
 
 <!-- KC:endInclude -->
 
 ### Kindle untuk PC {#toc70}
 
-NVDA mendukung membaca dan menavigasi buku di Amazon Kindle untuk PC.
+Aslan mendukung membaca dan menavigasi buku di Amazon Kindle untuk PC.
 Fungsi ini hanya tersedia di buku Kindle yang diberi judul "Screen Reader: Supported" yang dapat Anda periksa di halaman rincian untuk buku ini.
 
 Mode Jelajah digunakan untuk membaca buku.
@@ -982,7 +982,7 @@ Anda dapat secara manual beralih ke halaman berikutnya dengan tuts pageDown dan 
 Navigasi huruf tunggal didukung untuk tautan dan grafis, namun hanya ada di dalam laman saat ini.
 Navigasi dengan link juga mencakup catatan kaki.
 
-NVDA memberikan dukungan awal untuk membaca dan navigasi interaktif konten matematis untuk buku dengan matematika yang mudah diakses.
+Aslan memberikan dukungan awal untuk membaca dan navigasi interaktif konten matematis untuk buku dengan matematika yang mudah diakses.
 Silakan lihat bagian [Reading Mathematical Content (Membaca isi Matematika)](#ReadingMath) untuk informasi lebih lanjut.
 
 #### Text Selection (Seleksi Teks) {#toc71}
@@ -1000,7 +1000,7 @@ Anda dapat menambahkan catatan tentang kata atau bagian teks.
 Untuk melakukan ini, pertama pilih teks yang relevan dan akses pilihan pilihan seperti yang dijelaskan di atas.
 Kemudian, pilih Add Note (tambah catatan).
 
-Saat membaca di mode jelajah, NVDA mengacu pada catatan ini sebagai komentar.
+Saat membaca di mode jelajah, Aslan mengacu pada catatan ini sebagai komentar.
 
 Untuk melihat, mengedit atau menghapus catatan:
 
@@ -1020,19 +1020,19 @@ Saat melihat tabel di tambah buku:
 
 <!-- KC:endInclude -->
 
-## Melakukan Konfigurasi NVDA {#toc74}
+## Melakukan Konfigurasi Aslan {#toc74}
 ### Preferences (Preferensi) {#toc75}
 
 <!-- KC:settingsSection: || Nama | Tuts Desktop | Tuts Laptop | Keterangan | -->
-Sebagian besar pengaturan NVDA dapat diubah dengan menggunakan kotak dialog yang diakses melalui sub-menu Preferences pada menu NVDA.
-Dalam semua kotak dialog pengaturan NVDA, tekan tombol OK untuk menerima perubahan apa pun yang Anda buat.
+Sebagian besar pengaturan Aslan dapat diubah dengan menggunakan kotak dialog yang diakses melalui sub-menu Preferences pada menu Aslan.
+Dalam semua kotak dialog pengaturan Aslan, tekan tombol OK untuk menerima perubahan apa pun yang Anda buat.
 Untuk membatalkan perubahan, tekan tombol Cancel atau tuts Escape.
 Sebagian pengaturan juga dapat diubah dengan menggunakan tuts pintasan yang relevan, sebagaimana dicantumkan di bagian berikut ini. 
 
 Perhatikanlah bahwa secara default, tidak semua dialog Preferences dapat diakses dengan gestur input (perintah keyboard, gestur sentuh, dll.).
 Jika Anda ingin mengakses dialog yang tidak memiliki tuts pintasan, gunakanlah [dialog Input Gestures (Gestur Input)](#InputGestures) guna menambah custom gesture (gestur biasa) untuk dialog tersebut. 
 
-#### General Settings - Pengaturan Umum (NVDA+control+g) {#toc76}
+#### General Settings - Pengaturan Umum (Aslan+control+g) {#toc76}
 
 Kotak dialog General Settings (Pengaturan Umum) dapat Anda temukan di menu Preferences.  
 Pengaturan ini memiliki beberapa opsi: 
@@ -1041,88 +1041,88 @@ Pengaturan ini memiliki beberapa opsi:
 
 Ini adalah kotak kombo yang memungkinkan Anda untuk memilih bahasa yang akan digunakan dalam antarmuka pengguna dan pesan.
 Terdapat banyak pilihan bahasa, namun opsi default-nya adalah "User Default, Windows".
-Opsi ini meminta NVDA untuk menggunakan bahasa yang diatur untuk Windows saat ini. 
+Opsi ini meminta Aslan untuk menggunakan bahasa yang diatur untuk Windows saat ini. 
 
-Harap perhatikan bahwa NVDA harus di-restart saat Anda mengubah pilihan bahasa.
-NVDA akan bertanya apakah Anda ingin me-restart jika Anda memang mengubah pilihan bahasa.
-Tekan OK, dan NVDA akan melakukan restart. 
+Harap perhatikan bahwa Aslan harus di-restart saat Anda mengubah pilihan bahasa.
+Aslan akan bertanya apakah Anda ingin me-restart jika Anda memang mengubah pilihan bahasa.
+Tekan OK, dan Aslan akan melakukan restart. 
 
 ##### Save configuration on exit (Simpan konfigurasi saat keluar) {#toc78}
 
-Opsi ini adalah kotak centang yang jika dicentang, akan meminta pada NVDA untuk secara otomatis menyimpan konfigurasi yang aktif saat ini ketika Anda keluar dari NVDA. 
+Opsi ini adalah kotak centang yang jika dicentang, akan meminta pada Aslan untuk secara otomatis menyimpan konfigurasi yang aktif saat ini ketika Anda keluar dari Aslan. 
 
-##### Show exit options when exiting NVDA (Tunjukkan opsi keluar saat keluar dari NVDA) {#toc79}
+##### Show exit options when exiting Aslan (Tunjukkan opsi keluar saat keluar dari Aslan) {#toc79}
 
-Opsi ini adalah kotak centang yang memungkinkan Anda untuk memilih apakah sebuah dialog ditampilkan saat Anda keluar dari NVDA.
-Dialog ini menanyakan apa tindakan yang ingin Anda lakukan, jika dicentang sebuah dialog akan muncul saat Anda berusaha keluar dari NVDA dan menanyakan apakah Anda ingin keluar, melakukan restart, atau melakukan restart dengan add-ons dinonaktifkan.
-Jika tidak dicentang, Anda akan langsung keluar dari NVDA. 
+Opsi ini adalah kotak centang yang memungkinkan Anda untuk memilih apakah sebuah dialog ditampilkan saat Anda keluar dari Aslan.
+Dialog ini menanyakan apa tindakan yang ingin Anda lakukan, jika dicentang sebuah dialog akan muncul saat Anda berusaha keluar dari Aslan dan menanyakan apakah Anda ingin keluar, melakukan restart, atau melakukan restart dengan add-ons dinonaktifkan.
+Jika tidak dicentang, Anda akan langsung keluar dari Aslan. 
 
-##### Play sounds when starting or exiting NVDA (Perdengarkan suara saat memulai atau keluar dari NVDA) {#toc80}
+##### Play sounds when starting or exiting Aslan (Perdengarkan suara saat memulai atau keluar dari Aslan) {#toc80}
 
-Opsi ini adalah kotak centang yang jika dicentang, akan meminta pada NVDA untuk memperdengarkan suara saat Anda memulai atau keluar dari NVDA.
+Opsi ini adalah kotak centang yang jika dicentang, akan meminta pada Aslan untuk memperdengarkan suara saat Anda memulai atau keluar dari Aslan.
 
 ##### Logging level {#toc81}
 
-Ini adalah kotak kombo yang mengizinkan Anda untuk memilih seberapa banyak NVDA akan melakukan log saat sedang dijalankan.
+Ini adalah kotak kombo yang mengizinkan Anda untuk memilih seberapa banyak Aslan akan melakukan log saat sedang dijalankan.
 Biasanya, pengguna tidak perlu melakukan apa-apa dengan opsi ini karena pengguna tidak perlu banyak melakukan log.
 Namun jika Anda ingin memberikan informasi dalam bug report (laporan bug), maka ini mungkin akan menjadi opsi yang bermanfaat. 
 
-##### Automatically start NVDA after I log on to Windows (Secara otomatis memulai NVDA setelah saya log on ke Windows) {#toc82}
+##### Automatically start Aslan after I log on to Windows (Secara otomatis memulai Aslan setelah saya log on ke Windows) {#toc82}
 
-Jika opsi ini diaktifkan, NVDA akan mulai secara otomatis segera setelah Anda log on ke Windows. 
-Opsi ini hanya tersedia untuk salinan NVDA yang di-install.
+Jika opsi ini diaktifkan, Aslan akan mulai secara otomatis segera setelah Anda log on ke Windows. 
+Opsi ini hanya tersedia untuk salinan Aslan yang di-install.
 
-##### Use NVDA on the Windows Logon screen (requires administrator privileges) - Gunakan NVDA pada layar Logon Windows (diperlukan hak istimewa administrator) {#toc83}
+##### Use Aslan on the Windows Logon screen (requires administrator privileges) - Gunakan Aslan pada layar Logon Windows (diperlukan hak istimewa administrator) {#toc83}
 
-Jika Anda melakukan log on ke Windows dengan menuliskan nama pengguna dan kata kunci, maka mengaktifkan opsi ini akan membuat NVDA aktif secara otomatis pada layar log on ketika Windows diaktifkan.
-Opsi ini hanya tersedia untuk salinan NVDA yang di-install. 
+Jika Anda melakukan log on ke Windows dengan menuliskan nama pengguna dan kata kunci, maka mengaktifkan opsi ini akan membuat Aslan aktif secara otomatis pada layar log on ketika Windows diaktifkan.
+Opsi ini hanya tersedia untuk salinan Aslan yang di-install. 
 
 ##### Use currently saved settings on the logon and other secure screens (requires administrator privileges) - Gunakan pengaturan yang disimpan saat ini pada layar log on dan layar keamanan lain (diperlukan hak istimewa administrator) {#toc84}
 
-Menekan tombol ini akan menyalin konfigurasi pengguna NVDA yang tersimpan saat ini ke direktori konfigurasi sistem NVDA, sehingga NVDA akan menggunakannya ketika berjalan pada layar logon, User Account Control (UAC) dan layar keamanan Windows lainnya.
-Untuk memastikan bahwa semua pengaturan Anda telah ditransfer, pastikan untuk menyimpan konfigurasi Anda lebih dulu dengan control+NVDA+c atau Save configuration (Simpan konfigurasi) di dalam menu NVDA.
-Opsi ini hanya tersedia untuk salinan NVDA yang di-install. 
+Menekan tombol ini akan menyalin konfigurasi pengguna Aslan yang tersimpan saat ini ke direktori konfigurasi sistem Aslan, sehingga Aslan akan menggunakannya ketika berjalan pada layar logon, User Account Control (UAC) dan layar keamanan Windows lainnya.
+Untuk memastikan bahwa semua pengaturan Anda telah ditransfer, pastikan untuk menyimpan konfigurasi Anda lebih dulu dengan control+Aslan+c atau Save configuration (Simpan konfigurasi) di dalam menu Aslan.
+Opsi ini hanya tersedia untuk salinan Aslan yang di-install. 
 
-##### Automatically check for updates to NVDA (Memeriksa pembaruan secara otomatis pada NVDA) {#toc85}
+##### Automatically check for updates to Aslan (Memeriksa pembaruan secara otomatis pada Aslan) {#toc85}
 
-Jika opsi ini diaktifkan, NVDA akan secara otomatis memeriksa versi terbaru NVDA dan memberi tahu Anda kapan pembaruan akan tersedia.
-Anda juga dapat memeriksa pembaruan secara manual dengan memilih Check for updates (Periksa pembaruan) di bawah Help pada menu NVDA. 
+Jika opsi ini diaktifkan, Aslan akan secara otomatis memeriksa versi terbaru Aslan dan memberi tahu Anda kapan pembaruan akan tersedia.
+Anda juga dapat memeriksa pembaruan secara manual dengan memilih Check for updates (Periksa pembaruan) di bawah Help pada menu Aslan. 
 
-#### Synthesizer Selection - Pemilihan Synthesizer (NVDA+control+s) {#toc86}
+#### Synthesizer Selection - Pemilihan Synthesizer (Aslan+control+s) {#toc86}
 
-Dialog Synthesizer, yang dapat Anda temukan di bawah "Synthesizer..." dalam menu Preferences memungkinkan Anda untuk memilih Synthesizer mana yang digunakan NVDA untuk berbicara.
-Setelah Anda memilih synthesizer, Anda dapat menekan Ok dan NVDA akan membuka Synthesizer terpilih.
-Jika terjadi error saat membuka synthesizer, NVDA akan memberi tahu Anda lewat sebuah pesan, dan meneruskan menggunakan synthesizer sebelumnya. 
+Dialog Synthesizer, yang dapat Anda temukan di bawah "Synthesizer..." dalam menu Preferences memungkinkan Anda untuk memilih Synthesizer mana yang digunakan Aslan untuk berbicara.
+Setelah Anda memilih synthesizer, Anda dapat menekan Ok dan Aslan akan membuka Synthesizer terpilih.
+Jika terjadi error saat membuka synthesizer, Aslan akan memberi tahu Anda lewat sebuah pesan, dan meneruskan menggunakan synthesizer sebelumnya. 
 
 ##### Synthesizer {#toc87}
 
-Opsi ini memungkinkan Anda memilih synthesizer untuk digunakan NVDA dalam output pengucapan. 
+Opsi ini memungkinkan Anda memilih synthesizer untuk digunakan Aslan dalam output pengucapan. 
 
-Untuk mengetahui daftar Synthesizers yang didukung NVDA, silakan lihat bagian [Speech Synthesizer yang Didukung](#SupportedSpeechSynths).
+Untuk mengetahui daftar Synthesizers yang didukung Aslan, silakan lihat bagian [Speech Synthesizer yang Didukung](#SupportedSpeechSynths).
 
-Satu item istimewa yang akan selalu tampil dalam daftar adalah "No speech" (Tanpa pengucapan) yang memungkinkan Anda untuk menggunakan NVDA tanpa output pengucapan sama sekali.
-Ini mungkin berguna untuk seseorang yang ingin menggunakan NVDA hanya dengan braille display, atau mungkin bagi pengembang nontunanetra yang hanya ingin menggunakan Speech Viewer (Penampil Ucapan).
+Satu item istimewa yang akan selalu tampil dalam daftar adalah "No speech" (Tanpa pengucapan) yang memungkinkan Anda untuk menggunakan Aslan tanpa output pengucapan sama sekali.
+Ini mungkin berguna untuk seseorang yang ingin menggunakan Aslan hanya dengan braille display, atau mungkin bagi pengembang nontunanetra yang hanya ingin menggunakan Speech Viewer (Penampil Ucapan).
 
 ##### Output device (Perangkat output) {#toc88}
 
-Opsi ini memungkinkan Anda untuk memilih sound card (kartu suara) yang disyaratkan NVDA untuk diaplikasikan pada synthesizer terpilih guna menghasilkan pengucapan.
+Opsi ini memungkinkan Anda untuk memilih sound card (kartu suara) yang disyaratkan Aslan untuk diaplikasikan pada synthesizer terpilih guna menghasilkan pengucapan.
 
 <!-- KC:setting -->
 
 ##### Audio Ducking Mode (Mode Audio Ducking) {#toc89}
 
-Tuts: NVDA+shift+d
+Tuts: Aslan+shift+d
 
-Pada Windows 8 dan yang lebih baru, opsi ini memungkinkan Anda untuk memilih apakah NVDA harus merendahkan volume aplikasi lain saat NVDA berbicara, atau setiap waktu selama NVDA dijalankan. 
+Pada Windows 8 dan yang lebih baru, opsi ini memungkinkan Anda untuk memilih apakah Aslan harus merendahkan volume aplikasi lain saat Aslan berbicara, atau setiap waktu selama Aslan dijalankan. 
 
-* No Ducking (Tanpa Ducking): NVDA tidak akan pernah merendahkan volume audio lain.
-* Duck when outputting speech and sounds (Duck ketika memberikan output pengucapan dan suara): NVDA hanya akan merendahkan volume audio lain ketika NVDA berbicara atau memainkan suara. Ini mungkin tidak berfungsi pada setiap synthesizer. 
-* Always duck (Selalu duck):  NVDA akan merendahkan volume audio lain selama NVDA aktif. 
+* No Ducking (Tanpa Ducking): Aslan tidak akan pernah merendahkan volume audio lain.
+* Duck when outputting speech and sounds (Duck ketika memberikan output pengucapan dan suara): Aslan hanya akan merendahkan volume audio lain ketika Aslan berbicara atau memainkan suara. Ini mungkin tidak berfungsi pada setiap synthesizer. 
+* Always duck (Selalu duck):  Aslan akan merendahkan volume audio lain selama Aslan aktif. 
 
-Opsi ini hanya tersedia jika NVDA telah dipasang. 
-Tidaklah mungkin untuk mendukung audio ducking untuk salinan NVDA yang portabel maupun sementara. 
+Opsi ini hanya tersedia jika Aslan telah dipasang. 
+Tidaklah mungkin untuk mendukung audio ducking untuk salinan Aslan yang portabel maupun sementara. 
 
-#### Voice Settings - Pengaturan Suara (NVDA+control+v) {#VoiceSettings}
+#### Voice Settings - Pengaturan Suara (Aslan+control+v) {#VoiceSettings}
 
 Dialog Voice Settings (Pengaturan Suara) yang ditemukan dalam menu Preferences memiliki beberapa opsi yang memungkinkan Anda untuk mengubah suara pengucapan.
 Untuk cara alternatif yang lebih cepat dalam mengontrol parameter pengucapan dari mana pun, silakan lihat bagian [Ring Pengaturan Synth](#SynthSettingsRing).
@@ -1137,7 +1137,7 @@ Panah kiri dan atas akan membawa Anda ke bagian atas daftar, sementara panah kan
 
 ##### Variant (Varian) {#toc92}
 
-Jika Anda menggunakan synthesizer Espeak NG yang berada dalam paket NVDA, maka ini adalah kotak kombo yang memungkinkan Anda untuk memilih varian yang harus digunakan oleh synthesizer. 
+Jika Anda menggunakan synthesizer Espeak NG yang berada dalam paket Aslan, maka ini adalah kotak kombo yang memungkinkan Anda untuk memilih varian yang harus digunakan oleh synthesizer. 
 Varian ESpeak NG agak mirip dengan suara, karena varian ini menyediakan atribut yang hanya sedikit berbeda pada suara eSpeak NG.
 Sebagian varian mirip dengan suara pria, sebagian seperti suara wanita, dan sebagian lagi bahkan mirip suara kodok. 
 
@@ -1161,7 +1161,7 @@ Opsi ini adalah penggulir yang memungkinkan Anda untuk memilih seberapa banyak i
 
 ##### Automatic Language switching (Pengalihan Bahasa Secara Otomatis) {#toc97}
 
-Kotak centang ini memungkinkan Anda untuk men-toggle apakah NVDA harus mengalihkan bahasa speech synthesizer (synthesizer pengucapan) secara otomatis jika teks yang dibaca menyebutkan bahasanya. 
+Kotak centang ini memungkinkan Anda untuk men-toggle apakah Aslan harus mengalihkan bahasa speech synthesizer (synthesizer pengucapan) secara otomatis jika teks yang dibaca menyebutkan bahasanya. 
 Opsi ini aktif secara default. 
 Saat ini hanya synthesizer eSpeak NG yang mendukung pengalihan bahasa secara otomatis.
 
@@ -1175,7 +1175,7 @@ Opsi ini nonaktif secara default.
 
 ##### Punctuation/Symbol Level (Level Tanda Baca/Symbol) {#toc99}
 
-Tuts: NVDA+p
+Tuts: Aslan+p
 
 Opsi ini memungkinkan Anda untuk memilih level tanda baca dan simbol lain yang akan diucapkan sebagai kata.
 Misalnya, jika Anda memilih Set to all (Atur semua), semua simbol akan diucapkan sebagai kata.
@@ -1183,8 +1183,8 @@ Opsi ini berlaku pada semua synthesizer, bukan hanya synthesizer yang aktif saat
 
 ##### Trust voice's language for processing symbols and characters (Pastikan bahasa suara untuk memproses simbol dan karakter) {#toc100}
 
-Secara default, opsi ini memberi tahu NVDA apakah bahasa suara saat ini bisa dipastikan ketika memproses simbol dan karakter.
-Jika NVDA membaca tanda baca dalam bahasa yang salah untuk synthesizer atau suara tertentu, Anda mungkin ingin menonaktifkan opsi ini  guna memaksa NVDA menggunakan pengaturan bahasa yang global. 
+Secara default, opsi ini memberi tahu Aslan apakah bahasa suara saat ini bisa dipastikan ketika memproses simbol dan karakter.
+Jika Aslan membaca tanda baca dalam bahasa yang salah untuk synthesizer atau suara tertentu, Anda mungkin ingin menonaktifkan opsi ini  guna memaksa Aslan menggunakan pengaturan bahasa yang global. 
 
 ##### Capital pitch change percentage (Prosentase perubahan nada huruf kapital) {#toc101}
 
@@ -1194,12 +1194,12 @@ Jika Anda tidak ingin mengubah nada, gunakan nilai 0.
 
 ##### Say "cap" before capitals (Sebutkan "cap" sebelum huruf kapital) {#toc102}
 
-Pengaturan ini berupa kotak centang yang jika dicentang akan meminta NVDA untuk mengucapkan kata "cap" sebelum mengucapkan huruf kapital, ketika huruf kapital tersebut diucapkan sebagai karakter tersendiri seperti ketika mengeja.
-Biasanya, NVDA menaikkan nada sedikit untuk huruf kapital, tapi sebagian synthesizer mungkin tidak mendukung ini. Jadi, mungkin opsi ini Anda gunakan. 
+Pengaturan ini berupa kotak centang yang jika dicentang akan meminta Aslan untuk mengucapkan kata "cap" sebelum mengucapkan huruf kapital, ketika huruf kapital tersebut diucapkan sebagai karakter tersendiri seperti ketika mengeja.
+Biasanya, Aslan menaikkan nada sedikit untuk huruf kapital, tapi sebagian synthesizer mungkin tidak mendukung ini. Jadi, mungkin opsi ini Anda gunakan. 
 
 ##### Beep for capitals (Bunyi bip untuk huruf kapital) {#toc103}
 
-Jika kotak centang ini dicentang, NVDA akan memperdengarkan suara bip pelan dengan sendirinya, setiap kali menemui huruf kapital.
+Jika kotak centang ini dicentang, Aslan akan memperdengarkan suara bip pelan dengan sendirinya, setiap kali menemui huruf kapital.
 Seperti pada kotak centang "Say cap for capitals", opsi ini berguna untuk synthesizer yang tidak dapat mengubah nada huruf kapital. 
 
 ##### Use spelling functionality if supported (Gunakan fungsi pengejaan jika didukung) {#VoiceSpellingFunctionality}
@@ -1215,15 +1215,15 @@ Jika Anda menemui masalah dengan pelafalan karakter secara tersendiri, cobalah m
 
 #### Ring Pengaturan Synth {#SynthSettingsRing}
 
-Jika Anda ingin mengubah pengaturan pengucapan dengan cepat tanpa melalui dialog Voice Settings (Pengaturan Suara), terdapat beberapa perintah tuts NVDA yang memungkinkan Anda untuk menelusuri pengaturan pengucapan yang paling umum dari mana pun sementara Anda menjalankan NVDA: 
+Jika Anda ingin mengubah pengaturan pengucapan dengan cepat tanpa melalui dialog Voice Settings (Pengaturan Suara), terdapat beberapa perintah tuts Aslan yang memungkinkan Anda untuk menelusuri pengaturan pengucapan yang paling umum dari mana pun sementara Anda menjalankan Aslan: 
 <!-- KC:beginInclude -->
 
 | Nama |Tuts Desktop |Tuts Laptop |Keterangan|
 |---|---|---|---|
-|Pindah ke pengaturan synth berikutnya |NVDA+control+panah kanan |NVDA+shift+control+panah kanan |Berpindah ke pengaturan pengucapan berikutnya yang tersedia setelah pengaturan saat ini, kembali ke pengaturan yang pertama lagi setelah pengaturan terakhir.|
-|Pindah ke pengaturan synth sebelumnya |NVDA+control+panah kiri |NVDA+shift+control+panah kiri |Berpindah ke pengaturan pengucapan berikutnya yang tersedia sebelum pengaturan saat ini, berpindah ke pengaturan yang terakhir setelah pengaturan pertama.|
-|Tingkatkan pengaturan synth saat ini |NVDA+control+panah atas |NVDA+shift+control+panah atas |Meningkatkan pengaturan pengucapan yang aktif saat ini.  Misalnya, menambah rate (kecepatan), memilih suara berikutnya, menaikkan volume|
-|Kurangi pengaturan synth saat ini |NVDA+control+panah bawah |NVDA+shift+control+panah bawah |Mengurangi pengaturan pengucapan yang aktif saat ini. Misalnya, mengurangi rate (kecepatan), memilih suara sebelumnya, mengurangi volume.|
+|Pindah ke pengaturan synth berikutnya |Aslan+control+panah kanan |Aslan+shift+control+panah kanan |Berpindah ke pengaturan pengucapan berikutnya yang tersedia setelah pengaturan saat ini, kembali ke pengaturan yang pertama lagi setelah pengaturan terakhir.|
+|Pindah ke pengaturan synth sebelumnya |Aslan+control+panah kiri |Aslan+shift+control+panah kiri |Berpindah ke pengaturan pengucapan berikutnya yang tersedia sebelum pengaturan saat ini, berpindah ke pengaturan yang terakhir setelah pengaturan pertama.|
+|Tingkatkan pengaturan synth saat ini |Aslan+control+panah atas |Aslan+shift+control+panah atas |Meningkatkan pengaturan pengucapan yang aktif saat ini.  Misalnya, menambah rate (kecepatan), memilih suara berikutnya, menaikkan volume|
+|Kurangi pengaturan synth saat ini |Aslan+control+panah bawah |Aslan+shift+control+panah bawah |Mengurangi pengaturan pengucapan yang aktif saat ini. Misalnya, mengurangi rate (kecepatan), memilih suara sebelumnya, mengurangi volume.|
 
 <!-- KC:endInclude -->
 
@@ -1246,9 +1246,9 @@ Silakan lihat bagian [Braille Display yang Didukung](#SupportedBrailleDisplays) 
 Opsi ini, jika tersedia, memungkinkan Anda untuk memilih port atau tipe koneksi yang akan digunakan guna berkomunikasi dengan braille display yang telah Anda pilih.
 Ini adalah kotak kombo yang berisi beberapa pilihan untuk braille display Anda.
 
-Secara default, NVDA menggunakan deteksi port otomatis, yang berarti bahwa koneksi dengan perangkat braille display akan dilakukan secara otomatis dengan memindai perangkat USB dan bluetooth yang ada pada sistem Anda.
+Secara default, Aslan menggunakan deteksi port otomatis, yang berarti bahwa koneksi dengan perangkat braille display akan dilakukan secara otomatis dengan memindai perangkat USB dan bluetooth yang ada pada sistem Anda.
 Namun, untuk beberapa braille display, Anda mungkin bisa secara eksplisit memilih port yang akan digunakan.
-Opsi-opsi yang biasanya tersedia adalah "Automatic" (yang meminta NVDA untuk menggunakan prosedur pemilihan port otomatis secara default), "USB", "Bluetooth" dan beberapa port komunikasi serial legacy jika braille display Anda mendukung jenis komunikasi ini.
+Opsi-opsi yang biasanya tersedia adalah "Automatic" (yang meminta Aslan untuk menggunakan prosedur pemilihan port otomatis secara default), "USB", "Bluetooth" dan beberapa port komunikasi serial legacy jika braille display Anda mendukung jenis komunikasi ini.
 
 Opsi ini tidak akan tersedia jika braille display Anda hanya mendukung deteksi port otomatis.
 
@@ -1301,18 +1301,18 @@ Selection Indicator (Indikator Pemilihan) tidak dipengaruhi oleh opsi ini, itu s
 
 ##### Message Timeout (sec) - Waktu Habis untuk Pesan (detik) {#toc117}
 
-Opsi ini adalah bidang numerik yang mengontrol seberapa lama pesan NVDA ditampilkan pada braille display.
+Opsi ini adalah bidang numerik yang mengontrol seberapa lama pesan Aslan ditampilkan pada braille display.
 Memilih 0 akan sepenuhnya menonaktifkan penampilan pesan.
 
 ##### Show Messages Indefinitely (Tampilan Pesan Tanpa Batas) {#toc118}
 
-Opsi ini memungkinkan pesan NVDA ditampilkan pada tampilan braille tanpa batas.
+Opsi ini memungkinkan pesan Aslan ditampilkan pada tampilan braille tanpa batas.
 
 <!-- KC:setting -->
 
 ##### Braille Tethered to (Braille Display Ditambatkan ke) {#BrailleTether}
 
-Tuts: NVDA+control+t
+Tuts: Aslan+control+t
 
 Opsi ini memungkinkan Anda untuk memilih apakah braille display akan mengikuti fokus sistem, atau mengikuti objek navigator/kursor tinjauan.
 
@@ -1339,53 +1339,53 @@ Mengaktifkan opsi ini memungkinkan Anda untuk membaca dengan lebih lancar, namun
 
 ##### Focus context presentation (Fokus Konteks presentasi) {#toc122}
 
-Opsi ini memungkinkan anda memilih informasi konteks apa yang akan ditampilkan NVDA di layar braille saat objek mendapat fokus.
+Opsi ini memungkinkan anda memilih informasi konteks apa yang akan ditampilkan Aslan di layar braille saat objek mendapat fokus.
 Informasi konteks mengacu pada hirarki objek yang berisi fokus.
 Misalnya, ketika Anda memusatkan daftar item, item daftar ini adalah bagian dari daftar.
 Daftar ini mungkin berisi dialog, dll.
-Silakan baca bagian tentang [navigasi objek](#ObjectNavigation) untuk informasi lebih lanjut tentang hirarki yang berlaku untuk objek di NVDA.
+Silakan baca bagian tentang [navigasi objek](#ObjectNavigation) untuk informasi lebih lanjut tentang hirarki yang berlaku untuk objek di Aslan.
 
-Saat diatur untuk mengisi tampilan untuk perubahan konteks, NVDA akan mencoba menampilkan sebanyak mungkin informasi konteks pada tampilan braille, namun hanya untuk bagian-bagian dari konteks yang telah berubah.
-Untuk contoh di atas, ini berarti bahwa saat mengubah fokus ke daftar, NVDA akan menampilkan item daftar pada layar braille.
-Selanjutnya, jika ada cukup ruang yang tersisa pada layar braille, NVDA akan mencoba untuk menunjukkan bahwa item daftar adalah bagian dari daftar.
+Saat diatur untuk mengisi tampilan untuk perubahan konteks, Aslan akan mencoba menampilkan sebanyak mungkin informasi konteks pada tampilan braille, namun hanya untuk bagian-bagian dari konteks yang telah berubah.
+Untuk contoh di atas, ini berarti bahwa saat mengubah fokus ke daftar, Aslan akan menampilkan item daftar pada layar braille.
+Selanjutnya, jika ada cukup ruang yang tersisa pada layar braille, Aslan akan mencoba untuk menunjukkan bahwa item daftar adalah bagian dari daftar.
 Jika Anda kemudian mulai bergerak melalui daftar dengan tombol panah Anda, diasumsikan Anda sadar bahwa Anda masih berada dalam daftar.
-Jadi, untuk item daftar yang tersisa yang Anda fokuskan, NVDA hanya akan menampilkan item daftar fokus di layar.
+Jadi, untuk item daftar yang tersisa yang Anda fokuskan, Aslan hanya akan menampilkan item daftar fokus di layar.
 Agar Anda dapat membaca konteksnya lagi (yaitu bahwa Anda berada dalam daftar dan daftar itu adalah bagian dari dialog), Anda harus menggulir kembali tampilan braille Anda.
 
-Bila opsi ini disetel untuk selalu mengisi layar, NVDA akan mencoba menampilkan sebanyak mungkin informasi konteks pada tampilan braille, terlepas dari apakah Anda telah melihat informasi konteks yang sama sebelumnya.
-Ini memiliki keuntungan bahwa NVDA akan memasukkan informasi sebanyak mungkin di layar.
+Bila opsi ini disetel untuk selalu mengisi layar, Aslan akan mencoba menampilkan sebanyak mungkin informasi konteks pada tampilan braille, terlepas dari apakah Anda telah melihat informasi konteks yang sama sebelumnya.
+Ini memiliki keuntungan bahwa Aslan akan memasukkan informasi sebanyak mungkin di layar.
 Namun, sisi negatifnya adalah selalu ada perbedaan pada posisi dimana fokus dimulai pada layar braille.
 Hal ini dapat membuat sulit untuk membuat daftar item yang panjang, misalnya, karena Anda perlu terus memindahkan jari Anda untuk menemukan awal item.
-Ini adalah perilaku default NVDA 2017.2 dan sebelumnya.
+Ini adalah perilaku default Aslan 2017.2 dan sebelumnya.
 
-Bila Anda menetapkan pilihan presentasi konteks fokus untuk hanya menampilkan informasi konteks saat menggulir kembali, NVDA tidak pernah menampilkan informasi konteks pada layar braille Anda secara default.
-Jadi, pada contoh di atas, NVDA akan menampilkan bahwa Anda memfokuskan daftar item.
+Bila Anda menetapkan pilihan presentasi konteks fokus untuk hanya menampilkan informasi konteks saat menggulir kembali, Aslan tidak pernah menampilkan informasi konteks pada layar braille Anda secara default.
+Jadi, pada contoh di atas, Aslan akan menampilkan bahwa Anda memfokuskan daftar item.
 Namun, agar Anda dapat membaca konteksnya (yaitu bahwa Anda berada dalam daftar dan daftar itu adalah bagian dari dialog), Anda harus menggulir kembali tampilan braille Anda. 
 
 Untuk mengalihkan presentasi konteks fokus dari mana saja, tolong tetapkan isyarat khusus menggunakan [dialog Input Gestures](#InputGestures).
 
-#### Keyboard Settings - Pengaturan Keyboard (NVDA+control+k) {#toc123}
+#### Keyboard Settings - Pengaturan Keyboard (Aslan+control+k) {#toc123}
 
 Kotak dialog ini dapat Anda temukan di menu Preferences, di bawah "Keyboard settings...".
 Pengaturan ini memiliki beberapa opsi: 
 
 ##### Keyboard Layout (Tata Letak Keyboard) {#toc124}
 
-Kotak kombo ini memungkinkan Anda untuk memilih jenis tata letak keyboard yang akan digunakan NVDA. Saat ini, terdapat dua tampilan yang dapat digunakan NVDA, yaitu Desktop dan Laptop.
+Kotak kombo ini memungkinkan Anda untuk memilih jenis tata letak keyboard yang akan digunakan Aslan. Saat ini, terdapat dua tampilan yang dapat digunakan Aslan, yaitu Desktop dan Laptop.
 
-##### Use capslock as an NVDA modifier key (Gunakan capslock sebagai tuts modifier NVDA) {#toc125}
+##### Use capslock as an Aslan modifier key (Gunakan capslock sebagai tuts modifier Aslan) {#toc125}
 
-Jika kotak centang ini dicentang, capslock dapat digunakan sebagai tuts modifier NVDA. 
+Jika kotak centang ini dicentang, capslock dapat digunakan sebagai tuts modifier Aslan. 
 
-##### Use extended insert as an NVDA modifier key (Gunakan extended insert sebagai tuts modifier NVDA) {#toc126}
+##### Use extended insert as an Aslan modifier key (Gunakan extended insert sebagai tuts modifier Aslan) {#toc126}
 
-Jika kotak centang ini dicentang, tuts extended insert (biasanya terdapat di atas tuts panah, di dekat Home dan End) dapat digunakan sebagai tuts modifier NVDA.
+Jika kotak centang ini dicentang, tuts extended insert (biasanya terdapat di atas tuts panah, di dekat Home dan End) dapat digunakan sebagai tuts modifier Aslan.
 
-##### Use numpad insert as an NVDA modifier key (Gunakan numpad insert sebagai tuts modifier NVDA) {#toc127}
+##### Use numpad insert as an Aslan modifier key (Gunakan numpad insert sebagai tuts modifier Aslan) {#toc127}
 
-Jika kotak centang ini dicentang, tuts insert pada number pad (tuts numerik) dapat digunakan sebagai tuts modifier NVDA.
+Jika kotak centang ini dicentang, tuts insert pada number pad (tuts numerik) dapat digunakan sebagai tuts modifier Aslan.
 
-Jika tidak ada tuts yang dipilih sebagai tuts NVDA, maka Anda tidak mungkin dapat mengakses perintah NVDA tertentu.
+Jika tidak ada tuts yang dipilih sebagai tuts Aslan, maka Anda tidak mungkin dapat mengakses perintah Aslan tertentu.
 Oleh karena itu, dialog Keyboard Settings (Pengaturan Keyboard) akan menampilkan pesan error jika tidak ada tuts yang dipilih saat Anda menekan Ok.
 Setelah menutup pesan error, Anda harus memilih setidaknya satu tuts sebelum dapat menekan Ok untuk menutup dialog dengan benar. 
 
@@ -1393,17 +1393,17 @@ Setelah menutup pesan error, Anda harus memilih setidaknya satu tuts sebelum dap
 
 ##### Speak Typed Characters (Ucapkan karakter yang diketik) {#toc128}
 
-Tuts: NVDA+2
+Tuts: Aslan+2
 
-Jika diaktifkan, NVDA akan menyebutkan semua karakter yang Anda ketik pada keyboard. 
+Jika diaktifkan, Aslan akan menyebutkan semua karakter yang Anda ketik pada keyboard. 
 
 <!-- KC:setting -->
 
 ##### Speak Typed Words (Ucapkan kata yang diketik) {#toc129}
 
-Tuts: NVDA+3
+Tuts: Aslan+3
 
-Jika diaktifkan, NVDA akan menyebutkan semua kata yang Anda ketik pada keyboard. 
+Jika diaktifkan, Aslan akan menyebutkan semua kata yang Anda ketik pada keyboard. 
 
 ##### Speech interrupt for typed characters (Interupsi pengucapan untuk karakter yang diketik) {#toc130}
 
@@ -1427,50 +1427,50 @@ Oleh karena itu, akan sangat membantu jika ada peringatan dalam hal ini.
 
 ##### Speak Command Keys (Ucapkan tuts perintah) {#toc134}
 
-Tuts: NVDA+4
+Tuts: Aslan+4
 
-Jika diaktifkan, NVDA akan menyebutkan semua tuts non-karakter yang Anda ketik pada keyboard. Termasuk juga kombinasi tuts, seperti control + huruf lain. 
+Jika diaktifkan, Aslan akan menyebutkan semua tuts non-karakter yang Anda ketik pada keyboard. Termasuk juga kombinasi tuts, seperti control + huruf lain. 
 
 ##### Play sound for spelling errors while typing (Perdengarkan suara untuk kesalahan eja saat mengetik) {#toc135}
 
 Jika diaktifkan, suara dengung pendek akan diperdengarkan ketika kata yang Anda ketik mengandung kesalahan eja.
-Opsi ini hanya tersedia jika pelaporan kesalahan eja diaktifkan dalam dialog NVDA [Document Formatting Settings (Pengaturan Pemformatan Dokumen](#DocumentFormattingSettings).
+Opsi ini hanya tersedia jika pelaporan kesalahan eja diaktifkan dalam dialog Aslan [Document Formatting Settings (Pengaturan Pemformatan Dokumen](#DocumentFormattingSettings).
 
 ##### Handle keys from other applications (Tangani kunci dari aplikasi lain) {#toc136}
 
-Opsi ini memungkinkan pengguna untuk mengontrol apakah tindakan menekan kunci yang dilakukan dengan aplikasi, seperti on-screen keyboard (keyboard di layar) dan speech recognition software (software pengenalan ucapan) harus diproses oleh NVDA.
+Opsi ini memungkinkan pengguna untuk mengontrol apakah tindakan menekan kunci yang dilakukan dengan aplikasi, seperti on-screen keyboard (keyboard di layar) dan speech recognition software (software pengenalan ucapan) harus diproses oleh Aslan.
 Opsi ini ada dalam posisi on secara default, meskipun sebagian pengguna tertentu mungkin ingin menonaktifkannya, misalnya mereka yang mengetik dalam bahasa Vietnam dengan software pengetikan Unikey, karena opsi ini akan menyebabkan input karakter yang keliru. 
 
-#### Mouse Settings - Pengaturan Mouse (NVDA+control+m) {#MouseSettings}
+#### Mouse Settings - Pengaturan Mouse (Aslan+control+m) {#MouseSettings}
 
 Dialog Mouse Settings ini dapat Anda temukan di menu Preferences, di bawah "Mouse settings...".
 Pengaturan ini memiliki beberapa opsi: 
 
 ##### Report Mouse Shape Changes (Laporkan Perubahan Bentuk Mouse) {#toc138}
 
-Apabila kotak centang dicentang, maka NVDA akan memberi tahu setiap kali bentuk mouse pointer (penunjuk mouse) berubah.
+Apabila kotak centang dicentang, maka Aslan akan memberi tahu setiap kali bentuk mouse pointer (penunjuk mouse) berubah.
 Penunjuk mouse pada Windows berubah bentuk untuk menyampaikan informasi tertentu, seperti kapan sesuatu bisa diedit, atau kapan sesuatu sedang dibuka (loading), dll. 
 
 <!-- KC:setting -->
 
 ##### Enable mouse tracking (Aktifkan pelacakan mouse) {#toc139}
 
-Tuts: NVDA+m
+Tuts: Aslan+m
 
-Jika diaktifkan, NVDA akan memberi tahu teks yang saat ini ada di bawah mouse pointer (penunjuk mouse), saat Anda memindah-mindahkan penunjuk tersebut pada layar. Ini memungkinkan Anda untuk menemukan sesuatu pada layar dengan menggeser mouse secara fisik, alih-alih mencoba menemukan sesuatu tersebut melalui navigasi objek. 
+Jika diaktifkan, Aslan akan memberi tahu teks yang saat ini ada di bawah mouse pointer (penunjuk mouse), saat Anda memindah-mindahkan penunjuk tersebut pada layar. Ini memungkinkan Anda untuk menemukan sesuatu pada layar dengan menggeser mouse secara fisik, alih-alih mencoba menemukan sesuatu tersebut melalui navigasi objek. 
 
 ##### Text unit resolution (Resolusi kesatuan teks) {#toc140}
 
-Jika NVDA diatur untuk memberi tahu teks yang ada di bawah mouse saat Anda menggeser mouse, maka opsi ini memungkinkan Anda untuk memilih seberapa banyak persisnya teks yang akan diucapkan.
+Jika Aslan diatur untuk memberi tahu teks yang ada di bawah mouse saat Anda menggeser mouse, maka opsi ini memungkinkan Anda untuk memilih seberapa banyak persisnya teks yang akan diucapkan.
 Opsinya adalah karakter, kata, baris dan paragraf. 
 
 ##### Report role when mouse enters object (Laporkan peran ketika mouse memasuki objek) {#toc141}
 
-Jika kotak centang ini dicentang, NVDA akan memberi tahu peran (jenis) objek saat mouse bergerak di dalamnya. 
+Jika kotak centang ini dicentang, Aslan akan memberi tahu peran (jenis) objek saat mouse bergerak di dalamnya. 
 
 ##### Play audio coordinates when mouse moves (Perdengarkan koordinat audio ketika mouse bergerak) {#toc142}
 
-Mencentang kotak centang ini akan membuat NVDA memainkan bunyi bip saat mouse bergerak, sehingga pengguna dapat bekerja pada posisi mouse yang berhubungan dengan dimensi layar.
+Mencentang kotak centang ini akan membuat Aslan memainkan bunyi bip saat mouse bergerak, sehingga pengguna dapat bekerja pada posisi mouse yang berhubungan dengan dimensi layar.
 Semakin tinggi posisi mouse pada layar, semakin tinggi pitch (nada) bunyi bip tersebut.
 Semakin mouse ditempatkan ke kiri atau kanan pada layar, semakin ke kiri atau ke kanan pula bunyi bip yang dimainkan (diasumsikan bahwa pengguna memiliki speaker stereo atau headphone).
 
@@ -1488,7 +1488,7 @@ Dialog ini memiliki beberapa opsi sebagai berikut:
 
 ##### Follow System Focus (Ikuti Fokus Sistem) {#toc145}
 
-Tuts: NVDA+7
+Tuts: Aslan+7
 
 Jika diaktifkan, review cursor (kursor tinjauan) akan selalu berada di dalam objek yang sama dengan fokus sistem saat ini kapan pun fokus berubah. 
 
@@ -1496,7 +1496,7 @@ Jika diaktifkan, review cursor (kursor tinjauan) akan selalu berada di dalam obj
 
 ##### Follow System Caret (Ikuti System Caret) {#toc146}
 
-Tuts: NVDA+6
+Tuts: Aslan+6
 
 Jika diaktifkan, review cursor (kursor tinjauan) akan secara otomatis dipindahkan ke posisi system caret setiap kali system caret berpindah. 
 
@@ -1506,28 +1506,28 @@ Jika diaktifkan, review cursor (kursor tinjauan) akan mengikuti mouse saat mouse
 
 ##### Simple Review Mode (Mode Tinjauan Sederhana) {#toc148}
 
-Jika diaktifkan, NVDA akan memfilter hierarki objek yang dapat dinavigasi dengan tidak menyertakan objek yang bukan merupakan kepentingan pengguna. Misalnya, objek yang tak tampak dan objek yang digunakan hanya untuk keperluan tata letak. 
+Jika diaktifkan, Aslan akan memfilter hierarki objek yang dapat dinavigasi dengan tidak menyertakan objek yang bukan merupakan kepentingan pengguna. Misalnya, objek yang tak tampak dan objek yang digunakan hanya untuk keperluan tata letak. 
 
 Untuk mengaktifkan dan menonaktifkan mode tinjauan sederhana dari mana pun, silakan menetapkan custom gesture (gestur biasa) dengan menggunakan [dialog Input Gestures](#InputGestures).
 
-#### Object Presentation Settings - Pengaturan Presentasi Objek (NVDA+control+o) {#toc149}
+#### Object Presentation Settings - Pengaturan Presentasi Objek (Aslan+control+o) {#toc149}
 
 Pengaturan ini ada pada menu Preferences di bawah "Object Presentation..." 
 Kotak dialog ini memiliki beberapa opsi sebagai berikut:
 
 ##### Report Tool Tips (Laporkan Saran tentang Alat) {#toc150}
 
-Ini adalah sebuah kotak centang yang jika dicentang akan meminta NVDA untuk melaporkan saran tentang alat ketika saran tersebut muncul.
+Ini adalah sebuah kotak centang yang jika dicentang akan meminta Aslan untuk melaporkan saran tentang alat ketika saran tersebut muncul.
 Terdapat banyak jendela dan control yang menunjukkan sebuah pesan kecil (atau saran tentang alat) ketika Anda memindahkan penunjuk mouse ke atasnya, atau kadang-kadang ketika Anda memindahkan fokus ke sana. 
 
 ##### Report Help Balloons (Laporkan Balon Help) {#toc151}
 
-Kotak centang ini jika dicentang akan meminta NVDA untuk melaporkan Help Balloons jika balon tersebut muncul.
+Kotak centang ini jika dicentang akan meminta Aslan untuk melaporkan Help Balloons jika balon tersebut muncul.
 Help Balloons adalah seperti tool tip, tapi biasanya dalam ukuran yang lebih besar, dan berhubungan dengan system event, misalnya kabel jaringan yang diputus dari aliran listrik. Opsi ini juga dapat memberi peringatan tentang keamanan pada Windows. 
 
 ##### Report Object Shortcut Keys (Laporkan Tuts Pintasan Objek) {#toc152}
 
-Ketika kotak centang ini dicentang, NVDA akan menyertakan tuts pintasan yang terhubung dengan objek atau control tertentu saat tuts pintasan tersebut dilaporkan.
+Ketika kotak centang ini dicentang, Aslan akan menyertakan tuts pintasan yang terhubung dengan objek atau control tertentu saat tuts pintasan tersebut dilaporkan.
 Misalnya, menu File pada menu bar (bilah menu) memiliki tuts pintasan alt+f. 
 
 ##### Report object position information (Laporkan informasi posisi objek) {#toc153}
@@ -1536,9 +1536,9 @@ Opsi ini memungkinkan Anda untuk memilih apakah Anda ingin posisi objek (misalny
 
 ##### Guess Object Position Information when unavailable (Tebak Informasi Posisi Objek jika tidak tersedia) {#toc154}
 
-Jika pelaporan informasi posisi objek diaktifkan, opsi ini memungkinkan NVDA untuk menebak informasi posisi objek saat informasi ini tidak tersedia untuk control tertentu.
+Jika pelaporan informasi posisi objek diaktifkan, opsi ini memungkinkan Aslan untuk menebak informasi posisi objek saat informasi ini tidak tersedia untuk control tertentu.
 
-Jika diaktifkan, NVDA akan melaporkan informasi posisi untuk beberapa control lain, seperti menu dan toolbar. Namun informasi ini mungkin kurang akurat. 
+Jika diaktifkan, Aslan akan melaporkan informasi posisi untuk beberapa control lain, seperti menu dan toolbar. Namun informasi ini mungkin kurang akurat. 
 
 ##### Report Object descriptions (Laporkan keterangan tentang objek) {#toc155}
 
@@ -1548,42 +1548,42 @@ Hapus centang pada kotak centang ini jika Anda tidak ingin keterangan dilaporkan
 
 ##### Progress bar output (Output bilah progress) {#toc156}
 
-Tuts: NVDA+u
+Tuts: Aslan+u
 
-Opsi ini mengontrol cara NVDA melaporkan pembaruan bilah progress kepada Anda. 
+Opsi ini mengontrol cara Aslan melaporkan pembaruan bilah progress kepada Anda. 
 
 Pengaturan ini memiliki beberapa opsi sebagai berikut: 
 
 * Off: Bilah progress tidak akan dilaporkan saat berubah. 
-* Speak (Laporkan):  Opsi ini meminta NVDA untuk melaporkan perubahan prosentase pada bilah progress. Setiap kali bilah progress berubah, NVDA akan melaporkan nilainya.
-* Beep (Bip):  Opsi ini meminta NVDA untuk memperdengarkan bip setiap kali bilah progress berubah. Semakin tinggi nada bip, semakin dekat bilah progress ke titik selesai.
-* Beep and speak (Bip dan laporkan):  Opsi ini meminta NVDA untuk memperdengarkan bunyi bip sekaligus melaporkan pembaruan pada bilah progress. 
+* Speak (Laporkan):  Opsi ini meminta Aslan untuk melaporkan perubahan prosentase pada bilah progress. Setiap kali bilah progress berubah, Aslan akan melaporkan nilainya.
+* Beep (Bip):  Opsi ini meminta Aslan untuk memperdengarkan bip setiap kali bilah progress berubah. Semakin tinggi nada bip, semakin dekat bilah progress ke titik selesai.
+* Beep and speak (Bip dan laporkan):  Opsi ini meminta Aslan untuk memperdengarkan bunyi bip sekaligus melaporkan pembaruan pada bilah progress. 
 
 ##### Report background progress bars (Laporkan bilah progress di latar belakang) {#toc157}
 
-Ini adalah opsi yang jika dicentang akan meminta NVDA untuk tetap melaporkan bilah progress, bahkan saat bilah progress tidak nampak di latar depan.
-Jika Anda meminimalkan atau beralih dari jendela yang menampilkan bilah progress, NVDA akan tetap melacaknya, sehingga memungkinkan Anda untuk melakukan hal lain saat NVDA melacak bilah progress.
+Ini adalah opsi yang jika dicentang akan meminta Aslan untuk tetap melaporkan bilah progress, bahkan saat bilah progress tidak nampak di latar depan.
+Jika Anda meminimalkan atau beralih dari jendela yang menampilkan bilah progress, Aslan akan tetap melacaknya, sehingga memungkinkan Anda untuk melakukan hal lain saat Aslan melacak bilah progress.
 
 <!-- KC:setting -->
 
 ##### Report dynamic content changes (Laporkan perubahan konten dinamik) {#toc158}
 
-Tuts: NVDA+5
+Tuts: Aslan+5
 
 Mengaktifkan dan menonaktifkan pemberitahuan adanya konten baru dalam objek tertentu, seperti terminals dan history control dalam program chat (percakapan). 
 
 ##### Play a sound when auto-suggestions appear (Putar suara saat saran otomatis muncul) {#toc159}
 
-Ucapkan pengumuman tentang munculnya saran otomatis, dan jika diaktifkan, NVDA akan memutar suara untuk menunjukkan hal ini.
+Ucapkan pengumuman tentang munculnya saran otomatis, dan jika diaktifkan, Aslan akan memutar suara untuk menunjukkan hal ini.
 Saran otomatis adalah daftar entri yang disarankan berdasarkan teks yang dimasukkan ke dalam kolom edit dan dokumen tertentu.
 Misalnya saat Anda memasukkan teks ke dalam kotak pencarian di menu Start di Windows Vista dan yang lebih baru, Windows akan menampilkan daftar saran berdasarkan pada apa yang Anda ketik.
-Untuk beberapa bidang edit seperti bidang pencarian di berbagai aplikasi Windows 10, NVDA dapat memberi tahu Anda bahwa daftar saran telah muncul saat Anda mengetik teks.
-Daftar saran otomatis akan ditutup begitu Anda pindah dari bidang edit, dan untuk beberapa bidang, NVDA dapat memberi tahu Anda tentang hal ini saat ini terjadi.
+Untuk beberapa bidang edit seperti bidang pencarian di berbagai aplikasi Windows 10, Aslan dapat memberi tahu Anda bahwa daftar saran telah muncul saat Anda mengetik teks.
+Daftar saran otomatis akan ditutup begitu Anda pindah dari bidang edit, dan untuk beberapa bidang, Aslan dapat memberi tahu Anda tentang hal ini saat ini terjadi.
 
 #### Input Composition Settings (Pengaturan Komposisi Input) {#toc160}
 
 Dialog Input Composition Settings (Pengaturan Komposisi Input) dapat Anda temukan di bawah menu Preferences.
-Dialog ini memungkinkan Anda untuk mengontrol cara NVDA melaporkan karakter Asia, seperti dengan metode input IME atau Text Service.
+Dialog ini memungkinkan Anda untuk mengontrol cara Aslan melaporkan karakter Asia, seperti dengan metode input IME atau Text Service.
 Perhatikanlah bahwa karena metode input sangat beragam berdasarkan fitur yang ada dan berdasarkan cara metode tersebut menyampaikan informasi, maka sangat penting bagi Anda untuk mengonfigurasi opsi-opsi ini secara berbeda-beda untuk setiap metode input agar Anda dapat mengetik dengan cara yang paling efisien.
 
 ##### Automatically report all available candidates (Laporkan secara otomatis semua kandidat yang ada) {#toc161}
@@ -1594,30 +1594,30 @@ Namun, untuk metode input fonetik seperti Chinese New Phonetic, mungkin akan leb
 
 ##### Announce Selected Candidate (Laporkan Kandidat Terpilih) {#toc162}
 
-Opsi ini, yang berada dalam posisi on secara default, memungkinkan Anda untuk memilih apakah NVDA harus mengumumkan kandidat yang terpilih ketika daftar kandidat muncul atau ketika pilihannya diganti.
+Opsi ini, yang berada dalam posisi on secara default, memungkinkan Anda untuk memilih apakah Aslan harus mengumumkan kandidat yang terpilih ketika daftar kandidat muncul atau ketika pilihannya diganti.
 Untuk metode input yang cara memilihnya dapat diganti dengan tuts panah (seperti Chinese New Phonetic), hal ini penting. Tapi untuk sebagian metode input lain, mungkin akan lebih efisien jika Anda mengetik dengan menonaktifkan opsi ini.
 Perhatikanlah bahwa bahkan dengan opsi ini berada dalam posisi off, kursor tinjauan tetap akan ditempatkan pada kandidat terpilih, yang memungkinkan Anda untuk menggunakan navigasi/tinjauan objek guna membaca kandidat terpilih ini atau kandidat lain secara manual.
 
 ##### Always include short character descriptions for candidates (Selalu sertakan deskripsi pendek tentang karakter untuk kandidat) {#toc163}
 
-Opsi ini, yang on secara default, memungkinkan Anda untuk memilih apakah NVDA harus memberikan deskripsi pendek untuk setiap karakter dalam kandidat atau tidak, baik ketika karakter itu dipilih atau ketika karakter itu dibaca secara otomatis saat daftar kandidat muncul. 
+Opsi ini, yang on secara default, memungkinkan Anda untuk memilih apakah Aslan harus memberikan deskripsi pendek untuk setiap karakter dalam kandidat atau tidak, baik ketika karakter itu dipilih atau ketika karakter itu dibaca secara otomatis saat daftar kandidat muncul. 
 Perhatikanlah bahwa untuk bahasa lokal seperti bahasa Tionghoa, pemberitahuan deskripsi karakter ekstra untuk kandidat yang dipilih tidak dipengaruhi oleh opsi ini.
 Opsi ini mungkin bermanfaat untuk metode input bahasa Korea dan Jepang. 
 
 ##### Report changes to the reading string (Laporkan perubahan pada string pembacaan) {#toc164}
 
 Beberapa metode input seperti Chinese New Phonetic dan New ChangJie memiliki satu string pembacaan (kadang dikenal sebagai satu string prekomposisi).
-Anda dapat memilih apakah NVDA perlu memberi tahu karakter baru yang sedang diketik pada string pembacaan dengan opsi ini atau tidak.
+Anda dapat memilih apakah Aslan perlu memberi tahu karakter baru yang sedang diketik pada string pembacaan dengan opsi ini atau tidak.
 Opsi ini "on" secara default.
 Perhatikanlah bahwa metode input yang lebih lama seperti Chinese ChangJie mungkin tidak menggunakan string pembacaan untuk memuat karakter prekomposisi, melainkan menggunakan string komposisi secara langsung. Harap melihat opsi berikutnya untuk mengonfigurasi pelaporan string komposisi.
 
 ##### Report changes to the composition string (Laporkan perubahan pada string komposisi) {#toc165}
 
 Setelah bacaan atau data prekomposisi digabungkan ke dalam simbol piktografik yang valid, sebagian besar metode input menempatkan simbol ini ke dalam string komposisi untuk penyimpanan sementara bersama dengan simbol-simbol lain yang digabungkan, sebelum simbol-simbol itu akhirnya disisipkan ke dalam dokumen.
-Opsi ini memungkinkan Anda untuk memilih apakah NVDA harus melaporkan simbol baru atau tidak saat simbol itu muncul di string komposisi.  
+Opsi ini memungkinkan Anda untuk memilih apakah Aslan harus melaporkan simbol baru atau tidak saat simbol itu muncul di string komposisi.  
 Opsi ini "on" secara default.
 
-#### Browse Mode Settings - Pengaturan Mode Jelajah (NVDA+control+b) {#toc166}
+#### Browse Mode Settings - Pengaturan Mode Jelajah (Aslan+control+b) {#toc166}
 
 Dialog Browse Mode Settings (Pengaturan Mode Jelajah) dapat Anda temukan di menu Preferences, di bawah "Browse mode...".
 
@@ -1635,7 +1635,7 @@ Bidang ini mengatur jumlah baris yang akan Anda jelajahi saat menekan Page Up at
 
 ##### Use screen layout (Gunakan tata letak layar) {#toc169}
 
-Tuts: NVDA+v
+Tuts: Aslan+v
 
 Opsi ini memungkinkan Anda untuk memilih apakah konten dalam mode jelajah harus menempatkan konten seperti link (tautan) dan bidang lain di barisnya sendiri, atau apakah konten ini harus mempertahankannya dalam teks sebagaimana terlihat secara visual. Jika opsi ini diaktifkan, maka segala sesuatu akan tetap tampak sebagaimana biasanya. Tapi jika tidak diaktifkan, maka bidang-bidang akan ditempatkan di barisnya sendiri. 
 
@@ -1646,8 +1646,8 @@ Opsi ini aktif secara default.
 
 ##### Include layout tables (Sertakan tabel tata letak) {#toc171}
 
-Opsi ini memengaruhi cara NVDA menangani tabel yang digunakan hanya untuk tujuan tata letak.
-Jika diaktifkan, NVDA akan memperlakukan tabel-tabel ini sebagai tabel yang normal, dengan melaporkannya berdasarkan Pengaturan Pemformatan Dokumen dan menempatkannya dengan perintah navigasi cepat.
+Opsi ini memengaruhi cara Aslan menangani tabel yang digunakan hanya untuk tujuan tata letak.
+Jika diaktifkan, Aslan akan memperlakukan tabel-tabel ini sebagai tabel yang normal, dengan melaporkannya berdasarkan Pengaturan Pemformatan Dokumen dan menempatkannya dengan perintah navigasi cepat.
 Jika tidak diaktifkan, tabel-tabel ini tidak akan dilaporkan ataupun ditemukan dengan navigasi cepat.
 Namun, konten tabel masih akan disertakan sebagai teks normal. 
 Opsi ini tidak diaktifkan secara default.
@@ -1665,19 +1665,19 @@ Opsi ini memungkinkan Anda untuk menggunakan mode fokus jika fokus berubah. Seba
 
 ##### Automatic focus mode for caret movement (Mode fokus otomatis untuk pergerakan tanda sisipan) {#toc174}
 
-Opsi ini, jika dicentang, akan memungkinkan NVDA untuk masuk dan meninggalkan mode fokus saat menggunakan tuts panah. 
-Sebagai contoh, jika Anda menekan panah bawah ke laman web dan mendarat di satu kotak edit, NVDA akan secara otomatis membawa Anda masuk ke mode fokus. Jika  Anda menekan panah ke luar dari kotak edit, NVDA akan membawa Anda kembali ke mode jelajah.
+Opsi ini, jika dicentang, akan memungkinkan Aslan untuk masuk dan meninggalkan mode fokus saat menggunakan tuts panah. 
+Sebagai contoh, jika Anda menekan panah bawah ke laman web dan mendarat di satu kotak edit, Aslan akan secara otomatis membawa Anda masuk ke mode fokus. Jika  Anda menekan panah ke luar dari kotak edit, Aslan akan membawa Anda kembali ke mode jelajah.
 
 ##### Audio indication of Focus and Browse modes (Indikasi audio mode Fokus dan Jelajah) {#toc175}
 
-Jika opsi ini diaktifkan, NVDA akan memperdengarkan suara khusus saat beralih antara mode jelajah dan mode fokus, alih-alih mengucapkan perubahan tersebut.
+Jika opsi ini diaktifkan, Aslan akan memperdengarkan suara khusus saat beralih antara mode jelajah dan mode fokus, alih-alih mengucapkan perubahan tersebut.
 
 ##### Trap non-command gestures from reaching the document (Tahan gestur non-perintah dari mencapai dokumen) {#toc176}
 
-Diaktifkan secara default, opsi ini memungkinkan Anda untuk memilih apakah gestur (seperti menekan tuts) yang tidak menghasilkan perintah NVDA dan tidak menjadi tuts perintah secara umum harus ditahan agar tidak menuju dokumen yang sedang memiliki fokus saat ini, atau tidak.
+Diaktifkan secara default, opsi ini memungkinkan Anda untuk memilih apakah gestur (seperti menekan tuts) yang tidak menghasilkan perintah Aslan dan tidak menjadi tuts perintah secara umum harus ditahan agar tidak menuju dokumen yang sedang memiliki fokus saat ini, atau tidak.
 Sebagai contoh, jika opsi ini diaktifkan, jika huruf j ditekan, gestur ini akan ditahan sehingga tidak dapat mencapai dokumen, meskipun ini bukan perintah navigasi cepat dan boleh jadi bukan perintah dalam aplikasi itu sendiri. 
 
-#### Document Formatting Settings - Pengaturan Pemformatan Dokumen (NVDA+control+d) {#DocumentFormattingSettings}
+#### Document Formatting Settings - Pengaturan Pemformatan Dokumen (Aslan+control+d) {#DocumentFormattingSettings}
 
 Kotak dialog ini dapat Anda temukan di menu Preferences, di bawah "Document Formatting...".
 
@@ -1723,9 +1723,9 @@ Untuk mengaktifkan dan menonaktifkan pengaturan ini dari mana pun, silakan menet
 
 ##### Report formatting changes after the cursor (Laporkan perubahan pemformatan setelah kursor) {#toc178}
 
-Jika diaktifkan, pengaturan ini akan meminta NVDA untuk mencoba dan mendeteksi semua perubahan pemformatan pada satu baris ketika NVDA melaporkannya, meskipun ini akan memperlambat kinerja NVDA.
+Jika diaktifkan, pengaturan ini akan meminta Aslan untuk mencoba dan mendeteksi semua perubahan pemformatan pada satu baris ketika Aslan melaporkannya, meskipun ini akan memperlambat kinerja Aslan.
 
-Secara default, NVDA akan mendeteksi pemformatan pada posisi System Caret / Kursor Tinjauan, dan pada beberapa contoh mungkin mendeteksi pemformatan di sisa baris, jika hal ini tidak menyebabkan penurunan kinerja.  
+Secara default, Aslan akan mendeteksi pemformatan pada posisi System Caret / Kursor Tinjauan, dan pada beberapa contoh mungkin mendeteksi pemformatan di sisa baris, jika hal ini tidak menyebabkan penurunan kinerja.  
 
 Aktifkan opsi ini sambil melakukan proof reading (membaca) dokumen dalam aplikasi seperti Wordpad, di mana pemformatan menjadi hal yang penting. 
 
@@ -1734,15 +1734,15 @@ Aktifkan opsi ini sambil melakukan proof reading (membaca) dokumen dalam aplikas
 Opsi ini memungkinkan Anda untuk mengonfigurasi cara pelaporan indentasi di awal baris.  
 Report line indentasi (Laporkan indentasi baris) dengan kotak kombo memiliki empat opsi:
 
-* Off: NVDA tidak akan memperlakukan indentasi secara khusus. 
-* Speech (Pengucapan): Jika Speech dipilih, ketika jumlah indentasi berubah, NVDA akan mengatakan sesuatu seperti "twelve space" atau "four tab". 
+* Off: Aslan tidak akan memperlakukan indentasi secara khusus. 
+* Speech (Pengucapan): Jika Speech dipilih, ketika jumlah indentasi berubah, Aslan akan mengatakan sesuatu seperti "twelve space" atau "four tab". 
 * Tones: Jika Tones dipilih, ketika jumlah indentasi berubah, Tones akan menunjukkan jumlah perubahan dalam inden. 
 Tone akan meningkat dalam pitch pada setiap satu spasi. Dan untuk satu tab, tone akan naik dalam pitch yang setara dengan 4 spasi. 
 * Both Speech and Tones (Pengucapan dan Tones): Opsi ini membacakan indentasi dengan menggunakan kedua metode di atas. 
 
 #### Windows 10 OCR Settings {#Win10OcrSettings}
 
-This dialog can be accessed from the NVDA Preferences menu and allows you to configure [Windows 10 OCR](#Win10Ocr).
+This dialog can be accessed from the Aslan Preferences menu and allows you to configure [Windows 10 OCR](#Win10Ocr).
 
 ##### Recognition language (Bahasa pengenal) {#toc181}
 
@@ -1750,13 +1750,13 @@ Kotak kombo ini memungkinkan Anda memilih bahasa yang akan digunakan untuk penge
 
 #### Speech Dictionaries (Kamus Pengucapan) {#toc182}
 
-Menu Speech Dictionaries (Kamus Pengucapan) yang ditemukan di menu Preferences) berisi beberapa dialog yang memungkinkan Anda untuk mengelola cara NVDA mengucapkan kata atau frasa tertentu. 
+Menu Speech Dictionaries (Kamus Pengucapan) yang ditemukan di menu Preferences) berisi beberapa dialog yang memungkinkan Anda untuk mengelola cara Aslan mengucapkan kata atau frasa tertentu. 
 Saat ini, terdapat tiga jenis kamus pengucapan yang berbeda. 
 Yaitu:
 
-* Default: instruksi (rules) dalam kamus ini memengaruhi semua pengucapan dalam NVDA. 
+* Default: instruksi (rules) dalam kamus ini memengaruhi semua pengucapan dalam Aslan. 
 * Voice: instruksi (rules) dalam kamus ini memengaruhi pengucapan untuk suara synthesizer yang saat ini digunakan. 
-* Temporary: instruksi (rules) dalam kamus ini memengaruhi semua pengucapan dalam NVDA, tapi hanya untuk sesi saat ini. Instruksi-instruksi ini bersifat sementara dan akan hilang jika NVDA di-restart. 
+* Temporary: instruksi (rules) dalam kamus ini memengaruhi semua pengucapan dalam Aslan, tapi hanya untuk sesi saat ini. Instruksi-instruksi ini bersifat sementara dan akan hilang jika Aslan di-restart. 
 
 Anda perlu menetapkan custom gestures (gestur biasa) dengan menggunakan [dialog Input Gestures](#InputGestures) jika Anda ingin membuka salah satu dialog kamus ini dari mana pun. 
 
@@ -1767,16 +1767,16 @@ Untuk menambahkan instruksi baru ke kamus, tekan tombol Add, dan isi bidang-bida
 Anda akan melihat instruksi baru tersebut pada daftar instruksi.
 Namun untuk memastikan bahwa instruksi Anda telah benar-benar tersimpan, pastikan Anda menekan Ok untuk keluar dari dialog kamus bersamaan dengan Anda selesai menambahkan/mengedit instruksi tersebut. 
 
-Instruksi untuk kamus pengucapan NVDA memungkinkan Anda mengubah satu string karakter menjadi satu string karakter lain.
-Salah satu contoh yang mudah adalah, Anda ingin NVDA mengucapkan kata "frog" setiap kali NVDA diperkirakan akan mengucapkan kata "bird".
+Instruksi untuk kamus pengucapan Aslan memungkinkan Anda mengubah satu string karakter menjadi satu string karakter lain.
+Salah satu contoh yang mudah adalah, Anda ingin Aslan mengucapkan kata "frog" setiap kali Aslan diperkirakan akan mengucapkan kata "bird".
 Dalam dialog Add Rule (Tambahkan Instruksi), cara termudah untuk melakukan hal ini adalah dengan mengetikkan kata "bird" di bidang Pattern (Pola), dan kata "frog" di bidang Replacement (Penggantian).
 Anda mungkin juga ingin mengetik keterangan tentang instruksi dalam bidang Comment (seperti: ubah "bird" menjadi "frog"). 
 
-Bagaimanapun, kamus pengucapan NVDA lebih andal daripada metode penggantian kata secara sederhana.
-Dialog Add Rule juga memiliki satu kotak centang yang menanyakan apakah Anda ingin instruksi tersebut menjadi case sensitive, artinya NVDA harus memperhatikan apakah karakter-karakternya adalah huruf kapital atau huruf kecil. 
-Secara default, NVDA mengabaikan hal ini. 
+Bagaimanapun, kamus pengucapan Aslan lebih andal daripada metode penggantian kata secara sederhana.
+Dialog Add Rule juga memiliki satu kotak centang yang menanyakan apakah Anda ingin instruksi tersebut menjadi case sensitive, artinya Aslan harus memperhatikan apakah karakter-karakternya adalah huruf kapital atau huruf kecil. 
+Secara default, Aslan mengabaikan hal ini. 
 
-Akhirnya, serangkaian tombol radio memungkinkan Anda untuk meminta kepada NVDA apakah pola Anda harus cocok di mana pun, atau hanya cocok jika penggantinya merupakan kata lengkap saja, atau haruskah diperlakukan sebagai "Regular expression" (Ekspresi Reguler). 
+Akhirnya, serangkaian tombol radio memungkinkan Anda untuk meminta kepada Aslan apakah pola Anda harus cocok di mana pun, atau hanya cocok jika penggantinya merupakan kata lengkap saja, atau haruskah diperlakukan sebagai "Regular expression" (Ekspresi Reguler). 
 Mengatur pola agar cocok sebagai satu kata utuh berarti bahwa penggantian kata tersebut hanya akan dilakukan jika pola tersebut bukan merupakan bagian dari satu kata yang lebih panjang. Misalnya, satu karakter selain satu karakter alfanumerik atau satu garis bawah (atau tanpa karakter sama sekali) berada langsung sebelum ataupun sesudah pola.
 Jadi, jika kita menggunakan contoh penggantian kata "bird" menjadi "frog" sebelum ini, jika Anda mengaturnya sebagai penggantian satu kata utuh, maka kata "birds" atau "bluebird" tidak akan cocok. 
 
@@ -1788,7 +1788,7 @@ Regular Expression tidak dibahas di dalam panduan pengguna ini. Namun terdapat b
 Dialog ini memungkinkan Anda untuk mengubah cara pelafalan tanda baca dan simbol-simbol lain, serta level tempat simbol tersebut diucapkan. 
 
 The language for which symbol pronunciation is being edited will be shown in the dialog's title.
-Bahasa untuk pelafalan simbol yang sedang diedit akan ditunjukkan pada judul dialog. Perhatikanlah bahwa dialog ini menerima opsi "Trust voice's language for processing symbols and characters" (Pastikan bahasa suara untuk memproses simbol dan karakter) yang ada di [dialog Voice Settings (Pengaturan Suara)](#VoiceSettings); misalnya, opsi ini menggunakan bahasa suara alih-alih pengaturan bahasa global NVDA, jika opsi ini diaktifkan. 
+Bahasa untuk pelafalan simbol yang sedang diedit akan ditunjukkan pada judul dialog. Perhatikanlah bahwa dialog ini menerima opsi "Trust voice's language for processing symbols and characters" (Pastikan bahasa suara untuk memproses simbol dan karakter) yang ada di [dialog Voice Settings (Pengaturan Suara)](#VoiceSettings); misalnya, opsi ini menggunakan bahasa suara alih-alih pengaturan bahasa global Aslan, jika opsi ini diaktifkan. 
 
 Untuk mengubah satu simbol, pertama-tama pilih simbol tersebut di daftar Symbols. 
 
@@ -1813,12 +1813,12 @@ Setelah Anda selesai, tekan tombol OK untuk menyimpan perubahan atau tombol Canc
 
 #### Input Gestures (Gestur Input) {#InputGestures}
 
-Dalam dialog ini, Anda dapat menyesuaikan gestur input (tuts pada keyboard, tombol pada braille display, dll.) untuk perintah NVDA.
+Dalam dialog ini, Anda dapat menyesuaikan gestur input (tuts pada keyboard, tombol pada braille display, dll.) untuk perintah Aslan.
 
 Hanya perintah yang dapat diaplikasikan dengan segera sebelum dialog dibuka yang akan diperlihatkan.
  Misalnya, jika Anda ingin menyesuaikan perintah yang berhubungan dengan mode jelajah, Anda harus membuka dialog Input Gestures saat Anda berada di mode jelajah. 
 
-Tiga perintah dalam dialog ini merupakan perintah NVDA yang dapat diaplikasikan yang dikelompokkan berdasarkan kategori. 
+Tiga perintah dalam dialog ini merupakan perintah Aslan yang dapat diaplikasikan yang dikelompokkan berdasarkan kategori. 
 Anda dapat memfilternya dengan memasukkan satu atau beberapa kata dari nama perintah ke dalam kotak edit Filter by (Filter berdasarkan) dalam susunan bagaimanapun. 
 Gestur apa pun yang berhubungan dengan satu perintah dimasukkan ke dalam daftar di bawah perintah tersebut. 
 
@@ -1834,20 +1834,20 @@ Setelah Anda selesai membuat perubahan, tekan tombol OK untuk menyimpan perubaha
 
 ### Menyimpan dan Membuka Kembali Konfigurasi {#toc185}
 
-Secara default, NVDA akan menyimpan secara otomatis pengaturan yang Anda buat pada saat Anda keluar dari NVDA. 
+Secara default, Aslan akan menyimpan secara otomatis pengaturan yang Anda buat pada saat Anda keluar dari Aslan. 
 Namun perhatikanlah bahwa opsi ini dapat diubah di bawah General Options (Opsi Umum) pada menu Preferences. 
-Untuk menyimpan pengaturan secara manual setiap saat, pilih item Save configuration (Simpan konfigurasi) pada menu NVDA. 
+Untuk menyimpan pengaturan secara manual setiap saat, pilih item Save configuration (Simpan konfigurasi) pada menu Aslan. 
 
-Jika Anda pernah membuat kesalahan saat melakukan pengaturan dan perlu kembali ke pengaturan yang telah disimpan, pilih item "revert to saved configuration" (kembali ke konfigurasi tersimpan) pada menu NVDA.
-Anda juga dapat me-reset pengaturan ke default pabrik orisinal dengan memilih Reset Configuration to Factory Defaults (Atur Ulang Konfigurasi ke Default Pabrik) yang juga dapat ditemukan pada menu NVDA. 
+Jika Anda pernah membuat kesalahan saat melakukan pengaturan dan perlu kembali ke pengaturan yang telah disimpan, pilih item "revert to saved configuration" (kembali ke konfigurasi tersimpan) pada menu Aslan.
+Anda juga dapat me-reset pengaturan ke default pabrik orisinal dengan memilih Reset Configuration to Factory Defaults (Atur Ulang Konfigurasi ke Default Pabrik) yang juga dapat ditemukan pada menu Aslan. 
 
-Perintah tuts NVDA berikut ini juga bermanfaat:
+Perintah tuts Aslan berikut ini juga bermanfaat:
 <!-- KC:beginInclude -->
 
 | Nama |Tuts Desktop |Tuts Laptop |Keterangan|
 |---|---|---|---|
-|Save configuration (Simpan konfigurasi) |NVDA+control+c |NVDA+control+c |Menyimpan konfigurasi Anda saat ini agar tidak hilang saat Anda keluar dari NVDA|
-|Revert configuration (Kembalikan konfigurasi) |NVDA+control+r |NVDA+control+r |Menekan satu kali akan mengatur ulang konfigurasi Anda ke keadaan saat Anda terakhir kali menyimpannya. Menekan tiga kali akan me-reset-nya kembali ke default pabrik.|
+|Save configuration (Simpan konfigurasi) |Aslan+control+c |Aslan+control+c |Menyimpan konfigurasi Anda saat ini agar tidak hilang saat Anda keluar dari Aslan|
+|Revert configuration (Kembalikan konfigurasi) |Aslan+control+r |Aslan+control+r |Menekan satu kali akan mengatur ulang konfigurasi Anda ke keadaan saat Anda terakhir kali menyimpannya. Menekan tiga kali akan me-reset-nya kembali ke default pabrik.|
 
 <!-- KC:endInclude -->
 
@@ -1855,21 +1855,21 @@ Perintah tuts NVDA berikut ini juga bermanfaat:
 
 Kadang-kadang Anda mungkin ingin memiliki pengaturan yang berbeda untuk situasi yang berbeda.
 Misalnya, Anda mungkin ingin mengaktifkan pelaporan indentasi sembari mengaktifkan pengeditan atau pelaporan atribut font saat Anda melakukan proofreading. 
-NVDA memungkinkan Anda untuk melakukan ini dengan profil konfigurasi. 
+Aslan memungkinkan Anda untuk melakukan ini dengan profil konfigurasi. 
 
 Configuration profile hanya memuat pengaturan-pengaturan yang diubah ketika profil diedit.
-Sebagian besar pengaturan dapat diubah di Configuration Profiles, kecuali pengaturan di dialog General Settings (Pengaturan Umum), yang berlaku untuk keseluruhan NVDA.
+Sebagian besar pengaturan dapat diubah di Configuration Profiles, kecuali pengaturan di dialog General Settings (Pengaturan Umum), yang berlaku untuk keseluruhan Aslan.
 
 Configuration Profiles dapat diaktifkan secara manual.
 Configuration Profiles juga dapat diaktifkan secara otomatis dengan pemicu (trigger), antara lain dengan mengalihkan ke aplikasi tertentu. 
 
 #### Manajemen Dasar {#toc187}
 
-Anda dapat mengelola profil konfigurasi dengan cara memilih "Configuration Profiles" pada menu NVDA. 
+Anda dapat mengelola profil konfigurasi dengan cara memilih "Configuration Profiles" pada menu Aslan. 
 Anda juga dapat melakukan ini dengan menggunakan perintah tuts:
 <!-- KC:beginInclude -->
 
-* NVDA+control+p: Tampilkan dialog Configuration Profiles. 
+* Aslan+control+p: Tampilkan dialog Configuration Profiles. 
 
 <!-- KC:endInclude -->
 
@@ -1934,102 +1934,102 @@ Anda dapat melakukan ini dengan mengklik kotak centang Temporarily Disable All T
 
 ### Lokasi File Konfigurasi {#toc193}
 
-Versi portabel NVDA menyimpan semua pengaturan, custom appModules (appModules biasa) dan custom driver (driver biasa) dalam satu direktori yang disebut userConfig, di dalam direktori NVDA. 
+Versi portabel Aslan menyimpan semua pengaturan, custom appModules (appModules biasa) dan custom driver (driver biasa) dalam satu direktori yang disebut userConfig, di dalam direktori Aslan. 
 
-Versi install NVDA menyimpan semua pengaturan, custom appModules (appModules biasa) dan custom driver (driver biasa) dalam satu direktori khusus NVDA yang terletak di profil pengguna Windows Anda.
-Ini berarti bahwa setiap pengguna pada sistem dapat memiliki pengaturan NVDA masing-masing.  
-Untuk sampai di direktori pengaturan versi install NVDA, pada Start Menu, pilih Programs -> NVDA -> Explore user configuration directory (Jelajahi direktori konfigurasi pengguna).
+Versi install Aslan menyimpan semua pengaturan, custom appModules (appModules biasa) dan custom driver (driver biasa) dalam satu direktori khusus Aslan yang terletak di profil pengguna Windows Anda.
+Ini berarti bahwa setiap pengguna pada sistem dapat memiliki pengaturan Aslan masing-masing.  
+Untuk sampai di direktori pengaturan versi install Aslan, pada Start Menu, pilih Programs -> Aslan -> Explore user configuration directory (Jelajahi direktori konfigurasi pengguna).
 
-Pengaturan untuk NVDA saat dijalankan di layar logon atau layar UAC akan disimpan di direktori systemConfig di dalam direktori instalasi NVDA. 
+Pengaturan untuk Aslan saat dijalankan di layar logon atau layar UAC akan disimpan di direktori systemConfig di dalam direktori instalasi Aslan. 
 Biasanya, konfigurasi ini tidak boleh disentuh. 
-Untuk mengubah konfigurasi NVDA pada layar logon/UAC, lakukan konfigurasi NVDA sebagaimana Anda inginkan sambil log in ke Windows, simpan konfigurasi, dan tekan tombol "Use currently saved settings on the logon and other secure screens" (Gunakan pengaturan yang disimpan saat ini pada layar log on dan layar keamanan lain) pada dialog General Settings (Pengaturan Umum).
+Untuk mengubah konfigurasi Aslan pada layar logon/UAC, lakukan konfigurasi Aslan sebagaimana Anda inginkan sambil log in ke Windows, simpan konfigurasi, dan tekan tombol "Use currently saved settings on the logon and other secure screens" (Gunakan pengaturan yang disimpan saat ini pada layar log on dan layar keamanan lain) pada dialog General Settings (Pengaturan Umum).
 
 ## Extra Tools (Alat Ekstra) {#toc194}
 ### Log Viewer (Penampil Log) {#toc195}
 
-Log viewer (Penampil Log) yang dapat ditemukan di bawah Tools (Alat) pada menu NVDA, memungkinkan Anda untuk melihat semua logging output yang ada sejak pertama kali Anda memulai NVDA sampai saat ini. 
+Log viewer (Penampil Log) yang dapat ditemukan di bawah Tools (Alat) pada menu Aslan, memungkinkan Anda untuk melihat semua logging output yang ada sejak pertama kali Anda memulai Aslan sampai saat ini. 
 
 Selain membaca konten, Anda juga dapat menyimpan salinan log file, atau me-refresh viewer agar menunjukkan output terkini sejak Log Viewer dibuka. 
 Tindakan-tindakan ini tersedia di bawah menu Log viewer. 
 
 ### Speech Viewer (Penampil Ucapan) {#toc196}
 
-Untuk pengembang software nontunanetra atau mereka yang mendemonstrasikan NVDA kepada orang berpenglihatan, tersedia jendela melayang yang memungkinkan Anda untuk melihat semua teks yang diucapkan NVDA saat ini. 
+Untuk pengembang software nontunanetra atau mereka yang mendemonstrasikan Aslan kepada orang berpenglihatan, tersedia jendela melayang yang memungkinkan Anda untuk melihat semua teks yang diucapkan Aslan saat ini. 
 
-Untuk mengaktifkan speech viewer, centang item menu Speech Viewer di bawah Tools (Alat) pada menu NVDA. 
+Untuk mengaktifkan speech viewer, centang item menu Speech Viewer di bawah Tools (Alat) pada menu Aslan. 
 Hapus centang pada item menu untuk menonaktifkannya. 
 
 Jendela speech viewer memiliki satu kotak centang yang berlabel "Show speech viewer on startup" (Tampilkan speech viewer saat startup). 
-Jika dicentang, speech viewer akan terbuka ketika Anda memulai NVDA. 
+Jika dicentang, speech viewer akan terbuka ketika Anda memulai Aslan. 
 Jendela speech viewer akan selalu berusaha membuka kembali dengan dimensi dan lokasi yang sama dengan saat jendela tersebut ditutup. 
 
 Selama diaktifkan, speech viewer akan terus-menerus membuat pembaruan untuk menampilkan teks terkini yang diucapkan. 
-Namun jika Anda mengklik atau fokus di dalam viewer, NVDA untuk sementara akan berhenti memperbarui teks sehingga Anda dapat dengan mudah memilih atau menyalin konten yang ada. 
+Namun jika Anda mengklik atau fokus di dalam viewer, Aslan untuk sementara akan berhenti memperbarui teks sehingga Anda dapat dengan mudah memilih atau menyalin konten yang ada. 
 
 Untuk mengaktifkan dan menonaktifkan speech viewer dari mana pun, silakan menetapkan custom gesture (gestur biasa) dengan menggunakan [dialog Input Gestures](#InputGestures).
 
 ### Add-ons Manager (Pengelola Add-ons) {#toc197}
 
-Add-ons Manager (Pengelola Add-ons) diakses dengan memilih Manage add-ons (Kelola add-ons) di bawah Tools (Alat) pada menu NVDA; ini memungkinkan Anda untuk meng-install, meng-uninstall, mengaktifkan dan menonaktifkan paket add-on untuk NVDA. 
-Paket ini disediakan oleh komunitas dan berisi kode custom yang dapat menambah atau mengubah fitur-fitur NVDA atau bahkan menyediakan dukungan untuk braille display atau speech synthesizer tambahan. 
+Add-ons Manager (Pengelola Add-ons) diakses dengan memilih Manage add-ons (Kelola add-ons) di bawah Tools (Alat) pada menu Aslan; ini memungkinkan Anda untuk meng-install, meng-uninstall, mengaktifkan dan menonaktifkan paket add-on untuk Aslan. 
+Paket ini disediakan oleh komunitas dan berisi kode custom yang dapat menambah atau mengubah fitur-fitur Aslan atau bahkan menyediakan dukungan untuk braille display atau speech synthesizer tambahan. 
 
-Add-ons Manager berisi satu daftar yang menampilkan semua add-on yang saat ini terpasang pada konfigurasi pengguna NVDA Anda.  
+Add-ons Manager berisi satu daftar yang menampilkan semua add-on yang saat ini terpasang pada konfigurasi pengguna Aslan Anda.  
 Nama paket, status, versi dan penulisnya ditampilkan untuk setiap add-on, meskipun informasi lebih lanjut seperti deskripsi dan URL dapat dilihat dengan memilih add-on dan menekan tombol About add-on (Tentang add-on). 
 Jika bantuan tersedia untuk add-on yang dipilih, Anda dapat mengaksesnya dengan menekan tombol Add-on help.
 
 Untuk menjelajah dan mengunduh add-on yang tersedia secara online, tekan tombol Get add-ons (Dapatkan add-on). 
-Tombol ini akan membuka [halaman Add-on NVDA](https://addons.nvda-project.org/).
-Jika NVDA telah dipasang dan berjalan di sistem Anda, Anda dapat membuka add-on secara langsung dari browser untuk memulai proses instalasi sebagaimana dijelaskan di bawah ini.
+Tombol ini akan membuka [halaman Add-on Aslan](https://addons.aslan-project.org/).
+Jika Aslan telah dipasang dan berjalan di sistem Anda, Anda dapat membuka add-on secara langsung dari browser untuk memulai proses instalasi sebagaimana dijelaskan di bawah ini.
  Jika belum, simpan paket add-on dan ikuti petunjuk di bawah ini. 
 
 Untuk meng-install Add-on yang sebelumnya telah Anda dapatkan, tekan tombol Install. 
-Ini memungkinkan Anda untuk menjelajah paket add-on (.nvda-addon file) di suatu tempat pada komputer atau jaringan Anda. 
+Ini memungkinkan Anda untuk menjelajah paket add-on (.aslan-addon file) di suatu tempat pada komputer atau jaringan Anda. 
 Begitu Anda menekan Open, proses instalasi akan dimulai. 
 
-Ketika add-on akan di-install, NVDA akan terlebih dulu bertanya untuk mengonfirmasi apakah Anda benar-benar ingin meng-install add-on. 
-Karena fungsionalitas add-on tidak terbatas hanya untuk NVDA, yang secara teori termasuk juga mengakses data pribadi Anda atau bahkan sistem keseluruhan jika NVDA adalah salinan yang terpasang, maka sangat penting bagi Anda untuk hanya meng-install add-on dari sumber yang Anda percayai. 
-Setelah add-on di-install, NVDA harus di-restart agar add-on dapat dijalankan. 
+Ketika add-on akan di-install, Aslan akan terlebih dulu bertanya untuk mengonfirmasi apakah Anda benar-benar ingin meng-install add-on. 
+Karena fungsionalitas add-on tidak terbatas hanya untuk Aslan, yang secara teori termasuk juga mengakses data pribadi Anda atau bahkan sistem keseluruhan jika Aslan adalah salinan yang terpasang, maka sangat penting bagi Anda untuk hanya meng-install add-on dari sumber yang Anda percayai. 
+Setelah add-on di-install, Aslan harus di-restart agar add-on dapat dijalankan. 
 Sampai Anda melakukan hal ini, status "install" akan muncul untuk menunjukkan add-on tersebut pada daftar. 
 
 Untuk menghapus satu add-on, pilih add-on tersebut dari daftar dan tekan tombol Remove. 
-NVDA akan bertanya apakah Anda benar-benar ingin menghapusnya. 
-Sebagaimana halnya saat meng-install, NVDA harus di-restart agar add-on dapat dihapus sepenuhnya. 
+Aslan akan bertanya apakah Anda benar-benar ingin menghapusnya. 
+Sebagaimana halnya saat meng-install, Aslan harus di-restart agar add-on dapat dihapus sepenuhnya. 
 Sampai Anda melakukan hal ini, status "remove" akan muncul untuk menunjukkan add-on tersebut pada daftar. 
 
 Untuk menonaktifkan satu add-on, tekan tombol Disable. 
 Untuk mengaktifkan add-on yang sebelumnya tidak aktif, tekan tombol Enable. 
 Anda dapat menonaktifkan satu add-on jika status add-on menunjukkan add-on tersebut sedang berjalan atau diaktifkan. Atau aktifkan jika add-on tersebut dihentikan atau dinonaktifkan.  
-Setiap kali Anda menekan tombol Enable/Disable (Aktifkan/Nonaktifkan), status add-on akan berganti untuk menunjukkan apa yang akan terjadi saat NVDA di-restart. 
-Seperti ketika Anda meng-install atau menghapus add-on, Anda perlu me-restart NVDA agar perubahan tersebut berlaku.
+Setiap kali Anda menekan tombol Enable/Disable (Aktifkan/Nonaktifkan), status add-on akan berganti untuk menunjukkan apa yang akan terjadi saat Aslan di-restart. 
+Seperti ketika Anda meng-install atau menghapus add-on, Anda perlu me-restart Aslan agar perubahan tersebut berlaku.
 
 Fitur Manager juga memiliki tombol Close untuk menutup dialog. 
-Jika Anda telah meng-install, menghapus atau mengubah status suatu add-on, NVDA akan menanyakan apakah Anda ingin melakukan restart agar perubahan tersebut dapat berlaku. 
+Jika Anda telah meng-install, menghapus atau mengubah status suatu add-on, Aslan akan menanyakan apakah Anda ingin melakukan restart agar perubahan tersebut dapat berlaku. 
 
-Di masa lalu, Anda dapat memperluas fungsionalitas NVDA dengan menyalin plugin dan driver tersendiri pada direktori User Configuration (Konfigurasi Pengguna) NVDA Anda. 
-Meskipun versi NVDA ini mungkin masih dapat membukanya, plugin dan driver ini tidak akan ditampilkan pada Add-on Manager. 
+Di masa lalu, Anda dapat memperluas fungsionalitas Aslan dengan menyalin plugin dan driver tersendiri pada direktori User Configuration (Konfigurasi Pengguna) Aslan Anda. 
+Meskipun versi Aslan ini mungkin masih dapat membukanya, plugin dan driver ini tidak akan ditampilkan pada Add-on Manager. 
 Cara terbaik adalah menghapus file-file ini dari konfigurasi Anda dan meng-install add-on yang sesuai jika ada. 
 
 Untuk mengakses Add-ons Manager dari mana pun, silakan menetapkan custom gesture (gestur biasa) dengan menggunakan [dialog Input Gestures (Gestur Input)](#InputGestures).
 
 ### Python Console (Konsol Python) {#toc198}
 
-Python Console (Konsol Python) NVDA yang berada di bawah Tools (Alat) pada menu NVDA adalah alat pengembangan yang berguna untuk melakukan pencarian dan pengurangan kerusakan program (debugging), pemeriksaan umum internal NVDA atau pemeriksaan hierarki aksesibilitas dari suatu aplikasi. 
-Untuk informasi lebih lanjut, silakan lihat Panduan Pengembang yang tersedia di bagian [Pengembangan situs web NVDA](https://www.nvaccess.org/files/nvda/documentation/developerGuide.html).
+Python Console (Konsol Python) Aslan yang berada di bawah Tools (Alat) pada menu Aslan adalah alat pengembangan yang berguna untuk melakukan pencarian dan pengurangan kerusakan program (debugging), pemeriksaan umum internal Aslan atau pemeriksaan hierarki aksesibilitas dari suatu aplikasi. 
+Untuk informasi lebih lanjut, silakan lihat Panduan Pengembang yang tersedia di bagian [Pengembangan situs web Aslan](https://www.nvaccess.org/files/aslan/documentation/developerGuide.html).
 
 ### Reload plugins (Membuka ulang plugin) {#toc199}
 
-Setelah diaktifkan, item ini akan membuka ulang modul aplikasi dan plugin global tanpa me-restart NVDA. Hal ini berguna untuk para pengembang. 
+Setelah diaktifkan, item ini akan membuka ulang modul aplikasi dan plugin global tanpa me-restart Aslan. Hal ini berguna untuk para pengembang. 
 
 ## Speech Synthesizer yang Didukung {#SupportedSpeechSynths}
 
-Bagian ini memuat informasi tentang speech synthesizer yang didukung oleh NVDA. 
-Untuk informasi lebih jauh tentang synthesizer, baik komersial maupun gratis, yang dapat Anda beli dan unduh untuk digunakan bersama NVDA, silakan lihat di [laman tambahan suara](https://github.com/nvaccess/nvda/wiki/ExtraVoices).
+Bagian ini memuat informasi tentang speech synthesizer yang didukung oleh Aslan. 
+Untuk informasi lebih jauh tentang synthesizer, baik komersial maupun gratis, yang dapat Anda beli dan unduh untuk digunakan bersama Aslan, silakan lihat di [laman tambahan suara](https://github.com/nvaccess/aslan/wiki/ExtraVoices).
 
 ### eSpeak NG {#toc201}
 
-Synthesizer [eSpeak NG](https://github.com/espeak-ng/espeak-ng) disatukan secara langsung ke dalam NVDA dan tidak membutuhkan driver atau komponen khusus lain untuk instalasi. 
-NVDA di-start dengan menggunakan eSpeak NG secara default. 
-Karena synthesizer ini disatukan ke dalam NVDA, ini adalah pilihan yang sangat baik saat Anda menjalankan NVDA tanpa USB thumb drive pada sistem lain. 
+Synthesizer [eSpeak NG](https://github.com/espeak-ng/espeak-ng) disatukan secara langsung ke dalam Aslan dan tidak membutuhkan driver atau komponen khusus lain untuk instalasi. 
+Aslan di-start dengan menggunakan eSpeak NG secara default. 
+Karena synthesizer ini disatukan ke dalam Aslan, ini adalah pilihan yang sangat baik saat Anda menjalankan Aslan tanpa USB thumb drive pada sistem lain. 
 
 Setiap suara yang hadir bersama eSpeak NG berbicara dalam bahasa yang berbeda. 
 Terdapat lebih dari 43 bahasa yng didukung oleh eSpeak NG.
@@ -2039,21 +2039,21 @@ Terdapat juga berbagai varian yang dapat dipilih untuk mengubah bunyi pada suara
 ### Microsoft Speech API versi 4 (SAPI 4) {#toc202}
 
 SAPI 4 adalah standar Microsoft yang lebih awal untuk speech synthesizer software. 
-NVDA masih mendukung versi ini bagi pengguna yang telah memasang synthesizer SAPI 4. 
+Aslan masih mendukung versi ini bagi pengguna yang telah memasang synthesizer SAPI 4. 
 Namun Microsoft tidak lagi mendukung versi ini, dan komponen yang diperlukan tidak lagi disediakan oleh Microsoft. 
 
-Saat menggunakan synthesizer ini bersama NVDA, suara-suara yang tersedia (yang diakses dari [dialog Voice Settings (Pengaturan Suara)](#VoiceSettings) atau oleh [Synth Settings Ring (Ring Pengaturan Synth)](#SynthSettingsRing)) akan berisi semua suara dari semua mesin SAPI 4 yang terpasang dalam sistem Anda. 
+Saat menggunakan synthesizer ini bersama Aslan, suara-suara yang tersedia (yang diakses dari [dialog Voice Settings (Pengaturan Suara)](#VoiceSettings) atau oleh [Synth Settings Ring (Ring Pengaturan Synth)](#SynthSettingsRing)) akan berisi semua suara dari semua mesin SAPI 4 yang terpasang dalam sistem Anda. 
 
 ### Microsoft Speech API versi 5 (SAPI 5) {#toc203}
 
 SAPI 5 adalah standar Microsoft untuk speech synthesizer software. 
 Sebagian besar speech synthesizer yang mengikuti standar ini dapat dibeli atau diunduh secara gratis dari berbagai perusahaan dan situs web, meskipun sistem Anda mungkin telah dilengkapi setidaknya oleh suara SAPI 5 yang telah dipasang sebelumnya. 
-Saat menggunakan synthesizer ini bersama NVDA, suara-suara yang tersedia (yang diakses dari [dialog Voice Settings (Pengaturan Suara)](#VoiceSettings) atau oleh [Synth Settings Ring (Ring Pengaturan Synth)](#SynthSettingsRing)) akan berisi semua suara dari semua mesin SAPI 5 yang terpasang dalam sistem Anda.
+Saat menggunakan synthesizer ini bersama Aslan, suara-suara yang tersedia (yang diakses dari [dialog Voice Settings (Pengaturan Suara)](#VoiceSettings) atau oleh [Synth Settings Ring (Ring Pengaturan Synth)](#SynthSettingsRing)) akan berisi semua suara dari semua mesin SAPI 5 yang terpasang dalam sistem Anda.
 
 ### Microsoft Speech Platform {#toc204}
 
 Microsoft Speech Platform menyediakan suara untuk banyak bahasa yang biasa digunakan dalam pengembangan aplikasi speech (pengucapan) berbasis server. 
-Suara-suara ini juga dapat digunakan bersama NVDA. 
+Suara-suara ini juga dapat digunakan bersama Aslan. 
 
 Untuk menggunakan suara-suara ini, Anda perlu memasang dua komponen: 
 
@@ -2070,31 +2070,31 @@ Suara disediakan untuk banyak bahasa, dan lebih responsif daripada suara Microso
 
 Silakan lihat artikel Microsoft ini untuk daftar suara dan instruksi yang ada untuk menginstal: https://support.microsoft.com/en-us/help/22797/windows-10-narrator-tts-voices
 
-Perlu diketahui bahwa rate kecepatan yang tersedia pada Narator saat ini tidak tersedia dengan NVDA.
-Selain itu, kecepatan yang Anda pilih di Setelan Windows memengaruhi pengaturan kecepatan di NVDA.
+Perlu diketahui bahwa rate kecepatan yang tersedia pada Narator saat ini tidak tersedia dengan Aslan.
+Selain itu, kecepatan yang Anda pilih di Setelan Windows memengaruhi pengaturan kecepatan di Aslan.
 Ini adalah masalah yang tidak dapat kami selesaikan tanpa perubahan pada Windows.
 Kami berharap bahwa ini akan dibahas dalam update Windows masa depan.
 
 ### Audiologic Tts3 {#toc206}
 
 Ini adalah speech synthesizer komersial khusus untuk bahasa Italia. 
-Synthesizer ini harus sudah dipasang di sistem Anda agar dapat digunakan bersama NVDA. 
+Synthesizer ini harus sudah dipasang di sistem Anda agar dapat digunakan bersama Aslan. 
 Untuk informasi lebih lanjut, silakan kunjungi situs web Audiologic di [www.audiologic.it](http://www.audiologic.it).
 
 Synthesizer ini tidak mendukung [fungsionalitas pengejaan](#VoiceSpellingFunctionality).
 
-### Nuance Vocalizer for NVDA {#toc207}
+### Nuance Vocalizer for Aslan {#toc207}
 
-Nuance Vocalizer adalah voice synthesizer komersial berkualitas tinggi yang dikembangkan oleh Nuance Communications, Inc. dan dikemas khusus untuk NVDA oleh Tiflotecnia, Lda. 
+Nuance Vocalizer adalah voice synthesizer komersial berkualitas tinggi yang dikembangkan oleh Nuance Communications, Inc. dan dikemas khusus untuk Aslan oleh Tiflotecnia, Lda. 
 Synthesizer ini menyediakan 50 suara berbeda yang dapat Anda install, dan berbicara dalam lebih dari 30 bahasa. 
-Semua komponen synthesizer dan suara dibundel dalam paket add-on, yang memungkinkan Anda untuk menggunakan secara penuh salinan NVDA yang portabel. 
+Semua komponen synthesizer dan suara dibundel dalam paket add-on, yang memungkinkan Anda untuk menggunakan secara penuh salinan Aslan yang portabel. 
 
-Anda dapat memperoleh informasi lebih jauh tentang Nuance Vocalizer for NVDA dan cara membelinya di situs web [www.vocalizer-nvda.com](http://www.vocalizer-nvda.com/).
-Satu persen hasil penjualan produk ini akan didonasikan ke NV Access guna mendanai pengembangan NVDA Screen Reader.
+Anda dapat memperoleh informasi lebih jauh tentang Nuance Vocalizer for Aslan dan cara membelinya di situs web [www.vocalizer-aslan.com](http://www.vocalizer-aslan.com/).
+Satu persen hasil penjualan produk ini akan didonasikan ke NV Access guna mendanai pengembangan Aslan Screen Reader.
 
 ## Braille Display yang Didukung {#SupportedBrailleDisplays}
 
-Bagian ini memuat informasi tentang tipe-tipe braille display yang didukung oleh NVDA. 
+Bagian ini memuat informasi tentang tipe-tipe braille display yang didukung oleh Aslan. 
 
 ### Freedom Scientific Focus/PAC Mate Series {#toc209}
 
@@ -2102,13 +2102,13 @@ Semua braille display Focus dan PAC Mate dari [Freedom Scientific](http://www.fr
 Driver braille display Freedom Scientific harus sudah dipasang di sistem Anda.
 Jika Anda belum memilikinya, Anda dapat memperolehnya di http://www2.freedomscientific.com/downloads/focus-40-blue/focus-40-14-blue-downloads.asp.
 Meskipun laman ini hanya menyebut display Focus Blue, driver-nya mendukung semua display Freedom Scientific Focus dan Pacmate. 
-Meski sistem Anda menjalankan Windows 64 bit dan driver telah di-install oleh pembaca layar lain, Anda mungkin tetap perlu meng-install driver dari link (tautan) ini, karena file-file yang disyaratkan oleh NVDA mungkin tidak di-install oleh pembaca layar lain.
+Meski sistem Anda menjalankan Windows 64 bit dan driver telah di-install oleh pembaca layar lain, Anda mungkin tetap perlu meng-install driver dari link (tautan) ini, karena file-file yang disyaratkan oleh Aslan mungkin tidak di-install oleh pembaca layar lain.
 
-Secara default, NVDA dapat mendeteksi dan terhubung secara otomatis ke display, baik melalui USB ataupun bluetooth. 
+Secara default, Aslan dapat mendeteksi dan terhubung secara otomatis ke display, baik melalui USB ataupun bluetooth. 
 Namun, saat mengonfigurasi display, Anda dapat secara eksplisit memilih port "USB" atau "Bluetooth" untuk membatasi tipe koneksi yang digunakan. 
-Ini mungkin berguna jika Anda ingin menghubungkan focus display ke NVDA dengan menggunakan bluetooth, sambil mengisi daya dengan menggunakan USB power dari komputer Anda. 
+Ini mungkin berguna jika Anda ingin menghubungkan focus display ke Aslan dengan menggunakan bluetooth, sambil mengisi daya dengan menggunakan USB power dari komputer Anda. 
 
-Berikut adalah penggunaan tuts untuk mengoperasikan braille display ini dengan NVDA. 
+Berikut adalah penggunaan tuts untuk mengoperasikan braille display ini dengan Aslan. 
 Silakan lihat instruksi penggunaan braille display untuk mendapatkan penjelasan di mana posisi tuts-tuts ini. 
 <!-- KC:beginInclude -->
 
@@ -2145,7 +2145,7 @@ Silakan lihat instruksi penggunaan braille display untuk mendapatkan penjelasan 
 |space key (tuts space) |brailleSpaceBar|
 |windows+d key (minimize all applications) - Windows+tuts d (minimalkan semua aplikasi) |brailleSpaceBar+dot1+dot2+dot3+dot4+dot5+dot6|
 |Report Current Line (Laporkan Baris Saat Ini) |brailleSpaceBar+dot1+dot4|
-|NVDA Menu (Menu NVDA) |brailleSpaceBar+dot1+dot3+dot4+dot5|
+|Aslan Menu (Menu Aslan) |brailleSpaceBar+dot1+dot3+dot4+dot5|
 
 Untuk model Focus yang lebih baru yang memiliki tuts rocker bar (focus 40, focus 80 dan focus blue):
 
@@ -2167,12 +2167,12 @@ Hanya untuk Focus 80:
 
 Braille display ALVA BC640 dan BC680 dari [Optelec](http://www.optelec.com/) didukung saat terkoneksi via USB atau bluetooth. 
 Anda tidak perlu meng-install driver khusus untuk menggunakan display ini. 
-Cukup sambungkan display dan lakukan konfigurasi NVDA untuk menggunakannya. 
+Cukup sambungkan display dan lakukan konfigurasi Aslan untuk menggunakannya. 
 
 Kedua display ini memiliki keyboard braille dan dapat menerjemahkan dari braille ke teks. 
-Oleh karena itu, pengaturan tabel input braille NVDA tidaklah relevan. 
+Oleh karena itu, pengaturan tabel input braille Aslan tidaklah relevan. 
 
-Berikut ini adalah penggunaan tuts untuk display dengan NVDA. 
+Berikut ini adalah penggunaan tuts untuk display dengan Aslan. 
 Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana posisi tuts-tuts ini. 
 <!-- KC:beginInclude -->
 
@@ -2199,7 +2199,7 @@ Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana 
 |rightArrow key (tuts panah kanan) |spRight|
 |enter key (tuts Enter) |spEnter|
 |Report date/time (Laporkan tanggal/waktu) |sp1+sp2|
-|NVDA Menu (Menu NVDA) |sp1+sp3|
+|Aslan Menu (Menu Aslan) |sp1+sp3|
 |windows+d key (minimize all applications) - Windows+tuts d (minimalkan semua aplikasi) |sp1+sp4|
 |windows+b key (focus system tray) - Windows+ tuts b (baki sistem fokus) |sp3+sp4|
 |windows key (tuts Windows) |sp2+sp3|
@@ -2213,16 +2213,16 @@ Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana 
 
 ### Braille Display dari Handy Tech {#toc211}
 
-NVDA mendukung semua braille display dari [Handy Tech](http://www.handytech.de/) saat dihubungkan via USB atau bluetooth. 
+Aslan mendukung semua braille display dari [Handy Tech](http://www.handytech.de/) saat dihubungkan via USB atau bluetooth. 
 Untuk display USB versi yang lebih lama, Anda perlu meng-install driver USB dari Handy Tech di sistem Anda. 
 Input braille belum didukung. 
-Berikut ini display braille yang tidak didukung, tetapi dapat digunakan melalui [Handy Tech's universal driver](https://handytech.de/en/service/downloads-and-manuals/handy-tech-software/braille-display-drivers) dan add-on NVDA:
+Berikut ini display braille yang tidak didukung, tetapi dapat digunakan melalui [Handy Tech's universal driver](https://handytech.de/en/service/downloads-and-manuals/handy-tech-software/braille-display-drivers) dan add-on Aslan:
 
 * Braillino
 * Bookworm
 * Tampilan modular dengan firmware versi 1.13 atau lebih rendah. Perlu diketahui bahwa firmware display ini bisa di update.
 
-Berikut ini adalah penggunaan tuts untuk display dengan NVDA. 
+Berikut ini adalah penggunaan tuts untuk display dengan Aslan. 
 Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana posisi tuts-tuts ini. 
 <!-- KC:beginInclude -->
 
@@ -2242,7 +2242,7 @@ Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana 
 |downArrow key (tuts panah bawah) |joystickDown|
 |leftArrow key (tuts panah kiri) |joystickLeft|
 |rightArrow key (tuts panah kanan) |joystickRight|
-|Menu NVDA |b2+b4+b5+b6|
+|Menu Aslan |b2+b4+b5+b6|
 |Toggle braille tethered to (Toggle braille ditambatkan ke) |b2|
 |Toggle the braille cursor (Toggle kursor braille) |b1|
 |Toggle focus context presentation (Toggle fokus presentasi konteks)| b7|
@@ -2254,9 +2254,9 @@ Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana 
 
 Braille display Lilli dari [MDV](http://www.mdvbologna.it/) juga didukung.
 Anda tidak perlu meng-install driver khusus untuk menggunakan display ini. 
-Cukup sambungkan display dan konfigurasikan NVDA untuk menggunakannya.
+Cukup sambungkan display dan konfigurasikan Aslan untuk menggunakannya.
 
-Berikut adalah penggunaan tuts untuk mengoperasikan braille display ini dengan NVDA.  
+Berikut adalah penggunaan tuts untuk mengoperasikan braille display ini dengan Aslan.  
 Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana posisi tuts-tuts ini.
 <!-- KC:beginInclude -->
 
@@ -2293,7 +2293,7 @@ Refreshabraille dan Orbit Reader 20 dapat menggunakan HID jika dikonfigurasi den
 USB serial mode dari Orbit Reader 20 saat ini hanya didukung di Windows 10. 
 Maka, yang biasa digunakan adalah USB HID.
 
-Berikut adalah penggunaan tuts untuk mengoperasikan braille display ini dengan NVDA.  
+Berikut adalah penggunaan tuts untuk mengoperasikan braille display ini dengan Aslan.  
 Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana posisi tuts-tuts ini.
 <!-- KC:beginInclude -->
 
@@ -2322,7 +2322,7 @@ Untuk display yang dilengkapi joystick:
 Hedo ProfiLine USB dari [hedo Reha-Technik](http://www.hedo.de/) juga didukung. 
 Pertama-tama Anda harus meng-install driver USB yang disediakan oleh produsen. 
 
-Berikut adalah penggunaan tuts untuk mengoperasikan braille display ini dengan NVDA.  
+Berikut adalah penggunaan tuts untuk mengoperasikan braille display ini dengan Aslan.  
 Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana posisi tuts-tuts ini.
 <!-- KC:beginInclude -->
 
@@ -2343,7 +2343,7 @@ Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana 
 Hedo MobilLine USB dari [hedo Reha-Technik](http://www.hedo.de/) juga didukung.
 Pertama-tama Anda harus meng-install driver USB yang disediakan oleh produsen. 
 
-Berikut adalah penggunaan tuts untuk mengoperasikan display ini dengan NVDA. 
+Berikut adalah penggunaan tuts untuk mengoperasikan display ini dengan Aslan. 
 Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana posisi tuts-tuts ini. 
 <!-- KC:beginInclude -->
 
@@ -2365,7 +2365,7 @@ Rangkaian braille display Brailliant BI dan B dari [HumanWare](http://www.humanw
 Jika Anda menghubungkannya via USB dengan protocol set ke HumanWare, Anda harus terlebih dulu meng-install driver USB yang disediakan oleh produsen.
 Driver USB tidak diperlukan jika protocol diatur ke OpenBraille.
 
-Berikut adalah penggunaan tuts untuk mengoperasikan braille display ini dengan NVDA.  
+Berikut adalah penggunaan tuts untuk mengoperasikan braille display ini dengan Aslan.  
 Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana posisi tuts-tuts ini.
 <!-- KC:beginInclude -->
 
@@ -2381,7 +2381,7 @@ Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana 
 |downArrow key (tuts panah bawah) |space+dot4|
 |leftArrow key (tuts panah kiri) |space+dot3|
 |rightArrow key (tuts panah kanan) |space+dot6|
-|Menu NVDA |c1+c3+c4+c5 (perintah n)|
+|Menu Aslan |c1+c3+c4+c5 (perintah n)|
 |shift+tab key (shift+tuts tab) |space+dot1+dot3|
 |tab key (tuts tab) |space+dot4+dot6|
 |alt key (tuts Alt) |space+dot1+dot3+dot4 (space+m)|
@@ -2396,11 +2396,11 @@ Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana 
 
 ### HIMS Braille Sense/Braille EDGE/Smart Beetle Series {#toc217}
 
-NVDA mendukung display Braille Sense, Braille EDGE dan Smart Beetle dari [Hims](http://www.hims-inc.com/) ketika dihubungkan via USB atau bluetooth. 
+Aslan mendukung display Braille Sense, Braille EDGE dan Smart Beetle dari [Hims](http://www.hims-inc.com/) ketika dihubungkan via USB atau bluetooth. 
 Jika Anda menghubungkan via USB, Anda perlu meng-install driver USB dari HIMS di sistem Anda.
 Anda dapat mengunduhnya dari laman ini: http://www.himsintl.com/?c=2/13&uid=2319
 
-Berikut ini adalah penggunaan tuts untuk mengoperasikan display ini dengan NVDA. 
+Berikut ini adalah penggunaan tuts untuk mengoperasikan display ini dengan Aslan. 
 Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana posisi tuts-tuts ini.
 <!-- KC:beginInclude -->
 
@@ -2461,10 +2461,10 @@ Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana 
 
 ### HIMS SyncBraille {#toc218}
 
-NVDA mendukung SyncBraille Display dari [HIMS](http://www.hims-inc.com/).
+Aslan mendukung SyncBraille Display dari [HIMS](http://www.hims-inc.com/).
 Anda perlu meng-install driver USB dari HIMS di sistem Anda.
 
-Berikut ini adalah penggunaan tuts untuk mengoperasikan display ini dengan NVDA.
+Berikut ini adalah penggunaan tuts untuk mengoperasikan display ini dengan Aslan.
 Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana posisi tuts-tuts ini. 
 <!-- KC:beginInclude -->
 
@@ -2482,7 +2482,7 @@ Seika Versi 3, 4 dan 5 (40 sel) dan Seika80 (80 sel) dari [Nippon Telesoft](http
 nda dapat memperoleh informasi lebih lanjut tentang display ini di http://www.seika-braille.com/.
 Pertama-tama Anda harus meng-install driver USB yang disediakan oleh produsen. 
 
-Berikut ini adalah penggunaan tuts untuk mengoperasikan display ini dengan NVDA.
+Berikut ini adalah penggunaan tuts untuk mengoperasikan display ini dengan Aslan.
 Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana posisi tuts-tuts ini. 
 <!-- KC:beginInclude -->
 
@@ -2497,7 +2497,7 @@ Silakan lihat instruksi penggunaan display untuk mendapatkan penjelasan di mana 
 |tab |b1|
 |shift+tab |b2|
 |alt+tab |b1+b2|
-|Menu NVDA |kiri+kanan|
+|Menu Aslan |kiri+kanan|
 |RRoute to braille cell (Rute ke sel braille) |routing (perutean)|
 
 <!-- KC:endInclude -->
@@ -2511,9 +2511,9 @@ Berikut ini adalah beberapa braille display yang didukung:
 * BRAILLEX Trio (USB and bluetooth)
 * BRAILLEX Live 20, BRAILLEX Live and BRAILLEX Live Plus (USB and bluetooth)
 
-Jika BrxCom sudah di-install, NVDA akan menggunakan BrxCom.
+Jika BrxCom sudah di-install, Aslan akan menggunakan BrxCom.
 BrxCom adalah alat yang memungkinkan input keyboard dari braille display untuk berfungsi secara mandiri dari pembaca layar.
-Versi baru BrxCom yang bekerja dengan NVDA akan segera dirilis oleh Papenmeier.
+Versi baru BrxCom yang bekerja dengan Aslan akan segera dirilis oleh Papenmeier.
 Input keyboard dapat dilakukan dengan model Trio dan BRAILLEX Live. 
 
 Sebagian besar perangkat memiliki sebuah Easy Access Bar (EAB) yang memungkinkan Anda melakukan pengoperasian secara intuitif dan cepat.
@@ -2543,7 +2543,7 @@ Biasanya, tuts-tuts berikut ini tersedia di braille display tersebut:
 |dn |1 langkah ke bawah|
 |dn2 |2 langkah ke bawah|
 
-Berikut adalah penggunaan perintah Papenmeier untuk NVDA: 
+Berikut adalah penggunaan perintah Papenmeier untuk Aslan: 
 <!-- KC:beginInclude -->
 
 | Nama |Tuts|
@@ -2626,7 +2626,7 @@ Biasanya, tuts-tuts berikut ini tersedia di braille display tersebut:
 |dn |1 langkah ke bawah|
 |dn2 |2 langkah ke bawah|
 
-Berikut adalah penggunaan perintah Papenmeier untuk NVDA: 
+Berikut adalah penggunaan perintah Papenmeier untuk Aslan: 
 
 <!-- KC:beginInclude -->
 Perangkat dengan EAB: 
@@ -2696,15 +2696,15 @@ Model-model berikut ini adalah yang didukung:
 * BrailleNote MPower (koneksi serial dan bluetooth)
 * BrailleNote Apex (koneksi USB dan Bluetooth)
 
-Jika perangkat Anda mendukung lebih dari satu tipe koneksi, saat menghubungkan BrailleNote ke NVDA, Anda harus mengatur braille terminal port pada opsi Braille Terminal.
+Jika perangkat Anda mendukung lebih dari satu tipe koneksi, saat menghubungkan BrailleNote ke Aslan, Anda harus mengatur braille terminal port pada opsi Braille Terminal.
 Silakan pelajari buku panduan BrailleNote untuk informasi lebih detail.
-Di NVDA, Anda mungkin juga perlu mengatur port pada dialog Braille Settings (Pengaturan Braille).
+Di Aslan, Anda mungkin juga perlu mengatur port pada dialog Braille Settings (Pengaturan Braille).
 Jika Anda menghubungkan via USB atau bluetooth, Anda dapat mengatur port ke "Automatic", "USB" atau "Bluetooth", tergantung pilihan yang tersedia.
 Jika Anda menghubungkan dengan menggunakan port seri legacy (atau USB ke konverter seri) atau jika tidak ada opsi sebelumnya yang muncul, Anda harus secara eksplisit memilih port komunikasi yang akan digunakan dari daftar port hardware. 
 
 Sebelum menghubungkan BrailleNote Apex dengan menggunakan antarmuka klien USB, Anda harus meng-install driver yang disediakan oleh HumanWare. 
 
-Berikut adalah penggunaan perintah BrailleNote untuk NVDA.
+Berikut adalah penggunaan perintah BrailleNote untuk Aslan.
 Silakan baca instruksi penggunaan BrailleNote untuk menemukan posisi tuts-tuts ini. 
 
 <!-- KC:beginInclude -->
@@ -2740,7 +2740,7 @@ Silakan baca instruksi penggunaan BrailleNote untuk menemukan posisi tuts-tuts i
 
 ### EcoBraille {#toc223}
 
-NVDA mendukung braille display EcoBraille dari [ONCE](http://www.once.es/).
+Aslan mendukung braille display EcoBraille dari [ONCE](http://www.once.es/).
 Model-model berikut ini adalah yang didukung: 
 
 * EcoBraille 20
@@ -2748,7 +2748,7 @@ Model-model berikut ini adalah yang didukung:
 * EcoBraille 80
 * EcoBraille Plus
 
-Di NVDA, Anda dapat mengatur port seri yang dihubungkan ke display dalam dialog Braille Settings (Pengaturan Braille). 
+Di Aslan, Anda dapat mengatur port seri yang dihubungkan ke display dalam dialog Braille Settings (Pengaturan Braille). 
 
 Berikut ini adalah penggunaan tuts untuk display EcoBraille. 
 Silakan lihat [instruksi penggunaan EcoBraille](ftp://ftp.once.es/pub/utt/bibliotecnia/Lineas_Braille/ECO/) untuk mendapatkan penjelasan di mana posisi tuts-tuts ini. 
@@ -2799,9 +2799,9 @@ Anda harus mengunduh dan meng-install paket instalasi terkini, yang akan dinamai
 Saat mengonfigurasi display dan port yang akan digunakan, pastikan Anda memperhatikan instruksinya, terutama jika Anda menggunakan display USB dan memiliki driver yang telah ter-install dari produsen. 
 
 Untuk display yang memiliki keyboard braille, BRLTTY kini telah menangani input braille sendiri.
-Oleh karena itu, pengaturan tabel input braille NVDA tidaklah relevan. 
+Oleh karena itu, pengaturan tabel input braille Aslan tidaklah relevan. 
 
-Berikut adalah penggunaan perintah BRLTTY untuk NVDA.
+Berikut adalah penggunaan perintah BRLTTY untuk Aslan.
 Silakan lihat [BRLTTY key binding lists](http://mielke.cc/brltty/doc/KeyBindings/) untuk informasi tentang bagaimana perintah BRLTTY dipetakan untuk mengontrol braille display. 
 <!-- KC:beginInclude -->
 
@@ -2818,71 +2818,71 @@ Silakan lihat [BRLTTY key binding lists](http://mielke.cc/brltty/doc/KeyBindings
 ## Topik Lanjutan {#toc226}
 ### Opsi Command Line (Baris Perintah) {#CommandLineOptions}
 
-NVDA dapat menerima satu atau lebih opsi tambahan ketika di-start sehingga mengubah perilakunya.
+Aslan dapat menerima satu atau lebih opsi tambahan ketika di-start sehingga mengubah perilakunya.
 Anda dapat menyetujui sebanyak mungkin opsi yang Anda perlukan.
 Opsi-opsi ini dapat disetujui ketika dimulai dari satu pintasan (dalam Shortcut Properties), dari dialog Run (Start Menu -> Run atau Windows+r) atau dari Windows command console. 
-Opsi-opsi harus dipisahkan dari nama file NVDA yang dapat dieksekusi dan dari opsi-opsi lain berdasarkan space.
-Misalnya, pintasan Desktop yang dibuat NVDA selama instalasi memiliki opsi -r yang meminta NVDA untuk menutup salinan yang saat ini sedang berjalan sebelum memulai yang baru.
-Opsi lain yang berguna adalah --disable-addons, yang meminta NVDA untuk menangguhkan semua add-on yang sedang berjalan.
+Opsi-opsi harus dipisahkan dari nama file Aslan yang dapat dieksekusi dan dari opsi-opsi lain berdasarkan space.
+Misalnya, pintasan Desktop yang dibuat Aslan selama instalasi memiliki opsi -r yang meminta Aslan untuk menutup salinan yang saat ini sedang berjalan sebelum memulai yang baru.
+Opsi lain yang berguna adalah --disable-addons, yang meminta Aslan untuk menangguhkan semua add-on yang sedang berjalan.
 Ini memungkinkan Anda untuk menentukan apakah satu masalah disebabkan oleh satu add-on, dan untuk memulihkan komputer dari masalah serius yang disebabkan oleh add-on. 
 
-Sebagai contoh, Anda dapat keluar dari salinan NVDA yang saat ini sedang berjalan dengan memasuki yang berikut ini pada dialog Run: 
+Sebagai contoh, Anda dapat keluar dari salinan Aslan yang saat ini sedang berjalan dengan memasuki yang berikut ini pada dialog Run: 
 
-nvda -q
+aslan -q
 
 Sebagian opsi baris perintah memiliki satu versi pendek dan satu versi panjang, sementara sebagian lagi hanya memiliki versi panjang. 
 Untuk opsi yang memiliki versi pendek, Anda dapat menggabungkannya seperti ini: 
 
-|nvda -rm |Ini akan membawa Anda keluar dari salinan NVDA yang sedang berjalan dan akan memulai salinan baru dengan suara startup dinonaktifkan, dll.|
-|nvda -rm --disable-addons |Sama seperti di atas, tapi dengan add-on dinonaktfikan|
+|aslan -rm |Ini akan membawa Anda keluar dari salinan Aslan yang sedang berjalan dan akan memulai salinan baru dengan suara startup dinonaktifkan, dll.|
+|aslan -rm --disable-addons |Sama seperti di atas, tapi dengan add-on dinonaktfikan|
 
 Sebagian opsi baris perintah menerima parameter tambahan, mis. seberapa detail seharusnya suatu logging atau jalan menuju direktori User Configuration (Konfigurasi Pengguna).
 Parameter ini harus ditempatkan setelah opsi tersebut, terpisah dari opsi berdasarkan space ketika menggunakan versi pendek, atau tanda sama dengan (=) ketika menggunakan versi panjang, mis: 
 
-|nvda -l 10 |Meminta NVDA untuk mulai dengan log level yang diatur untuk melakukan debug|
-|nvda --log-file=c:\nvda.log |Meminta NVDA untuk menuliskan log-nya ke c:\nvda.log|
-|nvda --log-level=20 -f c:\nvda.log |Meminta NVDA untuk mulai dengan log level yang diatur untuk info dan untuk menuliskan log-nya ke c:\nvda.log|
+|aslan -l 10 |Meminta Aslan untuk mulai dengan log level yang diatur untuk melakukan debug|
+|aslan --log-file=c:\aslan.log |Meminta Aslan untuk menuliskan log-nya ke c:\aslan.log|
+|aslan --log-level=20 -f c:\aslan.log |Meminta Aslan untuk mulai dengan log level yang diatur untuk info dan untuk menuliskan log-nya ke c:\aslan.log|
 
-Berikut ini adalah opsi baris perintah untuk NVDA: 
+Berikut ini adalah opsi baris perintah untuk Aslan: 
 
 | Pendek |Panjang |Keterangan|
 |---|---|---|
 |-h |--help |Menampilkan baris perintah Help dan Exit|
-|-q |--quit |Menghentikan salinan NVDA yang sedang berjalan|
-|-r |--replace |Menghentikan salinan NVDA yang sedang berjalan dan memulai yang satu ini|
-|-k |--check-running |Melaporkan apakah NVDA sedang berjalan via exit code (sinyal keluar); 0 jika berjalan, 1 jika tidak berjalan|
+|-q |--quit |Menghentikan salinan Aslan yang sedang berjalan|
+|-r |--replace |Menghentikan salinan Aslan yang sedang berjalan dan memulai yang satu ini|
+|-k |--check-running |Melaporkan apakah Aslan sedang berjalan via exit code (sinyal keluar); 0 jika berjalan, 1 jika tidak berjalan|
 |-f LOGFILENAME |--log-file=LOGFILENAME |File tempat log message harus dituliskan|
 |-l LOGLEVEL |--log-level=LOGLEVEL |Level terendah untuk pesan yang di-log (debug 10, info 20, warning 30, error 40, critical 50), default-nya adalah warning|
-|-c CONFIGPATH |--config-path=CONFIGPATH |Lokasi tempat semua pengaturan NVDA disimpan|
+|-c CONFIGPATH |--config-path=CONFIGPATH |Lokasi tempat semua pengaturan Aslan disimpan|
 |-m |--minimal |Tanpa suara, tampa antarmuka, tanpa pesan Start, dll.|
 |-s |--secure |Secure mode (nonaktifkan Python console)|
 |None |--disable-addons |Add-on tidak akan berpengaruh|
 |None |--debug-logging |Aktifkan debug level logging hanya untuk menjalankan ini. Pengaturan ini akan menggantikan tingkat log lainnya (--loglevel, -l) argumen yang diberikan.|
 |None |--no-sr-flag |Jangan ubah bendera pembaca layar sistem global|
-|None |--install |Meng-install NVDA (memulai salinan yang baru ter-install)|
-|None |--install-silent |Meng-install NVDA secara diam-diam (tidak memulai salinan yang baru ter-install)|
-|None |--create-portable |Membuat salinan portabel NVDA (memulai salinan yang baru dibuat). Membutuhkan --portable-path untuk ditentukan|
-|None |--create-portable-silent |Membuat salinan portabel NVDA (tidak memulai salinan yang baru diinstal). Membutuhkan --portable-path untuk ditentukan|
+|None |--install |Meng-install Aslan (memulai salinan yang baru ter-install)|
+|None |--install-silent |Meng-install Aslan secara diam-diam (tidak memulai salinan yang baru ter-install)|
+|None |--create-portable |Membuat salinan portabel Aslan (memulai salinan yang baru dibuat). Membutuhkan --portable-path untuk ditentukan|
+|None |--create-portable-silent |Membuat salinan portabel Aslan (tidak memulai salinan yang baru diinstal). Membutuhkan --portable-path untuk ditentukan|
 |None |--portable-path=PORTABLEPATH |Path dimana salinan portabel akan dibuat|
 
 ### System Wide Parameters {#SystemWideParameters}
 
-NVDA memungkinkan beberapa nilai untuk ditetapkan dalam sistem registry yang mengubah perilaku sistem NVDA yang luas.
+Aslan memungkinkan beberapa nilai untuk ditetapkan dalam sistem registry yang mengubah perilaku sistem Aslan yang luas.
 Nilai ini disimpan di registri di bawah salah satu kunci berikut:
 
-* Sistem 32-bit: "HKEY_LOCAL_MACHINE\SOFTWARE\nvda"
-* Sistem 64-bit: "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\nvda"
+* Sistem 32-bit: "HKEY_LOCAL_MACHINE\SOFTWARE\aslan"
+* Sistem 64-bit: "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\aslan"
 
 Nilai berikut dapat diatur di bawah kunci registri ini:
 
 | Nama |Tipe |Nilai yang mungkin |Keterangan|
 |---|---|---|---|
-|configInLocalAppData |DWORD |0 (default) untuk menonaktifkan, 1 untuk mengaktifkan |Jika diaktifkan, simpan konfigurasi pengguna NVDA di data aplikasi lokal dan bukan data aplikasi roaming|
+|configInLocalAppData |DWORD |0 (default) untuk menonaktifkan, 1 untuk mengaktifkan |Jika diaktifkan, simpan konfigurasi pengguna Aslan di data aplikasi lokal dan bukan data aplikasi roaming|
 |serviceDebug |DWORD |0 (default) untuk menonaktifkan, 1 untuk mengaktifkan |Jika diaktifkan, nonaktifkan mode aman pada windows secure desktops, yang memungkinkan penggunaan konsol Python dan Log viewer. Karena beberapa implikasi keamanan utama, penggunaan opsi ini sangat tidak dianjurkan|
 
 ## Informasi Lebih Lanjut {#toc229}
 
-Jika Anda memerlukan informasi atau bantuan lebih lanjut mengenai NVDA, silakan berkunjung ke situs web NVDA di NVDA_URL.
+Jika Anda memerlukan informasi atau bantuan lebih lanjut mengenai Aslan, silakan berkunjung ke situs web Aslan di Aslan_URL.
 Di sini, Anda dapat menemukan lebih banyak petunjuk penggunaan serta dukungan teknis dan sumber daya komunitas.
-Situs ini juga menyediakan informasi dan sumber daya yang berkaitan dengan pengembangan NVDA. 
+Situs ini juga menyediakan informasi dan sumber daya yang berkaitan dengan pengembangan Aslan. 
 

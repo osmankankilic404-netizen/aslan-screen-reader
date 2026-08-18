@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2024 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -25,12 +25,12 @@ def _generateModuleList(
 
 	:param target: A single element list containing the target file node where the list of modules will be
 				written.
-	:param source: A single element list containing the source NVDA dist folder to be processed.
+	:param source: A single element list containing the source Aslan dist folder to be processed.
 				The folder should contain `library.zip` from which the '.pyc' files will be listed.
 	:param env: The SCons environment context under which this function is executed. This parameter provides
 				access to SCons construction variables, methods, and tools.
 	:return: None. The function does not return anything but writes the list of modules to the target file.
-	:raises ValueError: If the specified sanity check module (e.g., 'NVDAObjects.UIA') is not found in the
+	:raises ValueError: If the specified sanity check module (e.g., 'AslanObjects.UIA') is not found in the
 						list of modules extracted from the zipfile.
 	:raises FileNotFoundError: If the specified zipfile in `source` does not exist.
 	"""
@@ -41,7 +41,7 @@ def _generateModuleList(
 	pycFiles = [f for f in zipfile.ZipFile(libraryZipPath, "r").namelist() if f.endswith(".pyc")]
 
 	# Convert the file paths to python module format
-	# eg: NVDAObjects/IAccessible/__init__.pyc --> NVDAObjects.IAccessible
+	# eg: AslanObjects/IAccessible/__init__.pyc --> AslanObjects.IAccessible
 	importedModules = sorted(
 		{
 			re.sub(r"(.__init__|.__version__|._version)?\.pyc$", "", module_path).replace("/", ".")
@@ -50,8 +50,8 @@ def _generateModuleList(
 	)
 
 	# Sanity check for something guaranteed to be in library.zip
-	if "NVDAObjects.UIA" not in importedModules:
-		raise ValueError("Expected module NVDAObjects.UIA not found in the zipfile.")
+	if "AslanObjects.UIA" not in importedModules:
+		raise ValueError("Expected module AslanObjects.UIA not found in the zipfile.")
 
 	# Store the list to file
 	with open(str(target[0]), "w", encoding="utf-8") as file:

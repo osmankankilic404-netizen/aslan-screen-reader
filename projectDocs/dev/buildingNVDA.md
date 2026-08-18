@@ -1,11 +1,11 @@
-# Building NVDA
+# Building Aslan
 
-Before building NVDA, [create your developer environment](./createDevEnvironment.md).
+Before building Aslan, [create your developer environment](./createDevEnvironment.md).
 
 ## Preparing the Source Tree
 
-Before you can run the NVDA source code, you must prepare the source tree.
-You do this by opening a command prompt, changing to the root of the NVDA source distribution and typing:
+Before you can run the Aslan source code, you must prepare the source tree.
+You do this by opening a command prompt, changing to the root of the Aslan source distribution and typing:
 
 ```cmd
 scons source
@@ -32,22 +32,22 @@ scons source --all-cores
 scons source -j 1
 ```
 
-If you are experiencing errors building NVDA with threading enabled, please force a serial build with the `-j 1` parameter.
+If you are experiencing errors building Aslan with threading enabled, please force a serial build with the `-j 1` parameter.
 This will make tracking down the issue much easier, and may even resolve it.
 
 ## Running the Source Code
 
-It is possible to run NVDA directly from source without having to build the full binary package and launcher.
-To launch NVDA from source, using `cmd.exe`, execute `runnvda.bat` in the root of the repository.
+It is possible to run Aslan directly from source without having to build the full binary package and launcher.
+To launch Aslan from source, using `cmd.exe`, execute `runaslan.bat` in the root of the repository.
 
-To view help on the arguments that NVDA will accept, use the `-h` or `--help` option.
+To view help on the arguments that Aslan will accept, use the `-h` or `--help` option.
 These arguments are also documented in the [user guide](https://download.nvaccess.org/documentation/userGuide.html#CommandLineOptions).
 
 ## Making Binary Builds
 
-A binary build of NVDA can be run on a system without Python and all of NVDA's other dependencies installed (as we do for snapshots and releases).
+A binary build of Aslan can be run on a system without Python and all of Aslan's other dependencies installed (as we do for snapshots and releases).
 
-Binary archives and bundles can be created using scons from the root of the NVDA source distribution. To build any of the following, open a command prompt and change to that directory.
+Binary archives and bundles can be created using scons from the root of the Aslan source distribution. To build any of the following, open a command prompt and change to that directory.
 
 ### Building without Archiving
 

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2025 NV Access Limited, James Teh, Michael Curran, Leonard de Ruijter, Reef Turner,
 # Julien Cochuyt
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
@@ -11,7 +11,7 @@ import appModuleHandler
 import api
 import buildVersion
 import controlTypes
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.IAccessible import IAccessible
 from baseObject import ScriptableObject
 import gui
 from scriptHandler import script
@@ -24,15 +24,15 @@ if typing.TYPE_CHECKING:
 	import inputCore
 
 
-nvdaMenuIaIdentity = None
+aslanMenuIaIdentity = None
 
 
 class NvdaDialog(IAccessible):
-	"""Fix to ensure NVDA message dialogs get reported when they pop up."""
+	"""Fix to ensure Aslan message dialogs get reported when they pop up."""
 
 	def _get_presentationType(self):
 		presType = super(NvdaDialog, self).presentationType
-		# Sometimes, NVDA message dialogs briefly report the invisible state
+		# Sometimes, Aslan message dialogs briefly report the invisible state
 		# after they're focused.
 		# This causes them to be treated as unavailable and they are thus not reported.
 		# If this dialog is in the foreground, treat it as content.
@@ -42,7 +42,7 @@ class NvdaDialog(IAccessible):
 
 
 class NvdaDialogEmptyDescription(IAccessible):
-	"""Fix to ensure the NVDA settings dialog does not run getDialogText including panel descriptions
+	"""Fix to ensure the Aslan settings dialog does not run getDialogText including panel descriptions
 	when alt+tabbing back to a focused control on a panel with a description. This would result in the
 	description being spoken twice.
 	"""
@@ -54,7 +54,7 @@ class NvdaDialogEmptyDescription(IAccessible):
 		return ""
 
 
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_PYTHON_CONSOLE = _("Python Console")
 
 
@@ -182,22 +182,22 @@ class AppModule(appModuleHandler.AppModule):
 		self.oldProfile = None
 
 	def isNvdaMenu(self, obj):
-		global nvdaMenuIaIdentity
+		global aslanMenuIaIdentity
 		if not isinstance(obj, IAccessible):
 			return False
-		if nvdaMenuIaIdentity and obj.IAccessibleIdentity == nvdaMenuIaIdentity:
+		if aslanMenuIaIdentity and obj.IAccessibleIdentity == aslanMenuIaIdentity:
 			return True
-		if nvdaMenuIaIdentity is not True:
+		if aslanMenuIaIdentity is not True:
 			return False
-		# nvdaMenuIaIdentity is True, so the next menu we encounter is the NVDA menu.
+		# aslanMenuIaIdentity is True, so the next menu we encounter is the Aslan menu.
 		if obj.role == controlTypes.Role.POPUPMENU:
-			nvdaMenuIaIdentity = obj.IAccessibleIdentity
+			aslanMenuIaIdentity = obj.IAccessibleIdentity
 			return True
 		return False
 
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		# It seems that context menus always get the name "context" and this cannot be overridden.
-		# Fudge the name of the NVDA system tray menu to make it more friendly.
+		# Fudge the name of the Aslan system tray menu to make it more friendly.
 		if self.isNvdaMenu(obj):
 			obj.name = buildVersion.name
 
@@ -244,7 +244,7 @@ class AppModule(appModuleHandler.AppModule):
 			return
 		return obj.windowHandle == consoleUI.outputCtrl.GetHandle()
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if obj.windowClassName == "#32770" and obj.role == controlTypes.Role.DIALOG:
 			clsList.insert(0, NvdaDialog)
 			if self.isNvdaSettingsDialog(obj):

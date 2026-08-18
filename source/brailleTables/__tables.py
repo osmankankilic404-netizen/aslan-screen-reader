@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2008-2024 NV Access Limited, Joseph Lee, Babbage B.V., Julien Cochuyt, Leonard de Ruijter
 
-"""Contains the braille table definitions as used in NVDA.
+"""Contains the braille table definitions as used in Aslan.
 Note that importing this module for the first time will add all tables to the internal table store.
 """
 

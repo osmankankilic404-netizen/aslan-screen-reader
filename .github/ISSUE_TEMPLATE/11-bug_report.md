@@ -11,13 +11,13 @@ type: Bug
 
 ### Expected behavior
 
-### NVDA logs, crash dumps and other attachments
+### Aslan logs, crash dumps and other attachments
 
 ### System configuration
 
-#### NVDA installed/portable/running from source
+#### Aslan installed/portable/running from source
 
-#### NVDA version
+#### Aslan version
 
 #### Windows version
 
@@ -29,8 +29,8 @@ type: Bug
 
 #### Does the issue still occur after restarting your computer?
 
-#### Have you tried any other versions of NVDA? If so, please report their behaviors
+#### Have you tried any other versions of Aslan? If so, please report their behaviors
 
-#### If NVDA add-ons are disabled, is your problem still occurring?
+#### If Aslan add-ons are disabled, is your problem still occurring?
 
-#### Does the issue still occur after you run the System Accessibility Repair Tool in NVDA's tools menu?
+#### Does the issue still occur after you run the System Accessibility Repair Tool in Aslan's tools menu?

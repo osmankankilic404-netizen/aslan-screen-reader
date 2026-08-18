@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2021 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -9,7 +9,7 @@ from speech.commands import IndexCommand
 
 
 class SynthDriver(synthDriverHandler.SynthDriver):
-	"""A dummy synth driver used to disable speech in NVDA."""
+	"""A dummy synth driver used to disable speech in Aslan."""
 
 	name = "silence"
 	# Translators: Description for a speech synthesizer.

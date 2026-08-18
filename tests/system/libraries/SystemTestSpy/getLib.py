@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -16,10 +16,10 @@ def _getLib(libraryName: str, *args) -> Any:
 	The library instance from Robot is used in order to access the same state that may be present on
 	stateful libraries.
 	"""
-	from . import _nvdaSpyAlias
+	from . import _aslanSpyAlias
 
-	if libraryName == _nvdaSpyAlias:
-		raise AssertionError(f"Don't use _getLib for {_nvdaSpyAlias}, instead use 'NvdaLib.getSpyLib()'")
+	if libraryName == _aslanSpyAlias:
+		raise AssertionError(f"Don't use _getLib for {_aslanSpyAlias}, instead use 'NvdaLib.getSpyLib()'")
 	from robot.libraries.BuiltIn import BuiltIn
 
 	builtIn: BuiltIn = BuiltIn()

@@ -1,6 +1,6 @@
 # Garbage collection errors
 
-NVDA's `garbageHandler.py` monitors Python's cyclic garbage collector and reports
+Aslan's `garbageHandler.py` monitors Python's cyclic garbage collector and reports
 on objects that are unreachable.
 Cyclic references are typically a symptom of bad design, and can cause major problems for certain objects.
 For instance, cyclic references involving COM objects may cause a deadlock if the garbage collector happens to break the cycle and release the COM object in the wrong thread.
@@ -32,7 +32,7 @@ Once you can reliably reproduce the log error, you can tell the garbage collecto
 After an unreachable object is detected the references to the unreachable object can be inspected via the python console.
 Inspecting this should give you a fair idea of where the issue is occurring.
 
-1. Open the NVDA Python console `NVDA+control+z`
+1. Open the Aslan Python console `Aslan+control+z`
 1. Enable saving all objects:
 
    ``` python

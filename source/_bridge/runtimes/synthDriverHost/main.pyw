@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025 NV Access Limited.
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import sys
 import inspect
@@ -49,7 +49,7 @@ logging.getLogger("comtypes").setLevel(logging.INFO)
 log.info(f"Logging initialized, log file: {logPath}")
 
 try:
-	gettext.install("nvda", names=["pgettext", "npgettext", "ngettext"])
+	gettext.install("aslan", names=["pgettext", "npgettext", "ngettext"])
 	import core
 
 	core.main()

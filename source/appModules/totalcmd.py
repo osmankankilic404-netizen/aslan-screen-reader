@@ -1,11 +1,11 @@
 # appModules/totalcmd.py
-# A part of NonVisual Desktop Access (NVDA)
-# Copyright (C) 2006-2012 NVDA Contributors
+# A part of NonVisual Desktop Access (Aslan)
+# Copyright (C) 2006-2012 Aslan Contributors
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 import appModuleHandler
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.IAccessible import IAccessible
 import speech
 import controlTypes
 import ui
@@ -14,7 +14,7 @@ oldActivePannel = 0
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if obj.windowClassName in ("TMyListBox", "TMyListBox.UnicodeClass"):
 			clsList.insert(0, TCList)
 

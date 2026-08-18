@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025-2026 NV Access Limited, Zoomax, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
-"""NLS eReader Zoomax driver for NVDA."""
+"""NLS eReader Zoomax driver for Aslan."""
 
 import bdDetect
 import braille
@@ -26,8 +26,8 @@ COMMUNICATION_ESCAPE_BYTE = b"\x1b"
 So each command starts with the escape character.
 When part of the command payload, the escape character is duplicated. """
 
-PROTOCOL_NVDA = b"\x03"
-"""The device has a command 0x15 for setting protocol type, the parameter value 0x03 is specifying that the screen reader is NVDA."""
+PROTOCOL_Aslan = b"\x03"
+"""The device has a command 0x15 for setting protocol type, the parameter value 0x03 is specifying that the screen reader is Aslan."""
 
 
 class DeviceCommand(bytes, Enum):
@@ -123,7 +123,7 @@ class BrailleDisplayDriver(braille.display.driver.BrailleDisplayDriver):
 				log.debugWarning("Port not yet available.", exc_info=True)
 				continue
 
-			self._sendRequest(DeviceCommand.PROTOCOL_ONOFF.value, PROTOCOL_NVDA)
+			self._sendRequest(DeviceCommand.PROTOCOL_ONOFF.value, PROTOCOL_Aslan)
 			self._sendRequest(DeviceCommand.REPEAT_ALL.value)
 
 			for i in range(CONNECT_RETRIES):

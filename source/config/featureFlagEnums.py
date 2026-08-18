@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited, Bill Dengler, Rob Meredith, Leonard de Ruijter, Wang Chong
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """
 Feature flag value enumerations.
@@ -47,9 +47,9 @@ class BoolFlag(DisplayStringEnum):
 	def _displayStringLabels(self):
 		# To prevent duplication, self.DEFAULT is not included here.
 		return {
-			# Translators: Label for an option in NVDA settings.
+			# Translators: Label for an option in Aslan settings.
 			self.DISABLED: _("Disabled"),
-			# Translators: Label for an option in NVDA settings.
+			# Translators: Label for an option in Aslan settings.
 			self.ENABLED: _("Enabled"),
 		}
 
@@ -70,11 +70,11 @@ class ParagraphNavigationFlag(DisplayStringEnum):
 	@property
 	def _displayStringLabels(self):
 		return {
-			# Translators: Label for a paragraph style in NVDA settings.
+			# Translators: Label for a paragraph style in Aslan settings.
 			self.APPLICATION: _("Handled by application"),
-			# Translators: Label for a paragraph style in NVDA settings.
+			# Translators: Label for a paragraph style in Aslan settings.
 			self.SINGLE_LINE_BREAK: _("Single line break"),
-			# Translators: Label for a paragraph style in NVDA settings.
+			# Translators: Label for a paragraph style in Aslan settings.
 			self.MULTI_LINE_BREAK: _("Multi line break"),
 		}
 
@@ -111,9 +111,9 @@ class WindowsTerminalStrategyFlag(DisplayStringEnum):
 	@property
 	def _displayStringLabels(self):
 		return {
-			# Translators: Label for an option in NVDA settings.
+			# Translators: Label for an option in Aslan settings.
 			self.DIFFING: _("Diffing"),
-			# Translators: Label for an option in NVDA settings.
+			# Translators: Label for an option in Aslan settings.
 			self.NOTIFICATIONS: _("UIA notifications"),
 		}
 

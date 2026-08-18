@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2023 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -186,7 +186,7 @@ def _setWTS_LockState() -> _WTS_LockState:
 
 WTS_LockState: _WTS_LockState = _setWTS_LockState()
 """
-Set of known session states that NVDA can handle.
+Set of known session states that Aslan can handle.
 These values are different on different versions of Windows.
 
 In some cases, other states such as -0x1 are returned when queried (#14379).

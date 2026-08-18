@@ -1,17 +1,17 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2026 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton and others.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""Secure desktop support for NVDA Remote.
+"""Secure desktop support for Aslan Remote.
 
 Handles the transition between regular and secure desktop sessions in Windows,
 maintaining remote connections across these transitions. Manages the creation of local
 relay servers, connection bridging, and IPC (Inter-Process Communication) between the
-regular and secure desktop instances of NVDA.
+regular and secure desktop instances of Aslan.
 
 The secure desktop is a special Windows session used for UAC prompts and login screens
-that runs in an isolated environment for security. This module ensures NVDA Remote
+that runs in an isolated environment for security. This module ensures Aslan Remote
 connections persist when entering and leaving this secure environment.
 
 Note:
@@ -38,7 +38,7 @@ from serial.win32 import INVALID_HANDLE_VALUE
 import shlobj
 from logHandler import log
 from winAPI.secureDesktop import post_secureDesktopStateChange
-from NVDAHelper import localLib
+from AslanHelper import localLib
 from winBindings.kernel32 import (
 	FILE_MAP,
 	PAGE,
@@ -83,9 +83,9 @@ class SecureDesktopHandler:
 
 	SD_CONNECT_BLOCK_TIMEOUT: int = 1
 
-	_IPC_FILENAME = r"Local\NVDARemoteAccessSDHIPCFile"
+	_IPC_FILENAME = r"Local\AslanRemoteAccessSDHIPCFile"
 	"""IPC filename"""
-	_IPC_EVENTNAME = r"Local\NVDARemoteAccessSDHIPCEvent"
+	_IPC_EVENTNAME = r"Local\AslanRemoteAccessSDHIPCEvent"
 	"""IPC write event name"""
 	_IPC_MAXLEN = 64
 	"""

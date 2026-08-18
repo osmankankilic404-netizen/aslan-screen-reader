@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2026 NV Access Limited, Arnold Loubriat, Babbage B.V., Łukasz Golonka, Joseph Lee,
 # Peter Vágner
 # This file is covered by the GNU General Public License.
@@ -320,7 +320,7 @@ class ScintillaTextInfo(textInfos.offsets.OffsetsTextInfo):
 		return [start, end]
 
 
-# The Scintilla NVDA object, inherists the generic MSAA NVDA object
+# The Scintilla Aslan object, inherists the generic MSAA Aslan object
 class Scintilla(EditableTextWithAutoSelectDetection, Window):
 	TextInfo = ScintillaTextInfo
 

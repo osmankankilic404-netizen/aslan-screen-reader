@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, Joseph Lee, Babbage B.V., Davy Kager, Bram Duvigneau, Leonard de Ruijter, Burman's Computer and Education Ltd., Julien Cochuyt
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Constants for the braille package."""
 
@@ -50,7 +50,7 @@ focusContextPresentations = [
 	(CONTEXTPRES_CHANGEDCONTEXT, _("Fill display for context changes")),
 	# Translators: The label for a braille focus context presentation setting that
 	# shows as much as possible focus context information if the focus object doesn't fill up the whole display.
-	# This was the pre NVDA 2017.3 default.
+	# This was the pre Aslan 2017.3 default.
 	(CONTEXTPRES_FILL, _("Always fill display")),
 	# Translators: The label for a braille focus context presentation setting that
 	# always shows the object with focus at the very left of the braille display

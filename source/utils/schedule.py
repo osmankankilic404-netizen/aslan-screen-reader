@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2024 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -12,7 +12,7 @@ from typing import Callable
 import schedule
 
 from logHandler import log
-import NVDAState
+import AslanState
 
 scheduleThread: "ScheduleThread | None" = None
 
@@ -76,7 +76,7 @@ class ScheduleThread(threading.Thread):
 	START_MINUTE_OFFSET = 1
 	"""
 	Offset in minutes to start scheduling daily jobs.
-	The first scheduled job occurs X minutes after NVDA starts.
+	The first scheduled job occurs X minutes after Aslan starts.
 	"""
 
 	def __init__(self, *args, **kwargs) -> None:
@@ -90,9 +90,9 @@ class ScheduleThread(threading.Thread):
 			time.sleep(cls.SLEEP_INTERVAL_SECS)
 
 	def _calculateDailyTimeOffset(self) -> str:
-		startTime = datetime.fromtimestamp(NVDAState.getStartTime())
+		startTime = datetime.fromtimestamp(AslanState.getStartTime())
 		# Schedule jobs so that they occur offset by a regular period to avoid overlapping jobs.
-		# Start with a delay to give time for NVDA to start up.
+		# Start with a delay to give time for Aslan to start up.
 		startTimeMinuteOffset = (
 			startTime.minute
 			+ self.START_MINUTE_OFFSET

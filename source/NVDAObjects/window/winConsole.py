@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2007-2020 NV Access Limited, Bill Dengler
@@ -15,9 +15,9 @@ from diffHandler import prefer_difflib
 
 class WinConsole(Terminal, EditableTextWithoutAutoSelectDetection, Window):
 	"""
-	Base class for NVDA's legacy Windows Console support.
+	Base class for Aslan's legacy Windows Console support.
 	This is used in situations where UIA isn't available.
-	Please consider using NVDAObjects.UIA.winConsoleUIA instead.
+	Please consider using AslanObjects.UIA.winConsoleUIA instead.
 	"""
 
 	STABILIZE_DELAY = 0.03
@@ -25,7 +25,7 @@ class WinConsole(Terminal, EditableTextWithoutAutoSelectDetection, Window):
 	def _get_windowThreadID(self):
 		# #10113: Windows forces the thread of console windows to match the thread of the first attached process.
 		# However, To correctly handle speaking of typed characters,
-		# NVDA really requires the real thread the window was created in,
+		# Aslan really requires the real thread the window was created in,
 		# I.e. a thread inside conhost.
 		from IAccessibleHandler.internalWinEventHandler import consoleWindowsToThreadIDs
 
@@ -82,7 +82,7 @@ class WinConsole(Terminal, EditableTextWithoutAutoSelectDetection, Window):
 		self.event_typedCharacter("\b")
 
 	def script_close(self, gesture):
-		# #5343: New consoles in Windows 10 close with alt+f4 and take any processes attached with it (including NVDA).
+		# #5343: New consoles in Windows 10 close with alt+f4 and take any processes attached with it (including Aslan).
 		# Therefore detach from the console temporarily while sending the gesture.
 		winConsoleHandler.disconnectConsole()
 		gesture.send()

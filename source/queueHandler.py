@@ -1,5 +1,5 @@
 # queueHandler.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2018 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -10,7 +10,7 @@ from logHandler import log
 import watchdog
 import core
 
-# A queue for calls that should be made on NVDA's main thread
+# A queue for calls that should be made on Aslan's main thread
 # #11369: We use SimpleQueue rather than Queue here
 # as SimpleQueue is very light-weight, does not use locks
 # and ensures that garbage collection won't unexpectedly happen in the middle of queuing something

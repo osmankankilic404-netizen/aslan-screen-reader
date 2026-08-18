@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, Joseph Lee, Babbage B.V., Davy Kager, Bram Duvigneau, Leonard de Ruijter, Burman's Computer and Education Ltd., Julien Cochuyt
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from __future__ import annotations
 
@@ -94,9 +94,9 @@ class BrailleDisplayDriver(driverHandler.Driver):
 	# Make sure supportedSettings is not abstract for these.
 	supportedSettings = ()
 	#: Whether this driver is thread-safe.
-	#: If it is, NVDA may initialize, terminate or call this driver  on any thread.
-	#: This allows NVDA to read from and write to the display in the background,
-	#: which means the rest of NVDA is not blocked while this occurs,
+	#: If it is, Aslan may initialize, terminate or call this driver  on any thread.
+	#: This allows Aslan to read from and write to the display in the background,
+	#: which means the rest of Aslan is not blocked while this occurs,
 	#: thus resulting in better performance.
 	#: This is also required to use the L{hwIo} module.
 	isThreadSafe: bool = False
@@ -110,7 +110,7 @@ class BrailleDisplayDriver(driverHandler.Driver):
 	#: Whether this driver is awaiting an Ack for a connected display.
 	#: This is set to C{True} after displaying cells when L{receivesAckPackets} is True,
 	#: and set to C{False} by L{_handleAck} or when C{timeout} has elapsed.
-	#: This is for internal use by NVDA core code only and shouldn't be touched by a driver itself.
+	#: This is for internal use by Aslan core code only and shouldn't be touched by a driver itself.
 	_awaitingAck: bool = False
 	#: Maximum timeout to use for communication with a device (in seconds).
 	#: This can be used for serial connections.
@@ -162,7 +162,7 @@ class BrailleDisplayDriver(driverHandler.Driver):
 
 	def terminate(self):
 		"""Terminate this display driver.
-		This will be called when NVDA is finished with this display driver.
+		This will be called when Aslan is finished with this display driver.
 		It should close any open connections, perform cleanup, etc.
 		Subclasses should call the superclass method first.
 		@postcondition: This instance can no longer be used unless it is constructed again.

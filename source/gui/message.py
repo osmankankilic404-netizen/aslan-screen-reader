@@ -1,8 +1,8 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Peter Vágner, Aleksey Sadovoy, Mesar Hameed, Joseph Lee,
 # Thomas Stivers, Babbage B.V., Accessolutions, Julien Cochuyt, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from dataclasses import dataclass
 import threading
@@ -36,15 +36,15 @@ def isModalMessageBoxActive() -> bool:
 	"""
 	`gui.message.messageBox` is a function which blocks the calling thread,
 	until a user responds to the modal dialog.
-	When some action (e.g. quitting NVDA) should be prevented due to any active modal message box,
+	When some action (e.g. quitting Aslan) should be prevented due to any active modal message box,
 	even if unrelated, use `isModalMessageBoxActive` to check before triggering the action.
-	NVDA is in an uncertain state while waiting for an answer from a `gui.message.messageBox`.
+	Aslan is in an uncertain state while waiting for an answer from a `gui.message.messageBox`.
 
 	It's possible for multiple message boxes to be open at a time.
 	This function can be used to check before opening subsequent `gui.message.messageBox` instances.
 
 	Because an answer is required to continue after a modal messageBox is opened,
-	some actions such as shutting down are prevented while NVDA is in a possibly uncertain state.
+	some actions such as shutting down are prevented while Aslan is in a possibly uncertain state.
 
 	@return: True if a thread blocking modal response is still pending.
 	"""
@@ -88,7 +88,7 @@ def displayDialogAsModal(dialog: wx.Dialog) -> int:
 	to check if another messageBox modal response is still pending.
 
 	Because an answer is required to continue after a modal messageBox is opened,
-	some actions such as shutting down are prevented while NVDA is in a possibly uncertain state.
+	some actions such as shutting down are prevented while Aslan is in a possibly uncertain state.
 	"""
 	try:
 		if not dialog.GetParent():
@@ -119,7 +119,7 @@ def messageBox(
 	It's possible for multiple message boxes to be open at a time.
 	Before opening a new messageBox, use :func:`isModalMessageBoxActive` to check if another messageBox modal response is still pending.
 
-	Because an answer is required to continue after a modal messageBox is opened, some actions such as shutting down are prevented while NVDA is in a possibly uncertain state.
+	Because an answer is required to continue after a modal messageBox is opened, some actions such as shutting down are prevented while Aslan is in a possibly uncertain state.
 
 	:param message: The message text.
 	:param caption: The caption (title) of the dialog.
@@ -308,7 +308,7 @@ class Button(NamedTuple):
 	"""Whether this button is the fallback action.
 
 	The fallback action is called when the user presses escape, the title bar close button, or the system menu close item.
-	It is also called when programatically closing the dialog, such as when shutting down NVDA.
+	It is also called when programatically closing the dialog, such as when shutting down Aslan.
 
 	.. note:: This only sets whether to override the fallback action.
 			`EscapeCode.DEFAULT` may still result in this button being the fallback action, even if `fallbackAction=False`.
@@ -983,7 +983,7 @@ class MessageDialog(DpiScalingHelperMixinWithoutInit, ContextHelpMixin, wx.Dialo
 		self._wrapMessageControl()
 		self._mainSizer.Fit(self)
 		if self.Parent == gui.mainFrame:
-			# NVDA's main frame is not visible on screen, so centre on screen rather than on `mainFrame` to avoid the dialog appearing at the top left of the screen.
+			# Aslan's main frame is not visible on screen, so centre on screen rather than on `mainFrame` to avoid the dialog appearing at the top left of the screen.
 			self.CentreOnScreen()
 		else:
 			self.CentreOnParent()
@@ -1202,12 +1202,12 @@ class HtmlMessageDialog(MessageDialog):
 	"""A :class:`MessageDialog` that renders its message as HTML in a WebView.
 
 	The message passed to the dialog must be a full HTML document.
-	Because the WebView captures keyboard focus, key presses are routed from JavaScript to NVDA via
-	``nvda-action://<action>`` URLs. The ``close`` action is handled internally; register handlers for
+	Because the WebView captures keyboard focus, key presses are routed from JavaScript to Aslan via
+	``aslan-action://<action>`` URLs. The ``close`` action is handled internally; register handlers for
 	any other actions with :meth:`registerAction`.
 	"""
 
-	_ACTION_URL_PREFIX = "nvda-action://"
+	_ACTION_URL_PREFIX = "aslan-action://"
 	_DEFAULT_WEBVIEW_SIZE: tuple[int, int] = (350, 300)
 	"""Default WebView viewport, matching the legacy MSHTML browseable message template."""
 	_DIALOG_STYLE: int = (
@@ -1223,7 +1223,7 @@ class HtmlMessageDialog(MessageDialog):
 	.. note:: The Edge backend (wx.html2.WebViewBackendEdge) is preferred over IE for modern HTML support,
 		but incurs a ~4 second cold start on each new WebView instance because wxPython 4.2 does not expose
 		wx.html2.WebViewConfiguration, preventing reuse of the underlying CoreWebView2Environment across
-		instances. Once NVDA upgrades to wxPython 4.3.0, WebViewConfiguration can be created once, held
+		instances. Once Aslan upgrades to wxPython 4.3.0, WebViewConfiguration can be created once, held
 		alive, and passed to each WebView.New() call to eliminate the cold start. Switch this backend to
 		wx.html2.WebViewBackendEdge at that point.
 	"""
@@ -1248,9 +1248,9 @@ class HtmlMessageDialog(MessageDialog):
 		self.EnableCloseButton(self.hasFallback)
 
 	def registerAction(self, action: str, handler: Callable[[], None]) -> Self:
-		"""Register a handler for an ``nvda-action://<action>`` URL triggered from the HTML message.
+		"""Register a handler for an ``aslan-action://<action>`` URL triggered from the HTML message.
 
-		:param action: The action name, i.e. the part of the URL after ``nvda-action://``.
+		:param action: The action name, i.e. the part of the URL after ``aslan-action://``.
 		:param handler: Called when the message navigates to the action's URL.
 		:return: Updated instance for chaining.
 		"""

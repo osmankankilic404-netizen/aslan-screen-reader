@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022 NV Access Limited, Łukasz Golonka
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -7,15 +7,15 @@
 Do not rename! The executable file for Notepad++ is named `notepad++` and `+` is not a valid character
 in Python's import statements.
 This module is mapped to the right binary separately
-and the current name makes it possible to expose it from `nvdaBuiltin` for add-on developers.
+and the current name makes it possible to expose it from `aslanBuiltin` for add-on developers.
 """
 
 import ctypes
 
 import appModuleHandler
-from NVDAObjects import NVDAObject
-from NVDAObjects.inputComposition import InputCompositionTextInfo
-import NVDAObjects.window.scintilla as ScintillaBase
+from AslanObjects import AslanObject
+from AslanObjects.inputComposition import InputCompositionTextInfo
+import AslanObjects.window.scintilla as ScintillaBase
 import textInfos
 
 
@@ -42,8 +42,8 @@ class ScintillaTextInfoNpp83(ScintillaBase.ScintillaTextInfo):
 		]
 
 
-def _hasActiveInputComposition(obj: NVDAObject) -> bool:
-	"""Return True when NVDA has current IME composition text on this object."""
+def _hasActiveInputComposition(obj: AslanObject) -> bool:
+	"""Return True when Aslan has current IME composition text on this object."""
 	if getattr(obj, "isReading", False):
 		return bool(getattr(obj, "readingString", ""))
 	return bool(getattr(obj, "compositionString", ""))
@@ -68,6 +68,6 @@ class NppEdit(ScintillaBase.Scintilla):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if obj.windowClassName == "Scintilla" and obj.windowControlID == 0:
 			clsList.insert(0, NppEdit)

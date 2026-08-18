@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """ICU-based text boundary utilities using the Windows built-in ICU library.
 
@@ -83,7 +83,7 @@ def calculateWordOffsets(
 	breaking would need a locale, but those are not used here.)
 
 	Trailing whitespace is included in the preceding word segment, matching the
-	behaviour of NVDA's Uniscribe implementation (textUtils.cpp).  When the offset
+	behaviour of Aslan's Uniscribe implementation (textUtils.cpp).  When the offset
 	falls inside a whitespace run, the returned segment is the preceding word plus
 	the whitespace.
 

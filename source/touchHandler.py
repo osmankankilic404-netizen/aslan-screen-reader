@@ -1,11 +1,11 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2012-2026 NV Access Limited, Joseph Lee, Babbage B.V., Kefas Lungu
 
 """handles touchscreen interaction.
 Used to provide input gestures for touchscreens, touch modes and other support facilities.
-In order to use touch features, NVDA must be installed on a touchscreen computer.
+In order to use touch features, Aslan must be installed on a touchscreen computer.
 """
 
 import threading
@@ -209,7 +209,7 @@ def _getEdge(x: int, y: int) -> TouchEdge | None:
 
 	All four edges are checked.
 	Note that Windows or the taskbar may intercept gestures on certain edges
-	before they reach NVDA, in which case this function will never be called for those touches.
+	before they reach Aslan, in which case this function will never be called for those touches.
 
 	:param x: The x screen coordinate to test.
 	:param y: The y screen coordinate to test.
@@ -459,7 +459,7 @@ class TouchHandler(threading.Thread):
 			self._touchWindow = user32.CreateWindowEx(
 				0,
 				cast(self._wca, LPCWSTR),
-				"NVDA touch input",
+				"Aslan touch input",
 				0,
 				0,
 				0,
@@ -592,8 +592,8 @@ class TouchHandler(threading.Thread):
 	def notifyInteraction(self, obj):
 		"""Notify the system that UI interaction is occurring via touch.
 		This should be called when performing an action on an object.
-		@param obj: The NVDAObject with which the user is interacting.
-		@type obj: L{NVDAObjects.NVDAObject}
+		@param obj: The AslanObject with which the user is interacting.
+		@type obj: L{AslanObjects.AslanObject}
 		"""
 		winBindings.oleacc.AccNotifyTouchInteraction(
 			gui.mainFrame.Handle,
@@ -606,8 +606,8 @@ handler = None
 
 
 def touchSupported(debugLog: bool = False) -> bool:
-	"""Returns if the system and current NVDA session supports touchscreen interaction.
-	@param debugLog: Whether to log additional details about touch support to the NVDA log.
+	"""Returns if the system and current Aslan session supports touchscreen interaction.
+	@param debugLog: Whether to log additional details about touch support to the Aslan log.
 	"""
 	if not config.isInstalledCopy() and not config.isAppX:
 		if debugLog:
@@ -620,7 +620,7 @@ def touchSupported(debugLog: bool = False) -> bool:
 		return False
 	if not systemUtils.hasUiAccess():
 		if debugLog:
-			log.debugWarning("NVDA doesn't have UI Access so touch isn't supported.")
+			log.debugWarning("Aslan doesn't have UI Access so touch isn't supported.")
 		return False
 	return True
 

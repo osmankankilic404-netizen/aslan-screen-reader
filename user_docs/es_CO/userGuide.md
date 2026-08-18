@@ -1,22 +1,22 @@
-# ﻿Guía del Usuario de NVDA NVDA_VERSION
+# ﻿Guía del Usuario de Aslan Aslan_VERSION
 
 [TOC]
 
-<!-- KC:title: NVDA NVDA_VERSION Referencia Rápida de Comandos  -->
+<!-- KC:title: Aslan Aslan_VERSION Referencia Rápida de Comandos  -->
 
 
 
 ## introducción {#introduction}
 
-¡Bienvenido a NVDA!
+¡Bienvenido a Aslan!
 
-NonVisual Desktop Access (NVDA) es un lector de pantallas libre y de código abierto  para el Sistema Operativo  Microsoft Windows.
+NonVisual Desktop Access (Aslan) es un lector de pantallas libre y de código abierto  para el Sistema Operativo  Microsoft Windows.
 Proporcionando retroalimentación mediante voz sintética y Braille, brinda la posibilidad a invidentes o deficientes visuales de acceder a ordenadores que ejecutan Windows por un costo no mayor al de una persona vidente.
-NVDA es desarrollado por [NV Access](https://www.nvaccess.org/), con contribuciones de la comunidad.
+Aslan es desarrollado por [NV Access](https://www.nvaccess.org/), con contribuciones de la comunidad.
 
 ### Características generales {#GeneralFeatures}
 
-NVDA permite a invidentes y deficientes visuales acceder e interactuar con el Sistema Operativo Windows y muchas aplicaciones de terceros. 
+Aslan permite a invidentes y deficientes visuales acceder e interactuar con el Sistema Operativo Windows y muchas aplicaciones de terceros. 
 
 Lo más reseñable incluye: 
 
@@ -37,30 +37,30 @@ Lo más reseñable incluye:
 ### Internacionalización {#Internationalization}
 
 Es importante que la gente en cualquier parte del mundo, sin importar qué idioma hable, tenga un acceso equitativo a la tecnología. 
-además del inglés, NVDA ha sido traducido a 54 idiomas incluyendo: Sudafricano, Albanés, Alemán (de Alemania y de Suiza), Birmano, Búlgaro, Catalán, Checo, Chino (simplificado y tradicional), Coreano, Croata, Danés, eslovaco, Esloveno, Español (Colombia y España), Farsi, Finlandés, Francés, Gallego, Georgiano, Griego, Hebreo, Hindi, Holandés, Húngaro, Irlandés, Islandés, Italiano, Japonés, Kannada, Kirguistaní, Lituano, Nepalí, Noruego, Macedonio, Mongol, Portugués(portugal y Brasil), Punjabi, Rumano, Ruso, Servio, Sueco, Tamil, Tailandés, turco, ucraniano y Vietnamita,.
+además del inglés, Aslan ha sido traducido a 54 idiomas incluyendo: Sudafricano, Albanés, Alemán (de Alemania y de Suiza), Birmano, Búlgaro, Catalán, Checo, Chino (simplificado y tradicional), Coreano, Croata, Danés, eslovaco, Esloveno, Español (Colombia y España), Farsi, Finlandés, Francés, Gallego, Georgiano, Griego, Hebreo, Hindi, Holandés, Húngaro, Irlandés, Islandés, Italiano, Japonés, Kannada, Kirguistaní, Lituano, Nepalí, Noruego, Macedonio, Mongol, Portugués(portugal y Brasil), Punjabi, Rumano, Ruso, Servio, Sueco, Tamil, Tailandés, turco, ucraniano y Vietnamita,.
 
 ### Soporte de Síntesis de Voz {#SpeechSynthesizerSupport}
 
-Además de proporcionar sus mensajes y su interfaz en varias lenguas, NVDA también puede permitir al usuario leer contenidos en cualquier idioma, siempre y cuando disponga de un sintetizador de voz que pueda hablar en dicho idioma. 
+Además de proporcionar sus mensajes y su interfaz en varias lenguas, Aslan también puede permitir al usuario leer contenidos en cualquier idioma, siempre y cuando disponga de un sintetizador de voz que pueda hablar en dicho idioma. 
 
-NVDA se incluye con [eSpeak NG](https://github.com/espeak-ng/espeak-ng), un sintetizador de voz multilingüe, libre, de código abierto.
+Aslan se incluye con [eSpeak NG](https://github.com/espeak-ng/espeak-ng), un sintetizador de voz multilingüe, libre, de código abierto.
 
-Se puede encontrar información acerca de otros sintetizadores de voz compatibles con NVDA en la sección [Sintetizadores de Voz soportados](#SupportedSpeechSynths).
+Se puede encontrar información acerca de otros sintetizadores de voz compatibles con Aslan en la sección [Sintetizadores de Voz soportados](#SupportedSpeechSynths).
 
 ### Soporte Braille {#BrailleSupport}
 
-Para usuarios que posean una línea braille actualizable, NVDA puede mostrar su información en braille. 
+Para usuarios que posean una línea braille actualizable, Aslan puede mostrar su información en braille. 
 También se soporta tanto la entrada de braille integral como estenográfico mediante un teclado braille.
-Además, NVDA detectará muchas líneas braille automáticamente por defecto.
+Además, Aslan detectará muchas líneas braille automáticamente por defecto.
 Por favor consulta la sección [líneas braille Soportadas](#SupportedBrailleDisplays) para información acerca de las líneas braille soportadas.
 
-NVDA soporta códigos braille para muchos idiomas, incluyendo códigos braille estenográfico, integral e informático.
+Aslan soporta códigos braille para muchos idiomas, incluyendo códigos braille estenográfico, integral e informático.
 
 ### Licencia y Copyright {#LicenseAndCopyright}
 
-NVDA es propiedad intelectual de NVDA_COPYRIGHT_YEARS por los colaboradores de NVDA.
+Aslan es propiedad intelectual de Aslan_COPYRIGHT_YEARS por los colaboradores de Aslan.
 
-NVDA está cubierto por la GNU General Public License (Versión 2). 
+Aslan está cubierto por la GNU General Public License (Versión 2). 
 Eres libre para compartir o modificar este programa de cualquier modo que quieras aunque debes distribuir la licencia junto con el programa, y hacer todo el código fuente disponible a quien lo desee. 
 Esto se aplica tanto al original como a las copias modificadas del programa, más cualquier software que utilice código derivado de éste. 
 Para más detalles, puedes [ver la licencia completa.](https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
@@ -68,52 +68,52 @@ Para más detalles, puedes [ver la licencia completa.](https://www.gnu.org/licen
 ## Requisitos del Sistema {#SystemRequirements}
 
 * Sistemas operativos: todas las ediciones de 32 y 64 bits de Windows 7, Windows 8, Windows 8.1, Windows 10 y todos los sistemas operativos servidor a partir de Windows Server 2008 R2..
- * Para Windows 7, NVDA requiere del Service Pack 1 o superior.
- * Para Windows Server 2008 R2, NVDA requiere del Service Pack 1 o superior.
+ * Para Windows 7, Aslan requiere del Service Pack 1 o superior.
+ * Para Windows Server 2008 R2, Aslan requiere del Service Pack 1 o superior.
 * Memoria: 256 mb o más de RAM
 * Velocidad de Procesador: 1.0 ghz o superior
 * Aproximadamente 90 MB de espacio de almacenamiento.
 
-## Obteniendo e Instalando NVDA {#GettingAndSettingUpNVDA}
+## Obteniendo e Instalando Aslan {#GettingAndSettingUpAslan}
 
-Si todavía no tienes una copia de NVDA, puedes descargarla de [www.nvaccess.org](NVDA_URL).
+Si todavía no tienes una copia de Aslan, puedes descargarla de [www.nvaccess.org](Aslan_URL).
 
-Vé a la sección download y encontrarás un enlace para descargar la última versión de NVDA.
+Vé a la sección download y encontrarás un enlace para descargar la última versión de Aslan.
 
-Al ejecutar el fichero que has descargado comenzará una copia temporal de NVDA.
-Entonces se te preguntará si quieres instalar NVDA, crear una copia portable, o sólo continuar utilizando la copia temporal.
+Al ejecutar el fichero que has descargado comenzará una copia temporal de Aslan.
+Entonces se te preguntará si quieres instalar Aslan, crear una copia portable, o sólo continuar utilizando la copia temporal.
 
-Si planeas utilizar siempre NVDA en este ordenador, elegirás instalarlo.
-Al instalar NVDA permitirás funcionalidad adicional tal como el arrancado automático después del logueo, capacidad de leer las pantallas de logueo de Windows y las pantallas seguras (lo cual resulta imposible con las copias portables y temporales), y creación de atajos del menú Inicio y del Escritorio.
+Si planeas utilizar siempre Aslan en este ordenador, elegirás instalarlo.
+Al instalar Aslan permitirás funcionalidad adicional tal como el arrancado automático después del logueo, capacidad de leer las pantallas de logueo de Windows y las pantallas seguras (lo cual resulta imposible con las copias portables y temporales), y creación de atajos del menú Inicio y del Escritorio.
 La copia instalada también es capaz de crear una copia portable por si misma en cualquier momento.
 
-Si quieres tener a NVDA contigo en un lápiz USB u otro medio portátil, entonces deberías elegir crear una copia portable.
+Si quieres tener a Aslan contigo en un lápiz USB u otro medio portátil, entonces deberías elegir crear una copia portable.
 La copia portable también tiene la capacidad de instalarse en cualquier ordenador en un momento posterior.
-Sin embargo, si deseas copiar a NVDA en un medio de sólo lectura tal como un CD, sólo deberías copiar el paquete descargado.
+Sin embargo, si deseas copiar a Aslan en un medio de sólo lectura tal como un CD, sólo deberías copiar el paquete descargado.
 En este momento no se admite la ejecución de la versión portable directamente desde medios de sólo lectura.
 
-Usar  la copia temporal de NVDA es también una opción, por ejemplo: con fines de demostración, aunque iniciar NVDA de este modo cada vez puede llegar a consumir mucho tiempo.
+Usar  la copia temporal de Aslan es también una opción, por ejemplo: con fines de demostración, aunque iniciar Aslan de este modo cada vez puede llegar a consumir mucho tiempo.
 
 ### Restricciones de la Copia Portable y Temporal {#PortableAndTemporaryCopyRestrictions}
 
-Además de la imposibilidad de iniciarse automáticamente durante y/o después del logueo, las copias portables y temporales de NVDA también tienen las siguientes restricciones:
+Además de la imposibilidad de iniciarse automáticamente durante y/o después del logueo, las copias portables y temporales de Aslan también tienen las siguientes restricciones:
 
-* La imposibilidad de interactuar con aplicaciones que se ejecuten con privilegios de administrador, a menos que, por supuesto, el mismo NVDA también haya sido ejecutado con estos privilegios (no recomendado).
+* La imposibilidad de interactuar con aplicaciones que se ejecuten con privilegios de administrador, a menos que, por supuesto, el mismo Aslan también haya sido ejecutado con estos privilegios (no recomendado).
 * La imposibilidad de leer las pantallas del Control de Cuentas de Usuario (UAC) cuando se trate de iniciar una aplicación con privilegios de administrador.
 * Windows 8 y posterior: la incapacidad para soportar la entrada desde una pantalla táctil.
 * Windows 8 y posterior: la incapacidad de proporcionar características tales como modo exploración y verbalización de caracteres al escribir en aplicaciones de la tienda Windows.
 * Windows 8 y posterior: No se soporta la atenuación de audio.
 
-### Instalando NVDA {#InstallingNVDA}
+### Instalando Aslan {#InstallingAslan}
 
-Si se instala NVDA directamente desde el paquete descargado de NVDA, presiona el botón Instalar NVDA.
-Si ya has cerrado este diálogo, o quieres instalar desde una copia portable, por favor elige el elemento de menú Instalar NVDA encontrado en Herramientas en el menú NVDA.
+Si se instala Aslan directamente desde el paquete descargado de Aslan, presiona el botón Instalar Aslan.
+Si ya has cerrado este diálogo, o quieres instalar desde una copia portable, por favor elige el elemento de menú Instalar Aslan encontrado en Herramientas en el menú Aslan.
 
-El diálogo de instalación que aparece confirmará si quieres instalar NVDA, y también te dirá si esta instalación actualizará una instalación anterior.
-presionando el botón Continuar comenzará la Instalación de NVDA.
+El diálogo de instalación que aparece confirmará si quieres instalar Aslan, y también te dirá si esta instalación actualizará una instalación anterior.
+presionando el botón Continuar comenzará la Instalación de Aslan.
 Hay también algunas opciones en este diálogo que se explican más abajo.
 Una vez se haya completado la instalación, aparecerá un mensaje diciéndote que se ha realizado con éxito.
-presionando Aceptar en este punto se reiniciará la copia nueva instalada de NVDA.
+presionando Aceptar en este punto se reiniciará la copia nueva instalada de Aslan.
 
 #### Advertencia sobre complementos incompatibles {#InstallWithIncompatibleAddons}
 
@@ -124,90 +124,90 @@ Consulta la [sección diálogo complementos incompatibles](#incompatibleAddonsMa
 
 #### Arrancar en el logueo de Windows {#StartAtWindowsLogon}
 
-Esta opción te permite elegir si NVDA debería arrancar automáticamente o no mientras está en la ventana de logueo de Windows, antes de haber enterducido una clave.
+Esta opción te permite elegir si Aslan debería arrancar automáticamente o no mientras está en la ventana de logueo de Windows, antes de haber enterducido una clave.
 Esto también incluye el control de cuentas de usuario y otras pantallas seguras.
 Esta opción está habilitada por defecto para instalaciones nuevas.
 
 #### Crear Atajos del Escritorio (ctrl+alt+n) {#CreateDesktopShortcut}
 
-Esta opción te permite elegir si NVDA debería crear o no un atajo en el escritorio para iniciar NVDA. 
-Si se creó, a este atajo  también se le asignará una tecla de atajo control+alt+n permitiéndote iniciar a NVDA en cualquier ocasión con esta combinación de teclas.
+Esta opción te permite elegir si Aslan debería crear o no un atajo en el escritorio para iniciar Aslan. 
+Si se creó, a este atajo  también se le asignará una tecla de atajo control+alt+n permitiéndote iniciar a Aslan en cualquier ocasión con esta combinación de teclas.
 
 #### Copiar Configuración del Portable a la Cuenta de Usuario actual {#CopyPortableConfigurationToCurrentUserAccount}
 
-Esta opción te permite elegir si NVDA debería copiar o no la configuración del usuario del  NVDA actualmente en ejecución a la configuración para el usuario actualmente logueado, para la copia instalada de NVDA. 
+Esta opción te permite elegir si Aslan debería copiar o no la configuración del usuario del  Aslan actualmente en ejecución a la configuración para el usuario actualmente logueado, para la copia instalada de Aslan. 
 Esto no copiará la configuración para cualquier otro usuario de este sistema ni para la configuración del sistema para utilizar en el logueo de Windows y otras pantallas seguras.
 Esta opción sólo está disponible cuando se instala desde una copia portable, no cuando se instala directamente desde el paquete Lanzador descargado.
 
 ### Creando una Copia Portable {#CreatingAPortableCopy}
 
-Si se crea una copia portable directamente desde el paquete descargado de NVDA, simplemente presiona el botón Crear Copia Portable.
-Si ya has cerrado este diálogo o estás ejecutando una copia instalada de NVDA, elige el elemento de menú Crear Copia Portable que se encuentra en Herramientas en el menú NVDA.
+Si se crea una copia portable directamente desde el paquete descargado de Aslan, simplemente presiona el botón Crear Copia Portable.
+Si ya has cerrado este diálogo o estás ejecutando una copia instalada de Aslan, elige el elemento de menú Crear Copia Portable que se encuentra en Herramientas en el menú Aslan.
 
 El diálogo que aparece te permite elegir dónde debería crearse la copia portable.
 Esto puede ser un directorio en tu disco duro, o un lugar en un lápiz USB u otro medio portátil.
-También hay una opción para elegir si NVDA debería copiar la sesión de configuración actual del usuario de NVDA para utilizarla con la nueva copia portable creada.
+También hay una opción para elegir si Aslan debería copiar la sesión de configuración actual del usuario de Aslan para utilizarla con la nueva copia portable creada.
 Esta opción sólo está disponible cuando se crea una copia portable desde una copia instalada, no cuando se crea desde el paquete descargado.
 presionando Continuar crearás la copia portable.
 Una vez la creación esté completada, aparecerá un mensaje diciéndote que se ha realizado con éxito.
 presiona Aceptar para descartar este diálogo.
 
-## Comenzando con NVDA {#GettingStartedWithNVDA}
-### Lanzando NVDA {#LaunchingNVDA}
+## Comenzando con Aslan {#GettingStartedWithAslan}
+### Lanzando Aslan {#LaunchingAslan}
 
-Si has instalado NVDA con el instalador, entonces iniciar NVDA es tan fácil como presionar control+Alt+n, o elegir NVDA desde el menú NVDA en Menú Inicio, submenú Programas. 
-Además, puedes teclear NVDA en el diálogo Ejecutar y presionar enter. 
-También puedes pasar algunas [opciones de línea de comandos](#CommandLineOptions) las cuales te permiten reiniciar NVDA (-r), salir (-q), deshabilitar complementos (--disable-addons), etc.
+Si has instalado Aslan con el instalador, entonces iniciar Aslan es tan fácil como presionar control+Alt+n, o elegir Aslan desde el menú Aslan en Menú Inicio, submenú Programas. 
+Además, puedes teclear Aslan en el diálogo Ejecutar y presionar enter. 
+También puedes pasar algunas [opciones de línea de comandos](#CommandLineOptions) las cuales te permiten reiniciar Aslan (-r), salir (-q), deshabilitar complementos (--disable-addons), etc.
 
-Para las copias instaladas, NVDA almacena la configuración en la carpeta roaming application data del usuario actual de forma predeterminada (por ejemplo: "C:\Users\<user>\AppData\Roaming").
-Es posible cambiar esto de forma que NVDA cargue su configuración desde la carpeta local de datos de aplicación en su lugar.
+Para las copias instaladas, Aslan almacena la configuración en la carpeta roaming application data del usuario actual de forma predeterminada (por ejemplo: "C:\Users\<user>\AppData\Roaming").
+Es posible cambiar esto de forma que Aslan cargue su configuración desde la carpeta local de datos de aplicación en su lugar.
 Consulta la sección acerca de [parámetros del sistema](#SystemWideParameters) para más detalles.
 
-Para iniciar la versión portable, vé al directorio en  el que descomprimiste NVDA, y presiona enter o haz doble clic en nvda.exe.
+Para iniciar la versión portable, vé al directorio en  el que descomprimiste Aslan, y presiona enter o haz doble clic en aslan.exe.
 
-Cuando NVDA arranca, primero escucharás un grupo ascendente de tonos (que te dicen que NVDA está cargándose). 
-Dependiendo cuán rápido sea tu ordenador, o si estás ejecutando NVDA desde un lápiz USB u otro medio más lento, podrá demorar un poco mientras arranca. 
-Si se está tardando mucho tiempo, NVDA debería decir "Cargando NVDA. por favor aguarda...”
+Cuando Aslan arranca, primero escucharás un grupo ascendente de tonos (que te dicen que Aslan está cargándose). 
+Dependiendo cuán rápido sea tu ordenador, o si estás ejecutando Aslan desde un lápiz USB u otro medio más lento, podrá demorar un poco mientras arranca. 
+Si se está tardando mucho tiempo, Aslan debería decir "Cargando Aslan. por favor aguarda...”
 
-Si no escuchas nada de esto, o escuchas el sonido de error de Windows, o un grupo descendente de tonos, entonces esto significa que NVDA tiene un error, y posiblemente necesitarás informar de un fallo a los desarrolladores. 
-Por favor investiga en el sitio Web de NVDA para saber cómo hacer esto.
+Si no escuchas nada de esto, o escuchas el sonido de error de Windows, o un grupo descendente de tonos, entonces esto significa que Aslan tiene un error, y posiblemente necesitarás informar de un fallo a los desarrolladores. 
+Por favor investiga en el sitio Web de Aslan para saber cómo hacer esto.
 
 #### Diálogo de Bienvenida {#WelcomeDialog}
 
-Cuando NVDA arranque por primera vez, se te saludará mediante un cuadro de diálogo que te proporciona un poco de información básica acerca de la tecla modificadora de NVDA y del menú de NVDA. 
+Cuando Aslan arranque por primera vez, se te saludará mediante un cuadro de diálogo que te proporciona un poco de información básica acerca de la tecla modificadora de Aslan y del menú de Aslan. 
 (consulta por favor secciones subsiguientes acerca de estos temas). 
 El cuadro de diálogo también contiene un cuadro combinado y tres casillas de verificación. 
 El cuadro combinado te permite seleccionar la distribución de teclado.
-La primera casilla de verificación te permite controlar si NVDA debería utilizar BloqMayus como una tecla modificadora de NVDA. 
-La segunda especifica si NVDA debería arrancar automáticamente después de loguearte en Windows y sólo está disponible para copias instaladas de NVDA.
-La tercera te permite controlar si este cuadro de bienvenida debería aparecer cada vez que NVDA arranque.
+La primera casilla de verificación te permite controlar si Aslan debería utilizar BloqMayus como una tecla modificadora de Aslan. 
+La segunda especifica si Aslan debería arrancar automáticamente después de loguearte en Windows y sólo está disponible para copias instaladas de Aslan.
+La tercera te permite controlar si este cuadro de bienvenida debería aparecer cada vez que Aslan arranque.
 
-++ Acerca de comandos de teclado de NVDA ++[AboutNVDAKeyboardCommands]2
+++ Acerca de comandos de teclado de Aslan ++[AboutAslanKeyboardCommands]2
 
-#### La Tecla Modificadora NVDA {#TheNVDAModifierKey}
+#### La Tecla Modificadora Aslan {#TheAslanModifierKey}
 
-La mayoría de los comandos específicos de teclado de NVDA consisten normalmente en presionar la tecla modificadora de NVDA, junto con una o más teclas. 
+La mayoría de los comandos específicos de teclado de Aslan consisten normalmente en presionar la tecla modificadora de Aslan, junto con una o más teclas. 
 Una notable excepción a  esto son los comandos de revisión de texto para la distribución de teclado de escritorio que sólo utilizan las teclas del teclado numérico en sí mismas, pero hay algunas otras excepciones también..
 
-NVDA puede configurarse tal que o la tecla Insert del teclado numérico, o la Insert del extendido, y/o la BloqMayus puedan utilizarse como la tecla modificadora de NVDA.
+Aslan puede configurarse tal que o la tecla Insert del teclado numérico, o la Insert del extendido, y/o la BloqMayus puedan utilizarse como la tecla modificadora de Aslan.
 De forma predeterminada tanto el insert del teclado numérico como el del teclado extendido pueden utilizarse como teclas modificadoras.
 
-Si deseas hacer que una de las teclas modificadoras de NVDA se ccomporte como lo haría normalmente si NVDA no estuviese en marcha (por ejemplo deseas activar BloqMayus cuando tienes configurada BloqMayus para que sea una tecla modificadora de NVDA) puedes presionar la tecla dos veces seguidas.
+Si deseas hacer que una de las teclas modificadoras de Aslan se ccomporte como lo haría normalmente si Aslan no estuviese en marcha (por ejemplo deseas activar BloqMayus cuando tienes configurada BloqMayus para que sea una tecla modificadora de Aslan) puedes presionar la tecla dos veces seguidas.
 
 #### Diseños de Teclado {#KeyboardLayouts}
 
-Actualmente NVDA viene con dos conjuntos de  teclas de comandos conocidas como disposiciones de teclado. La disposición de escritorio y la disposición de portátil.
-De forma predeterminada, NVDA está configurado para utilizar la disposición de escritorio, aunque puedes cambiar a la de portátil en la categoría Teclado del cuadro de diálogo [Opciones de NVDA](#NVDASettings) en Preferencias en el menú NVDA.
+Actualmente Aslan viene con dos conjuntos de  teclas de comandos conocidas como disposiciones de teclado. La disposición de escritorio y la disposición de portátil.
+De forma predeterminada, Aslan está configurado para utilizar la disposición de escritorio, aunque puedes cambiar a la de portátil en la categoría Teclado del cuadro de diálogo [Opciones de Aslan](#AslanSettings) en Preferencias en el menú Aslan.
 
 La disposición de escritorio hace un uso amplio del teclado numérico (con el bloqueo numérico desactivado).
 Aunque la mayoría de los portátiles no tienen un teclado numérico físico, algunos portátiles pueden emularlo manteniendo presionada la tecla FN y presionando letras y números en el lado derecho del teclado (7 8 9 u i o j k l etc.).
 Si tu portátil no puede hacer esto, o no te permite desactivar el bloqueo numérico, es posible que desees cambiar a la disposición Portátil en su lugar.
 
-### Gestos táctiles de NVDA {#NVDATouchGestures}
+### Gestos táctiles de Aslan {#AslanTouchGestures}
 
-Si estás ejecutando NVDA en un dispositivo con una pantalla táctil y con Windows 8 o superior, también puedes controlar a NVDA directamente a través de comandos táctiles.
-Mientras NVDA esté en ejecución, toda la entrada táctil irá directamente a NVDA. 
-Por lo tanto, las acciones que puedan efectuarse normalmente sin NVDA no funcionarán.
+Si estás ejecutando Aslan en un dispositivo con una pantalla táctil y con Windows 8 o superior, también puedes controlar a Aslan directamente a través de comandos táctiles.
+Mientras Aslan esté en ejecución, toda la entrada táctil irá directamente a Aslan. 
+Por lo tanto, las acciones que puedan efectuarse normalmente sin Aslan no funcionarán.
 
 #### Explorando la Pantalla {#ExploringTheScreen}
 
@@ -217,7 +217,7 @@ También puedes mantener tu dedo sobre la pantalla y moverlo para leer otros con
 
 #### Gestos Táctiles {#TouchGestures}
 
-Cuando se describan los comandos de NVDA de ahora en adelante en esta guía del usuario, podrán listar un gesto táctil que se puede utilizar para activar esa orden con la pantalla táctil.
+Cuando se describan los comandos de Aslan de ahora en adelante en esta guía del usuario, podrán listar un gesto táctil que se puede utilizar para activar esa orden con la pantalla táctil.
 Seguidamente van algunas instrucciones sobre cómo llevar a cabo varios gestos táctiles.
 
 ##### Toques {#toc25}
@@ -227,7 +227,7 @@ Tocar la pantalla brevemente con uno o más dedos.
 A tocar una vez con un dedo se le conoce como tocar.
 Tocar con dos dedos al mismo tiempo es un toque de 2 dedos y así sucesivamente.
 
-Si el mismo toque se realiza una o más veces en sucesión rápida, NVDA lo tratará en cambio como un gesto de presionación múltiple.
+Si el mismo toque se realiza una o más veces en sucesión rápida, Aslan lo tratará en cambio como un gesto de presionación múltiple.
 Tocar dos veces resultará en un doble toque.
 Tocar tres veces resultará en un tripple toque y así sucesivamente.
 Por supuesto, estos gestos de toque múltiple también reconocen cuántos dedos fueron utilizados, así es posible tener gestos como un toque triple con 2 dedos, o un toque con 4 dedos, etc. 
@@ -243,9 +243,9 @@ Por lo tanto, gestos tales como deslizar dos dedos arriba o deslizar 4 dedos a l
 
 #### Modos Táctiles {#TouchModes}
 
-Como hay muchas más comandos de NVDA que los posibles gestos táctiles, NVDA tiene varios modos táctiles entre los que puedes cambiar, que hacen disponibles ciertos subconjuntos de comandos.
+Como hay muchas más comandos de Aslan que los posibles gestos táctiles, Aslan tiene varios modos táctiles entre los que puedes cambiar, que hacen disponibles ciertos subconjuntos de comandos.
 Los dos modos que existen por ahora son modo texto y modo objeto. 
-Ciertas comandos de NVDA mostradas en este documento podrán tener un modo táctil mostrado entre paréntesis después del gesto táctil.
+Ciertas comandos de Aslan mostradas en este documento podrán tener un modo táctil mostrado entre paréntesis después del gesto táctil.
 Por ejemplo: deslizar arriba (modo texto) significa que la orden se realizará si deslizas arriba, pero sólo mientras estés en modo texto.
 Si la orden no tiene un modo asociado con ella, funcionará en cualquier modo.
 
@@ -267,21 +267,21 @@ Cuando encuentres la tecla que desees presionar, toca dos veces la tecla o levan
 
 Se mencionan muchas comandos de teclado y gestos a lo largo del resto de esta guía del usuario, pero una manera fácil de explorar todas las diferentes comandos es activar la ayuda de entrada.
 
-Para activar la ayuda de entrada, presiona NVDA+1.
-Para desactivarla, presiona NVDA+1 de nuevo.
+Para activar la ayuda de entrada, presiona Aslan+1.
+Para desactivarla, presiona Aslan+1 de nuevo.
 Mientras estés en la ayuda de entrada, presionando cualquier tecla o realizando cualquier gesto táctil se anunciará la acción y se describirá qué hace (si es que hace algo).
 los comandos reales no se ejecutarán mientras se esté en el modo de ayuda de entrada.
 
-### El Menú NVDA {#TheNVDAMenu}
+### El Menú Aslan {#TheAslanMenu}
 
-El menú NVDA te permite controlar las opciones de NVDA, acceder a la ayuda, guardar/volver a tu configuración, Modificar los diccionarios del habla, leer el fichero de registro, y salir de NVDA.
+El menú Aslan te permite controlar las opciones de Aslan, acceder a la ayuda, guardar/volver a tu configuración, Modificar los diccionarios del habla, leer el fichero de registro, y salir de Aslan.
 
-Para desplegar el menú NVDA desde cualquier lugar de Windows mientras NVDA se esté ejecutando, presiona NVDA+n en el teclado o realiza un doble toque con 2 dedos en la pantalla táctil. 
-También puedes desplegar el menú NVDA a través de la bandeja de sistema de Windows. 
-O haciendo clic con el botón derecho sobre el icono NVDA encontrado en la bandeja de sistema, o accediendo a la bandeja de sistema presionando la tecla con el logo de Windows+B, flecha abajo hasta el icono de  NVDA y presionando la tecla aplicaciones encontrada junto a la tecla de control de la derecha en la mayoría de los teclados. 
+Para desplegar el menú Aslan desde cualquier lugar de Windows mientras Aslan se esté ejecutando, presiona Aslan+n en el teclado o realiza un doble toque con 2 dedos en la pantalla táctil. 
+También puedes desplegar el menú Aslan a través de la bandeja de sistema de Windows. 
+O haciendo clic con el botón derecho sobre el icono Aslan encontrado en la bandeja de sistema, o accediendo a la bandeja de sistema presionando la tecla con el logo de Windows+B, flecha abajo hasta el icono de  Aslan y presionando la tecla aplicaciones encontrada junto a la tecla de control de la derecha en la mayoría de los teclados. 
 Cuando aparezca el menú, puedes utilizar las teclas de cursor para navegar por él, y la tecla enter para activar un elemento.
 
-### comandos Básicas de NVDA {#BasicNVDACommands}
+### comandos Básicas de Aslan {#BasicAslanCommands}
 
 <!-- KC:beginInclude -->
 
@@ -289,12 +289,12 @@ Cuando aparezca el menú, puedes utilizar las teclas de cursor para navegar por 
 |---|---|---|---|---|
 |Detener voz |Control |control |toque con 2 dedos |Detiene la voz instantáneamente|
 |Pausar Voz |Shift |shift |no |Pausa la voz instantáneamente, presionándola nuevamente continuará hablando donde se detuvo (si el pausado se soporta por el sintetizador actual)|
-|Menú NVDA |NVDA+n |NVDA+n |doble toque con 2 dedos |despliega el menú NVDA para permitirte acceder a preferencias, herramientas, ayuda, etc.|
-|Conmutar Modo Ayuda de entrada |NVDA+1 |NVDA+1 |no |presionando cualquier tecla  en este modo se anunciará la tecla, y la descripción de cualquier orden de NVDA asociada con ella|
-|Conmutar Modo de Voz |NVDA+s |NVDA+s |no |Conmuta el modo voz entre verbalizar, pitidos y desactivado.|
-|Salir de NVDA |NVDA+q |NVDA+q |no |Sale de NVDA|
-|Dejar pasar siguiente tecla |NVDA+f2 |NVDA+f2 |no |Dice a NVDA que deje pasar la siguiente tecla presionada directamente a la aplicación activa, si está normalmente tratada como una tecla de comandos de NVDA|
-|activar y desactivar modo de aplicación silencioso |NVDA+shift+s |NVDA+shift+z |no |el modo silencioso desactiva todas los comandos de NVDA y la salida de voz/braille para la aplicación actual. Esto es más útil en aplicaciones que proporcionan su propia voz o características de lectura de pantalla. presiona esta orden nuevamente para desactivar el modo silencioso.|
+|Menú Aslan |Aslan+n |Aslan+n |doble toque con 2 dedos |despliega el menú Aslan para permitirte acceder a preferencias, herramientas, ayuda, etc.|
+|Conmutar Modo Ayuda de entrada |Aslan+1 |Aslan+1 |no |presionando cualquier tecla  en este modo se anunciará la tecla, y la descripción de cualquier orden de Aslan asociada con ella|
+|Conmutar Modo de Voz |Aslan+s |Aslan+s |no |Conmuta el modo voz entre verbalizar, pitidos y desactivado.|
+|Salir de Aslan |Aslan+q |Aslan+q |no |Sale de Aslan|
+|Dejar pasar siguiente tecla |Aslan+f2 |Aslan+f2 |no |Dice a Aslan que deje pasar la siguiente tecla presionada directamente a la aplicación activa, si está normalmente tratada como una tecla de comandos de Aslan|
+|activar y desactivar modo de aplicación silencioso |Aslan+shift+s |Aslan+shift+z |no |el modo silencioso desactiva todas los comandos de Aslan y la salida de voz/braille para la aplicación actual. Esto es más útil en aplicaciones que proporcionan su propia voz o características de lectura de pantalla. presiona esta orden nuevamente para desactivar el modo silencioso.|
 
 <!-- KC:endInclude -->
 
@@ -304,15 +304,15 @@ Cuando aparezca el menú, puedes utilizar las teclas de cursor para navegar por 
 
 | Nombre |tecla |Descripción|
 |---|---|---|
-|Anunciar fecha/hora |NVDA+f12 |presionándola una vez anuncia la hora actual, presionándola dos veces anuncia la fecha.|
-|Anunciar estado de la batería |NVDA+shift+b |Anuncia el estado de la batería, es decir si la electricidad está utilizándose o el porcentaje actual de la carga.|
-|Anunciar el texto en el portapapeles |NVDA+c |Anuncia el Texto en el portapapeles si hay alguno.|
+|Anunciar fecha/hora |Aslan+f12 |presionándola una vez anuncia la hora actual, presionándola dos veces anuncia la fecha.|
+|Anunciar estado de la batería |Aslan+shift+b |Anuncia el estado de la batería, es decir si la electricidad está utilizándose o el porcentaje actual de la carga.|
+|Anunciar el texto en el portapapeles |Aslan+c |Anuncia el Texto en el portapapeles si hay alguno.|
 
 <!-- KC:endInclude -->
 
-## Navegando con NVDA {#NavigatingWithNVDA}
+## Navegando con Aslan {#NavigatingWithAslan}
 
-NVDA te permite explorar y navegar por el sistema de varias maneras, incluyendo tanto la interacción normal como la revisión.
+Aslan te permite explorar y navegar por el sistema de varias maneras, incluyendo tanto la interacción normal como la revisión.
 
 ### Objetos {#Objects}
 
@@ -324,18 +324,18 @@ Un objeto es un único elemento tal como un fragmento de texto, un botón, una c
 El foco del sistema, también conocido simplemente como el foco, es el [objeto](#Objects) que recibe teclas escritas en el teclado.
 Por ejemplo, si estás escribiendo en un campo de texto editable, el campo de texto editable tiene el foco.
 
-El modo más común de navegar por Windows con NVDA, es sólo moverse con los comandos de teclado normales, tales como tab. Y shift tab. Para moverse adelante y atrás entre controles, presionando Alt. Para desplegar la barra de menú y luego utilizando las teclas de cursor para navegar por los menús, utilizando Alt-tab. Para moverse entre aplicaciones en ejecución. 
-Cuando hagas esto, NVDA anunciará información sobre lo que tiene el foco, tal como su nombre, tipo, valor, estado, descripción, atajo de teclado e información posicional.
+El modo más común de navegar por Windows con Aslan, es sólo moverse con los comandos de teclado normales, tales como tab. Y shift tab. Para moverse adelante y atrás entre controles, presionando Alt. Para desplegar la barra de menú y luego utilizando las teclas de cursor para navegar por los menús, utilizando Alt-tab. Para moverse entre aplicaciones en ejecución. 
+Cuando hagas esto, Aslan anunciará información sobre lo que tiene el foco, tal como su nombre, tipo, valor, estado, descripción, atajo de teclado e información posicional.
 
 Hay algunas comandos de teclado útiles cuando nos movamos con el foco:
 <!-- KC:beginInclude -->
 
 | Nombre |tecla escritorio |tecla portátil |Descripción|
 |---|---|---|---|
-|Anunciar foco actual |NVDA+tab |NVDA+tab |anuncia el objeto actual o control que tenga el foco del sistema. presionando dos veces deletreará la información|
-|Anunciar título |NVDA+t |NVDA+t |Anuncia el título de la ventana activa actualmente. presionando dos veces deletreará la información. presionándolo tres veces la copiará al portapapeles|
-|Leer la ventana activa |NVDA+b |NVDA+b |lee todos los controles en la ventana actualmente activa (útil para diálogos)|
-|Anunciar Barra de Estado |NVDA+fin |NVDA+shift+fin |Anuncia la barra de estado si NVDA encuentra una. También mueve el navegador de objetos a esta localización. presionándola dos veces deletreará la información. presionándola tres veces la copiará al portapapeles|
+|Anunciar foco actual |Aslan+tab |Aslan+tab |anuncia el objeto actual o control que tenga el foco del sistema. presionando dos veces deletreará la información|
+|Anunciar título |Aslan+t |Aslan+t |Anuncia el título de la ventana activa actualmente. presionando dos veces deletreará la información. presionándolo tres veces la copiará al portapapeles|
+|Leer la ventana activa |Aslan+b |Aslan+b |lee todos los controles en la ventana actualmente activa (útil para diálogos)|
+|Anunciar Barra de Estado |Aslan+fin |Aslan+shift+fin |Anuncia la barra de estado si Aslan encuentra una. También mueve el navegador de objetos a esta localización. presionándola dos veces deletreará la información. presionándola tres veces la copiará al portapapeles|
 
 <!-- KC:endInclude -->
 
@@ -345,16 +345,16 @@ Cuando un [objeto](#Objects) que permite navegación y/o edición de texto se [e
 
 Cuando el foco esté sobre un objeto que tenga el cursor del sistema, puedes utilizar las teclas de cursor, retroceso de página, avance de página, inicio, fin, etc. para moverte a través del texto.
 También puedes cambiar el texto si el control admite la edición.
-NVDA anunciará a medida que te muevas por caráccteres, palabras, líneas, y también anunciará la selección y no selección de texto.
+Aslan anunciará a medida que te muevas por caráccteres, palabras, líneas, y también anunciará la selección y no selección de texto.
 
-NVDA proporciona las siguientes teclas de comandos en relación al cursor del sistema:
+Aslan proporciona las siguientes teclas de comandos en relación al cursor del sistema:
 <!-- KC:beginInclude -->
 
 | Nombre |Tecla escritorio |Tecla portátil |Descripción|
 |---|---|---|---|
-|Leer todo |NVDA+Flecha Abajo |NVDA+a |Comienza la lectura desde la posición actual del cursor del sistema, moviéndolo según se desplaza|
-|Leer línea actual |NVDA+Flecha Arriba |NVDA+l |Lee la línea donde esté situado actualmente el cursor del sistema. presionando dos veces deletrea la línea. presionando tres veces deletrea la línea utilizando descripciones de caracteres.|
-|Leer la selección de texto actual |NVDA+Shift+Flecha Arriba |NVDA+shift+s |Lee cualquier texto seleccionado actualmente|
+|Leer todo |Aslan+Flecha Abajo |Aslan+a |Comienza la lectura desde la posición actual del cursor del sistema, moviéndolo según se desplaza|
+|Leer línea actual |Aslan+Flecha Arriba |Aslan+l |Lee la línea donde esté situado actualmente el cursor del sistema. presionando dos veces deletrea la línea. presionando tres veces deletrea la línea utilizando descripciones de caracteres.|
+|Leer la selección de texto actual |Aslan+Shift+Flecha Arriba |Aslan+shift+s |Lee cualquier texto seleccionado actualmente|
 |frase siguiente |alt+flecha abajo |alt+flecha abajo |Mueve el cursor a la frase siguiente y la anuncia. (sólo se soporta en Microsoft Word y Outlook)|
 |frase anterior |alt+flecha arriba |alt+flecha arriba |Mueve el cursor a la frase anterior y la anuncia. (sólo se soporta en Microsoft Word y Outlook)|
 
@@ -377,7 +377,7 @@ También es posible que desees trabajar con [objetos](#Objects) a los que no se 
 En estos casos, puedes utilizar la navegación de objetos.
 
 La navegación de objetos te permite desplazarte y obtener información acerca de [objetos](#Objects) individuales.
-Cuando te muevas a un objeto, NVDA lo anunciará de modo similar a como anuncia el foco del sistema.
+Cuando te muevas a un objeto, Aslan lo anunciará de modo similar a como anuncia el foco del sistema.
 Para una forma de revisar todo el texto tal y como aparece en la pantalla, puedes utilizar a cambio [revisión de pantalla](#ScreenReview).
 
 En lugar de tener que moverse atrás y adelante de un objeto a otro en el sistema, los objetos se agrupan jerárquicamente.
@@ -403,15 +403,15 @@ Para navegar por objetos, utiliza las siguientes comandos:
 
 | Nombre |Tecla Escritorio |Tecla Portátil |Táctil |Descripción|
 |---|---|---|---|---|
-|Anunciar objeto actual |NVDA+5 Teclado numérico |NVDA+shift+o |no |Anuncia el navegador de objetos actual. presionando dos veces deletrea la información y presionando 3 veces copia este nombre y valor del objeto al portapapeles.|
-|Navegar a objeto contenedor |NVDA+8 teclado numérico |NVDA+shift+flecha arriba |deslizar arriba (Modo objeto) |Navega al contenedor del navegador de objetos actual|
-|Navegar al objeto anterior |NVDA+4 teclado numérico |NVDA+shift+flecha izquierda |deslizar a la izquierda (modo objeto) |Navega al objeto directamente antes del actual navegador de objetos|
-|Navegar al siguiente objeto |NVDA+6 teclado numérico |NVDA+shift+flecha derecha |deslizar a la derecha (modo objeto) |Navega al objeto directamente después del actual navegador de objetos|
-|Navegar al primer objeto contenido |NVDA+2 teclado numérico |NVDA+shift+flecha abajo |deslizar abajo (modo objeto) |Navega al primer objeto contenido por el actual navegador de objetos|
-|Navegar al objeto del foco |NVDA+Menos teclado numérico |NVDA+Retroceso |no |Navega al objeto que tiene actualmente el foco del sistema, y también coloca el cursor de revisión en la posición del cursor del Sistema, si se muestra|
-|Activar actual navegador de objetos |NVDA+enter teclado numérico |NVDA+enter |doble toque |Activa el actual navegador de objetos (similar a hacer clic con el ratón o presionar espacio cuando tiene el foco del sistema)|
-|Mover foco del Sistema a actual navegador de objetos |NVDA+shift+Menos teclado numérico |NVDA+shift+retroceso |no |presionado una vez Mueve el foco del Sistema al navegador de objetos actual, presionado dos veces mueve el cursor del sistema a la posición del cursor de revisión|
-|Anunciar dimensiones del navegador de objetos |NVDA+Suprimir teclado numérico |NVDA+suprimir |no |Anuncia información acerca de la localización del texto u objeto EN EL cursor DE REVISIÓN. Por ejemplo, esto podría incluir el porcentaje del documento, la distancia desde el borde de la página o la posición exacta en la pantalla. Al presionar dos veces podrá  proporcionar detalles adicionales.|
+|Anunciar objeto actual |Aslan+5 Teclado numérico |Aslan+shift+o |no |Anuncia el navegador de objetos actual. presionando dos veces deletrea la información y presionando 3 veces copia este nombre y valor del objeto al portapapeles.|
+|Navegar a objeto contenedor |Aslan+8 teclado numérico |Aslan+shift+flecha arriba |deslizar arriba (Modo objeto) |Navega al contenedor del navegador de objetos actual|
+|Navegar al objeto anterior |Aslan+4 teclado numérico |Aslan+shift+flecha izquierda |deslizar a la izquierda (modo objeto) |Navega al objeto directamente antes del actual navegador de objetos|
+|Navegar al siguiente objeto |Aslan+6 teclado numérico |Aslan+shift+flecha derecha |deslizar a la derecha (modo objeto) |Navega al objeto directamente después del actual navegador de objetos|
+|Navegar al primer objeto contenido |Aslan+2 teclado numérico |Aslan+shift+flecha abajo |deslizar abajo (modo objeto) |Navega al primer objeto contenido por el actual navegador de objetos|
+|Navegar al objeto del foco |Aslan+Menos teclado numérico |Aslan+Retroceso |no |Navega al objeto que tiene actualmente el foco del sistema, y también coloca el cursor de revisión en la posición del cursor del Sistema, si se muestra|
+|Activar actual navegador de objetos |Aslan+enter teclado numérico |Aslan+enter |doble toque |Activa el actual navegador de objetos (similar a hacer clic con el ratón o presionar espacio cuando tiene el foco del sistema)|
+|Mover foco del Sistema a actual navegador de objetos |Aslan+shift+Menos teclado numérico |Aslan+shift+retroceso |no |presionado una vez Mueve el foco del Sistema al navegador de objetos actual, presionado dos veces mueve el cursor del sistema a la posición del cursor de revisión|
+|Anunciar dimensiones del navegador de objetos |Aslan+Suprimir teclado numérico |Aslan+suprimir |no |Anuncia información acerca de la localización del texto u objeto EN EL cursor DE REVISIÓN. Por ejemplo, esto podría incluir el porcentaje del documento, la distancia desde el borde de la página o la posición exacta en la pantalla. Al presionar dos veces podrá  proporcionar detalles adicionales.|
 
 <!-- KC:endInclude -->
 
@@ -419,7 +419,7 @@ nota: las teclas del teclado numérico requieren que la tecla BloqNum esté desa
 
 ### Revisando Texto {#ReviewingText}
 
-NVDA te permite leer el contenido de la [pantalla](#ScreenReview), [documento actual](#DocumentReview) o [objeto actual](#ObjectReview) por caracteres, palabras o líneas.
+Aslan te permite leer el contenido de la [pantalla](#ScreenReview), [documento actual](#DocumentReview) o [objeto actual](#ObjectReview) por caracteres, palabras o líneas.
 Esto es muy útil en lugares (incluyendo la consola del Dos de Windows) donde no haya la existencia de un  [cursor del sistema](#SystemCaret).
 Por ejemplo, puedes utilizarlo para revisar el texto de un largo mensaje de información en un diálogo.
 
@@ -435,23 +435,23 @@ Las siguientes comandos están disponibles para revisión de texto:
 
 | Nombre |Tecla Escritorio |Tecla Portátil |Táctil |Descripción|
 |---|---|---|---|---|
-|mover a la línea superior en revisión |shift+7 teclado numérico |NVDA+control+inicio |no |Mueve el cursor de revisión a la línea superior del texto|
-|Mover a la línea anterior en revisión |7 teclado numérico |NVDA+flecha arriba |deslizar arriba (modo texto) |Mueve el cursor de revisión a la línea anterior de texto|
-|Anunciar línea actual en revisión |8 teclado numérico |NVDA+shift+. |no |Anuncia la línea actual de texto donde esté colocado el cursor de revisión. presionando dos veces deletrea la línea, presionando tres veces deletrea la línea utilizando descripciones de caracteres.|
-|Mover a la línea siguiente en revisión |9 teclado numérico |NVDA+FLECHA abajo |deslizar abajo (modo texto) |Mueve el cursor de revisión a la línea siguiente de texto|
-|Mover a la línea inferior en revisión |shift+9 teclado numérico |NVDA+control+fin |no |Mueve el cursor de revisión a la línea inferior de texto|
-|Mover a la palabra anterior en revisión |4 teclado numérico |NVDA+control+flecha izquierda |deslizar con 2 dedos a la izquierda (modo texto) |Mueve el cursor de revisión a la palabra anterior en el texto|
-|Anunciar palabra actual en revisión |5 teclado numérico |NVDA+control+. |no |Anuncia la palabra actual en el texto donde esté posicionado el cursor de revisión. presionando dos veces deletrea la palabra, presionando tres veces deletrea la palabra utilizando descripciones de caracteres.|
-|Mover a la siguiente palabra en revisión |6 teclado numérico |NVDA+control+flecha derecha |desplazar con 2 dedos a la derecha (modo texto) |Mueve el cursor de revisión a la siguiente palabra en el texto|
-|mover al inicio de la línea en revisión |shift+1 teclado numérico |NVDA+inicio |no |Mueve el cursor de revisión al comienzo de la línea actual en el texto|
-|Mover al carácter anterior en revisión |1 teclado numérico |NVDA+flecha izquierda |deslizar a la izquierda (modo texto) |Mueve el cursor de revisión al carácter anterior en la línea actual en el texto|
-|Anunciar carácter actual en revisión |2 teclado numérico |NVDA+. |no |Anuncia el carácter actual en la línea de texto donde esté posicionado el cursor de revisión. presionando dos veces anuncia una descripción o ejemplo de ese carácter. presionando tres veces anuncia el valor numérico del carácter en decimal y hexadecimal.|
-|Mover al siguiente carácter en revisión |3 teclado numérico |NVDA+flecha derecha |deslizar a la derecha (modo texto) |Mueve el cursor de revisión al siguiente carácter en la línea actual de texto|
-|Mover al final de la línea en revisión |shift+3 teclado numérico |NVDA+fin |no |Mueve el cursor de revisión al final de la línea actual de texto|
-|Leer todo con revisión |Más teclado numérico |NVDA+shift+a |deslizar con 3 dedos abajo (modo texto) |Lee desde la posición actual del cursor de revisión, moviéndolo según baja|
-|Seleccionar después Copiar desde cursor de revisión |NVDA+f9 |NVDA+f9 |none |Comienza la selección después procesa la copia desde la posición actual del cursor de revisión. La acción actual no se lleva a cabo hasta que digas a NVDA dónde está el final del rango de texto|
-|Seleccionar después copiar a cursor de revisión |NVDA+f10 |NVDA+f10 |none |En la primera presionación, el texto se selecciona desde encima de la posición previamente fijada como marca de comienzo e incluyendo la posición actual del cursor de revisión. Después de presionar esta tecla una segunda vez, el texto se copiará al portapapeles de Windows|
-|Anunciar formato del texto |NVDA+f |NVDA+f |no |Informa del formato del texto donde esté situado actualmente el cursor de revisión. presionando dos veces muestra la información en modo exploración|
+|mover a la línea superior en revisión |shift+7 teclado numérico |Aslan+control+inicio |no |Mueve el cursor de revisión a la línea superior del texto|
+|Mover a la línea anterior en revisión |7 teclado numérico |Aslan+flecha arriba |deslizar arriba (modo texto) |Mueve el cursor de revisión a la línea anterior de texto|
+|Anunciar línea actual en revisión |8 teclado numérico |Aslan+shift+. |no |Anuncia la línea actual de texto donde esté colocado el cursor de revisión. presionando dos veces deletrea la línea, presionando tres veces deletrea la línea utilizando descripciones de caracteres.|
+|Mover a la línea siguiente en revisión |9 teclado numérico |Aslan+FLECHA abajo |deslizar abajo (modo texto) |Mueve el cursor de revisión a la línea siguiente de texto|
+|Mover a la línea inferior en revisión |shift+9 teclado numérico |Aslan+control+fin |no |Mueve el cursor de revisión a la línea inferior de texto|
+|Mover a la palabra anterior en revisión |4 teclado numérico |Aslan+control+flecha izquierda |deslizar con 2 dedos a la izquierda (modo texto) |Mueve el cursor de revisión a la palabra anterior en el texto|
+|Anunciar palabra actual en revisión |5 teclado numérico |Aslan+control+. |no |Anuncia la palabra actual en el texto donde esté posicionado el cursor de revisión. presionando dos veces deletrea la palabra, presionando tres veces deletrea la palabra utilizando descripciones de caracteres.|
+|Mover a la siguiente palabra en revisión |6 teclado numérico |Aslan+control+flecha derecha |desplazar con 2 dedos a la derecha (modo texto) |Mueve el cursor de revisión a la siguiente palabra en el texto|
+|mover al inicio de la línea en revisión |shift+1 teclado numérico |Aslan+inicio |no |Mueve el cursor de revisión al comienzo de la línea actual en el texto|
+|Mover al carácter anterior en revisión |1 teclado numérico |Aslan+flecha izquierda |deslizar a la izquierda (modo texto) |Mueve el cursor de revisión al carácter anterior en la línea actual en el texto|
+|Anunciar carácter actual en revisión |2 teclado numérico |Aslan+. |no |Anuncia el carácter actual en la línea de texto donde esté posicionado el cursor de revisión. presionando dos veces anuncia una descripción o ejemplo de ese carácter. presionando tres veces anuncia el valor numérico del carácter en decimal y hexadecimal.|
+|Mover al siguiente carácter en revisión |3 teclado numérico |Aslan+flecha derecha |deslizar a la derecha (modo texto) |Mueve el cursor de revisión al siguiente carácter en la línea actual de texto|
+|Mover al final de la línea en revisión |shift+3 teclado numérico |Aslan+fin |no |Mueve el cursor de revisión al final de la línea actual de texto|
+|Leer todo con revisión |Más teclado numérico |Aslan+shift+a |deslizar con 3 dedos abajo (modo texto) |Lee desde la posición actual del cursor de revisión, moviéndolo según baja|
+|Seleccionar después Copiar desde cursor de revisión |Aslan+f9 |Aslan+f9 |none |Comienza la selección después procesa la copia desde la posición actual del cursor de revisión. La acción actual no se lleva a cabo hasta que digas a Aslan dónde está el final del rango de texto|
+|Seleccionar después copiar a cursor de revisión |Aslan+f10 |Aslan+f10 |none |En la primera presionación, el texto se selecciona desde encima de la posición previamente fijada como marca de comienzo e incluyendo la posición actual del cursor de revisión. Después de presionar esta tecla una segunda vez, el texto se copiará al portapapeles de Windows|
+|Anunciar formato del texto |Aslan+f |Aslan+f |no |Informa del formato del texto donde esté situado actualmente el cursor de revisión. presionando dos veces muestra la información en modo exploración|
 |Anunciar reemplazo de símbolo actual |No |No |no |Verbaliza el símbolo donde esté colocado el cursor de revisión. presionado dos veces, muestra el símbolo y el texto utilizado para verbalizarlo en modo exploración.|
 
 <!-- KC:endInclude -->
@@ -467,16 +467,16 @@ La disposición está ilustrada como sigue:
 
 ### Modos de Revisión {#ReviewModes}
 
-los comandos de revisión de texto de NVDA pueden revisar el contenido dentro del navegador de objetos actual, documento actual, o pantalla, dependiendo del modo de revisión seleccionado.
-Los modos de revisión son un  reemplazo para el antiguo concepto de revisión plana de NVDA.
+los comandos de revisión de texto de Aslan pueden revisar el contenido dentro del navegador de objetos actual, documento actual, o pantalla, dependiendo del modo de revisión seleccionado.
+Los modos de revisión son un  reemplazo para el antiguo concepto de revisión plana de Aslan.
 
 los comandos que siguen cambian entre los modos de revisión:
 <!-- KC:beginInclude -->
 
 | Nombre |Tecla Escritorio |Tecla Portátil |Táctil |Descripción|
 |---|---|---|---|---|
-|Cambiar al  modo de revisión siguiente |NVDA+7 teclado numérico |NVDA+repág |deslizar 2 dedos arriba |cambia al siguiente modo de revisión disponible.|
-|cambiar al modo de revisión anterior |NVDA+1 teclado numérico |NVDA+avPág |deslizar 2 dedos hacia abajo |Cambia al siguiente modo de revisión disponible.|
+|Cambiar al  modo de revisión siguiente |Aslan+7 teclado numérico |Aslan+repág |deslizar 2 dedos arriba |cambia al siguiente modo de revisión disponible.|
+|cambiar al modo de revisión anterior |Aslan+1 teclado numérico |Aslan+avPág |deslizar 2 dedos hacia abajo |Cambia al siguiente modo de revisión disponible.|
 
 <!-- KC:endInclude -->
 
@@ -494,7 +494,7 @@ El modo revisión de documentos te permite revisar el texto del documento entero
 Cuando se cambie desde revisión de objetos a revisión de documentos, el cursor de revisión se coloca en el documento en la posición del navegador de objetos.
 Al moverte por el documento con los comandos de revisión, el navegador de objetos se actualiza automáticamente al objeto que se encuentra en la  posición actual del cursor de revisión.
 
-Ten en cuenta que NVDA cambiará a revisión de documentos desde revisión de objetos automáticamente cuando te muevas por documentos en modo exploración.
+Ten en cuenta que Aslan cambiará a revisión de documentos desde revisión de objetos automáticamente cuando te muevas por documentos en modo exploración.
 
 #### Revisión de Pantalla {#ScreenReview}
 
@@ -504,40 +504,40 @@ Esto es similar a la funcionalidad de revisión de pantalla o cursor del ratón 
  Cuando se cambia al modo revisión de pantalla, el cursor de revisión se coloca en la posición de pantalla del actual [navegador de objetos](#ObjectNavigation).
  Cuando nos movamos por la pantalla con los comandos de revisión, el navegador de objetos se actualiza automáticamente al objeto encontrado en la posición de la pantalla del cursor de revisión.
 
- Ten en cuenta que en algunas aplicaciones modernas, NVDA podría no ver alguno o todo el texto disponible en la pantalla, debido al uso de las recientes tecnologías de dibujo en pantalla que son imposibles de soportar en estos momentos.
+ Ten en cuenta que en algunas aplicaciones modernas, Aslan podría no ver alguno o todo el texto disponible en la pantalla, debido al uso de las recientes tecnologías de dibujo en pantalla que son imposibles de soportar en estos momentos.
 
 ### Navegando con el Ratón {#NavigatingWithTheMouse}
 
-Cuando mueves el ratón, NVDA informa de forma predeterminada del texto que esté directamente bajo el puntero del mismo, según se mueva sobre él. 
-Donde se admita, NVDA leerá el valor de un párrafo de texto, aunque algunos controles sólo podrán leerse por líneas.
+Cuando mueves el ratón, Aslan informa de forma predeterminada del texto que esté directamente bajo el puntero del mismo, según se mueva sobre él. 
+Donde se admita, Aslan leerá el valor de un párrafo de texto, aunque algunos controles sólo podrán leerse por líneas.
 
-NVDA también puede configurarse para anunciar el tipo de control u objeto sobre el que esté actualmente el ratón según se mueva (por ejemplo: lista, botón etc.). 
+Aslan también puede configurarse para anunciar el tipo de control u objeto sobre el que esté actualmente el ratón según se mueva (por ejemplo: lista, botón etc.). 
 Esto podrá ser útil para usuarios ciegos totales cuando algunas veces el texto no baste.
 
-NVDA proporciona un modo para que los usuarios comprendan dónde está el ratón con respecto a las dimensiones de la pantalla, haciendo sonar las coordenadas actuales del ratón en forma de pitidos de audio. 
+Aslan proporciona un modo para que los usuarios comprendan dónde está el ratón con respecto a las dimensiones de la pantalla, haciendo sonar las coordenadas actuales del ratón en forma de pitidos de audio. 
 Cuanto más alto esté el ratón en la pantalla, más alto será El tono de los pitidos. 
 Cuanto más a la izquierda o a la derecha esté el ratón en la pantalla, más a la izquierda o a la derecha parecerá ir el sonido (asumiendo que el usuario tenga altavoces estereofónicos).
 
-Estas características extra del ratón no están activadas de forma predeterminada en NVDA. 
-Si deseas sacar partido de ellas, puedes configurarlas desde la categoría [Opciones del Ratón](#MouseSettings), del diálogo [Opciones de NVDA](#NVDASettings) que se encuentra en el menú Preferencias de NVDA.
+Estas características extra del ratón no están activadas de forma predeterminada en Aslan. 
+Si deseas sacar partido de ellas, puedes configurarlas desde la categoría [Opciones del Ratón](#MouseSettings), del diálogo [Opciones de Aslan](#AslanSettings) que se encuentra en el menú Preferencias de Aslan.
 
-Si bien un ratón físico o un trackpad se podrían utilizar para navegar con el ratón, NVDA tiene unas pocas teclas de comandos relacionadas con el ratón:
+Si bien un ratón físico o un trackpad se podrían utilizar para navegar con el ratón, Aslan tiene unas pocas teclas de comandos relacionadas con el ratón:
 <!-- KC:beginInclude -->
 
 | Nombre |Tecla Escritorio |Tecla Portátil |Descripción|
 |---|---|---|---|
-|Clic botón izquierdo del ratón |Dividir teclado numérico |NVDA+` (acento grave) |Hace clic en el botón izquierdo del ratón una vez. El común doble clic puede llevarse a cabo presionando esta tecla dos veces en rápida sucesión|
-|Bloquear botón izquierdo del ratón |shift+Dividir teclado numérico |NVDA+control+` (acento grave) |Mantiene presionado el botón izquierdo del ratón. Púlsalo de nuevo para liberarlo. Para arrastrar el ratón,  presiona esta tecla para bloquear el botón izquierdo y entonces mueve el ratón físicamente o utiliza una de las otras comandos de enrutamiento del ratón|
-|Clic botón derecho del ratón |Multiplicar teclado numérico |NVDA++ (signo más) |Hace Clic en el botón derecho del ratón una vez.|
-|Bloquear botón derecho del ratón |shift+Multiplicar teclado numérico |NVDA+control++ (signo más) |Mantiene presionado el botón derecho del ratón. presiona otra vez para liberarlo. Para arrastrar el ratón,  presiona esta tecla  para bloquear el botón derecho y entonces mueve el ratón físicamente o utiliza una de las otras comandos de enrutamiento del ratón|
-|Mover ratón a navegador de objetos actual |NVDA+Dividir teclado numérico |NVDA+shift+m |Mueve el ratón a la posición del navegador de objetos actual y cursor de revisión|
-|navegar al objeto bajo el ratón |NVDA+Multiplicar teclado numérico |NVDA+shift+n |Pone el navegador de objetos en el objeto localizado en la posición del ratón|
+|Clic botón izquierdo del ratón |Dividir teclado numérico |Aslan+` (acento grave) |Hace clic en el botón izquierdo del ratón una vez. El común doble clic puede llevarse a cabo presionando esta tecla dos veces en rápida sucesión|
+|Bloquear botón izquierdo del ratón |shift+Dividir teclado numérico |Aslan+control+` (acento grave) |Mantiene presionado el botón izquierdo del ratón. Púlsalo de nuevo para liberarlo. Para arrastrar el ratón,  presiona esta tecla para bloquear el botón izquierdo y entonces mueve el ratón físicamente o utiliza una de las otras comandos de enrutamiento del ratón|
+|Clic botón derecho del ratón |Multiplicar teclado numérico |Aslan++ (signo más) |Hace Clic en el botón derecho del ratón una vez.|
+|Bloquear botón derecho del ratón |shift+Multiplicar teclado numérico |Aslan+control++ (signo más) |Mantiene presionado el botón derecho del ratón. presiona otra vez para liberarlo. Para arrastrar el ratón,  presiona esta tecla  para bloquear el botón derecho y entonces mueve el ratón físicamente o utiliza una de las otras comandos de enrutamiento del ratón|
+|Mover ratón a navegador de objetos actual |Aslan+Dividir teclado numérico |Aslan+shift+m |Mueve el ratón a la posición del navegador de objetos actual y cursor de revisión|
+|navegar al objeto bajo el ratón |Aslan+Multiplicar teclado numérico |Aslan+shift+n |Pone el navegador de objetos en el objeto localizado en la posición del ratón|
 
 <!-- KC:endInclude -->
 
 ## Modo Exploración {#BrowseMode}
 
-Los documentos complejos de sólo lectura, tales como páginas Web, se representan en NVDA con un Modo Exploración. 
+Los documentos complejos de sólo lectura, tales como páginas Web, se representan en Aslan con un Modo Exploración. 
 Esto incluye documentos en las siguientes aplicaciones:
 
 * Mozilla Firefox
@@ -554,13 +554,13 @@ Esto incluye documentos en las siguientes aplicaciones:
 El modo Exploración también está opcionalmente disponible para documentos de Microsoft Word.
 
 En el Modo Exploración, el contenido del documento está disponible mediante una representación plana por el que te puedes mover con las teclas de cursor como si se tratara de un documento de texto normal. 
-Todas las teclas de comandos de [cursor del sistema](#SystemCaret) de NVDA funcionarán en este modo; por ejemplo: leer todo, anunciar formato, comandos de navegación de tabla, etc.
+Todas las teclas de comandos de [cursor del sistema](#SystemCaret) de Aslan funcionarán en este modo; por ejemplo: leer todo, anunciar formato, comandos de navegación de tabla, etc.
 La información tal como si el texto es un enlace,  encabezado, etc. se anuncia junto con el texto según te muevas.
 
 A veces, necesitarás interactuar directamente con controles en estos documentos.
 +Por ejemplo, tendrás que hacer esto para campos de texto editable y listas tal que puedas escribir caracteres y utilizar las teclas de cursor para trabajar con el control.
 Esto se hace cambiando a modo foco, donde casi todas las teclas se pasan al control.
-Cuando se está en modo Exploración, por defecto, NVDA cambiará automáticamente a modo foco si tabulas a o haces clic sobre un control en particular que lo requiera.
+Cuando se está en modo Exploración, por defecto, Aslan cambiará automáticamente a modo foco si tabulas a o haces clic sobre un control en particular que lo requiera.
 En cambio, tabulando o haciendo clic sobre un control que no requiera modo foco retornará a modo exploración.
 También puedes presionar enter o espacio para cambiar a modo foco en controles que lo requieran.
 presionando escape volverás a modo exploración.
@@ -570,19 +570,19 @@ Además, puedes forzar manualmente el modo foco, después de lo cual permanecer�
 
 | Nombre |Tecla |Descripción|
 |---|---|---|
-|Alternar modos exploración/foco |NVDA+espacio |Conmuta entre modo foco y modo Exploración|
+|Alternar modos exploración/foco |Aslan+espacio |Conmuta entre modo foco y modo Exploración|
 |Salir de modo foco |escape |Cambia a modo exploración si el modo foco anteriormente estaba cambiado automáticamente|
-|Refrescar documento en modo exploración |NVDA+f5 |Recarga el contenido del documento actual (útil si ciertos contenidos parecen estar desaparecidos del documento. No disponible en Microsoft Word y Outlook.)|
-|Buscar |NVDA+control+f |Despliega un diálogo en el que puedes teclear algún texto a encontrar en el  documento actual. Consulta [buscar texto](#SearchingForText) para más información.|
-|Buscar siguiente |NVDA+f3 |Encuentra la siguiente  ocurrencia del texto en el documento que buscaste anteriormente|
-|Buscar anterior |NVDA+shift+f3 |Encuentra la ocurrencia anterior del texto en el documento buscado anteriormente|
-|abrir descripción larga |NVDA+d |Abre una ventana nueva conteniendo una descripción larga para el elemento sobre el que esté si tiene una.|
+|Refrescar documento en modo exploración |Aslan+f5 |Recarga el contenido del documento actual (útil si ciertos contenidos parecen estar desaparecidos del documento. No disponible en Microsoft Word y Outlook.)|
+|Buscar |Aslan+control+f |Despliega un diálogo en el que puedes teclear algún texto a encontrar en el  documento actual. Consulta [buscar texto](#SearchingForText) para más información.|
+|Buscar siguiente |Aslan+f3 |Encuentra la siguiente  ocurrencia del texto en el documento que buscaste anteriormente|
+|Buscar anterior |Aslan+shift+f3 |Encuentra la ocurrencia anterior del texto en el documento buscado anteriormente|
+|abrir descripción larga |Aslan+d |Abre una ventana nueva conteniendo una descripción larga para el elemento sobre el que esté si tiene una.|
 
 <!-- KC:endInclude -->
 
 ### Navegación con una Sola Letra {#SingleLetterNavigation}
 
-Mientras se esté en modo exploración, para una navegación más rápida NVDA también proporciona teclas de un solo carácter para saltar a ciertos campos en el documento.
+Mientras se esté en modo exploración, para una navegación más rápida Aslan también proporciona teclas de un solo carácter para saltar a ciertos campos en el documento.
 Ten en cuenta que no todas estas comandos se soportan en cada tipo de documento.
 
 <!-- KC:beginInclude -->
@@ -622,9 +622,9 @@ Para moverte al comienzo o final de elementos contenedores tales como listas y t
 <!-- KC:endInclude -->
 
 Algunas aplicaciones web tales como Gmail, Twitter y Facebook utilizan letras solas como atajos de teclado.
-Si quieres utilizar éstas aún podrás usar las teclas de cursor para leer en modo exploración, puedes desactivar temporalmente  las teclas de navegación con una sola letra de NVDA.
+Si quieres utilizar éstas aún podrás usar las teclas de cursor para leer en modo exploración, puedes desactivar temporalmente  las teclas de navegación con una sola letra de Aslan.
 <!-- KC:beginInclude -->
-Para activar o desactivar la navegación con una sola letra para el documento actual, presiona NVDA+shift+espacio.
+Para activar o desactivar la navegación con una sola letra para el documento actual, presiona Aslan+shift+espacio.
 <!-- KC:endInclude -->
 
 ### La Lista de Elementos {#ElementsList}
@@ -638,7 +638,7 @@ Una vez hayas elegido un elemento, puedes utilizar los botones proporcionados en
 
 | Nombre |Tecla |Descripción|
 |---|---|---|
-|Lista de elementos del Modo Exploración |NVDA+f7 |Lista  varios tipos de elementos en el documento actual|
+|Lista de elementos del Modo Exploración |Aslan+f7 |Lista  varios tipos de elementos en el documento actual|
 
 <!-- KC:endInclude -->
 
@@ -653,16 +653,16 @@ Utiliza las siguientes teclas para realizar  búsquedas:
 
 | Nombre |Tecla |Descripción|
 |---|---|---|
-|Buscar texto |NVDA+control+f |Abre el diálogo buscar|
-|Buscar siguiente |NVDA+f3 |Busca la siguiente ocurrencia del término buscado actual||
-|Buscar anterior |NVDA+shift+f3 |Busca la ocurrencia anterior del término buscado actual|
+|Buscar texto |Aslan+control+f |Abre el diálogo buscar|
+|Buscar siguiente |Aslan+f3 |Busca la siguiente ocurrencia del término buscado actual||
+|Buscar anterior |Aslan+shift+f3 |Busca la ocurrencia anterior del término buscado actual|
 
 <!-- KC:endInclude -->
 
 ### Objetos Integrados {#ImbeddedObjects}
 
 Las páginas pueden incluir contenido enriquecido utilizando tecnologías tales como Adobe Flash, Oracle Java y HTML5, así como aplicaciones y diálogos. 
-En los casos en que se encuentren en el modo de Navegación, NVDA anunciará "objeto integrado", "aplicación" o "diálogo", respectivamente.
+En los casos en que se encuentren en el modo de Navegación, Aslan anunciará "objeto integrado", "aplicación" o "diálogo", respectivamente.
 Puedes moverte rápidamente a ellos utilizando las teclas de navegación de una sola tecla de objetos integrados o y shift+o.
 Para interactuar con estos objetos, puedes presionar enter sobre ellos.
 Si son accesibles, entonces puedes tabular por ellos e interactuar como con cualquier otra aplicación. 
@@ -671,17 +671,17 @@ Se proporciona una orden de teclado para regresar a la página original que cont
 
 | Nombre |Tecla |Descripción|
 |---|---|---|
-|Mover al contenido del modo de Navegación |NVDA+control+espacio |Mueve el foco fuera del actual objeto integrado y lo pone dentro del documento que lo contiene|
+|Mover al contenido del modo de Navegación |Aslan+control+espacio |Mueve el foco fuera del actual objeto integrado y lo pone dentro del documento que lo contiene|
 
 <!-- KC:endInclude -->
 
 ## Leyendo Contenido Matemático {#ReadingMath}
 
-Utilizando MathPlayer 4 from Design Science, NVDA puede leer y navegar interactivamente por el contenido matemático soportado.
+Utilizando MathPlayer 4 from Design Science, Aslan puede leer y navegar interactivamente por el contenido matemático soportado.
 Esto requiere que MathPlayer 4 esté instalado en el ordenador.
 MathPlayer está disponible como una descarga gratuita desde: https://www.dessci.com/en/products/mathplayer/
 
-NVDA admite los siguientes tipos de contenidos matemáticos:
+Aslan admite los siguientes tipos de contenidos matemáticos:
 
 * MathML en Mozilla Firefox Microsoft Internet Explorer y Google Chrome..
 * Design Science MathType en Microsoft Word y PowerPoint.
@@ -690,7 +690,7 @@ MathType tiene que estar instalado para que esto funcione. La versión de prueba
 Ten en cuenta que esto no es un estándar official aún, así que no hay actualmente software disponible al público que pueda producir este contenido.
 * Matemáticas en Kindle para PC para libros con matemáticas accesibles.
 
-Al leer un documento, NVDA verbalizará cualquier contenido matemático compatible donde aparezca.
+Al leer un documento, Aslan verbalizará cualquier contenido matemático compatible donde aparezca.
 Si estás utilizando una pantalla braille, también se mostrará en braille.
 
 ### Navegación Interactiva {#InteractiveNavigation}
@@ -709,7 +709,7 @@ Por omisión, el cursor de revisión sigue al cursor del sistema, así puedes ut
 
 | Nombre |Tecla |Descripción|
 |---|---|---|
-|Interactuar con contenido matemático |NVDA+alt+m |Comienza la interacción con el contenido matemático.|
+|Interactuar con contenido matemático |Aslan+alt+m |Comienza la interacción con el contenido matemático.|
 
 <!-- KC:endInclude -->
 
@@ -721,12 +721,12 @@ Cuando desees volver al documento, simplemente presiona la tecla escape.
 
 ## Braille {#Braille}
 
-Si tienes una pantalla braille, NVDA puede mostrar información en braille.
+Si tienes una pantalla braille, Aslan puede mostrar información en braille.
 Si tu pantalla braille tiene un teclado tipo Perkins, también puedes enterducir braille contraído o sin contraer.
 
 Por favor consulta la sección [líneas braille admitidas](#SupportedBrailleDisplays) para información  acerca de las líneas braille soportadas.
-Esta sección también contiene información sobre qué pantallas son compatibles con la función de detección automática de líneas braille de NVDA.
-Puedes configurar el braille utilizando la [categoría Opciones de Braille](#BrailleSettings) del diálogo [Opciones de NVDA](#NVDASettings).
+Esta sección también contiene información sobre qué pantallas son compatibles con la función de detección automática de líneas braille de Aslan.
+Puedes configurar el braille utilizando la [categoría Opciones de Braille](#BrailleSettings) del diálogo [Opciones de Aslan](#AslanSettings).
 
 ### Abreviaturas de tipos de Control, estado y regiones {#BrailleAbbreviations}
 
@@ -824,8 +824,8 @@ Finalmente, se definieron las siguientes abreviaturas para regiones:
 
 ### Entrada Braille {#BrailleInput}
 
-NVDA admite la entrada de braille  contraído y sin contraer a través de un teclado braille.
-Puedes seleccionar la tabla de transcripción utilizada para transcribir braille en el texto utilizando la opción [Tabla de entrada](#BrailleSettingsInputTable) en la categoría de braille en el diálogo [Opciones de NVDA](#NVDASettings).
+Aslan admite la entrada de braille  contraído y sin contraer a través de un teclado braille.
+Puedes seleccionar la tabla de transcripción utilizada para transcribir braille en el texto utilizando la opción [Tabla de entrada](#BrailleSettingsInputTable) en la categoría de braille en el diálogo [Opciones de Aslan](#AslanSettings).
 
 Cuando se esté utilizando braille sin contraer, el texto se inserta tan pronto como se enterduce.
 Cuando se esté utilizando braille contraído, el texto se inserta al presionar espacio o enter al final de una palabra.
@@ -841,10 +841,10 @@ presionando los puntos 7 + 8 transcribe cualquier entrada braille, pero sin aña
 ## Reconocimiento de Contenidos {#ContentRecognition}
 
 Cuando los autores no proporcionan suficiente información para que un usuario de lector de pantalla determine el contenido de algo, pueden utilizarse varias herramientas para intentar reconocer el contenido desde una imagen.
-NVDA es compatible con la funcionalidad de reconocimiento óptico de caracteres (OCR) integrada en Windows 10 para reconocer texto desde imágenes.
-Pueden proporcionarse reconocedores de contenido adicionales en complementos de NVDA.
+Aslan es compatible con la funcionalidad de reconocimiento óptico de caracteres (OCR) integrada en Windows 10 para reconocer texto desde imágenes.
+Pueden proporcionarse reconocedores de contenido adicionales en complementos de Aslan.
 
-Cuando utilices una orden de reconocimiento de contenido, NVDA reconoce contenido desde el [navegador de objetos](#ObjectNavigation) actual.
+Cuando utilices una orden de reconocimiento de contenido, Aslan reconoce contenido desde el [navegador de objetos](#ObjectNavigation) actual.
 Por omisión, el navegador de objetos sigue al foco del sistema o al cursor del modo exploración, así puedes mover normalmente el foco o el cursor del modo exploración donde desees.
 Por ejemplo, si mueves  el cursor del modo exploración a un gráfico, el reconocimiento reconocerá el contenido desde el gráfico por omisión.
 Por lo tanto, es posible que desees utilizar la navegación de objetos directamente para, por ejemplo, reconocer el contenido de toda una ventana de aplicación.
@@ -856,32 +856,32 @@ presionando escape se descarta el resultado del reconocimiento.
 ### OCR de Windows 10 {#Win10Ocr}
 
 Windows 10 incluye un OCR para muchos idiomas.
-NVDA puede utilizar esto para reconocer texto desde imágenes o aplicaciones inaccesibles.
+Aslan puede utilizar esto para reconocer texto desde imágenes o aplicaciones inaccesibles.
 
-Puedes configurar el idioma a utilizar para el reconocimiento de texto en la [categoría OCR de Windows 10](#Win10OcrSettings)del diálogo [Opciones de NVDA](#NVDASettings).
+Puedes configurar el idioma a utilizar para el reconocimiento de texto en la [categoría OCR de Windows 10](#Win10OcrSettings)del diálogo [Opciones de Aslan](#AslanSettings).
 Pueden instalarse idiomas adicionales abriendo el menú Inicio, eligiendo Configuración, seleccionando Hora e Idioma -> Región e Idioma y luego eligiendo Añadir un Idioma.
 
 <!-- KC:beginInclude -->
-Para reconocer el texto en el actual navegador de objetos utilizando el OCR de Windows 10, presiona NVDA+r.
+Para reconocer el texto en el actual navegador de objetos utilizando el OCR de Windows 10, presiona Aslan+r.
 <!-- KC:endInclude -->
 
 ## Características Específicas para Aplicación {#ApplicationSpecificFeatures}
 
-NVDA proporciona sus propias características adicionales para algunas aplicaciones con el fin de facilitar ciertas tareas o para proporcionar acceso a funciones que de otro modo no serían accesibles para los usuarios de lectores de pantalla.
+Aslan proporciona sus propias características adicionales para algunas aplicaciones con el fin de facilitar ciertas tareas o para proporcionar acceso a funciones que de otro modo no serían accesibles para los usuarios de lectores de pantalla.
 
 ### Microsoft Word {#MicrosoftWord}
 #### Lectura Automática de Encabezados de Columna y Fila {#WordAutomaticColumnAndRowHeaderReading}
 
-NVDA es capaz de anunciar automáticamente  los encabezados apropiados de fila y columna al navegar a través de tablas en Microsoft Word.
-Esto requiere primero que la opción Anunciar  Encabezados de Filas y columnas en las ocpiones de NVDA Formateado de Documentos, que se encuentra en el diálogo [Opciones de NVDA](#NVDASettings), esté activada.
-En segundo lugar, NVDA necesita saber qué fila o columna contiene el encabezado en cualquier tabla dada.
+Aslan es capaz de anunciar automáticamente  los encabezados apropiados de fila y columna al navegar a través de tablas en Microsoft Word.
+Esto requiere primero que la opción Anunciar  Encabezados de Filas y columnas en las ocpiones de Aslan Formateado de Documentos, que se encuentra en el diálogo [Opciones de Aslan](#AslanSettings), esté activada.
+En segundo lugar, Aslan necesita saber qué fila o columna contiene el encabezado en cualquier tabla dada.
 Después de moverse a la primera celda en la columna o fila que contenga los encabezados, utiliza una de los comandos siguientes:
 <!-- KC:beginInclude -->
 
 | Nombre |Tecla |Descripción|
 |---|---|---|
-|Definir encabezados de columna |NVDA+shift+c |presionando esto una vez dice a NVDA que esta es la primera celda de encabezado en la fila que contiene encabezado de columna, que debería ser anunciada automáticamente al moverse entre columnas por debajo de esta fila. presionando dos veces eliminarás la opción.|
-|Definir encabezados de fila |NVDA+shift+r |presionando esto una vez dices a NVDA que esta es la primera celda de encabezado en la columna que contiene encabezados de fila, la cual debería aunuciarse automáticamente al moverse entre filas después de esta columna. presionando dos veces eliminarás la opción.|
+|Definir encabezados de columna |Aslan+shift+c |presionando esto una vez dice a Aslan que esta es la primera celda de encabezado en la fila que contiene encabezado de columna, que debería ser anunciada automáticamente al moverse entre columnas por debajo de esta fila. presionando dos veces eliminarás la opción.|
+|Definir encabezados de fila |Aslan+shift+r |presionando esto una vez dices a Aslan que esta es la primera celda de encabezado en la columna que contiene encabezados de fila, la cual debería aunuciarse automáticamente al moverse entre filas después de esta columna. presionando dos veces eliminarás la opción.|
 
 <!-- KC:endInclude -->
 Estas opciones se almacenarán en el documento como marcadores compatibles con otros lectores de pantalla tales como Jaws.
@@ -891,37 +891,37 @@ Esto significa que otros usuarios de lectores de pantalla que abran este documen
 
 De manera similar a la web, el modo exploración puede utilizarse en Microsoft Word para permitirte utilizar características tales como navegación rápida y la Lista de Elementos
 <!-- KC:beginInclude -->
-Para activar o desactivar el modo Exploración en Microsoft Word, presiona NVDA+espacio.
+Para activar o desactivar el modo Exploración en Microsoft Word, presiona Aslan+espacio.
 <!-- KC:endInclude -->
 Para información adicional acerca del modo Exploración y la Navegación Rápida, consulta la [sección Modo Exploración](#BrowseMode).
 
 ##### La Lista de Elementos {#WordElementsList}
 
 <!-- KC:beginInclude -->
-Mientras se esté en modo Exploración en Microsoft Word, puedes acceder a la Lista de Elementos presionando NVDA+f7.
+Mientras se esté en modo Exploración en Microsoft Word, puedes acceder a la Lista de Elementos presionando Aslan+f7.
 <!-- KC:endInclude -->
 La Lista de Elementos puede listar encabezados, enlaces, anotaciones (las cuales incluyen comentarios y seguimiento de cambios) y errores (actualmente limitados a errores de ortografía).
 
 #### Anunciado de Comentarios {#WordReportingComments}
 
 <!-- KC:beginInclude -->
-Para anunciar cualquier comentario en la posición actual del cursor de edición, presiona NVDA+alt+c.
+Para anunciar cualquier comentario en la posición actual del cursor de edición, presiona Aslan+alt+c.
 <!-- KC:endInclude -->
- Todos los comentarios para el documento con otro seguimiento de cambios también pueden listarse en la Lista de Elementos de NVDA al seleccionar Anotaciones según se teclea.
+ Todos los comentarios para el documento con otro seguimiento de cambios también pueden listarse en la Lista de Elementos de Aslan al seleccionar Anotaciones según se teclea.
 
 ### Microsoft Excel {#MicrosoftExcel}
 #### Lectura Automática de Encabezado de Columna y fila {#ExcelAutomaticColumnAndRowHeaderReading}
 
-NVDA podrá anunciar automáticamente los encabezados apropiados de fila y columna al navegar a través de las hojas de cálculo de Excel.
-Esto requiere en primer lugar que la opción Anunciar Encabezados de Fila y Columna de tabla en las opciones de NVDA Formateado de documentos, que se encuentra en el diálogo [Opciones de NVDA](#NVDASettings), esté activado.
-En segundo lugar, NVDA necesita saber qué fila o columna contiene los encabezados.
+Aslan podrá anunciar automáticamente los encabezados apropiados de fila y columna al navegar a través de las hojas de cálculo de Excel.
+Esto requiere en primer lugar que la opción Anunciar Encabezados de Fila y Columna de tabla en las opciones de Aslan Formateado de documentos, que se encuentra en el diálogo [Opciones de Aslan](#AslanSettings), esté activado.
+En segundo lugar, Aslan necesita saber qué fila o columna contiene los encabezados.
 Después de moverte a la primera celda en la columna o fila que contenga los encabezados, utiliza una de las siguientes comandos:
 <!-- KC:beginInclude -->
 
 | Nombre |Tecla |Descripción|
 |---|---|---|
-|Definir encabezado de columnas |NVDA+shift+c |Al presionar esto una vez le dice a NVDA que es la primera celda de encabezado de la fila que contiene los encabezados de columna, que debería ser anunciado automáticamente cuando te desplaces entre las columnas por debajo de esta fila. presionando dos veces se eliminará la opción.|
-|Definir encabezado de filas |NVDA+shift+r |Al presionar esto una vez le dice a NVDA que es la primera celda del encabezado de la columna que contiene los encabezados de fila, que debería ser anunciado automáticamente cuando te desplaces entre las filas después de esta columna. presionando dos veces eliminarás la opción.|
+|Definir encabezado de columnas |Aslan+shift+c |Al presionar esto una vez le dice a Aslan que es la primera celda de encabezado de la fila que contiene los encabezados de columna, que debería ser anunciado automáticamente cuando te desplaces entre las columnas por debajo de esta fila. presionando dos veces se eliminará la opción.|
+|Definir encabezado de filas |Aslan+shift+r |Al presionar esto una vez le dice a Aslan que es la primera celda del encabezado de la columna que contiene los encabezados de fila, que debería ser anunciado automáticamente cuando te desplaces entre las filas después de esta columna. presionando dos veces eliminarás la opción.|
 
 <!-- KC:endInclude -->
 Estas opciones se almacenarán en el libro de trabajo como rangos de nombres definidos, compatibles con otros lectores de pantalla tales como Jaws.
@@ -929,9 +929,9 @@ Esto significa que otros usuarios de lectores de pantalla que abran este libro d
 
 #### La Lista de Elementos {#ExcelElementsList}
 
-De modo similar a la web, NVDA tiene una Lista de Elementos para Microsoft Excel, que te permite listar y acceder a varios tipos diferentes de información.
+De modo similar a la web, Aslan tiene una Lista de Elementos para Microsoft Excel, que te permite listar y acceder a varios tipos diferentes de información.
 <!-- KC:beginInclude -->
-Para acceder a la Lista de Elementos en Excel, presiona NVDA+f7.
+Para acceder a la Lista de Elementos en Excel, presiona Aslan+f7.
 <!-- KC:endInclude -->
 Los diversos tipos de información disponible en la Lista de Elementos son:
 
@@ -953,15 +953,15 @@ Al seleccionar un campo de formulario y al presionar enter o el botón Mover te 
 #### Anunciando Comentarios {#ExcelReportingComments}
 
 <!-- KC:beginInclude -->
-Para anunciar cualquier comentario para la celda actualmente enfocada, presiona NVDA+alt+c.
+Para anunciar cualquier comentario para la celda actualmente enfocada, presiona Aslan+alt+c.
 <!-- KC:endInclude -->
-Todos los comentarios para la hoja de cálculo también pueden listarse en la Lista de Elementos de NVDA.
+Todos los comentarios para la hoja de cálculo también pueden listarse en la Lista de Elementos de Aslan.
 
 #### Leyendo Celdas Protegidas {#ExcelReadingProtectedCells}
 
 Si un libro de trabajo ha sido protegido, podría no ser posible mover el foco a celdas en particular que hayan sido bloqueadas para edición.
 <!-- KC:beginInclude -->
-Para permitir el movimiento a celdas bloqueadas, cambia a modo Exploración presionando NVDA+espacio, y entonces utiliza los comandos estándar de movimiento de Excel  tales como las teclas de cursor para moverte por todas las celdas en la hoja de cálculo actual.
+Para permitir el movimiento a celdas bloqueadas, cambia a modo Exploración presionando Aslan+espacio, y entonces utiliza los comandos estándar de movimiento de Excel  tales como las teclas de cursor para moverte por todas las celdas en la hoja de cálculo actual.
 <!-- KC:endInclude -->
 
 #### Campos de Formulario {#ExcelFormFields}
@@ -977,7 +977,7 @@ Para información adicional acerca del modo exploración y de la navegación con
 
 | Nombre |Tecla |Descripción|
 |---|---|---|
-|conmutar lectura de notas del orador |control+shift+s |Cuando se está en una presentación en ejecución, esta orden conmutará entre las notas del orador para la diapositiva y el contenido de la diapositiva. Esto sólo afecta a lo que lee NVDA, no a lo que se muestra en la pantalla.|
+|conmutar lectura de notas del orador |control+shift+s |Cuando se está en una presentación en ejecución, esta orden conmutará entre las notas del orador para la diapositiva y el contenido de la diapositiva. Esto sólo afecta a lo que lee Aslan, no a lo que se muestra en la pantalla.|
 
 <!-- KC:endInclude -->
 
@@ -1001,7 +1001,7 @@ Nota: los atajos de teclado de arriba sólo funcionan con la cadena de formato p
 
 | Nombre |Tecla |Descripción|
 |---|---|---|
-|Anunciar mensaje reciente |NVDA+control+1-4 |Anuncia uno de los mensajes recientes, dependiendo del número presionado; por ejemplo: NVDA+control+2 lee el segundo mensaje más reciente.|
+|Anunciar mensaje reciente |Aslan+control+1-4 |Anuncia uno de los mensajes recientes, dependiendo del número presionado; por ejemplo: Aslan+control+2 lee el segundo mensaje más reciente.|
 
 <!-- KC:endInclude -->
 
@@ -1023,13 +1023,13 @@ Cuando se está en una conversación:
 
 | Nombre |Tecla |Descripción|
 |---|---|---|
-|Revisar mensaje |NVDA+control+1-0 |Anuncia y mueve el cursor de revisión a un mensaje reciente, dependiendo del número presionado; por por ejemplo: NVDA+control+2 lee el segundo mensaje más reciente.|
+|Revisar mensaje |Aslan+control+1-0 |Anuncia y mueve el cursor de revisión a un mensaje reciente, dependiendo del número presionado; por por ejemplo: Aslan+control+2 lee el segundo mensaje más reciente.|
 
 <!-- KC:endInclude -->
 
 ### Kindle para PC {#Kindle}
 
-NVDA es compatible con la lectura y la navegación de libros en Amazon Kindle para PC.
+Aslan es compatible con la lectura y la navegación de libros en Amazon Kindle para PC.
 Esta funcionalidad sólo está disponible en libros de Kindle designados con "Lector de Pantalla: Soportado" lo cual puedes verificar en la página de detalles para el libro.
 
 Se utiliza el modo exploración para leer libros.
@@ -1042,7 +1042,7 @@ Puedes pasar a la siguiente página manualmente con la tecla avPág y retroceder
 Se admite la navegación con una sola tecla para enlaces y gráficos, pero sólo dentro de la página actual.
 La navegación por enlaces también incluye notas al pie.
 
-NVDA proporciona soporte preliminar para la lectura y la navegación interactiva de contenido matemático para libros con matemáticas accesibles.
+Aslan proporciona soporte preliminar para la lectura y la navegación interactiva de contenido matemático para libros con matemáticas accesibles.
 Por favor consulta la sección [Leyendo Contenido Matemático](#ReadingMath) para información adicional.
 
 #### Selección de Texto {#KindleTextSelection}
@@ -1060,7 +1060,7 @@ Puedes añadir una nota con respecto a una palabra o a un pasaje de texto.
 Para ello, primero selecciona el texto pertinente y accede a las opciones de la selección según se describió anteriormente.
 A continuación, elige Añadir Nota.
 
-Cuando se lee en el modo exploración, NVDA se refiere a estas notas como comentarios.
+Cuando se lee en el modo exploración, Aslan se refiere a estas notas como comentarios.
 
 Para ver, editar o eliminar una nota:
 
@@ -1080,122 +1080,122 @@ Cuando se esté en la tabla de vista de libros añadidos:
 
 <!-- KC:endInclude -->
 
-## Configurando NVDA {#ConfiguringNVDA}
+## Configurando Aslan {#ConfiguringAslan}
 
-La mayor parte de la configuración puede realizarse utilizando cuadros de diálogo a los que se accede mediante el submenú Preferencias del menú NVDA.
-Muchas de estas opciones pueden encontrarse en el cuadro de diálogo multipágina [Opciones de NVDA](#NVDASettings).
+La mayor parte de la configuración puede realizarse utilizando cuadros de diálogo a los que se accede mediante el submenú Preferencias del menú Aslan.
+Muchas de estas opciones pueden encontrarse en el cuadro de diálogo multipágina [Opciones de Aslan](#AslanSettings).
 En todos los cuadros de diálogo, presiona el botón Aceptar para acceptar cualquier cambio que hayas hecho.
 Para cancelar cualquier cambio, presiona el botón Cancelar o la tecla escape.
 Para ciertos cuadros de diálogo, puedes presionar el botón aplicar para hacer que las opciones tengan lugar imediatamente sin cerrarlo.
 Algunas opciones también pueden cambiarse utilizando teclas de atajo,  que se enumeran donde sean relevantes en las secciones subsiguientes.
 
-### Opciones de NVDA {#NVDASettings}
+### Opciones de Aslan {#AslanSettings}
 
 <!-- KC:settingsSection: || Nombre | Tecla Escritorio | Tecla Portátil | Descripción | -->
-El cuadro de diálogo Opciones de NVDA contiene muchos parámetros de configuración que se pueden cambiar.
+El cuadro de diálogo Opciones de Aslan contiene muchos parámetros de configuración que se pueden cambiar.
 Este diálogo contiene una lista con varias categorías de opciones entre las que elegir.
 Al seleccionar una categoría, se mostrarán varias opciones relacionadas con esta categoría en este cuadro de diálogo.
 Estas opciones se pueden aplicar utilizando el botón aplicar, en cuyo caso el diálogo permanecerá abierto.
-Si deseas guardar la configuración y cerrar el cuadro de diálogo Opciones de NVDA, puedes utilizar el botón Aceptar.
+Si deseas guardar la configuración y cerrar el cuadro de diálogo Opciones de Aslan, puedes utilizar el botón Aceptar.
 
 Algunas categorías de opciones tienen un atajo de teclado dedicado.
-Si se presiona, este atajo de teclado abrirá  el diálogo Opciones de NVDA en esa categoría en particular.
+Si se presiona, este atajo de teclado abrirá  el diálogo Opciones de Aslan en esa categoría en particular.
 De forma predeterminada, no se puede acceder a todas las categorías con comandos de teclado.
 Si deseas acceder a categorías que no tengan atajos de teclado dedicados, utiliza el [cuadro de diálogo Gestos de Entrada](#InputGestures) para añadir un gesto personalizado tal como una orden de teclado o un gesto táctil para esa categoría.
 
-Las diversas categorías  de opciones que se encuentran en el cuadro de diálogo Opciones de NVDA se describirán a continuación..
+Las diversas categorías  de opciones que se encuentran en el cuadro de diálogo Opciones de Aslan se describirán a continuación..
 
-#### General (NVDA+control+g) {#GeneralSettings}
+#### General (Aslan+control+g) {#GeneralSettings}
 
-La categoría General del cuadro de diálogo Opciones de NVDA establece el comportamiento general de NVDA, como el idioma de la interfaz y si debería o no comprobar las actualizaciones.
+La categoría General del cuadro de diálogo Opciones de Aslan establece el comportamiento general de Aslan, como el idioma de la interfaz y si debería o no comprobar las actualizaciones.
 Esta categoría contiene las siguientes opciones:
 
 ##### Idioma {#GeneralSettingsLanguage}
 
-Este es un cuadro combinado que te permite seleccionar el idioma en que debería mostrarse la interface de usuario y los mensajes de NVDA. 
+Este es un cuadro combinado que te permite seleccionar el idioma en que debería mostrarse la interface de usuario y los mensajes de Aslan. 
 Hay muchos idiomas, no obstante la opción predeterminada es llamada "Predeterminado del usuario". 
-Esta elección dirá a NVDA que utilice el idioma en el que Windows esté actualmente ajustado. 
+Esta elección dirá a Aslan que utilice el idioma en el que Windows esté actualmente ajustado. 
 
-Por favor ten en cuenta que NVDA debe reiniciarse cuando se cambie el idioma. 
+Por favor ten en cuenta que Aslan debe reiniciarse cuando se cambie el idioma. 
 Cuando aparezca el diálogo de confirmación, selecciona "reiniciar ahora" o "reiniciar más tarde" si deseas utilizar el idioma nuevo ahora o en un momento posterior, respectivamente. Si está seleccionado "reiniciar más tarde", la configuración debe guardarse (o manualmente o utilizando la funcionalidad guardar al salir).
 
 ##### Guardar Configuración al Salir {#GeneralSettingsSaveConfig}
 
-Esta opción es una casilla de verificación que, cuando se marca, dice a NVDA que guarde automáticamente la actual configuración cuando se salga de NVDA. 
+Esta opción es una casilla de verificación que, cuando se marca, dice a Aslan que guarde automáticamente la actual configuración cuando se salga de Aslan. 
 
-##### Mostrar opciones de salida al salir de NVDA {#GeneralSettingsShowExitOptions}
+##### Mostrar opciones de salida al salir de Aslan {#GeneralSettingsShowExitOptions}
 
-Esta opción es una casilla de verificación que te permite elegir si aparece o no un diálogo al salir de NVDA que te pregunta sobre qué acción quieres llebar a cabo.
-Cuando se marque, aparecerá un diálogo al intentar salir de NVDA preguntándote si quieres salir, reiniciar, reiniciar con los complementos deshabilitados o instalar actualizaciones pendientes si las hay.
-Cuando se desmarque, NVDA saldrá inmediatamente.
+Esta opción es una casilla de verificación que te permite elegir si aparece o no un diálogo al salir de Aslan que te pregunta sobre qué acción quieres llebar a cabo.
+Cuando se marque, aparecerá un diálogo al intentar salir de Aslan preguntándote si quieres salir, reiniciar, reiniciar con los complementos deshabilitados o instalar actualizaciones pendientes si las hay.
+Cuando se desmarque, Aslan saldrá inmediatamente.
 
-##### Reproducir sonidos al iniciar o salir de NVDA {#GeneralSettingsPlaySounds}
+##### Reproducir sonidos al iniciar o salir de Aslan {#GeneralSettingsPlaySounds}
 
-Esta Opción es una casilla de verificación que, cuando está marcada, dice a NVDA que reproduzca sonidos cuando se inicie o se cierre.
+Esta Opción es una casilla de verificación que, cuando está marcada, dice a Aslan que reproduzca sonidos cuando se inicie o se cierre.
 
 ##### Nivel del Registro {#GeneralSettingsLogLevel}
 
-Este es un cuadro combinado que te permite elegir cuánta info pondrá NVDA en el registro según se ejecute. 
+Este es un cuadro combinado que te permite elegir cuánta info pondrá Aslan en el registro según se ejecute. 
 Generalmente los usuarios no deberían necesitar tocar esto ya que no es demasiado amigable. 
 Sin embargo, si deseas proporcionar información en un informe de fallos, o habilitar o deshabilitar todo el registro, entonces podrá ser una opción útil.
 
 Los niveles disponibles del registro son:
 
-* Deshabilitado: Aparte de un breve mensaje de inicio, NVDA no registrará nada mientras se ejecute.
-* Información: NVDA registrará información básica tal como mensajes de inicio e información útil para los desarrolladores.
+* Deshabilitado: Aparte de un breve mensaje de inicio, Aslan no registrará nada mientras se ejecute.
+* Información: Aslan registrará información básica tal como mensajes de inicio e información útil para los desarrolladores.
 * Advertencia de depuración: se registrarán mensajes de advertencia que no sean causados por errores graves.
 * Entrada/salida: se registrarán las entradas de las líneas braille y de los teclados, así como la salida de la voz y del braille. Si te preocupa la privacidad, no configures esta opción de nivel de registro.
 * Depuración: además de los mensajes de información, advertencia y entrada/salida, se registrarán mensajes de depuración adicionales. Al igual que con la Entrada/salida, si te preocupa la privacidad, no deberías configurar el nivel de registro en esta opción.
 
-##### Arrancar automáticamente NVDA después de Iniciar sesión en Windows {#GeneralSettingsStartAfterLogOn}
+##### Arrancar automáticamente Aslan después de Iniciar sesión en Windows {#GeneralSettingsStartAfterLogOn}
 
-Si esta opción está activada, NVDA arrancará automáticamente tan pronto como inicies sesión en Windows. 
-Esta opción sólo está disponible para copias instaladas de NVDA.
+Si esta opción está activada, Aslan arrancará automáticamente tan pronto como inicies sesión en Windows. 
+Esta opción sólo está disponible para copias instaladas de Aslan.
 
-##### Utilizar NVDA en la pantalla de logueo de Windows (requiere privilegios de administrador) {#GeneralSettingsStartOnLogOnScreen}
+##### Utilizar Aslan en la pantalla de logueo de Windows (requiere privilegios de administrador) {#GeneralSettingsStartOnLogOnScreen}
 
-Si inicias sesión en Windows proporcionando un nombre de usuario y una contraseña, entonces activando esta opción hará que NVDA se inicie automáticamente en la pantalla de logueo cuando Windows arranque. 
-Esta opción sólo está disponible para copias instaladas de NVDA.
+Si inicias sesión en Windows proporcionando un nombre de usuario y una contraseña, entonces activando esta opción hará que Aslan se inicie automáticamente en la pantalla de logueo cuando Windows arranque. 
+Esta opción sólo está disponible para copias instaladas de Aslan.
 
 ##### Utilizar Opciones guardadas actualmente en el logueo y otras pantallas seguras {#GeneralSettingsCopySettings}
 
-presionando este botón copias tu configuración de usuario de NVDA actualmente guardada al directorio de sistema de configuración de NVDA, tal que NVDA lo utilizará cuando se ejecute en el logueo, Control de Cuentas de Usuario (UAC) y otras pantallas seguras de Windows.
-Para estar seguro de que todas tus opciones se transfieren, asegúrate de guardar primeramente tu configuración con control+NVDA+c o guarda la configuración en el menú NVDA.
-Esta opción sólo está disponible para copias instaladas de NVDA.
+presionando este botón copias tu configuración de usuario de Aslan actualmente guardada al directorio de sistema de configuración de Aslan, tal que Aslan lo utilizará cuando se ejecute en el logueo, Control de Cuentas de Usuario (UAC) y otras pantallas seguras de Windows.
+Para estar seguro de que todas tus opciones se transfieren, asegúrate de guardar primeramente tu configuración con control+Aslan+c o guarda la configuración en el menú Aslan.
+Esta opción sólo está disponible para copias instaladas de Aslan.
 
-##### Buscar actualizaciones para NVDA automáticamente {#GeneralSettingsCheckForUpdates}
+##### Buscar actualizaciones para Aslan automáticamente {#GeneralSettingsCheckForUpdates}
 
-Si esto está activado, NVDA buscará automáticamente versiones actualizadas y te informará cuando una actualización esté disponible.
-También puedes buscar actualizaciones manualmente seleccionando Buscar Actualizaciones en el submenú Ayuda en el menú NVDA.
-Cuando se busquen actualizaciones manual o automáticamente, es necesario para NVDA enviar alguna información al servidor de actualizaciones para recibir la actualización correcta para tu sistema.
+Si esto está activado, Aslan buscará automáticamente versiones actualizadas y te informará cuando una actualización esté disponible.
+También puedes buscar actualizaciones manualmente seleccionando Buscar Actualizaciones en el submenú Ayuda en el menú Aslan.
+Cuando se busquen actualizaciones manual o automáticamente, es necesario para Aslan enviar alguna información al servidor de actualizaciones para recibir la actualización correcta para tu sistema.
 Se envía siempre la siguiente información: 
 
-* Versión actual de NVDA
+* Versión actual de Aslan
 * Versión del Sistema Operativo
 * Si el Sistema Operativo es de 64 o de 32 bits
 
-##### Permitir que el Proyecto NVDA Recopile Estadísticas de Uso de NVDA {#GeneralSettingsGatherUsageStats}
+##### Permitir que el Proyecto Aslan Recopile Estadísticas de Uso de Aslan {#GeneralSettingsGatherUsageStats}
 
-Si esto está activado, NV Access utilizará la información de las búsquedas de actualizaciones para seguir el número de usuarios de NVDA incluyendo datos demográficos particulares tales como el Sistema Operativo y el país de origen.
+Si esto está activado, NV Access utilizará la información de las búsquedas de actualizaciones para seguir el número de usuarios de Aslan incluyendo datos demográficos particulares tales como el Sistema Operativo y el país de origen.
 Ten en cuenta que aunque tu dirección IP se utilizará para calcular tu país durante la búsqueda de actualizaciones, la dirección IP nunca se conservará.
 Además de la información obligatoria necesaria para buscar actualizaciones, también se envía la siguiente información adicional actualmente:
 
-* Idioma de la interfaz de NVDA
-* Si esta copia de NVDA es portable o instalada
+* Idioma de la interfaz de Aslan
+* Si esta copia de Aslan es portable o instalada
 * El nombre del sintetizador de voz actual en uso (incluyendo el nombre del complemento que viene con el controlador)
 * El nombre de la pantalla Braille actual en uso (incluyendo el nombre del complemento que viene con el controlador)
 * La tabla de salida braille actual (si el Braille está en uso)
 
-Esta información ayuda enormemente a NV Access a priorizar el desarrollo futuro de NVDA.
+Esta información ayuda enormemente a NV Access a priorizar el desarrollo futuro de Aslan.
 
 ##### Notificar actualizaciones pendientes al arrancar {#GeneralSettingsNotifyPendingUpdates}
 
-Si esto está habilitado, NVDA te informará cuando haya una actualización pendiente al arrancar, ofreciéndote la posibilidad de instalarla.
-También puedes instalar manualmente la actualización pendiente desde el diálogo Salir de NVDA (si está habilitado), desde el menú NVDA, o al realizar una nueva búsqueda desde el menú Ayuda.
+Si esto está habilitado, Aslan te informará cuando haya una actualización pendiente al arrancar, ofreciéndote la posibilidad de instalarla.
+También puedes instalar manualmente la actualización pendiente desde el diálogo Salir de Aslan (si está habilitado), desde el menú Aslan, o al realizar una nueva búsqueda desde el menú Ayuda.
 
-#### Opciones de Voz (NVDA+control+v) {#SpeechSettings}
+#### Opciones de Voz (Aslan+control+v) {#SpeechSettings}
 
-La categoría voz en el cuadro de diálogo Opciones de NVDA contiene ajustes que te permiten cambiar el sintetizador de voz así como características de la voz para el sintetizador elegido.
+La categoría voz en el cuadro de diálogo Opciones de Aslan contiene ajustes que te permiten cambiar el sintetizador de voz así como características de la voz para el sintetizador elegido.
 Para una forma alternativa rápida de controlar los parámetros de voz desde cualquier lugar, por favor consulta la sección [Grupo de Opciones de Sintetizador](#SynthSettingsRing).
 
 La categoría Opciones de voz contiene los siguientes ajustes:
@@ -1203,8 +1203,8 @@ La categoría Opciones de voz contiene los siguientes ajustes:
 ##### Cambiar Sintetizador {#SpeechSettingsChange}
 
 El primer ajuste en la categoría Opciones de Voz es el botón Cambiar... Este botón activa el cuadro de diálogo [Seleccionar Sintetizador](#SelectSynthesizer), el cual te permite seleccionar el sintetizador de voz activo y el dispositivo de sonido.
-Este diálogo se abre por encima del cuadro de diálogo Opciones de NVDA.
-Guardando o descartando los ajustes en el cuadro de diálogo Seleccionar Sintetizador volverás al diálogo Opciones de NVDA.
+Este diálogo se abre por encima del cuadro de diálogo Opciones de Aslan.
+Guardando o descartando los ajustes en el cuadro de diálogo Seleccionar Sintetizador volverás al diálogo Opciones de Aslan.
 
 ##### Voz {#SpeechSettingsVoice}
 
@@ -1214,7 +1214,7 @@ Las flechas izquierda y arriba suben por la lista, mientras que las flechas dere
 
 ##### Variante {#SpeechSettingsVariant}
 
-Si estás utilizando el sintetizador Espeak NG empaquetado junto con NVDA, este es un cuadro combinado que te permite seleccionar la variante con la que el sintetizador debería hablar. 
+Si estás utilizando el sintetizador Espeak NG empaquetado junto con Aslan, este es un cuadro combinado que te permite seleccionar la variante con la que el sintetizador debería hablar. 
 Las variantes de Espeak NG son bastante parecidas a las voces, pero proporcionan atributos ligeramente diferentes para la voz de ESpeak NG. 
 Algunas variantes sonarán como un hombre, algunas como una mujer, y algunas como si tuvieran carraspera.
 
@@ -1238,7 +1238,7 @@ Esta opción es un deslizador que te permite elegir cuánta entonación (subida 
 
 ##### Cambio Automático de Idioma {#SpeechSettingsLanguageSwitching}
 
-Esta casilla de verificación te permite activar o desactivar si NVDA debería cambiar automáticamente los idiomas del sintetizador de voz si el texto a leer lo especifica .
+Esta casilla de verificación te permite activar o desactivar si Aslan debería cambiar automáticamente los idiomas del sintetizador de voz si el texto a leer lo especifica .
 Esta opción está activada de manera predeterminada.
 Actualmente sólo el sintetizador eSpeak NG sopporta el cambio automático de idioma.
 
@@ -1252,7 +1252,7 @@ Esta opción está desactivada de forma predeterminada.
 
 ##### Nivel de Puntuación y símbolos {#SpeechSettingsSymbolLevel}
 
-Tecla: NVDA+p
+Tecla: Aslan+p
 
 Esto te permite elegir la cantidad de puntuación y otros símbolos que deberían verbalizarse como palabras.
 Por ejemplo, cuando se configura a toda, todos los símbolos se verbalizarán como palabras.
@@ -1260,19 +1260,19 @@ Esta opción se aplica a todos los sintetizadores, no sólo al sintetizador acti
 
 ##### Confiar en el idioma de la voz al procesar símbolos y caracteres {#SpeechSettingsTrust}
 
-Activada de manera predeterminada, esta opción dice a NVDA si el idioma de la voz actual puede ser de confianza al procesar símbolos y caracteres.
-Si notas que NVDA está leyendo la puntuación en un idioma  incorrecto para un sintetizador o voz en particular, podrás querer desactivar esta opción para forzar a NVDA a utilizar su idioma global configurado en su lugar.
+Activada de manera predeterminada, esta opción dice a Aslan si el idioma de la voz actual puede ser de confianza al procesar símbolos y caracteres.
+Si notas que Aslan está leyendo la puntuación en un idioma  incorrecto para un sintetizador o voz en particular, podrás querer desactivar esta opción para forzar a Aslan a utilizar su idioma global configurado en su lugar.
 
 ##### Incluir datos Unicode Consortium (incluyendo emoji) al procesar caracteres y símbolos {#SpeechSettingsCLDR}
 
-Cuando esta casilla de verificación esté activada, NVDA incluirá los diccionarios de pronunciación de símbolos adicional cuando pronuncie caracteres y símbolos.
+Cuando esta casilla de verificación esté activada, Aslan incluirá los diccionarios de pronunciación de símbolos adicional cuando pronuncie caracteres y símbolos.
 Estos diccionarios contienen descripciones para símbolos (en particular emoji) que se proporcionan por el [Unicode Consortium](http://www.unicode.org/consortium/) como parte de su [Common Locale Data Repository](http://cldr.unicode.org/).
-Si quieres que NVDA verbalice descripciones de caracteres emoji basados en estos datos, deberías habilitar esta opción.
+Si quieres que Aslan verbalice descripciones de caracteres emoji basados en estos datos, deberías habilitar esta opción.
 Por lo tanto, si estás utilizando un sintetizador de voz que admita la verbalización de descripciones de emoji nativamente, deberías desactivar esto.
 
 Ten en cuenta que las descripciones de caracteres añadidas o editadas manualmente se guardan como parte de tus opciones de usuario.
 Por lo tanto, si cambias la descripción de un emoji en particular, tu descripción personalizada se verbalizará para ese emoji sin importar si esta opción está habilitada.
-Puedes añadir, editar o eliminar descripciones de símbolos en el [diálogo de pronunciación de puntuación y símbolos](#SymbolPronunciation) de NVDA.
+Puedes añadir, editar o eliminar descripciones de símbolos en el [diálogo de pronunciación de puntuación y símbolos](#SymbolPronunciation) de Aslan.
 
 ##### Cambio de Porcentaje de Tono para Mayúsculas {#SpeechSettingsCapPitchChange}
 
@@ -1282,12 +1282,12 @@ Para no cambiar el tono utilizarías el 0.
 
 ##### Decir" Mayus" antes de Mayúsculas {#SpeechSettingsSayCapBefore}
 
-Esta opción es una casilla de verificación, que cuando está marcada dice a NVDA que diga la palabra "mayus" antes de cualquier letra en mayúscula, cuando se navega sobre ella o verbalizándolo cuando está siendo escrita. 
-Normalmente, NVDA eleva el tono ligeramente para cualquier letra mayúscula, pero algunos sintetizadores podrán no soportar esto bien, así quizás esta opción podrá ser de utilidad.
+Esta opción es una casilla de verificación, que cuando está marcada dice a Aslan que diga la palabra "mayus" antes de cualquier letra en mayúscula, cuando se navega sobre ella o verbalizándolo cuando está siendo escrita. 
+Normalmente, Aslan eleva el tono ligeramente para cualquier letra mayúscula, pero algunos sintetizadores podrán no soportar esto bien, así quizás esta opción podrá ser de utilidad.
 
 ##### Pitar para Mayúsculas {#SpeechSettingsBeepForCaps}
 
-Si esta casilla de verificación está marcada, NVDA emitirá un pequeño pitido cada vez que esté verbalizando un carácter en mayúscula. 
+Si esta casilla de verificación está marcada, Aslan emitirá un pequeño pitido cada vez que esté verbalizando un carácter en mayúscula. 
 Como la casilla de verificación 'decir mayus para mayúsculas', esta es útil para sintetizadores que no puedan modificar su tono para las letras mayúsculas.
 
 ##### Utilizar funcionalidad de deletreo si está soportada {#SpeechSettingsUseSpelling}
@@ -1301,64 +1301,64 @@ Esta opción generalmente debería activarse.
 No obstante, algunos sintetizadores Microsoft Speech API no implementan esto correctamente y funciona anómalamente cuando se activa.
 Si estás teniendo problemas con la pronunciación de caracteres individuales,  prueba desactivando esta opción.
 
-#### Seleccionar Sintetizador (NVDA+control+s) {#SelectSynthesizer}
+#### Seleccionar Sintetizador (Aslan+control+s) {#SelectSynthesizer}
 
-El cuadro de diálogo Sintetizador, el cual puede abrirse activando el botón Cambiar... en la categoría voz del diálogo Opciones de NVDA, te permite seleccionar qué Sintetizador debería utilizar NVDA para hablar.
-Una vez hayas seleccionado el sintetizador de tu elección, puedes presionar Aceptar y NVDA cargará el sintetizador seleccionado.
-Si hay un error cargando el sintetizador, NVDA te lo notificará con un mensaje, y continuará utilizando el anterior.
+El cuadro de diálogo Sintetizador, el cual puede abrirse activando el botón Cambiar... en la categoría voz del diálogo Opciones de Aslan, te permite seleccionar qué Sintetizador debería utilizar Aslan para hablar.
+Una vez hayas seleccionado el sintetizador de tu elección, puedes presionar Aceptar y Aslan cargará el sintetizador seleccionado.
+Si hay un error cargando el sintetizador, Aslan te lo notificará con un mensaje, y continuará utilizando el anterior.
 
 ##### Sintetizador {#SelectSynthesizerSynthesizer}
 
-Esta opción te permite elegir el sintetizador que deseas que NVDA utilice para la salida de voz.
+Esta opción te permite elegir el sintetizador que deseas que Aslan utilice para la salida de voz.
 
-Para obtener una lista de los sintetizadores que admite NVDA, por favor consulta la sección [Sintetizadores de Voz admitidos](#SupportedSpeechSynths).
+Para obtener una lista de los sintetizadores que admite Aslan, por favor consulta la sección [Sintetizadores de Voz admitidos](#SupportedSpeechSynths).
 
-Un elemento especial que siempre aparecerá en esta lista es "Sin voz", que te permite utilizar NVDA sin salida de voz.
-Esto puede ser útil para alguien que sólo desee utilizar NVDA con braille, o quizás para desarrolladores videntes que sólo deseen utilizar el Visualizador de voz.
+Un elemento especial que siempre aparecerá en esta lista es "Sin voz", que te permite utilizar Aslan sin salida de voz.
+Esto puede ser útil para alguien que sólo desee utilizar Aslan con braille, o quizás para desarrolladores videntes que sólo deseen utilizar el Visualizador de voz.
 
 ##### Dispositivo de Salida {#SelectSynthesizerOutputDevice}
 
-Esta opción te permite elegir la tarjeta de sonido que NVDA debería indicar para que el sintetizador seleccionado hable.
+Esta opción te permite elegir la tarjeta de sonido que Aslan debería indicar para que el sintetizador seleccionado hable.
 
 <!-- KC:setting -->
 
 ##### Modo Atenuación de Audio {#SelectSynthesizerDuckingMode}
 
-Key: NVDA+shift+d
+Key: Aslan+shift+d
 
-En Windows 8 y superior, esta opción te permite elegir si NVDA debería reducir el volumen de otras aplicaciones mientras esté hablando, o todo el tiempo mientras NVDA se esté ejecutando.
+En Windows 8 y superior, esta opción te permite elegir si Aslan debería reducir el volumen de otras aplicaciones mientras esté hablando, o todo el tiempo mientras Aslan se esté ejecutando.
 
-* Sin Atenuación: NVDA nunca reducirá el volumen del otro audio. 
-* Atenuar cuando salgan voz y sonidos: NVDA sólo reducirá el volumen del otro audio cuando NVDA esté hablando o reproduciendo sonidos. Esto puede no funcionar para todos los sintetizadores. 
-* Atenuar Siempre: NVDA mantendrá el volumen del otro audio reducido durante todo el tiempo que esté en ejecución.
+* Sin Atenuación: Aslan nunca reducirá el volumen del otro audio. 
+* Atenuar cuando salgan voz y sonidos: Aslan sólo reducirá el volumen del otro audio cuando Aslan esté hablando o reproduciendo sonidos. Esto puede no funcionar para todos los sintetizadores. 
+* Atenuar Siempre: Aslan mantendrá el volumen del otro audio reducido durante todo el tiempo que esté en ejecución.
 
-Esta opción sólo estará disponible si se ha instalado NVDA.
-No es posible el soporte de la atenuación de audio para las copias portable y temporal de NVDA.
+Esta opción sólo estará disponible si se ha instalado Aslan.
+No es posible el soporte de la atenuación de audio para las copias portable y temporal de Aslan.
 
 #### Anillo de Opciones de Sintetizador {#SynthSettingsRing}
 
-Si deseas cambiar rápidamente opciones de voz  sin ir a la categoría de Voz del diálogo Opciones de NVDA, hay algunas teclas de comandos de que te permiten moverte a través de las opciones de voz más comunes, desde cualquier lugar mientras se ejecute NVDA:
+Si deseas cambiar rápidamente opciones de voz  sin ir a la categoría de Voz del diálogo Opciones de Aslan, hay algunas teclas de comandos de que te permiten moverte a través de las opciones de voz más comunes, desde cualquier lugar mientras se ejecute Aslan:
 <!-- KC:beginInclude -->
 
 | Nombre |Tecla Escritorio |Tecla Portátil |Descripción|
 |---|---|---|---|
-|Mover a la siguiente opción de sintetizador |NVDA+control+Flecha derecha |NVDA+shift+control+Flecha derecha |Se mueve a la siguiente opción de voz disponible después de la actual, pasando por la primera opción de nuevo después de la última|
-|Mover a la opción de sintetizador anterior |NVDA+control+Flecha izquierda |NVDA+shift+control+Flecha izquierda |Se mueve a la opción de voz anterior disponible después de la actual, pasando por la primera opción de nuevo después de la última|
-|Incrementar actual opción de sintetizador |NVDA+control+Flecha arriba |NVDA+shift+control+Flecha arriba |incrementa la opción de voz actual sobre la que estés. por Ejemplo: incrementa la velocidad, elige la siguiente voz, incrementa el volumen|
-|Decrementar actual opción de sintetizador |NVDA+control+Flecha abajo |NVDA+shift+control+Flecha abajo |decrementa la opción de voz actual sobre la que estés. por Ejemplo: decrementa la velocidad, elige  la voz anterior, decrementa el volumen|
+|Mover a la siguiente opción de sintetizador |Aslan+control+Flecha derecha |Aslan+shift+control+Flecha derecha |Se mueve a la siguiente opción de voz disponible después de la actual, pasando por la primera opción de nuevo después de la última|
+|Mover a la opción de sintetizador anterior |Aslan+control+Flecha izquierda |Aslan+shift+control+Flecha izquierda |Se mueve a la opción de voz anterior disponible después de la actual, pasando por la primera opción de nuevo después de la última|
+|Incrementar actual opción de sintetizador |Aslan+control+Flecha arriba |Aslan+shift+control+Flecha arriba |incrementa la opción de voz actual sobre la que estés. por Ejemplo: incrementa la velocidad, elige la siguiente voz, incrementa el volumen|
+|Decrementar actual opción de sintetizador |Aslan+control+Flecha abajo |Aslan+shift+control+Flecha abajo |decrementa la opción de voz actual sobre la que estés. por Ejemplo: decrementa la velocidad, elige  la voz anterior, decrementa el volumen|
 
 <!-- KC:endInclude -->
 
 #### Braille {#BrailleSettings}
 
-La categoría Braille en el diálogo Opciones de NVDA contiene ajustes que te permiten cambiar varios aspectos de la entrada y salida braille.
+La categoría Braille en el diálogo Opciones de Aslan contiene ajustes que te permiten cambiar varios aspectos de la entrada y salida braille.
 Esta categoría contiene las siguientes opciones:
 
 ##### Cambiar pantalla braille {#BrailleSettingsChange}
 
-El botón Cambiar... en la categoría Braille del cuadro de diálogo Opciones de NVDA activa el diálogo [Seleccionar Pantalla Braille](#SelectBrailleDisplay), el cual te permite seleccionar la pantalla braille activa.
-Este cuadro de diálogo se abre sobre el diálogo Opciones de NVDA.
-Guardando o descartando las opciones en el diálogo Seleccionar Pantalla Braille volverás al cuadro de diálogo Opciones de NVDA.
+El botón Cambiar... en la categoría Braille del cuadro de diálogo Opciones de Aslan activa el diálogo [Seleccionar Pantalla Braille](#SelectBrailleDisplay), el cual te permite seleccionar la pantalla braille activa.
+Este cuadro de diálogo se abre sobre el diálogo Opciones de Aslan.
+Guardando o descartando las opciones en el diálogo Seleccionar Pantalla Braille volverás al cuadro de diálogo Opciones de Aslan.
 
 ##### Tabla de Salida {#BrailleSettingsOutputTable}
 
@@ -1412,17 +1412,17 @@ Especifycando 0 se deshabilita el mostrado de estos mensajes completamente.
 
 ##### Mostrar Mensajes Indefinidamente {#BrailleSettingsNoMessageTimeout}
 
-Esta opción permite a los mensajes de NVDA mostrarse en la pantalla braille indefinidamente.
+Esta opción permite a los mensajes de Aslan mostrarse en la pantalla braille indefinidamente.
 
 <!-- KC:setting -->
 
 ##### Seguimiento Braille {#BrailleTether}
 
-Tecla: NVDA+control+t
+Tecla: Aslan+control+t
 
 Esta opción te permite elegir si la pantalla braille seguirá al foco del sistema, o si seguirá al navegador de objetos / cursor de revisión, o a ambos.
-Cuando se seleccione "automáticamente", NVDA seguirá al foco y al cursor del sistema por omisión.
-En este caso, cuando se cambie la posición del navegador de objetos o del cursor de revisión mediante una interacción explícita del usuario, NVDA seguirá a la revisión temporalmente, hasta que el foco o el cursor cambie.
+Cuando se seleccione "automáticamente", Aslan seguirá al foco y al cursor del sistema por omisión.
+En este caso, cuando se cambie la posición del navegador de objetos o del cursor de revisión mediante una interacción explícita del usuario, Aslan seguirá a la revisión temporalmente, hasta que el foco o el cursor cambie.
 
 ##### Leer por Párrafo {#BrailleSettingsReadByParagraph}
 
@@ -1447,44 +1447,44 @@ Habilitar esto podría permitir una mayor fluidez en la lectura, pero normalment
 
 ##### Presentación de Contexto de Foco {#BrailleSettingsFocusContextPresentation}
 
-Esta opción te permite elegir qué información de contexto mostrará NVDA en la pantalla braille cuando un objeto obtenga el foco.
+Esta opción te permite elegir qué información de contexto mostrará Aslan en la pantalla braille cuando un objeto obtenga el foco.
 La información de contexto se refiere a la jerarquía de objetos que contengan el foco.
 Por ejemplo, cuando enfoques un elemento de lista, este elemento de lista es parte de una lista.
 Esta lista podría estar contenida en un diálogo, etc.
-Por favor consulta la sección acercqa de [navegación de objetos](#ObjectNavigation) para más información acerca de la jerarquía que se aplica a los objetos en NVDA.
+Por favor consulta la sección acercqa de [navegación de objetos](#ObjectNavigation) para más información acerca de la jerarquía que se aplica a los objetos en Aslan.
 
-Cuando se configure en rellenar pantalla para cambios de contexto, NVDA tratará de mostrar tanta información de contexto como le sea posible en la pantalla braille, pero sólo para las partes del contexto que hayan cambiado.
-Para el ejemplo de arriba, esto significa que cuando el foco cambie por la lista, NVDA mostrará el elemento de lista en la pantalla braille.
-Además, si queda espacio suficiente en la pantalla braille, NVDA tratará de mostrar que el elemento de lista es parte de una lista.
+Cuando se configure en rellenar pantalla para cambios de contexto, Aslan tratará de mostrar tanta información de contexto como le sea posible en la pantalla braille, pero sólo para las partes del contexto que hayan cambiado.
+Para el ejemplo de arriba, esto significa que cuando el foco cambie por la lista, Aslan mostrará el elemento de lista en la pantalla braille.
+Además, si queda espacio suficiente en la pantalla braille, Aslan tratará de mostrar que el elemento de lista es parte de una lista.
 Si, a continuación, comienzas a moverte por la lista con las teclas de cursor, se supone que eres consciente de estar todavía en la lista.
-Por lo tanto, para los elementos de lista restantes que enfoques, NVDA sólo mostrará el elemento de lista enfocado en la pantalla.
+Por lo tanto, para los elementos de lista restantes que enfoques, Aslan sólo mostrará el elemento de lista enfocado en la pantalla.
 Para leer el contexto de nuevo (es decir, que estás en una lista y que la lista es parte de un diálogo), tendrás que desplazar tu pantalla braille hacia atrás.
 
-Cuando esta opción esté configurada a rellenar siempre la pantalla, NVDA tratará de mostrar tanta información de contexto como sea posible en la pantalla braille, independientemente de si has visto la misma información de contexto antes.
-Esto tiene la ventaja de que NVDA ajustará tanta información como sea posible.
+Cuando esta opción esté configurada a rellenar siempre la pantalla, Aslan tratará de mostrar tanta información de contexto como sea posible en la pantalla braille, independientemente de si has visto la misma información de contexto antes.
+Esto tiene la ventaja de que Aslan ajustará tanta información como sea posible.
 Por lo tanto, la desventaja es que siempre hay una diferencia en la posición donde comienza el enfoque en la pantalla braille.
 Esto puede hacer difícil de navegar por una lista larga de elementos,  por ejemplo, ya que tendrás que mover contínuamente el dedo para encontrar el comienzo del elemento.
-Este era el conmportamiento predeterminado para NVDA 2017.2 y anteriores.
+Este era el conmportamiento predeterminado para Aslan 2017.2 y anteriores.
 
-Cuando configures la opción presentación de contexto del foco en mostrar sólo la información de contexto al desplazarse hacia atrás, NVDA nunca muestra información de contexto en la pantalla braille por omisión.
-Así, en el ejemplo anterior, NVDA mostrará que enfocaste un elemento de lista.
+Cuando configures la opción presentación de contexto del foco en mostrar sólo la información de contexto al desplazarse hacia atrás, Aslan nunca muestra información de contexto en la pantalla braille por omisión.
+Así, en el ejemplo anterior, Aslan mostrará que enfocaste un elemento de lista.
 Por lo tanto, para  leer el contexto (es decir, que estás en una lista y que esta lista es parte de un diálogo), habrás de desplazar la pantalla braille hacia atrás.
 
 Para conmutar la presentación de contexto del foco desde cualquier lugar, por favor asigna un gesto personalizado utilizando el [diálogo Gestos de Entrada](#InputGestures).
 
-#### Seleccionar Pantalla Braille (NVDA+control+a) {#SelectBrailleDisplay}
+#### Seleccionar Pantalla Braille (Aslan+control+a) {#SelectBrailleDisplay}
 
-El cuadro de diálogo Seleccionar Pantalla Braille, el cual se puede abrir activando el botón Cambiar... en la categoría Braille del diálogo Opciones de NVDA, te permite seleccionar qué pantalla braille debería utilizar NVDA para la salida braille.
-Una vez hayas seleccionado la pantalla braille de tu elección, puedes presionar Aceptar y NVDA cargará la pantalla seleccionada.
-Si hay un error carghando el controlador de la pantalla, NVDA te lo notificará con un mensaje, y continuará utilizando la pantalla anterior, si hay alguna.
+El cuadro de diálogo Seleccionar Pantalla Braille, el cual se puede abrir activando el botón Cambiar... en la categoría Braille del diálogo Opciones de Aslan, te permite seleccionar qué pantalla braille debería utilizar Aslan para la salida braille.
+Una vez hayas seleccionado la pantalla braille de tu elección, puedes presionar Aceptar y Aslan cargará la pantalla seleccionada.
+Si hay un error carghando el controlador de la pantalla, Aslan te lo notificará con un mensaje, y continuará utilizando la pantalla anterior, si hay alguna.
 
 ##### Pantalla Braille {#SelectBrailleDisplayDisplay}
 
 Este cuadro combinado se te presenta con varias opciones dependiendo de qué controladores de pantalla braille estén disponibles en tu sistema.
 Muévete entre estas opciones con las teclas de flechas.
 
-La opción automático permitirá a NVDA buscar muchas líneas braille admitidas en segundo plano.
-Cuando esta característica esté activada y conectes una pantalla admitida utilizando USB o bluetooth, NVDA conectará automáticamente con ella.
+La opción automático permitirá a Aslan buscar muchas líneas braille admitidas en segundo plano.
+Cuando esta característica esté activada y conectes una pantalla admitida utilizando USB o bluetooth, Aslan conectará automáticamente con ella.
 
 Sin braille significa que no estás utilizando braille.
 
@@ -1495,50 +1495,50 @@ Por favor consulta la sección [líneas braille Admitidas](#SupportedBrailleDisp
 Esta opción, si está disponible, te permite elegir qué puerto o tipo de conexión se utilizará para comunicar con la pantalla braille que has seleccionado.
 Es un cuadro combinado que contiene las elecciones posibles para tu pantalla braille.
 
-Por omisión, NVDA emplea la detección de puerto automática,  lo que significa que la conexión con el dispositivo braille se establecerá automáticamente buscando los dispositivos USB y bluetooth en tu sisttema.
+Por omisión, Aslan emplea la detección de puerto automática,  lo que significa que la conexión con el dispositivo braille se establecerá automáticamente buscando los dispositivos USB y bluetooth en tu sisttema.
 Por lo tanto, para algunas líneas braille, podrás elegir explícitamente qué puerto debería utilizarse.
-Las opciones comunes son "Automático" (la cual dice a NVDA que emplee el procedimiento de selección de puerto automático predeterminado), "USB", "Bluetooth" y puertos serie heredados si tu pantalla braille admite este tipo de comunicación.
+Las opciones comunes son "Automático" (la cual dice a Aslan que emplee el procedimiento de selección de puerto automático predeterminado), "USB", "Bluetooth" y puertos serie heredados si tu pantalla braille admite este tipo de comunicación.
 
 Esta opción no estará disponible si tu pantalla braille sólo admite detección automática de puertos.
 
 Puedes consultar la documentación para tu pantalla braille en la sección [líneas braille Admitidas](#SupportedBrailleDisplays) para buscar más detalles sobre los tipos compatibles de comunicación y puertos disponibles.
 
-#### Teclado (NVDA+control+k) {#KeyboardSettings}
+#### Teclado (Aslan+control+k) {#KeyboardSettings}
 
-La categoría Teclado en el cuadro de diálogo Opciones de NVDA contiene ajustes que establecen el comportamiento de NVDA cuando usas y escribes en tu teclado.
+La categoría Teclado en el cuadro de diálogo Opciones de Aslan contiene ajustes que establecen el comportamiento de Aslan cuando usas y escribes en tu teclado.
 Esta categoría Opciones contiene los siguientes ajustes:
 
 ##### Disposición del Teclado {#KeyboardSettingsLayout}
 
-Este cuadro combinado te permite elegir qué tipo de disposición de teclado debería utilizar NVDA. Actualmente los dos que vienen con NVDA son Escritorio y Portátil.
+Este cuadro combinado te permite elegir qué tipo de disposición de teclado debería utilizar Aslan. Actualmente los dos que vienen con Aslan son Escritorio y Portátil.
 
-##### Seleccionar Teclas Modificadoras de NVDA {#KeyboardSettingsModifiers}
+##### Seleccionar Teclas Modificadoras de Aslan {#KeyboardSettingsModifiers}
 
-Las casillas de verificación en esta lista controlan qué teclas pueden utilizarse como [teclas modificadoras de NVDA](#TheNVDAModifierKey). Las siguientes teclas están dispponibles para elegir:
+Las casillas de verificación en esta lista controlan qué teclas pueden utilizarse como [teclas modificadoras de Aslan](#TheAslanModifierKey). Las siguientes teclas están dispponibles para elegir:
 
 * La tecla bloqueo de mayúsculas
 * La tecla insertar en el tecládo numérico
 * La tecla insertar extendida (encontrada normalmente encima de las teclas de flecha, cerca de inicio y fin)
 
-Si no se elige ninguna tecla como la tecla NVDA podría ser imposible acceder a ciertas comandos de NVDA.
-Por lo tanto, el diálogo Opciones de NVDA mostrará un mensaje de error si todas las teclas están sin seleccionar  cuando se presione Aceptar.
+Si no se elige ninguna tecla como la tecla Aslan podría ser imposible acceder a ciertas comandos de Aslan.
+Por lo tanto, el diálogo Opciones de Aslan mostrará un mensaje de error si todas las teclas están sin seleccionar  cuando se presione Aceptar.
 Después de descartar el mensaje de error, debes seleccionar al menos una antes de poder presionar Aceptar para cerrar el diálogo correctamente.
 
 <!-- KC:setting -->
 
 ##### Verbalizar caracteres al escribir {#KeyboardSettingsSpeakTypedCharacters}
 
-Tecla: NVDA+2
+Tecla: Aslan+2
 
-Cuando está marcada significa que NVDA anunciará todos los caracteres según los escribas en el teclado. 
+Cuando está marcada significa que Aslan anunciará todos los caracteres según los escribas en el teclado. 
 
 <!-- KC:setting -->
 
 ##### Verbalizar palabras al escribir {#KeyboardSettingsSpeakTypedWords}
 
-Tecla: NVDA+3
+Tecla: Aslan+3
 
-Cuando esté marcada significa que NVDA anunciará todas las palabras al escribirlas en el teclado. 
+Cuando esté marcada significa que Aslan anunciará todas las palabras al escribirlas en el teclado. 
 
 ##### Interrupción de Voz para Caracteres Escritos {#KeyboardSettingsSpeechInteruptForCharacters}
 
@@ -1562,52 +1562,52 @@ Por lo tanto, puede ser bastante útil ser advertido acerca de esto.
 
 ##### Verbalizar teclas de comandos {#KeyboardSettingsSpeakCommandKeys}
 
-Tecla: NVDA+4
+Tecla: Aslan+4
 
-Cuando está marcada significa que NVDA anunciará todas las teclas que no sean caracteres al escribirlas en el teclado. Esto incluye combinaciones de teclas tales como control más cualquier otra letra. 
+Cuando está marcada significa que Aslan anunciará todas las teclas que no sean caracteres al escribirlas en el teclado. Esto incluye combinaciones de teclas tales como control más cualquier otra letra. 
 
 ##### Reproducir sonido para Errores de Ortografía mientras se escribe {#KeyboardSettingsAlertForSpellingErrors}
 
 Al habilitarse, se reproducirá una breve señal acústica cuando una palabra que estés escribiendo contenga un error de ortografía.
-Esta opción sólo está disponible si el anunciado de errores de ortografía está habilitado en el diálogo de NVDA [Opciones de Formateado de Documento](#DocumentFormattingSettings), encontrada en el cuadro de diálogo Opciones de NVDA.
+Esta opción sólo está disponible si el anunciado de errores de ortografía está habilitado en el diálogo de Aslan [Opciones de Formateado de Documento](#DocumentFormattingSettings), encontrada en el cuadro de diálogo Opciones de Aslan.
 
 ##### Manejar teclas desde otras aplicaciones {#KeyboardSettingsHandleKeys}
 
-Esta opción permite al usuario controlar si la presionación de las teclas generada por aplicaciones tales como teclados en pantalla y por el software de reconocimiento de voz debería procesarse por NVDA. 
+Esta opción permite al usuario controlar si la presionación de las teclas generada por aplicaciones tales como teclados en pantalla y por el software de reconocimiento de voz debería procesarse por Aslan. 
 Esta opción está activada por defecto, aunque algunos usuarios pueden necesitar deshabilitarla, como aquellos que escriban en vietnamita con el programa de escritura Unikey ya que hará que la entrada de caracteres sea incorrecta.
 
-#### Ratón (NVDA+control+m) {#MouseSettings}
+#### Ratón (Aslan+control+m) {#MouseSettings}
 
-La categoría Ratón del cuadro de diálogo Opciones de NVDA permite a NVDA realizar un seguimiento del ratón, reproducir pitidos de sus coordenadas  y configurar otras opciones de uso del ratón.
+La categoría Ratón del cuadro de diálogo Opciones de Aslan permite a Aslan realizar un seguimiento del ratón, reproducir pitidos de sus coordenadas  y configurar otras opciones de uso del ratón.
 Esta categoría contiene los siguientes ajustes:
 
 ##### Anunciar Cambios en la Forma del Ratón {#MouseSettingsShape}
 
-Una casilla de verificación, que cuando se marca significa que NVDA anunciará la forma del puntero del ratón cada vez que cambie. 
+Una casilla de verificación, que cuando se marca significa que Aslan anunciará la forma del puntero del ratón cada vez que cambie. 
 El puntero del ratón en Windows cambia su forma para comunicar cierta información tal como cuando algo es editable, o cuando algo se está cargando, etc.
 
 <!-- KC:setting -->
 
 ##### Habilitar Seguimiento del  Ratón {#MouseSettingsTracking}
 
-Tecla: NVDA+m |
+Tecla: Aslan+m |
 
-Cuando está marcada significa que NVDA anunciará el texto actualmente bajo el puntero del ratón, a medida que lo muevas por la pantalla. Esto te permite encontrar cosas en ella, moviendo físicamente el ratón, en lugar de tratar de encontrarlas a través del navegador de objetos.
+Cuando está marcada significa que Aslan anunciará el texto actualmente bajo el puntero del ratón, a medida que lo muevas por la pantalla. Esto te permite encontrar cosas en ella, moviendo físicamente el ratón, en lugar de tratar de encontrarlas a través del navegador de objetos.
 
 ##### Unidad de Resolución de Texto {#MouseSettingsTextUnit}
 
-Si NVDA está configurado para anunciar el texto bajo el ratón según lo muevas, esta opción te permite elegir exactamente cuánto texto será verbalizado. 
+Si Aslan está configurado para anunciar el texto bajo el ratón según lo muevas, esta opción te permite elegir exactamente cuánto texto será verbalizado. 
 Las opciones son carácter, palabra, línea y párrafo.
 
 Para cambiar la unidad de resolución de texto desde cualquier lugar, por favor asigna un gesto personalizado utilizando el [Diálogo Gestos de entrada](#InputGestures).
 
 ##### Anunciar rol cuando el ratón entra en los Objetos {#MouseSettingsRole}
 
-Si esta casilla de verificación está marcada, NVDA anunciará el rol (tipo) de objeto cuando el ratón se mueva dentro de él.
+Si esta casilla de verificación está marcada, Aslan anunciará el rol (tipo) de objeto cuando el ratón se mueva dentro de él.
 
 ##### Reproducir audio de Coordenadas cuando se mueva el ratón {#MouseSettingsAudio}
 
-Marcando esta casilla de verificación haces que NVDA reproduzca pitidos cuando el ratón se mueva, de modo que el usuario pueda averiguar dónde está el ratón con respecto a las dimensiones de la pantalla.
+Marcando esta casilla de verificación haces que Aslan reproduzca pitidos cuando el ratón se mueva, de modo que el usuario pueda averiguar dónde está el ratón con respecto a las dimensiones de la pantalla.
 Cuanto más alto esté el ratón en la pantalla, más alto será el tono de los pitidos.
 Cuanto más esté situado el ratón a la izquierda o a la derecha  en la pantalla, el sonido se reproducirá más a la izquierda o a la derecha (asumiendo que el usuario tenga unos altavoces o auriculares estéreo).
 
@@ -1620,11 +1620,11 @@ Esta opción está desmarcada de forma predeterminada.
 
 Esta opción permite al usuario ignorar los eventos del ratón (incluyendo el movimiento del ratón y las presionaciones de botones) generados por otras aplicaciones como TeamViewer y otros programas de control remoto.
 Esta opción está desmarcada por defecto.
-Si marcas esta opción y tienes activada la opción "Habilitar seguimiento del ratón", NVDA no anunciará lo que hay debajo del ratón si éste es movido por otra aplicación.
+Si marcas esta opción y tienes activada la opción "Habilitar seguimiento del ratón", Aslan no anunciará lo que hay debajo del ratón si éste es movido por otra aplicación.
 
 #### Interacción Táctil {#TouchInteraction}
 
-Esta categoría de opciones, sólo disponible en ordenadores que ejecuten Windows 8 y posterior con capacidades táctiles, te permite configurar la forma en que NVDA interactúa con pantallas táctiles.
+Esta categoría de opciones, sólo disponible en ordenadores que ejecuten Windows 8 y posterior con capacidades táctiles, te permite configurar la forma en que Aslan interactúa con pantallas táctiles.
 Esta Categoría contiene las siguientes opciones:
 
 ##### Modo de escritura táctil {#TouchTypingMode}
@@ -1635,14 +1635,14 @@ Si está desmarcada, deberás tocar dos veces la tecla en pantalla para presiona
 
 #### Cursor de Revisión {#ReviewCursorSettings}
 
-La categoría Cursor de Revisión en el cuadro de diálogo Opciones de NVDA se utiliza para configurar el comportamiento del cursor de revisión de NVDA.
+La categoría Cursor de Revisión en el cuadro de diálogo Opciones de Aslan se utiliza para configurar el comportamiento del cursor de revisión de Aslan.
 Esta categoría contiene las siguientes opciones:
 
 <!-- KC:setting -->
 
 ##### Seguir al Foco Del sistema {#ReviewCursorFollowFocus}
 
-Tecla: NVDA+7
+Tecla: Aslan+7
 
 Cuando se activa, el cursor de revisión siempre se colocará en el mismo objeto que el actual foco del sistema siempre que  éste  cambie.
 
@@ -1650,7 +1650,7 @@ Cuando se activa, el cursor de revisión siempre se colocará en el mismo objeto
 
 ##### Seguir al Cursor del Sistema {#ReviewCursorFollowCaret}
 
-Tecla: NVDA+6
+Tecla: Aslan+6
 
 Cuando se activa, el cursor de revisión se moverá automáticamente a la posición del cursor del Sistema cada vez que se mueva.
 
@@ -1660,28 +1660,28 @@ Cuando se activa, el cursor de revisión seguirá al ratón según se mueva.
 
 ##### Modo de Revisión Simple {#ReviewCursorSimple}
 
-Cuando se activa, NVDA filtrará la jerarquía de objetos que puede navegarse, para excluir cualquier objeto que no sea del interés para el usuario; por ejemplo: objetos invisibles y objetos utilizados sólo con propósitos de diseño.
+Cuando se activa, Aslan filtrará la jerarquía de objetos que puede navegarse, para excluir cualquier objeto que no sea del interés para el usuario; por ejemplo: objetos invisibles y objetos utilizados sólo con propósitos de diseño.
 
 Para conmutar el modo de revisión simple desde cualquier sitio, por favor asigna un gesto personalizado utilizando el [diálogo Gestos de Entrada](#InputGestures).
 
-#### Presentación de Objetos (NVDA+control+o) {#ObjectPresentationSettings}
+#### Presentación de Objetos (Aslan+control+o) {#ObjectPresentationSettings}
 
-La categoría Presentación de objetos del cuadro de diálogo Opciones de NVDA se utiliza para establecer la cantidad de información que NVDA presentará sobre controles tales como descripción, información de posición, etc.
+La categoría Presentación de objetos del cuadro de diálogo Opciones de Aslan se utiliza para establecer la cantidad de información que Aslan presentará sobre controles tales como descripción, información de posición, etc.
 Esta categoría contiene las siguientes opciones:
 
 ##### Anunciar Consejos {#ObjectPresentationReportToolTips}
 
-Una casilla de verificación que cuando está marcada dice a NVDA que anuncie consejos según aparezcan. 
+Una casilla de verificación que cuando está marcada dice a Aslan que anuncie consejos según aparezcan. 
 Muchas ventanas y controles muestran un pequeño mensaje (o consejo) cuando mueves el puntero del ratón sobre ellos, o algunas veces cuando te mueves con el foco por ellos.
 
 ##### Anunciar globos de ayuda {#ObjectPresentationReportBalloons}
 
-Esta casilla de verificación cuando está marcada dice a NVDA que anuncie los globos de ayuda cuando aparezcan. 
+Esta casilla de verificación cuando está marcada dice a Aslan que anuncie los globos de ayuda cuando aparezcan. 
 Los globos de ayuda son como los consejos, pero normalmente son más grandes, y están asociados con eventos del Sistema tales como la desconexión de un cable de red, o quizás alertarte acerca de problemas de seguridad de Windows.
 
 ##### Anunciar Teclas de Atajo de los Objetos {#ObjectPresentationShortcutKeys}
 
-Cuando esta casilla de verificación está verificada, NVDA incluirá la tecla de atajo que esté asociada con cierto objeto o control cuando sea anunciado. 
+Cuando esta casilla de verificación está verificada, Aslan incluirá la tecla de atajo que esté asociada con cierto objeto o control cuando sea anunciado. 
 Por ejemplo el menú Archivo en una barra de menú podrá tener una tecla de atajo Alt+a.
 
 ##### Anunciar Información de la Posición del Objeto {#ObjectPresentationReportDescriptions}
@@ -1690,8 +1690,8 @@ Esta opción te permite elegir si deseas que se te informe sobre la posición de
 
 ##### Deducir la información de Posición del Objeto cuando no esté disponible {#ObjectPresentationGuessPositionInfo}
 
-Si el anunciado de información de posición del objeto está activado, esta opción permite a NVDA deducir la información de posición del objeto cuando no esté disponible para un control en particular.
-Cuando esté activada, NVDA anunciará información de posición para más controles tales como menús y barras de herramientas, no obstante esta información podrá ser ligeramente incorrecta. 
+Si el anunciado de información de posición del objeto está activado, esta opción permite a Aslan deducir la información de posición del objeto cuando no esté disponible para un control en particular.
+Cuando esté activada, Aslan anunciará información de posición para más controles tales como menús y barras de herramientas, no obstante esta información podrá ser ligeramente incorrecta. 
 
 ==== Anunciar Descripciones de Objetos ========[ObjectPresentationReportDescriptions]
 Desmarca esta casilla de verificación si crees que no necesitas escuchar la descripción anunciada junto con los objetos.
@@ -1700,41 +1700,41 @@ Desmarca esta casilla de verificación si crees que no necesitas escuchar la des
 
 ##### Salida en las Barras de Progreso {#ObjectPresentationProgressBarOutput}
 
-Tecla: NVDA+u
+Tecla: Aslan+u
 
-Esta opción se te presenta con un cuadro combinado que controla cómo NVDA anuncia las actualizaciones de las barras de progreso. 
+Esta opción se te presenta con un cuadro combinado que controla cómo Aslan anuncia las actualizaciones de las barras de progreso. 
 
 Tiene las siguientes opciones:
 
 * Desactivado: Las barras de progreso no serán anunciadas según cambien.
-* Verbalizar: Esta opción dice a NVDA que verbalice las barras de progreso en porcentajes. Cada vez que la barra de progreso cambie, NVDA verbalizará el valor nuevo. 
-* Pitar: Esto dice a NVDA que pite cada vez que la barra de progreso cambie. Para un pitido más alto, el completado de la barra de progreso está más próximo
-* Pitar y Verbalizar: Esta opción dice a NVDA que pite y verbalice cuando se actualiza una barra de progreso.
+* Verbalizar: Esta opción dice a Aslan que verbalice las barras de progreso en porcentajes. Cada vez que la barra de progreso cambie, Aslan verbalizará el valor nuevo. 
+* Pitar: Esto dice a Aslan que pite cada vez que la barra de progreso cambie. Para un pitido más alto, el completado de la barra de progreso está más próximo
+* Pitar y Verbalizar: Esta opción dice a Aslan que pite y verbalice cuando se actualiza una barra de progreso.
 
 ##### Anunciar Barras de Progreso en Segundo Plano {#ObjectPresentationReportBackgroundProgressBars}
 
-Esta es una opción que, cuando está marcada, dice a NVDA que mantenga el anunciado de una barra de progreso, aún si no está físicamente visible en primer plano. 
-Si minimizas o cambias a otra ventana que contenga una barra de progreso, NVDA mantendrá la pista de ella, permitiéndote hacer otras cosas mientras NVDA sigue a la barra de progreso.
+Esta es una opción que, cuando está marcada, dice a Aslan que mantenga el anunciado de una barra de progreso, aún si no está físicamente visible en primer plano. 
+Si minimizas o cambias a otra ventana que contenga una barra de progreso, Aslan mantendrá la pista de ella, permitiéndote hacer otras cosas mientras Aslan sigue a la barra de progreso.
 
 <!-- KC:setting -->
 
 ##### Anunciar cambios de contenido dinámico {#ObjectPresentationReportDynamicContent}
 
-Tecla: NVDA+5
+Tecla: Aslan+5
 
 Conmuta el anunciado de contenido nuevo en objetos particulares tales como terminales y el control de histórico en programas de chat.
 
 ##### Reproducir un sonido al aparecer autosugerencias {#ObjectPresentationSuggestionSounds}
 
-Alterna el anunciado de la aparición de autosugerencias, y si está habilitado, NVDA reproducirá un sonido para indicar esto.
+Alterna el anunciado de la aparición de autosugerencias, y si está habilitado, Aslan reproducirá un sonido para indicar esto.
 Las sugerencias automáticas son listas de entradas sugeridas basadas en texto enterducido en ciertos campos de edición y documentos.
 por ejemplo, cuando enterduzcas texto en el cuadro de búsqueda en el menú inicio en Windows Vista y posteriores, Windows muestra una lista de sugerencias basadas en lo que escribiste.
-Para algunos campos de edición  tales como campos de búsqueda en varias aplicaciones de Windows 10, NVDA puede notificarte que ha aparecido una lista de sugerencias al escribir texto.
-La lista de autosugerencias se cerrará una vez te muevas por el campo de edición, y para algunos campos, NVDA puede notificarte de esto cuando ello ocurra.
+Para algunos campos de edición  tales como campos de búsqueda en varias aplicaciones de Windows 10, Aslan puede notificarte que ha aparecido una lista de sugerencias al escribir texto.
+La lista de autosugerencias se cerrará una vez te muevas por el campo de edición, y para algunos campos, Aslan puede notificarte de esto cuando ello ocurra.
 
 #### Composición de Entrada {#InputCompositionSettings}
 
-La categoría Composición de entrada te permite controlar cómo anuncia NVDA la entrada de Caracteres Asiáticos, tales como con IME o métodos de Servicio de entrada de texto .
+La categoría Composición de entrada te permite controlar cómo anuncia Aslan la entrada de Caracteres Asiáticos, tales como con IME o métodos de Servicio de entrada de texto .
 Ten en cuenta que debido al hecho de que los métodos de entrada varían en gran medida por sus características disponibles y por cómo transmiten la información, lo más probable será que sea necesario configurar estas opciones de modo diferente para cada método de entrada para obtener la experiencia de escritura más eficiente.
 
 ##### Anunciar Automáticamente todos los Candidatos Disponibles {#InputCompositionReportAllCandidates}
@@ -1745,32 +1745,32 @@ Sin embargo, para los métodos de entrada fonéticos tales como el Chinese New P
 
 ##### Anunciar Candidato Seleccionado {#InputCompositionAnnounceSelectedCandidate}
 
-Esta Opción, que está activada por omisión, te permite elegir si NVDA debería anunciar el candidato seleccionado cuando aparece una lista de candidatos o cuando la selección se cambió.
+Esta Opción, que está activada por omisión, te permite elegir si Aslan debería anunciar el candidato seleccionado cuando aparece una lista de candidatos o cuando la selección se cambió.
 Para los métodos de entrada donde la selección se puede cambiar con las teclas de flechas (tal como el Chinese New Phonetic) esto es necesario, pero para algunos métodos de entrada podría ser más eficiente teclear con esta opción desactivada.
 Ten en cuenta que aún con esta opción desactivada, el cursor de revisión todavía se colocará sobre el candidato seleccionado permitiéndote utilizar la navegación de objetos para revisar manualmente para leer este u otros candidatos.
 
 ##### Incluir siempre descripciones cortas de caracteres para los candidatos {#InputCompositionCandidateIncludesShortCharacterDescription}
 
-Esta Opción, que está activada por omisión, te permite elegir si NVDA debería proporcionar o no una descripción corta para cada carácter en un candidato, o cuando se seleccione o cuando se lea automáticamente cuando aparezca la lista de candidatos.
+Esta Opción, que está activada por omisión, te permite elegir si Aslan debería proporcionar o no una descripción corta para cada carácter en un candidato, o cuando se seleccione o cuando se lea automáticamente cuando aparezca la lista de candidatos.
 Ten en cuenta que para localizaciones tales como Chino, el anunciado de descripciones extra de caracteres para el candidato seleccionado no está afectado por esta opción.
 Esta opción podría ser útil para los métodos de entrada Coreano y japonés.
 
 ##### Anunciar Cambios para la Cadena de Lectura {#InputCompositionReadingStringChanges}
 
 Algunos métodos de entrada como el Chinese New Phonetic y el New ChangJie tienen una cadena de lectura (conocida a veces como una cadena de precomposición).
-Puedes elegir si NVDA debería anunciar caracteres nuevos al ser tecleados en esta cadena de lectura con esta opción.
+Puedes elegir si Aslan debería anunciar caracteres nuevos al ser tecleados en esta cadena de lectura con esta opción.
 Esta opción está activada de manera predeterminada.
 Ten en cuenta que algunos métodos de entrada antiguos tales como Chino ChangJie podrían no utilizar la cadena de lectura para contener los caracteres de precomposición, en su lugar utiliza la cadena de composición directamente. Por favor consulta la siguiente opción para configurar el anunciado de la cadena de composición.
 
 ##### Anunciar Cambios a la cadena de composición {#InputCompositionCompositionStringChanges}
 
 Después de que la lectura o los datos de precomposición hayan sido combinados dentro de un símbolo pictográfico válido, la mayoría de los métodos de entrada colocan este símbolo dentro de una cadena de composición para un almacenamiento temporal junto con otros símbolos combinados antes de que finalmente se inserten dentro del documento.
-Esta Opción te permite elegir si NVDA debería anunciar o no símbolos nuevos según aparezcan en la cadena de composición.
+Esta Opción te permite elegir si Aslan debería anunciar o no símbolos nuevos según aparezcan en la cadena de composición.
 Esta opción está activada por omisión.
 
-#### Modo Exploración (NVDA+control+b) {#BrowseModeSettings}
+#### Modo Exploración (Aslan+control+b) {#BrowseModeSettings}
 
-La categoría Modo Exploración del cuadro de diálogo Opciones de NVDA se utiliza para configurar el comportamiento de NVDA al leer y al navegar por documentos complejos como páginas web.
+La categoría Modo Exploración del cuadro de diálogo Opciones de Aslan se utiliza para configurar el comportamiento de Aslan al leer y al navegar por documentos complejos como páginas web.
 Esta categoría contiene las siguientes opciones:
 
 ##### Máximo Número de Caracteres en Una Línea {#BrowseModeSettingsMaxLength}
@@ -1785,7 +1785,7 @@ Este campo ajusta la cantidad de líneas que moverás cuando presiones Avance de
 
 ##### Utilizar diseño de pantalla {#BrowseModeSettingsScreenLayout}
 
-Tecla: NVDA+v
+Tecla: Aslan+v
 
 Esta opción te permite especificar si el contenido en el modo Exploración debería colocar cosas tales como enlaces y otros campos cada uno en su propia línea, o si debería conservarlos en el flujo de texto según sea mostrado visualmente.
 Si la opción está activada, entonces las cosas permanecerán según sean mostradas visualmente, pero si está desactivada, entonces los campos serán colocados en su propia línea.
@@ -1805,8 +1805,8 @@ Esta opción está activada por defecto.
 
 ##### Incluir Tablas de Diseño {#BrowseModeSettingsIncludeLayoutTables}
 
-Esta opción afecta a cómo NVDA maneja las tablas utilizadas exclusivamente con fines de diseño.
-Cuando está activada, NVDA las trata como tablas normales, anunciándolas basándose en las [Opciones de Formato de Documento](#DocumentFormattingSettings) y localizándolas con los comandos de navegación rápida.
+Esta opción afecta a cómo Aslan maneja las tablas utilizadas exclusivamente con fines de diseño.
+Cuando está activada, Aslan las trata como tablas normales, anunciándolas basándose en las [Opciones de Formato de Documento](#DocumentFormattingSettings) y localizándolas con los comandos de navegación rápida.
 Cuando está desactivada, no se anuncian ni se encuentran con la navegación rápida.
 Sin embargo, el contenido de las tablas todavía se incluirá como texto normal.
 Esta opción está desactivada de forma predeterminada.
@@ -1815,7 +1815,7 @@ Para conmutar la inclusión de tablas de diseño desde cualquier lugar, por favo
 
 ##### Configurando el anunciado de campos tales como enlaces y encabezados {#BrowseModeLinksAndHeadings}
 
-Por favor consulta las opciones en la  [categoría Formateado de Documentos](#DocumentFormattingSettings) del diálogo [Opciones de NVDA](#NVDASettings) para configurar los campos que se anuncian cuando se navega, tales como enlaces, encabezados y tablas.
+Por favor consulta las opciones en la  [categoría Formateado de Documentos](#DocumentFormattingSettings) del diálogo [Opciones de Aslan](#AslanSettings) para configurar los campos que se anuncian cuando se navega, tales como enlaces, encabezados y tablas.
 
 ##### Modo de foco automático para cambios del foco {#BrowseModeSettingsAutoPassThroughOnFocusChange}
 
@@ -1824,19 +1824,19 @@ Por ejemplo, cuando estás en una página Web, si presionas tab. y caes sobre un
 
 ##### Modo foco automático para movimiento de cursor {#BrowseModeSettingsAutoPassThroughOnCaretMove}
 
-Esta opción, cuando está marcada, permite a NVDA entrar y salir del modo foco cuando se utilizan las flechas. 
-Por ejemplo, si se va presionando flecha abajo por una página Web y caes sobre un cuadro de edición, NVDA activará automáticamente el modo foco. Si presionas las flechas para salir del cuadro de edición, NVDA te volverá a poner en modo revisión.
+Esta opción, cuando está marcada, permite a Aslan entrar y salir del modo foco cuando se utilizan las flechas. 
+Por ejemplo, si se va presionando flecha abajo por una página Web y caes sobre un cuadro de edición, Aslan activará automáticamente el modo foco. Si presionas las flechas para salir del cuadro de edición, Aslan te volverá a poner en modo revisión.
 
 ##### Indicación de Audio de los modos Foco y Navegación {#BrowseModeSettingsPassThroughAudioIndication}
 
-Si esta opción está activada, NVDA reproducirá sonidos especiales cuando cambie entre modo exploración y modo foco en lugar de verbalizar el cambio.
+Si esta opción está activada, Aslan reproducirá sonidos especiales cuando cambie entre modo exploración y modo foco en lugar de verbalizar el cambio.
 
 ##### Capturar los gestos que no sean de comandos  para que no alcancen el  documento {#BrowseModeSettingsTrapNonCommandGestures}
 
-Habilitada de modo predeterminado, esta opción te permite elegir si los gestos (tales como la presionación de teclas) que no sean una orden de NVDA y que no se considere que sea una tecla de orden en general, deberían capturarse para no pasar al documento que esté en el foco actualmente. 
+Habilitada de modo predeterminado, esta opción te permite elegir si los gestos (tales como la presionación de teclas) que no sean una orden de Aslan y que no se considere que sea una tecla de orden en general, deberían capturarse para no pasar al documento que esté en el foco actualmente. 
 Como un ejemplo, al estar activada, si se presionó la letra j, debería capturarse para no alcanzar el documento, ya que no es ni una tecla de navegación rápida ni es probable que sea una orden de la misma aplicación.
 
-#### Formateado de Documento (NVDA+control+d) {#DocumentFormattingSettings}
+#### Formateado de Documento (Aslan+control+d) {#DocumentFormattingSettings}
 
 La mayoría de las casillas de verificación en este diálogo son para configurar qué tipo de formato deseas escuchar automáticamente cuando muevas el cursor por los documentos. 
 Por Ejemplo, si marcas la casilla de verificación anunciar el nombre de la fuente, cada vez que navegues por el texto con una fuente diferente, el nombre de la fuente será anunciado.
@@ -1880,9 +1880,9 @@ Para conmutar estas  opciones desde cualquier lugar, por favor asigna gestos per
 
 ##### Anunciar cambios de formato después del cursor {#DocumentFormattingDetectFormatAfterCursor}
 
-Si está activada, esta opción dice a NVDA que pruebe y detecte todos los cambios de formato en una línea según la anuncia, si se hace esto podría enlentecerse la respuesta de NVDA.
+Si está activada, esta opción dice a Aslan que pruebe y detecte todos los cambios de formato en una línea según la anuncia, si se hace esto podría enlentecerse la respuesta de Aslan.
 
-De forma predeterminada, NVDA detectará el formato en la posición del cursor del Sistema / Revisión, y en algunos casos podría detectar el formato en el resto de la línea, sólo si no está causando una disminución del rendimiento.
+De forma predeterminada, Aslan detectará el formato en la posición del cursor del Sistema / Revisión, y en algunos casos podría detectar el formato en el resto de la línea, sólo si no está causando una disminución del rendimiento.
 
 Activa esta opción mientras compruebas la lectura de documentos en aplicaciones tales como Worpad, donde el formato sea importante.
 
@@ -1891,8 +1891,8 @@ Activa esta opción mientras compruebas la lectura de documentos en aplicaciones
 Esta opción te permite configurar cómo debe leerse la sangría del principio de las líneas.
 El cuadro combinado Anunciar sangría de líneas con tiene cuatro opciones.
 
-* Desactivado: NVDA no tratará la sangría especialmente.
-* Voz: si se selecciona voz, cuando la cantidad de sangrado cambie, NVDA verbalizará algo como "doce espacios" o "cuatro tabuladores."
+* Desactivado: Aslan no tratará la sangría especialmente.
+* Voz: si se selecciona voz, cuando la cantidad de sangrado cambie, Aslan verbalizará algo como "doce espacios" o "cuatro tabuladores."
 * Tonos: Si se selecciona Tonos, cuando la cantidad de sangrado cambie, los tonos indican la cantidad de cambios en la sangría.
 El tono se incrementará en intensidad para cada espacio, y para el tabulador,se incrementará en intensidad equivalente de 4 espacios.
 * Voz y Tonos: esta opción lee la sangría utilizando ambos métodos de arriba.
@@ -1908,8 +1908,8 @@ Este cuadro combinado te permite elegir el idioma para utilizar con el reconocim
 
 #### Opciones Avanzadas {#AdvancedSettings}
 
-¡Advertencia! Las opciones en esta categoría son para usuarios avanzados y pueden causar que NVDA no funcione correctamente si se configura de forma incorrecta.
-Realiza cambios en estas opciones únicamente si estás seguro de que sabes lo que estás haciendo o si has recibido las instrucciones específicas de un desarrollador de NVDA.
+¡Advertencia! Las opciones en esta categoría son para usuarios avanzados y pueden causar que Aslan no funcione correctamente si se configura de forma incorrecta.
+Realiza cambios en estas opciones únicamente si estás seguro de que sabes lo que estás haciendo o si has recibido las instrucciones específicas de un desarrollador de Aslan.
 
 ##### Hacer cambios a opciones avanzadas {#AdvancedSettingsMakingChanges}
 
@@ -1923,69 +1923,69 @@ Este también puede ser el caso si no estás seguro de que se hayan cambiado las
 
 ##### Habilitar la carga de código personalizado desde el directorio Developer Scratchpad {#AdvancedSettingsEnableScratchpad}
 
-Al desarrollar complementos para NVDA, es útil poder probar el código a medida que lo escribes.
-Esta opción al estar habilitada, permite a NVDA cargar appModules personalizados, globalPlugins, brailleDisplayDrivers y synthDrivers, desde un directorio especial de desarrolladores scratchpad de tu directorio de configuración de usuario de NVDA.
-Anteriormente, NVDA cargaba código personalizado directamente desde el directorio de configuración del usuario, sin posibilidad de deshabilitarlo.
-Esta opción está desactivada de forma predeterminada, lo que garantiza que nunca se ejecute ningún código no probado en NVDA sin el conocimiento explícito del usuario.
-Si deseas distribuir código personalizado a otros, debes empaquetarlo como un complemento de NVDA.
+Al desarrollar complementos para Aslan, es útil poder probar el código a medida que lo escribes.
+Esta opción al estar habilitada, permite a Aslan cargar appModules personalizados, globalPlugins, brailleDisplayDrivers y synthDrivers, desde un directorio especial de desarrolladores scratchpad de tu directorio de configuración de usuario de Aslan.
+Anteriormente, Aslan cargaba código personalizado directamente desde el directorio de configuración del usuario, sin posibilidad de deshabilitarlo.
+Esta opción está desactivada de forma predeterminada, lo que garantiza que nunca se ejecute ningún código no probado en Aslan sin el conocimiento explícito del usuario.
+Si deseas distribuir código personalizado a otros, debes empaquetarlo como un complemento de Aslan.
 
 ##### Abrir el directorio Developer Scratchpad {#AdvancedSettingsOpenScratchpadDir}
 
 Este botón abre el directorio donde puedes colocar el código personalizado mientras lo desarrollas.
-Este botón sólo está habilitado si NVDA está configurado para permitir la carga de código personalizado desde el directorio de desarrolladores del Scratchpad.
+Este botón sólo está habilitado si Aslan está configurado para permitir la carga de código personalizado desde el directorio de desarrolladores del Scratchpad.
 
 ##### Utilizar UI automation para acceder a controles de documento de Microsoft Word cuando esté disponible {#AdvancedSettingsUseUiaForWord}
 
-Cuando esta opción esté activada, NVDA intentará utilizar la API de accesibilidad de Microsoft UI Automation para obtener información de los controles de documentos de Microsoft Word.
+Cuando esta opción esté activada, Aslan intentará utilizar la API de accesibilidad de Microsoft UI Automation para obtener información de los controles de documentos de Microsoft Word.
 Esto incluye el mismo Microsoft Word, y también el visor de mensajes y el compositor de Microsoft Outlook.
- Para las versiones más recientes de Microsoft Office 2016/365 que se ejecutan en Windows 10, la compatibilidad con la UI Automation  es lo suficientemente completa como para proporcionar acceso a documentos de Microsoft Word casi igual a la compatibilidad con Microsoft Word existente de NVDA, con la ventaja añadida de que la capacidad de respuesta aumenta considerablemente.
+ Para las versiones más recientes de Microsoft Office 2016/365 que se ejecutan en Windows 10, la compatibilidad con la UI Automation  es lo suficientemente completa como para proporcionar acceso a documentos de Microsoft Word casi igual a la compatibilidad con Microsoft Word existente de Aslan, con la ventaja añadida de que la capacidad de respuesta aumenta considerablemente.
 
 Sin embargo, puede haber alguna información que no esté expuesta o que esté incorrectamente expuesta en algunas versiones de Microsoft Office, lo que significa que no siempre se puede confiar en este soporte de la UI automation.
 Todavía no recomendamos que la mayoría de los usuarios activen esta opción de forma predeterminada, aunque invitamos a los usuarios de Office 2016/365 a que prueben esta función y nos envíen sus comentarios.
 
 ##### Utilizar UI Automation para acceder a la Consola de Windows cuando esté disponible {#AdvancedSettingsConsoleUIA}
 
-Cuando esta opción esté activada, NVDA utilizará una versión nueva de trabajo en curso de su soporte para la Consola de Windows que aprovecha las ventajas de las [mejoras de accesibilidad hechas por Microsoft](https://devblogs.microsoft.com/commandline/whats-new-in-windows-console-in-windows-10-fall-creators-update/). Esta característica es altamente experimental y todavía incompleta, así que su uso aún no está recomendado. Sin embargo, una vez completado, se prevé que este nuevo soporte se convierta  en el predeterminado, mejorando el rendimiento y la estabilidad de NVDA en las consolas de comandos de Windows.
+Cuando esta opción esté activada, Aslan utilizará una versión nueva de trabajo en curso de su soporte para la Consola de Windows que aprovecha las ventajas de las [mejoras de accesibilidad hechas por Microsoft](https://devblogs.microsoft.com/commandline/whats-new-in-windows-console-in-windows-10-fall-creators-update/). Esta característica es altamente experimental y todavía incompleta, así que su uso aún no está recomendado. Sin embargo, una vez completado, se prevé que este nuevo soporte se convierta  en el predeterminado, mejorando el rendimiento y la estabilidad de Aslan en las consolas de comandos de Windows.
 
 ##### Verbalizar contraseñas en consolas UIA {#AdvancedSettingsWinConsoleSpeakPasswords}
 
-Esta opción controla si se verbalizan los caracteres por [verbalizar caracteres al escribir](#KeyboardSettingsSpeakTypedCharacters) o [verbalizar palabras al escribir](#KeyboardSettingsSpeakTypedWords) en situaciones donde la pantalla no se actualice (tales como entrada de contraseña) en la Consola de Windows con el soporte UI automation activado. Por razones de seguridad, esta opción debería dejarse deshabilitada. Sin embargo, es posible que desees habilitarla si experimentas problemas de rendimiento o de inestabilidad con el anuncio de caracteres y/o palabras al escribir mientras utilizas el nuevo soporte experimental de NVDA para la Consola.
+Esta opción controla si se verbalizan los caracteres por [verbalizar caracteres al escribir](#KeyboardSettingsSpeakTypedCharacters) o [verbalizar palabras al escribir](#KeyboardSettingsSpeakTypedWords) en situaciones donde la pantalla no se actualice (tales como entrada de contraseña) en la Consola de Windows con el soporte UI automation activado. Por razones de seguridad, esta opción debería dejarse deshabilitada. Sin embargo, es posible que desees habilitarla si experimentas problemas de rendimiento o de inestabilidad con el anuncio de caracteres y/o palabras al escribir mientras utilizas el nuevo soporte experimental de Aslan para la Consola.
 
 ##### Poner Automáticamente el Foco del Sistema en los Elementos enfocables en Modo Exploración {#BrowseModeSettingsAutoFocusFocusableElements}
 
-Tecla: NVDA+8
+Tecla: Aslan+8
 
 Habilitada por omisión, esta opción te permite elegir si el foco del sistema debería ponerse automáticamente en los elementos que puedan tenerlo (enlaces, campos de formulario, etc.) cuando se navegue por el contenido con el cursor del modo exploración.
-Si se habilita, esto representa el comportamiento predeterminado de NVDA como la versión 2019.1 y anteriores.
+Si se habilita, esto representa el comportamiento predeterminado de Aslan como la versión 2019.1 y anteriores.
 Deshabilitando esta opción no se enfocarán automáticamente los elementos enfocables cuando se seleccionen con el cursor del modo exploración.
 Esto podría resultar en una mejor experiencia de navegación y una mejor respuesta en el modo exploración.
 El foco todavía se actualizará al elemento en particular cuando interactúes con él (por ejemplo, presionando un botón, marcando una casilla de verificación).
-Esta funcionalidad es experimental a partir de NVDA 2019.2.
+Esta funcionalidad es experimental a partir de Aslan 2019.2.
 
 ##### Tiempo de espera para el movimiento del cursor (en MS) {#AdvancedSettingsCaretMoveTimeout}
 
-Esta opción te permite configurar el número de milésimas de segundo que NVDA esperará a que el cursor (punto de inserción) se mueva en los controles de texto editables.
-Si ves que NVDA aparenta estar siguiendo incorrectamente el cursor, por ejemplo, parece estar siempre un carácter por detrás o repitiendo líneas, entonces puedes intentar aumentar este valor.
+Esta opción te permite configurar el número de milésimas de segundo que Aslan esperará a que el cursor (punto de inserción) se mueva en los controles de texto editables.
+Si ves que Aslan aparenta estar siguiendo incorrectamente el cursor, por ejemplo, parece estar siempre un carácter por detrás o repitiendo líneas, entonces puedes intentar aumentar este valor.
 
 ##### Categorías de registro de depuración {#AdvancedSettingsDebugLoggingCategories}
 
-Las casillas de verificación de esta lista te permiten habilitar categorías específicas de mensajes de depuración en el registro de NVDA.
+Las casillas de verificación de esta lista te permiten habilitar categorías específicas de mensajes de depuración en el registro de Aslan.
 El registro de estos mensajes puede incurrir en un menor rendimiento y en archivos de registro de gran tamaño.
-Activa sólo uno de ellos si un desarrollador de NVDA te ha dado instrucciones específicas, por ejemplo, al depurar por qué un controlador de pantalla braille no está funcionando correctamente.
+Activa sólo uno de ellos si un desarrollador de Aslan te ha dado instrucciones específicas, por ejemplo, al depurar por qué un controlador de pantalla braille no está funcionando correctamente.
 
 ### Miscelánea de Opciones {#MiscSettings}
 
-Además del cuadro de diálogo [Opciones de NVDA](#NVDASettings), el submenú Preferencias del menú NVDA contiene otros elementos que se describen a continuación.
+Además del cuadro de diálogo [Opciones de Aslan](#AslanSettings), el submenú Preferencias del menú Aslan contiene otros elementos que se describen a continuación.
 
 #### Diccionarios del Habla {#SpeechDictionaries}
 
-El menú de Diccionarios del habla, (encontrado en el menú Preferencias) contiene diálogos que te permiten controlar el modo en que NVDA pronuncia palabras o frases particulares. 
+El menú de Diccionarios del habla, (encontrado en el menú Preferencias) contiene diálogos que te permiten controlar el modo en que Aslan pronuncia palabras o frases particulares. 
 Hay actualmente tres tipos diferentes de diccionarios del habla. 
 son:
 
-* Predeterminado: las reglas en este diccionario afectan a todas las voces en NVDA.
+* Predeterminado: las reglas en este diccionario afectan a todas las voces en Aslan.
 * Voz: un diccionario cuyas reglas afectan a la voz para el sintetizador que actualmente está siendo utilizado.
-* Temporal: las reglas en este diccionario afectan a todas las voces en NVDA, pero sólo para la sesión actual. Estas reglas son temporales y se perderán si NVDA es reiniciado
+* Temporal: las reglas en este diccionario afectan a todas las voces en Aslan, pero sólo para la sesión actual. Estas reglas son temporales y se perderán si Aslan es reiniciado
 
 Necesitas asignar gestos personalizados utilizando el [diálogo Gestos de Entrada](#InputGestures) si deseas abrir cualquiera de estos diálogos de diccionario desde cualquier lugar.
 
@@ -1996,16 +1996,16 @@ Para añadir una nueva regla al diccionario, presiona el botón Añadir, y relle
 A continuación berás tu nueva regla en la lista de reglas. 
 Asimismo para asegurarte de que tu regla está actualmente guardada, asegúrate de presionar Aceptar para salir completamente del diálogo de diccionario Una vez hayas finalizado de añadir/editar reglas.
 
-Las reglas para los diccionarios de voz de NVDA te permiten cambiar una cadena de caracteres por otra. 
-Un ejemplo simple sería que quisieras tener a NVDA diciendo la palabra rana cada vez que tuviera que decir la palabra pájaro. 
+Las reglas para los diccionarios de voz de Aslan te permiten cambiar una cadena de caracteres por otra. 
+Un ejemplo simple sería que quisieras tener a Aslan diciendo la palabra rana cada vez que tuviera que decir la palabra pájaro. 
 En el diálogo de añadir regla, el modo más fácil de hacer esto es teclear la palabra pájaro en el campo Patrón, y la palabra rana en el campo de reemplazar. 
 También puedes querer teclear una descripción de la regla en el campo Comentario (algo como: cambiar pájaro por rana).
 
-Los diccionarios del habla de NVDA asimismo son mucho más poderosos que un simple reemplazo de palabras. 
-El diálogo de Añadir reglas también contiene Una Casilla de verificación que dice si quieres o no que la regla sea sensible a las mayúsculas (significando que NVDA debería tener en cuenta si los caracteres están en mayúsculas o en minúsculas. 
-NVDA ignora los casos de forma predeterminada). 
+Los diccionarios del habla de Aslan asimismo son mucho más poderosos que un simple reemplazo de palabras. 
+El diálogo de Añadir reglas también contiene Una Casilla de verificación que dice si quieres o no que la regla sea sensible a las mayúsculas (significando que Aslan debería tener en cuenta si los caracteres están en mayúsculas o en minúsculas. 
+Aslan ignora los casos de forma predeterminada). 
 
-Finalmente, un conjunto de botones de opción te permiten decir a NVDA si tu patrón debería compararse con cualquier cosa, o sólo debería compararse si es una palabra completa o si debería tratarse como una "Expresión Regular".
+Finalmente, un conjunto de botones de opción te permiten decir a Aslan si tu patrón debería compararse con cualquier cosa, o sólo debería compararse si es una palabra completa o si debería tratarse como una "Expresión Regular".
 Ajustar el patrón para comparar como una palabra completa significa que el reemplazo sólo se hará si el patrón no ocurre como parte de una palabra más larga; es decir, un carácter distinto a un carácter alfanumérico o un subrayado (o sin carácter) que venga inmediatamente antes y después del patrón.
 Por lo tanto, utilizando el ejemplo anterior de la sustitución de la palabra "pájaro" con "rana", si fueras  a hacer de esto un reemplazo de palabra completa, no se compararía "pájaros" o "pájaroAzul".
 
@@ -2017,7 +2017,7 @@ Las expresiones regulares no están cubiertas en esta Guía del Usuario, pero ha
 Este diálogo te permite cambiar el modo en que son pronunciados la puntuación y otros símbolos, así como el nivel de los símbolos en el cual se verbalizan. 
 
 El idioma cuya pronunciación de símbolo vaya a ser editada se mostrará en el título del diálogo.
-Ten en cuenta que este diálogo respeta la opción "Confiar en el Idioma de la voz al procesar símbolos y caracteres" que se encuentra en la [Categoría Voz](#SpeechSettings) del diálogo [Opciones de NVDA](#NVDASettings) es decir, utiliza el idioma de la voz en lugar de la opción del idioma global de NVDA cuando esta opción esté habilitada.
+Ten en cuenta que este diálogo respeta la opción "Confiar en el Idioma de la voz al procesar símbolos y caracteres" que se encuentra en la [Categoría Voz](#SpeechSettings) del diálogo [Opciones de Aslan](#AslanSettings) es decir, utiliza el idioma de la voz en lugar de la opción del idioma global de Aslan cuando esta opción esté habilitada.
 
 Para cambiar un símbolo, primero selecciónalo en la lísta de Símbolos.
 Puedes filtrar los símbolos enterduciendo el símbolo o una parte de su sustitución en el cuadro de edición Filtrar por.
@@ -2043,12 +2043,12 @@ Cuando termines, presiona el botón Aceptar para guardar tus cambios o el botón
 
 #### Gestos de Entrada {#InputGestures}
 
-En este diálogo, puedes personalizar los gestos de entrada (teclas en el teclado, botones en la pantalla braille, etc.) para comandos de NVDA.
+En este diálogo, puedes personalizar los gestos de entrada (teclas en el teclado, botones en la pantalla braille, etc.) para comandos de Aslan.
 
 Sólo se muestran los comandos que se apliquen inmediatamente antes de que el diálogo se abra.
 Por ejemplo, si quieres personalizar comandos relacionadas con el modo exploración, deberías abrir el diálogo Gestos de entrada mientras estés en modo exploración.
 
-El árbol en este cuadro de diálogo muestra todas los comandos de NVDA aplicables agrupadas por categoría.
+El árbol en este cuadro de diálogo muestra todas los comandos de Aslan aplicables agrupadas por categoría.
 Puedes filtrarlos enterduciendo una o más palabras desde el nombre de los comandos dentro del cuadro de edición Filtrar por... en cualquier orden.
 Cualquier gesto asociado con una orden se lista bajo la orden.
 
@@ -2064,20 +2064,20 @@ Cuando hayas terminado de realizar cambios, presiona el botón Aceptar para guar
 
 ### Guardando y Recargando la configuración {#SavingAndReloading}
 
-De forma predeterminada NVDA guardará automáticamente tus opciones al salir.
+De forma predeterminada Aslan guardará automáticamente tus opciones al salir.
 Ten en cuenta, no obstante, que esta opción predeterminada puede ser cambiada en las opciones generales en el menú preferencias. 
-Para guardar las opciones manualmente en cualquier momento, elige el elemento Guardar configuración en el menú NVDA.
+Para guardar las opciones manualmente en cualquier momento, elige el elemento Guardar configuración en el menú Aslan.
 
-Si alguna vez cometes un error con las opciones y necesitas volver a las opciones guardadas, puedes elegir el elemento "volver a la configuración guardada" en el menú NVDA.
-También puedes reiniciar las opciones a sus valores predeterminados de fábrica originales eligiendo Reiniciar Configuración a los Valores Predeterminados de Fábrica, que también se encuentra en el menú NVDA.
+Si alguna vez cometes un error con las opciones y necesitas volver a las opciones guardadas, puedes elegir el elemento "volver a la configuración guardada" en el menú Aslan.
+También puedes reiniciar las opciones a sus valores predeterminados de fábrica originales eligiendo Reiniciar Configuración a los Valores Predeterminados de Fábrica, que también se encuentra en el menú Aslan.
 
-Las siguientes teclas de comandos de NVDA también son útiles:
+Las siguientes teclas de comandos de Aslan también son útiles:
 <!-- KC:beginInclude -->
 
 | Nombre |Tecla Escritorio |Tecla Portátil |Descripción|
 |---|---|---|---|
-|Guardar configuración |NVDA+control+c |NVDA+control+c |Guarda tu configuración actual tal que no se pierda cuando salgas de NVDA|
-|Revertir configuración |NVDA+control+r |NVDA+control+r |presionando una vez reinicia tu configuración a cuando la guardaste por última vez. presionando tres veces la reiniciará a los valores predeterminados de fábrica.|
+|Guardar configuración |Aslan+control+c |Aslan+control+c |Guarda tu configuración actual tal que no se pierda cuando salgas de Aslan|
+|Revertir configuración |Aslan+control+r |Aslan+control+r |presionando una vez reinicia tu configuración a cuando la guardaste por última vez. presionando tres veces la reiniciará a los valores predeterminados de fábrica.|
 
 <!-- KC:endInclude -->
 
@@ -2085,21 +2085,21 @@ Las siguientes teclas de comandos de NVDA también son útiles:
 
 A veces, es posible que desees tener diferentes configuraciones para diferentes situaciones.
 Por ejemplo, es posible que desees tener el anunciado de sangría habilitado mientras estás editando o el anunciado de los atributos de la fuente activado mientras estás corrigiendo.
-NVDA te permite hacer esto utilizando perfiles de configuración.
+Aslan te permite hacer esto utilizando perfiles de configuración.
 
 Un perfil de configuración contiene sólo las opciones que se cambian mientras que el perfil esté siendo editado.
-La mayoría de las opciones se pueden cambiar en los perfiles de configuración con excepción de aquellas que estén en la categoría General del cuadro de diálogo [Opciones de NVDA](#NVDASettings) , las cuales se aplican a la totalidad de NVDA.
+La mayoría de las opciones se pueden cambiar en los perfiles de configuración con excepción de aquellas que estén en la categoría General del cuadro de diálogo [Opciones de Aslan](#AslanSettings) , las cuales se aplican a la totalidad de Aslan.
 
 Los perfiles de configuración pueden ser activados manualmente, ya sea desde un cuadro de diálogo o utilizando gestos añadidos personalizados.
 También se pueden activar de forma automática debido a disparadores tales como el cambio a una aplicación en particular.
 
 #### Manejo Básico {#ProfilesBasicManagement}
 
-Los perfiles de configuración se gestionan seleccionando "Perfiles de Configuración" en el menú NVDA.
+Los perfiles de configuración se gestionan seleccionando "Perfiles de Configuración" en el menú Aslan.
 También puedes hacer esto utilizando una orden de teclado:
 <!-- KC:beginInclude -->
 
-* NVDA+control+p: Muestra el cuadro de diálogo Perfiles de configuración.
+* Aslan+control+p: Muestra el cuadro de diálogo Perfiles de configuración.
 
 <!-- KC:endInclude -->
 
@@ -2175,81 +2175,81 @@ Borrar un perfil eliminará automáticamente el gesto asociado con él.
 
 ### Ubicación de los Ficheros de Configuración {#LocationOfConfigurationFiles}
 
-Las versiones portables de NVDA almacenan todas sus opciones y complementos en un directorio llamado userConfig, que se encuentra en el directorio de NVDA.
+Las versiones portables de Aslan almacenan todas sus opciones y complementos en un directorio llamado userConfig, que se encuentra en el directorio de Aslan.
 
-Las versiones instaladas de NVDA almacenan todas sus opciones y complementos en un directorio especial de NVDA localizado en tu perfil de usuario de Windows. 
-Esto significa que cada usuario en el sistema puede tener sus propias opciones de NVDA. 
-Para optener tu directorio de opciones para una versión instalada de NVDA, en el menú de Inicio puedes ir a programas -> NVDA -> explorar directorio de configuración de usuario.
+Las versiones instaladas de Aslan almacenan todas sus opciones y complementos en un directorio especial de Aslan localizado en tu perfil de usuario de Windows. 
+Esto significa que cada usuario en el sistema puede tener sus propias opciones de Aslan. 
+Para optener tu directorio de opciones para una versión instalada de Aslan, en el menú de Inicio puedes ir a programas -> Aslan -> explorar directorio de configuración de usuario.
 
-Las opciones para NVDA cuando se ejecuta en las pantallas de logueo o de UAC se almacenan en el directorio SystemConfig en el directorio de instalación de NVDA.
+Las opciones para Aslan cuando se ejecuta en las pantallas de logueo o de UAC se almacenan en el directorio SystemConfig en el directorio de instalación de Aslan.
 Normalmente esta configuración no debería ser tocada.
-Para cambiar cómo se configura NVDA en las pantallas de logueo/UAC, configura a NVDA como desees mientras estás autentificado en Windows, guarda la configuración y luego presiona el botón "Utilizar ajustes guardados actualmente en el logueo y otras pantallas seguras en la categoría General del diálogo [Opciones de NVDA](#NVDASettings) .
+Para cambiar cómo se configura Aslan en las pantallas de logueo/UAC, configura a Aslan como desees mientras estás autentificado en Windows, guarda la configuración y luego presiona el botón "Utilizar ajustes guardados actualmente en el logueo y otras pantallas seguras en la categoría General del diálogo [Opciones de Aslan](#AslanSettings) .
 
 ## Herramientas Extra {#ExtraTools}
 ### Visualizador del Registro {#LogViewer}
 
-El visualizador del Registro, encontrado en Herramientas en el menú NVDA, te permite ver toda la salida que haya ocurrido hasta ahora desde cuando iniciaste NVDA por última vez.
-Utilizando NVDA+F1 se abrirá el visualizador del registro y se mostrará la información del desarrollador sobre el navegador de objetos actual.
+El visualizador del Registro, encontrado en Herramientas en el menú Aslan, te permite ver toda la salida que haya ocurrido hasta ahora desde cuando iniciaste Aslan por última vez.
+Utilizando Aslan+F1 se abrirá el visualizador del registro y se mostrará la información del desarrollador sobre el navegador de objetos actual.
 Además de leer el contenido, también puedes guardar una copia del fichero de registro, o refrescar el visualizador tal que se muestre la salida más reciente desde que el visualizador de registro fue abierto.
 Estas acciones están disponibles en el menú de visualizador de Registro.
 
 ### Visualizador de Voz {#SpeechViewer}
 
-Para desarrolladores de Software videntes o gente demostrando NVDA a una audiencia vidente, está disponible una ventana flotante que te permite ver todo el texto que NVDA esté verbalizando actualmente.
+Para desarrolladores de Software videntes o gente demostrando Aslan a una audiencia vidente, está disponible una ventana flotante que te permite ver todo el texto que Aslan esté verbalizando actualmente.
 
-Para activar el visualizador de voz, marca el elemento de menú "Visualizador de Voz" en Herramientas en el menú NVDA.
+Para activar el visualizador de voz, marca el elemento de menú "Visualizador de Voz" en Herramientas en el menú Aslan.
 Desmarca el elemento de menú para desactivarlo.
 
 La ventana del visualizador de voz contiene una casilla de verificación etiquetada "Mostrar visualizador de voz al arrancar".
-Si esta está marcada, el visualizador de voz se abrirá cuando NVDA arranque.
+Si esta está marcada, el visualizador de voz se abrirá cuando Aslan arranque.
 La ventana del visualizador de voz siempre intentará reabrirse con las mismas dimensiones y localización que cuando se cerró.
 
 Mientras el visualizador de voz está activado, se actualiza constantemente para mostrarte el texto más reciente que se esté verbalizando.
-No obstante, si haces clic o colocas el foco dentro del visualizador,  NVDA detendrá temporalmente la actualización del texto, tal que podrás seleccionar o copiar fácilmente el contenido existente.
+No obstante, si haces clic o colocas el foco dentro del visualizador,  Aslan detendrá temporalmente la actualización del texto, tal que podrás seleccionar o copiar fácilmente el contenido existente.
 
 Para conmutar el visualizador de voz desde cualquier lugar, por favor asigna un gesto personalizado utilizando el [diálogo Gestos de Entrada](#InputGestures).
 
 ### Administrador de Complementos {#AddonsManager}
 
-El Administrador de Complementos, al que se accede seleccionando Gestionar Complementos en Herramientas en el menú NVDA, te permite instalar, desinstalar, habilitar y deshabilitar paquetes de complementos para NVDA.
-Estos paquetes se proporcionan por la comunidad y contienen código personalizado que podrá añadir o cambiar características en NVDA o también proporcionan soporte para líneas braille o sintetizadores de voz extra.
+El Administrador de Complementos, al que se accede seleccionando Gestionar Complementos en Herramientas en el menú Aslan, te permite instalar, desinstalar, habilitar y deshabilitar paquetes de complementos para Aslan.
+Estos paquetes se proporcionan por la comunidad y contienen código personalizado que podrá añadir o cambiar características en Aslan o también proporcionan soporte para líneas braille o sintetizadores de voz extra.
 
-El Administrador de Complementos contiene una lista que muestra todos los complementos instalados actualmente en tu configuración de usuario de NVDA. 
+El Administrador de Complementos contiene una lista que muestra todos los complementos instalados actualmente en tu configuración de usuario de Aslan. 
 Se muestra el nombre de paquete, el estado, la versión y el autor para cada complemento, aunque se puede ver más información tal como una descripción y una URL seleccionando el complemento y presionando el botón Acerca del complemento.
 Si hay ayuda disponible para el complemento seleccionado, puedes acceder a ella presionando su botón de Ayuda.
 
 Para examinar y descargar los complementos disponibles online, presiona el botón Obtener Complementos.
-Este botón abre la [página de complementos de NVDA](https://addons.nvda-project.org/).
-Si NVDA está instalado y ejecutándose en tu sistema, puedes abrir directamente el complemento desde el explorador para comenzar el proceso de instalación como se describe a continuación.
+Este botón abre la [página de complementos de Aslan](https://addons.aslan-project.org/).
+Si Aslan está instalado y ejecutándose en tu sistema, puedes abrir directamente el complemento desde el explorador para comenzar el proceso de instalación como se describe a continuación.
 De lo contrario, guarda el paquete de complemento y sigue las instrucciones de más abajo.
 
 Para instalar un complemento que obtuviste previamente, presiona el botón Instalar.
-Esto te permitirá buscar un paquete de complemento (fichero .nvda-addon) en algún lugar de tu ordenador o en una red.
+Esto te permitirá buscar un paquete de complemento (fichero .aslan-addon) en algún lugar de tu ordenador o en una red.
 Una vez presiones Abrir, el proceso de instalación comenzará.
 
-Cuando un complemento se va a instalar, NVDA primero te pedirá que confirmes que realmente deseas instalarlo.
-Debido a que la funcionalidad de los complementos no tiene restricciones dentro de NVDA, lo cual en teoría podría incluir el acceso a tus datos personales o incluso a todo el sistema si NVDA es una copia instalada, es muy importante que instales sólo complementos desde fuentes fiables.
-Una vez que el complemento esté instalado, NVDA debe reiniciarse para que el complemento comience su ejecución. 
+Cuando un complemento se va a instalar, Aslan primero te pedirá que confirmes que realmente deseas instalarlo.
+Debido a que la funcionalidad de los complementos no tiene restricciones dentro de Aslan, lo cual en teoría podría incluir el acceso a tus datos personales o incluso a todo el sistema si Aslan es una copia instalada, es muy importante que instales sólo complementos desde fuentes fiables.
+Una vez que el complemento esté instalado, Aslan debe reiniciarse para que el complemento comience su ejecución. 
 Hasta que lo hagas, se mostrará un estado de "instalar" para ese complemento en la lista.
 
 Para eliminar un complemento, selecciona el complemento desde la lista y presiona el botón Eliminar.
-NVDA te preguntará si realmente deseas hacer esto.
-Al igual que con la instalación, NVDA debe reiniciarse para que el complemento sea eliminado completamente.
+Aslan te preguntará si realmente deseas hacer esto.
+Al igual que con la instalación, Aslan debe reiniciarse para que el complemento sea eliminado completamente.
 Hasta que lo hagas, se mostrará un estado de "eliminar" para ese complemento en la lista.
 
 Para deshabilitar un complemento, presiona el botón deshabilitar.
 Para habilitar un comnplemento anteriormente deshabilitado, presiona el botón habilitar.
 Puedes deshabilitar un complemento si su estado indica que está en ejecución o habilitado, o habilitarlo si el complemento está suspendido o deshabilitado.
-Para cada presionación del botón habilitar/deshabilitar, el estado del complemento cambia para indicar qué ocurrirá al reiniciar NVDA.
+Para cada presionación del botón habilitar/deshabilitar, el estado del complemento cambia para indicar qué ocurrirá al reiniciar Aslan.
 Si el complemento fue deshabilitado anteriormente, se mostrará un estado "habilitado después de reiniciar".
 Si el complemento fue anteriormente "Habilitado", se mostrará un estado "deshabilitado después de reiniciar"
-Al igual que cuando instalas o eliminas complementos, tienes que reiniciar NVDA para que los cambios tengan efecto.
+Al igual que cuando instalas o eliminas complementos, tienes que reiniciar Aslan para que los cambios tengan efecto.
 
 El administrador también tiene un botón Cerrar para cerrar el diálogo.
-Si has instalado, eliminado o cambiado el estado de los complementos, NVDA primero te preguntará si deseas reiniciar para que los cambios puedan llevarse a cabo.
+Si has instalado, eliminado o cambiado el estado de los complementos, Aslan primero te preguntará si deseas reiniciar para que los cambios puedan llevarse a cabo.
 
-Algunos complementos antiguos pueden ya no ser compatibles con la versión de NVDA que tienes.
-Cuando utilices una versión más antigua de NVDA, algunos complementos nuevos pueden no ser compatibles.
+Algunos complementos antiguos pueden ya no ser compatibles con la versión de Aslan que tienes.
+Cuando utilices una versión más antigua de Aslan, algunos complementos nuevos pueden no ser compatibles.
 Intentar instalar un complemento incompatible resultará en un error explicando por qué el complemento se considera incompatible.
 
 Para acceder al Administrador de Complementos desde cualquier lugar, por favor asigna un gesto personalizado utilizando el [diálogho Gestos de Entrada](#InputGestures).
@@ -2257,8 +2257,8 @@ Para acceder al Administrador de Complementos desde cualquier lugar, por favor a
 ### Administrador de Complementos Incompatibles {#incompatibleAddonsManager}
 
 El Administrador de Complementos Incompatibles, al que se puede acceder a través de los botones "ver complementos incompatibles" en el Administrador de Complementos, te permite inspeccionar cualquier complemento incompatible y la razón por la que se consideran incompatibles.
-Los complementos se consideran incompatibles cuando no han sido actualizados para funcionar con cambios significativos de NVDA, o cuando se basan en una característica no disponible en la versión de NVDA que estás utilizando.
-El Administrador de Complementos Incompatibles tiene un mensaje breve para explicar su propósito así como la versión de NVDA.
+Los complementos se consideran incompatibles cuando no han sido actualizados para funcionar con cambios significativos de Aslan, o cuando se basan en una característica no disponible en la versión de Aslan que estás utilizando.
+El Administrador de Complementos Incompatibles tiene un mensaje breve para explicar su propósito así como la versión de Aslan.
 Los complementos incompatibles se presentan en una lista con las siguientes columnas:
 
 1. Paquete, el nombre del complemento
@@ -2270,23 +2270,23 @@ Esto abre lo que te permitirá conocer todos los detalles del complemento, lo cu
 
 ### Consola de Python {#PythonConsole}
 
-La consola de Python de NVDA, encontrada en Herramientas en el menú NVDA, es una herramienta de desarrollo que es útil para depuración, inspección general del interior  de NVDA o inspeción de la jerarquía de accesibilidad  de una aplicación.
-Para más información, por favor consulta la Guía del desarrollador disponible en [la sección de Desarrollo de la página web de NVDA](https://community.nvda-project.org/wiki/Development).
+La consola de Python de Aslan, encontrada en Herramientas en el menú Aslan, es una herramienta de desarrollo que es útil para depuración, inspección general del interior  de Aslan o inspeción de la jerarquía de accesibilidad  de una aplicación.
+Para más información, por favor consulta la Guía del desarrollador disponible en [la sección de Desarrollo de la página web de Aslan](https://community.aslan-project.org/wiki/Development).
 
 ### Recargar plugins {#ReloadPlugins}
 
-Este elemento, una vez activado, recarga app modules y plugins globales sin reiniciar a NVDA, lo cual es útil para desarrolladores.
+Este elemento, una vez activado, recarga app modules y plugins globales sin reiniciar a Aslan, lo cual es útil para desarrolladores.
 
 ## Sintetizadores de Voz Admitidos {#SupportedSpeechSynths}
 
-Esta sección contiene información acerca de los sintetizadores de voz admitidos por NVDA.
-Para una lista más extensa de los sintetizadores libres y comerciales que puedes comprar y descargar para utilizar con NVDA, por favor consulta la [página de voces extra](https://github.com/nvaccess/nvda/wiki/ExtraVoices).
+Esta sección contiene información acerca de los sintetizadores de voz admitidos por Aslan.
+Para una lista más extensa de los sintetizadores libres y comerciales que puedes comprar y descargar para utilizar con Aslan, por favor consulta la [página de voces extra](https://github.com/nvaccess/aslan/wiki/ExtraVoices).
 
 ### eSpeak NG {#eSpeakNG}
 
-El sintetizador [Espeak NG](https://github.com/espeak-ng/espeak-ng) se compila directamente en NVDA y no requiere ningún otro controlador o componentes especiales para instalarse.
-NVDA se inicia utilizando Espeak NG de forma predeterminada.
-Como este sintetizador se compiló en NVDA, es una gran elección para cuando se ejecuta NVDA en  una memoria USB o en un CD en otros sistemas.
+El sintetizador [Espeak NG](https://github.com/espeak-ng/espeak-ng) se compila directamente en Aslan y no requiere ningún otro controlador o componentes especiales para instalarse.
+Aslan se inicia utilizando Espeak NG de forma predeterminada.
+Como este sintetizador se compiló en Aslan, es una gran elección para cuando se ejecuta Aslan en  una memoria USB o en un CD en otros sistemas.
 
 Cada voz que viene con Espeak NG habla un idioma diferente.
 Hay sobre 43 idiomas diferentes soportados por Espeak NG.
@@ -2296,21 +2296,21 @@ También hay muchas variantes que pueden elegirse para alterar el sonido de la v
 ### Microsoft Speech API versión 4 (SAPI 4) {#SAPI4}
 
 SAPI 4 es un antiguo estándar de Microsoft para sintetizadores de voz software.
-NVDA todavía es compatible con esto para usuarios que aún tengan sintetizadores SAPI 4 instalados.
+Aslan todavía es compatible con esto para usuarios que aún tengan sintetizadores SAPI 4 instalados.
 No obstante, Microsoft ya no da soporte para esto y se necesitan componentes que ya no están disponibles desde Microsoft.
 
-Cuando utilices este sintetizador con NVDA, las voces disponibles (a las que se accede desde la  [categoría Voz](#SpeechSettings) del diálogo [Opciones de NVDA](#NVDASettings) o por el [Anillo de Opciones del Sintetizador](#SynthSettingsRing)) contendrán todas las voces de todos los motores instalados SAPI 4 encontrados en tu sistema.
+Cuando utilices este sintetizador con Aslan, las voces disponibles (a las que se accede desde la  [categoría Voz](#SpeechSettings) del diálogo [Opciones de Aslan](#AslanSettings) o por el [Anillo de Opciones del Sintetizador](#SynthSettingsRing)) contendrán todas las voces de todos los motores instalados SAPI 4 encontrados en tu sistema.
 
 ### Microsoft Speech API versión 5 (SAPI 5) {#SAPI5}
 
 SAPI 5 es un estándar de Microsoft para sintetizadores de voz software.
 Muchos sintetizadores de voz que cumplen con este estándar podrán comprarse o descargarse gratuitamente desde varias compañías y sitios Web, aunque probablemente tu sistema ya vendrá con al menos una voz SAPI 5 preinstalada.
-Cuando se utiliza este sintetizador con NVDA, las voces disponibles (a las que se accede desde la [categoría Voz](#SpeechSettings) del cuadro de diálogo [Opciones de NVDA](#NVDASettings) o por el [Anillo de Opciones del Sintetizador](#SynthSettingsRing)) contendrán todas las voces de todos los motores SAPI 5 instalados encontrados en tu sistema.
+Cuando se utiliza este sintetizador con Aslan, las voces disponibles (a las que se accede desde la [categoría Voz](#SpeechSettings) del cuadro de diálogo [Opciones de Aslan](#AslanSettings) o por el [Anillo de Opciones del Sintetizador](#SynthSettingsRing)) contendrán todas las voces de todos los motores SAPI 5 instalados encontrados en tu sistema.
 
 ### Microsoft Speech Platform {#MicrosoftSpeechPlatform}
 
 La Microsoft Speech Platform proporciona voces para muchos idiomas que se utilizan habitualmente en el desarrollo de aplicaciones basadas en servidores de habla. 
-Estas voces también pueden utilizarse con NVDA.
+Estas voces también pueden utilizarse con Aslan.
 
 Para utilizar estas voces, necesitarás instalar dos componentes:
 
@@ -2327,27 +2327,27 @@ Se proporcionan voces para muchos idiomas y son más ágiles que las voces Micro
 
 Porfavor consulta este artículo de Microsoft para una lista de voces disponibles e instrucciones para instalarlas: https://support.microsoft.com/en-us/help/22797/windows-10-narrator-tts-voices
 
-Por favor ten en cuenta que actualmente no están disponibles con NVDA las velocidades más rápidas disponibles con Narrator.
-También, la velocidad seleccionada en la configuración de Windows afecta a la configurada en NVDA.
+Por favor ten en cuenta que actualmente no están disponibles con Aslan las velocidades más rápidas disponibles con Narrator.
+También, la velocidad seleccionada en la configuración de Windows afecta a la configurada en Aslan.
 Estos problemas no se pueden resolver sin cambios en Windows.
 Deseamos que esto se solucione en una actualización futura de Windows.
 
 ### Audiologic Tts3 {#Audiologic}
 
 Este es un sintetizador de voz comercial específicamente para el idioma italiano.
-Debes tener este sintetizador instalado en tu sistema para poder utilizarlo con NVDA.
+Debes tener este sintetizador instalado en tu sistema para poder utilizarlo con Aslan.
 Para más información, por favor visita el sitio Web de Audiologic en [www.audiologic.it](http://www.audiologic.it).
 
 Este sintetizador no soporta la [funcionalidad de deletreo](#SpeechSettingsUseSpelling).
 
 ## líneas braille Admitidas {#SupportedBrailleDisplays}
 
-Esta sección contiene información acerca de las líneas braille compatibles con NVDA.
+Esta sección contiene información acerca de las líneas braille compatibles con Aslan.
 
 ### Pantallas que admiten la detección automática {#AutomaticDetection}
 
-NVDA tiene la capacidad para detectar muchas líneas braille en segundo plano automáticamente, o a través de USB o de bluetooth.
-Este comportamiento se logra seleccionando la opción Automático como la pantalla braille preferida desde el [cuadro de diálogo Opciones de Braille](#BrailleSettings) de NVDA.
+Aslan tiene la capacidad para detectar muchas líneas braille en segundo plano automáticamente, o a través de USB o de bluetooth.
+Este comportamiento se logra seleccionando la opción Automático como la pantalla braille preferida desde el [cuadro de diálogo Opciones de Braille](#BrailleSettings) de Aslan.
 Esta opción está seleccionada predeterminadamente.
 
 Las siguientes pantallas admiten esta funcionalidad de detección automática.
@@ -2368,12 +2368,12 @@ Necesitarás los controladores de líneas braille de Freedom Scientific instalad
 Si no los tienes todavía, puedes obtenerlos desde https://www2.freedomscientific.com/downloads/focus-40-blue/focus-40-14-blue-downloads.asp.
 Aunque esta página sólo mencione la pantalla Focus 40 Blue, el controlador es compatible con todas las pantallas Focus y Pacmate de Freedom Scientific.
 
-De manera predeterminada, NVDA puede detectar automáticamente y conectarse a estas pantallas tanto a través de USB como de bluetooth.
+De manera predeterminada, Aslan puede detectar automáticamente y conectarse a estas pantallas tanto a través de USB como de bluetooth.
 No obstante, cuando se configura la pantalla, puedes seleccionar explícitamente los puertos "USB" o "Bluetooth" para restringir el tipo de conexión a utilizar.
-Esto podría ser útil si quieres conectar la pantalla focus a NVDA utilizando bluetooth, y todavía podrías cargarla utilizando la energía del USB desde tu ordenador.
-La detección automática de líneas braille de NVDA también reconocerá la pantalla en USB o en Bluetooth.
+Esto podría ser útil si quieres conectar la pantalla focus a Aslan utilizando bluetooth, y todavía podrías cargarla utilizando la energía del USB desde tu ordenador.
+La detección automática de líneas braille de Aslan también reconocerá la pantalla en USB o en Bluetooth.
 
-Seguidamente van las asociaciones de teclas para esta pantalla con NVDA.
+Seguidamente van las asociaciones de teclas para esta pantalla con Aslan.
 Por favor consulta la documentación de la pantalla para descripciones de dónde pueden encontrarse estas teclas.
 <!-- KC:beginInclude -->
 
@@ -2412,7 +2412,7 @@ Por favor consulta la documentación de la pantalla para descripciones de dónde
 |tecla espacio |barra espaciadora braille|
 |tecla windows+d (minimizar todas las aplicaciones) |barra espaciadora braille+punto1+punto2+punto3+punto4+punto5+punto6|
 |Anunciar Línea Actual |barra espaciadora braille+punto1+punto4|
-|Menú NVDA |barra espaciadora braille+punto1+punto3+punto4+punto5|
+|Menú Aslan |barra espaciadora braille+punto1+punto3+punto4+punto5|
 
 Para los modelos más recientes de la Focus que contengan teclas de balancines (focus 40, focus 80 y focus blue):
 
@@ -2435,16 +2435,16 @@ Sólo para la Focus 80:
 Ambas pantallas ALVA BC640 y BC680 de [Optelec](https://www.optelec.com/) están admitidas.
 Alternativamente, puedes conectar una pantalla antigua de Optelec, tal como una Braille Voyager, utilizando un conversor de protocolo suministrado por Optelec.
 No necesitas instalar ningún controlador en especial para utilizar estas pantallas.
-Sólo enchufa la pantalla y configura NVDA para utilizarla.
+Sólo enchufa la pantalla y configura Aslan para utilizarla.
 
-Nota: NVDA podría no ser capaz de usar una pantalla ALVA BC6 con Bluetooth cuando se empareja utilizando la utilidad ALVA Bluetooth.
-Cuando hayas emparejado tu dispositivo usando su utilidad y NVDA no pueda detectarlo, te recomendamos enparejar tu pantalla ALVA de la forma ordinaria utilizando las opciones de Bluetooth de Windows.
+Nota: Aslan podría no ser capaz de usar una pantalla ALVA BC6 con Bluetooth cuando se empareja utilizando la utilidad ALVA Bluetooth.
+Cuando hayas emparejado tu dispositivo usando su utilidad y Aslan no pueda detectarlo, te recomendamos enparejar tu pantalla ALVA de la forma ordinaria utilizando las opciones de Bluetooth de Windows.
 
 Nota: dado que algunas de estas pantallas tienen un teclado braille, manejan la transcripción de braille a texto por sí mismas por omisión.
-Esto significa que el sistema de entrada braille de NVDA no se está utilizando en una situación predeterminada (es decir, la tabla de entrada braille configurada no tiene efecto).
+Esto significa que el sistema de entrada braille de Aslan no se está utilizando en una situación predeterminada (es decir, la tabla de entrada braille configurada no tiene efecto).
 Para pantallas ALVA con firmware reciente, es posible deshabilitar esta simulación de teclado HID utilizando un gesto de entrada.
 
-Seguidamente van las asignaciones de teclas para esta pantalla con NVDA.
+Seguidamente van las asignaciones de teclas para esta pantalla con Aslan.
 Por favor consulta la documentación de la pantalla para descripciones de dónde pueden encontrarse estas teclas.
 <!-- KC:beginInclude -->
 
@@ -2473,7 +2473,7 @@ Por favor consulta la documentación de la pantalla para descripciones de dónde
 |tecla flecha derecha |spRight|
 |tecla enter |spEnter, enter|
 |Anunciar fecha/hora |sp2+sp3|
-|menú NVDA |sp1+sp3|
+|menú Aslan |sp1+sp3|
 |tecla windows+d (minimizar todas las aplicaciones) |sp1+sp4|
 |Tecla windows+b (enfocar la bandeja del sistema) |sp3+sp4|
 |tecla windows |sp1+sp2, windows|
@@ -2488,16 +2488,16 @@ Por favor consulta la documentación de la pantalla para descripciones de dónde
 
 ### Pantallas Handy Tech {#HandyTech}
 
-NVDA admite la mayoría de las pantallas de [Handy Tech](https://www.handytech.de/) cuando se conecten por USB, puerto serie o bluetooth.
+Aslan admite la mayoría de las pantallas de [Handy Tech](https://www.handytech.de/) cuando se conecten por USB, puerto serie o bluetooth.
 Para algunas pantallas antiguas USB, necesitarás instalar los controladores USB de Handy Tech en tu sistema.
 
-Las siguientes pantallas no son compatibles al sacarlas de la caja, pero pueden utilizarse a través del [controlador universal de Handy Tech](https://handytech.de/en/service/downloads-and-manuals/handy-tech-software/braille-display-drivers) y el complemento de NVDA:
+Las siguientes pantallas no son compatibles al sacarlas de la caja, pero pueden utilizarse a través del [controlador universal de Handy Tech](https://handytech.de/en/service/downloads-and-manuals/handy-tech-software/braille-display-drivers) y el complemento de Aslan:
 
 * Braillino
 * Bookworm
 * Pantallas modulares con la versión del firmware 1.13 o inferior. Por favor ten en cuenta que el firmware de estas pantallas puede actualizarse.
 
-Seguidamente van las asignaciones de teclas para esta pantalla con NVDA.
+Seguidamente van las asignaciones de teclas para esta pantalla con Aslan.
 Por favor conhsulta la documentación de la pantalla para descripciones de dónde pueden encontrarse estas teclas.
 <!-- KC:beginInclude -->
 
@@ -2517,7 +2517,7 @@ Por favor conhsulta la documentación de la pantalla para descripciones de dónd
 |tecla flecha abajo |joystick abajo|
 |tecla flecha izquierda |joystick izquierda|
 |tecla flecha derecha| joystick derecha|
-|menú NVDA |b2+b4+b5+b6|
+|menú Aslan |b2+b4+b5+b6|
 |Conmutar seguimiento de braille |b2|
 |Conmutar el cursor braille |b1|
 |Conmutar la presentación de contexto de foco |b7|
@@ -2529,11 +2529,11 @@ Por favor conhsulta la documentación de la pantalla para descripciones de dónd
 
 La pantalla braille Lilli disponible desde [MDV](https://www.mdvbologna.it/) se admite.
 No necesitas instalar ningún controlador específico para utilizar esta pantalla.
-Solo enchufa la pantalla y configura NVDA para utilizarla.
+Solo enchufa la pantalla y configura Aslan para utilizarla.
 
-Esta pantalla todavía no admite la funcionalidad de detección automática de NVDA.
+Esta pantalla todavía no admite la funcionalidad de detección automática de Aslan.
 
-Seguidamente van las asignaciones de teclas para esta pantalla con NVDA.
+Seguidamente van las asignaciones de teclas para esta pantalla con Aslan.
 Por favor consulta la documentación de la pantalla para descripciones de dónde se pueden encontrar estas teclas.
 <!-- KC:beginInclude -->
 
@@ -2570,7 +2570,7 @@ La Refreshabraille y la Orbit Reader 20 pueden utilizar HID si se configuran apr
 El modo serie USB de la Orbit Reader 20 actualmente sólo es compatible en Windows 10.
 Generalmente debería utilizarse USB HID  en su lugar.
 
-Seguidamente van las asignaciones de teclas para esta pantalla con NVDA.
+Seguidamente van las asignaciones de teclas para esta pantalla con Aslan.
 Por favor consulta la documentación de la pantalla braille para descripciones de dónde se pueden encontrar estas teclas.
 <!-- KC:beginInclude -->
 
@@ -2599,9 +2599,9 @@ Para pantallas que tengan un joystick:
 La hedo ProfiLine USB de [hedo Reha-Technik](https://www.hedo.de/) está admitida.
 Primero debes instalar los controladores USB proporcionados por el fabricante.
 
-Esta pantalla todavía no admite la funcionalidad de detección automática de NVDA.
+Esta pantalla todavía no admite la funcionalidad de detección automática de Aslan.
 
-Seguidamente van las asignaciones de teclas para esta pantalla con NVDA.
+Seguidamente van las asignaciones de teclas para esta pantalla con Aslan.
 Por favor consulta la documentación de la pantalla para descripciones de dónde se pueden encontrar estas teclas.
 <!-- KC:beginInclude -->
 
@@ -2622,9 +2622,9 @@ Por favor consulta la documentación de la pantalla para descripciones de dónde
 Se admite la hedo MobilLine USB de [hedo Reha-Technik](https://www.hedo.de/).
 Primero debes instalar los controladores USB proporcionados por el fabricante.
 
-Esta pantalla todavía no admite la funcionalidad de detección automática de NVDA.
+Esta pantalla todavía no admite la funcionalidad de detección automática de Aslan.
 
-Seguidamente van las asignaciones de teclas para esta pantalla con NVDA.
+Seguidamente van las asignaciones de teclas para esta pantalla con Aslan.
 Por favor consulta la documentación de la pantalla para descripciones de dónde pueden encontrarse estas teclas.
 <!-- KC:beginInclude -->
 
@@ -2648,7 +2648,7 @@ Los controladores USB no se requieren si el protocolo se configura a OpenBraille
 
 También se admite la BrailleNote Touch, y no requiere instalar ningún controlador.
 
-Seguidamente van las asignaciones de teclas para las pantallas Brailliant BI/B y BrailleNote touch con NVDA.
+Seguidamente van las asignaciones de teclas para las pantallas Brailliant BI/B y BrailleNote touch con Aslan.
 Por favor conhsulta la documentación de la pantalla para descripciones de dónde pueden encontrarse estas teclas.
 
 #### Asignaciones de teclas para todos los modelos {#toc241}
@@ -2674,7 +2674,7 @@ Por favor conhsulta la documentación de la pantalla para descripciones de dónd
 |tecla enter |punto8|
 |tecla windows |espacio+punto3+punto4|
 |tecla alt+tab |espacio+punto2+punto3+punto4+punto5 (espacio+t)|
-|Menú NVDA |espacio+punto1+punto3+punto4+punto5 (espacio+n)|
+|Menú Aslan |espacio+punto1+punto3+punto4+punto5 (espacio+n)|
 |tecla windows+d (minimizar todas las aplicaciones) |espacio+punto1+punto4+punto5 (espacio+d)|
 |Leer todo |espacio+punto1+punto2+punto3+punto4+punto5+punto6|
 
@@ -2686,7 +2686,7 @@ Por favor conhsulta la documentación de la pantalla para descripciones de dónd
 
 | Nombre |Tecla|
 |---|---|
-|Menú NVDA |c1+c3+c4+c5 (comando n)|
+|Menú Aslan |c1+c3+c4+c5 (comando n)|
 |tecla windows+d (minimizar todas las aplicaciones) |c1+c4+c5 (comando d)|
 |Leer todo |c1+c2+c3+c4+c5+c6|
 
@@ -2708,11 +2708,11 @@ Por favor conhsulta la documentación de la pantalla para descripciones de dónd
 
 ### Series de las HIMS Braille Sense/Braille EDGE/Smart Beetle/Sync Braille {#Hims}
 
-NVDA es compatible con las líneas braille Sense, Braille EDGE, Smart Beetle y Sync Braille de [Hims](https://www.hims-inc.com/) cuando se conectan a través de USB o bluetooth. 
+Aslan es compatible con las líneas braille Sense, Braille EDGE, Smart Beetle y Sync Braille de [Hims](https://www.hims-inc.com/) cuando se conectan a través de USB o bluetooth. 
 Si se conectan a través de USB, necesitarás instalar los controladores USB de HIMS en el sistema.
 Puedes descargarlos de aquí: https://www.himsintl.com/upload/HIMS_USB_Driver_v25.zip
 
-Seguidamente van las asignaciones de teclas para estas pantallas con NVDA.
+Seguidamente van las asignaciones de teclas para estas pantallas con Aslan.
 Por favor consulta la documentación de las pantallas para descripciones de dónde pueden encontrarse estas teclas.
 <!-- KC:beginInclude -->
 
@@ -2788,9 +2788,9 @@ Se admiten las líneas braille Seika Versión 3, 4 y 5 (40 celdas) y Seika80 (80
 Puedes encontrar más información acerca de estas pantallas en https://www.seika-braille.com/.
 Primero debes instalar los controladores USB proporcionados por el fabricante.
 
-Estas pantallas todavía no admiten la funcionalidad de detección automática de NVDA.
+Estas pantallas todavía no admiten la funcionalidad de detección automática de Aslan.
 
-Seguidamente van las asignaciones de teclas para estas pantallas con NVDA.
+Seguidamente van las asignaciones de teclas para estas pantallas con Aslan.
 Por favor consulta la documentación de las pantallas para descripciones de dónde se encuentran estas teclas.
 <!-- KC:beginInclude -->
 
@@ -2805,7 +2805,7 @@ Por favor consulta la documentación de las pantallas para descripciones de dón
 |tab |b1|
 |shift+tab |b2|
 |alt+tab |b1+b2|
-|Menú NVDA |izquierda+derecha|
+|Menú Aslan |izquierda+derecha|
 |Ir a la celda braille |sensores|
 
 <!-- KC:endInclude -->
@@ -2819,9 +2819,9 @@ Se admiten las siguientes líneas braille:
 * BRAILLEX Trio (USB y bluetooth)
 * BRAILLEX Live 20, BRAILLEX Live y BRAILLEX Live Plus (USB y bluetooth)
 
-Estas pantallas no admiten la funcionalidad de detección automática de NVDA.
+Estas pantallas no admiten la funcionalidad de detección automática de Aslan.
 
-Si está instalado BrxCom, NVDA utilizará BrxCom.
+Si está instalado BrxCom, Aslan utilizará BrxCom.
 BrxCom es una herramienta que te permite utilizar la entrada de teclado de la pantalla braille para funcionar independientemente de un lector de pantalla.
 La entrada es posible con los modelos Trio y BRAILLEX Live.
 
@@ -2852,7 +2852,7 @@ Generalmente, las siguientes teclas están disponibles en estas líneas braille:
 |dn |1 paso abajo|
 |dn2 |2 pasos abajo|
 
-Seguidamente van las asignaciones de comandos de la Papenmeier para NVDA:
+Seguidamente van las asignaciones de comandos de la Papenmeier para Aslan:
 <!-- KC:beginInclude -->
 
 | Nombre |Tecla|
@@ -2911,7 +2911,7 @@ Se admiten las siguientes líneas braille:
 * BRAILLEX Tiny, 2D Screen
 
 Ten en cuenta que estas pantallas sólo se pueden conectar a través de un puerto serie.
-Debido a esto, estas pantallas no admiten la funcionalidad de detección automática de NVDA.
+Debido a esto, estas pantallas no admiten la funcionalidad de detección automática de Aslan.
 Deberías  seleccionar el puerto al cual está conectada la pantalla después de haber elegido este controlador en el cuadro de diálogo [Seleccionar pantalla Braille](#SelectBrailleDisplay).
 
 Algunos de estos dispositivos tienen una barra de acceso rápido (EAB) que permite un accionamiento rápido e intuitivo.
@@ -2936,7 +2936,7 @@ Generalmente, las siguientes teclas están disponibles en las líneas braille:
 |dn |1 paso abajo|
 |dn2 |2 pasos abajo|
 
-Seguidamente van las asignaciones de comandos de las Papenmeier para NVDA:
+Seguidamente van las asignaciones de comandos de las Papenmeier para Aslan:
 
 <!-- KC:beginInclude -->
 Dispositivos con EAB:
@@ -2998,7 +2998,7 @@ BRAILLEX 2D Screen:
 
 ### HumanWare BrailleNote {#HumanWareBrailleNote}
 
-NVDA es compatible con los anotadores electrónicos BrailleNote de [Humanware](https://www.humanware.com) cuando actúen como un terminal braille para un lector de pantalla.
+Aslan es compatible con los anotadores electrónicos BrailleNote de [Humanware](https://www.humanware.com) cuando actúen como un terminal braille para un lector de pantalla.
 Se admiten los siguientes modelos:
 
 * BrailleNote Classic (sólo conexión serie)
@@ -3013,18 +3013,18 @@ Para el BrailleNote QT, no se admite la emulación del teclado de PC.
 También puedes enterducir puntos braille utilizando el teclado QT.
 Por favor consulta la sección de terminal braille de la guía de manual del BrailleNote para detalles.
 
-Si tu dispositivo admite más de un tipo de conexión, cuando conectes tu BrailleNote a NVDA, debes configurar el puerto de la terminal braille en las opciones de terminal braille.
+Si tu dispositivo admite más de un tipo de conexión, cuando conectes tu BrailleNote a Aslan, debes configurar el puerto de la terminal braille en las opciones de terminal braille.
 Por favor consulta el manual del BrailleNote para detalles.
-En NVDA, también podrías necesitar configurar el puerto en el cuadro de diálogo [Seleccionar Pantalla Braille](#SelectBrailleDisplay).
+En Aslan, también podrías necesitar configurar el puerto en el cuadro de diálogo [Seleccionar Pantalla Braille](#SelectBrailleDisplay).
 Si te estás conectando a través de USB o bluetooth, puedes configurar el puerto a "Automático", "USB" o "Bluetooth", dependiendo de las opciones disponibles.
 Si te estás conectando utilizando un puerto serie (o un conversor de USB a serie) o si no aparece ninguna de las opciones anteriores, debes elegir explícitamente el puerto de comunicación a utilizarse desde la lista de puertos hardware.
 
 Antes de conectar tu BrailleNote Apex utilizando su cliente de interface USB, debes instalar los controladores proporcionados por HumanWare.
 
-En el BrailleNote Apex BT, puedes utilizar la rueda de desplazamiento ubicada entre los puntos 1 y 4 para varias comandos de NVDA.
+En el BrailleNote Apex BT, puedes utilizar la rueda de desplazamiento ubicada entre los puntos 1 y 4 para varias comandos de Aslan.
 La rueda consiste en  cuatro puntos direccionales, un clic en el botón central, y una rueda que gira en el sentido o contra el sentido de las agujas del reloj.
 
-Seguidamente van las asignaciones de comandos del BrailleNote para NVDA.
+Seguidamente van las asignaciones de comandos del BrailleNote para Aslan.
 Por favor consulta la documentación del BrailleNote para encontrar dónde se localizan estas teclas.
 
 <!-- KC:beginInclude -->
@@ -3036,7 +3036,7 @@ Por favor consulta la documentación del BrailleNote para encontrar dónde se lo
 |Mover pantalla braille a la línea anterior |anterior|
 |Mover pantalla braille a la línea siguiente |siguiente|
 |Llevar a la celda braille |sensores|
-|menú NVDA |espacio+punto1+punto3+punto4+punto5 (espacio+n)|
+|menú Aslan |espacio+punto1+punto3+punto4+punto5 (espacio+n)|
 |Activar y desactivar seguimiento de braille |anterior+siguiente|
 |Tecla flecha arriba |espacio+punto1|
 |Tecla flecha abajo |espacio+punto4|
@@ -3061,7 +3061,7 @@ Seguidamente van los comandos asignadas al BrailleNote QT cuando no está en mod
 
 | Nombre |Tecla|
 |---|---|
-|Menú NVDA |leer+n|
+|Menú Aslan |leer+n|
 |Tecla flecha arriba |flecha arriba|
 |Tecla flecha abajo |flecha abajo|
 |Tecla flecha izquierda |flecha izquierda|
@@ -3096,7 +3096,7 @@ Seguidamente van los comandos asignadas a la rueda de desplazamiento:
 
 ### EcoBraille {#EcoBraille}
 
-NVDA admite las pantallas EcoBraille de [ONCE](https://www.once.es/).
+Aslan admite las pantallas EcoBraille de [ONCE](https://www.once.es/).
 Se soportan los siguientes modelos:
 
 * EcoBraille 20
@@ -3104,8 +3104,8 @@ Se soportan los siguientes modelos:
 * EcoBraille 80
 * EcoBraille Plus
 
-En NVDA, puedes configurar el puerto serie al que se conecta la pantalla en el cuadro de diálogo [Seleccionar Pantalla Braille](#SelectBrailleDisplay).
-Estas pantallas no admiten la funcionalidad de detección automática de NVDA.
+En Aslan, puedes configurar el puerto serie al que se conecta la pantalla en el cuadro de diálogo [Seleccionar Pantalla Braille](#SelectBrailleDisplay).
+Estas pantallas no admiten la funcionalidad de detección automática de Aslan.
 
 Seguidamente van las asignaciones de teclas para las pantallas EcoBraille.
 Por favor consulta la [documentación para EcoBraille](ftp://ftp.once.es/pub/utt/bibliotecnia/Lineas_Braille/ECO/) para descripciones de donde se pueden encontrar estas teclas.
@@ -3150,7 +3150,7 @@ Debido a esto, y para mantener compatibilidad con otros lectores de pantalla en 
 
 ### Pantallas Eurobraille Esys/Esytime/Iris {#Eurobraille}
 
-Se admiten por NVDA las pantallas Esys, Esytime e Iris de [Eurobraille](https://www.eurobraille.fr/).
+Se admiten por Aslan las pantallas Esys, Esytime e Iris de [Eurobraille](https://www.eurobraille.fr/).
 Los dispositivos Esys y Esytime-Evo son compatibles cuando se conecten a través de USB o bluetooth.
 Los dispositivos Esytime antiguos sólo admiten USB.
 Las pantallas Iris sólo se pueden conectar a través de un puerto serie.
@@ -3159,7 +3159,7 @@ Por lo tanto, para estas pantallas, deberías seleccionar el puerto al cual se c
 Las pantallas Iris y Esys tienen un teclado braille con 10 teclas.
 De las dos teclas colocadas como barra espaciadora, la tecla de la izquierda se corresponde con la tecla retroceso y la tecla derecha con la barra espaciadora.
 
-Seguidamente van las asignaciones de teclas para estas pantallas con NVDA.
+Seguidamente van las asignaciones de teclas para estas pantallas con Aslan.
 Por favor consulta la documentación de la pantalla para descripciones de dónde se pueden encontrar estas teclas.
 <!-- KC:beginInclude -->
 
@@ -3244,11 +3244,11 @@ Deberías descargar e instalar el último paquete instalable, que se llamará, p
 Cuando configures la línea y puerto a utilizar,  asegúrate de prestar gran atención a las instrucciones, especialmente si estás utilizando una línea USB y ya tienes los controladores del fabricante instalados.
 
 Para pantallas que tengan un teclado braille, BRLTTY actualmente maneja la entrada braille por sí mismo.
-Por lo tanto, la opción tabla braille de entrada de NVDA es irrelevante.
+Por lo tanto, la opción tabla braille de entrada de Aslan es irrelevante.
 
-BRLTTY no está involucrado en la funcionalidad de detección automática de líneas braille de NVDA.
+BRLTTY no está involucrado en la funcionalidad de detección automática de líneas braille de Aslan.
 
-Seguidamente van las asignaciones a comandos de BRLTTY para NVDA.
+Seguidamente van las asignaciones a comandos de BRLTTY para Aslan.
 Por favor consulta las [listas de claves de vínculos de BRLTTY](https://mielke.cc/brltty/doc/KeyBindings/) para información acerca de cómo se mapean los comandos de BRLTTY para controlar las líneas braille.
 <!-- KC:beginInclude -->
 
@@ -3265,73 +3265,73 @@ Por favor consulta las [listas de claves de vínculos de BRLTTY](https://mielke.
 ## Temas Avanzados {#AdvancedTopics}
 ### Opciones de Línea de comandos {#CommandLineOptions}
 
-NVDA puede aceptar una o más opciones adicionales al arrancar que alteren su comportamiento.
+Aslan puede aceptar una o más opciones adicionales al arrancar que alteren su comportamiento.
 Puedes pasar tantas opciones como necesites.
 Estas opciones pueden pasarse al arrancar desde un atajo de teclado (en las propiedades del atajo de teclado), desde el diálogo Ejecutar(Menú Inicio -> Ejecutar o Windows+r) o desde una consola de comandos de Windows.
-Las opciones deberían separarse del nombre del fichero ejecutable de NVDA y de otras opciones por espacios.
-Por ejemplo, el atajo de teclado del escritorio que crea NVDA durante la instalación tiene la opción -r, que dice a NVDA que cierre la copia actual en ejecucución antes de iniciar una nueva.
-Otra opción útil es --disable-addons, que dice a NVDA que suspenda todos los complementos en ejecución.
+Las opciones deberían separarse del nombre del fichero ejecutable de Aslan y de otras opciones por espacios.
+Por ejemplo, el atajo de teclado del escritorio que crea Aslan durante la instalación tiene la opción -r, que dice a Aslan que cierre la copia actual en ejecucución antes de iniciar una nueva.
+Otra opción útil es --disable-addons, que dice a Aslan que suspenda todos los complementos en ejecución.
 Esto te permite determinar si un problema es causado por un complemento y recuperarte de problemas serios causados por complementos.
 
-Como un ejemplo, puedes salir de la copia actualmente en ejecución de NVDA enterduciendo lo siguiente en el diálogo Ejecutar:
+Como un ejemplo, puedes salir de la copia actualmente en ejecución de Aslan enterduciendo lo siguiente en el diálogo Ejecutar:
 
-nvda -q
+aslan -q
 
 Algunas de las opciones de línea de comandos tienen una versión corta y una larga, mientras otras sólo tienen una versión larga.
 Para aquellas que tengan una versión corta, puedes combinarlas así:
 
-|nvda -rm |Esto saldrá de la copia actualmente en ejecución de NVDA e iniciará una copia nueva con los sonidos de inicio deshabilitados, etc.|
-|nvda -rm --disable-addons |Igual que el anterior, pero con los complementos deshabilitados|
+|aslan -rm |Esto saldrá de la copia actualmente en ejecución de Aslan e iniciará una copia nueva con los sonidos de inicio deshabilitados, etc.|
+|aslan -rm --disable-addons |Igual que el anterior, pero con los complementos deshabilitados|
 
 Algunas de las opciones de línea de comandos aceptan parámetros adicionales; por ejemplo: cómo debería ser el grado de detalle del registro o la ruta para el directorio de configuración del usuario.
 Esos parámetros deberían colocarse después de la opción, separados de la opción por un espacio cuando se utiliza la versión o un signo igual (=) cuando se utiliza  la versión larga; por ejemplo:
 
-|nvda -l 10 |dice a NVDA que se inicie con el nivel de registro puesto en depuración|
-|nvda --log-file=c:\nvda.log |Dice a NVDA que escriba su registro en c:\nvda.log|
-|nvda --log-level=20 -f c:\nvda.log |Dice a NVDA que arranque con el nivel de registro puesto en info y que escriba su registro en c:\nvda.log|
+|aslan -l 10 |dice a Aslan que se inicie con el nivel de registro puesto en depuración|
+|aslan --log-file=c:\aslan.log |Dice a Aslan que escriba su registro en c:\aslan.log|
+|aslan --log-level=20 -f c:\aslan.log |Dice a Aslan que arranque con el nivel de registro puesto en info y que escriba su registro en c:\aslan.log|
 
-Seguidamente van las opciones de línea de comandos para NVDA:
+Seguidamente van las opciones de línea de comandos para Aslan:
 
 | Corta |Larga |Descripción|
 |---|---|---|
 |-h |--help |muestra la ayuda en línea de comandos y sale|
-|-q |--quit |Sale de la copia que ya se esté ejecutando de NVDA|
-|-r |--replace |Sale de la copia que ya se esté ejecutando de NVDA y arranca esta otra|
-|-k |--check-running |Informa si NVDA está en ejecución a través del código de salida; 0 si está en ejecución, 1 si no está en ejecución|
+|-q |--quit |Sale de la copia que ya se esté ejecutando de Aslan|
+|-r |--replace |Sale de la copia que ya se esté ejecutando de Aslan y arranca esta otra|
+|-k |--check-running |Informa si Aslan está en ejecución a través del código de salida; 0 si está en ejecución, 1 si no está en ejecución|
 |-f LOGFILENAME |--log-file=LOGFILENAME |El fichero donde deberían escribirse los mensajes de registro|
 |-l LOGLEVEL |--log-level=LOGLEVEL |El nivel más bajo de mensaje registrado (debug 10, input/output 12, debug warning 15, info 20, warning 30, error 40, critical 50, disabled 100), default is warning|
-|-c CONFIGPATH |--config-path=CONFIGPATH |La ruta donde se almacenan todos los ajustes para NVDA|
+|-c CONFIGPATH |--config-path=CONFIGPATH |La ruta donde se almacenan todos los ajustes para Aslan|
 |-m |--minimal |Sin sonidos, sin interface, sin mensaje de inicio etc|
 |-s |--secure |Modo seguro (deshabilita la consola Python y las características de registro, a menudo utilizado en pantallas seguras)|
 |None |--disable-addons |Los complementos no tendrán efecto|
 |None |--debug-logging |Habilita el nivel de registro de depuración sólo para esta ejecución. Esta configuración sobreescribirá cualquier otro nivel de registro ( --loglevel, -l) argumento dado, incluyendo la opción no registro.|
-|None |--no-logging |Deshabilita el registro durante el uso de NVDA. Esta opción puede sobreescribirse si se especifica un nivel de registro ( --loglevel, -l) desde la línea de comandos o si el registro de depuración está activado.|
+|None |--no-logging |Deshabilita el registro durante el uso de Aslan. Esta opción puede sobreescribirse si se especifica un nivel de registro ( --loglevel, -l) desde la línea de comandos o si el registro de depuración está activado.|
 |None |--no-sr-flag |No cambia la bandera global de sistema del lector de pantalla|
-|None |--install |Se instala NVDA iniciando la nueva copia instalada|
-|None |--install-silent |Instala en silencio NVDA (No inicia la nueva copia instalada)|
-|None |--enable-start-on-logon=True|False |Al instalar, habilita [arrancar en la pantalla de inicio](#StartAtWindowsLogon) de NVDA|
-|None |--create-portable |Crea una copia portable de NVDA (iniciando la copia recientemente creada). Requiere especificarse --portable-path|
-|None |--create-portable-silent |Crea una copia portable de NVDA (no inicia la copia recientemente instalada). Requiere expecificarse --portable-path|
+|None |--install |Se instala Aslan iniciando la nueva copia instalada|
+|None |--install-silent |Instala en silencio Aslan (No inicia la nueva copia instalada)|
+|None |--enable-start-on-logon=True|False |Al instalar, habilita [arrancar en la pantalla de inicio](#StartAtWindowsLogon) de Aslan|
+|None |--create-portable |Crea una copia portable de Aslan (iniciando la copia recientemente creada). Requiere especificarse --portable-path|
+|None |--create-portable-silent |Crea una copia portable de Aslan (no inicia la copia recientemente instalada). Requiere expecificarse --portable-path|
 |None |--portable-path=PORTABLEPATH |La ruta donde se creará una copia portable|
 
 ### Parámetros del Sistema {#SystemWideParameters}
 
-NVDA permite configurar algunos valores en el registro del sistema que alteran el comportamiento de todo el sistema de NVDA.
+Aslan permite configurar algunos valores en el registro del sistema que alteran el comportamiento de todo el sistema de Aslan.
 Estos valores se almacenan en el registro del sistema bajo una de las siguientes claves:
 
-* Sistema de 32 bits: "HKEY_LOCAL_MACHINE\SOFTWARE\nvda"
-* Sistema de 64 bits: "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\nvda"
+* Sistema de 32 bits: "HKEY_LOCAL_MACHINE\SOFTWARE\aslan"
+* Sistema de 64 bits: "HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\aslan"
 
 Los siguientes valores pueden configurarse bajo estas claves del registro:
 
 | Nombre |Tipo |Valores Posibles |Descripción|
 |---|---|---|---|
-|configInLocalAppData |DWORD |0 (predeterminado) para deshabilitado, 1 para habilitado |Si está habilitado, almacena la configuración de usuario de NVDA en la carpeta local de datos de aplicación en lugar de la roaming application data|
+|configInLocalAppData |DWORD |0 (predeterminado) para deshabilitado, 1 para habilitado |Si está habilitado, almacena la configuración de usuario de Aslan en la carpeta local de datos de aplicación en lugar de la roaming application data|
 |serviceDebug |DWORD |0 (predeterminado) para deshabilitar, 1 para habilitar |Si se habilita, deshabilita el modo seguro en los escritorios seguros de windows, permitiendo la utilización de la consola de Python y del visualizador del Registro. Debido a varias implicaciones importantes de seguridad, la utilización de esta opción está altamente desaconsejada|
 
 ## Información Adicional {#FurtherInformation}
 
-Si requieres de información adicional o asistencia con respecto a NVDA, por favor visita el sitio Web de NVDA en NVDA_URL.
+Si requieres de información adicional o asistencia con respecto a Aslan, por favor visita el sitio Web de Aslan en Aslan_URL.
 Aquí, puedes encontrar documentación adicional, así como soporte técnico y recursos de la comunidad.
-Este Sitio también proporciona información y recursos concernientes al desarrollo de NVDA.
+Este Sitio también proporciona información y recursos concernientes al desarrollo de Aslan.
 

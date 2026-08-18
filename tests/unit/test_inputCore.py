@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2023 NV Access Limited, Babbage B.V., Leonard de Ruijter
@@ -21,7 +21,7 @@ class TestInputManagerExtensionPoints(unittest.TestCase):
 		inputCore.terminate()
 
 	def test_decide_executeGesture(self):
-		gesture = keyboardHandler.KeyboardInputGesture.fromName("NVDA+T")
+		gesture = keyboardHandler.KeyboardInputGesture.fromName("Aslan+T")
 		with deciderTester(
 			self,
 			inputCore.decide_executeGesture,

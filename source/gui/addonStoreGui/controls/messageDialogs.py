@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2023-2026 NV Access Limited, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -43,9 +43,9 @@ from gui.guiHelper import (
 	SPACE_BETWEEN_VERTICAL_DIALOG_ITEMS,
 )
 from gui.message import DisplayableError, displayDialogAsModal, messageBox, _countAsMessageBox
-from gui.nvdaControls import _CheckListCtrl
+from gui.aslanControls import _CheckListCtrl
 from logHandler import log
-import NVDAState
+import AslanState
 from speech.priorities import SpeechPriority
 import ui
 from utils.caseInsensitiveCollections import CaseInsensitiveSet
@@ -60,7 +60,7 @@ __all__ = [
 	"_shouldProceedToRemoveAddonDialog",
 	"_shouldInstallWhenAddonTooOldDialog",
 	"_shouldEnableWhenAddonTooOldDialog",
-	"_showAddonRequiresNVDAUpdateDialog",
+	"_showAddonRequiresAslanUpdateDialog",
 	"_showConfirmAddonInstallDialog",
 	"_showAddonInfo",
 	"_SafetyWarningDialog",
@@ -135,8 +135,8 @@ def _shouldProceedWhenInstalledAddonVersionUnknown(
 		name=addon.displayName,
 		version=addon.addonVersionName,
 		oldVersion=addon._addonHandlerModel.version,
-		lastTestedNVDAVersion=addonAPIVersion.formatForGUI(addon.lastTestedNVDAVersion),
-		NVDAVersion=addonAPIVersion.formatForGUI(addonAPIVersion.CURRENT),
+		lastTestedAslanVersion=addonAPIVersion.formatForGUI(addon.lastTestedAslanVersion),
+		AslanVersion=addonAPIVersion.formatForGUI(addonAPIVersion.CURRENT),
 	)
 	dlg = ErrorAddonInstallDialogWithYesNoButtons(
 		parent=parent,
@@ -159,7 +159,7 @@ def _shouldProceedToRemoveAddonDialog(
 		"addonStore",
 		# Translators: Presented when attempting to remove the selected add-on.
 		# {addon} is replaced with the add-on name.
-		"Are you sure you wish to remove the {addon} add-on from NVDA? This cannot be undone.",
+		"Are you sure you wish to remove the {addon} add-on from Aslan? This cannot be undone.",
 	).format(addon=addon.displayName)
 	dlg = ErrorAddonInstallDialogWithYesNoButtons(
 		parent=parent,
@@ -181,18 +181,18 @@ def _shouldInstallWhenAddonTooOldDialog(
 	incompatibleMessage = pgettext(
 		"addonStore",
 		# Translators: The message displayed when installing an add-on package that is incompatible
-		# because the add-on is too old for the running version of NVDA.
+		# because the add-on is too old for the running version of Aslan.
 		"Warning: add-on is incompatible: {name} {version}. "
 		"Check for an updated version of this add-on if possible. "
-		"This add-on was last tested with NVDA {lastTestedNVDAVersion}. "
-		"NVDA requires this add-on to be tested with NVDA {nvdaVersion} or higher. "
-		"Installation may cause unstable behavior in NVDA.\n"
+		"This add-on was last tested with Aslan {lastTestedAslanVersion}. "
+		"Aslan requires this add-on to be tested with Aslan {aslanVersion} or higher. "
+		"Installation may cause unstable behavior in Aslan.\n"
 		"Proceed with installation anyway? ",
 	).format(
 		name=addon.displayName,
 		version=addon.addonVersionName,
-		lastTestedNVDAVersion=addonAPIVersion.formatForGUI(addon.lastTestedNVDAVersion),
-		nvdaVersion=addonAPIVersion.formatForGUI(addonAPIVersion.BACK_COMPAT_TO),
+		lastTestedAslanVersion=addonAPIVersion.formatForGUI(addon.lastTestedAslanVersion),
+		aslanVersion=addonAPIVersion.formatForGUI(addonAPIVersion.BACK_COMPAT_TO),
 	)
 	dlg = ErrorAddonInstallDialogWithYesNoButtons(
 		parent=parent,
@@ -214,18 +214,18 @@ def _shouldEnableWhenAddonTooOldDialog(
 	incompatibleMessage = pgettext(
 		"addonStore",
 		# Translators: The message displayed when enabling an add-on package that is incompatible
-		# because the add-on is too old for the running version of NVDA.
+		# because the add-on is too old for the running version of Aslan.
 		"Warning: add-on is incompatible: {name} {version}. "
 		"Check for an updated version of this add-on if possible. "
-		"This add-on was last tested with NVDA {lastTestedNVDAVersion}. "
-		"NVDA requires this add-on to be tested with NVDA {nvdaVersion} or higher. "
-		"Enabling may cause unstable behavior in NVDA.\n"
+		"This add-on was last tested with Aslan {lastTestedAslanVersion}. "
+		"Aslan requires this add-on to be tested with Aslan {aslanVersion} or higher. "
+		"Enabling may cause unstable behavior in Aslan.\n"
 		"Proceed with enabling anyway? ",
 	).format(
 		name=addon.displayName,
 		version=addon.addonVersionName,
-		lastTestedNVDAVersion=addonAPIVersion.formatForGUI(addon.lastTestedNVDAVersion),
-		nvdaVersion=addonAPIVersion.formatForGUI(addonAPIVersion.BACK_COMPAT_TO),
+		lastTestedAslanVersion=addonAPIVersion.formatForGUI(addon.lastTestedAslanVersion),
+		aslanVersion=addonAPIVersion.formatForGUI(addonAPIVersion.BACK_COMPAT_TO),
 	)
 	dlg = ErrorAddonInstallDialogWithYesNoButtons(
 		parent=parent,
@@ -239,20 +239,20 @@ def _shouldEnableWhenAddonTooOldDialog(
 	return (res == wx.YES), dlg.shouldRememberChoice()
 
 
-def _showAddonRequiresNVDAUpdateDialog(
+def _showAddonRequiresAslanUpdateDialog(
 	parent: wx.Window,
 	addon: _AddonGUIModel,
 ) -> None:
 	incompatibleMessage = _(
 		# Translators: The message displayed when installing an add-on package is prohibited,
-		# because it requires a later version of NVDA than is currently installed.
-		"Installation of {summary} {version} has been blocked. The minimum NVDA version required for "
-		"this add-on is {minimumNVDAVersion}, your current NVDA version is {NVDAVersion}",
+		# because it requires a later version of Aslan than is currently installed.
+		"Installation of {summary} {version} has been blocked. The minimum Aslan version required for "
+		"this add-on is {minimumAslanVersion}, your current Aslan version is {AslanVersion}",
 	).format(
 		summary=addon.displayName,
 		version=addon.addonVersionName,
-		minimumNVDAVersion=addonAPIVersion.formatForGUI(addon.minimumNVDAVersion),
-		NVDAVersion=addonAPIVersion.formatForGUI(addonAPIVersion.CURRENT),
+		minimumAslanVersion=addonAPIVersion.formatForGUI(addon.minimumAslanVersion),
+		AslanVersion=addonAPIVersion.formatForGUI(addonAPIVersion.CURRENT),
 	)
 	displayDialogAsModal(
 		ErrorAddonInstallDialog(
@@ -312,15 +312,15 @@ def _showAddonInfo(addon: _AddonGUIModel) -> None:
 	if addon.homepage:
 		# Translators: the url part of the About Add-on information
 		message.append(pgettext("addonStore", "Homepage: {url}\n").format(url=addon.homepage))
-	minimumNVDAVersion = addonAPIVersion.formatForGUI(addon.minimumNVDAVersion)
+	minimumAslanVersion = addonAPIVersion.formatForGUI(addon.minimumAslanVersion)
 	message.append(
-		# Translators: the minimum NVDA version part of the About Add-on information
-		pgettext("addonStore", "Minimum required NVDA version: {}\n").format(minimumNVDAVersion),
+		# Translators: the minimum Aslan version part of the About Add-on information
+		pgettext("addonStore", "Minimum required Aslan version: {}\n").format(minimumAslanVersion),
 	)
-	lastTestedNVDAVersion = addonAPIVersion.formatForGUI(addon.lastTestedNVDAVersion)
+	lastTestedAslanVersion = addonAPIVersion.formatForGUI(addon.lastTestedAslanVersion)
 	message.append(
-		# Translators: the last NVDA version tested part of the About Add-on information
-		pgettext("addonStore", "Last NVDA version tested: {}\n").format(lastTestedNVDAVersion),
+		# Translators: the last Aslan version tested part of the About Add-on information
+		pgettext("addonStore", "Last Aslan version tested: {}\n").format(lastTestedAslanVersion),
 	)
 	# Translators: title for the Addon Information dialog
 	title = pgettext("addonStore", "Add-on Information")
@@ -344,7 +344,7 @@ class _SafetyWarningDialog(
 		_warningText = pgettext(
 			"addonStore",
 			# Translators: Warning that is displayed before using the Add-on Store.
-			"Add-ons are created by the NVDA community and are not vetted by NV Access. "
+			"Add-ons are created by the Aslan community and are not vetted by NV Access. "
 			"NV Access cannot be held responsible for add-on behavior. "
 			"The functionality of add-ons is unrestricted and can include "
 			"accessing your personal data or even the entire system. ",
@@ -562,7 +562,7 @@ class UpdatableAddonsDialog(
 
 	@classmethod
 	def _checkForUpdatableAddons(cls):
-		if not NVDAState.shouldWriteToDisk() or (
+		if not AslanState.shouldWriteToDisk() or (
 			AddonsAutomaticUpdate.DISABLED == config.conf["addonStore"]["automaticUpdates"]
 		):
 			log.debug("automatic add-on updates are disabled")
@@ -606,7 +606,7 @@ class UpdatableAddonsDialog(
 def _updateAddons(addonsPendingUpdate: list[_AddonGUIModel]):
 	"""Update the add-ons in the background.
 	Blocks while downloading occurs.
-	This function is treated as message box to prevent NVDA from exiting while the download/install is in progress.
+	This function is treated as message box to prevent Aslan from exiting while the download/install is in progress.
 	"""
 	from ..viewModels.store import AddonStoreVM
 
@@ -628,7 +628,7 @@ def _updateAddons(addonsPendingUpdate: list[_AddonGUIModel]):
 		AddonStoreVM.installPending()
 		ui.message(
 			# Translators: Message shown when updating add-ons automatically
-			pgettext("addonStore", "Add-ons updated, restart NVDA to activate changes"),
+			pgettext("addonStore", "Add-ons updated, restart Aslan to activate changes"),
 			SpeechPriority.NEXT,
 		)
 
@@ -714,18 +714,18 @@ class _CopyAddonsDialog(
 			labelStrings.append(
 				pgettext(
 					"addonStore",
-					# Translators: Explanatory text in the dialog which allows users to select which add-ons to copy to NVDA's system config.
-					"One or more add-ons are currently enabled in your NVDA configuration. "
+					# Translators: Explanatory text in the dialog which allows users to select which add-ons to copy to Aslan's system config.
+					"One or more add-ons are currently enabled in your Aslan configuration. "
 					"If run on secure screens, they will have unrestricted, higher-than-administrator level access to your entire system. "
-					"You are strongly encouraged to copy only add-ons that you absolutely require in order to use NVDA during sign-in and on secure screens.",
+					"You are strongly encouraged to copy only add-ons that you absolutely require in order to use Aslan during sign-in and on secure screens.",
 				),
 			)
 		if systemManifests.keys() - availableAddons.keys():
 			labelStrings.append(
 				pgettext(
 					"addonStore",
-					# Translators: Explanatory text in the dialog which allows users to select which add-ons to copy to NVDA's system config.
-					"The system-wide NVDA configuration contains add-ons that are not present in your configuration. "
+					# Translators: Explanatory text in the dialog which allows users to select which add-ons to copy to Aslan's system config.
+					"The system-wide Aslan configuration contains add-ons that are not present in your configuration. "
 					"If you continue, these add-ons will be removed from the system-wide configuration.",
 				),
 			)
@@ -733,7 +733,7 @@ class _CopyAddonsDialog(
 			labelStrings.append(
 				pgettext(
 					"addonStore",
-					# Translators: Instructional text in the dialog which allows users to select which add-ons to copy to NVDA's system config.
+					# Translators: Instructional text in the dialog which allows users to select which add-ons to copy to Aslan's system config.
 					"Check only the add-ons you wish to copy to the system-wide configuration.",
 				),
 			)
@@ -867,9 +867,9 @@ class _CopyAddonsDialog(
 					npgettext(
 						"addonStore",
 						# Translators: A message to warn the user when attempting to copy add-ons for use on secure screens
-						"You have selected to copy {num} add-on to NVDA's system-wide configuration. "
+						"You have selected to copy {num} add-on to Aslan's system-wide configuration. "
 						"Using this add-on during sign-in and on secure screens is a serious security risk.",
-						"You have selected to copy {num} add-ons to NVDA's system-wide configuration. "
+						"You have selected to copy {num} add-ons to Aslan's system-wide configuration. "
 						"Using these add-ons during sign-in and on secure screens is a serious security risk.",
 						len(toCopy),
 					).format(num=len(toCopy)),
@@ -879,8 +879,8 @@ class _CopyAddonsDialog(
 					npgettext(
 						"addonStore",
 						# Translators: A message to warn the user when copying their configuration will remove add-ons
-						"This action will remove {num} add-on from NVDA's system-wide configuration. ",
-						"This action will remove {num} add-ons from NVDA's system-wide configuration. ",
+						"This action will remove {num} add-on from Aslan's system-wide configuration. ",
+						"This action will remove {num} add-ons from Aslan's system-wide configuration. ",
 						countRemoved,
 					).format(num=countRemoved),
 				)

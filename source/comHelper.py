@@ -1,5 +1,5 @@
 # comHelper.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2013 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -28,15 +28,15 @@ def _lresultFromGetActiveObject(progid, dynamic):
 def getActiveObject(progid, dynamic=False, appModule=None):
 	"""Get an active COM object, handling privilege issues.
 	This is similar to comtypes.client.GetActiveObject
-	except that it can retrieve objects from normal processes when NVDA is running with uiAccess.
+	except that it can retrieve objects from normal processes when Aslan is running with uiAccess.
 	"""
 	if appModule:
 		if not appModule.helperLocalBindingHandle:
 			raise ValueError("appModule does not have a binding handle")
-		import NVDAHelper
+		import AslanHelper
 
 		p = ctypes.POINTER(comtypes.IUnknown)()
-		res = NVDAHelper.localLib.nvdaInProcUtils_getActiveObject(
+		res = AslanHelper.localLib.aslanInProcUtils_getActiveObject(
 			appModule.helperLocalBindingHandle,
 			progid,
 			ctypes.byref(p),

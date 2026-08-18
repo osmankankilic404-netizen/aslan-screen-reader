@@ -1,11 +1,11 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Bill Dengler, Joseph Lee
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 """A module used to record Windows versions.
 It is also used to define feature checks such as
-making sure NVDA can run on a minimum supported version of Windows.
+making sure Aslan can run on a minimum supported version of Windows.
 
 When working on this file, consider moving to winAPI.
 """
@@ -16,7 +16,7 @@ import os
 import functools
 import winreg
 import platform
-import NVDAState
+import AslanState
 from config.registry import RegistryKey
 from logHandler import log
 
@@ -168,7 +168,7 @@ WIN11_25H2 = WinVersion(major=10, minor=0, build=26200)
 
 @functools.lru_cache(maxsize=1)
 def getWinVer() -> WinVersion:
-	"""Returns a record of current Windows version NVDA is running on."""
+	"""Returns a record of current Windows version Aslan is running on."""
 	winVer = sys.getwindowsversion()
 	# #12509: on Windows 10, fetch whatever Windows Registry says for the current build.
 	# #12626: note that not all Windows 10 releases are labeled "Windows 10"
@@ -212,7 +212,7 @@ def getWinVer() -> WinVersion:
 
 
 def isSupportedOS() -> bool:
-	# NVDA can only run on Windows 10 and above
+	# Aslan can only run on Windows 10 and above
 	return getWinVer() >= WIN10
 
 
@@ -225,16 +225,16 @@ def isUwpOcrAvailable() -> bool:
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	if attrName == "WIN7" and NVDAState._allowDeprecatedAPI():
+	if attrName == "WIN7" and AslanState._allowDeprecatedAPI():
 		log.warning("WIN7 is deprecated.")
 		return WinVersion(major=6, minor=1, build=7600, releaseName="Windows 7")
-	if attrName == "WIN7_SP1" and NVDAState._allowDeprecatedAPI():
+	if attrName == "WIN7_SP1" and AslanState._allowDeprecatedAPI():
 		log.warning("WIN7_SP1 is deprecated.")
 		return WinVersion(major=6, minor=1, build=7601, releaseName="Windows 7", servicePack="1")
-	if attrName == "WIN8" and NVDAState._allowDeprecatedAPI():
+	if attrName == "WIN8" and AslanState._allowDeprecatedAPI():
 		log.warning("WIN8 is deprecated.")
 		return WinVersion(major=6, minor=2, build=9200, releaseName="Windows 8")
-	if attrName == "WIN81" and NVDAState._allowDeprecatedAPI():
+	if attrName == "WIN81" and AslanState._allowDeprecatedAPI():
 		log.warning("WIN81 is deprecated.")
 		return WinVersion(major=6, minor=3, build=9600, releaseName="Windows 8.1")
 	raise AttributeError(f"module {repr(__name__)} has no attribute {repr(attrName)}")

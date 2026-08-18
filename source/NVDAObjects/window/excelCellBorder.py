@@ -1,5 +1,5 @@
-# NVDAObjects/window/excelCellBorder.py
-# A part of NonVisual Desktop Access (NVDA)
+# AslanObjects/window/excelCellBorder.py
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2016 Takuya Nishimoto
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.

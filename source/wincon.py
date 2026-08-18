@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -24,7 +24,7 @@ import textUtils
 from utils import _deprecate
 
 """
-Lower level utility functions and constants for NVDA's
+Lower level utility functions and constants for Aslan's
 legacy Windows console support, for situations where UIA isn't available.
 """
 

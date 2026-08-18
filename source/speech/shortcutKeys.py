@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2023 NV Access Limited, Cyrille Bougot
@@ -110,10 +110,10 @@ def _getKeySpeech(key: str) -> SpeechSequence:
 def _splitShortcut(shortcut: str) -> Tuple[List[str], str]:
 	"""Splits a string representing a shortcut key combination.
 	@param shortcut: the shortcut to split.
-		It may be of the form "NVDA+R" or "NVDA + R", i.e. key names separated by "+" symbol with or without
+		It may be of the form "Aslan+R" or "Aslan + R", i.e. key names separated by "+" symbol with or without
 		space around it.
 	@return: 2-tuple containing the list of the keys and the separator used between them.
-		E.g. (['NVDA', 'R'], ' + ')
+		E.g. (['Aslan', 'R'], ' + ')
 	"""
 
 	if " + " in shortcut:

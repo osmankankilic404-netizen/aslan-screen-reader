@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2018-2021 NV Access Limited, Leonard de Ruijter
@@ -196,7 +196,7 @@ class ExcelCell(ExcelObject):
 			"Shows a browseable message Listing information about a cell's "
 			"appearance such as outline and fill colors, rotation and size",
 		),
-		gestures=["kb:NVDA+o"],
+		gestures=["kb:Aslan+o"],
 	)
 	def script_showCellAppearanceInfo(self, gesture):
 		infoList = []
@@ -364,7 +364,7 @@ class ExcelCell(ExcelObject):
 		if controlTypes.State.FOCUSED in states and self.selectionContainer.getSelectedItemsCount() == 0:
 			# #12530: In some versions of Excel, the selection pattern reports 0 selected items,
 			# even though the focused UIA element reports as selected.
-			# NVDA only silences the positive SELECTED state when one item is selected.
+			# Aslan only silences the positive SELECTED state when one item is selected.
 			# Therefore, by discarding both the SELECTED and SELECTABLE states,
 			# we eliminate the redundant selection announcement.
 			states.discard(controlTypes.State.SELECTED)
@@ -505,7 +505,7 @@ class ExcelCell(ExcelObject):
 	@script(
 		# Translators: the description  for a script for Excel
 		description=_("Reports the note or comment thread on the current cell"),
-		gesture="kb:NVDA+alt+c",
+		gesture="kb:Aslan+alt+c",
 	)
 	def script_reportComment(self, gesture):
 		if winVersion.getWinVer() >= winVersion.WIN11:
@@ -592,7 +592,7 @@ class ExcelTable(UIA):
 	"""Represents a table within an Excel spreadsheet."""
 
 	def event_focusExited(self):
-		# Generally, NVDA would not announce when focus exits an ancestor control.
+		# Generally, Aslan would not announce when focus exits an ancestor control.
 		# However, it is very common for focus to enter and exit tables within a spreadsheet,
 		# Thus we specifically announce exiting tables here,
 		# But only when focus is on an Excel cell,

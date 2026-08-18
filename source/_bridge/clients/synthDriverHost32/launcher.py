@@ -1,14 +1,14 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025 NV Access Limited.
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import os
 import subprocess
 from typing import Any
 import rpyc
 from rpyc.core.stream import PipeStream
-import NVDAState
+import AslanState
 from logHandler import log
 from _bridge.base import Connection, Service
 from _bridge.components.services.synthDriver import SynthDriverService
@@ -18,22 +18,22 @@ from _bridge.components.services.nvwave import WavePlayerService
 
 
 @rpyc.service
-class NVDAService(Service):
-	"""The main NVDA service exposed to remote synth driver hosts."""
+class AslanService(Service):
+	"""The main Aslan service exposed to remote synth driver hosts."""
 
 	def __init__(self, childProcess: subprocess.Popen):
 		super().__init__(childProcess)
 
 	@Service.exposed
 	def getAppDir(self) -> str:
-		"""Get the NVDA application directory."""
+		"""Get the Aslan application directory."""
 		import globalVars
 
 		return globalVars.appDir
 
 	@Service.exposed
 	def getAppArg(self, key: str) -> Any:
-		"""Get an NVDA commandline argument value."""
+		"""Get an Aslan commandline argument value."""
 		if key.startswith("_"):
 			raise RuntimeError(f"Cannot fetch key {key}")
 		import globalVars
@@ -42,12 +42,12 @@ class NVDAService(Service):
 
 	@Service.exposed
 	def isRunningAsSource(self) -> bool:
-		"""Return whether NVDA is running from source."""
-		return NVDAState.isRunningAsSource()
+		"""Return whether Aslan is running from source."""
+		return AslanState.isRunningAsSource()
 
 	@Service.exposed
 	def getVersionedLibPath(self) -> str:
-		return NVDAState.ReadPaths.versionedLibPath
+		return AslanState.ReadPaths.versionedLibPath
 
 	@Service.exposed
 	def getConfigValue(self, *pathStrings):
@@ -83,8 +83,8 @@ class NVDAService(Service):
 
 
 _hostExe = os.path.join(
-	NVDAState.ReadPaths.versionedLibX86Path,
-	"synthDriverHost-runtime/nvda_synthDriverHost.exe",
+	AslanState.ReadPaths.versionedLibX86Path,
+	"synthDriverHost-runtime/aslan_synthDriverHost.exe",
 )
 
 
@@ -94,7 +94,7 @@ def isSynthDriverHost32RuntimeAvailable() -> bool:
 
 def createSynthDriver(name: str, synthDriversPath: str) -> tuple[Connection, SynthDriverService]:
 	"""Start the 32-bit synth driver host process and connect to its RPYC service over the hosts standard pipes.
-	Instructs the host to install proxies that use the given NVDAService for remote calls back into NVDA.
+	Instructs the host to install proxies that use the given AslanService for remote calls back into Aslan.
 	:returns: The remote SynthDriverHostService instance.
 	"""
 	job = jobObject.Job()
@@ -111,7 +111,7 @@ def createSynthDriver(name: str, synthDriversPath: str) -> tuple[Connection, Syn
 	log.debug("Creating PipeStream over host process std pipes")
 	stream = PipeStream(hostProc.stdout, hostProc.stdin)
 	log.debug("Connecting to synthDriverHost32 process RPYC service over PipeStream")
-	service = NVDAService(hostProc)
+	service = AslanService(hostProc)
 	conn = Connection(stream, service, name="synthDriverHost32")
 	conn.bgEventLoop(daemon=True)
 	log.debug("Connection to synthDriverHost32 process RPYC service established")

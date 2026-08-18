@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2011-2021 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -6,7 +6,7 @@
 
 from . import VirtualBuffer, VirtualBufferTextInfo
 import controlTypes
-import NVDAObjects.IAccessible
+import AslanObjects.IAccessible
 import winUser
 import mouseHandler
 import IAccessibleHandler
@@ -29,7 +29,7 @@ class WebKit_TextInfo(VirtualBufferTextInfo):
 				accRole = accRole.lower()
 
 		if not role:
-			role = IAccessibleHandler.IAccessibleRolesToNVDARoles.get(accRole, controlTypes.Role.UNKNOWN)
+			role = IAccessibleHandler.IAccessibleRolesToAslanRoles.get(accRole, controlTypes.Role.UNKNOWN)
 		states = IAccessibleHandler.getStatesSetFromIAccessibleAttrs(attrs)
 		role, states = controlTypes.transformRoleStates(role, states)
 
@@ -43,11 +43,11 @@ class WebKit_TextInfo(VirtualBufferTextInfo):
 class WebKit(VirtualBuffer):
 	TextInfo = WebKit_TextInfo
 
-	def __init__(self, rootNVDAObject):
-		super(WebKit, self).__init__(rootNVDAObject, backendName="webKit")
+	def __init__(self, rootAslanObject):
+		super(WebKit, self).__init__(rootAslanObject, backendName="webKit")
 
 	def __contains__(self, obj):
-		if not winUser.isDescendantWindow(self.rootNVDAObject.windowHandle, obj.windowHandle):
+		if not winUser.isDescendantWindow(self.rootAslanObject.windowHandle, obj.windowHandle):
 			return False
 		# #15653: The list items within combo boxes should not be classed as part of the browse mode document.
 		# Otherwise arrowing to them will switch back to browse mode.
@@ -62,21 +62,21 @@ class WebKit(VirtualBuffer):
 	def _get_isAlive(self):
 		if self.isLoading:
 			return True
-		root = self.rootNVDAObject
+		root = self.rootAslanObject
 		if not root:
 			return False
 		if not winUser.isWindow(root.windowHandle) or root.role == controlTypes.Role.UNKNOWN:
 			return False
 		return True
 
-	def getNVDAObjectFromIdentifier(self, docHandle, ID):
+	def getAslanObjectFromIdentifier(self, docHandle, ID):
 		if ID > 0:
 			# WebKit returns a positive value for uniqueID,
 			# but we need to pass a negative value when retrieving objects.
 			ID = -ID
-		return NVDAObjects.IAccessible.getNVDAObjectFromEvent(docHandle, winUser.OBJID_CLIENT, ID)
+		return AslanObjects.IAccessible.getAslanObjectFromEvent(docHandle, winUser.OBJID_CLIENT, ID)
 
-	def getIdentifierFromNVDAObject(self, obj):
+	def getIdentifierFromAslanObject(self, obj):
 		docHandle = obj.windowHandle
 		ID = obj.IA2UniqueID
 		return docHandle, ID
@@ -130,7 +130,7 @@ class WebKit(VirtualBuffer):
 			return None
 		return attrs
 
-	def _activateNVDAObject(self, obj):
+	def _activateAslanObject(self, obj):
 		try:
 			obj.doAction()
 			return

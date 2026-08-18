@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2014-2023 NV Access Limited, Accessolutions, Julien Cochuyt, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -253,8 +253,8 @@ class BrailleViewerFrame(
 ):
 	helpId = "BrailleViewer"
 
-	# Translators: The title of the NVDA Braille Viewer tool window.
-	_title = _("NVDA Braille Viewer")
+	# Translators: The title of the Aslan Braille Viewer tool window.
+	_title = _("Aslan Braille Viewer")
 	_numCells: int
 	_rawTextOutputLastSet: str
 	_rawTextOutput: wx.TextCtrl

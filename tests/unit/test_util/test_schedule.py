@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2024 NV Access Limited.
@@ -9,7 +9,7 @@ from unittest.mock import MagicMock
 
 import schedule
 
-import NVDAState
+import AslanState
 
 # import the entire module to make accessing top level global variables safer
 # i.e. scheduleThread
@@ -27,15 +27,15 @@ class ScheduleThreadTests(unittest.TestCase):
 	TODAY_AT_MIDNIGHT = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
 
 	def setUp(self):
-		self.oldNVDAStateGetStartTime = NVDAState.getStartTime
-		NVDAState.getStartTime = MagicMock(return_value=datetime.now().timestamp())
+		self.oldAslanStateGetStartTime = AslanState.getStartTime
+		AslanState.getStartTime = MagicMock(return_value=datetime.now().timestamp())
 		self.assertEqual(len(schedule.jobs), 0, "No jobs should be scheduled at the start of the test.")
 		self.assertIsNone(_sch.scheduleThread, "scheduleThread should be None at the start of the test.")
 		initialize()
 
 	def tearDown(self):
 		terminate()
-		NVDAState.getStartTime = self.oldNVDAStateGetStartTime
+		AslanState.getStartTime = self.oldAslanStateGetStartTime
 
 	def test_scheduleDailyJobAtStartUp(self):
 		scheduledVals = [0, 0, 0]
@@ -59,7 +59,7 @@ class ScheduleThreadTests(unittest.TestCase):
 		expectedResult = [0, 0, 0]
 		self.assertEqual(scheduledVals, expectedResult)
 		for jobIndex in range(3):
-			startTime = NVDAState.getStartTime()
+			startTime = AslanState.getStartTime()
 			currentJob = schedule.jobs[jobIndex]
 
 			# Ensure that the job is scheduled to run at the expected time
@@ -120,14 +120,14 @@ class ScheduleThreadTests(unittest.TestCase):
 
 	def test_calculateDailyTimeOffset_firstJob(self):
 		"""Test the case where the first job time is calculated correctly"""
-		NVDAState.getStartTime = MagicMock(return_value=ScheduleThreadTests.TODAY_AT_MIDNIGHT.timestamp())
+		AslanState.getStartTime = MagicMock(return_value=ScheduleThreadTests.TODAY_AT_MIDNIGHT.timestamp())
 		offset = _sch.scheduleThread._calculateDailyTimeOffset()
 		# Assert that the offset is calculated correctly
 		self.assertEqual(offset, f"00:{ScheduleThread.START_MINUTE_OFFSET:02d}")
 
 	def test_calculateDailyTimeOffset_secondJob(self):
 		"""Test the case where the second job time is calculated correctly"""
-		NVDAState.getStartTime = MagicMock(return_value=ScheduleThreadTests.TODAY_AT_MIDNIGHT.timestamp())
+		AslanState.getStartTime = MagicMock(return_value=ScheduleThreadTests.TODAY_AT_MIDNIGHT.timestamp())
 		_sch.scheduleThread.scheduledDailyJobCount = 1
 		offset = _sch.scheduleThread._calculateDailyTimeOffset()
 		self.assertEqual(
@@ -137,7 +137,7 @@ class ScheduleThreadTests(unittest.TestCase):
 
 	def test_calculateDailyTimeOffset_minuteOverflow(self):
 		"""Test the case where the start time is 11:59 to ensure the hour offset is calculated correctly"""
-		NVDAState.getStartTime = MagicMock(
+		AslanState.getStartTime = MagicMock(
 			return_value=ScheduleThreadTests.TODAY_AT_MIDNIGHT.replace(hour=11, minute=59).timestamp(),
 		)
 		_sch.scheduleThread.scheduledDailyJobCount = 0
@@ -147,7 +147,7 @@ class ScheduleThreadTests(unittest.TestCase):
 
 	def test_calculateDailyTimeOffset_hourOverflow(self):
 		"""Test the case where the start time is 23:59 to ensure the day and hour offset is calculated correctly"""
-		NVDAState.getStartTime = MagicMock(
+		AslanState.getStartTime = MagicMock(
 			return_value=ScheduleThreadTests.TODAY_AT_MIDNIGHT.replace(hour=23, minute=59).timestamp(),
 		)
 		_sch.scheduleThread.scheduledDailyJobCount = 0

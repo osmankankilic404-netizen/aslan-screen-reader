@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020-2025 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -31,7 +31,7 @@ MAX_FOREGROUND_DEFERS = 2
 _deferUntilForegroundWindow = None
 _foregroundDefers = 0
 
-winEventIDsToNVDAEventNames = {
+winEventIDsToAslanEventNames = {
 	winUser.EVENT_SYSTEM_DESKTOPSWITCH: "desktopSwitch",
 	winUser.EVENT_SYSTEM_FOREGROUND: "gainFocus",
 	winUser.EVENT_SYSTEM_ALERT: "alert",
@@ -213,14 +213,14 @@ def initialize(
 ):
 	global _processDestroyWinEvent
 	_processDestroyWinEvent = processDestroyWinEventFunc
-	for eventType in winEventIDsToNVDAEventNames:
+	for eventType in winEventIDsToAslanEventNames:
 		hookID = winUser.setWinEventHook(eventType, eventType, 0, cWinEventCallback, 0, 0, 0)
 		if hookID:
 			winEventHookIDs.append(hookID)
 		else:
 			log.error(
 				f"initialize: could not register callback for"
-				f" event {eventType} ({winEventIDsToNVDAEventNames[eventType]})",
+				f" event {eventType} ({winEventIDsToAslanEventNames[eventType]})",
 			)
 
 
@@ -265,7 +265,7 @@ def _shouldGetEvents():
 
 #: Maps from console windows (ConsoleWindowClass) to thread IDs
 # Windows hacks GetWindowThreadProcessId to return the input thread of the first attached process in a console
-# But NVDA really requires to know the actual thread the window was created in,
+# But Aslan really requires to know the actual thread the window was created in,
 # I.e. inside conhost,
 # In order to handle speaking of typed characters etc.
 # winEventCallback adds these whenever it sees an event for ConsoleWindowClass windows,

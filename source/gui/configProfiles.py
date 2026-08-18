@@ -1,10 +1,10 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2013-2022 NV Access Limited, Joseph Lee, Julien Cochuyt, Thomas Stivers, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 import wx
-import NVDAState
+import AslanState
 import config
 import api
 import gui
@@ -112,7 +112,7 @@ class ProfilesDialog(
 		self.Bind(wx.EVT_BUTTON, self.onClose, id=wx.ID_CLOSE)
 		self.EscapeId = wx.ID_CLOSE
 
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			for item in newButton, triggersButton, self.renameButton, self.deleteButton:
 				item.Disable()
 		self.onProfileListChoice(None)
@@ -281,7 +281,7 @@ class ProfilesDialog(
 			label = _("Manual activate")
 		self.changeStateButton.Label = label
 		self.changeStateButton.Enabled = enable
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			return
 		self.deleteButton.Enabled = enable
 		self.renameButton.Enabled = enable

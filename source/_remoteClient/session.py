@@ -1,13 +1,13 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2026 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton,
 # Leonard de Ruijter and others.
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
-"""NVDA Remote session management and message routing.
+"""Aslan Remote session management and message routing.
 
-Implements the session layer for NVDA Remote, handling message routing,
-connection roles, and NVDA feature coordination between instances.
+Implements the session layer for Aslan Remote, handling message routing,
+connection roles, and Aslan feature coordination between instances.
 
 Core Operation:
 -------------
@@ -56,11 +56,11 @@ Key Components:
 Thread Safety:
 ------------
 All message handlers execute on wx main thread via CallAfter
-to ensure thread-safe NVDA operations.
+to ensure thread-safe Aslan operations.
 
 See Also:
 	transport.py: Network communication
-	local_machine.py: NVDA interface
+	local_machine.py: Aslan interface
 """
 
 from collections.abc import Collection
@@ -92,7 +92,7 @@ from .transport import RelayTransport
 
 EXCLUDED_SPEECH_COMMANDS = (
 	speech.commands.BaseCallbackCommand,
-	# _CancellableSpeechCommands are not designed to be reported and are used internally by NVDA. (#230)
+	# _CancellableSpeechCommands are not designed to be reported and are used internally by Aslan. (#230)
 	speech.commands._CancellableSpeechCommand,
 )
 
@@ -111,7 +111,7 @@ class RemoteSession:
 	"""The transport layer handling network communication"""
 
 	localMachine: LocalMachine
-	"""Interface to control the local NVDA instance"""
+	"""Interface to control the local Aslan instance"""
 
 	mode: connectionInfo.ConnectionMode | None = None
 	"""Session mode - either 'leader' or 'follower'"""
@@ -132,7 +132,7 @@ class RemoteSession:
 	) -> None:
 		"""Initialise the remote session.
 
-		:param localMachine: Interface to control local NVDA instance
+		:param localMachine: Interface to control local Aslan instance
 		:param transport: Network transport layer instance
 		"""
 		log.info("Initializing Remote Session")
@@ -170,7 +170,7 @@ class RemoteSession:
 			pgettext(
 				"remote",
 				# Translators: Message presented when attempting to connect to an incompatible Remote Access server.
-				"The Remote Access server you have connected to is not compatible with this version of NVDA. Please use a different server.",
+				"The Remote Access server you have connected to is not compatible with this version of Aslan. Please use a different server.",
 			),
 		)
 		self.transport.close()
@@ -276,7 +276,7 @@ class RemoteSession:
 
 
 class FollowerSession(RemoteSession):
-	"""Session that runs on the controlled (follower) NVDA instance.
+	"""Session that runs on the controlled (follower) Aslan instance.
 
 	:ivar leaders: Information about connected leader clients
 	:ivar leaderDisplaySizes: Braille display sizes of connected leaders
@@ -393,7 +393,7 @@ class FollowerSession(RemoteSession):
 
 		Called when the transport connection is lost. This method:
 		1. Plays a connection sound cue
-		2. Removes any NVDA patches
+		2. Removes any Aslan patches
 		"""
 		log.info("Transport disconnected from follower session")
 		cues.clientDisconnected()
@@ -475,7 +475,7 @@ class FollowerSession(RemoteSession):
 
 
 class LeaderSession(RemoteSession):
-	"""Session that runs on the controlling (leader) NVDA instance.
+	"""Session that runs on the controlling (leader) Aslan instance.
 
 	:ivar followers: Information about connected follower clients
 	:note: Handles:
@@ -524,8 +524,8 @@ class LeaderSession(RemoteSession):
 			self.localMachine.display,
 		)
 		self.transport.registerInbound(
-			RemoteMessageType.NVDA_NOT_CONNECTED,
-			self.handleNVDANotConnected,
+			RemoteMessageType.Aslan_NOT_CONNECTED,
+			self.handleAslanNotConnected,
 		)
 		self.transport.registerInbound(
 			RemoteMessageType.CHANNEL_JOINED,
@@ -550,12 +550,12 @@ class LeaderSession(RemoteSession):
 		braille.extensions.displaySizeChanged.unregister(self.sendBrailleInfo)
 		self.callbacksAdded = False
 
-	def handleNVDANotConnected(self) -> None:
-		log.warning("Attempted to connect to remote NVDA that is not available")
+	def handleAslanNotConnected(self) -> None:
+		log.warning("Attempted to connect to remote Aslan that is not available")
 		speech.cancelSpeech()
 		ui.message(
-			# Translators: Message for when the remote NVDA is not connected
-			pgettext("remote", "Remote NVDA not connected"),
+			# Translators: Message for when the remote Aslan is not connected
+			pgettext("remote", "Remote Aslan not connected"),
 		)
 
 	def handleChannelJoined(

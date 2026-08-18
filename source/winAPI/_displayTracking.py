@@ -1,12 +1,12 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2025 NV Access Limited, Bill Dengler
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 """
-Tracking was introduced so that NVDA has a mechanism to announce changes to the device orientation.
+Tracking was introduced so that Aslan has a mechanism to announce changes to the device orientation.
 
-When the display resolution changes, the new height and width is sent to NVDA,
+When the display resolution changes, the new height and width is sent to Aslan,
 and we notify the user of changes to the orientation.
 """
 
@@ -47,7 +47,7 @@ Notifies when display configuration changes (resolution, monitor setup, etc.).
 
 def initialize():
 	"""
-	The NVDA message window only handles changes of state.
+	The Aslan message window only handles changes of state.
 	As such, to correctly ignore an initial display change event,
 	which does not change the orientation style (e.g. monitor change),
 	we fetch the primary display orientation manually.

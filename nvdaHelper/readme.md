@@ -1,6 +1,6 @@
-# NVDA Helper
+# Aslan Helper
 
-Parts of NVDA Helper are used to capture and cache information, in-process, within web browsers and other applications.
+Parts of Aslan Helper are used to capture and cache information, in-process, within web browsers and other applications.
 This cache is called a virtual buffer.
 While virtual buffers apply to several different application types, it may first be easiest to think about how they
 work with browsers, the rest of this document will take a web browser centric view unless specified otherwise.
@@ -9,13 +9,13 @@ work with browsers, the rest of this document will take a web browser centric vi
 
 Internal code is built into several DLLs:
 
-* `nvdaHelperLocal.dll`
-* `nvdaHelperLocalWin10.dll`
-* `nvdaHelperRemote.dll`
+* `aslanHelperLocal.dll`
+* `aslanHelperLocalWin10.dll`
+* `aslanHelperRemote.dll`
 * Several COM proxy dlls
 * `UIARemote.dll`
 
-The `*local*.dll`'s are built for x86 (ie to match NVDA's arch), others are built for x86, x64, and arm64.
+The `*local*.dll`'s are built for x86 (ie to match Aslan's arch), others are built for x86, x64, and arm64.
 
 ### COM proxy dlls
 
@@ -26,31 +26,31 @@ For instance:
 * IAccessible2 IDL files are built into `IAccessible2Proxy.dll`
 * ISimpleDOM IDL files are built into `ISimpleDOM.dll`
 
-### nvdaHelperLocalWin10.dll
+### aslanHelperLocalWin10.dll
 
 Contains code specific to Windows 10 and above, that aides in accessing newer technologies such as Windows OneCore speech synthesis, the Windows in-built OCR service.
 This code is mostly C++/WinRT.
 
-### nvdaHelperLocal.dll
+### aslanHelperLocal.dll
 
-This dll is loaded directly in to NVDA. It provides the following features:
+This dll is loaded directly in to Aslan. It provides the following features:
 
-* client stub methods for several RPC interfaces allowing NVDA to execute code in-process. These interfaces include nvdaInprocUtils, vbufBackends, and displayModel, which are implemented in nvdaHelperRemote.dll.
-* Server stub methods for several RPC interfaces allowing in-process code to execute code in NVDA. These interfaces include nvdaController and nvdaControllerInternal.
-* Functions to aide NVDA in hooking platform dlls to make their calls easier to cancel
+* client stub methods for several RPC interfaces allowing Aslan to execute code in-process. These interfaces include aslanInprocUtils, vbufBackends, and displayModel, which are implemented in aslanHelperRemote.dll.
+* Server stub methods for several RPC interfaces allowing in-process code to execute code in Aslan. These interfaces include aslanController and aslanControllerInternal.
+* Functions to aide Aslan in hooking platform dlls to make their calls easier to cancel
 * Several small utility functions that assist in processing text (which are faster in c++).
 
-### NVDAHelperRemote.dll
+### AslanHelperRemote.dll
 
-This dll injects itself into other processes on the system, allowing for in-process code execution by NVDA.
+This dll injects itself into other processes on the system, allowing for in-process code execution by Aslan.
 It provides the following features:
 
-* Server stub methods for several RPC interfaces, including NVDAInprocUtils, VBufBackends and displayModel.
-* Client stub methods for several RPC interfaces, allowing in-process code to execute code back in NVDA. These interfaces include NVDAController and NVDAControllerInternal
+* Server stub methods for several RPC interfaces, including AslanInprocUtils, VBufBackends and displayModel.
+* Client stub methods for several RPC interfaces, allowing in-process code to execute code back in Aslan. These interfaces include AslanController and AslanControllerInternal
 
 ### UIARemote.dll
 
-This dll is loaded by NVDA, providing utility functions that perform certain tasks or batch procedures on Microsoft UI Automation elements.
+This dll is loaded by Aslan, providing utility functions that perform certain tasks or batch procedures on Microsoft UI Automation elements.
 It makes use of the UI Automation Remote Operations capabilities in Windows 11, allowing to declaratively define code  to  access and manipulate UI Automation elements, that will be Just-In-Time compiled by Windows and executed in the process providing the UI Automation elements.
 
 ## Configuring Visual Studio
@@ -58,16 +58,16 @@ It makes use of the UI Automation Remote Operations capabilities in Windows 11, 
 The following steps won't prepare a buildable solution, but it will enable intellisense.
 You should still build on the command line to verify errors.
 
-* Ensure you have built NVDA on the command line first.
+* Ensure you have built Aslan on the command line first.
 * From the files menu select: `Create a new project from existing code`
 * "Welcome to the Create Project from Existing Code Files Wizard"
   * "What type of project would you like to create?": `Visual C++`
   * Press next.
 * "Specify Project Location and Source Files"
-  * "Project file location": `<repo root>/nvdaHelper/`
-  * Project name: `nvdaHelper`
+  * "Project file location": `<repo root>/aslanHelper/`
+  * Project name: `aslanHelper`
   * Add files to the project from these folders: `checked`
-  * One **checked** item: `<path to nvdaHelper>`
+  * One **checked** item: `<path to aslanHelper>`
   * Files types to add to the project: **use default**
   * Show all files in Solution Explorer: *use default (checked)**
   * Press next
@@ -76,7 +76,7 @@ You should still build on the command line to verify errors.
   * Press next
 * Specify Debug Configuration Settings
   * Build command line: `scons source`
-  * Preprocessor definitions (/D): `WIN32;_WINDOWS;_USRDLL;NVDAHELPER_EXPORTS;UNICODE;_CRT_SECURE_NO_DEPRECATE;LOGLEVEL=15;_WIN32_WINNT=_WIN32_WINNT_WIN10;NOMINMAX`
+  * Preprocessor definitions (/D): `WIN32;_WINDOWS;_USRDLL;AslanHELPER_EXPORTS;UNICODE;_CRT_SECURE_NO_DEPRECATE;LOGLEVEL=15;_WIN32_WINNT=_WIN32_WINNT_WIN10;NOMINMAX`
   * Include search paths (/I): `../include;../miscDeps/include;./;../build\x86_64;../include/minhook/include`
   * Forced Included files (/FI): `winuser.h`
   * Press next
@@ -91,7 +91,7 @@ You should still build on the command line to verify errors.
 
 ### To confirm these settings
 
-* Build NVDA normally
+* Build Aslan normally
 * Look for lines in the build output that start with `cl`
   * EG
 
@@ -108,37 +108,37 @@ You should still build on the command line to verify errors.
   * includes directories beginning with `/I`
   * Additional options like `/std:c++20`
 
-## Compiling NVDAHelper with Debugging Options
+## Compiling AslanHelper with Debugging Options
 
-Among other things, preparing the source tree builds the NVDAHelper libraries.
-If trying to debug nvdaHelper, you can control various debugging options by building with the `nvdaHelperDebugFlags` and `nvdaHelperLogLevel` command line variables.
+Among other things, preparing the source tree builds the AslanHelper libraries.
+If trying to debug aslanHelper, you can control various debugging options by building with the `aslanHelperDebugFlags` and `aslanHelperLogLevel` command line variables.
 
-The `nvdaHelperLogLevel` variable specifies the level of logging (0-59) you wish to see, lower is more verbose. The default is 15.
+The `aslanHelperLogLevel` variable specifies the level of logging (0-59) you wish to see, lower is more verbose. The default is 15.
 
-The `nvdaHelperDebugFlags` variable takes one or more of the following flags:
+The `aslanHelperDebugFlags` variable takes one or more of the following flags:
 
 * debugCRT: the libraries will be linked against the debug C runtime and assertions will be enabled. (By default, the normal CRT is used and assertions are disabled.)
 * RTC: runtime checks (stack corruption, uninitialized variables, etc.) will be enabled. (The default is no runtime checks.)
-* analyze: runs MSVC code analysis on all nvdaHelper code, halting on any warning. (default is no analysis).
+* analyze: runs MSVC code analysis on all aslanHelper code, halting on any warning. (default is no analysis).
 
 The special keywords none and all can also be used in place of the individual flags.
 
 An example follows that enables debug CRT and runtime checks
 
 ```cmd
-scons source nvdaHelperDebugFlags=debugCRT,RTC
+scons source aslanHelperDebugFlags=debugCRT,RTC
 ```
 
 Symbol pdb files are always produced when building, regardless of the debug flags.
-However, they are not included in the NVDA distribution.
+However, they are not included in the Aslan distribution.
 Instead, `scons symbolsArchive` will package them as a separate archive.
 
 By default, builds also do not use any compiler optimizations.
 Please see the `release` keyword argument for what compiler optimizations it will enable.
 
-## Building nvdaHelper developer documentation
+## Building aslanHelper developer documentation
 
-[Refer to this section](../projectDocs/dev/buildingDevDocumentation.md#building-nvdahelper-developer-documentation)
+[Refer to this section](../projectDocs/dev/buildingDevDocumentation.md#building-aslanhelper-developer-documentation)
 
 ## Virtual Buffer Backends
 
@@ -171,9 +171,9 @@ This code is responsible for interacting with the IA2 accessibility API, these c
 
 ## Overview of calling to remote code.
 
-* NVDA's python code calls into the local DLL (`NVDAHelperLocal.dll`).
+* Aslan's python code calls into the local DLL (`AslanHelperLocal.dll`).
 * Generated RPC Wrappers are called
-* The RPC Wrappers call through to the "remote in-process DLL" (ie `nvdaHelperRemote.dll`)
+* The RPC Wrappers call through to the "remote in-process DLL" (ie `aslanHelperRemote.dll`)
 
 ### Build notes
 

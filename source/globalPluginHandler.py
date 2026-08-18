@@ -1,5 +1,5 @@
 # globalPluginHandler.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2010 James Teh <jamie@jantrid.net>
@@ -66,27 +66,27 @@ class GlobalPlugin(baseObject.ScriptableObject):
 	Each global plugin should be a separate Python module in the globalPlugins package containing a C{GlobalPlugin} class which inherits from this base class.
 	Global plugins can implement and bind gestures to scripts which will take effect at all times.
 	See L{ScriptableObject} for details.
-	Global plugins can also receive NVDAObject events for all NVDAObjects.
+	Global plugins can also receive AslanObject events for all AslanObjects.
 	This is done by implementing methods called C{event_eventName},
 	where C{eventName} is the name of the event; e.g. C{event_gainFocus}.
-	These event methods take two arguments: the NVDAObject on which the event was fired
+	These event methods take two arguments: the AslanObject on which the event was fired
 	and a callable taking no arguments which calls the next event handler.
 	"""
 
 	def terminate(self):
 		"""Terminate this global plugin.
-		This will be called when NVDA is finished with this global plugin.
+		This will be called when Aslan is finished with this global plugin.
 		"""
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
-		"""Choose NVDAObject overlay classes for a given NVDAObject.
-		This is called when an NVDAObject is being instantiated after L{NVDAObjects.NVDAObject.findOverlayClasses} has been called on the API-level class.
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
+		"""Choose AslanObject overlay classes for a given AslanObject.
+		This is called when an AslanObject is being instantiated after L{AslanObjects.AslanObject.findOverlayClasses} has been called on the API-level class.
 		This allows a global plugin to add or remove overlay classes.
-		See L{NVDAObjects.NVDAObject.findOverlayClasses} for details about overlay classes.
+		See L{AslanObjects.AslanObject.findOverlayClasses} for details about overlay classes.
 		@param obj: The object being created.
-		@type obj: L{NVDAObjects.NVDAObject}
+		@type obj: L{AslanObjects.AslanObject}
 		@param clsList: The list of classes, which will be modified by this method if appropriate.
-		@type clsList: list of L{NVDAObjects.NVDAObject}
+		@type clsList: list of L{AslanObjects.AslanObject}
 		"""
 
 	def __repr__(self):

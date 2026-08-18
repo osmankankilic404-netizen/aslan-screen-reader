@@ -2,7 +2,7 @@
 name: (Advanced) ADR for major project
 about: Free text ADR template for those familiar with GitHub.
 type: Task
-labels: ["ADR", "audience/nvda-dev"]
+labels: ["ADR", "audience/aslan-dev"]
 
 ---
 

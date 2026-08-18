@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2024 NV Access Limited, Łukasz Golonka, Leonard de Ruijter, Babbage B.V.,
 # Aleksey Sadovoy, Peter Vágner
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
@@ -14,7 +14,7 @@ from globalVars.
 Instead, encapsulate variables in setters and getters in
 other modules.
 
-When NVDA core is no longer dependent on globalVars,
+When Aslan core is no longer dependent on globalVars,
 a deprecation warning should be added to this module which
 warns developers when importing anything from this module.
 
@@ -32,7 +32,7 @@ from typing import (
 
 if TYPE_CHECKING:
 	import documentBase  # noqa: F401 used for type checking only
-	import NVDAObjects  # noqa: F401 used for type checking only
+	import AslanObjects  # noqa: F401 used for type checking only
 
 
 class DefaultAppArgs(argparse.Namespace):
@@ -45,9 +45,9 @@ class DefaultAppArgs(argparse.Namespace):
 	minimal: bool = False
 	secure: bool = False
 	"""
-	When this is True, NVDA is running in secure mode.
-	This is set to True when NVDA starts with the --secure parameter.
-	This is also set to True when NVDA is running on a secure screen
+	When this is True, Aslan is running in secure mode.
+	This is set to True when Aslan starts with the --secure parameter.
+	This is also set to True when Aslan is running on a secure screen
 	(utils.security.isRunningOnSecureDesktop() returns True)
 	and the serviceDebug parameter is not set.
 	This is forced to true if the forceSecureMode parameter is set.
@@ -74,48 +74,48 @@ class DefaultAppArgs(argparse.Namespace):
 
 # Encapsulated by api module,
 # refer to #14037 for removal strategy.
-desktopObject: Optional["NVDAObjects.NVDAObject"] = None
+desktopObject: Optional["AslanObjects.AslanObject"] = None
 """Deprecated, use `setDesktopObject|getDesktopObject` from `api` instead"""
 
-foregroundObject: Optional["NVDAObjects.NVDAObject"] = None
+foregroundObject: Optional["AslanObjects.AslanObject"] = None
 """Deprecated, use `setForegroundObject|getForegroundObject` from `api` instead"""
 
-focusObject: Optional["NVDAObjects.NVDAObject"] = None
+focusObject: Optional["AslanObjects.AslanObject"] = None
 """Deprecated, use `setFocusObject|getFocusObject` from `api` instead"""
 
-focusAncestors: List["NVDAObjects.NVDAObject"] = []
+focusAncestors: List["AslanObjects.AslanObject"] = []
 """Deprecated, use `getFocusAncestors` from `api` instead"""
 
 focusDifferenceLevel: Optional[int] = None
 """Deprecated, use `getFocusDifferenceLevel` from `api` instead"""
 
-mouseObject: Optional["NVDAObjects.NVDAObject"] = None
+mouseObject: Optional["AslanObjects.AslanObject"] = None
 """Deprecated, use ``setMouseObject|getMouseObject`` from `api` instead"""
 
-navigatorObject: Optional["NVDAObjects.NVDAObject"] = None
+navigatorObject: Optional["AslanObjects.AslanObject"] = None
 """Deprecated, use ``setNavigatorObject|getNavigatorObject`` from `api` instead"""
 
 reviewPosition: Optional["documentBase.TextContainerObject"] = None
 """Deprecated, use ``getReviewPosition|setReviewPosition`` from `api` instead"""
 
-reviewPositionObj: Optional["NVDAObjects.NVDAObject"] = None
+reviewPositionObj: Optional["AslanObjects.AslanObject"] = None
 """Deprecated, use ``api.getReviewPosition().obj`` instead"""
 
 
 # unused, should eventually get removed.
 mouseOldX: Literal[None] = None
-"""Deprecated, this is unused and not set by NVDA core"""
+"""Deprecated, this is unused and not set by Aslan core"""
 
 mouseOldY: Literal[None] = None
-"""Deprecated, this is unused and not set by NVDA core"""
+"""Deprecated, this is unused and not set by Aslan core"""
 
 lastProgressValue: Literal[0] = 0
-"""Deprecated, this is unused and not set by NVDA core"""
+"""Deprecated, this is unused and not set by Aslan core"""
 
 
-# TODO: encapsulate in NVDAState
+# TODO: encapsulate in AslanState
 startTime: float = 0.0
-"""Deprecated, use ``NVDAState.getStartTime`` instead"""
+"""Deprecated, use ``AslanState.getStartTime`` instead"""
 
 appArgs = DefaultAppArgs()
 
@@ -124,17 +124,17 @@ unknownAppArgs: List[str] = []
 exitCode: int = 0
 """
 Deprecated, this should not be used by add-on authors.
-NVDA core should use `NVDAState._getExitCode|_setExitCode` instead.
+Aslan core should use `AslanState._getExitCode|_setExitCode` instead.
 """
 
 appPid: int = 0
-"""The process ID of NVDA itself.
+"""The process ID of Aslan itself.
 """
 
 appDir: str
 """
-The directory where NVDA is installed or running from.
-Set by nvda_slave.pyw and nvda.pyw.
+The directory where Aslan is installed or running from.
+Set by aslan_slave.pyw and aslan.pyw.
 """
 
 # TODO: encapsulate in synthDriverHandler

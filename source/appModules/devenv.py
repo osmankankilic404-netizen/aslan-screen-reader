@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2010-2025 NV Access Limited, Soronel Haetir, Babbage B.V., Francisco Del Roio,
 # Leonard de Ruijter
 # This file is covered by the GNU General Public License.
@@ -14,12 +14,12 @@ from logHandler import log
 import textInfos.offsets
 
 from fileUtils import getFileVersionInfo
-from NVDAObjects.behaviors import EditableText, EditableTextWithoutAutoSelectDetection
-from NVDAObjects.window import Window
+from AslanObjects.behaviors import EditableText, EditableTextWithoutAutoSelectDetection
+from AslanObjects.window import Window
 from comtypes.automation import IDispatch
-from NVDAObjects.window import DisplayModelEditableText
-from NVDAObjects.IAccessible import IAccessible
-from NVDAObjects.UIA import UIA, WpfTextView, UIATextInfo
+from AslanObjects.window import DisplayModelEditableText
+from AslanObjects.IAccessible import IAccessible
+from AslanObjects.UIA import UIA, WpfTextView, UIATextInfo
 from enum import IntEnum
 import appModuleHandler
 import controlTypes
@@ -55,7 +55,7 @@ class AppModule(appModuleHandler.AppModule):
 		vsMajor, vsMinor, rest = productVersion.split(".", 2)
 		self.vsMajor, self.vsMinor = int(vsMajor), int(vsMinor)
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if WpfTextView in clsList:
 			clsList.remove(WpfTextView)
 			clsList.insert(0, VsWpfTextView)

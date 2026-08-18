@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2023-2024 NV Access Limited, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -49,18 +49,18 @@ class _Context:
 class Context(_Context, Enum):
 	SECURE_MODE = (
 		lambda: globalVars.appArgs.secure,
-		# Translators: Reported when an action cannot be performed because NVDA is in a secure screen
+		# Translators: Reported when an action cannot be performed because Aslan is in a secure screen
 		_("Action unavailable in secure context"),
 	)
 	WINDOWS_STORE_VERSION = (
 		lambda: config.isAppX,
-		# Translators: Reported when an action cannot be performed because NVDA has been installed
+		# Translators: Reported when an action cannot be performed because Aslan has been installed
 		# from the Windows Store.
-		_("Action unavailable in NVDA Windows Store version"),
+		_("Action unavailable in Aslan Windows Store version"),
 	)
 	MODAL_DIALOG_OPEN = (
 		_isModalMessageBoxActive,
-		# Translators: Reported when an action cannot be performed because NVDA is waiting
+		# Translators: Reported when an action cannot be performed because Aslan is waiting
 		# for a response from a modal dialog
 		_("Action unavailable while a dialog requires a response"),
 		_modalDialogOpenCallback,
@@ -72,9 +72,9 @@ class Context(_Context, Enum):
 	)
 	RUNNING_LAUNCHER = (
 		lambda: globalVars.appArgs.launcher,
-		# Translators: Reported when an action cannot be performed because NVDA is running the launcher temporary
+		# Translators: Reported when an action cannot be performed because Aslan is running the launcher temporary
 		# version
-		_("Action unavailable in a temporary version of NVDA"),
+		_("Action unavailable in a temporary version of Aslan"),
 	)
 	BRAILLE_MODE_SPEECH_OUTPUT = (
 		lambda: config.conf["braille"]["mode"] == BrailleMode.SPEECH_OUTPUT.value,

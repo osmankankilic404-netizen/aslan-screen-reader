@@ -1,10 +1,10 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Peter Vágner, Aleksey Sadovoy, Patrick Zajda, Babbage B.V.,
 # Davy Kager, Leonard de Ruijter, Cyrille Bougot
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
-"""Module that contains the base NVDA object type with dynamic class creation support,
+"""Module that contains the base Aslan object type with dynamic class creation support,
 as well as the associated TextInfo class."""
 
 import time
@@ -51,9 +51,9 @@ if TYPE_CHECKING:
 	from utils.urlUtils import _LinkData
 
 
-class NVDAObjectTextInfo(textInfos.offsets.OffsetsTextInfo):
+class AslanObjectTextInfo(textInfos.offsets.OffsetsTextInfo):
 	"""A default TextInfo which is used to enable text review of information about widgets that don't support text content.
-	The L{NVDAObject.basicText} attribute is used as the text to expose.
+	The L{AslanObject.basicText} attribute is used as the text to expose.
 	"""
 
 	locationText = None
@@ -75,18 +75,18 @@ class NVDAObjectTextInfo(textInfos.offsets.OffsetsTextInfo):
 		return [self.obj.location]
 
 	def allowMoveToUnitOffsetPastEnd(self, unit: str) -> bool:
-		# Default NVDA Object TextInfo has no insertion point, so no need to move past the end of text.
+		# Default Aslan Object TextInfo has no insertion point, so no need to move past the end of text.
 		return False
 
 
-class InvalidNVDAObject(RuntimeError):
-	"""Raised by NVDAObjects during construction to inform that this object is invalid.
-	In this case, for the purposes of NVDA, the object should be considered non-existent.
-	Therefore, L{DynamicNVDAObjectType} will return C{None} if this exception is raised.
+class InvalidAslanObject(RuntimeError):
+	"""Raised by AslanObjects during construction to inform that this object is invalid.
+	In this case, for the purposes of Aslan, the object should be considered non-existent.
+	Therefore, L{DynamicAslanObjectType} will return C{None} if this exception is raised.
 	"""
 
 
-class DynamicNVDAObjectType(baseObject.ScriptableObject.__class__):
+class DynamicAslanObjectType(baseObject.ScriptableObject.__class__):
 	_dynamicClassCache = {}
 
 	def __call__(self, chooseBestAPI=True, **kwargs):
@@ -103,8 +103,8 @@ class DynamicNVDAObjectType(baseObject.ScriptableObject.__class__):
 			obj.APIClass = APIClass
 			if isinstance(obj, self):
 				obj.__init__(**kwargs)
-		except InvalidNVDAObject as e:
-			log.debugWarning("Invalid NVDAObject: %s" % e, exc_info=True)
+		except InvalidAslanObject as e:
+			log.debugWarning("Invalid AslanObject: %s" % e, exc_info=True)
 			return None
 
 		clsList = []
@@ -114,22 +114,22 @@ class DynamicNVDAObjectType(baseObject.ScriptableObject.__class__):
 			clsList.append(APIClass)
 		# Allow app modules to choose overlay classes.
 		appModule = obj.appModule
-		# optimisation: The base implementation of chooseNVDAObjectOverlayClasses does nothing,
+		# optimisation: The base implementation of chooseAslanObjectOverlayClasses does nothing,
 		# so only call this method if it's been overridden.
-		if appModule and not hasattr(appModule.chooseNVDAObjectOverlayClasses, "_isBase"):
+		if appModule and not hasattr(appModule.chooseAslanObjectOverlayClasses, "_isBase"):
 			try:
-				appModule.chooseNVDAObjectOverlayClasses(obj, clsList)
+				appModule.chooseAslanObjectOverlayClasses(obj, clsList)
 			except Exception:
-				log.exception(f"Exception in chooseNVDAObjectOverlayClasses for {appModule}")
+				log.exception(f"Exception in chooseAslanObjectOverlayClasses for {appModule}")
 				pass
 
 		# Allow global plugins to choose overlay classes.
 		for plugin in globalPluginHandler.runningPlugins:
-			if "chooseNVDAObjectOverlayClasses" in plugin.__class__.__dict__:
+			if "chooseAslanObjectOverlayClasses" in plugin.__class__.__dict__:
 				try:
-					plugin.chooseNVDAObjectOverlayClasses(obj, clsList)
+					plugin.chooseAslanObjectOverlayClasses(obj, clsList)
 				except Exception:
-					log.exception(f"Exception in chooseNVDAObjectOverlayClasses for {plugin}")
+					log.exception(f"Exception in chooseAslanObjectOverlayClasses for {plugin}")
 					pass
 
 		# After all other mutation has finished,
@@ -180,11 +180,11 @@ class DynamicNVDAObjectType(baseObject.ScriptableObject.__class__):
 				pass
 
 		# Allow app modules to make minor tweaks to the instance.
-		if appModule and hasattr(appModule, "event_NVDAObject_init"):
+		if appModule and hasattr(appModule, "event_AslanObject_init"):
 			try:
-				appModule.event_NVDAObject_init(obj)
+				appModule.event_AslanObject_init(obj)
 			except Exception:
-				log.exception(f"Exception in event_NVDAObject_init for {appModule}")
+				log.exception(f"Exception in event_AslanObject_init for {appModule}")
 				pass
 
 		return obj
@@ -196,7 +196,7 @@ class DynamicNVDAObjectType(baseObject.ScriptableObject.__class__):
 		"""
 		cls._dynamicClassCache.clear()
 
-	def _insertLockScreenObject(self, clsList: typing.List["NVDAObject"]) -> None:
+	def _insertLockScreenObject(self, clsList: typing.List["AslanObject"]) -> None:
 		"""
 		Inserts LockScreenObject to the start of the clsList if Windows is locked.
 		"""
@@ -207,15 +207,15 @@ class DynamicNVDAObjectType(baseObject.ScriptableObject.__class__):
 			clsList.insert(0, LockScreenObject)
 
 
-class NVDAObject(
+class AslanObject(
 	documentBase.TextContainerObject,
 	baseObject.ScriptableObject,
-	metaclass=DynamicNVDAObjectType,
+	metaclass=DynamicAslanObjectType,
 ):
-	"""NVDA's representation of a single control/widget.
-	Every widget, regardless of how it is exposed by an application or the operating system, is represented by a single NVDAObject instance.
-	This allows NVDA to work with all widgets in a uniform way.
-	An NVDAObject provides information about the widget (e.g. its name, role and value),
+	"""Aslan's representation of a single control/widget.
+	Every widget, regardless of how it is exposed by an application or the operating system, is represented by a single AslanObject instance.
+	This allows Aslan to work with all widgets in a uniform way.
+	An AslanObject provides information about the widget (e.g. its name, role and value),
 	as well as functionality to manipulate it (e.g. perform an action or set focus).
 	Events for the widget are handled by special event methods on the object.
 	Commands triggered by input from the user can also be handled by special methods called scripts.
@@ -223,23 +223,23 @@ class NVDAObject(
 
 	The only attribute that absolutely must be provided is L{processID}.
 	However, subclasses should provide at least the L{name} and L{role} attributes in order for the object to be meaningful to the user.
-	Attributes such as L{parent}, L{firstChild}, L{next} and L{previous} link an instance to other NVDAObjects in the hierarchy.
+	Attributes such as L{parent}, L{firstChild}, L{next} and L{previous} link an instance to other AslanObjects in the hierarchy.
 	In order to facilitate access to text exposed by a widget which supports text content (e.g. an editable text control),
 	a L{textInfos.TextInfo} should be implemented and the L{TextInfo} attribute should specify this class.
 
-	There are two main types of NVDAObject classes:
+	There are two main types of AslanObject classes:
 		* API classes, which provide the core functionality to work with objects exposed using a particular API (e.g. MSAA/IAccessible).
 		* Overlay classes, which supplement the core functionality provided by an API class to handle a specific widget or type of widget.
 	Most developers need only be concerned with overlay classes.
 	The overlay classes to be used for an instance are determined using the L{findOverlayClasses} method on the API class.
-	An L{AppModule} can also choose overlay classes for an instance using the L{AppModule.chooseNVDAObjectOverlayClasses} method.
+	An L{AppModule} can also choose overlay classes for an instance using the L{AppModule.chooseAslanObjectOverlayClasses} method.
 	"""
 
 	cachePropertiesByDefault = True
 
 	#: The TextInfo class this object should use to provide access to text.
 	#: @type: type; L{textInfos.TextInfo}
-	TextInfo = NVDAObjectTextInfo
+	TextInfo = AslanObjectTextInfo
 
 	#: Indicates if the text selection is anchored at the start.
 	#: The anchored position is the end that doesn't move when extending or shrinking the selection.
@@ -260,7 +260,7 @@ class NVDAObject(
 		@param kwargs: the arguments necessary to construct an object of the class this method was called on.
 		@type kwargs: dictionary
 		@returns: the new APIClass
-		@rtype: DynamicNVDAObjectType
+		@rtype: DynamicAslanObjectType
 		"""
 		newAPIClass = cls
 		if "getPossibleAPIClasses" in newAPIClass.__dict__:
@@ -270,7 +270,7 @@ class NVDAObject(
 					continue
 				if possibleAPIClass.kwargsFromSuper(kwargs, relation=relation):
 					return possibleAPIClass.findBestAPIClass(kwargs, relation=relation)
-		return newAPIClass if newAPIClass is not NVDAObject else None
+		return newAPIClass if newAPIClass is not AslanObject else None
 
 	@classmethod
 	def getPossibleAPIClasses(cls, kwargs, relation=None):
@@ -283,9 +283,9 @@ class NVDAObject(
 		@returns: a generator
 		@rtype: generator
 		"""
-		import NVDAObjects.window
+		import AslanObjects.window
 
-		yield NVDAObjects.window.Window
+		yield AslanObjects.window.Window
 
 	@classmethod
 	def kwargsFromSuper(cls, kwargs, relation=None):
@@ -301,47 +301,47 @@ class NVDAObject(
 		"""
 		raise NotImplementedError
 
-	def findOverlayClasses(self, clsList: typing.List[typing.Type["NVDAObject"]]) -> None:
+	def findOverlayClasses(self, clsList: typing.List[typing.Type["AslanObject"]]) -> None:
 		"""
 		Chooses overlay classes which should be added to this object's class structure,
 		after the object has been initially instantiated.
-		After an NVDAObject class (normally an API-level class) is instantiated,
+		After an AslanObject class (normally an API-level class) is instantiated,
 		this method is called on the instance to choose appropriate overlay classes.
 
 		This method may use properties, etc. on the instance to make this choice.
 		The object's class structure is then mutated to contain these classes.
 
 		L{initOverlayClass} is then called for each class which was not part of the initially instantiated object.
-		This process allows an NVDAObject to be dynamically created using the most appropriate NVDAObject subclass at each API level.
+		This process allows an AslanObject to be dynamically created using the most appropriate AslanObject subclass at each API level.
 		Classes should be listed with subclasses first.
 		That is, subclasses should generally call super and then append their own classes to the list.
 
-		For example: Called on an IAccessible NVDAObject, the list might contain:
+		For example: Called on an IAccessible AslanObject, the list might contain:
 		"DialogIAccessible (a subclass of IAccessible), Edit (a subclass of Window)".
 
 		@param clsList: The list of classes, which will be modified by this method if appropriate.
 		"""
-		clsList.append(NVDAObject)
+		clsList.append(AslanObject)
 
-	beTransparentToMouse = False  #:If true then NVDA will never consider the mouse to be on this object, rather it will be on an ancestor.
+	beTransparentToMouse = False  #:If true then Aslan will never consider the mouse to be on this object, rather it will be on an ancestor.
 
-	def objectFromPointRedirect(self, x: int, y: int) -> "NVDAObject | None":
-		"""Redirects NVDA to another object if this object is retrieved from on-screen coordinates.
+	def objectFromPointRedirect(self, x: int, y: int) -> "AslanObject | None":
+		"""Redirects Aslan to another object if this object is retrieved from on-screen coordinates.
 		:param x: the x coordinate.
 		:param y: the y coordinate.
-		:return: The object that NVDA should be redirected to.
+		:return: The object that Aslan should be redirected to.
 		"""
 		return
 
 	@staticmethod
-	def objectFromPoint(x: int, y: int) -> "NVDAObject":
-		"""Retrieves an NVDAObject instance representing a control in the Operating System at the given x and y coordinates.
+	def objectFromPoint(x: int, y: int) -> "AslanObject":
+		"""Retrieves an AslanObject instance representing a control in the Operating System at the given x and y coordinates.
 		:param x: the x coordinate.
 		:param y: the y coordinate.
 		:return: The object at the given x and y coordinates.
 		"""
 		kwargs = {}
-		APIClass = NVDAObject.findBestAPIClass(kwargs, relation=(x, y))
+		APIClass = AslanObject.findBestAPIClass(kwargs, relation=(x, y))
 		obj = APIClass(chooseBestAPI=False, **kwargs) if APIClass else None
 		if not obj:
 			return
@@ -352,12 +352,12 @@ class NVDAObject(
 
 	@staticmethod
 	def objectWithFocus():
-		"""Retrieves the object representing the control currently with focus in the Operating System. This differens from NVDA's focus object as this focus object is the real focus object according to the Operating System, not according to NVDA.
+		"""Retrieves the object representing the control currently with focus in the Operating System. This differens from Aslan's focus object as this focus object is the real focus object according to the Operating System, not according to Aslan.
 		@return: the object with focus.
-		@rtype: L{NVDAObject}
+		@rtype: L{AslanObject}
 		"""
 		kwargs = {}
-		APIClass = NVDAObject.findBestAPIClass(kwargs, relation="focus")
+		APIClass = AslanObject.findBestAPIClass(kwargs, relation="focus")
 		if not APIClass:
 			return None
 		obj = APIClass(chooseBestAPI=False, **kwargs)
@@ -371,16 +371,16 @@ class NVDAObject(
 	@staticmethod
 	def objectInForeground():
 		"""Retrieves the object representing the current foreground control according to the
-		Operating System. This may differ from NVDA's cached foreground object.
+		Operating System. This may differ from Aslan's cached foreground object.
 		@return: the foreground object
-		@rtype: L{NVDAObject}
+		@rtype: L{AslanObject}
 		"""
 		kwargs = {}
-		APIClass = NVDAObject.findBestAPIClass(kwargs, relation="foreground")
+		APIClass = AslanObject.findBestAPIClass(kwargs, relation="foreground")
 		return APIClass(chooseBestAPI=False, **kwargs) if APIClass else None
 
 	def __init__(self):
-		super(NVDAObject, self).__init__()
+		super(AslanObject, self).__init__()
 		self._mouseEntered = (
 			False  #:True if the mouse has entered this object (for use in L{event_mouseMoved})
 		)
@@ -389,16 +389,16 @@ class NVDAObject(
 		)
 
 	def _isEqual(self, other):
-		"""Calculates if this object is equal to another object. Used by L{NVDAObject.__eq__}.
+		"""Calculates if this object is equal to another object. Used by L{AslanObject.__eq__}.
 		@param other: the other object to compare with.
-		@type other: L{NVDAObject}
+		@type other: L{AslanObject}
 		@return: True if equal, false otherwise.
 		@rtype: boolean
 		"""
 		return True
 
 	def __eq__(self, other):
-		"""Compaires the objects' memory addresses, their type, and uses L{NVDAObject._isEqual} to see if they are equal."""
+		"""Compaires the objects' memory addresses, their type, and uses L{AslanObject._isEqual} to see if they are equal."""
 		if self is other:
 			return True
 		if type(self) is not type(other):
@@ -411,7 +411,7 @@ class NVDAObject(
 		return super().__hash__()
 
 	def __ne__(self, other):
-		"""The opposite to L{NVDAObject.__eq__}"""
+		"""The opposite to L{AslanObject.__eq__}"""
 		return not self.__eq__(other)
 
 	focusRedirect = (
@@ -423,7 +423,7 @@ class NVDAObject(
 
 	def _get_treeInterceptorClass(self) -> typing.Type[TreeInterceptor]:
 		"""
-		If this NVDAObject should use a treeInterceptor, then this property
+		If this AslanObject should use a treeInterceptor, then this property
 		provides the L{treeInterceptorHandler.TreeInterceptor} class it should use.
 		If not then it should be not implemented.
 		@raises NotImplementedError when no TreeInterceptor class is available.
@@ -479,7 +479,7 @@ class NVDAObject(
 		@return: the appModule
 		"""
 		if not hasattr(self, "_appModuleRef"):
-			a = appModuleHandler.getAppModuleForNVDAObject(self)
+			a = appModuleHandler.getAppModuleForAslanObject(self)
 			if a:
 				self._appModuleRef = weakref.ref(a)
 				return a
@@ -506,7 +506,7 @@ class NVDAObject(
 	def _get_roleText(self) -> typing.Optional[str]:
 		"""
 		A custom role string for this object, which is used for braille and speech presentation, which will override the standard label for this object's role property.
-		No string is provided by default, meaning that NVDA will fall back to using role.
+		No string is provided by default, meaning that Aslan will fall back to using role.
 		Examples of where this property might be overridden are shapes in Powerpoint, or ARIA role descriptions.
 		"""
 		if self.landmark and self.landmark in aria.landmarkRoles:
@@ -517,7 +517,7 @@ class NVDAObject(
 		"""
 		A custom role string for this object, which is used for braille presentation,
 		which will override the standard label for this object's role property as well as the value of roleText.
-		By default, NVDA falls back to using roleText.
+		By default, Aslan falls back to using roleText.
 		"""
 		if self.landmark and self.landmark in braille.labels.landmarkLabels:
 			return f"{braille.labels.roleLabels[controlTypes.Role.LANDMARK]} {braille.labels.landmarkLabels[self.landmark]}"
@@ -564,7 +564,7 @@ class NVDAObject(
 
 	def _get_detailsSummary(self) -> typing.Optional[str]:
 		log.warning(
-			"NVDAObject.detailsSummary is deprecated. Use NVDAObject.annotations instead.",
+			"AslanObject.detailsSummary is deprecated. Use AslanObject.annotations instead.",
 			stack_info=True,
 		)
 		return None
@@ -575,7 +575,7 @@ class NVDAObject(
 		In most instances this should be optimised.
 		"""
 		log.warning(
-			"NVDAObject.hasDetails is deprecated. Use NVDAObject.annotations instead.",
+			"AslanObject.hasDetails is deprecated. Use AslanObject.annotations instead.",
 			stack_info=True,
 		)
 		return bool(self.annotations)
@@ -587,7 +587,7 @@ class NVDAObject(
 
 	def _get_detailsRole(self) -> typing.Optional[controlTypes.Role]:
 		log.warning(
-			"NVDAObject.detailsRole is deprecated. Use NVDAObject.annotations instead.",
+			"AslanObject.detailsRole is deprecated. Use AslanObject.annotations instead.",
 			stack_info=True,
 		)
 		if config.conf["debugLog"]["annotations"]:
@@ -675,10 +675,10 @@ class NVDAObject(
 		).format(left=percentFromLeft, top=percentFromTop, width=percentWidth, height=percentHeight)
 
 	#: Typing information for auto-property: _get_parent
-	parent: typing.Optional["NVDAObject"]
+	parent: typing.Optional["AslanObject"]
 	"This object's parent (the object that contains this object)."
 
-	def _get_parent(self) -> typing.Optional["NVDAObject"]:
+	def _get_parent(self) -> typing.Optional["AslanObject"]:
 		"""Retrieves this object's parent (the object that contains this object).
 		@return: the parent object if it exists else None.
 		"""
@@ -694,49 +694,49 @@ class NVDAObject(
 		return parent
 
 	#: Typing information for auto-property: _get_next
-	next: typing.Optional["NVDAObject"]
+	next: typing.Optional["AslanObject"]
 	"The object directly after this object with the same parent."
 
-	def _get_next(self) -> typing.Optional["NVDAObject"]:
+	def _get_next(self) -> typing.Optional["AslanObject"]:
 		"""Retrieves the object directly after this object with the same parent.
 		@return: the next object if it exists else None.
 		"""
 		return None
 
 	#: Typing information for auto-property: _get_previous
-	previous: typing.Optional["NVDAObject"]
+	previous: typing.Optional["AslanObject"]
 	"The object directly before this object with the same parent."
 
-	def _get_previous(self) -> typing.Optional["NVDAObject"]:
+	def _get_previous(self) -> typing.Optional["AslanObject"]:
 		"""Retrieves the object directly before this object with the same parent.
 		@return: the previous object if it exists else None.
 		"""
 		return None
 
 	#: Type definition for auto prop '_get_firstChild'
-	firstChild: typing.Optional["NVDAObject"]
+	firstChild: typing.Optional["AslanObject"]
 
-	def _get_firstChild(self) -> typing.Optional["NVDAObject"]:
+	def _get_firstChild(self) -> typing.Optional["AslanObject"]:
 		"""Retrieves the first object that this object contains.
 		@return: the first child object if it exists else None.
 		"""
 		return None
 
 	#: Type definition for auto prop '_get_lastChild'
-	lastChild: typing.Optional["NVDAObject"]
+	lastChild: typing.Optional["AslanObject"]
 
-	def _get_lastChild(self) -> typing.Optional["NVDAObject"]:
+	def _get_lastChild(self) -> typing.Optional["AslanObject"]:
 		"""Retrieves the last object that this object contains.
 		@return: the last child object if it exists else None.
 		"""
 		return None
 
 	#: Type definition for auto prop '_get_children'
-	children: typing.List["NVDAObject"]
+	children: typing.List["AslanObject"]
 
 	def _get_children(self):
 		"""Retrieves a list of all the objects directly contained by this object (who's parent is this object).
-		@rtype: list of L{NVDAObject}
+		@rtype: list of L{AslanObject}
 		"""
 		log.debugWarning(
 			"Base implementation used."
@@ -749,7 +749,7 @@ class NVDAObject(
 			child = child.next
 		return children
 
-	def getChild(self, index: int) -> "NVDAObject":
+	def getChild(self, index: int) -> "AslanObject":
 		"""Retrieve a child by index.
 		@note: Subclasses may override this if they have an efficient way to retrieve a single, arbitrary child.
 			The base implementation uses L{children}.
@@ -882,7 +882,7 @@ class NVDAObject(
 
 	def _get_table(self):
 		"""Retrieves the object that represents the table that this object is contained in, if this object is a table cell.
-		@rtype: L{NVDAObject}
+		@rtype: L{AslanObject}
 		"""
 		raise NotImplementedError
 
@@ -899,7 +899,7 @@ class NVDAObject(
 		"""Recursively traverse and return the descendants of this object.
 		This is a depth-first forward traversal.
 		@return: The recursive descendants of this object.
-		@rtype: generator of L{NVDAObject}
+		@rtype: generator of L{AslanObject}
 		"""
 		for child in self.children:
 			yield child
@@ -950,7 +950,7 @@ class NVDAObject(
 		name = self.name
 		description = self.description
 		# #15324: Some builds of Microsoft Office expose a space character as the name of unlabeled groupings.
-		# trying to force NVDA to announce them.
+		# trying to force Aslan to announce them.
 		if name and name.isspace():
 			name = None
 		if description and description.isspace():
@@ -1057,7 +1057,7 @@ class NVDAObject(
 	def _get_activeChild(self):
 		"""Retrieves the child of this object that currently has, or contains, the focus.
 		@return: the active child if it has one else None
-		@rtype: L{NVDAObject} or None
+		@rtype: L{AslanObject} or None
 		"""
 		return None
 
@@ -1092,7 +1092,7 @@ class NVDAObject(
 	def _get_labeledBy(self):
 		"""Retrieves the object that this object is labeled by (example: the static text label beside an edit field).
 		@return: the label object if it has one else None.
-		@rtype: L{NVDAObject} or None
+		@rtype: L{AslanObject} or None
 		"""
 		return None
 
@@ -1152,7 +1152,7 @@ class NVDAObject(
 	def _get_flowsTo(self):
 		"""The object to which content flows from this object.
 		@return: The object to which this object flows, C{None} if none.
-		@rtype: L{NVDAObject}
+		@rtype: L{AslanObject}
 		@raise NotImplementedError: If not supported by the underlying object.
 		"""
 		raise NotImplementedError
@@ -1160,7 +1160,7 @@ class NVDAObject(
 	def _get_flowsFrom(self):
 		"""The object from which content flows to this object.
 		@return: The object from which this object flows, C{None} if none.
-		@rtype: L{NVDAObject}
+		@rtype: L{AslanObject}
 		@raise NotImplementedError: If not supported by the underlying object.
 		"""
 		raise NotImplementedError
@@ -1182,9 +1182,9 @@ class NVDAObject(
 		return True
 
 	#: Type definition for auto prop '_get_statusBar'
-	statusBar: Optional["NVDAObject"]
+	statusBar: Optional["AslanObject"]
 
-	def _get_statusBar(self) -> Optional["NVDAObject"]:
+	def _get_statusBar(self) -> Optional["AslanObject"]:
 		"""Finds the closest status bar in relation to this object.
 		@return: the found status bar else None
 		"""
@@ -1209,7 +1209,7 @@ class NVDAObject(
 		"""Announces this object in a way suitable such that it gained focus."""
 		speech.speakObject(self, reason=controlTypes.OutputReason.FOCUS)
 
-	def isDescendantOf(self, obj: "NVDAObject") -> bool:
+	def isDescendantOf(self, obj: "AslanObject") -> bool:
 		"""is this object a descendant of obj?"""
 		raise NotImplementedError
 
@@ -1285,7 +1285,7 @@ class NVDAObject(
 		try:
 			info = self.makeTextInfo(locationHelper.Point(x, y))
 		except NotImplementedError:
-			info = NVDAObjectTextInfo(self, textInfos.POSITION_FIRST)
+			info = AslanObjectTextInfo(self, textInfos.POSITION_FIRST)
 		except LookupError:
 			return
 
@@ -1381,7 +1381,7 @@ class NVDAObject(
 		speech.clearTypedWordBuffer()
 
 	def event_focusExited(self):
-		# In the general case, NVDA should not announce anything when focus exits an ancestor control.
+		# In the general case, Aslan should not announce anything when focus exits an ancestor control.
 		pass
 
 	def event_foreground(self):
@@ -1438,7 +1438,7 @@ class NVDAObject(
 		parent = self.simpleParent
 		while parent:
 			ti = parent.treeInterceptor
-			if ti and self in ti and ti.rootNVDAObject == parent:
+			if ti and self in ti and ti.rootAslanObject == parent:
 				return ti.makeTextInfo(self)
 			if issubclass(parent.TextInfo, DisplayModelTextInfo):
 				try:
@@ -1573,7 +1573,7 @@ class NVDAObject(
 	_cache_sleepMode = False
 
 	def _get_sleepMode(self) -> bool:
-		"""Whether NVDA should sleep for this object (e.g. it is self-voicing).
+		"""Whether Aslan should sleep for this object (e.g. it is self-voicing).
 		If C{True}, all  events and script requests for this object are silently dropped.
 		"""
 		if self.appModule:
@@ -1593,8 +1593,8 @@ class NVDAObject(
 	language = None
 
 	def _get__hasNavigableText(self):
-		# The generic NVDAObjectTextInfo by itself is never enough to be navigable
-		if self.TextInfo is NVDAObjectTextInfo:
+		# The generic AslanObjectTextInfo by itself is never enough to be navigable
+		if self.TextInfo is AslanObjectTextInfo:
 			return False
 		role = self.role
 		states = self.states
@@ -1619,7 +1619,7 @@ class NVDAObject(
 		)
 
 	def _get_selectionContainer(self):
-		"""An ancestor NVDAObject which manages the selection for this object and other descendants."""
+		"""An ancestor AslanObject which manages the selection for this object and other descendants."""
 		return None
 
 	def getSelectedItemsCount(self, maxCount=2):

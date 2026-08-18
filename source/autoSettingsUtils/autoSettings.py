@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2019-2025 NV Access Limited
@@ -23,7 +23,7 @@ type SupportedSettingType = Iterable[DriverSetting]
 
 
 class AutoSettings(AutoPropertyObject):
-	"""An AutoSettings instance is used to simplify the load/save of user config for NVDA extensions
+	"""An AutoSettings instance is used to simplify the load/save of user config for Aslan extensions
 	(Synth drivers, braille drivers, vision providers) and make it possible to automatically provide a
 	standard GUI for these settings.
 	Derived classes must implement:

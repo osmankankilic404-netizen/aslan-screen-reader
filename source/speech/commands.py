@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2006-2023 NV Access Limited, Leonard de Ruijter
@@ -44,7 +44,7 @@ class SpeechCommand(object):
 	"""The base class for objects that can be inserted between strings of text to perform actions,
 	change voice parameters, etc.
 
-	Note: Some of these commands are processed by NVDA and are not directly passed to synth drivers.
+	Note: Some of these commands are processed by Aslan and are not directly passed to synth drivers.
 	synth drivers will only receive commands derived from L{SynthCommand}.
 	"""
 
@@ -115,12 +115,12 @@ class SynthCommand(SpeechCommand):
 
 class IndexCommand(SynthCommand):
 	"""Marks this point in the speech with an index.
-	When speech reaches this index, the synthesizer notifies NVDA,
-	thus allowing NVDA to perform actions at specific points in the speech;
+	When speech reaches this index, the synthesizer notifies Aslan,
+	thus allowing Aslan to perform actions at specific points in the speech;
 	e.g. synchronizing the cursor, beeping or playing a sound.
 	Callers should not use this directly.
 	Instead, use one of the subclasses of L{BaseCallbackCommand}.
-	NVDA handles the indexing and dispatches callbacks as appropriate.
+	Aslan handles the indexing and dispatches callbacks as appropriate.
 	"""
 
 	def __init__(self, index):
@@ -182,7 +182,7 @@ class LangChangeCommand(SynthParamCommand):
 
 	def __init__(self, lang: str | None):
 		"""
-		:param lang: The language to switch to: If None then the NVDA locale will be used.
+		:param lang: The language to switch to: If None then the Aslan locale will be used.
 		"""
 		self.lang = lang
 		self.isDefault = not lang
@@ -412,18 +412,18 @@ class BaseCallbackCommand(SpeechCommand, metaclass=ABCMeta):
 	@abstractmethod
 	def run(self):
 		"""Code to run when speech reaches this command.
-		This method is executed in NVDA's main thread,
+		This method is executed in Aslan's main thread,
 		therefore must return as soon as practically possible,
-		otherwise it will block production of further speech and or other functionality in NVDA.
+		otherwise it will block production of further speech and or other functionality in Aslan.
 		"""
 
 
 class CallbackCommand(BaseCallbackCommand):
 	"""
 	Call a function when speech reaches this point.
-	Note that  the provided function is executed in NVDA's main thread,
+	Note that  the provided function is executed in Aslan's main thread,
 		therefore must return as soon as practically possible,
-		otherwise it will block production of further speech and or other functionality in NVDA.
+		otherwise it will block production of further speech and or other functionality in Aslan.
 	"""
 
 	def __init__(self, callback, name: Optional[str] = None):

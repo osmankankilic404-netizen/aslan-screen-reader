@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2025 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton and others.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -17,7 +17,7 @@ from .connectionInfo import ConnectionMode
 
 
 class RemoteMenu(wx.Menu):
-	"""Menu for the NVDA Remote functionality that appears in the NVDA Tools menu"""
+	"""Menu for the Aslan Remote functionality that appears in the Aslan Tools menu"""
 
 	def __init__(self, client: "RemoteClient") -> None:
 		super().__init__()
@@ -77,12 +77,12 @@ class RemoteMenu(wx.Menu):
 		self.sendCtrlAltDelItem.Enable(False)
 		self.remoteItem = toolsMenu.AppendSubMenu(
 			self,
-			# Translators: Label of the Remote Access submenu in the NVDA tools menu.
+			# Translators: Label of the Remote Access submenu in the Aslan tools menu.
 			pgettext("remote", "R&emote Access"),
 			pgettext(
 				"remote",
-				# Translators: Tooltip for the Remote Access submenu in the NVDA Tools menu.
-				"Allow someone to control this computer from elsewhere, or control another computer running NVDA with this one.",
+				# Translators: Tooltip for the Remote Access submenu in the Aslan Tools menu.
+				"Allow someone to control this computer from elsewhere, or control another computer running Aslan with this one.",
 			),
 		)
 
@@ -155,7 +155,7 @@ class RemoteMenu(wx.Menu):
 		# Translators: Item in the Remote Access submenu to connect to another computer.
 		self.connectionItem.SetItemLabel(_("Connect..."))
 		# Translators: Tooltip for the Connect menu item in the Remote Access submenu.
-		self.connectionItem.SetHelp(pgettext("remote", "Remotely connect to another computer running NVDA."))
+		self.connectionItem.SetHelp(pgettext("remote", "Remotely connect to another computer running Aslan."))
 		gui.mainFrame.sysTrayIcon.Unbind(wx.EVT_MENU, self.connectionItem)
 		gui.mainFrame.sysTrayIcon.Bind(
 			wx.EVT_MENU,
@@ -172,7 +172,7 @@ class RemoteMenu(wx.Menu):
 		Sets the label, help text and event bindings of the connection item
 		to those appropriate for disconnecting an existing Remote session.
 		"""
-		# Translators: Menu item in the Remote Access submenu to disconnect from another computer running NVDA.
+		# Translators: Menu item in the Remote Access submenu to disconnect from another computer running Aslan.
 		self.connectionItem.SetItemLabel(_("Disconnect"))
 		# Translators: Tooltip for the Disconnect menu item in the Remote Access submenu.
 		self.connectionItem.SetHelp(pgettext("remote", "Disconnect from the current Remote Access session."))

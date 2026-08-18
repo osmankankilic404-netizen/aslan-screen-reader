@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Comparison tests between the Uniscribe and ICU word boundary backends.
 
@@ -21,7 +21,7 @@ from textUtils.segFlag import WordSegFlag
 
 from . import skipIfNoICU
 
-# Encoding used for all WordSegmenter calls — matches what NVDA uses internally.
+# Encoding used for all WordSegmenter calls — matches what Aslan uses internally.
 _ENCODING = textUtils.WCHAR_ENCODING
 
 
@@ -67,7 +67,7 @@ class TestWordOffsetsEnglish(_WordOffsetsParityTest):
 	"""Word offset comparison for English text.
 
 	Both backends include trailing whitespace as part of the preceding word.
-	NVDA's Uniscribe implementation (textUtils.cpp) does this natively;
+	Aslan's Uniscribe implementation (textUtils.cpp) does this natively;
 	the ICU implementation mirrors that behaviour explicitly.
 	"""
 
@@ -194,7 +194,7 @@ class TestWordOffsetsTrailingPunctuationDivergence(unittest.TestCase):
 	"""Trailing punctuation: ICU splits it into its own word; Uniscribe keeps it attached.
 
 	UAX#29 treats the full stop as a separate word segment, so ICU returns "logo"
-	and then "." as two words.  NVDA's Uniscribe implementation keeps the trailing
+	and then "." as two words.  Aslan's Uniscribe implementation keeps the trailing
 	punctuation attached to the preceding word ("logo.").  ICU's behaviour matches
 	modern Windows edit controls such as the Start menu search field.
 	"""

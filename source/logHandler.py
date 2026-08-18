@@ -1,10 +1,10 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2026 NV Access Limited, Rui Batista, Joseph Lee, Leonard de Ruijter, Babbage B.V.,
 # Accessolutions, Julien Cochuyt, Cyrille Bougot, Łukasz Golonka
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
-"""Utilities and classes to manage logging in NVDA"""
+"""Utilities and classes to manage logging in Aslan"""
 
 import os
 import ctypes
@@ -29,8 +29,8 @@ from typing import (
 )
 import exceptions
 import RPCConstants
-import NVDAState
-from NVDAState import WritePaths
+import AslanState
+from AslanState import WritePaths
 
 
 if TYPE_CHECKING:
@@ -44,10 +44,10 @@ E_ACCESSDENIED = -2147024891
 CO_E_OBJNOTCONNECTED = -2147220995
 EVENT_E_ALL_SUBSCRIBERS_FAILED = -2147220991
 LOAD_WITH_ALTERED_SEARCH_PATH = 0x8
-_NVDA_CODE_PATH = os.path.dirname(__file__)
-"""Store path in which NVDA code is placed.
-We cannot use `globalVars.appDir`, since for binary builds it points to the directory with NVDA binaries,
-whereas for compiled versions NVDA's code files are in `library.zip`.
+_Aslan_CODE_PATH = os.path.dirname(__file__)
+"""Store path in which Aslan code is placed.
+We cannot use `globalVars.appDir`, since for binary builds it points to the directory with Aslan binaries,
+whereas for compiled versions Aslan's code files are in `library.zip`.
 """
 
 
@@ -69,12 +69,12 @@ def getFormattedStacksForAllThreads() -> str:
 	return "\n".join(stacks)
 
 
-def isPathExternalToNVDA(path: str) -> bool:
-	"""Checks if the given path is external to NVDA (I.e. not pointing to built-in code)."""
+def isPathExternalToAslan(path: str) -> bool:
+	"""Checks if the given path is external to Aslan (I.e. not pointing to built-in code)."""
 	if (
 		path[0] != "<"
 		and os.path.isabs(path)
-		and not os.path.normpath(path).startswith(_NVDA_CODE_PATH + "\\")
+		and not os.path.normpath(path).startswith(_Aslan_CODE_PATH + "\\")
 		or (
 			# Handle messages logged before config is initialized
 			WritePaths.configDir is not None and path.startswith(WritePaths.configDir)
@@ -83,8 +83,8 @@ def isPathExternalToNVDA(path: str) -> bool:
 		# This module is external because:
 		# the code comes from a file (fn doesn't begin with "<");
 		# it has an absolute file path (code bundled in binary builds reports relative paths); and
-		# it is not part of NVDA's Python code
-		# (i.e. outside of NVDA directory or in NVDA's config,
+		# it is not part of Aslan's Python code
+		# (i.e. outside of Aslan directory or in Aslan's config,
 		# so it belongs to an add-on or a plugin in the scratchpad).
 		return True
 	return False
@@ -98,7 +98,7 @@ def getCodePath(f):
 	@rtype: string
 	"""
 	fn = f.f_code.co_filename
-	if isPathExternalToNVDA(fn):
+	if isPathExternalToAslan(fn):
 		path = "external:"
 	else:
 		path = ""
@@ -203,7 +203,7 @@ def shouldPlayErrorSound() -> bool:
 
 
 # Function to strip the base path of our code from traceback text to improve readability.
-if NVDAState.isRunningAsSource():
+if AslanState.isRunningAsSource():
 	BASE_PATH = os.path.split(__file__)[0] + os.sep
 	TB_BASE_PATH_PREFIX = '  File "'
 	TB_BASE_PATH_MATCH = TB_BASE_PATH_PREFIX + BASE_PATH
@@ -428,20 +428,20 @@ class RemoteHandler(logging.Handler):
 		import winBindings.kernel32
 
 		h = winBindings.kernel32.LoadLibraryEx(
-			NVDAState.ReadPaths.nvdaHelperRemoteDll,
+			AslanState.ReadPaths.aslanHelperRemoteDll,
 			0,
 			# Using an altered search path is necessary here
-			# As NVDAHelperRemote needs to locate dependent dlls in the same directory
+			# As AslanHelperRemote needs to locate dependent dlls in the same directory
 			# such as IAccessible2proxy.dll.
 			winKernel.LOAD_WITH_ALTERED_SEARCH_PATH,
 		)
-		self._remoteLib = ctypes.CDLL("nvdaHelperRemote", handle=h)
+		self._remoteLib = ctypes.CDLL("aslanHelperRemote", handle=h)
 		logging.Handler.__init__(self)
 
 	def emit(self, record):
 		msg = self.format(record)
 		try:
-			self._remoteLib.nvdaControllerInternal_logMessage(record.levelno, globalVars.appPid, msg)
+			self._remoteLib.aslanControllerInternal_logMessage(record.levelno, globalVars.appPid, msg)
 		except WindowsError:
 			pass
 
@@ -463,10 +463,10 @@ class Formatter(logging.Formatter):
 		return stripBasePathFromTracebackText(super(Formatter, self).formatException(ex))
 
 	def format(self, record: logging.LogRecord) -> str:
-		# NVDA's log calls provide / generate a special 'codepath' record attribute.
+		# Aslan's log calls provide / generate a special 'codepath' record attribute.
 		# Which is a clean and friendly module.class.function string.
-		# However, as NVDA's logger is also installed as the root logger to catch logging from other libraries,
-		# log calls outside of NVDA will not provide codepath.
+		# However, as Aslan's logger is also installed as the root logger to catch logging from other libraries,
+		# log calls outside of Aslan will not provide codepath.
 		if not hasattr(record, "codepath"):
 			# #14315: codepath was not provided,
 			# So make up a simple one from standard record attributes we know will exist.
@@ -521,22 +521,22 @@ def redirectStdout(logger):
 	sys.stderr = StreamRedirector("stderr", logger, logging.ERROR)
 
 
-NVDA_LOGGER_NAME = "nvda"
+Aslan_LOGGER_NAME = "aslan"
 # Register our logging class as the class for all loggers.
 logging.setLoggerClass(Logger)
 #: The singleton logger instance.
-log: Logger = logging.getLogger(NVDA_LOGGER_NAME)
+log: Logger = logging.getLogger(Aslan_LOGGER_NAME)
 #: The singleton log handler instance.
 logHandler: logging.Handler | None = None
 
 
 def _getDefaultLogFilePath():
-	if NVDAState.isRunningAsSource():
-		return os.path.join(globalVars.appDir, "nvda.log")
+	if AslanState.isRunningAsSource():
+		return os.path.join(globalVars.appDir, "aslan.log")
 	else:
 		import tempfile
 
-		return os.path.join(tempfile.gettempdir(), "nvda.log")
+		return os.path.join(tempfile.gettempdir(), "aslan.log")
 
 
 def _excepthook(*exc_info):
@@ -588,7 +588,7 @@ def _showwarning(message, category, filename, lineno, file=None, line=None):
 
 def _shouldDisableLogging() -> bool:
 	"""Disables logging based on command line options and if secure mode is active.
-	See NoConsoleOptionParser in nvda.pyw, #TODO and #8516.
+	See NoConsoleOptionParser in aslan.pyw, #TODO and #8516.
 
 	Secure mode disables logging.
 	Logging on secure screens could allow keylogging of passwords and retrieval from the SYSTEM user.
@@ -606,7 +606,7 @@ def filterExternalDependencyLogging(record: logging.LogRecord) -> bool:
 	import config
 
 	return (
-		record.name == NVDA_LOGGER_NAME
+		record.name == Aslan_LOGGER_NAME
 		or record.levelno >= Logger.WARNING
 		or config.conf["debugLog"]["externalPythonDependencies"]
 	)
@@ -616,7 +616,7 @@ def initialize(shouldDoRemoteLogging=False):
 	"""Initialize logging.
 	This must be called before any logging can occur.
 	@precondition: The command line arguments have been parsed into L{globalVars.appArgs}.
-	@var shouldDoRemoteLogging: True if all logging should go to the real NVDA via rpc (for slave)
+	@var shouldDoRemoteLogging: True if all logging should go to the real Aslan via rpc (for slave)
 	@type shouldDoRemoteLogging: bool
 	"""
 	global log, logHandler
@@ -639,8 +639,8 @@ def initialize(shouldDoRemoteLogging=False):
 		else:
 			if not globalVars.appArgs.logFileName:
 				globalVars.appArgs.logFileName = _getDefaultLogFilePath()
-			# Keep a backup of the previous log file so we can access it even if NVDA crashes or restarts.
-			oldLogFileName = os.path.join(os.path.dirname(globalVars.appArgs.logFileName), "nvda-old.log")
+			# Keep a backup of the previous log file so we can access it even if Aslan crashes or restarts.
+			oldLogFileName = os.path.join(os.path.dirname(globalVars.appArgs.logFileName), "aslan-old.log")
 			try:
 				# We must remove the old log file first as os.rename does replace it.
 				if os.path.exists(oldLogFileName):

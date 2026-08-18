@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2025 NV Access Limited, Ethan Holliger, Dinesh Kaushal, Leonard de Ruijter,
 # Joseph Lee, Julien Cochuyt, Łukasz Golonka, Cyrille Bougot
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
@@ -37,7 +37,7 @@ EXPECTED_MESSAGES_WITHOUT_COMMENTS = {
 	"gesture map File Error",
 	"Type help(object) to get help about object.",
 	"Type exit() to exit the console",
-	"NVDA Python Console",
+	"Aslan Python Console",
 	"Emulates pressing %s on the system keyboard",
 	"continuous section break",
 	"new column section break",
@@ -46,10 +46,10 @@ EXPECTED_MESSAGES_WITHOUT_COMMENTS = {
 	"odd pages section break",
 	"column break",
 	"background pattern {pattern}",
-	"NVDA Speech Viewer",
+	"Aslan Speech Viewer",
 	"NonVisual Desktop Access",
 	"A free and open source screen reader for Microsoft Windows",
-	"Copyright (C) {years} NVDA Contributors",
+	"Copyright (C) {years} Aslan Contributors",
 	"Display",
 	"left",
 	"right",
@@ -113,7 +113,7 @@ def checkPot(fileName):
 				continue
 			if line.startswith("#: "):
 				# This specifies the files and line numbers where this message was found.
-				# Example: "#: NVDAObjects\window\winword.py:1322"
+				# Example: "#: AslanObjects\window\winword.py:1322"
 				# Strip the "#: " prefix (3 chars).
 				sourceLines.append(line[3:])
 				continue

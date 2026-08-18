@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2024 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -25,7 +25,7 @@ if TYPE_CHECKING:
 
 def _getAddonBundleToInstallIfValid(addonPath: str) -> "AddonBundle":
 	"""
-	@param addonPath: path to the 'nvda-addon' file.
+	@param addonPath: path to the 'aslan-addon' file.
 	@return: the addonBundle, if valid
 	@raise DisplayableError if the addon bundle is invalid / incompatible.
 	"""
@@ -51,7 +51,7 @@ def _getAddonBundleToInstallIfValid(addonPath: str) -> "AddonBundle":
 		raise DisplayableError(
 			displayMessage=pgettext(
 				"addonStore",
-				# Translators: The message displayed when an add-on is not supported by this version of NVDA.
+				# Translators: The message displayed when an add-on is not supported by this version of Aslan.
 				# The %s will be replaced with the path to the add-on that is not supported.
 				"Add-on not supported %s",
 			)

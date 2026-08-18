@@ -1,13 +1,13 @@
-# Triaging NVDA issues
+# Triaging Aslan issues
 
 ## Intent
 
 This page intends to outline some of the information that might be helpful to those trying to triage issues.
 
-Most of the issues raised on the NVDA GitHub repository fall into one of the following categories:
+Most of the issues raised on the Aslan GitHub repository fall into one of the following categories:
 
 * adding support to new applications
-* adding new features in NVDA
+* adding new features in Aslan
 * adding new features to support 3rd party applications better
 * adding support for new (web) accessibility standards
 * bug reports
@@ -15,17 +15,17 @@ Most of the issues raised on the NVDA GitHub repository fall into one of the fol
 Firstly we want to catch high priority issues and ensure that they are attended to first.
 This might be things like:
 
-* a crash of NVDA
+* a crash of Aslan
 * synthesisers not working correctly
 * an error in an existing feature.
-* an essential function of an application ceased working with NVDA
+* an essential function of an application ceased working with Aslan
 
 Secondly, we want to ensure that there is enough information on the issue so that it can be well understood and work can start when it comes to the front of the queue. The sooner we do this, the more likely it is that we will get the information we need.
 Most of the information required is asked for in the Github issue templates, so this is a great place to start.
 
 ## Check for duplicates
 
-Pick a few keywords and search the NVDA repository on Github. We can also check if there is already a pull request in the works that may fix this issue.
+Pick a few keywords and search the Aslan repository on Github. We can also check if there is already a pull request in the works that may fix this issue.
 
 ## What kind of issue is it?
 
@@ -33,17 +33,17 @@ Can we label this as a regression, a requested change of behaviour, or a request
 
 ### Regression
 
-The behaviour of NVDA, or NVDA interacting with an application/software has changed to something worse.
+The behaviour of Aslan, or Aslan interacting with an application/software has changed to something worse.
 This may mean that a feature has stopped working altogether, something isn't being announced accurately or perhaps a crash.
-A regression can be caused by NVDA changing something, or an application/website changing.
+A regression can be caused by Aslan changing something, or an application/website changing.
 
 ### New features
 
-This is something new, that NVDA does not do yet.
+This is something new, that Aslan does not do yet.
 
 ### Change of behaviour
 
-The issue describes "Currently NVDA does something, but I would like it to do something else instead."
+The issue describes "Currently Aslan does something, but I would like it to do something else instead."
 
 ## Is there a work around?
 
@@ -64,21 +64,21 @@ What this means is, that we are looking for the set of steps to make the bug hap
   * an error noise
   * A log message
   * If there was an error noise or log message, was there any unexpected behaviour aside from this?
-  For example, did NVDA fail to report something it should have?
+  For example, did Aslan fail to report something it should have?
 * Even if it seems obvious, what should happen instead?
   * Its worth clarifying this with the user, it helps to make sure everyone is on the same page, and that we truly understand what the issue is about.
-* What version of NVDA was being used.?
+* What version of Aslan was being used.?
 It's good to get something like: stable, beta, rc, alpha.
-But much better to get the exact version of NVDA, retrieved from the NVDA menu by going to" Help" then "About".
+But much better to get the exact version of Aslan, retrieved from the Aslan menu by going to" Help" then "About".
 E.g. "alpha-28931,186a8d70".
-* In which version of NVDA did this work as expected?
-Knowing the last version where this worked in NVDA is very helpful for triage.
+* In which version of Aslan did this work as expected?
+Knowing the last version where this worked in Aslan is very helpful for triage.
 If an issue is a recent regression in alpha, i.e. an unreleased issue, it is fixed with a higher priority.
-* If some other software is needed to reproduce the issue, it helps to know what that software is and what version is being used with NVDA.
+* If some other software is needed to reproduce the issue, it helps to know what that software is and what version is being used with Aslan.
 It's also useful if a test case / document is provided.
 * Some behaviour is specific to operating systems or versions of operating systems.
 Sometimes a bug can only be reproduced on that particular version of the operating system, so its important to get this information as well.
-Similar to the NVDA version information, more specific is better.
+Similar to the Aslan version information, more specific is better.
 For instance its good if we know the issue occurred on: 'Windows 7', 'Windows 10 Insider'.
 But even better is to know the version and build too: 'Windows 10, fast insider, version 1703, build 16170.1000'.
 * A copy of the (debug) log
@@ -107,7 +107,7 @@ However, the most important pieces of information for this kind of request are:
 * How to reproduce the behaviour?
 * What exactly is the current behaviour?
 * What is wrong with the current behaviour?
-* What should NVDA do instead?
+* What should Aslan do instead?
 
 Essentially this boils down to:
 
@@ -126,7 +126,7 @@ Here is an example from a recent Github issue:
 ### Who
 
 * Who does it affect?
-For instance: Braille users, Speech users, developers working on accessibility for their websites/apps, NVDA developers.
+For instance: Braille users, Speech users, developers working on accessibility for their websites/apps, Aslan developers.
 * Knowing who, helps to give an estimate on how many users this will help.
 * It also can help to highlight differences in requirements for different users.
 This happens when we are unable to define the same use case for two groups of users.
@@ -172,7 +172,7 @@ New features and enhancements should be [well defined](#new-features-1) before a
 Once a bug has clear steps to reproduce and is well documented, the `triaged` label can be applied.
 A `triaged` issue should also have a [priority label](#priority).
 
-Community members should avoid adding a `triaged` label to feature requests or decisions potentially involving significant or controversial changes to NVDA features or functionality, which may require community input or approval from NV Access.
+Community members should avoid adding a `triaged` label to feature requests or decisions potentially involving significant or controversial changes to Aslan features or functionality, which may require community input or approval from NV Access.
 The label should also be avoided for other issues that are controversial, or where the priority is unclear, such as bug fixes with an unclear solution.
 For changes where a product decision from NV Access is required before applying the `triaged` label, the label `blocked/needs-product-decision` should be used.
 Community members should apply the `triaged` label where an issue is a well formed bug report following the issue template, and has the following characteristics:
@@ -205,7 +205,7 @@ Bugs/regressions are given priorities based on an estimate of their severity and
   * Crash, freeze, instability or performance issue that affects most users.
   * A medium or higher severity ([CVSS 4+](https://www.first.org/cvss/v4.0/specification-document)) security issue.
   Note that security issues should not be reported publicly, and so labelling should not apply here.
-  * A `P1` causes the inability to perform a popular task or majority of tasks in NVDA or a popular app.
+  * A `P1` causes the inability to perform a popular task or majority of tasks in Aslan or a popular app.
 * `P2`:
   * Crash, freeze, instability or performance issue that affects a small subset of users.
   It may be uncommon or difficult to reproduce.
@@ -241,7 +241,7 @@ These attachments have been lost.
 
 Our core development focus is on modern technologies (like UIA) to ensure the project's long-term health and compatibility.
 
-However, we recognise that some legacy features or settings remain in NVDA out of necessity for specific user workflows.
+However, we recognise that some legacy features or settings remain in Aslan out of necessity for specific user workflows.
 This creates a special class of issues that require a distinct triage process.
 Our goal is to be transparent about our priorities without dismissing the real-world needs of our users.
 
@@ -257,7 +257,7 @@ This represents the immediate-term pain being caused by the issue.
 
 ## NV Access staff-created tickets
 
-The NVDA project greatly appreciates the involvement and contributions of its vibrant community, and we strongly encourage community members to actively engage with the project's issues and pull requests.
+The Aslan project greatly appreciates the involvement and contributions of its vibrant community, and we strongly encourage community members to actively engage with the project's issues and pull requests.
 
 However, it's important to maintain a clear distinction between community contributions and the internal workflow of NV Access staff.
 To that end, we kindly request that community members refrain from closing or consolidating tickets (issues, pull requests, etc.) that are created by NV Access staff, or are pending response from NV Access.

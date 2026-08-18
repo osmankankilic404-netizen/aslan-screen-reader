@@ -1,8 +1,8 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2011-2026 NV Access Limited, Babbage B.v., Cyrille Bougot, Julien Cochuyt, Accessolutions,
 # Bill Dengler, Joseph Lee, Takuya Nishimoto
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from ctypes import FormatError, GetLastError, byref
 from ctypes.wintypes import HANDLE
@@ -38,7 +38,7 @@ import gui.contextHelp
 from gui.dpiScalingHelper import DpiScalingHelperMixinWithoutInit
 import systemUtils
 import ui
-from NVDAState import WritePaths
+from AslanState import WritePaths
 from .message import DialogType, MessageDialog, ReturnCode, displayDialogAsModal
 
 
@@ -118,26 +118,26 @@ def _restartWindows() -> bool:
 
 
 def _showPostInstallDialog(isUpdate: bool, startAfterInstall: bool) -> None:
-	"""Show the post-install dialog after NVDA installation completes.
+	"""Show the post-install dialog after Aslan installation completes.
 
 	Presents the user with options to restart Windows, start the installed copy,
-	or exit NVDA.
+	or exit Aslan.
 	"""
 	if isUpdate:
 		message = _(
-			# Translators: The message displayed when NVDA has been successfully updated,
+			# Translators: The message displayed when Aslan has been successfully updated,
 			# shown in the post-install dialog.
-			"Successfully updated your installation of NVDA."
+			"Successfully updated your installation of Aslan."
 			" It is recommended to restart Windows after updating."
-			" NVDA may malfunction without a restart.",
+			" Aslan may malfunction without a restart.",
 		)
 	else:
 		message = _(
-			# Translators: The message displayed when NVDA has been successfully installed,
+			# Translators: The message displayed when Aslan has been successfully installed,
 			# shown in the post-install dialog.
-			"Successfully installed NVDA."
+			"Successfully installed Aslan."
 			" It is recommended to restart Windows after installing."
-			" NVDA may malfunction without a restart.",
+			" Aslan may malfunction without a restart.",
 		)
 	dialog = MessageDialog(
 		parent=gui.mainFrame,
@@ -148,8 +148,8 @@ def _showPostInstallDialog(isUpdate: bool, startAfterInstall: bool) -> None:
 		helpId="RestartWindowsAfterInstall",
 	)
 	if startAfterInstall:
-		# Translators: Button in the post-install dialog to start the newly installed NVDA.
-		dialog.addButton(ReturnCode.CUSTOM_1, label=_("&Start NVDA"), defaultFocus=True, fallbackAction=True)
+		# Translators: Button in the post-install dialog to start the newly installed Aslan.
+		dialog.addButton(ReturnCode.CUSTOM_1, label=_("&Start Aslan"), defaultFocus=True, fallbackAction=True)
 	dialog.addButton(
 		ReturnCode.CUSTOM_2,
 		label=_(
@@ -158,16 +158,16 @@ def _showPostInstallDialog(isUpdate: bool, startAfterInstall: bool) -> None:
 		),
 		defaultFocus=not startAfterInstall,
 	)
-	# Translators: Button in the post-install dialog to exit NVDA.
-	dialog.addButton(ReturnCode.CANCEL, label=_("E&xit NVDA"), fallbackAction=not startAfterInstall)
+	# Translators: Button in the post-install dialog to exit Aslan.
+	dialog.addButton(ReturnCode.CANCEL, label=_("E&xit Aslan"), fallbackAction=not startAfterInstall)
 	match dialog.ShowModal():
 		case ReturnCode.CUSTOM_1:
-			newNVDA = core.NewNVDAInstance(
-				filePath=os.path.join(WritePaths.defaultInstallDir, "nvda.exe"),
+			newAslan = core.NewAslanInstance(
+				filePath=os.path.join(WritePaths.defaultInstallDir, "aslan.exe"),
 				parameters=_generate_executionParameters(),
 			)
-			if not core.triggerNVDAExit(newNVDA):
-				log.error("NVDA already in process of exiting, this indicates a logic error.")
+			if not core.triggerAslanExit(newAslan):
+				log.error("Aslan already in process of exiting, this indicates a logic error.")
 		case ReturnCode.CUSTOM_2:
 			# If we successfully request a system restart, we will be terminated by the shutdown sequence.
 			# Other apps may require input before they can exit, so we should not exit just yet.
@@ -175,25 +175,25 @@ def _showPostInstallDialog(isUpdate: bool, startAfterInstall: bool) -> None:
 				# Restart failed — inform the user.
 				# Only exit if a new copy can be started so the user keeps a screen reader.
 				gui.messageBox(
-					# Translators: Message shown when Windows restart fails after NVDA installation.
+					# Translators: Message shown when Windows restart fails after Aslan installation.
 					_("Failed to restart Windows. Please restart Windows manually."),
 					# Translators: Title of the error dialog shown when Windows restart fails.
 					_("Error"),
 					wx.OK | wx.ICON_ERROR,
 				)
 				if startAfterInstall:
-					newNVDA = core.NewNVDAInstance(
-						filePath=os.path.join(WritePaths.defaultInstallDir, "nvda.exe"),
+					newAslan = core.NewAslanInstance(
+						filePath=os.path.join(WritePaths.defaultInstallDir, "aslan.exe"),
 						parameters=_generate_executionParameters(),
 					)
-					if not core.triggerNVDAExit(newNVDA):
-						log.error("NVDA already in process of exiting, this indicates a logic error.")
+					if not core.triggerAslanExit(newAslan):
+						log.error("Aslan already in process of exiting, this indicates a logic error.")
 				else:
-					if not core.triggerNVDAExit(None):
-						log.error("NVDA already in process of exiting, this indicates a logic error.")
+					if not core.triggerAslanExit(None):
+						log.error("Aslan already in process of exiting, this indicates a logic error.")
 		case ReturnCode.CANCEL:
-			if not core.triggerNVDAExit(None):
-				log.error("NVDA already in process of exiting, this indicates a logic error.")
+			if not core.triggerAslanExit(None):
+				log.error("Aslan already in process of exiting, this indicates a logic error.")
 		case _ as returnCode:
 			log.error(f"Unexpected return code from post-install dialog: {returnCode}")
 
@@ -208,16 +208,16 @@ def doInstall(
 ):
 	progressDialog = gui.IndeterminateProgressDialog(
 		gui.mainFrame,
-		# Translators: The title of the dialog presented while NVDA is being updated.
-		_("Updating NVDA")
+		# Translators: The title of the dialog presented while Aslan is being updated.
+		_("Updating Aslan")
 		if isUpdate
-		# Translators: The title of the dialog presented while NVDA is being installed.
-		else _("Installing NVDA"),
-		# Translators: The message displayed while NVDA is being updated.
-		_("Please wait while your previous installation of NVDA is being updated.")
+		# Translators: The title of the dialog presented while Aslan is being installed.
+		else _("Installing Aslan"),
+		# Translators: The message displayed while Aslan is being updated.
+		_("Please wait while your previous installation of Aslan is being updated.")
 		if isUpdate
-		# Translators: The message displayed while NVDA is being installed.
-		else _("Please wait while NVDA is being installed"),
+		# Translators: The message displayed while Aslan is being installed.
+		else _("Please wait while Aslan is being installed"),
 	)
 	try:
 		res = systemUtils.execElevated(
@@ -240,12 +240,12 @@ def doInstall(
 	del progressDialog
 	if isinstance(res, installer.RetriableFailure):
 		message = _(
-			# Translators: a message dialog asking to retry or cancel when NVDA install fails
+			# Translators: a message dialog asking to retry or cancel when Aslan install fails
 			"The installation is unable to remove or overwrite a file. "
-			"Another copy of NVDA may be running on another logged-on user account. "
-			"Please make sure all installed copies of NVDA are shut down and try the installation again.",
+			"Another copy of Aslan may be running on another logged-on user account. "
+			"Please make sure all installed copies of Aslan are shut down and try the installation again.",
 		)
-		# Translators: the title of a retry cancel dialog when NVDA installation fails
+		# Translators: the title of a retry cancel dialog when Aslan installation fails
 		title = _("File in Use")
 		if winUser.MessageBox(None, message, title, winUser.MB_RETRYCANCEL) == winUser.IDRETRY:
 			return doInstall(
@@ -259,8 +259,8 @@ def doInstall(
 	if res != 0:
 		log.error("Installation failed: %s" % res)
 		gui.messageBox(
-			# Translators: The message displayed when an error occurs during installation of NVDA.
-			_("The installation of NVDA failed. Please check the Log Viewer for more information."),
+			# Translators: The message displayed when an error occurs during installation of Aslan.
+			_("The installation of Aslan failed. Please check the Log Viewer for more information."),
 			# Translators: The title of a dialog presented when an error occurs.
 			_("Error"),
 			wx.OK | wx.ICON_ERROR,
@@ -272,14 +272,14 @@ def doInstall(
 		_showPostInstallDialog(isUpdate=isUpdate, startAfterInstall=startAfterInstall)
 		return
 
-	newNVDA = None
+	newAslan = None
 	if startAfterInstall:
-		newNVDA = core.NewNVDAInstance(
-			filePath=os.path.join(WritePaths.defaultInstallDir, "nvda.exe"),
+		newAslan = core.NewAslanInstance(
+			filePath=os.path.join(WritePaths.defaultInstallDir, "aslan.exe"),
 			parameters=_generate_executionParameters(),
 		)
-	if not core.triggerNVDAExit(newNVDA):
-		log.error("NVDA already in process of exiting, this indicates a logic error.")
+	if not core.triggerAslanExit(newAslan):
+		log.error("Aslan already in process of exiting, this indicates a logic error.")
 
 
 def _generate_executionParameters() -> str:
@@ -293,7 +293,7 @@ def _generate_executionParameters() -> str:
 	# We start from len-2 as the -c option must have a value, so it is guaranteed to take up 2 items in argv.
 	for i in range(len(sys.argv) - 2, 0, -1):
 		if sys.argv[i] in ("-c", "--config-path"):
-			# We don't absolutise -c here because if it was provided by a previous copy of NVDA this will
+			# We don't absolutise -c here because if it was provided by a previous copy of Aslan this will
 			# have already been done, and if it was provided by the user absolutising it now will result in
 			# it being in a temporary directory, which is almost certainly not what they want.
 			executeParams.extend(("--config-path", sys.argv[i + 1]))
@@ -327,13 +327,13 @@ class InstallerDialog(
 	gui.contextHelp.ContextHelpMixin,
 	wx.Dialog,  # wxPython does not seem to call base class initializer, put last in MRO
 ):
-	helpId = "InstallingNVDA"
+	helpId = "InstallingAslan"
 
 	def __init__(self, parent, isUpdate):
 		self.isUpdate = isUpdate
 		self.textWrapWidth = 600
-		# Translators: The title of the Install NVDA dialog.
-		super().__init__(parent, title=_("Install NVDA"))
+		# Translators: The title of the Install Aslan dialog.
+		super().__init__(parent, title=_("Install Aslan"))
 
 		import addonHandler
 		from addonStore.models.version import (
@@ -350,17 +350,17 @@ class InstallerDialog(
 		mainSizer = self.mainSizer = wx.BoxSizer(wx.VERTICAL)
 		sHelper = guiHelper.BoxSizerHelper(self, orientation=wx.VERTICAL)
 
-		# Translators: An informational message in the Install NVDA dialog.
-		msg = _("To install NVDA to your hard drive, please press the Continue button.")
+		# Translators: An informational message in the Install Aslan dialog.
+		msg = _("To install Aslan to your hard drive, please press the Continue button.")
 		if self.isUpdate:
 			msg += " " + _(
-				# Translators: An informational message in the Install NVDA dialog.
-				"A previous copy of NVDA has been found on your system. This copy will be updated.",
+				# Translators: An informational message in the Install Aslan dialog.
+				"A previous copy of Aslan has been found on your system. This copy will be updated.",
 			)
 			if not os.path.isdir(WritePaths.defaultInstallDir):
 				msg += " " + _(
-					# Translators: a message in the installer telling the user NVDA is now located in a different place.
-					"The installation path for NVDA has changed. it will now  be installed in {path}",
+					# Translators: a message in the installer telling the user Aslan is now located in a different place.
+					"The installation path for Aslan has changed. it will now  be installed in {path}",
 				).format(path=WritePaths.defaultInstallDir)
 		if shouldAskAboutAddons:
 			msg += "\n\n" + getAddonCompatibilityMessage()
@@ -377,14 +377,14 @@ class InstallerDialog(
 			self.bindHelpEvent("InstallWithIncompatibleAddons", self.confirmationCheckbox)
 			self.confirmationCheckbox.SetFocus()
 
-		# Translators: The label for a group box containing the NVDA installation dialog options.
+		# Translators: The label for a group box containing the Aslan installation dialog options.
 		optionsLabel = _("Options")
 		optionsSizer = sHelper.addItem(wx.StaticBoxSizer(wx.VERTICAL, self, label=optionsLabel))
 		optionsHelper = guiHelper.BoxSizerHelper(self, sizer=optionsSizer)
 		optionsBox = optionsSizer.GetStaticBox()
 
-		# Translators: The label of a checkbox option in the Install NVDA dialog.
-		startOnLogonText = _("Use NVDA during sign-in")
+		# Translators: The label of a checkbox option in the Install Aslan dialog.
+		startOnLogonText = _("Use Aslan during sign-in")
 		self.startOnLogonCheckbox = optionsHelper.addItem(wx.CheckBox(optionsBox, label=startOnLogonText))
 		self.bindHelpEvent("StartAtWindowsLogon", self.startOnLogonCheckbox)
 		if globalVars.appArgs.enableStartOnLogon is not None:
@@ -394,12 +394,12 @@ class InstallerDialog(
 
 		shortcutIsPrevInstalled = installer.isDesktopShortcutInstalled()
 		if self.isUpdate and shortcutIsPrevInstalled:
-			# Translators: The label of a checkbox option in the Install NVDA dialog.
+			# Translators: The label of a checkbox option in the Install Aslan dialog.
 			keepShortCutText = _("&Keep existing desktop shortcut")
 			keepShortCutBox = wx.CheckBox(optionsBox, label=keepShortCutText)
 			self.createDesktopShortcutCheckbox = optionsHelper.addItem(keepShortCutBox)
 		else:
-			# Translators: The label of the option to create a desktop shortcut in the Install NVDA dialog.
+			# Translators: The label of the option to create a desktop shortcut in the Install Aslan dialog.
 			# If the shortcut key has been changed for this locale,
 			# this change must also be reflected here.
 			createShortcutText = _("Create &desktop icon and shortcut key (control+alt+n)")
@@ -408,7 +408,7 @@ class InstallerDialog(
 		self.bindHelpEvent("CreateDesktopShortcut", self.createDesktopShortcutCheckbox)
 		self.createDesktopShortcutCheckbox.Value = shortcutIsPrevInstalled if self.isUpdate else True
 
-		# Translators: The label of a checkbox option in the Install NVDA dialog.
+		# Translators: The label of a checkbox option in the Install Aslan dialog.
 		createPortableText = _("Copy &portable configuration to current user account")
 		createPortableBox = wx.CheckBox(optionsBox, label=createPortableText)
 		self.copyPortableConfigCheckbox = optionsHelper.addItem(createPortableBox)
@@ -475,26 +475,26 @@ class InstallingOverNewerVersionDialog(
 	gui.contextHelp.ContextHelpMixin,
 	wx.Dialog,  # wxPython does not seem to call base class initializer, put last in MRO
 ):
-	helpId = "InstallingNVDA"
+	helpId = "InstallingAslan"
 
 	_DOWNGRADE_WARNING = _(
-		# Translators: A warning presented when the user attempts to downgrade NVDA
+		# Translators: A warning presented when the user attempts to downgrade Aslan
 		# to an older version.
-		"You are attempting to install an earlier version of NVDA "
+		"You are attempting to install an earlier version of Aslan "
 		"than the version currently installed. "
 		"If you really wish to revert to an earlier version, "
 		"you should first cancel this installation "
-		"and completely uninstall NVDA before installing the earlier version.",
+		"and completely uninstall Aslan before installing the earlier version.",
 	)
 
 	_UNKNOWN_WARNING = _(
 		# Translators: A warning presented when the installer is unable to determine
-		# the state of the current NVDA installation.
-		"An existing NVDA installation has been detected, "
+		# the state of the current Aslan installation.
+		"An existing Aslan installation has been detected, "
 		"but its version cannot be determined. "
-		"If you are attempting to install an earlier version of NVDA, "
+		"If you are attempting to install an earlier version of Aslan, "
 		"you should first cancel this installation "
-		"and completely uninstall NVDA before installing the earlier version.",
+		"and completely uninstall Aslan before installing the earlier version.",
 	)
 
 	def __init__(self, installState: ComparisonState = ComparisonState.DOWNGRADE):
@@ -547,19 +547,19 @@ class PortableCopyOverNewerVersionDialog(InstallingOverNewerVersionDialog):
 	helpId = "CreatingAPortableCopy"
 
 	_DOWNGRADE_WARNING = _(
-		# Translators: A warning presented when the user attempts to downgrade NVDA
+		# Translators: A warning presented when the user attempts to downgrade Aslan
 		# to an older version.
-		"You are attempting to replace an existing portable copy of NVDA with an earlier version. "
-		"Downgrading NVDA is not recommended. "
+		"You are attempting to replace an existing portable copy of Aslan with an earlier version. "
+		"Downgrading Aslan is not recommended. "
 		"You should cancel this operation and create a new portable copy instead. ",
 	)
 
 	_UNKNOWN_WARNING = _(
 		# Translators: A warning presented when the installer is unable to determine
-		# the state of the current NVDA installation.
-		"An existing copy of NVDA has been detected in the chosen directory, "
+		# the state of the current Aslan installation.
+		"An existing copy of Aslan has been detected in the chosen directory, "
 		"but its version cannot be determined. "
-		"If you are attempting to downgrade to an earlier version of NVDA, "
+		"If you are attempting to downgrade to an earlier version of Aslan, "
 		"you should cancel this operation and create a new portable copy. ",
 	)
 
@@ -577,8 +577,8 @@ def showInstallGui():
 	gui.mainFrame.postPopup()
 
 
-def _nvdaExistsInDir(directory: str) -> bool:
-	return os.path.exists(os.path.join(directory, "nvda.exe"))
+def _aslanExistsInDir(directory: str) -> bool:
+	return os.path.exists(os.path.join(directory, "aslan.exe"))
 
 
 def _warnAndConfirmForNonEmptyDirectory(portableDirectory: str) -> bool:
@@ -593,16 +593,16 @@ def _warnAndConfirmForNonEmptyDirectory(portableDirectory: str) -> bool:
 	if not any(os.scandir(portableDirectory)):
 		# The directory is empty, so we can proceed.
 		return True
-	if _nvdaExistsInDir(portableDirectory):
+	if _aslanExistsInDir(portableDirectory):
 		if wx.NO == gui.messageBox(
 			_(
 				# Translators: The message displayed when the user has specified a destination directory
-				# that already has a portable copy in the Create Portable NVDA dialog.
+				# that already has a portable copy in the Create Portable Aslan dialog.
 				"A portable copy already exists in the directory '{portableDirectory}'. "
 				"Do you want to update it?",
 			).format(portableDirectory=portableDirectory),
 			# Translators: The title of a dialog presented when the user has specified a destination directory
-			# that already has a portable copy in the Create Portable NVDA dialog.
+			# that already has a portable copy in the Create Portable Aslan dialog.
 			_("Portable Copy Exists"),
 			wx.YES_NO | wx.ICON_QUESTION,
 		):
@@ -619,13 +619,13 @@ def _warnAndConfirmForNonEmptyDirectory(portableDirectory: str) -> bool:
 	return wx.YES == gui.messageBox(
 		_(
 			# Translators: The message displayed when the user has specified a destination directory
-			# that already exists in the Create Portable NVDA dialog.
+			# that already exists in the Create Portable Aslan dialog.
 			"The specified directory '{portableDirectory}' is not empty. "
 			"Proceeding will delete and replace existing files in the directory. "
 			"Do you want to overwrite the contents of this folder? ",
 		).format(portableDirectory=portableDirectory),
 		# Translators: The title of a dialog presented when the user has specified a destination directory
-		# that already exists in the Create Portable NVDA dialog.
+		# that already exists in the Create Portable Aslan dialog.
 		_("Directory Exists"),
 		wx.YES_NO | wx.ICON_QUESTION,
 	)
@@ -638,20 +638,20 @@ def _warnAndConfirmIfInstallingRemotely(isUpdate: bool) -> bool:
 				gui.mainFrame,
 				(
 					_(
-						# Translators: Message shown to users when attempting to update NVDA
-						# on a computer which is being remotely controlled via NVDA Remote Access
-						"Updating NVDA when connected to NVDA Remote Access as the controlled computer is not recommended. ",
+						# Translators: Message shown to users when attempting to update Aslan
+						# on a computer which is being remotely controlled via Aslan Remote Access
+						"Updating Aslan when connected to Aslan Remote Access as the controlled computer is not recommended. ",
 					)
 					if isUpdate
 					else _(
-						# Translators: Message shown to users when attempting to install NVDA
-						# on a computer which is being remotely controlled via NVDA Remote Access
-						"Installing NVDA when connected to NVDA Remote Access as the controlled computer is not recommended. ",
+						# Translators: Message shown to users when attempting to install Aslan
+						# on a computer which is being remotely controlled via Aslan Remote Access
+						"Installing Aslan when connected to Aslan Remote Access as the controlled computer is not recommended. ",
 					)
 				)
 				+ _(
-					# Translators: Message shown to users when attempting to install or update NVDA from the launcher
-					# on a computer which is being remotely controlled via NVDA Remote Access
+					# Translators: Message shown to users when attempting to install or update Aslan from the launcher
+					# on a computer which is being remotely controlled via Aslan Remote Access
 					"You will be unable to respond to User Account Control (UAC) prompts from the controlling computer. "
 					"You should only proceed if you have physical access to the controlled computer.\n\n"
 					"Are you sure you want to continue?",
@@ -670,14 +670,14 @@ def _warnAndConfirmIfInstallingRemotely(isUpdate: bool) -> bool:
 
 def _getUniqueNewPortableDirectory(basePath: str) -> str:
 	"""
-	Generate a new directory name for a portable copy of NVDA.
+	Generate a new directory name for a portable copy of Aslan.
 	:param basePath: The base path to use.
 	:return: A new directory name.
 	"""
-	newPortableDirectory = os.path.join(basePath, "NVDA")
+	newPortableDirectory = os.path.join(basePath, "Aslan")
 	i = 1
 	while os.path.exists(newPortableDirectory):
-		newPortableDirectory = os.path.join(basePath, f"NVDA_{i}")
+		newPortableDirectory = os.path.join(basePath, f"Aslan_{i}")
 		i += 1
 	return newPortableDirectory
 
@@ -689,19 +689,19 @@ class PortableCreaterDialog(
 	helpId = "CreatePortableCopy"
 
 	def __init__(self, parent):
-		# Translators: The title of the Create Portable NVDA dialog.
-		super().__init__(parent, title=_("Create Portable NVDA"))
+		# Translators: The title of the Create Portable Aslan dialog.
+		super().__init__(parent, title=_("Create Portable Aslan"))
 		mainSizer = self.mainSizer = wx.BoxSizer(wx.VERTICAL)
 		sHelper = guiHelper.BoxSizerHelper(self, orientation=wx.VERTICAL)
 
 		dialogCaption = _(
-			# Translators: An informational message displayed in the Create Portable NVDA dialog.
-			"To create a portable copy of NVDA, please select the path and other options and then press Continue",
+			# Translators: An informational message displayed in the Create Portable Aslan dialog.
+			"To create a portable copy of Aslan, please select the path and other options and then press Continue",
 		)
 		sHelper.addItem(wx.StaticText(self, label=dialogCaption))
 
 		# Translators: The label of a grouping containing controls to select the destination directory
-		# in the Create Portable NVDA dialog.
+		# in the Create Portable Aslan dialog.
 		directoryGroupText = _("Portable directory:")
 		groupSizer = wx.StaticBoxSizer(wx.VERTICAL, self, label=directoryGroupText)
 		groupHelper = sHelper.addItem(guiHelper.BoxSizerHelper(self, sizer=groupSizer))
@@ -709,7 +709,7 @@ class PortableCreaterDialog(
 		# Translators: The label of a button to browse for a directory.
 		browseText = _("Browse...")
 		# Translators: The title of the dialog presented when browsing for the
-		# destination directory when creating a portable copy of NVDA.
+		# destination directory when creating a portable copy of Aslan.
 		dirDialogTitle = _("Select portable directory")
 		directoryPathHelper = guiHelper.PathSelectionHelper(groupBox, browseText, dirDialogTitle)
 		directoryEntryControl = groupHelper.addItem(directoryPathHelper)
@@ -717,18 +717,18 @@ class PortableCreaterDialog(
 		if globalVars.appArgs.portablePath:
 			self.portableDirectoryEdit.Value = globalVars.appArgs.portablePath
 
-		# Translators: The label of a checkbox option in the Create Portable NVDA dialog.
+		# Translators: The label of a checkbox option in the Create Portable Aslan dialog.
 		newFolderText = _("Create a &new folder for the portable copy")
 		self.newFolderCheckBox = sHelper.addItem(wx.CheckBox(self, label=newFolderText))
 		self.newFolderCheckBox.Value = True
 
-		# Translators: The label of a checkbox option in the Create Portable NVDA dialog.
+		# Translators: The label of a checkbox option in the Create Portable Aslan dialog.
 		copyConfText = _("Copy current &user configuration")
 		self.copyUserConfigCheckbox = sHelper.addItem(wx.CheckBox(self, label=copyConfText))
 		self.copyUserConfigCheckbox.Value = False
 		if globalVars.appArgs.launcher:
 			self.copyUserConfigCheckbox.Disable()
-		# Translators: The label of a checkbox option in the Create Portable NVDA dialog.
+		# Translators: The label of a checkbox option in the Create Portable Aslan dialog.
 		startAfterCreateText = _("&Start the new portable copy after creation")
 		self.startAfterCreateCheckbox = sHelper.addItem(wx.CheckBox(self, label=startAfterCreateText))
 		self.startAfterCreateCheckbox.Value = False
@@ -753,7 +753,7 @@ class PortableCreaterDialog(
 		if not self.portableDirectoryEdit.Value:
 			gui.messageBox(
 				# Translators: The message displayed when the user has not specified a destination directory
-				# in the Create Portable NVDA dialog.
+				# in the Create Portable Aslan dialog.
 				_("Please specify a directory in which to create the portable copy."),
 				# Translators: the title of an error dialog.
 				_("Error"),
@@ -765,14 +765,14 @@ class PortableCreaterDialog(
 			gui.messageBox(
 				_(
 					# Translators: The message displayed when the user has not specified an absolute destination directory
-					# in the Create Portable NVDA dialog.
+					# in the Create Portable Aslan dialog.
 					"Please specify the absolute path where the portable copy should be created. "
 					"It must start with a drive letter (e.g. C:). "
 					"It may include system variables (e.g. %temp%, %homepath%) as placeholders for parts of the path.\n"
 					"Current path: {path}. ",
 				).format(path=expandedPortableDirectory),
 				# Translators: The message title displayed when the user has not specified an absolute
-				# destination directory in the Create Portable NVDA dialog.
+				# destination directory in the Create Portable Aslan dialog.
 				_("Error"),
 				wx.OK | wx.ICON_ERROR,
 			)
@@ -810,7 +810,7 @@ def doCreatePortable(
 	warnForNonEmptyDirectory: bool = True,
 ) -> None:
 	"""
-	Create a portable copy of NVDA.
+	Create a portable copy of Aslan.
 	:param portableDirectory: The directory in which to create the portable copy.
 	:param copyUserConfig: Whether to copy the current user configuration.
 	:param silent: Whether to suppress messages.
@@ -818,15 +818,15 @@ def doCreatePortable(
 	:param warnForNonEmptyDirectory: Whether to warn if the destination directory is not empty.
 	"""
 	if warnForNonEmptyDirectory and not _warnAndConfirmForNonEmptyDirectory(portableDirectory):
-		# Translators: The message displayed when the user cancels the creation of a portable copy of NVDA.
+		# Translators: The message displayed when the user cancels the creation of a portable copy of Aslan.
 		ui.message(_("Portable copy creation cancelled."))
 		return
 	d = gui.IndeterminateProgressDialog(
 		gui.mainFrame,
-		# Translators: The title of the dialog presented while a portable copy of NVDA is being created.
+		# Translators: The title of the dialog presented while a portable copy of Aslan is being created.
 		_("Creating Portable Copy"),
-		# Translators: The message displayed while a portable copy of NVDA is being created.
-		_("Please wait while a portable copy of NVDA is created."),
+		# Translators: The message displayed while a portable copy of Aslan is being created.
+		_("Please wait while a portable copy of Aslan is created."),
 	)
 	try:
 		systemUtils.ExecAndPump(installer.createPortableCopy, portableDirectory, copyUserConfig)
@@ -834,17 +834,17 @@ def doCreatePortable(
 		log.error("Failed to create portable copy", exc_info=True)
 		d.done()
 		if isinstance(e, installer.RetriableFailure):
-			# Translators: a message dialog asking to retry or cancel when NVDA portable copy creation fails
-			message = _("NVDA is unable to remove or overwrite a file.")
-			# Translators: the title of a retry cancel dialog when NVDA portable copy creation  fails
+			# Translators: a message dialog asking to retry or cancel when Aslan portable copy creation fails
+			message = _("Aslan is unable to remove or overwrite a file.")
+			# Translators: the title of a retry cancel dialog when Aslan portable copy creation  fails
 			title = _("File in Use")
 			if winUser.MessageBox(None, message, title, winUser.MB_RETRYCANCEL) == winUser.IDRETRY:
 				return doCreatePortable(portableDirectory, copyUserConfig, silent, startAfterCreate)
 		gui.messageBox(
-			# Translators: The message displayed when an error occurs while creating a portable copy of NVDA.
+			# Translators: The message displayed when an error occurs while creating a portable copy of Aslan.
 			# {error} will be replaced with the specific error message.
 			_("Failed to create portable copy: {error}.").format(error=e),
-			# Translators: Title of an error dialog shown when an error occurs while creating a portable copy of NVDA.
+			# Translators: Title of an error dialog shown when an error occurs while creating a portable copy of Aslan.
 			_("Error"),
 			wx.OK | wx.ICON_ERROR,
 		)
@@ -852,19 +852,19 @@ def doCreatePortable(
 	d.done()
 	if not silent:
 		gui.messageBox(
-			# Translators: The message displayed when a portable copy of NVDA has been successfully created.
+			# Translators: The message displayed when a portable copy of Aslan has been successfully created.
 			# {dir} will be replaced with the destination directory.
-			_("Successfully created a portable copy of NVDA at {dir}").format(dir=portableDirectory),
-			# Translators: Title of a dialog shown when a portable copy of NVDA is created.
+			_("Successfully created a portable copy of Aslan at {dir}").format(dir=portableDirectory),
+			# Translators: Title of a dialog shown when a portable copy of Aslan is created.
 			_("Success"),
 		)
 	startAfterCreate = startAfterCreate and not isRunningElevated()
 	if silent or startAfterCreate:
-		newNVDA = None
+		newAslan = None
 		if startAfterCreate:
-			newNVDA = core.NewNVDAInstance(
-				filePath=os.path.join(portableDirectory, "nvda.exe"),
+			newAslan = core.NewAslanInstance(
+				filePath=os.path.join(portableDirectory, "aslan.exe"),
 				parameters=None,
 			)
-		if not core.triggerNVDAExit(newNVDA):
-			log.error("NVDA already in process of exiting, this indicates a logic error.")
+		if not core.triggerAslanExit(newAslan):
+			log.error("Aslan already in process of exiting, this indicates a logic error.")

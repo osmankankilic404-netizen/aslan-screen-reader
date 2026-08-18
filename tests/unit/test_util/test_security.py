@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2022 NV Access Limited.
@@ -14,7 +14,7 @@ from typing import (
 import unittest
 from unittest.mock import patch
 
-from ..objectProvider import PlaceholderNVDAObject
+from ..objectProvider import PlaceholderAslanObject
 import treeInterceptorHandler
 
 from utils.security import (
@@ -37,11 +37,11 @@ class _MoveWindow:
 
 class Test_objectBelowLockScreenAndWindowsIsLocked(unittest.TestCase):
 	"""
-	Tests for objects which are not NVDAObjects being passed to
+	Tests for objects which are not AslanObjects being passed to
 	objectBelowLockScreenAndWindowsIsLocked.
 
 	Several callers, e.g. braille.handler.handleUpdate and braille.handler.handleCaretMove,
-	are called with a TreeInterceptor (such as a virtual buffer) rather than an NVDAObject.
+	are called with a TreeInterceptor (such as a virtual buffer) rather than an AslanObject.
 	TreeInterceptors do not implement isBelowLockScreen (#18861).
 	"""
 
@@ -49,13 +49,13 @@ class Test_objectBelowLockScreenAndWindowsIsLocked(unittest.TestCase):
 		# isLockScreenModeActive is imported into both modules by name.
 		self._patches = [
 			patch("utils.security.isLockScreenModeActive", lambda: True),
-			patch("NVDAObjects.isLockScreenModeActive", lambda: True),
+			patch("AslanObjects.isLockScreenModeActive", lambda: True),
 			# Avoid depending on the z-order of real windows.
-			patch("NVDAObjects._isObjectBelowLockScreen", lambda obj: True),
+			patch("AslanObjects._isObjectBelowLockScreen", lambda obj: True),
 		]
 		for p in self._patches:
 			p.start()
-		self._rootObj = PlaceholderNVDAObject()
+		self._rootObj = PlaceholderAslanObject()
 		return super().setUp()
 
 	def tearDown(self) -> None:
@@ -63,17 +63,17 @@ class Test_objectBelowLockScreenAndWindowsIsLocked(unittest.TestCase):
 			p.stop()
 		return super().tearDown()
 
-	def test_NVDAObject(self):
-		"""An NVDAObject below the lock screen is detected as such."""
+	def test_AslanObject(self):
+		"""An AslanObject below the lock screen is detected as such."""
 		self.assertTrue(objectBelowLockScreenAndWindowsIsLocked(self._rootObj))
 
 	def test_treeInterceptor(self):
-		"""A TreeInterceptor is checked via its root NVDAObject."""
+		"""A TreeInterceptor is checked via its root AslanObject."""
 		treeInterceptor = treeInterceptorHandler.TreeInterceptor(self._rootObj)
 		self.assertTrue(objectBelowLockScreenAndWindowsIsLocked(treeInterceptor))
 
 	def test_unhandledObject(self):
-		"""An object which is neither an NVDAObject nor has a root NVDAObject is treated as safe."""
+		"""An object which is neither an AslanObject nor has a root AslanObject is treated as safe."""
 		self.assertFalse(objectBelowLockScreenAndWindowsIsLocked(object()))
 
 

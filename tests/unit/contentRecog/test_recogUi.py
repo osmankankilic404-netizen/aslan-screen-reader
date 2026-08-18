@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Cary-rowen
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -82,7 +82,7 @@ class TestRecognize(unittest.TestCase):
 		results = []
 
 		with patch.object(recogUi, "_captureImage", side_effect=cancellation):
-			recogUi.RefreshableRecogResultNVDAObject._recognize(result, results.append)
+			recogUi.RefreshableRecogResultAslanObject._recognize(result, results.append)
 
 		self.assertEqual(results, [cancellation])
 		recognizer.recognize.assert_not_called()
@@ -93,7 +93,7 @@ class TestScreenCurtainEnableBlock(unittest.TestCase):
 		focusObj = _FakeRefreshableRecogResult(allowAutoRefresh=True)
 
 		with (
-			patch.object(recogUi, "RefreshableRecogResultNVDAObject", _FakeRefreshableRecogResult),
+			patch.object(recogUi, "RefreshableRecogResultAslanObject", _FakeRefreshableRecogResult),
 			patch.object(recogUi, "_isWgcCaptureSupported", side_effect=(False, True)),
 		):
 			self.assertTrue(recogUi._shouldBlockScreenCurtainEnable(focusObj))
@@ -102,5 +102,5 @@ class TestScreenCurtainEnableBlock(unittest.TestCase):
 	def test_nonAutoRefreshRecognitionDoesNotBlockScreenCurtain(self):
 		focusObj = _FakeRefreshableRecogResult(allowAutoRefresh=False)
 
-		with patch.object(recogUi, "RefreshableRecogResultNVDAObject", _FakeRefreshableRecogResult):
+		with patch.object(recogUi, "RefreshableRecogResultAslanObject", _FakeRefreshableRecogResult):
 			self.assertFalse(recogUi._shouldBlockScreenCurtainEnable(focusObj))

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2021-2023 NV Access Limited, Cyrille Bougot
@@ -11,7 +11,7 @@ from utils.displayString import DisplayStringStrEnum
 
 
 class TextPosition(DisplayStringStrEnum):
-	"""Values to use for 'text-position' NVDA format field.
+	"""Values to use for 'text-position' Aslan format field.
 	These describe the vertical position of the text with respect to the base line.
 	"""
 
@@ -103,7 +103,7 @@ class FontSize:
 
 
 class TextAlign(DisplayStringStrEnum):
-	"""Values to use for 'text-align' NVDA format field.
+	"""Values to use for 'text-align' Aslan format field.
 	These describe the horizontal paragraph position.
 	"""
 
@@ -150,7 +150,7 @@ _textAlignLabels: Dict[TextAlign, str] = {
 
 
 class VerticalTextAlign(DisplayStringStrEnum):
-	"""Values to use for 'vertical-align' NVDA format field.
+	"""Values to use for 'vertical-align' Aslan format field.
 	These describe the vertical text position, e.g. in a table cell.
 	"""
 

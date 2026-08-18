@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -8,7 +8,7 @@ This module contains aliases for symbols used before controlTypes was refactored
 These values should not be extended, they are for backwards compatibility with add-ons only.
 It is recommended that add-ons convert to use the Role, and State symbols directly rather than
 continuing to rely on the aliases (I.E. 'ROLE_*' and 'STATE_*' symbols) this module provides.
-Using controlTypes.Role and controlTypes.State will make your add-on code consistent with NVDA core.
+Using controlTypes.Role and controlTypes.State will make your add-on code consistent with Aslan core.
 """
 
 import typing

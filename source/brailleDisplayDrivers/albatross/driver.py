@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2023-25 NV Access Limited, Burman's Computer and Education Ltd., Leonard de Ruijter
@@ -479,8 +479,8 @@ class BrailleDisplayDriver(braille.display.driver.BrailleDisplayDriver):
 						_(
 							# Translators: A message when number of status cells must be changed
 							# for a braille display driver
-							"To use an Albatross with NVDA, change the number of status cells in the Albatross's internal menu "
-							"to at most {maxCells}, and restart the Albatross and NVDA if needed.",
+							"To use an Albatross with Aslan, change the number of status cells in the Albatross's internal menu "
+							"to at most {maxCells}, and restart the Albatross and Aslan if needed.",
 						).format(maxCells=MAX_STATUS_CELLS_ALLOWED),
 					)
 					self._disableConnection()
@@ -605,7 +605,7 @@ class BrailleDisplayDriver(braille.display.driver.BrailleDisplayDriver):
 		All other keys are switched with corresponding other side keys.
 
 		- bit 2: place of status cells; 0 = left, 1 = right. Not implemented.
-		NVDA does not use status cells at the moment.
+		Aslan does not use status cells at the moment.
 
 		- bit 3: all keys act as right side keys; 0 = no, 1 = yes.
 		Left, right, down3, up2, routing and secondRouting keys are not affected.
@@ -622,7 +622,7 @@ class BrailleDisplayDriver(braille.display.driver.BrailleDisplayDriver):
 		All other right side keys are assigned to corresponding left side keys.
 
 		- bits 4 - 7: number of status cells. Not implemented.
-		NVDA does not use status cells at the moment.
+		Aslan does not use status cells at the moment.
 
 		@param data: Settings byte
 		"""

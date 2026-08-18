@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -139,7 +139,7 @@ def taskSwitchToItemMatching(targetWindowNamePattern: _re.Pattern, maxWindowsToT
 		spy.wait_for_speech_to_finish(speechStartedIndex=nextIndex)
 		raise AssertionError(
 			f"Unable to find Window in task switcher matching: {targetWindowNamePattern}\n"
-			"See NVDA log for dump of all speech.",
+			"See Aslan log for dump of all speech.",
 		)
 	else:
 		builtIn.log("Found, attempting to select.", level="DEBUG")

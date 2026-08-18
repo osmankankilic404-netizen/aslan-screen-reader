@@ -1,5 +1,5 @@
 # vision/visionHandlerExtensionPoints.py
-# A  part of NonVisual Desktop Access (NVDA)
+# A  part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2018-2019 NV Access Limited, Babbage B.V.
@@ -16,13 +16,13 @@ from dataclasses import dataclass, field
 @dataclass(repr=False, frozen=True)
 class EventExtensionPoints:
 	"""Data class containing extension points that will be used to notify
-	vision enhancement providers about occuring events, particularly for NVDA Objects.
+	vision enhancement providers about occuring events, particularly for Aslan Objects.
 	Though an instance of this class is created when initializing the vision handler,
 	it should never be accessed from the vision handler directly.
 	Instead, vision enhancement providers should implement a "registerEventExtensionPoints" method,
 	taking an instance of this class as the only argument,
 	performing registration to the extension points it is interested in.
-	For an example, see the L{visionEnhancementProviders.NVDAHighlighter} module.
+	For an example, see the L{visionEnhancementProviders.AslanHighlighter} module.
 	"""
 
 	#: Notifies a vision enhancement provider when an object property has changed.
@@ -32,24 +32,24 @@ class EventExtensionPoints:
 	#: when the name of the object has changed.
 	#: Handlers are called with two  arguments.
 	#: @param obj: The object that received a property change.
-	#: @type obj: L{NVDAObjects.NVDAObject}
+	#: @type obj: L{AslanObjects.AslanObject}
 	#: @param property: The object's property that changed, e.g. "name" or "description".
 	#: @type property: str
 	post_objectUpdate: Action = field(default_factory=Action, init=False)
-	#: Notifies a vision enhancement provider when the focused NVDAObject has changed.
+	#: Notifies a vision enhancement provider when the focused AslanObject has changed.
 	#: This allows a vision enhancement provider to take an action when the focus changed.
 	#: For example, a magnifier can track the magnified area of the screen to this object.
 	#: Handlers are called with one argument.
 	#: @param obj: The object that received focus.
-	#: @type obj: L{NVDAObjects.NVDAObject}
+	#: @type obj: L{AslanObjects.AslanObject}
 	post_focusChange: Action = field(default_factory=Action, init=False)
-	#: Notifies a vision enhancement provider when the foreground NVDAObject has changed.
+	#: Notifies a vision enhancement provider when the foreground AslanObject has changed.
 	#: This allows a vision enhancement provider to take an action
 	#: when another window takes the foreground.
 	#: For example, a magnifier can track the magnified area of the screen to this object.
 	#: Handlers are called with one argument.
 	#: @param obj: The object that became the foreground object.
-	#: @type obj: L{NVDAObjects.NVDAObject}
+	#: @type obj: L{AslanObjects.AslanObject}
 	post_foregroundChange: Action = field(default_factory=Action, init=False)
 	#: Notifies a vision enhancement provider when a physical caret has moved.
 	#: This allows a vision enhancement provider to take an action
@@ -60,7 +60,7 @@ class EventExtensionPoints:
 	#: unless they delegate caret change handling to a separate thread.
 	#: Handlers are called with one argument.
 	#: @param obj: The object in which the caret position changed.
-	#: @type obj: L{NVDAObjects.NVDAObject}
+	#: @type obj: L{AslanObjects.AslanObject}
 	post_caretMove: Action = field(default_factory=Action, init=False)
 	#: Notifies a vision enhancement provider when a virtual caret has moved.
 	#: This allows a vision enhancement provider to take an action
@@ -97,11 +97,11 @@ class EventExtensionPoints:
 	#: Notifies a vision enhancement provider when the mouse has moved.
 	#: This allows a vision enhancement provider to take an action for mouse moves.
 	#: For example, a magnifier can track the magnified area of the screen to the position of the mouse.
-	#: Note that, by the nature of NVDA's mouse tracking implementation,
+	#: Note that, by the nature of Aslan's mouse tracking implementation,
 	#: This extension point is only called once per core cycle.
 	#: Handlers are called with one argument.
 	#: @param obj: The object that received focus.
-	#: @type obj: L{NVDAObjects.NVDAObject}
+	#: @type obj: L{AslanObjects.AslanObject}
 	post_mouseMove: Action = field(default_factory=Action, init=False)
 	#: Notifies a vision enhancement provider at the end of every core cycle.
 	#: This allows a vision enhancement provider to rate limit certain actions.

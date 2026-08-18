@@ -1,17 +1,17 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2025 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton and others.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""Message serialization for remote NVDA communication.
+"""Message serialization for remote Aslan communication.
 
-This module handles serializing and deserializing messages between NVDA instances.
-It provides special handling for speech commands and other NVDA-specific data types.
+This module handles serializing and deserializing messages between Aslan instances.
+It provides special handling for speech commands and other Aslan-specific data types.
 
 Module Features
 -------------
 * A generic :class:`.Serializer` interface
-* A concrete :class:`.JSONSerializer` implementation for NVDA Remote messages
+* A concrete :class:`.JSONSerializer` implementation for Aslan Remote messages
 
 Supported Data Types
 ------------------
@@ -36,7 +36,7 @@ JSONDict = Dict[str, Any]
 class Serializer(metaclass=ABCMeta):
 	"""Base class for message serialization.
 
-	Defines the interface for serializing messages between NVDA instances.
+	Defines the interface for serializing messages between Aslan instances.
 	Concrete implementations should handle converting Python objects to/from
 	a wire format suitable for network transmission.
 
@@ -69,10 +69,10 @@ class Serializer(metaclass=ABCMeta):
 
 
 class JSONSerializer(Serializer):
-	"""JSON-based message serializer with NVDA-specific type handling.
+	"""JSON-based message serializer with Aslan-specific type handling.
 
 	Implements message serialization using JSON encoding with special handling for
-	NVDA speech commands and other custom types. Messages are encoded as UTF-8
+	Aslan speech commands and other custom types. Messages are encoded as UTF-8
 	with newline separation.
 	"""
 
@@ -83,7 +83,7 @@ class JSONSerializer(Serializer):
 		"""Serialize a message to JSON bytes.
 
 		Converts message type and payload to JSON format, handling Enum types
-		and using CustomEncoder for NVDA-specific objects.
+		and using CustomEncoder for Aslan-specific objects.
 
 		:param type: Message type identifier (string or Enum)
 		:param obj: Message payload to serialize
@@ -101,7 +101,7 @@ class JSONSerializer(Serializer):
 		"""Deserialize JSON message bytes.
 
 		Converts JSON bytes back to a dict, using as_sequence hook to
-		reconstruct NVDA speech commands.
+		reconstruct Aslan speech commands.
 
 		:param data: UTF-8 encoded JSON bytes
 		:return: Dict containing the deserialized message
@@ -117,7 +117,7 @@ SEQUENCE_CLASSES = (
 
 
 class SpeechCommandJSONEncoder(json.JSONEncoder):
-	"""Custom JSON encoder for NVDA speech commands.
+	"""Custom JSON encoder for Aslan speech commands.
 
 	Handles serialization of speech command objects by converting them
 	to a list containing their class name and instance variables.

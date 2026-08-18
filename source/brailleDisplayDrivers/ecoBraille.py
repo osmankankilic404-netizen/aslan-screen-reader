@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 # brailleDisplayDrivers/ecoBraille.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2014-2015 ONCE-CIDAT <cidat.id@once.es>
@@ -74,7 +74,7 @@ class ecoTypes:
 def eco_in_init(dev: serial.Serial) -> int:
 	msg: bytes = dev.read(9)
 	if len(msg) < 9:
-		return ecoTypes.TECO_80  # Needed to restart NVDA with Ecoplus
+		return ecoTypes.TECO_80  # Needed to restart Aslan with Ecoplus
 	# Command message from EcoBraille is something like that:
 	# 0x10 0x02 TT AA BB CC DD 0x10 0x03
 	# where TT can be 0xF1 (identification message) or 0x88 (command pressed in the line)

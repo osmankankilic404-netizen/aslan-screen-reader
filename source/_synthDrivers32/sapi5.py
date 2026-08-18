@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Leonard de Ruijter, gexgd0419
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -8,7 +8,7 @@ import os
 import comtypes.client
 
 # Precompile the SAPI5 COM interfaces
-# Placing them where NVDA's original sapi5 driver expects them.
+# Placing them where Aslan's original sapi5 driver expects them.
 sys.modules["comInterfaces.SpeechLib"] = comtypes.client.GetModule(
 	r"c:\windows\system32\speech\common\sapi.dll",
 )

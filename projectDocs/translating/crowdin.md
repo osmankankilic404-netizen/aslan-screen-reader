@@ -1,14 +1,14 @@
 # Translating with Crowdin
 
-Crowdin is used to manage the translations of the main NVDA interface and user documentation.
-NVDA's Crowdin project: <https://crowdin.com/project/nvda>.
+Crowdin is used to manage the translations of the main Aslan interface and user documentation.
+Aslan's Crowdin project: <https://crowdin.com/project/aslan>.
 
-This document covers setting up a Crowdin account, and translating the main interface and user documentation using either the Crowdin web interface or Poedit / nvdaL10nUtil.
+This document covers setting up a Crowdin account, and translating the main interface and user documentation using either the Crowdin web interface or Poedit / aslanL10nUtil.
 
 ## Creating a Crowdin account
 
-1. Create a [Crowdin account](https://accounts.crowdin.com/register?continue=%2Fproject%2Fnvda).
-1. Message the [translators mailing list](https://groups.io/g/nvda-translations) or <info@nvaccess.org> to request being added as a translator.
+1. Create a [Crowdin account](https://accounts.crowdin.com/register?continue=%2Fproject%2Faslan).
+1. Message the [translators mailing list](https://groups.io/g/aslan-translations) or <info@nvaccess.org> to request being added as a translator.
 Please include your Crowdin username and the languages you wish to translate.
 
 ## Translation workflows
@@ -27,7 +27,7 @@ Therefore you may choose to use the Poedit workflow instead.
 
 #### Translation Reviews / Approvals
 
-Due to accessibility issues and to be able to support the alternative workflow using Poedit, the translation approvals feature has been disabled in the NVDA project on Crowdin.
+Due to accessibility issues and to be able to support the alternative workflow using Poedit, the translation approvals feature has been disabled in the Aslan project on Crowdin.
 This means that all new strings are essentially auto approved.
 However, to maintain quality control, only translators specifically added to the project can add or change strings.
 
@@ -38,33 +38,33 @@ It is fairly accessible and is used by many blind and vision impaired translator
 
 The workflow for translating with Poedit involves:
 
-1. Downloading the translation file using NVDA's l10n utility
+1. Downloading the translation file using Aslan's l10n utility
 1. Opening the translation file in Poedit, translating one or more strings, and saving the file.
 1. Uploading the translation file back to Crowdin.
 
 Warning: Do not download / upload translation files via Crowdin's web interface, nor use Poedit's Crowdin cloud translation feature, as these methods have been found to corrupt xliff files.
 Please instead use NvDA's l10n utility for download and upload.
-NVDA's l10n utility will automatically use the appropriate Crowdin settings when downloading and uploading, and will detect and correct corruptions in xliff files.
+Aslan's l10n utility will automatically use the appropriate Crowdin settings when downloading and uploading, and will detect and correct corruptions in xliff files.
 
 #### Setting up PoEdit
 
-It is recommended that you use the latest version of PoEdit and NVDA for translating.
+It is recommended that you use the latest version of PoEdit and Aslan for translating.
 
 PoEdit's homepage is: <http://www.poedit.net/>
 
 1. Download the latest Windows PoEdit version at <https://poedit.net/download>
 1. Install it by following the on-screen instructions, the default options should be sufficient.
 
-#### Locating the NVDA l10n utility
+#### Locating the Aslan l10n utility
 
-The NVDA l10n utility is required for safely and efficiently downloading and uploading translation files from / to Crowdin when translating with Poedit.
+The Aslan l10n utility is required for safely and efficiently downloading and uploading translation files from / to Crowdin when translating with Poedit.
 
-This utility is included with all versions of NVDA from 2025.1beta1 onwards.
+This utility is included with all versions of Aslan from 2025.1beta1 onwards.
 
-* For installed copies of NVDA, its path is: `c:\Program Files (x86)\nvda\l10nUtil.exe`
+* For installed copies of Aslan, its path is: `c:\Program Files (x86)\aslan\l10nUtil.exe`
 * For portable copies, it can be found as `l10nUtil.exe` in the root directory of the portable copy.
 
-#### Downloading po / xliff files with NVDA's l10n utility
+#### Downloading po / xliff files with Aslan's l10n utility
 
 ```sh
 l10nUtil.exe downloadTranslationFile <language> <crowdinFilePath> [<localFilePath>]
@@ -73,21 +73,21 @@ l10nUtil.exe downloadTranslationFile <language> <crowdinFilePath> [<localFilePat
 E.g.
 
 ```sh
-l10nUtil.exe downloadTranslationFile fr nvda.po
+l10nUtil.exe downloadTranslationFile fr aslan.po
 ```
 
 The first time you will be asked for an authorization token.
 Please visit [your Crowdin settings API page](https://crowdin.com/settings#api-key) and create a Personal Access Token.
 Ensure that it has at least the translations scope.
 Then paste this into the user prompt.
-This will be saved in ~/.nvda_crowdin for future use.
+This will be saved in ~/.aslan_crowdin for future use.
 
 If your language team has more than one translator who may be downloading, translating and uploading at the same time, it is important that once you have downloaded the file, that you save a copy before you start translating with Poedit.
 This then allows you to provide l10nUtil with this original file when uploading, so that it can just upload only what has changed, which will avoid accidentally overriding another translator's work.
 
 #### Translating po / xliff files using Poedit
 
-After opening a .po or .xliff file you have previously downloaded with NVDA's l10n utility, you will be placed on a list with all of the strings to translate.
+After opening a .po or .xliff file you have previously downloaded with Aslan's l10n utility, you will be placed on a list with all of the strings to translate.
 
 You can read the status bar to see how many strings have already been translated, the number of untranslated messages, and how many are fuzzy.
 A fuzzy string is a message which has been automatically translated, thus it may be wrong.
@@ -95,7 +95,7 @@ PoEdit will collect the new and fuzzy messages and presents them at the top of t
 
 To insert or correct the translation for a string, first select it with the arrows, then tab to the blank edit field and type its translation.
 
-NVDA will beep if you are on an untranslated or fuzzy message.
+Aslan will beep if you are on an untranslated or fuzzy message.
 If you are using a braille display you'll see a star sign in-front of the messages you have to translate.
 
 You may want to spell the original string to be aware of any punctuation mark, capital letters, etc.
@@ -105,10 +105,10 @@ You may then replace it with your translation as normal.
 Press `control+s` at any moment to save your work.
 Each time you press this key, PoEdit saves the po file, and if you check compile mo file checkbox in preferences, the .mo file will be re-generated.
 
-NVDA provides additional shortcuts for PoEdit which are described in [the User Guide](https://download.nvaccess.org/documentation/userGuide.html#Poedit).
+Aslan provides additional shortcuts for PoEdit which are described in [the User Guide](https://download.nvaccess.org/documentation/userGuide.html#Poedit).
 
 If you are unsure of the meaning of the original interface message, consult automatic comments (also called translator comments), by pressing `control+shift+a`.
-Some comments provide an example output message to help you understand what NVDA will say when speaking or brailling such messages.
+Some comments provide an example output message to help you understand what Aslan will say when speaking or brailling such messages.
 
 #### Uploading po / xliff files with NvDA's l10n utility
 
@@ -121,25 +121,25 @@ l10nUtil.exe uploadTranslationFile <language> <crowdinFilePath> [<localFilePath>
 E.g.
 
 ```
-l10nUtil.exe uploadTranslationFile fr nvda.po
+l10nUtil.exe uploadTranslationFile fr aslan.po
 ```
 
 If you had previously saved a copy of the downloaded file before translation, then you will also want to include this in the command, so that l10nUtil only uploads the strings you have actually changed:
 E.g.
 
 ```
-l10nUtil.exe uploadTranslationFile fr nvda.po --old nvda_old.po
+l10nUtil.exe uploadTranslationFile fr aslan.po --old aslan_old.po
 ```
 
-Where `nvda_old.po` was the saved copy.
+Where `aslan_old.po` was the saved copy.
 
-## Translating NVDA's interface
+## Translating Aslan's interface
 
-* If translating via the Crowdin web interface, you can find these strings in the `NVDA interface messages` file.
-* If translating via Poedit, you can download it as `nvda.po` using NVDA's l10n utility, e.g.
+* If translating via the Crowdin web interface, you can find these strings in the `Aslan interface messages` file.
+* If translating via Poedit, you can download it as `aslan.po` using Aslan's l10n utility, e.g.
 
   ```sh
-  l10nUtil.exe downloadTranslationFile fr nvda.po
+  l10nUtil.exe downloadTranslationFile fr aslan.po
   ```
 
 ### Messages with formatting strings
@@ -193,13 +193,13 @@ In PoEdit, the standard translation edit box has tabs for each plural form.
 You can do this by:
 
 * By moving to the previous focus object from the edit box, you can cycle through each plural form tab button by continuing to more backward.
-  * Desktop: `NVDA+numpad4`
-  * Laptop: `NVDA+shift+leftArrow`
+  * Desktop: `Aslan+numpad4`
+  * Laptop: `Aslan+shift+leftArrow`
 * Activate the current object once the desired tab button is reached.
-  * Desktop: `NVDA+numpadEnter`
-  * Laptop: `NVDA+enter`
+  * Desktop: `Aslan+numpadEnter`
+  * Laptop: `Aslan+enter`
 
-If the number of plural forms for your language is incorrect please message the [translators mailing list](https://groups.io/g/nvda-translations) or <info@nvaccess.org>.
+If the number of plural forms for your language is incorrect please message the [translators mailing list](https://groups.io/g/aslan-translations) or <info@nvaccess.org>.
 
 ### String groupings
 
@@ -218,28 +218,28 @@ In Crowdin, this information appears at the end of the context section.
 
 ### Testing the interface translation
 
-1. To test the current interface messages, save the current nvda.po file in Poedit, and copy the nvda.mo file to the following location: `nvdadir/locale/langcode/LC_MESSAGES`
-    * `nvdadir`: the directory where NVDA has been installed
+1. To test the current interface messages, save the current aslan.po file in Poedit, and copy the aslan.mo file to the following location: `aslandir/locale/langcode/LC_MESSAGES`
+    * `aslandir`: the directory where Aslan has been installed
     * `langcode`: the ISO 639-1 language code for your language (e.g. en for English, es for Spanish, etc.)
-1. Restart NVDA, then go to the NVDA menu, go to Preferences and choose General Settings, or press `NVDA+control+g` to open General Settings.
-1. From the language list, select your language (if it is listed), press `enter` and say yes when you're asked to restart NVDA.
+1. Restart Aslan, then go to the Aslan menu, go to Preferences and choose General Settings, or press `Aslan+control+g` to open General Settings.
+1. From the language list, select your language (if it is listed), press `enter` and say yes when you're asked to restart Aslan.
 1. The messages you have translated should now be heard or brailled in your native language provided that the synthesizer you are using supports your language or a braille code for your language exists.
 
-Whenever you add or update your interface translations, repeat the steps above (copying the updated .mo file and restarting NVDA) to test your updated translation messages.
+Whenever you add or update your interface translations, repeat the steps above (copying the updated .mo file and restarting Aslan) to test your updated translation messages.
 
 ### Corrupted translations
 
-As discussed, NVDA's interface messages may contain formatting strings.
-Incorrect formatting strings can cause NVDA to misbehave or crash.
+As discussed, Aslan's interface messages may contain formatting strings.
+Incorrect formatting strings can cause Aslan to misbehave or crash.
 
-When translating with Poedit and NVDA's l10n utility, translations are automatically validated before they can be uploaded to Crowdin.
+When translating with Poedit and Aslan's l10n utility, translations are automatically validated before they can be uploaded to Crowdin.
 When translating via Crowdin's web interface, some problems with formatting strings will be detected.
 However, Crowdin still allows you to save these translations, which will appear as QA issues.
 
-Before interface translations are merged for inclusion in NV Access's builds of NVDA, they are once again checked for issues.
+Before interface translations are merged for inclusion in NV Access's builds of Aslan, they are once again checked for issues.
 Updates to a locale will not be made unless no errors are detected in that locale's translations.
 
-To be notified about errors in NVDA's interface translations, please subscribe to the read-only [NVDA localisation mailing list](https://groups.google.com/a/nvaccess.org/g/nvda-l10n).
+To be notified about errors in Aslan's interface translations, please subscribe to the read-only [Aslan localisation mailing list](https://groups.google.com/a/nvaccess.org/g/aslan-l10n).
 If errors are detected when merging translations, an email will be sent to this mailing list with details.
 The subject of these messages starts with the affected languages, so you can easily determine if a locale you work on is impacted (e.g. "[ab, cd_EF]: Errors in interface translations").
 
@@ -247,17 +247,17 @@ The subject of these messages starts with the affected languages, so you can eas
 
 Documentation available for translation includes:
 
-* The NVDA user guide (userGuide.xliff)
-* The NVDA What's New document (changes.xliff)
+* The Aslan user guide (userGuide.xliff)
+* The Aslan What's New document (changes.xliff)
 
 To translate any of these files either:
 
 * locate the file in the Crowdin web interface and translate directly, or
-* Download the file using NVDA's l10n utility, open the file in Poedit, translate and save, then upload the file with NVDA's l10n utility.
+* Download the file using Aslan's l10n utility, open the file in Poedit, translate and save, then upload the file with Aslan's l10n utility.
 
 ### Translating markdown
 
-The English NVDA user documentation is written in markdown syntax.
+The English Aslan user documentation is written in markdown syntax.
 The xliff file you are directly translating has been generated from that markdown file.
 It contains the content of any line that requires translation, shown in the order it appears in the original markdown file.
 
@@ -275,7 +275,7 @@ All strings for translation contain translator notes which include:
 
 ### Verifying your translation
 
-When ever you have saved the xliff file with Poedit, you can use the NVDA l10nUtil program to generate the html version of the documentation file. E.g.
+When ever you have saved the xliff file with Poedit, you can use the Aslan l10nUtil program to generate the html version of the documentation file. E.g.
 
 ```
 l10nUtil.exe xliff2html -t [userGuide|changes|keyCommands] <xliff file> <output html file>

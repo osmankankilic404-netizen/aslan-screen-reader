@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2016-2025 NV Access Limited, Łukasz Golonka
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -163,7 +163,7 @@ def associateElements(firstElement: wx.TextCtrl, secondElement: wx.Button) -> wx
 
 def associateElements(firstElement, secondElement) -> wx.BoxSizer:
 	"""Associates two GUI elements together. Handles choosing a layout and appropriate spacing. Abstracts away common
-	pairings used in the NVDA GUI.
+	pairings used in the Aslan GUI.
 	Currently handles:
 		wx.StaticText and :const:`_HorizontalCtrlT` - Horizontal layout
 		wx.StaticText and wx.CheckBox - Horizontal layout, control first, label second

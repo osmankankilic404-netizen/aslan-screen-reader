@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020-2023 NV Access Limited, Joseph Lee
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -9,8 +9,8 @@ This is also the base app module for Windows 11 Calculator."""
 import appModuleHandler
 import api
 import config
-from NVDAObjects.UIA import UIA
-from NVDAObjects import NVDAObject
+from AslanObjects.UIA import UIA
+from AslanObjects import AslanObject
 from config.configFlags import TypingEcho
 import queueHandler
 import ui
@@ -46,10 +46,10 @@ class AppModule(appModuleHandler.AppModule):
 	_shouldAnnounceResult = False
 	# Name change says the same thing multiple times for some items.
 	_resultsCache = ""
-	# #13383: for some commands (such as number row keys), NVDA should not announce calculator results.
+	# #13383: for some commands (such as number row keys), Aslan should not announce calculator results.
 	_noCalculatorResultsGesturePressed = False
 
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		if not isinstance(obj, UIA):
 			return
 		# #11858: version 10.2009 introduces a regression where history and memory items have no names
@@ -58,7 +58,7 @@ class AppModule(appModuleHandler.AppModule):
 		if not obj.name and obj.parent.UIAAutomationId in ("HistoryListView", "MemoryListView"):
 			obj.name = "".join([item.name for item in obj.children])
 
-	def event_typedCharacter(self, obj: NVDAObject, nextHandler: Callable[[], None], ch: str) -> None:
+	def event_typedCharacter(self, obj: AslanObject, nextHandler: Callable[[], None], ch: str) -> None:
 		originalMode = config.conf["keyboard"]["speakTypedCharacters"]
 		if originalMode == TypingEcho.EDIT_CONTROLS.value:
 			try:

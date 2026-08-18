@@ -1,6 +1,6 @@
 # appModules/thunderbird.py
-# A part of NonVisual Desktop Access (NVDA)
-# Copyright (C) 2006-2012 NVDA Contributors
+# A part of NonVisual Desktop Access (Aslan)
+# Copyright (C) 2006-2012 Aslan Contributors
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
@@ -11,12 +11,12 @@ import controlTypes
 import api
 import speech
 import winUser
-from NVDAObjects import NVDAObject
+from AslanObjects import AslanObject
 from typing import Callable
 
 
 class AppModule(appModuleHandler.AppModule):
-	def _isPopupMenuItem(self, obj: NVDAObject):
+	def _isPopupMenuItem(self, obj: AslanObject):
 		attributes = getattr(obj, "IA2Attributes", None)
 
 		if attributes and "class" in attributes:
@@ -26,7 +26,7 @@ class AppModule(appModuleHandler.AppModule):
 
 		return False
 
-	def event_NVDAObject_init(self, obj: NVDAObject):
+	def event_AslanObject_init(self, obj: AslanObject):
 		if obj.role == controlTypes.Role.SECTION and not obj.name and self._isPopupMenuItem(obj):
 			obj.role = controlTypes.Role.MENUITEM
 			obj.name = obj.IAccessibleObject.accChild(1).accName(0)
@@ -50,8 +50,8 @@ class AppModule(appModuleHandler.AppModule):
 				return
 		nextHandler()
 
-	def event_nameChange(self, obj: NVDAObject, nextHandler: Callable[[], None]) -> None:
-		focusObj: NVDAObject = api.getFocusObject()
+	def event_nameChange(self, obj: AslanObject, nextHandler: Callable[[], None]) -> None:
+		focusObj: AslanObject = api.getFocusObject()
 		if focusObj.windowClassName == "MozillaDropShadowWindowClass" and focusObj.windowControlID == 0:
 			# Report state changes in "select columns to display" menu
 			focusObj.event_stateChange()

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -6,7 +6,7 @@
 import os
 
 """
-This module contains non-localizable version information for NVDA such as the version string and major and minor numbers etc.
+This module contains non-localizable version information for Aslan such as the version string and major and minor numbers etc.
 Any localizable version information should be placed in the versionInfo module, not this one.
 This module exists separately so that it can be imported for version checks before localization is initialized.
 """
@@ -61,8 +61,8 @@ def formatVersionForGUI(year, major, minor):
 	return "{y}.{M}.{m}".format(y=year, M=major, m=minor)
 
 
-# Version information for NVDA
-name = "NVDA"
+# Version information for Aslan
+name = "Aslan"
 version_year = 2026
 version_major = 3
 version_minor = 0

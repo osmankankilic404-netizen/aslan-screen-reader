@@ -1,5 +1,5 @@
-# NVDAObjects/MSHTML.py
-# A part of NonVisual Desktop Access (NVDA)
+# AslanObjects/MSHTML.py
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Aleksey Sadovoy
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -24,9 +24,9 @@ from logHandler import log
 import controlTypes
 from . import IAccessible
 from ..behaviors import EditableTextWithoutAutoSelectDetection, Dialog
-from .. import InvalidNVDAObject
+from .. import InvalidAslanObject
 from ..window import Window
-from NVDAObjects.UIA import UIA, UIATextInfo
+from AslanObjects.UIA import UIA, UIATextInfo
 from locationHelper import RectLTRB
 from typing import Dict
 
@@ -109,7 +109,7 @@ class HTMLAttribCache(object):
 		return contains
 
 
-nodeNamesToNVDARoles: Dict[str, int] = {
+nodeNamesToAslanRoles: Dict[str, int] = {
 	"FRAME": controlTypes.Role.FRAME,
 	"IFRAME": controlTypes.Role.INTERNALFRAME,
 	"FRAMESET": controlTypes.Role.DOCUMENT,
@@ -543,7 +543,7 @@ class MSHTML(IAccessible):
 		if nodeName:
 			if nodeName == "SELECT" and self.windowStyle & winUser.WS_POPUP:
 				clsList.append(PopupList)
-			elif nodeNamesToNVDARoles.get(nodeName) == controlTypes.Role.DOCUMENT:
+			elif nodeNamesToAslanRoles.get(nodeName) == controlTypes.Role.DOCUMENT:
 				try:
 					isBodyNode = self.HTMLNodeUniqueNumber == self.HTMLNode.document.body.uniqueNumber
 				except (COMError, NameError):
@@ -625,7 +625,7 @@ class MSHTML(IAccessible):
 					tempNode = None
 
 		if not IAccessibleObject:
-			raise InvalidNVDAObject("Couldn't get IAccessible, probably dead object")
+			raise InvalidAslanObject("Couldn't get IAccessible, probably dead object")
 
 		super(MSHTML, self).__init__(
 			IAccessibleObject=IAccessibleObject,
@@ -696,7 +696,7 @@ class MSHTML(IAccessible):
 		):
 			ti = self.treeInterceptor
 			try:
-				if ti and ti.isReady and ti.isNVDAObjectPartOfLayoutTable(self):
+				if ti and ti.isReady and ti.isAslanObjectPartOfLayoutTable(self):
 					presType = self.presType_layout
 			except LookupError:
 				pass
@@ -742,7 +742,7 @@ class MSHTML(IAccessible):
 			)
 			or
 			# Adding an ARIA landmark or unknown role to a DIV or NAV node makes an IAccessible with role_system_grouping and a name calculated from descendants.
-			# This name should also be ignored, but check NVDA's role, not accRole as its possible that NVDA chose a better role
+			# This name should also be ignored, but check Aslan's role, not accRole as its possible that Aslan chose a better role
 			# E.g. row (#2780)
 			(self.HTMLNodeName in ("DIV", "NAV") and self.role == controlTypes.Role.GROUPING)
 		):
@@ -815,7 +815,7 @@ class MSHTML(IAccessible):
 		if self.HTMLNode:
 			ariaRole = (self.HTMLAttributes["role"] or "").split(" ")[0]
 			if ariaRole:
-				role = aria.ariaRolesToNVDARoles.get(ariaRole)
+				role = aria.ariaRolesToAslanRoles.get(ariaRole)
 				if role:
 					return role
 			nodeName = self.HTMLNodeName
@@ -833,7 +833,7 @@ class MSHTML(IAccessible):
 					"ARTICLE",
 					"FIELDSET",
 				):
-					return nodeNamesToNVDARoles.get(nodeName, controlTypes.Role.SECTION)
+					return nodeNamesToAslanRoles.get(nodeName, controlTypes.Role.SECTION)
 		if self.IAccessibleChildID > 0:
 			states = super(MSHTML, self).states
 			if controlTypes.State.LINKED in states:
@@ -851,7 +851,7 @@ class MSHTML(IAccessible):
 		else:
 			states = set()
 		ariaSort = self.HTMLAttributes["aria-sort"]
-		state = aria.ariaSortValuesToNVDAStates.get(ariaSort)
+		state = aria.ariaSortValuesToAslanStates.get(ariaSort)
 		if state is not None:
 			states.add(state)
 		htmlRequired = "required" in self.HTMLAttributes
@@ -1110,7 +1110,7 @@ class MSHTML(IAccessible):
 			# This case should be pretty rare anyway.
 			return None
 		try:
-			return ti.getControlFieldForNVDAObject(self)["language"]
+			return ti.getControlFieldForAslanObject(self)["language"]
 		except LookupError:
 			return None
 
@@ -1251,7 +1251,7 @@ class Math(MSHTML):
 
 def findExtraIAccessibleOverlayClasses(obj, clsList):
 	"""Determine the most appropriate class for MSHTML objects.
-	This works similarly to L{NVDAObjects.NVDAObject.findOverlayClasses} except that it never calls any other findOverlayClasses method.
+	This works similarly to L{AslanObjects.AslanObject.findOverlayClasses} except that it never calls any other findOverlayClasses method.
 	"""
 	windowClass = obj.windowClassName
 	iaRole = obj.IAccessibleRole

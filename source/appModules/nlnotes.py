@@ -1,11 +1,11 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2011-2012 NV Access Limited
 import appModuleHandler
 import controlTypes
-from NVDAObjects.IAccessible import IAccessible
-from NVDAObjects.window import DisplayModelEditableText
+from AslanObjects.IAccessible import IAccessible
+from AslanObjects.window import DisplayModelEditableText
 import winUser
 import api
 import virtualBuffers.lotusNotes
@@ -42,7 +42,7 @@ class NotesSubprog(IAccessible):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		windowClassName = obj.windowClassName
 		role = obj.role
 		if windowClassName == "NotesSubprog" and role == controlTypes.Role.DOCUMENT:

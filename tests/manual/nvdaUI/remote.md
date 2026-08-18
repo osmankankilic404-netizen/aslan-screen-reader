@@ -1,8 +1,8 @@
-# NVDA Remote Manual Test Suite
+# Aslan Remote Manual Test Suite
 
 ## Overview
 
-Remote  enables remote assistance functionality between two computers running NVDA. It allows a user to connect to another computer running NVDA and either control the remote system or have their system controlled. This enables remote support, training, and collaboration between screen reader users. The add-on provides features such as speech relay, keyboard control, clipboard sharing, and braille support over remote connections.
+Remote  enables remote assistance functionality between two computers running Aslan. It allows a user to connect to another computer running Aslan and either control the remote system or have their system controlled. This enables remote support, training, and collaboration between screen reader users. The add-on provides features such as speech relay, keyboard control, clipboard sharing, and braille support over remote connections.
 
 ## Environment Setup
 
@@ -11,8 +11,8 @@ Remote  enables remote assistance functionality between two computers running NV
 * Windows 11 Pro
 * Memory: at least 16GB
 * Processor: at least 4 core
-* NVDA Version: latest
-* NVDA Remote Version: 2.6.4 (installed via addon store)
+* Aslan Version: latest
+* Aslan Remote Version: 2.6.4 (installed via addon store)
 
 ### Guest Configuration
 
@@ -20,25 +20,25 @@ Remote  enables remote assistance functionality between two computers running NV
 * Storage: 64GB disk
 * Memory: 16GB
 * Processor: 8 core
-* NVDA Version: Custom build from <https://github.com/nvda-art/nvda> (remote branch)
+* Aslan Version: Custom build from <https://github.com/aslan-art/aslan> (remote branch)
 * Base Position: latest
 
 ## Pre-Test Setup
 
 1. Build signed launcher
-2. Host: Run installed stock NVDA
+2. Host: Run installed stock Aslan
 3. Guest: Install signed launcher
 
 ## Connection Tests
 
 ### Direct Connection
 
-1. Open NVDA Remote on the host
-2. Press NVDA+alt+page-up to open the "Connect" dialog
+1. Open Aslan Remote on the host
+2. Press Aslan+alt+page-up to open the "Connect" dialog
 3. Choose "Host" option
 4. Set a password and wait for incoming connection
-5. Open NVDA Remote on the guest
-6. Press NVDA+alt+page-up to open the "Connect" dialog
+5. Open Aslan Remote on the guest
+6. Press Aslan+alt+page-up to open the "Connect" dialog
 7. Choose "Client" option
 8. Enter the host's IP address and password
 9. Verify connection status announcements or sounds
@@ -46,9 +46,9 @@ Remote  enables remote assistance functionality between two computers running NV
 
 ### Control Server Connection
 
-1. Open NVDA Remote on both systems
-2. On both systems, press NVDA+alt+page-up to open the "Connect" dialog
-3. Choose "Connect to Control Server" (nvdaremote.com)
+1. Open Aslan Remote on both systems
+2. On both systems, press Aslan+alt+page-up to open the "Connect" dialog
+3. Choose "Connect to Control Server" (aslanremote.com)
 4. Enter the same key on both systems
 5. Set appropriate control permissions (Host controls guest, guest controls host)
 6. Verify connection is established
@@ -95,10 +95,10 @@ Remote  enables remote assistance functionality between two computers running NV
    1. Alt+Tab to switch applications
    2. Windows key to open start menu
    3. Alt+F4 to close applications
-4. Test NVDA-specific shortcuts:
-   1. NVDA+T to read title
-   2. NVDA+F to read formatting
-   3. NVDA+Tab for focus reporting
+4. Test Aslan-specific shortcuts:
+   1. Aslan+T to read title
+   2. Aslan+F to read formatting
+   3. Aslan+Tab for focus reporting
 5. Verify modifier key combinations work properly:
    1. Shift+arrows for selection
    2. Ctrl+C and Ctrl+V for copy/paste
@@ -135,7 +135,7 @@ Remote  enables remote assistance functionality between two computers running NV
 
 1. Connect two machines
 2. Copy text on the controlling machine (Ctrl+C)
-3. Push the clipboard text (NVDA+SHIFT+CTRL+C)
+3. Push the clipboard text (Aslan+SHIFT+CTRL+C)
 4. Paste text on the controlled machine (Ctrl+V)
 5. Repeat in reverse direction
 6. Test with various content types:
@@ -165,7 +165,7 @@ Remote  enables remote assistance functionality between two computers running NV
 4. Run resource-intensive applications during connection
 5. Verify system stability under load
 6. Document any performance degradation
-7. Test with different NVDA logging levels
+7. Test with different Aslan logging levels
 
 ## Security Tests
 

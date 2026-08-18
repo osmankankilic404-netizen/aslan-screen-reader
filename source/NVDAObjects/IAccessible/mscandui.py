@@ -7,9 +7,9 @@ import api
 import ui
 import winUser
 import mouseHandler
-import NVDAObjects.window
+import AslanObjects.window
 from . import IAccessible
-from NVDAObjects.behaviors import CandidateItem as CandidateItemBehavior
+from AslanObjects.behaviors import CandidateItem as CandidateItemBehavior
 
 
 def reportSelectedCandidate(candidateObject, allowDuplicate=False, newList=False):
@@ -240,8 +240,8 @@ class MSCandUIWindow(IAccessible):
 class ModernCandidateUICandidateItem(BaseCandidateItem):
 	def _get_parent(self):
 		# Candidate list in Microsoft Quick cannot be obtained in IAccessible _get_parent.
-		# Use _get_parent in NVDAObject.window.
-		parent = NVDAObjects.window.Window._get_parent(self)
+		# Use _get_parent in AslanObject.window.
+		parent = AslanObjects.window.Window._get_parent(self)
 		return parent
 
 	def _get_candidateCharacters(self):

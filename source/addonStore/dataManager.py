@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2025 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -25,8 +25,8 @@ import config
 from core import callLater
 import languageHandler
 from logHandler import log
-import NVDAState
-from NVDAState import WritePaths
+import AslanState
+from AslanState import WritePaths
 
 from .models.addon import (
 	AddonStoreModel,
@@ -95,7 +95,7 @@ class _DataManager:
 		)
 		self._installedAddonDataCacheDir = WritePaths.addonsDir
 
-		if NVDAState.shouldWriteToDisk():
+		if AslanState.shouldWriteToDisk():
 			# ensure caching dirs exist
 			pathlib.Path(WritePaths.addonStoreDir).mkdir(parents=True, exist_ok=True)
 			pathlib.Path(self._installedAddonDataCacheDir).mkdir(parents=True, exist_ok=True)
@@ -113,7 +113,7 @@ class _DataManager:
 		self._initialiseAvailableAddonsThread.start()
 
 	def terminate(self):
-		if NVDAState.shouldWriteToDisk():
+		if AslanState.shouldWriteToDisk():
 			self.storeSettings.save()
 		if self._initialiseAvailableAddonsThread.is_alive():
 			self._initialiseAvailableAddonsThread.join(timeout=1)
@@ -152,7 +152,7 @@ class _DataManager:
 		return cacheHash
 
 	def _cacheCompatibleAddons(self, addonData: str, cacheHash: Optional[str]):
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			return
 		if not addonData or not cacheHash:
 			return
@@ -160,13 +160,13 @@ class _DataManager:
 			"cacheHash": cacheHash,
 			"data": addonData,
 			"cachedLanguage": self._lang,
-			"nvdaAPIVersion": addonAPIVersion.CURRENT,
+			"aslanAPIVersion": addonAPIVersion.CURRENT,
 		}
 		with open(self._cacheCompatibleFile, "w", encoding="utf-8") as cacheFile:
 			json.dump(cacheData, cacheFile, ensure_ascii=False)
 
 	def _cacheLatestAddons(self, addonData: str, cacheHash: Optional[str]):
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			return
 		if not addonData or not cacheHash:
 			return
@@ -174,7 +174,7 @@ class _DataManager:
 			"cacheHash": cacheHash,
 			"data": addonData,
 			"cachedLanguage": self._lang,
-			"nvdaAPIVersion": _LATEST_API_VER,
+			"aslanAPIVersion": _LATEST_API_VER,
 		}
 		with open(self._cacheLatestFile, "w", encoding="utf-8") as cacheFile:
 			json.dump(cacheData, cacheFile, ensure_ascii=False)
@@ -187,7 +187,7 @@ class _DataManager:
 				cacheData = json.load(cacheFile)
 		except Exception:
 			log.exception("Invalid add-on store cache")
-			if NVDAState.shouldWriteToDisk():
+			if AslanState.shouldWriteToDisk():
 				os.remove(cacheFilePath)
 			return None
 		try:
@@ -195,17 +195,17 @@ class _DataManager:
 			cachedAddonData = _createStoreCollectionFromJson(data)
 			cacheHash = cacheData["cacheHash"]
 			cachedLanguage = cacheData["cachedLanguage"]
-			nvdaAPIVersion = cacheData["nvdaAPIVersion"]
+			aslanAPIVersion = cacheData["aslanAPIVersion"]
 		except (KeyError, JSONDecodeError):
 			log.exception(f"Invalid add-on store cache:\n{cacheData}")
-			if NVDAState.shouldWriteToDisk():
+			if AslanState.shouldWriteToDisk():
 				os.remove(cacheFilePath)
 			return None
 		return CachedAddonsModel(
 			cachedAddonData=cachedAddonData,
 			cacheHash=cacheHash,
 			cachedLanguage=cachedLanguage,
-			nvdaAPIVersion=tuple(nvdaAPIVersion),  # loads as list,
+			aslanAPIVersion=tuple(aslanAPIVersion),  # loads as list,
 		)
 
 	# Translators: A title of the dialog shown when fetching add-on data from the store fails
@@ -230,7 +230,7 @@ class _DataManager:
 		cacheHash = self._getCacheHash()
 		shouldRefreshData = (
 			not self._compatibleAddonCache
-			or self._compatibleAddonCache.nvdaAPIVersion != addonAPIVersion.CURRENT
+			or self._compatibleAddonCache.aslanAPIVersion != addonAPIVersion.CURRENT
 			or cacheHash is None
 			or self._compatibleAddonCache.cacheHash != cacheHash
 			or self._compatibleAddonCache.cachedLanguage != self._lang
@@ -247,7 +247,7 @@ class _DataManager:
 					cachedAddonData=_createStoreCollectionFromJson(decodedApiData),
 					cacheHash=cacheHash,
 					cachedLanguage=self._lang,
-					nvdaAPIVersion=addonAPIVersion.CURRENT,
+					aslanAPIVersion=addonAPIVersion.CURRENT,
 				)
 			else:
 				self._do_displayError(
@@ -283,7 +283,7 @@ class _DataManager:
 					cachedAddonData=_createStoreCollectionFromJson(decodedApiData),
 					cacheHash=cacheHash,
 					cachedLanguage=self._lang,
-					nvdaAPIVersion=_LATEST_API_VER,
+					aslanAPIVersion=_LATEST_API_VER,
 				)
 			else:
 				self._do_displayError(
@@ -329,7 +329,7 @@ class _DataManager:
 			os.remove(addonCachePath)
 
 	def _cacheInstalledAddon(self, addonData: AddonStoreModel):
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			return
 		if not addonData:
 			return

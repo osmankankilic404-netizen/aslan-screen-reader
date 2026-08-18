@@ -34,13 +34,13 @@ TODO
 
 [NSIS-build readme](https://github.com/nvaccess/NSIS-build)
 
-## nvda_dmp
+## aslan_dmp
 
 TODO
 
-## nvda-cldr
+## aslan-cldr
 
-[nvda-cldr readme](https://github.com/nvaccess/nvda-cldr)
+[aslan-cldr readme](https://github.com/nvaccess/aslan-cldr)
 
 ## sonic
 

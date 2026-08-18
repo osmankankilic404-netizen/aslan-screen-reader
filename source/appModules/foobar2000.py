@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2009-2023 NV Access Limited, Aleksey Sadovoy, James Teh, Joseph Lee, Tuukka Ojala,
 # Bram Duvigneau, Cyrille Bougot
 # This file is covered by the GNU General Public License.
@@ -23,7 +23,7 @@ from scriptHandler import script
 
 if TYPE_CHECKING:
 	from inputCore import InputGesture  # noqa: F401
-	from NVDAObjects import NVDAObject  # noqa: F401
+	from AslanObjects import AslanObject  # noqa: F401
 
 
 _timeOutputToParsingFormats: Dict[TimeOutputFormat, str] = {
@@ -118,7 +118,7 @@ class _StatusBarTimes(NamedTuple):
 
 
 class AppModule(appModuleHandler.AppModule):
-	_statusBar: Optional["NVDAObject"] = None
+	_statusBar: Optional["AslanObject"] = None
 
 	def event_gainFocus(self, obj, nextHandler):
 		if not self._statusBar:
@@ -149,7 +149,7 @@ class AppModule(appModuleHandler.AppModule):
 		return elapsedAndTotalTime
 
 	@script(
-		# Translators: The description of an NVDA command for reading the remaining time of the currently playing
+		# Translators: The description of an Aslan command for reading the remaining time of the currently playing
 		# track in Foobar 2000.
 		description=_("Reports the remaining time of the currently playing track, if any"),
 		gesture="kb:control+shift+r",
@@ -175,7 +175,7 @@ class AppModule(appModuleHandler.AppModule):
 			ui.message(_("Remaining time not available"))
 
 	@script(
-		# Translators: The description of an NVDA command for reading the elapsed time of the currently playing
+		# Translators: The description of an Aslan command for reading the elapsed time of the currently playing
 		# track in Foobar 2000.
 		description=_("Reports the elapsed time of the currently playing track, if any"),
 		gesture="kb:control+shift+e",
@@ -193,7 +193,7 @@ class AppModule(appModuleHandler.AppModule):
 			ui.message(_("Elapsed time not available"))
 
 	@script(
-		# Translators: The description of an NVDA command for reading the length of the currently playing track in
+		# Translators: The description of an Aslan command for reading the length of the currently playing track in
 		# Foobar 2000.
 		description=_("Reports the length of the currently playing track, if any"),
 		gesture="kb:control+shift+t",

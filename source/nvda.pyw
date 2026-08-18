@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Aleksey Sadovoy, Babbage B.V., Joseph Lee, Łukasz Golonka,
 # Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""The NVDA launcher - main / entry point into NVDA.
+"""The Aslan launcher - main / entry point into Aslan.
 It can handle some command-line arguments (including help).
 It sets up logging, and then starts the core.
 """
@@ -24,28 +24,28 @@ import ctypes
 from ctypes import wintypes
 import monkeyPatches
 
-import NVDAState
+import AslanState
 import winUser
 from winBindings import user32
 
 monkeyPatches.applyMonkeyPatches()
 
-#: logger to use before the true NVDA log is initialised.
-# Ideally, all logging would be captured by the NVDA log, however this would introduce contention
-# when multiple NVDA processes run simultaneously.
+#: logger to use before the true Aslan log is initialised.
+# Ideally, all logging would be captured by the Aslan log, however this would introduce contention
+# when multiple Aslan processes run simultaneously.
 _log = logging.Logger(name="preStartup", level=logging.INFO)
 _log.addHandler(logging.NullHandler(level=logging.INFO))
 
-if NVDAState.isRunningAsSource():
-	# We should always change directory to the location of this module (nvda.pyw), don't rely on sys.path[0]
+if AslanState.isRunningAsSource():
+	# We should always change directory to the location of this module (aslan.pyw), don't rely on sys.path[0]
 	appDir = os.path.abspath(os.path.dirname(__file__))
 	# Ensure we are inside the Python virtual environment
 	virtualEnv = os.getenv("VIRTUAL_ENV")
 	if not virtualEnv or Path(appDir).parent != Path(virtualEnv).parent:
 		user32.MessageBox(
 			0,
-			"NVDA cannot  detect the Python virtual environment. "
-			"To run NVDA from source, please use runnvda.bat in the root of this repository.",
+			"Aslan cannot  detect the Python virtual environment. "
+			"To run Aslan from source, please use runaslan.bat in the root of this repository.",
 			"Error",
 			winUser.MB_ICONERROR,
 		)
@@ -65,7 +65,7 @@ import logHandler  # noqa: E402
 from logHandler import log  # noqa: E402
 import winKernel  # noqa: E402
 
-# Find out if NVDA is running as a Windows Store application
+# Find out if Aslan is running as a Windows Store application
 bufLen = ctypes.c_int()
 try:
 	GetCurrentPackageFullName = winBindings.kernel32.GetCurrentPackageFullName
@@ -77,7 +77,7 @@ else:
 	# #8362: error 15700 (not a package) error is returned if this is not a Windows Store package.
 	config.isAppX = GetCurrentPackageFullName(ctypes.byref(bufLen), None) != 15700
 
-NVDAState._initializeStartTime()
+AslanState._initializeStartTime()
 
 
 # Check OS version requirements
@@ -90,7 +90,7 @@ if not winVersion.isSupportedOS():
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	if NVDAState._allowDeprecatedAPI():
+	if AslanState._allowDeprecatedAPI():
 		if attrName in ("NoConsoleOptionParser", "stringToBool", "stringToLang"):
 			import argsParsing
 
@@ -120,7 +120,7 @@ for name in pathAppArgs:
 		setattr(globalVars.appArgs, name, newVal)
 
 
-def terminateRunningNVDA(window):
+def terminateRunningAslan(window):
 	processID, threadID = winUser.getWindowThreadProcessID(window)
 	winUser.PostMessage(window, winUser.WM_QUIT, 0, 0)
 	h = winKernel.openProcess(winKernel.SYNCHRONIZE, False, processID)
@@ -146,30 +146,30 @@ def terminateRunningNVDA(window):
 		winKernel.closeHandle(h)
 
 
-# Handle running multiple instances of NVDA
+# Handle running multiple instances of Aslan
 try:
-	oldAppWindowHandle = winUser.FindWindow("wxWindowClassNR", "NVDA")
+	oldAppWindowHandle = winUser.FindWindow("wxWindowClassNR", "Aslan")
 except WindowsError as e:
-	_log.info("Can't find existing NVDA via Window Class")
+	_log.info("Can't find existing Aslan via Window Class")
 	_log.debug(f"FindWindow error: {e}")
 	oldAppWindowHandle = 0
 if not winUser.isWindow(oldAppWindowHandle):
 	oldAppWindowHandle = 0
 
 if oldAppWindowHandle and not globalVars.appArgs.easeOfAccess:
-	_log.debug(f"NVDA already running. OldAppWindowHandle: {oldAppWindowHandle}")
+	_log.debug(f"Aslan already running. OldAppWindowHandle: {oldAppWindowHandle}")
 	if globalVars.appArgs.check_running:
-		# NVDA is running.
-		_log.debug("Is running check complete: NVDA is running.")
+		# Aslan is running.
+		_log.debug("Is running check complete: Aslan is running.")
 		_log.debug("Exiting")
 		sys.exit(0)
 	try:
 		_log.debug(f"Terminating oldAppWindowHandle: {oldAppWindowHandle}")
-		terminateRunningNVDA(oldAppWindowHandle)
+		terminateRunningAslan(oldAppWindowHandle)
 	except Exception as e:
 		winUser.MessageBox(
 			0,
-			f"Couldn't terminate existing NVDA process, abandoning start:\nException: {e}",
+			f"Couldn't terminate existing Aslan process, abandoning start:\nException: {e}",
 			"Error",
 			winUser.MB_OK,
 		)
@@ -178,8 +178,8 @@ if globalVars.appArgs.quit or (oldAppWindowHandle and globalVars.appArgs.easeOfA
 	_log.debug("Quitting")
 	sys.exit(0)
 elif globalVars.appArgs.check_running:
-	# NVDA is not running.
-	_log.debug("Is running check: NVDA is not running")
+	# Aslan is not running.
+	_log.debug("Is running check: Aslan is not running")
 	_log.debug("Exiting")
 	sys.exit(1)
 
@@ -208,7 +208,7 @@ def _acquireMutex(_desktopName: str) -> wintypes.HANDLE | None:
 		# Don't take initial ownership, use wait to acquire ownership instead.
 		# Allows waiting for a prior process to finish exiting.
 		False,  # bInitialOwner
-		f"Local\\NVDA_{_desktopName}",  # lpName
+		f"Local\\Aslan_{_desktopName}",  # lpName
 	)
 	createMutexResult = winBindings.kernel32.GetLastError()
 	if not _mutex:
@@ -216,7 +216,7 @@ def _acquireMutex(_desktopName: str) -> wintypes.HANDLE | None:
 		raise winUser.WinError(createMutexResult)
 	else:
 		if createMutexResult == winKernel.ERROR_ALREADY_EXISTS:
-			_log.debug("Waiting for prior NVDA to finish exiting")
+			_log.debug("Waiting for prior Aslan to finish exiting")
 		# We didn't ask to be the initial owner,
 		waitResult = winKernel.waitForSingleObject(
 			_mutex,  # hHandle
@@ -225,13 +225,13 @@ def _acquireMutex(_desktopName: str) -> wintypes.HANDLE | None:
 
 		_log.debug(f"Wait result: {waitResult}")
 		if winKernel.WAIT_OBJECT_0 == waitResult:
-			_log.info("Prior NVDA has finished exiting")
+			_log.info("Prior Aslan has finished exiting")
 			return _mutex  # mutex ownership acquired
 		elif winKernel.WAIT_ABANDONED == waitResult:
 			_log.error(
-				"Prior NVDA exited without releasing mutex, taking ownership."
+				"Prior Aslan exited without releasing mutex, taking ownership."
 				" Note: Restarting your system is recommended."
-				" This error indicates that NVDA previously did not exit correctly or was terminated"
+				" This error indicates that Aslan previously did not exit correctly or was terminated"
 				" (perhaps by the task manager).",
 			)
 			return _mutex  # mutex ownership acquired
@@ -266,12 +266,12 @@ if mutex is None:
 	sys.exit(1)
 
 
-if NVDAState._forceSecureModeEnabled():
+if AslanState._forceSecureModeEnabled():
 	globalVars.appArgs.secure = True
 
 
 if isRunningOnSecureDesktop():
-	if not NVDAState._serviceDebugEnabled():
+	if not AslanState._serviceDebugEnabled():
 		globalVars.appArgs.secure = True
 	globalVars.appArgs.changeScreenReaderFlag = False
 	globalVars.appArgs.minimal = True
@@ -289,14 +289,14 @@ if logHandler.log.getEffectiveLevel() is log.DEBUG:
 	log.debug("Provided arguments: {}".format(sys.argv[1:]))
 import buildVersion  # noqa: E402
 
-log.info(f"Starting NVDA version {buildVersion.version} {os.environ['PROCESSOR_ARCHITECTURE']}")
+log.info(f"Starting Aslan version {buildVersion.version} {os.environ['PROCESSOR_ARCHITECTURE']}")
 log.debug("Debug level logging enabled")
 if globalVars.appArgs.changeScreenReaderFlag:
 	winUser.setSystemScreenReaderFlag(True)
 
 # Accept WM_QUIT from other processes, even if running with higher privileges
 if not user32.ChangeWindowMessageFilter(winUser.WM_QUIT, winUser.MSGFLT.ALLOW):
-	log.error("Unable to set the NVDA process to receive WM_QUIT messages from other processes")
+	log.error("Unable to set the Aslan process to receive WM_QUIT messages from other processes")
 	raise winUser.WinError()
 # Make this the last application to be shut down and don't display a retry dialog box.
 winKernel.SetProcessShutdownParameters(0x100, winKernel.SHUTDOWN_NORETRY)
@@ -331,5 +331,5 @@ finally:
 		error = winUser.GetLastError()
 		log.error(f"Unable to close mutex handle, last error: {winUser.WinError(error)}")
 
-log.info("NVDA exit")
-sys.exit(NVDAState._getExitCode())
+log.info("Aslan exit")
+sys.exit(AslanState._getExitCode())

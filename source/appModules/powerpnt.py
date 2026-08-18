@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2012-2025 NV Access Limited, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -26,15 +26,15 @@ from speech import sayAll
 import winUser
 import msoAutoShapeTypes
 from treeInterceptorHandler import DocumentTreeInterceptor
-from NVDAObjects import NVDAObjectTextInfo
+from AslanObjects import AslanObjectTextInfo
 from displayModel import DisplayModelTextInfo, EditableTextDisplayModelTextInfo
 import textInfos
 import textInfos.offsets
 import eventHandler
 import appModuleHandler
-from NVDAObjects.IAccessible import IAccessible
-from NVDAObjects.window import Window
-from NVDAObjects.behaviors import EditableTextWithoutAutoSelectDetection, EditableText
+from AslanObjects.IAccessible import IAccessible
+from AslanObjects.window import Window
+from AslanObjects.behaviors import EditableTextWithoutAutoSelectDetection, EditableText
 import braille
 from cursorManager import ReviewCursorManager
 import controlTypes
@@ -42,10 +42,10 @@ from controlTypes import TextPosition
 from logHandler import log
 import scriptHandler
 from locationHelper import RectLTRB, RectLTWH
-from NVDAObjects.window._msOfficeChart import OfficeChart
+from AslanObjects.window._msOfficeChart import OfficeChart
 from utils.urlUtils import _LinkData
 
-# Translators: The name of a category of NVDA commands.
+# Translators: The name of a category of Aslan commands.
 SCRCAT_POWERPOINT = _("PowerPoint")
 
 # Window classes where PowerPoint's object model should be used
@@ -84,7 +84,7 @@ class ppEApplicationSink(comtypes.COMObject):
 		oldFocus = api.getFocusObject()
 		if not isinstance(oldFocus, SlideShowWindow) or i.hwndFocus != oldFocus.windowHandle:
 			return
-		oldFocus.treeInterceptor.rootNVDAObject.handleSlideChange()
+		oldFocus.treeInterceptor.rootAslanObject.handleSlideChange()
 
 	def WindowSelectionChange(self, sel):
 		i = winUser.getGUIThreadInfo(0)
@@ -242,7 +242,7 @@ msoInk = 22
 msoInkComment = 23
 msoSmartArt = 24
 
-msoShapeTypesToNVDARoles = {
+msoShapeTypesToAslanRoles = {
 	msoChart: controlTypes.Role.CHART,
 	msoGroup: controlTypes.Role.GROUPING,
 	msoEmbeddedOLEObject: controlTypes.Role.EMBEDDEDOBJECT,
@@ -345,7 +345,7 @@ class DocumentWindow(PaneClassDC):
 		return self.ppSelection
 
 	def _get_selection(self):
-		"""Fetches an NVDAObject representing the current presentation's selected slide, shape or text frame."""
+		"""Fetches an AslanObject representing the current presentation's selected slide, shape or text frame."""
 		sel = self.ppSelection
 		selType = sel.type
 		# MS Powerpoint 2007 and below does not correctly indecate text selection in the notes page when in normal view
@@ -509,7 +509,7 @@ class OutlinePane(EditableTextWithoutAutoSelectDetection, PaneClassDC):
 
 class PpObject(Window):
 	"""
-	The base NVDAObject for slides, shapes and text frames.
+	The base AslanObject for slides, shapes and text frames.
 	Accepts and holds references to the original Document window, and the current object's Powerpoint object.
 	Also has some utility functions and scripts for managing selection changes.
 	Note No events are used to detect selection changes, its all keyboard commands for now.
@@ -960,7 +960,7 @@ class Shape(PpObject):
 				return controlTypes.Role.VIDEO
 			elif ppMediaType == ppAudio:
 				return controlTypes.Role.AUDIO
-		role = msoShapeTypesToNVDARoles.get(self.ppShapeType, controlTypes.Role.SHAPE)
+		role = msoShapeTypesToAslanRoles.get(self.ppShapeType, controlTypes.Role.SHAPE)
 		if role == controlTypes.Role.SHAPE:
 			ppAutoShapeType = self.ppAutoShapeType
 			role = msoAutoShapeTypes.msoAutoShapeTypeToRole.get(ppAutoShapeType, controlTypes.Role.SHAPE)
@@ -1354,25 +1354,25 @@ class NotesTextFrame(TextFrame):
 		return self.documentWindow
 
 
-class SlideShowTreeInterceptorTextInfo(NVDAObjectTextInfo):
-	"""The TextInfo for Slide Show treeInterceptors. Based on NVDAObjectTextInfo but tweeked to work with TreeInterceptors by using basicText on the treeInterceptor's rootNVDAObject."""
+class SlideShowTreeInterceptorTextInfo(AslanObjectTextInfo):
+	"""The TextInfo for Slide Show treeInterceptors. Based on AslanObjectTextInfo but tweeked to work with TreeInterceptors by using basicText on the treeInterceptor's rootAslanObject."""
 
 	def _getStoryText(self):
-		return self.obj.rootNVDAObject.basicText
+		return self.obj.rootAslanObject.basicText
 
 	def _get_boundingRects(self) -> list[RectLTWH]:
-		if self.obj.rootNVDAObject.hasIrrelevantLocation:
+		if self.obj.rootAslanObject.hasIrrelevantLocation:
 			raise LookupError("Object is off screen, invisible or has no location")
-		return [self.obj.rootNVDAObject.location]
+		return [self.obj.rootAslanObject.location]
 
-	def _getOffsetsFromNVDAObject(self, obj):
-		if obj == self.obj.rootNVDAObject:
+	def _getOffsetsFromAslanObject(self, obj):
+		if obj == self.obj.rootAslanObject:
 			return (0, self._getStoryLength())
 		raise LookupError
 
 	def getTextWithFields(self, formatConfig: Optional[Dict] = None) -> textInfos.TextInfo.TextWithFieldsT:
-		fields = self.obj.rootNVDAObject.basicTextFields
-		text = self.obj.rootNVDAObject.basicText
+		fields = self.obj.rootAslanObject.basicTextFields
+		text = self.obj.rootAslanObject.basicText
 		out = []
 		textOffset = self._startOffset
 		for fieldOffset, field in fields:
@@ -1417,16 +1417,16 @@ class SlideShowTreeInterceptor(DocumentTreeInterceptor):
 	"""A TreeInterceptor for showing Slide show content. Has no caret navigation, a CursorManager must be used on top."""
 
 	def _get_isAlive(self):
-		return winUser.isWindow(self.rootNVDAObject.windowHandle)
+		return winUser.isWindow(self.rootAslanObject.windowHandle)
 
 	def __contains__(self, obj):
-		return isinstance(obj, Window) and obj.windowHandle == self.rootNVDAObject.windowHandle
+		return isinstance(obj, Window) and obj.windowHandle == self.rootAslanObject.windowHandle
 
 	hadFocusOnce = False
 
 	def event_treeInterceptor_gainFocus(self):
 		braille.handler.handleGainFocus(self)
-		self.rootNVDAObject.reportFocus()
+		self.rootAslanObject.reportFocus()
 		self.reportNewSlide(self.hadFocusOnce)
 		if not self.hadFocusOnce:
 			self.hadFocusOnce = True
@@ -1460,17 +1460,17 @@ class SlideShowTreeInterceptor(DocumentTreeInterceptor):
 		description=_(
 			# Translators: The description for a script
 			"Toggles between reporting the speaker notes or the actual slide content. This does not change"
-			" what is visible on-screen, but only what the user can read with NVDA",
+			" what is visible on-screen, but only what the user can read with Aslan",
 		),
 		category=SCRCAT_POWERPOINT,
 	)
 	def script_toggleNotesMode(self, gesture):
-		self.rootNVDAObject.notesMode = not self.rootNVDAObject.notesMode
-		self.rootNVDAObject.handleSlideChange()
+		self.rootAslanObject.notesMode = not self.rootAslanObject.notesMode
+		self.rootAslanObject.handleSlideChange()
 
 	def script_slideChange(self, gesture):
 		gesture.send()
-		self.rootNVDAObject.handleSlideChange()
+		self.rootAslanObject.handleSlideChange()
 
 
 class ReviewableSlideshowTreeInterceptor(ReviewCursorManager, SlideShowTreeInterceptor):
@@ -1627,7 +1627,7 @@ class AppModule(appModuleHandler.AppModule):
 		gui.mainFrame.prePopup()
 		d.Show()
 		self.hasTriedPpAppSwitch = True
-		# Make sure NVDA detects and reports focus on the waiting dialog
+		# Make sure Aslan detects and reports focus on the waiting dialog
 		api.processPendingEvents()
 		try:
 			comtypes.client.PumpEvents(1)
@@ -1717,7 +1717,7 @@ class AppModule(appModuleHandler.AppModule):
 				)
 		return m
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if (
 			obj.windowClassName in objectModelWindowClasses
 			and isinstance(obj, IAccessible)

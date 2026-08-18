@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025-2026 NV Access Limited, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Improvements for wxWidgets objects."""
 
@@ -9,13 +9,13 @@ import api
 import eventHandler
 import winUser
 
-from . import IAccessible, getNVDAObjectFromEvent
+from . import IAccessible, getAslanObjectFromEvent
 from logHandler import log
 import windowUtils
-from .. import NVDAObject
+from .. import AslanObject
 
 
-def findExtraOverlayClasses(obj: IAccessible, clsList: list[NVDAObject]):
+def findExtraOverlayClasses(obj: IAccessible, clsList: list[AslanObject]):
 	if obj.name == "wxWebView" and obj.event_objectID == winUser.OBJID_CLIENT:
 		clsList.insert(0, WxWebView)
 
@@ -34,7 +34,7 @@ class WxWebView(IAccessible):
 			case "Shell Embedding":
 				# This is an IE webview.
 				try:
-					obj = getNVDAObjectFromEvent(
+					obj = getAslanObjectFromEvent(
 						windowUtils.findDescendantWindow(
 							firstChild.windowHandle,
 							className="Internet Explorer_Server",

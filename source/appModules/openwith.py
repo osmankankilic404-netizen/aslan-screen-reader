@@ -1,12 +1,12 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2011-2023 NV Access Limited, Joseph Lee
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 import appModuleHandler
 import controlTypes
-from NVDAObjects.UIA import UIA
-from NVDAObjects.behaviors import Dialog
+from AslanObjects.UIA import UIA
+from AslanObjects.behaviors import Dialog
 import winUser
 from winAPI.types import HWNDValT
 
@@ -33,7 +33,7 @@ class ImmersiveOpenWithFlyout(Dialog, UIA):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if isinstance(obj, UIA):
 			automationId = obj.UIAAutomationId
 			if automationId == "NonDefaultAppTile":
@@ -44,7 +44,7 @@ class AppModule(appModuleHandler.AppModule):
 	def isGoodUIAWindow(self, hwnd: HWNDValT) -> bool:
 		if winUser.getClassName(hwnd) in (
 			# #11335: Open With dialog isn't read in Windows 10 Version 2004 (May 2020 Update).
-			# Note that treating the below window as a UIA window will make NVDA no longer announce "pane".
+			# Note that treating the below window as a UIA window will make Aslan no longer announce "pane".
 			"Shell_Flyout",
 			# #14538: Windows 11 Version 22H2 (2022 Update) comes with a modernized Open With dialog
 			# but prevents proper mouse and touch interaction.

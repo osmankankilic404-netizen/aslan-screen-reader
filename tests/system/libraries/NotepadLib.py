@@ -1,10 +1,10 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2021-2025 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.plaintext
 
 """This module provides the NotepadLib Robot Framework Library which allows system tests to start
-Windows Notepad with a text sample and assert NVDA interacts with it in the expected way.
+Windows Notepad with a text sample and assert Aslan interacts with it in the expected way.
 """
 
 # imported methods start with underscore (_) so they don't get imported into robot files as keywords
@@ -168,7 +168,7 @@ class NotepadLib:
 		try:
 			self._waitForNotepadFocus(uniqueTitleRegex)
 		except AssertionError:
-			# NVDA has waited but something prevented notepad from focusing.
+			# Aslan has waited but something prevented notepad from focusing.
 			# A window may have stolen focus or windows may have failed to focus notepad.
 			# Attempt to switch windows directly.
 			windowsLib.logForegroundWindowTitle()

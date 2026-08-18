@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2023-2025 NV Access Limited
@@ -14,7 +14,7 @@ from ctypes import (
 )
 from comtypes.automation import VARIANT
 import enum
-import NVDAState
+import AslanState
 from UIAHandler import UIA
 
 
@@ -55,7 +55,7 @@ class RelativeOffset(c_long):
 		return f"RelativeOffset {self.value}"
 
 
-_dll = oledll[NVDAState.ReadPaths.UIARemoteDll]
+_dll = oledll[AslanState.ReadPaths.UIARemoteDll]
 
 
 class RemoteOperationResultSet:

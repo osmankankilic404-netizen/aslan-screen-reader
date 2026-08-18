@@ -1,8 +1,8 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Manish Agrawal, Derek Riemer, Babbage B.V., Cyrille Bougot,
 # Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 
 import ctypes
@@ -26,7 +26,7 @@ import scriptHandler
 from scriptHandler import script
 import languageHandler
 import ui
-import NVDAHelper
+import AslanHelper
 import XMLFormatting
 from logHandler import log
 from winBindings import user32
@@ -454,13 +454,13 @@ storyTypeLocalizedLabels = {
 	wdTextFrameStory: _("Text frame"),
 }
 
-wdFieldTypesToNVDARoles = {
+wdFieldTypesToAslanRoles = {
 	wdFieldFormTextInput: controlTypes.Role.EDITABLETEXT,
 	wdFieldFormCheckBox: controlTypes.Role.CHECKBOX,
 	wdFieldFormDropDown: controlTypes.Role.COMBOBOX,
 }
 
-wdContentControlTypesToNVDARoles = {
+wdContentControlTypesToAslanRoles = {
 	wdContentControlRichText: controlTypes.Role.EDITABLETEXT,
 	wdContentControlText: controlTypes.Role.EDITABLETEXT,
 	wdContentControlPicture: controlTypes.Role.GRAPHIC,
@@ -475,7 +475,7 @@ winwordWindowIid = GUID("{00020962-0000-0000-C000-000000000046}")
 
 wm_winword_expandToLine = user32.RegisterWindowMessage("wm_winword_expandToLine")
 
-NVDAUnitsToWordUnits = {
+AslanUnitsToWordUnits = {
 	textInfos.UNIT_CHARACTER: wdCharacter,
 	textInfos.UNIT_WORD: wdWord,
 	textInfos.UNIT_LINE: wdLine,
@@ -569,7 +569,7 @@ class WordDocumentCommentQuickNavItem(WordDocumentCollectionQuickNavItem):
 		author = self.collectionItem.author
 		date = self.collectionItem.date
 		text = self.collectionItem.range.text
-		# Translators: The label shown for a comment in the NVDA Elements List dialog in Microsoft Word.
+		# Translators: The label shown for a comment in the Aslan Elements List dialog in Microsoft Word.
 		# {text}, {author} and {date} will be replaced by the corresponding details about the comment.
 		return _("comment: {text} by {author} on {date}").format(author=author, text=text, date=date)
 
@@ -590,7 +590,7 @@ class WordDocumentRevisionQuickNavItem(WordDocumentCollectionQuickNavItem):
 		date = self.collectionItem.date
 		description = self.collectionItem.formatDescription or ""
 		text = (self.collectionItem.range.text or "")[:100]
-		# Translators: The label shown for an editor revision (tracked change)  in the NVDA Elements List dialog in Microsoft Word.
+		# Translators: The label shown for an editor revision (tracked change)  in the Aslan Elements List dialog in Microsoft Word.
 		# {revisionType} will be replaced with the type of revision; e.g. insertion, deletion or property.
 		# {description} will be replaced with a description of the formatting changes, if any.
 		# {text}, {author} and {date} will be replaced by the corresponding details about the revision.
@@ -614,13 +614,13 @@ class WordDocumentChartQuickNavItem(WordDocumentCollectionQuickNavItem):
 		return "{text}".format(text=text)
 
 	def moveTo(self):
-		chartNVDAObj = _msOfficeChart.OfficeChart(
-			windowHandle=self.document.rootNVDAObject.windowHandle,
+		chartAslanObj = _msOfficeChart.OfficeChart(
+			windowHandle=self.document.rootAslanObject.windowHandle,
 			officeApplicationObject=self.rangeObj.Document.Application,
 			officeChartObject=self.collectionItem.Chart,
-			initialDocument=self.document.rootNVDAObject,
+			initialDocument=self.document.rootAslanObject,
 		)
-		eventHandler.queueEvent("gainFocus", chartNVDAObj)
+		eventHandler.queueEvent("gainFocus", chartAslanObj)
 
 
 class WordDocumentSpellingErrorQuickNavItem(WordDocumentCollectionQuickNavItem):
@@ -630,7 +630,7 @@ class WordDocumentSpellingErrorQuickNavItem(WordDocumentCollectionQuickNavItem):
 	@property
 	def label(self):
 		text = self.collectionItem.text
-		# Translators: The label shown for a spelling error in the NVDA Elements List dialog in Microsoft Word.
+		# Translators: The label shown for a spelling error in the Aslan Elements List dialog in Microsoft Word.
 		# {text} will be replaced with the text of the spelling error.
 		return _("spelling: {text}").format(text=text)
 
@@ -648,7 +648,7 @@ class WordDocumentFootnoteQuickNavItem(WordDocumentReferenceQuickNavItem):
 	def label(self) -> str:
 		number = self.collectionItem.index
 		text = self.collectionItem.range.text
-		# Translators: The label shown for a footnote reference in the NVDA Elements List dialog in Microsoft Word.
+		# Translators: The label shown for a footnote reference in the Aslan Elements List dialog in Microsoft Word.
 		# {number} will be replaced with the footnote number.
 		# {text} will be replaced with the text in the footnote.
 		return _("footnote reference {number}: {text}").format(number=number, text=text)
@@ -659,7 +659,7 @@ class WordDocumentEndnoteQuickNavItem(WordDocumentReferenceQuickNavItem):
 	def label(self) -> str:
 		number = self.collectionItem.index
 		text = self.collectionItem.range.text
-		# Translators: The label shown for a endnote reference in the NVDA Elements List dialog in Microsoft Word.
+		# Translators: The label shown for a endnote reference in the Aslan Elements List dialog in Microsoft Word.
 		# {number} will be replaced with the endnote number.
 		# {text} will be replaced with the text in the footnote.
 		return _("endnote reference {number}: {text}").format(number=number, text=text)
@@ -997,7 +997,7 @@ class WordDocumentTextInfo(textInfos.TextInfo):
 	def _expandToLineAtCaret(self):
 		lineStart = ctypes.c_int()
 		lineEnd = ctypes.c_int()
-		res = NVDAHelper.localLib.nvdaInProcUtils_winword_expandToLine(
+		res = AslanHelper.localLib.aslanInProcUtils_winword_expandToLine(
 			self.obj.appModule.helperLocalBindingHandle,
 			self.obj.documentWindowHandle,
 			self._rangeObj.start,
@@ -1078,7 +1078,7 @@ class WordDocumentTextInfo(textInfos.TextInfo):
 		# cancellable thread so the watchdog can cancel it.
 		try:
 			res = watchdog.cancellableExecute(
-				NVDAHelper.localLib.nvdaInProcUtils_winword_getTextInRange,
+				AslanHelper.localLib.aslanInProcUtils_winword_getTextInRange,
 				self.obj.appModule.helperLocalBindingHandle,
 				self.obj.documentWindowHandle,
 				startOffset,
@@ -1152,7 +1152,7 @@ class WordDocumentTextInfo(textInfos.TextInfo):
 		else:
 			fieldType = int(field.pop("wdFieldType", -1))
 			if fieldType != -1:
-				role = wdFieldTypesToNVDARoles.get(fieldType, controlTypes.Role.UNKNOWN)
+				role = wdFieldTypesToAslanRoles.get(fieldType, controlTypes.Role.UNKNOWN)
 				if fieldType == wdFieldFormCheckBox and int(field.get("wdFieldResult", "0")) > 0:
 					field["states"] = set([controlTypes.State.CHECKED])
 				elif fieldType == wdFieldFormDropDown:
@@ -1164,7 +1164,7 @@ class WordDocumentTextInfo(textInfos.TextInfo):
 			else:
 				fieldType = int(field.get("wdContentControlType", -1))
 				if fieldType != -1:
-					role = wdContentControlTypesToNVDARoles.get(fieldType, controlTypes.Role.UNKNOWN)
+					role = wdContentControlTypesToAslanRoles.get(fieldType, controlTypes.Role.UNKNOWN)
 					if role == controlTypes.Role.CHECKBOX:
 						fieldChecked = bool(int(field.get("wdContentControlChecked", "0")))
 						if fieldChecked:
@@ -1243,16 +1243,16 @@ class WordDocumentTextInfo(textInfos.TextInfo):
 		field["text-position"] = TextPosition(textPosition)
 		color = field.pop("color", None)
 		if color is not None:
-			field["color"] = self.obj.winwordColorToNVDAColor(int(color))
+			field["color"] = self.obj.winwordColorToAslanColor(int(color))
 		bgColor = field.pop("background-color", None)
 		if bgColor is not None:
-			field["background-color"] = self.obj.winwordColorToNVDAColor(int(bgColor))
+			field["background-color"] = self.obj.winwordColorToAslanColor(int(bgColor))
 		hlColorIndex = field.pop("highlight-color-index", None)
 		if hlColorIndex is not None:
 			hlColor = None
 			try:
 				val = _colorIndexToColor[int(hlColorIndex)]
-				hlColor = self.obj.winwordColorToNVDAColor(val)
+				hlColor = self.obj.winwordColorToAslanColor(val)
 			except (KeyError, ValueError):
 				log.debugWarning("highlight color error", exc_info=True)
 				pass
@@ -1299,8 +1299,8 @@ class WordDocumentTextInfo(textInfos.TextInfo):
 			self._expandToLineAtCaret()
 		elif unit == textInfos.UNIT_CHARACTER:
 			self._rangeObj.moveEnd(wdCharacter, 1)
-		elif unit in NVDAUnitsToWordUnits:
-			self._rangeObj.Expand(NVDAUnitsToWordUnits[unit])
+		elif unit in AslanUnitsToWordUnits:
+			self._rangeObj.Expand(AslanUnitsToWordUnits[unit])
 		else:
 			raise NotImplementedError("unit: %s" % unit)
 
@@ -1364,8 +1364,8 @@ class WordDocumentTextInfo(textInfos.TextInfo):
 		if not _rangeObj:
 			_rangeObj = self._rangeObj
 		unit = self._resolveReadingChunkUnit(unit)
-		if unit in NVDAUnitsToWordUnits:
-			unit = NVDAUnitsToWordUnits[unit]
+		if unit in AslanUnitsToWordUnits:
+			unit = AslanUnitsToWordUnits[unit]
 		else:
 			raise NotImplementedError("unit: %s" % unit)
 		if endPoint == "start":
@@ -1398,7 +1398,7 @@ class WordDocumentTextInfo(textInfos.TextInfo):
 		oldOffset = self._rangeObj.end if endPoint == "end" else self._rangeObj.start
 		newOffset = ctypes.c_long()
 		# Try moving by line making use of the selection temporarily
-		res = NVDAHelper.localLib.nvdaInProcUtils_winword_moveByLine(
+		res = AslanHelper.localLib.aslanInProcUtils_winword_moveByLine(
 			self.obj.appModule.helperLocalBindingHandle,
 			self.obj.documentWindowHandle,
 			oldOffset,
@@ -1486,8 +1486,8 @@ class BrowseModeWordDocumentTextInfo(
 			position = textInfos.POSITION_CARET
 		super(BrowseModeWordDocumentTextInfo, self).__init__(obj, position, _rangeObj=_rangeObj)
 
-	def _get_focusableNVDAObjectAtStart(self):
-		return self.obj.rootNVDAObject
+	def _get_focusableAslanObjectAtStart(self):
+		return self.obj.rootAslanObject
 
 
 class WordDocumentTreeInterceptor(browseMode.BrowseModeDocumentTreeInterceptor):
@@ -1500,10 +1500,10 @@ class WordDocumentTreeInterceptor(browseMode.BrowseModeDocumentTreeInterceptor):
 		ui.browseableMessage(longDesc, _("Table description"))
 
 	def _get_isAlive(self):
-		return winUser.isWindow(self.rootNVDAObject.windowHandle)
+		return winUser.isWindow(self.rootAslanObject.windowHandle)
 
 	def __contains__(self, obj):
-		return obj == self.rootNVDAObject
+		return obj == self.rootAslanObject
 
 	def _get_ElementsListDialog(self):
 		return ElementsListDialog
@@ -1541,7 +1541,7 @@ class WordDocumentTreeInterceptor(browseMode.BrowseModeDocumentTreeInterceptor):
 		if pos:
 			rangeObj = pos.innerTextInfo._rangeObj
 		else:
-			rangeObj = self.rootNVDAObject.WinwordDocumentObject.range(0, 0)
+			rangeObj = self.rootAslanObject.WinwordDocumentObject.range(0, 0)
 		includeCurrent = False if pos else True
 		if nodeType == "link":
 			return LinkWinWordCollectionQuicknavIterator(
@@ -1626,19 +1626,19 @@ class WordDocumentTreeInterceptor(browseMode.BrowseModeDocumentTreeInterceptor):
 		info.activate()
 
 	def script_nextRow(self, gesture):
-		self.rootNVDAObject._moveInTable(row=True, forward=True)
+		self.rootAslanObject._moveInTable(row=True, forward=True)
 		braille.handler.handleCaretMove(self)
 
 	def script_previousRow(self, gesture):
-		self.rootNVDAObject._moveInTable(row=True, forward=False)
+		self.rootAslanObject._moveInTable(row=True, forward=False)
 		braille.handler.handleCaretMove(self)
 
 	def script_nextColumn(self, gesture):
-		self.rootNVDAObject._moveInTable(row=False, forward=True)
+		self.rootAslanObject._moveInTable(row=False, forward=True)
 		braille.handler.handleCaretMove(self)
 
 	def script_previousColumn(self, gesture):
-		self.rootNVDAObject._moveInTable(row=False, forward=False)
+		self.rootAslanObject._moveInTable(row=False, forward=False)
 		braille.handler.handleCaretMove(self)
 
 	def _iterTextStyle(
@@ -1669,7 +1669,7 @@ class WordDocumentTreeInterceptor(browseMode.BrowseModeDocumentTreeInterceptor):
 class WordDocument(Window, EditableTextBase):
 	_supportsSentenceNavigation = True
 
-	def winwordColorToNVDAColor(self, val):
+	def winwordColorToAslanColor(self, val):
 		if val >= 0:
 			# normal RGB value
 			return colors.RGB.fromCOLORREF(val).name
@@ -1817,7 +1817,7 @@ class WordDocument(Window, EditableTextBase):
 				# In case an unlisted value is returned by Word Object model.
 				# This may happen if the selection contains multiple underline styles and if the gesture has failed to
 				# apply the underline style (e.g. too short timeout, gesture mismatch due to localization mismatch
-				# between Word and NVDA, etc.)
+				# between Word and Aslan, etc.)
 				log.debugWarning(f"No underline value for {val}")
 		else:
 			# Translators: a message when toggling formatting in Microsoft word
@@ -2202,7 +2202,7 @@ class WordDocument(Window, EditableTextBase):
 
 class WordDocument_WwN(WordDocument):
 	def _get_documentWindowHandle(self):
-		w = NVDAHelper.localLib.findWindowWithClassInThread(self.windowThreadID, "_WwG", True)
+		w = AslanHelper.localLib.findWindowWithClassInThread(self.windowThreadID, "_WwG", True)
 		if not w:
 			log.debugWarning("Could not find window for class _WwG in thread.")
 			w = super(WordDocument_WwN, self).documentWindowHandle

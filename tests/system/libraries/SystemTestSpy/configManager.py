@@ -1,11 +1,11 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
 
 """
-This module is designed to construct and install the speechSpyGlobalPlugin, speechSpySynthDriver, and NVDA
-NVDA config before NVDA is started by the system tests.
+This module is designed to construct and install the speechSpyGlobalPlugin, speechSpySynthDriver, and Aslan
+Aslan config before Aslan is started by the system tests.
 """
 
 from os.path import join as _pJoin
@@ -38,7 +38,7 @@ def _findDepPath(depFileName, searchPaths):
 def _installSystemTestSpyToScratchPad(repoRoot: str, scratchPadDir: str):
 	"""Assembles the required files for the system test spy.
 	Most notably this includes:
-	- speechSpyGlobalPlugin - The actual remote Robot library used to get information out of NVDA
+	- speechSpyGlobalPlugin - The actual remote Robot library used to get information out of Aslan
 	- speechSpySynthDriver - A synth driver that captures and caches speech to provide to speechSpyGlobalPlugin
 	"""
 
@@ -56,7 +56,7 @@ def _installSystemTestSpyToScratchPad(repoRoot: str, scratchPadDir: str):
 	try:
 		opSys.directory_should_exist(_pJoin(spyPackageLibsDir, "xmlrpc"))
 	except AssertionError:
-		# installed copies of NVDA <= 2020.4 don't copy this over
+		# installed copies of Aslan <= 2020.4 don't copy this over
 		_copyPythonLibs(
 			pythonImports=[  # relative to the python path
 				"xmlrpc",
@@ -99,22 +99,22 @@ def setupProfile(
 	stagingDir: str,
 	gesturesFileName: Optional[str] = None,
 ):
-	builtIn.log("Copying files into NVDA profile", level="DEBUG")
+	builtIn.log("Copying files into Aslan profile", level="DEBUG")
 	opSys.copy_file(
 		# Despite duplication, specify full paths for clarity.
-		_pJoin(repoRoot, "tests", "system", "nvdaSettingsFiles", settingsFileName),
-		_pJoin(stagingDir, "nvdaProfile", "nvda.ini"),
+		_pJoin(repoRoot, "tests", "system", "aslanSettingsFiles", settingsFileName),
+		_pJoin(stagingDir, "aslanProfile", "aslan.ini"),
 	)
 	if gesturesFileName is not None:
 		opSys.copy_file(
 			# Despite duplication, specify full paths for clarity.
-			_pJoin(repoRoot, "tests", "system", "nvdaSettingsFiles", gesturesFileName),
-			_pJoin(stagingDir, "nvdaProfile", "gestures.ini"),
+			_pJoin(repoRoot, "tests", "system", "aslanSettingsFiles", gesturesFileName),
+			_pJoin(stagingDir, "aslanProfile", "gestures.ini"),
 		)
 	# create a package to use as the globalPlugin
 	_installSystemTestSpyToScratchPad(
 		repoRoot,
-		_pJoin(stagingDir, "nvdaProfile", "scratchpad"),
+		_pJoin(stagingDir, "aslanProfile", "scratchpad"),
 	)
 
 
@@ -123,8 +123,8 @@ def teardownProfile(stagingDir: str):
 	@todo: this could have an option to preserve the profile for debugging purposes.
 	@param stagingDir: Where the profile was constructed
 	"""
-	builtIn.log("Cleaning up NVDA profile", level="DEBUG")
+	builtIn.log("Cleaning up Aslan profile", level="DEBUG")
 	opSys.remove_directory(
-		_pJoin(stagingDir, "nvdaProfile"),
+		_pJoin(stagingDir, "aslanProfile"),
 		recursive=True,
 	)

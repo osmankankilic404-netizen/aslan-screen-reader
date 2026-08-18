@@ -1,5 +1,5 @@
 # vision/util.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2018-2025 NV Access Limited, Babbage B.V., hwf1324
@@ -10,7 +10,7 @@ from .constants import Context
 import api
 import locationHelper
 from documentBase import TextContainerObject
-from NVDAObjects import NVDAObject
+from AslanObjects import AslanObject
 from typing import Optional
 import textInfos
 import mouseHandler
@@ -26,9 +26,9 @@ def getCaretRect(obj: Optional[TextContainerObject] = None) -> locationHelper.Re
 	if api.isObjectInActiveTreeInterceptor(obj):
 		obj = obj.treeInterceptor
 	if (
-		api.isNVDAObject(obj)
-		# Ignore fake NVDAObjects, as the caret rectangle may not be obtainable through the display model.
-		and not api.isFakeNVDAObject(obj)
+		api.isAslanObject(obj)
+		# Ignore fake AslanObjects, as the caret rectangle may not be obtainable through the display model.
+		and not api.isFakeAslanObject(obj)
 	):
 		# Import late to avoid circular import
 		import displayModel
@@ -57,9 +57,9 @@ def getMouseRect() -> locationHelper.RectLTRB:
 	return locationHelper.RectLTRB.fromPoint(point)
 
 
-def getObjectRect(obj: NVDAObject) -> locationHelper.RectLTRB:
-	if not api.isNVDAObject(obj):
-		raise TypeError("obj must be of type NVDAObject, %s not supported" % type(obj).__name__)
+def getObjectRect(obj: AslanObject) -> locationHelper.RectLTRB:
+	if not api.isAslanObject(obj):
+		raise TypeError("obj must be of type AslanObject, %s not supported" % type(obj).__name__)
 	location = obj.location
 	if not location:
 		raise LookupError

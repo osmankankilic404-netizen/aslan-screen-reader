@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2009-2023 NV Access Limited, Rui Batista, Zahari Yurukov, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -16,7 +16,7 @@ from keyword import iskeyword
 def initializeModulePackagePaths():
 	"""Initializes the module package paths for drivers and plugins.
 	This ensures that drivers (such as braille display drivers) or plugins (such as app modules)
-	can be discovered by NVDA.
+	can be discovered by Aslan.
 	"""
 	import appModules
 	import brailleDisplayDrivers

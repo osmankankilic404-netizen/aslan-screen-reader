@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2026 NV Access Limited, Joseph Lee, Babbage B.V., Davy Kager, Bram Duvigneau, Leonard de Ruijter, Burman's Computer and Education Ltd., Julien Cochuyt
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from typing import Optional
 import baseObject
 import config
 import inputCore
-import NVDAState
+import AslanState
 import scriptHandler
 from logHandler import log
 
@@ -83,7 +83,7 @@ class BrailleDisplayGesture(inputCore.InputGesture):
 			return f"multi{baseName[0].upper()}{baseName[1:]}"
 		return baseName
 
-	if NVDAState._allowDeprecatedAPI():
+	if AslanState._allowDeprecatedAPI():
 
 		def _get_routingIndex(self) -> int | None:
 			"""Deprecated. Use :attr:`cellIndexes` instead.

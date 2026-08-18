@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2017-2025 NV Access Limited, James Teh, Leonard de Ruijter, Cary-rowen
 # This file is covered by the GNU General Public License.
 #  See the file COPYING for more details.
@@ -21,7 +21,7 @@ import cursorManager
 import textInfos.offsets
 from abc import ABCMeta, abstractmethod
 from locationHelper import RectLTWH
-from NVDAObjects import NVDAObject
+from AslanObjects import AslanObject
 
 onRecognizeResultCallbackT = Callable[[Union["RecognitionResult", Exception]], None]
 
@@ -92,7 +92,7 @@ class ContentRecognizer(AutoPropertyObject):
 		"""Validate the capture coordinates before creating image for content recognition"""
 		return True
 
-	def validateObject(self, nav: NVDAObject) -> bool:
+	def validateObject(self, nav: AslanObject) -> bool:
 		"""Validation to be performed on the navigator object before content recognition
 		@param nav: The navigator object to be validated
 		@return: C{True} or C{False}, depending on whether the navigator object is valid or not.
@@ -110,7 +110,7 @@ class RecogImageInfo:
 	This class calculates the width and height of the image for recognition;
 	see the L{recogWidth} and L{recogHeight} attributes.
 	It can also convert coordinates in the recognized image
-	to screen coordinates suitable to be returned to NVDA;
+	to screen coordinates suitable to be returned to Aslan;
 	e.g. in order to route the mouse.
 	This is done using the L{convertXToScreen} and L{convertYToScreen} methods.
 	"""
@@ -189,7 +189,7 @@ class RecognitionResult(garbageHandler.TrackedObject, metaclass=ABCMeta):
 	def makeTextInfo(self, obj, position) -> BaseContentRecogTextInfo:
 		"""Make a TextInfo within the recognition result text at the requested position.
 		@param obj: The object to return for the C{obj} property of the TextInfo.
-			The TextInfo itself doesn't use this, but NVDA requires it to set the review object, etc.
+			The TextInfo itself doesn't use this, but Aslan requires it to set the review object, etc.
 		@param position: The requested position; one of the C{textInfos.POSITION_*} constants.
 		@return: The TextInfo at the requested position in the result.
 		"""
@@ -319,9 +319,9 @@ class SimpleTextResult(RecognitionResult):
 	"""A L{RecognitionResult} which presents a simple text string.
 	This should only be used if the recognizer only returns text
 	and no coordinate information.
-	In this case, NVDA calculates words and lines itself based on the text;
+	In this case, Aslan calculates words and lines itself based on the text;
 	e.g. a new line character breaks a line.
-	Routing the mouse, etc. cannot be supported because even though NVDA
+	Routing the mouse, etc. cannot be supported because even though Aslan
 	has the coordinates for the entire block of content, it doesn't have
 	the coordinates for individual words or characters.
 	"""

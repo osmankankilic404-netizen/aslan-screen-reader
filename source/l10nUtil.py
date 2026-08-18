@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2024-2025 NV Access Limited.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -26,19 +26,19 @@ EXPORT_TIMEOUT_SECONDS = 60 * 10  # 10 minutes
 
 def fetchCrowdinAuthToken() -> str:
 	"""
-	Fetch the Crowdin auth token from the ~/.nvda_crowdin file or prompt the user for it.
-	If provided by the user, the token will be saved to the ~/.nvda_crowdin file.
+	Fetch the Crowdin auth token from the ~/.aslan_crowdin file or prompt the user for it.
+	If provided by the user, the token will be saved to the ~/.aslan_crowdin file.
 	:return: The auth token
 	"""
 	crowdinAuthToken = os.getenv("crowdinAuthToken", "")
 	if crowdinAuthToken:
 		print("Using Crowdin auth token from environment variable.")
 		return crowdinAuthToken
-	token_path = os.path.expanduser("~/.nvda_crowdin")
+	token_path = os.path.expanduser("~/.aslan_crowdin")
 	if os.path.exists(token_path):
 		with open(token_path, "r") as f:
 			token = f.read().strip()
-			print("Using auth token from ~/.nvda_crowdin")
+			print("Using auth token from ~/.aslan_crowdin")
 			return token
 	print("A Crowdin auth token is required to proceed.")
 	print("Please visit https://crowdin.com/settings#api-key")
@@ -228,9 +228,9 @@ def stripXliff(xliffPath: str, outputPath: str, oldXliffPath: str | None = None)
 
 
 crowdinFileIDs = {
-	"nvda.po": 2,
-	# alias for nvda.po
-	"nvda.pot": 2,
+	"aslan.po": 2,
+	# alias for aslan.po
+	"aslan.pot": 2,
 	"userGuide.xliff": 18,
 	# lowercase alias for userGuide.xliff
 	"userguide.xliff": 18,

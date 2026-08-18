@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2012-2026 NV Access Limited, Rui Batista, Babbage B.V., Julien Cochuyt, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 """Handler for braille input."""
 
@@ -415,13 +415,13 @@ class BrailleInputHandler(AutoPropertyObject):
 
 	def handleGainFocus(self, obj):
 		"""Clear all state when the focus changes.
-		:type obj: NVDAObjects.NVDAObject
+		:type obj: AslanObjects.AslanObject
 		"""
 		self.flushBuffer()
 
 	def handleCaretMove(self, obj):
 		"""
-		:type obj: NVDAObjects.NVDAObject
+		:type obj: AslanObjects.AslanObject
 		"""
 		if not self.bufferBraille:
 			# No pending braille input, so nothing to do.

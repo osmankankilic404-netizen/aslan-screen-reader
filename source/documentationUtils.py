@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Łukasz Golonka, Cyrille Bougot
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -13,7 +13,7 @@ import nh3
 import globalVars
 from gui import blockAction
 import languageHandler
-import NVDAState
+import AslanState
 from logHandler import log
 import ui
 import queueHandler
@@ -22,7 +22,7 @@ import wx
 
 def getDocFilePath(fileName: str, localized: bool = True) -> str | None:
 	if not getDocFilePath.rootPath:
-		if NVDAState.isRunningAsSource():
+		if AslanState.isRunningAsSource():
 			getDocFilePath.rootPath = os.path.join(globalVars.appDir, "..", "user_docs")
 		else:
 			getDocFilePath.rootPath = os.path.join(globalVars.appDir, "documentation")
@@ -48,7 +48,7 @@ def getDocFilePath(fileName: str, localized: bool = True) -> str | None:
 		return None
 	else:
 		# Not localized.
-		if NVDAState.isRunningAsSource() and fileName == "copying.txt":
+		if AslanState.isRunningAsSource() and fileName == "copying.txt":
 			# If running from source, this file is in the root dir.
 			return os.path.join(globalVars.appDir, "..", fileName)
 		else:
@@ -59,7 +59,7 @@ getDocFilePath.rootPath = None
 
 
 def reportNoDocumentation(fileName: str, useMsgBox: bool = False) -> None:
-	# Translators: Message reported upon action (e.g. context sensitive help, open documentation from NVDA menu)
+	# Translators: Message reported upon action (e.g. context sensitive help, open documentation from Aslan menu)
 	noDocMessage = _("No documentation found.")
 	log.debugWarning(
 		f"Documentation not found ({fileName}): possible cause - running from source without building user docs.",
@@ -94,7 +94,7 @@ def _getSanitizedHtmlLicense() -> str:
 def displayLicense():
 	ui.browseableMessage(
 		_getSanitizedHtmlLicense(),
-		# Translators: The title of the dialog to show the NVDA License.
-		_("NVDA License"),
+		# Translators: The title of the dialog to show the Aslan License.
+		_("Aslan License"),
 		isHtml=True,
 	)

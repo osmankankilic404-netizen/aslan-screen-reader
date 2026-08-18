@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2012-2022 NV Access Limited, Leonard de Ruijter
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -8,9 +8,9 @@
 from typing import Optional
 import appModuleHandler
 import controlTypes
-from NVDAObjects.window import Window
+from AslanObjects.window import Window
 import winUser
-from NVDAObjects.IAccessible.sysListView32 import ListItem
+from AslanObjects.IAccessible.sysListView32 import ListItem
 import displayModel
 import locationHelper
 
@@ -52,7 +52,7 @@ class TweetListItem(ListItem):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		if not isinstance(obj, Window):
 			return
 		role = obj.role
@@ -61,7 +61,7 @@ class AppModule(appModuleHandler.AppModule):
 		wclass = Window.normalizeWindowClassName(obj.windowClassName)
 
 		if wclass == "Window.8" and role == controlTypes.Role.PANE:
-			# optimisation: There are quite a lot of these, so let's not instantiate parent NVDAObjects unnecessarily.
+			# optimisation: There are quite a lot of these, so let's not instantiate parent AslanObjects unnecessarily.
 			parentWindow = winUser.getAncestor(obj.windowHandle, winUser.GA_PARENT)
 			if (
 				parentWindow
@@ -72,6 +72,6 @@ class AppModule(appModuleHandler.AppModule):
 		elif wclass == "SysTabControl32":
 			obj.isPresentableFocusAncestor = False
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if ListItem in clsList:
 			clsList.insert(0, TweetListItem)

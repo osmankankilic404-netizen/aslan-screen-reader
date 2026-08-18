@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2021 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -20,10 +20,10 @@ from AssertsLib import AssertsLib as _AssertsLib
 
 import os
 from typing import Optional
-import NvdaLib as _nvdaLib
-from NvdaLib import NvdaLib as _nvdaRobotLib
+import NvdaLib as _aslanLib
+from NvdaLib import NvdaLib as _aslanRobotLib
 
-_nvdaProcessAlias = _nvdaRobotLib.nvdaProcessAlias
+_aslanProcessAlias = _aslanRobotLib.aslanProcessAlias
 
 _builtIn: BuiltIn = BuiltIn()
 _process: _ProcessLib = _getLib("Process")
@@ -31,9 +31,9 @@ _asserts: _AssertsLib = _getLib("AssertsLib")
 
 
 def navigate_to_settings(settingsName):
-	spy = _nvdaLib.getSpyLib()
+	spy = _aslanLib.getSpyLib()
 	# open settings menu
-	spy.emulateKeyPress("NVDA+n")
+	spy.emulateKeyPress("Aslan+n")
 	spy.emulateKeyPress("p")
 	spy.emulateKeyPress("s")
 	spy.emulateKeyPress("leftWindows+upArrow")  # maximise
@@ -48,9 +48,9 @@ def navigate_to_settings(settingsName):
 
 
 def read_settings(settingsName, cacheFolder, currentVersion, compareVersion: Optional[str] = None):
-	spy = _nvdaLib.getSpyLib()
+	spy = _aslanLib.getSpyLib()
 	start_speech_index = spy.get_next_speech_index()
-	advancedWarning = "I understand that changing these settings may cause NVDA to function incorrectly."
+	advancedWarning = "I understand that changing these settings may cause Aslan to function incorrectly."
 
 	# read new setting
 	lastSpeech = ""

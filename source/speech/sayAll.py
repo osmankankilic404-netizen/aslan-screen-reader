@@ -1,8 +1,8 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2026 NV Access Limited, Peter Vágner, Aleksey Sadovoy, Babbage B.V., Bill Dengler,
 # Julien Cochuyt, Cyrille Bougot, Leonard de Ruijter
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from abc import ABCMeta, abstractmethod
 from enum import IntEnum
@@ -27,7 +27,7 @@ from .types import (
 )
 
 if TYPE_CHECKING:
-	import NVDAObjects
+	import AslanObjects
 	from .speech import (
 		getTextInfoSpeech,
 		SpeakTextInfoState,
@@ -93,7 +93,7 @@ class _SayAllHandler:
 		"""
 		return bool(self._getActiveSayAll())
 
-	def readObjects(self, obj: "NVDAObjects.NVDAObject", startedFromScript: bool | None = False):
+	def readObjects(self, obj: "AslanObjects.AslanObject", startedFromScript: bool | None = False):
 		"""Start or restarts the object reader.
 		:param obj: the object to be read
 		:param startedFromScript: whether the current say all action was initially started from a script; use None to keep
@@ -162,12 +162,12 @@ class _Reader(garbageHandler.TrackedObject, metaclass=ABCMeta):
 class _ObjectsReader(_Reader):
 	"""Manages continuous reading of objects."""
 
-	def __init__(self, handler: _SayAllHandler, root: "NVDAObjects.NVDAObject"):
+	def __init__(self, handler: _SayAllHandler, root: "AslanObjects.AslanObject"):
 		super().__init__(handler)
 		self.walker = self.walk(root)
 		self.prevObj = None
 
-	def walk(self, obj: "NVDAObjects.NVDAObject"):
+	def walk(self, obj: "AslanObjects.AslanObject"):
 		yield obj
 		child = obj.simpleFirstChild
 		while child:

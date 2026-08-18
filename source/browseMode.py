@@ -1,8 +1,8 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2026 NV Access Limited, Babbage B.V., James Teh, Leonard de Ruijter,
 # Thomas Stivers, Accessolutions, Julien Cochuyt, Cyrille Bougot, Kefas Lungu
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from typing import Any
 from collections.abc import Callable, Generator
@@ -45,7 +45,7 @@ import treeInterceptorHandler
 import api
 import gui.guiHelper
 from gui.dpiScalingHelper import DpiScalingHelperMixinWithoutInit
-from NVDAObjects import NVDAObject
+from AslanObjects import AslanObject
 import gui.contextHelp
 from abc import ABCMeta, abstractmethod
 import globalVars
@@ -197,7 +197,7 @@ class TextInfoQuickNavItem(QuickNavItem):
 
 	@property
 	def obj(self):
-		return self.textInfo.basePosition if isinstance(self.textInfo.basePosition, NVDAObject) else None
+		return self.textInfo.basePosition if isinstance(self.textInfo.basePosition, AslanObject) else None
 
 	@property
 	def label(self):
@@ -251,7 +251,7 @@ class TextInfoQuickNavItem(QuickNavItem):
 			Alternative property names might be name or value.
 			The callable must return None if the property doesn't exist.
 			An expected callable might be get method on a L{Dict},
-			or "lambda property: getattr(self.obj, property, None)" for an L{NVDAObject}.
+			or "lambda property: getattr(self.obj, property, None)" for an L{AslanObject}.
 		"""
 		content = self.textInfo.text.strip()
 		if self.itemType == "heading":
@@ -284,7 +284,7 @@ class TextInfoQuickNavItem(QuickNavItem):
 					# Example output: Mute; toggle button; pressed
 					labelParts = (content or name or unlabeled, roleText, labeledStates)
 				else:
-					# Example output: Find a repository...; edit; has auto complete; NVDA
+					# Example output: Find a repository...; edit; has auto complete; Aslan
 					labelParts = (name or unlabeled, roleText, labeledStates, content)
 			elif self.itemType in ("link", "button"):
 				# Example output: You have unread notifications; visited
@@ -310,11 +310,11 @@ class BrowseModeTreeInterceptor(treeInterceptorHandler.TreeInterceptor):
 		"""Returns the type of a link in the document, or C{None} if the link type cannot be determined."""
 		return urlUtils.getLinkType(url, self.documentURL)
 
-	def _get_currentNVDAObject(self):
+	def _get_currentAslanObject(self):
 		raise NotImplementedError
 
-	def _get_currentFocusableNVDAObject(self):
-		return self.makeTextInfo(textInfos.POSITION_CARET).focusableNVDAObjectAtStart
+	def _get_currentFocusableAslanObject(self):
+		return self.makeTextInfo(textInfos.POSITION_CARET).focusableAslanObjectAtStart
 
 	def event_treeInterceptor_gainFocus(self):
 		"""Triggered when this browse mode interceptor gains focus.
@@ -366,7 +366,7 @@ class BrowseModeTreeInterceptor(treeInterceptorHandler.TreeInterceptor):
 	def shouldPassThrough(self, obj, reason: OutputReason | None = None):
 		"""Determine whether pass through mode should be enabled (focus mode) or disabled (browse mode) for a given object.
 		@param obj: The object in question.
-		@type obj: L{NVDAObjects.NVDAObject}
+		@type obj: L{AslanObjects.AslanObject}
 		@param reason: The reason for this query;
 		one of the output reasons, or C{None} for manual pass through mode activation by the user.
 		@return: C{True} if pass through mode (focus mode) should be enabled, C{False} if it should be disabled (browse mode).
@@ -429,7 +429,7 @@ class BrowseModeTreeInterceptor(treeInterceptorHandler.TreeInterceptor):
 				return True
 			# If this is a focus change, pass through should be enabled for certain ancestor containers.
 			# this is done last for performance considerations. Walking up the through the parents could be costly
-			while obj and obj != self.rootNVDAObject:
+			while obj and obj != self.rootAslanObject:
 				if obj.role == controlTypes.Role.TOOLBAR:
 					return True
 				obj = obj.parent
@@ -675,13 +675,13 @@ class BrowseModeTreeInterceptor(treeInterceptorHandler.TreeInterceptor):
 	script_elementsList.__doc__ = _("Lists various types of elements in this document")
 	script_elementsList.ignoreTreeInterceptorPassThrough = True
 
-	def _activateNVDAObject(self, obj):
+	def _activateAslanObject(self, obj):
 		"""Activate an object in response to a user request.
 		This should generally perform the default action or click on the object.
 		@param obj: The object to activate.
-		@type obj: L{NVDAObjects.NVDAObject}
+		@type obj: L{AslanObjects.AslanObject}
 		"""
-		while obj and obj != self.rootNVDAObject:
+		while obj and obj != self.rootAslanObject:
 			try:
 				obj.doAction()
 				break
@@ -705,7 +705,7 @@ class BrowseModeTreeInterceptor(treeInterceptorHandler.TreeInterceptor):
 
 	def _activatePosition(self, obj=None):
 		if not obj:
-			obj = self.currentNVDAObject
+			obj = self.currentAslanObject
 			if not obj:
 				return
 		if obj.role == controlTypes.Role.MATH:
@@ -724,7 +724,7 @@ class BrowseModeTreeInterceptor(treeInterceptorHandler.TreeInterceptor):
 			obj.setFocus()
 			speech.speakObject(obj, reason=OutputReason.FOCUS)
 		else:
-			self._activateNVDAObject(obj)
+			self._activateAslanObject(obj)
 
 	def script_activatePosition(self, gesture: inputCore.InputGesture) -> None:
 		self._focusLastFocusableObject(activatePosition=True)
@@ -735,14 +735,14 @@ class BrowseModeTreeInterceptor(treeInterceptorHandler.TreeInterceptor):
 	def _focusLastFocusableObject(self, activatePosition=False):
 		"""Used when auto focus focusable elements is disabled to sync the focus
 		to the browse mode cursor.
-		When auto focus focusable elements is disabled, NVDA doesn't focus elements
+		When auto focus focusable elements is disabled, Aslan doesn't focus elements
 		as the user moves the browse mode cursor. However, there are some cases
 		where the user always wants to interact with the focus; e.g. if they press
 		the applications key to open the context menu. In these cases, this method
 		is called first to sync the focus to the browse mode cursor.
 		"""
-		obj = self.currentFocusableNVDAObject
-		if obj != self.rootNVDAObject and self._shouldSetFocusToObj(obj) and obj != api.getFocusObject():
+		obj = self.currentFocusableAslanObject
+		if obj != self.rootAslanObject and self._shouldSetFocusToObj(obj) and obj != api.getFocusObject():
 			obj.setFocus()
 			# We might be about to activate or pass through a key which will cause
 			# this object to change (e.g. checking a check box). However, we won't
@@ -773,9 +773,9 @@ class BrowseModeTreeInterceptor(treeInterceptorHandler.TreeInterceptor):
 	script_disablePassThrough.ignoreTreeInterceptorPassThrough = True
 
 	def _set_disableAutoPassThrough(self, state: bool):
-		# If the user manually switches to focus mode with NVDA+space, that enables
+		# If the user manually switches to focus mode with Aslan+space, that enables
 		# pass-through and disables auto pass-through.
-		# NVDA doesn't automatically sync the focus to the browse mode
+		# Aslan doesn't automatically sync the focus to the browse mode
 		# cursor, however, since the user is switching to focus mode, they probably
 		# want to interact with the focus, so sync the focus here.
 		if state and self.passThrough:
@@ -883,11 +883,11 @@ class BrowseModeTreeInterceptor(treeInterceptorHandler.TreeInterceptor):
 			getattr(self, f"script_previous{itemType[0].upper()}{itemType[1:]}")(gesture)
 
 	__gestures = {
-		"kb:NVDA+f7": "elementsList",
+		"kb:Aslan+f7": "elementsList",
 		"kb:enter": "activatePosition",
 		"kb:numpadEnter": "activatePosition",
 		"kb:space": "activatePosition",
-		"kb:NVDA+shift+space": "toggleSingleLetterNav",
+		"kb:Aslan+shift+space": "toggleSingleLetterNav",
 		"kb:escape": "disablePassThrough",
 		"kb:control+enter": "passThrough",
 		"kb:control+numpadEnter": "passThrough",
@@ -1549,7 +1549,7 @@ class ElementsListDialog(
 	def onElementTypeChange(self, evt):
 		elementType = evt.GetInt()
 		# We need to make sure this gets executed after the focus event.
-		# Otherwise, NVDA doesn't seem to get the event.
+		# Otherwise, Aslan doesn't seem to get the event.
 		queueHandler.queueFunction(
 			queueHandler.eventQueue,
 			self.initElementType,
@@ -1792,19 +1792,19 @@ class ElementsListDialog(
 					item.report()
 				item.moveTo()
 
-			# We must use core.callLater rather than wx.CallLater to ensure that the callback runs within NVDA's core pump.
-			# If it didn't, and it directly or indirectly called wx.Yield, it could start executing NVDA's core pump from within the yield, causing recursion.
+			# We must use core.callLater rather than wx.CallLater to ensure that the callback runs within Aslan's core pump.
+			# If it didn't, and it directly or indirectly called wx.Yield, it could start executing Aslan's core pump from within the yield, causing recursion.
 			core.callLater(100, move)
 
 
 class BrowseModeDocumentTextInfo(textInfos.TextInfo):
-	def _get_focusableNVDAObjectAtStart(self):
+	def _get_focusableAslanObjectAtStart(self):
 		try:
 			item = next(self.obj._iterNodesByType("focusable", "up", self))
 		except StopIteration:
-			return self.obj.rootNVDAObject
+			return self.obj.rootAslanObject
 		if not item:
-			return self.obj.rootNVDAObject
+			return self.obj.rootAslanObject
 		return item.obj
 
 
@@ -1827,8 +1827,8 @@ class BrowseModeDocumentTreeInterceptor(
 		self._hadFirstGainFocus = False
 		self._enteringFromOutside = True
 		# We need to cache this because it will be unavailable once the document dies.
-		if not hasattr(self.rootNVDAObject.appModule, "_browseModeRememberedCaretPositions"):
-			self.rootNVDAObject.appModule._browseModeRememberedCaretPositions = {}
+		if not hasattr(self.rootAslanObject.appModule, "_browseModeRememberedCaretPositions"):
+			self.rootAslanObject.appModule._browseModeRememberedCaretPositions = {}
 		self._lastCaretPosition = None
 		#: True if the last caret move was due to a focus change.
 		self._lastCaretMoveWasFocus = False
@@ -1839,13 +1839,13 @@ class BrowseModeDocumentTreeInterceptor(
 			lastCaretPos = self._lastCaretPosition
 			log.debug(f"Saving caret position {lastCaretPos} for document at {docID}")
 			try:
-				self.rootNVDAObject.appModule._browseModeRememberedCaretPositions[docID] = lastCaretPos
+				self.rootAslanObject.appModule._browseModeRememberedCaretPositions[docID] = lastCaretPos
 			except AttributeError:
 				# The app module died.
 				pass
 
-	def _get_currentNVDAObject(self):
-		return self.makeTextInfo(textInfos.POSITION_CARET).NVDAObjectAtStart
+	def _get_currentAslanObject(self):
+		return self.makeTextInfo(textInfos.POSITION_CARET).AslanObjectAtStart
 
 	def event_treeInterceptor_gainFocus(self):
 		doSayAll = False
@@ -1875,7 +1875,7 @@ class BrowseModeDocumentTreeInterceptor(
 		if not self.passThrough:
 			if doSayAll:
 				speech.speakObjectProperties(
-					self.rootNVDAObject,
+					self.rootAslanObject,
 					name=True,
 					states=True,
 					reason=OutputReason.FOCUS,
@@ -1885,18 +1885,18 @@ class BrowseModeDocumentTreeInterceptor(
 				# Speak it like we would speak focus on any other document object.
 				# This includes when entering the treeInterceptor for the first time:
 				if not hadFirstGainFocus:
-					speech.speakObject(self.rootNVDAObject, reason=OutputReason.FOCUS)
+					speech.speakObject(self.rootAslanObject, reason=OutputReason.FOCUS)
 				else:
 					# And when coming in from an outside object
 					# #4069 But not when coming up from a non-rendered descendant.
 					ancestors = api.getFocusAncestors()
 					fdl = api.getFocusDifferenceLevel()
 					try:
-						tl = ancestors.index(self.rootNVDAObject)
+						tl = ancestors.index(self.rootAslanObject)
 					except ValueError:
 						tl = len(ancestors)
 					if fdl <= tl:
-						speech.speakObject(self.rootNVDAObject, reason=OutputReason.FOCUS)
+						speech.speakObject(self.rootAslanObject, reason=OutputReason.FOCUS)
 				info = self.selection
 				if not info.isCollapsed:
 					speech.speakPreselectedText(info.text)
@@ -1921,7 +1921,7 @@ class BrowseModeDocumentTreeInterceptor(
 
 	def _activatePosition(self, obj=None, info=None):
 		if info:
-			obj = info.NVDAObjectAtStart
+			obj = info.AslanObjectAtStart
 			if not obj:
 				return
 		super(BrowseModeDocumentTreeInterceptor, self)._activatePosition(obj=obj)
@@ -1948,16 +1948,16 @@ class BrowseModeDocumentTreeInterceptor(
 		if reason == OutputReason.FOCUS:
 			self._lastCaretMoveWasFocus = True
 			focusObj = api.getFocusObject()
-			if focusObj == self.rootNVDAObject:
+			if focusObj == self.rootAslanObject:
 				return
 		else:
 			self._lastCaretMoveWasFocus = False
-			focusObj = info.focusableNVDAObjectAtStart
-			obj = info.NVDAObjectAtStart
+			focusObj = info.focusableAslanObjectAtStart
+			obj = info.AslanObjectAtStart
 			if not obj:
-				log.debugWarning("Invalid NVDAObjectAtStart")
+				log.debugWarning("Invalid AslanObjectAtStart")
 				return
-			if obj == self.rootNVDAObject:
+			if obj == self.rootAslanObject:
 				return
 			obj.scrollIntoView()
 			if self.programmaticScrollMayFireEvent:
@@ -1966,7 +1966,7 @@ class BrowseModeDocumentTreeInterceptor(
 			self.passThrough = self.shouldPassThrough(focusObj, reason=reason)
 			if (
 				not eventHandler.isPendingEvents("gainFocus")
-				and focusObj != self.rootNVDAObject
+				and focusObj != self.rootAslanObject
 				and focusObj != api.getFocusObject()
 				and self._shouldSetFocusToObj(focusObj)
 			):
@@ -1979,7 +1979,7 @@ class BrowseModeDocumentTreeInterceptor(
 		"""Determine whether an object should receive focus.
 		Subclasses may extend or override this method.
 		@param obj: The object in question.
-		@type obj: L{NVDAObjects.NVDAObject}
+		@type obj: L{AslanObjects.AslanObject}
 		"""
 		return (
 			obj.role not in self.APPLICATION_ROLES
@@ -2030,7 +2030,7 @@ class BrowseModeDocumentTreeInterceptor(
 
 		scriptHandler.queueScript(script, gesture)
 
-	currentExpandedControl = None  #: an NVDAObject representing the control that has just been expanded with the collapseOrExpandControl script.
+	currentExpandedControl = None  #: an AslanObject representing the control that has just been expanded with the collapseOrExpandControl script.
 
 	def script_collapseOrExpandControl(self, gesture: inputCore.InputGesture):
 		self._focusLastFocusableObject()
@@ -2111,7 +2111,7 @@ class BrowseModeDocumentTreeInterceptor(
 			gesture.send()
 
 	def event_focusEntered(self, obj, nextHandler):
-		if obj == self.rootNVDAObject:
+		if obj == self.rootAslanObject:
 			self._enteringFromOutside = True
 		# Even if passThrough is enabled, we still completely drop focusEntered events here.
 		# In order to get them back when passThrough is enabled, we replay them with the _replayFocusEnteredEvents method in event_gainFocus.
@@ -2121,7 +2121,7 @@ class BrowseModeDocumentTreeInterceptor(
 	def _shouldIgnoreFocus(self, obj):
 		"""Determines whether focus on a given object should be ignored.
 		@param obj: The object in question.
-		@type obj: L{NVDAObjects.NVDAObject}
+		@type obj: L{AslanObjects.AslanObject}
 		@return: C{True} if focus on L{obj} should be ignored, C{False} otherwise.
 		@rtype: bool
 		"""
@@ -2131,7 +2131,7 @@ class BrowseModeDocumentTreeInterceptor(
 		"""Executed after a gainFocus within the browseMode document.
 		This will not be executed if L{event_gainFocus} determined that it should abort and call nextHandler.
 		@param obj: The object that gained focus.
-		@type obj: L{NVDAObjects.NVDAObject}
+		@type obj: L{AslanObjects.AslanObject}
 		"""
 
 	def _replayFocusEnteredEvents(self):
@@ -2173,7 +2173,7 @@ class BrowseModeDocumentTreeInterceptor(
 			# user switches to focus mode with this object still focused.
 			self._postGainFocus(obj)
 			return
-		if obj == self.rootNVDAObject:
+		if obj == self.rootAslanObject:
 			if self.passThrough:
 				self._replayFocusEnteredEvents()
 				return nextHandler()
@@ -2208,7 +2208,7 @@ class BrowseModeDocumentTreeInterceptor(
 				self._replayFocusEnteredEvents()
 			return nextHandler()
 
-		# Save off and clear any previous object that was focused by NVDA
+		# Save off and clear any previous object that was focused by Aslan
 		# and waiting on a focus event.
 		objPendingFocusBeforeActivate = self._objPendingFocusBeforeActivate
 		self._objPendingFocusBeforeActivate = None
@@ -2218,7 +2218,7 @@ class BrowseModeDocumentTreeInterceptor(
 			# still initializing  or the old focus is dead.
 			isOverlapping = False
 		else:
-			# if this focus event was caused by NVDA setting the focus itself
+			# if this focus event was caused by Aslan setting the focus itself
 			# due to activation or applications key etc.
 			isOverlapping = obj == objPendingFocusBeforeActivate
 
@@ -2246,7 +2246,7 @@ class BrowseModeDocumentTreeInterceptor(
 				# Not doing this would cause  later browseMode speaking to either not speak controlFields it had entered, or speak controlField exits after having already exited.
 				# See #7435 for a discussion on this.
 				# #17750: It's important that we do this *after* speaking the object.
-				# Otherwise, the cached info would prevent NVDA from detecting things like
+				# Otherwise, the cached info would prevent Aslan from detecting things like
 				# row and column changes.
 				speech.speakTextInfo(focusInfo, reason=OutputReason.ONLYCACHE)
 			focusInfo.collapse()
@@ -2267,7 +2267,7 @@ class BrowseModeDocumentTreeInterceptor(
 					# an element (e.g. by pressing enter) or presses a key which we pass
 					# through (e.g. control+enter), we call _focusLastFocusableObject.
 					# However, the activation/key press might cause a property change
-					# before we get the focus event, so NVDA's normal reporting of
+					# before we get the focus event, so Aslan's normal reporting of
 					# changes to the focus won't pick it up.
 					# The speech property cache on _objPendingFocusBeforeActivate reflects
 					# the properties before the activation/key, so use that to speak any
@@ -2286,7 +2286,7 @@ class BrowseModeDocumentTreeInterceptor(
 
 	def _handleScrollTo(
 		self,
-		obj: NVDAObject | textInfos.TextInfo,
+		obj: AslanObject | textInfos.TextInfo,
 	) -> bool:
 		"""Handle scrolling the browseMode document to a given object in response to an event.
 		Subclasses should call this from an event which indicates that the document has scrolled.
@@ -2305,7 +2305,7 @@ class BrowseModeDocumentTreeInterceptor(
 			# However, pretend we handled it, as we don't want it to be passed on to the object either.
 			return True
 
-		if isinstance(obj, NVDAObject):
+		if isinstance(obj, AslanObject):
 			try:
 				scrollInfo = self.makeTextInfo(obj)
 			except (NotImplementedError, RuntimeError):
@@ -2330,13 +2330,13 @@ class BrowseModeDocumentTreeInterceptor(
 
 		return False
 
-	def _isNVDAObjectInApplication_noWalk(self, obj):
+	def _isAslanObjectInApplication_noWalk(self, obj):
 		"""Determine whether a given object is within an application without walking ancestors.
 		The base implementation simply checks whether the object has an application role.
 		Subclasses can override this if they can provide a definite answer without needing to walk.
 		For example, for virtual buffers, if the object is in the buffer,
 		it definitely isn't in an application.
-		L{_isNVDAObjectInApplication} calls this and walks to the next ancestor if C{None} is returned.
+		L{_isAslanObjectInApplication} calls this and walks to the next ancestor if C{None} is returned.
 		@return: C{True} if definitely in an application,
 			C{False} if definitely not in an application,
 			C{None} if this can't be determined without walking ancestors.
@@ -2355,12 +2355,12 @@ class BrowseModeDocumentTreeInterceptor(
 			return True
 		return None
 
-	def _isNVDAObjectInApplication(self, obj):
+	def _isAslanObjectInApplication(self, obj):
 		"""Determine whether a given object is within an application.
 		The object is considered to be within an application if it or one of its ancestors has an application role.
-		This should only be called on objects beneath the treeInterceptor's root NVDAObject.
+		This should only be called on objects beneath the treeInterceptor's root AslanObject.
 		@param obj: The object in question.
-		@type obj: L{NVDAObjects.NVDAObject}
+		@type obj: L{AslanObjects.AslanObject}
 		@return: C{True} if L{obj} is within an application, C{False} otherwise.
 		@rtype: bool
 		"""
@@ -2380,13 +2380,13 @@ class BrowseModeDocumentTreeInterceptor(
 				cache[obj] = result
 			return result
 
-		while obj and obj != self.rootNVDAObject:
+		while obj and obj != self.rootAslanObject:
 			inApp = cache.get(obj)
 			if inApp is not None:
 				# We found a cached result.
 				return doResult(inApp)
 			objs.append(obj)
-			inApp = self._isNVDAObjectInApplication_noWalk(obj)
+			inApp = self._isAslanObjectInApplication_noWalk(obj)
 			if inApp is not None:
 				return doResult(inApp)
 			# We must walk ancestors.
@@ -2440,7 +2440,7 @@ class BrowseModeDocumentTreeInterceptor(
 		if self.shouldRememberCaretPositionAcrossLoads:
 			docID = self._lastCachedDocumentConstantIdentifier
 			try:
-				caretPos = self.rootNVDAObject.appModule._browseModeRememberedCaretPositions[docID]
+				caretPos = self.rootAslanObject.appModule._browseModeRememberedCaretPositions[docID]
 			except KeyError:
 				log.debug(f"No saved caret position for {docID}")
 				return None
@@ -2562,8 +2562,8 @@ class BrowseModeDocumentTreeInterceptor(
 		2. Then we drop all control fields, leaving only formatChange fields and text.
 		@raise RuntimeError: found unknown command in getTextWithFields()
 		"""
-		from NVDAObjects.UIA.wordDocument import WordBrowseModeDocument
-		from NVDAObjects.window.winword import WordDocumentTreeInterceptor
+		from AslanObjects.UIA.wordDocument import WordBrowseModeDocument
+		from AslanObjects.window.winword import WordDocumentTreeInterceptor
 
 		microsoftWordMode: bool = isinstance(self, (WordBrowseModeDocument, WordDocumentTreeInterceptor))
 		stack: list[textInfos.FormatField] = [{}]
@@ -2846,7 +2846,7 @@ class BrowseModeDocumentTreeInterceptor(
 			# Translators: the description for the toggleScreenLayout script.
 			"Toggles on and off if the screen layout is preserved while rendering the document content",
 		),
-		gesture="kb:NVDA+v",
+		gesture="kb:Aslan+v",
 	)
 	def script_toggleScreenLayout(self, gesture: inputCore.InputGesture) -> None:
 		try:
@@ -2856,7 +2856,7 @@ class BrowseModeDocumentTreeInterceptor(
 			ui.message(_("Not supported in this document."))
 
 	def updateAppSelection(self):
-		"""Update the native selection in the application to match the browse mode selection in NVDA."""
+		"""Update the native selection in the application to match the browse mode selection in Aslan."""
 		raise NotImplementedError
 
 	def clearAppSelection(self):
@@ -2877,7 +2877,7 @@ class BrowseModeDocumentTreeInterceptor(
 				log.debugWarning("Synchronising the native selection with focus mode failed", exc_info=True)
 
 	@script(
-		gesture="kb:NVDA+shift+f10",
+		gesture="kb:Aslan+shift+f10",
 		# Translators: input help message for toggle native selection command
 		description=_("Toggles native selection mode on and off"),
 	)

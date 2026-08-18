@@ -1,5 +1,5 @@
 # winConsoleHandler.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2009-2025 NV Access Limited, Babbage B.V.
@@ -23,7 +23,7 @@ from typing import (
 )
 
 """
-Handler for NVDA's legacy Windows Console support,
+Handler for Aslan's legacy Windows Console support,
 used in situations where UIA isn't available.
 """
 
@@ -66,9 +66,9 @@ def _consoleCtrlHandler(event):
 
 def connectConsole(obj):
 	global consoleObject, consoleOutputHandle, checkDeadTimer
-	# Get the process ID of the console this NVDAObject is fore
+	# Get the process ID of the console this AslanObject is fore
 	processID, threadID = winUser.getWindowThreadProcessID(obj.windowHandle)
-	# Attach NVDA to this console so we can access its text etc
+	# Attach Aslan to this console so we can access its text etc
 	try:
 		wincon.AttachConsole(processID)
 	except WindowsError as e:
@@ -121,7 +121,7 @@ def disconnectConsole():
 		wincon.SetConsoleCtrlHandler(_consoleCtrlHandler, False)
 	except WindowsError:
 		pass
-	# Try freeing NVDA from this console
+	# Try freeing Aslan from this console
 	try:
 		wincon.FreeConsole()
 	except WindowsError:
@@ -131,8 +131,8 @@ def disconnectConsole():
 
 def isConsoleDead():
 	# Every console should have at least one process associated with it.
-	# This console should have two if NVDA is also connected.
-	# If there is only one, it must be NVDA alone, so it is dead.
+	# This console should have two if Aslan is also connected.
+	# If there is only one, it must be Aslan alone, so it is dead.
 	processList = wincon.GetConsoleProcessList(2)
 	return len(processList) < 2
 
@@ -140,7 +140,7 @@ def isConsoleDead():
 def _checkDead():
 	try:
 		if isConsoleDead():
-			# We must disconnect NVDA from this console so it can close.
+			# We must disconnect Aslan from this console so it can close.
 			disconnectConsole()
 	except:  # noqa: E722
 		log.exception()
@@ -166,7 +166,7 @@ def consoleWinEventHook(
 	threadID: int,
 	timestamp: int,
 ) -> None:
-	from NVDAObjects.behaviors import KeyboardHandlerBasedTypedCharSupport
+	from AslanObjects.behaviors import KeyboardHandlerBasedTypedCharSupport
 
 	# We don't want to do anything with the event if the event is not for the window this console is in
 	if window != consoleObject.windowHandle:

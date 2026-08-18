@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2016-2021 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -24,9 +24,9 @@ from browseMode import BrowseModeDocumentTreeInterceptor
 import textInfos
 from speech.types import SpeechSequence
 from textInfos import DocumentWithPageTurns
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.IAccessible import IAccessible
 from globalCommands import SCRCAT_SYSTEMCARET
-from NVDAObjects.IAccessible.ia2TextMozilla import MozillaCompoundTextInfo
+from AslanObjects.IAccessible.ia2TextMozilla import MozillaCompoundTextInfo
 from comInterfaces import IAccessible2Lib as IA2
 import winUser
 import mouseHandler
@@ -51,7 +51,7 @@ class BookPageViewTreeInterceptor(
 	pageChangeAlreadyHandled = False
 
 	def turnPage(self, previous=False):
-		self.rootNVDAObject.turnPage(previous=previous)
+		self.rootAslanObject.turnPage(previous=previous)
 		# turnPage waits for a pageChange event before returning,
 		# but the pageChange event will still get fired.
 		# We need to know that we've already handled it.
@@ -64,23 +64,23 @@ class BookPageViewTreeInterceptor(
 			return
 		info = self.makeTextInfo(textInfos.POSITION_FIRST)
 		self.selection = info
-		if not self.rootNVDAObject.hasFocus:
+		if not self.rootAslanObject.hasFocus:
 			# Don't report anything if the book area isn't focused.
 			return
 		info.expand(textInfos.UNIT_LINE)
 		speech.speakTextInfo(info, unit=textInfos.UNIT_LINE, reason=OutputReason.CARET)
 
 	def isAlive(self):
-		return winUser.isWindow(self.rootNVDAObject.windowHandle)
+		return winUser.isWindow(self.rootAslanObject.windowHandle)
 
 	def __contains__(self, obj):
-		return obj == self.rootNVDAObject
+		return obj == self.rootAslanObject
 
 	def _getTableCellAt(self, tableID, startPos, destRow, destCol):
 		"""Override of documentBase.DocumentWithTableNavigation._getTableCellAt."""
 		# Locate the table in the object ancestry of the given document position.
-		obj = startPos.NVDAObjectAtStart
-		while not obj.table and obj != startPos.obj.rootNVDAObject:
+		obj = startPos.AslanObjectAtStart
+		while not obj.table and obj != startPos.obj.rootAslanObject:
 			obj = obj.parent
 		if not obj.table:
 			# No table could be found
@@ -150,7 +150,7 @@ class BookPageViewTreeInterceptor(
 		# The selection might have been adjusted to meet word boundaries,
 		# so retrieve and report the selection from Kindle.
 		# we can't just use self.makeTextInfo, as that will use our fake selection.
-		realSel = self.rootNVDAObject.makeTextInfo(textInfos.POSITION_SELECTION)
+		realSel = self.rootAslanObject.makeTextInfo(textInfos.POSITION_SELECTION)
 		speech.speakTextSelected(realSel.text)
 		# Remove our virtual selection and move the caret to the active end.
 		fakeSel.innerTextInfo = realSel
@@ -205,7 +205,7 @@ class BookPageViewTreeInterceptor(
 			)
 		obj = pos.innerTextInfo._startObj
 		if nodeType == "container":
-			while obj != self.rootNVDAObject:
+			while obj != self.rootAslanObject:
 				if obj.role == controlTypes.Role.TABLE:
 					ti = self.makeTextInfo(obj)
 					yield browseMode.TextInfoQuickNavItem(nodeType, self, ti)
@@ -240,7 +240,7 @@ class BookPageViewTreeInterceptor(
 						yield browseMode.TextInfoQuickNavItem(nodeType, self, ti)
 			# No more embedded objects here.
 			# We started in an embedded object, so continue in the parent.
-			if obj == self.rootNVDAObject:
+			if obj == self.rootAslanObject:
 				log.debug("At root, stopping")
 				break  # Can't go any further.
 			log.debug("Continuing in parent")
@@ -441,7 +441,7 @@ class Math(IAccessible):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if isinstance(obj, IAccessible):
 			clsList.insert(0, PageTurnFocusIgnorer)
 			if (
@@ -457,7 +457,7 @@ class AppModule(appModuleHandler.AppModule):
 				clsList.insert(0, Math)
 		return clsList
 
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		if (
 			isinstance(obj, IAccessible)
 			and isinstance(obj.IAccessibleObject, IA2.IAccessible2)

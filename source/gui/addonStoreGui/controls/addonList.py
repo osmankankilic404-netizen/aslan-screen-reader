@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited, Leonard de Ruijter, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -11,7 +11,7 @@ import wx
 
 from gui import (
 	guiHelper,
-	nvdaControls,
+	aslanControls,
 )
 from gui.dpiScalingHelper import DpiScalingHelperMixinWithoutInit
 from logHandler import log
@@ -25,7 +25,7 @@ from ..viewModels.addonList import AddonListItemVM, AddonListVM
 
 
 class AddonVirtualList(
-	nvdaControls.AutoWidthColumnListCtrl,
+	aslanControls.AutoWidthColumnListCtrl,
 	DpiScalingHelperMixinWithoutInit,
 ):
 	def __init__(
@@ -115,7 +115,7 @@ class AddonVirtualList(
 	def _itemDataUpdated(self, index: int):
 		log.debug(f"index: {index}")
 		self.RefreshItem(index)
-		# Emit a namechange event for the list item in order for NVDA to report the updated state.
+		# Emit a namechange event for the list item in order for Aslan to report the updated state.
 		wx.Accessible.NotifyEvent(wx.ACC_EVENT_OBJECT_NAMECHANGE, self, wx.OBJID_CLIENT, index + 1)
 
 	def OnItemSelected(self, evt: wx.ListEvent):

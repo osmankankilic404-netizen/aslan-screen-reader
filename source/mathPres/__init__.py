@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2014-2022 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -14,7 +14,7 @@ import re
 import typing
 from typing import List, Optional, Union
 
-from NVDAObjects.window import Window
+from AslanObjects.window import Window
 import controlTypes
 import api
 import virtualBuffers
@@ -25,7 +25,7 @@ import ui
 import textInfos
 
 if typing.TYPE_CHECKING:
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 	from speech.commands import SpeechCommand  # noqa F401: type-checking only
 
 
@@ -60,7 +60,7 @@ class MathPresentationProvider:
 	def interactWithMathMlFromSource(
 		self,
 		mathMl: str,
-		sourceObj: "NVDAObject",
+		sourceObj: "AslanObject",
 	) -> None:
 		"""Begin interaction with specified MathML markup from the given source object.
 
@@ -126,8 +126,8 @@ def initialize() -> None:
 			)
 
 
-class MathInteractionNVDAObject(Window):
-	"""Base class for a fake NVDAObject which can be focused while interacting with math.
+class MathInteractionAslanObject(Window):
+	"""Base class for a fake AslanObject which can be focused while interacting with math.
 	Subclasses can bind commands to interact with the content
 	and produce speech and braille output as they wish.
 	To begin interaction, call ``setFocus``.
@@ -144,7 +144,7 @@ class MathInteractionNVDAObject(Window):
 		self,
 		provider: MathPresentationProvider | None = None,
 		mathMl: str | None = None,
-		sourceObj: "NVDAObject | None" = None,
+		sourceObj: "AslanObject | None" = None,
 	) -> None:
 		"""Initialize a math interaction object.
 
@@ -154,8 +154,8 @@ class MathInteractionNVDAObject(Window):
 		"""
 		self.parent = parent = api.getFocusObject()
 		self.provider = provider
-		self.sourceObj: "NVDAObject | None" = sourceObj
-		super(MathInteractionNVDAObject, self).__init__(windowHandle=parent.windowHandle)
+		self.sourceObj: "AslanObject | None" = sourceObj
+		super(MathInteractionAslanObject, self).__init__(windowHandle=parent.windowHandle)
 
 	def setFocus(self):
 		ti = self.parent.treeInterceptor
@@ -214,7 +214,7 @@ def getMathMlFromTextInfo(pos: textInfos.TextInfo) -> Optional[str]:
 	return None
 
 
-def interactWithMathMl(mathMl: str, sourceObj: "NVDAObject | None" = None) -> None:
+def interactWithMathMl(mathMl: str, sourceObj: "AslanObject | None" = None) -> None:
 	"""Begin interaction with specified MathML markup, reporting any errors to the user.
 
 	This is intended to be called from scripts.

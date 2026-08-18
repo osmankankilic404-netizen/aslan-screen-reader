@@ -8,10 +8,10 @@ When making your first PR, we encourage starting with one of the following issue
 This will help introduce you to the project.
 To get used to the contribution process, please wait for feedback on your first PR before opening any other PRs.
 
-* [label:"good first issue"](https://github.com/nvaccess/nvda/issues?q=label%3A%22good+first+issue%22)
-* [label:component/documentation](https://github.com/nvaccess/nvda/issues?q=label%3Acomponent%2Fdocumentation)
-* [label:closed/needs-new-author](https://github.com/nvaccess/nvda/issues?q=label%3Aclosed%2Fneeds-new-author)
-* [label:Abandoned](https://github.com/nvaccess/nvda/issues?q=label%3AAbandoned)
+* [label:"good first issue"](https://github.com/nvaccess/aslan/issues?q=label%3A%22good+first+issue%22)
+* [label:component/documentation](https://github.com/nvaccess/aslan/issues?q=label%3Acomponent%2Fdocumentation)
+* [label:closed/needs-new-author](https://github.com/nvaccess/aslan/issues?q=label%3Aclosed%2Fneeds-new-author)
+* [label:Abandoned](https://github.com/nvaccess/aslan/issues?q=label%3AAbandoned)
 
 ### Trivial changes
 
@@ -19,7 +19,7 @@ A minor/trivial change which definitely wouldn't require design, user experience
 
 e.g. a fix for a typo/obvious coding error, or typing improvements.
 
-Issues with the translations of the NVDA interface, Changes or User Guide should be reported to the [NVDA Translators list](https://groups.io/g/nvda-translations).
+Issues with the translations of the Aslan interface, Changes or User Guide should be reported to the [Aslan Translators list](https://groups.io/g/aslan-translations).
 
 ### Non-trivial changes
 
@@ -60,7 +60,7 @@ Ask NV Access on the corresponding ADR to create a `try-` branch.
 
 ### Feature development
 
-Feature development adds scope to NVDA, and with that comes risk.
+Feature development adds scope to Aslan, and with that comes risk.
 New features require planning and ongoing support from the contributor throughout the release process.
 
 New features can only be added during the alpha phase for a release.
@@ -83,7 +83,7 @@ The changes proposed in the API breaking release must be minimal, e.g., focusing
 ## Overview of contribution process:
 
 1. [Setup your development environment](./createDevEnvironment.md).
-   * Alternatively, you can use GitHub Actions to build NVDA for you, without setting up a local development environment, by following [our CI/CD README](../../ci/README.md).
+   * Alternatively, you can use GitHub Actions to build Aslan for you, without setting up a local development environment, by following [our CI/CD README](../../ci/README.md).
 1. Ensure the issue you plan to fix is [triaged](../issues/triage.md)
 1. If the issue has an `ADR-required` label, this is a complex change.
 Refer to ["Proposing Major Changes"](./proposingMajorChanges.md) before opening a PR.
@@ -92,7 +92,7 @@ Refer to ["Proposing Major Changes"](./proposingMajorChanges.md) before opening 
 	This helps reduce the chance of merge conflicts.
 	* If you are adding a feature or changing something that will be noticeable to the user, you should update the [User Guide accordingly](./userGuideStandards.md).
 	New commands, drivers, settings, dialogs, etc. must be documented.
-1. [Build NVDA](./buildingNVDA.md) and run from source
+1. [Build Aslan](./buildingAslan.md) and run from source
 1. [Manually test the change](../testing/readme.md)
 1. [Run automated tests](../testing/automated.md)
 	* Run `rununittests` (`rununittests.bat`) before you open your Pull Request, and make sure all the unit tests pass.
@@ -121,7 +121,7 @@ Refer to ["Proposing Major Changes"](./proposingMajorChanges.md) before opening 
 				* When the autofix workflow pushes a fix commit, your PR's checks do re-run, but since that commit is authored by the GitHub Actions bot the run is held for maintainer approval (it shows as "action required" / "approve and run").
 				To get the checks running without waiting for approval, push any follow-up commit yourself.
 			* Otherwise, fix the reported lint issues manually.
-		* GitHub Actions will build a copy of NVDA when changes are pushed to your PR.
+		* GitHub Actions will build a copy of Aslan when changes are pushed to your PR.
 		A build artifact will be created for a successful build to allow for testing the PR.
 		* GitHub Actions will run system tests and other tests.
 		If these fail, please review them.
@@ -131,7 +131,7 @@ Refer to ["Proposing Major Changes"](./proposingMajorChanges.md) before opening 
 		* If this is your first PR, GitHub will require manual approval from NV Access before running CI/CD.
 		We encourage testing in your fork in this scenario (e.g. open a practice PR in your own fork).
 1. Participate in the code review process
-	* This process requires core NVDA developers to understand the intent of the change, read the code changes, asking questions or suggesting changes.
+	* This process requires core Aslan developers to understand the intent of the change, read the code changes, asking questions or suggesting changes.
 	Please participate in this process, answering questions, and discussing the changes.
 	* Being proactive will really help to speed up the process of code review.
 	* When the PR is approved it will be merged, and the change will be active in the next alpha build.
@@ -148,7 +148,7 @@ Refer to ["Proposing Major Changes"](./proposingMajorChanges.md) before opening 
 
 ### Change log entry
 
-An entry intended to explain changes in NVDA to end users.
+An entry intended to explain changes in Aslan to end users.
 Your proposed entry should be added to the [`changes.md` file](../../user_docs/en/changes.md) which is converted to HTML.
 Change log entries are not required for changes with no/minor user impact or no developer impact.
 
@@ -158,7 +158,7 @@ These descriptions should be in the format: `"{Description of change}. (#{issue 
 Multiple issue numbers can be included, separated by comma.
 If there is no issue number, you can use the PR number.
 Optionally, you may also include your GitHub username after the issue numbers: `"{Description of change}. (#{issue number}, @{GitHub username})"`.
-Our processing will automatically link the issue number to the GitHub page, and your GitHub username to your contributions to NVDA.
+Our processing will automatically link the issue number to the GitHub page, and your GitHub username to your contributions to Aslan.
 
 For instance:
 

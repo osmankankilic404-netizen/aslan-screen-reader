@@ -1,12 +1,12 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2025 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
 
 """
-Session tracking was introduced so that NVDA has a mechanism to track activation of the Windows lock screen.
+Session tracking was introduced so that Aslan has a mechanism to track activation of the Windows lock screen.
 This is required to support the privacy and data integrity of the logged in user.
-NVDA restricts access to NVDA settings and certain tools while the system is locked,
+Aslan restricts access to Aslan settings and certain tools while the system is locked,
 and prevents navigating beyond apps open on the lock screen (LockScreen.exe, Magnifier, some notifications).
 
 Used to:
@@ -29,7 +29,7 @@ from typing import (
 
 from baseObject import AutoPropertyObject
 from logHandler import log
-from NVDAState import _TrackNVDAInitialization
+from AslanState import _TrackAslanInitialization
 
 from ._wtsApi32 import (
 	WTSINFOEXW,
@@ -46,15 +46,15 @@ RPC_S_INVALID_BINDING = 0x6A6
 Error which occurs when Windows is not ready to register session notification tracking.
 This error can be prevented by waiting for the event: 'Global\\TermSrvReadyEvent.'
 
-Unused in NVDA core.
+Unused in Aslan core.
 """
 
 NOTIFY_FOR_THIS_SESSION = 0
 """
 The alternative to NOTIFY_FOR_THIS_SESSION is to be notified for all user sessions.
-NOTIFY_FOR_ALL_SESSIONS is not required as NVDA runs on separate user profiles, including the system profile.
+NOTIFY_FOR_ALL_SESSIONS is not required as Aslan runs on separate user profiles, including the system profile.
 
-Unused in NVDA core.
+Unused in Aslan core.
 """
 
 SYNCHRONIZE = 0x00100000
@@ -62,7 +62,7 @@ SYNCHRONIZE = 0x00100000
 Parameter for OpenEventW, blocks thread until event is registered.
 https://docs.microsoft.com/en-us/windows/win32/sync/synchronization-object-security-and-access-rights
 
-Unused in NVDA core, duplicate of winKernel.SYNCHRONIZE.
+Unused in Aslan core, duplicate of winKernel.SYNCHRONIZE.
 """
 
 _lockStateTracker: Optional["_WindowsLockedState"] = None
@@ -85,7 +85,7 @@ class WindowsTrackedSession(enum.IntEnum):
 	Context:
 	https://docs.microsoft.com/en-us/windows/win32/api/wtsapi32/nf-wtsapi32-wtsregistersessionnotification
 
-	Unused in NVDA core.
+	Unused in Aslan core.
 	"""
 
 	CONSOLE_CONNECT = 1
@@ -137,14 +137,14 @@ def pumpAll():
 
 
 def _isWindowsLocked() -> bool:
-	if not _TrackNVDAInitialization.isInitializationComplete():
+	if not _TrackAslanInitialization.isInitializationComplete():
 		# Wait until initialization is complete,
-		# so NVDA and other consumers can register the lock state
+		# so Aslan and other consumers can register the lock state
 		# via post_sessionLockStateChanged.
 		return False
 	if _lockStateTracker is None:
 		log.error(
-			"_TrackNVDAInitialization.markInitializationComplete was called "
+			"_TrackAslanInitialization.markInitializationComplete was called "
 			"before sessionTracking.initialize",
 		)
 		return False

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2014-2025 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -10,7 +10,7 @@ from typing import Any
 
 from config.registry import RegistryKey as _RegistryKey, EASE_OF_ACCESS_APP_KEY_NAME
 from logHandler import log
-import NVDAState
+import AslanState
 import winreg
 import winUser
 import winBindings.user32
@@ -18,7 +18,7 @@ import winBindings.user32
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	if attrName == "RegistryKey" and NVDAState._allowDeprecatedAPI():
+	if attrName == "RegistryKey" and AslanState._allowDeprecatedAPI():
 		log.warning("easeOfAccess.RegistryKey is deprecated, use config.registry.RegistryKey instead.")
 
 		class RegistryKey(str, Enum):
@@ -28,23 +28,23 @@ def __getattr__(attrName: str) -> Any:
 
 		return RegistryKey
 
-	if attrName == "ROOT_KEY" and NVDAState._allowDeprecatedAPI():
+	if attrName == "ROOT_KEY" and AslanState._allowDeprecatedAPI():
 		log.warning("ROOT_KEY is deprecated, use config.registry.RegistryKey.EASE_OF_ACCESS instead.")
 		return _RegistryKey.EASE_OF_ACCESS.value
-	if attrName == "APP_KEY_PATH" and NVDAState._allowDeprecatedAPI():
+	if attrName == "APP_KEY_PATH" and AslanState._allowDeprecatedAPI():
 		log.warning("APP_KEY_PATH is deprecated, use config.registry.RegistryKey.EASE_OF_ACCESS_APP instead.")
 		return _RegistryKey.EASE_OF_ACCESS_APP.value
-	if attrName == "APP_KEY_NAME" and NVDAState._allowDeprecatedAPI():
+	if attrName == "APP_KEY_NAME" and AslanState._allowDeprecatedAPI():
 		log.warning("APP_KEY_NAME is deprecated, use config.registry.EASE_OF_ACCESS_APP_KEY_NAME instead.")
 		return EASE_OF_ACCESS_APP_KEY_NAME
-	if attrName == "canConfigTerminateOnDesktopSwitch" and NVDAState._allowDeprecatedAPI():
+	if attrName == "canConfigTerminateOnDesktopSwitch" and AslanState._allowDeprecatedAPI():
 		log.warning("canConfigTerminateOnDesktopSwitch is deprecated.")
 		return True
 	raise AttributeError(f"module {repr(__name__)} has no attribute {repr(attrName)}")
 
 
 class AutoStartContext(IntEnum):
-	"""Registry HKEY used for tracking when NVDA starts automatically"""
+	"""Registry HKEY used for tracking when Aslan starts automatically"""
 
 	ON_LOGON_SCREEN = winreg.HKEY_LOCAL_MACHINE
 	AFTER_LOGON = winreg.HKEY_CURRENT_USER
@@ -96,7 +96,7 @@ def notify(signal):
 
 
 def willAutoStart(autoStartContext: AutoStartContext) -> bool:
-	"""Based on autoStartContext, gets whether NVDA starts automatically:
+	"""Based on autoStartContext, gets whether Aslan starts automatically:
 	 - AutoStartContext.ON_LOGON_SCREEN : on the logon screen
 	 - AutoStartContext.AFTER_LOGON : after logging on
 
@@ -148,7 +148,7 @@ def _getAutoStartConfiguration(autoStartContext: AutoStartContext) -> list[str]:
 
 def setAutoStart(autoStartContext: AutoStartContext, enable: bool) -> None:
 	"""
-	Based on autoStartContext, sets NVDA to start automatically:
+	Based on autoStartContext, sets Aslan to start automatically:
 	 - AutoStartContext.ON_LOGON_SCREEN : on the logon screen
 	 - AutoStartContext.AFTER_LOGON : after logging on
 

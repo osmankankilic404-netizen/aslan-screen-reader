@@ -1,6 +1,6 @@
 # Fonts
 
-This folder contains fonts (and their projects files) used by NVDA.
+This folder contains fonts (and their projects files) used by Aslan.
 
 ## FreeMono-FixedBraille.ttf
 

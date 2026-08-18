@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025-2026 NV Access Limited, Dot Incorporated, Bram Duvigneau
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import time
 from itertools import count, takewhile
@@ -36,7 +36,7 @@ def queueReader(
 	Runs in its own daemon thread for each `Ble` instance. Pulls chunks of
 	received data off `queue` as they arrive from the Bleak notification
 	callback, and hands each chunk off to `onReceive` via
-	`ioThread.queueAsApc` so the callback runs on the shared NVDA I/O
+	`ioThread.queueAsApc` so the callback runs on the shared Aslan I/O
 	thread (matching the behaviour of other `hwIo` transports). Exits
 	cleanly when `stopEvent` is set. `OSError` from the I/O thread path
 	is logged and the loop continues so one transient failure does not
@@ -45,7 +45,7 @@ def queueReader(
 	:param queue: Queue that `Ble._notifyReceive` pushes received bytes to.
 	:param onReceive: Callback to invoke on the I/O thread with each chunk.
 	:param stopEvent: Set by `Ble.close()` to make the loop exit.
-	:param ioThread: Shared NVDA I/O thread used to run `onReceive`.
+	:param ioThread: Shared Aslan I/O thread used to run `onReceive`.
 	"""
 	while True:
 		if stopEvent.is_set():

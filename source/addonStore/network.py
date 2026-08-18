@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited, Cary-rowen
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from concurrent.futures import (
 	Future,
@@ -22,8 +22,8 @@ import requests
 import addonAPIVersion
 from core import callLater
 from logHandler import log
-import NVDAState
-from NVDAState import WritePaths
+import AslanState
+from AslanState import WritePaths
 import threading
 from utils.security import sha256_checksum
 from config import conf
@@ -59,8 +59,8 @@ def _getCurrentApiVersionForURL() -> str:
 	return f"{year}.{major}.{minor}"
 
 
-def _getAddonStoreURL(channel: Channel, lang: str, nvdaApiVersion: str) -> str:
-	return f"{_getBaseURL()}/{lang}/{channel.value}/{nvdaApiVersion}.json"
+def _getAddonStoreURL(channel: Channel, lang: str, aslanApiVersion: str) -> str:
+	return f"{_getBaseURL()}/{lang}/{channel.value}/{aslanApiVersion}.json"
 
 
 def _getCacheHashURL() -> str:
@@ -130,7 +130,7 @@ class AddonFileDownloader:
 	def _prepareDownloadDir(shouldClearExisting: bool = False) -> None:
 		"""Ensure the temporary download directory exists, optionally clearing stale contents."""
 		with AddonFileDownloader.DOWNLOAD_LOCK:
-			if not NVDAState.shouldWriteToDisk():
+			if not AslanState.shouldWriteToDisk():
 				return
 			if shouldClearExisting and os.path.exists(WritePaths.addonStoreDownloadDir):
 				try:
@@ -275,7 +275,7 @@ class AddonFileDownloader:
 				self._executor = None
 			self._activeDownloadPaths.clear()
 			self.progress.clear()
-			if NVDAState.shouldWriteToDisk() and os.path.exists(WritePaths.addonStoreDownloadDir):
+			if AslanState.shouldWriteToDisk() and os.path.exists(WritePaths.addonStoreDownloadDir):
 				try:
 					shutil.rmtree(WritePaths.addonStoreDownloadDir)
 				except OSError:
@@ -293,7 +293,7 @@ class AddonFileDownloader:
 		@return: True if the add-on is downloaded successfully,
 		False if the download is cancelled
 		"""
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			log.error("Should not write to disk, cancelling download")
 			return False
 
@@ -397,7 +397,7 @@ class AddonFileDownloader:
 
 	@staticmethod
 	def _getCacheFilenameForAddon(addonData: _AddonGUIModel) -> str:
-		return f"{addonData.addonId}-{addonData.addonVersionName}.nvda-addon"
+		return f"{addonData.addonId}-{addonData.addonVersionName}.aslan-addon"
 
 	def __del__(self):
 		if self._executor is not None:

@@ -1,12 +1,12 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2021 NV Access Limited, Mesar Hameed, Peter Vágner
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
 
 import config
 import winUser
-from NVDAObjects.IAccessible import IAccessible
+from AslanObjects.IAccessible import IAccessible
 import controlTypes
 import oleacc
 import textInfos
@@ -40,13 +40,13 @@ possibleHistoryWindowNames = frozenset(
 
 
 class AppModule(appModuleHandler.AppModule):
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if (
 			obj.windowClassName == "DirectUIHWND"
 			and obj.role == controlTypes.Role.EDITABLETEXT
 			and obj.name in possibleHistoryWindowNames
 		):
-			from NVDAObjects.window import DisplayModelEditableText
+			from AslanObjects.window import DisplayModelEditableText
 
 			clsList.remove(DisplayModelEditableText)
 			clsList.insert(0, OldMSNHistory)

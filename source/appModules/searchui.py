@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2025 NV Access Limited, Joseph Lee, James Teh
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -13,9 +13,9 @@ import controlTypes
 import winVersion
 import winUser
 from logHandler import log
-from NVDAObjects import NVDAObject
-from NVDAObjects.IAccessible import IAccessible, ContentGenericClient
-from NVDAObjects.UIA import UIA, SearchField, SuggestionListItem
+from AslanObjects import AslanObject
+from AslanObjects.IAccessible import IAccessible, ContentGenericClient
+from AslanObjects.UIA import UIA, SearchField, SuggestionListItem
 
 
 class StartMenuSearchField(SearchField):
@@ -42,7 +42,7 @@ class StartChromiumObj(IAccessible):
 				log.debugWarning("Couldn't find CoreInput ancestor of Chromium doc")
 		return super().shouldAllowIAccessibleFocusEvent
 
-	def isDescendantOf(self, obj: NVDAObject) -> bool:
+	def isDescendantOf(self, obj: AslanObject) -> bool:
 		# #17951: We use IA2 for the Chromium document. However, this method will be
 		# called with the UIA object being controlled by the search box to check
 		# whether it is a suggestion.
@@ -52,7 +52,7 @@ class StartChromiumObj(IAccessible):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		if isinstance(obj, UIA):
 			# #10341: Build 18363 introduces modern search experience in File Explorer.
 			# As part of this, suggestion count is part of a live region.
@@ -65,7 +65,7 @@ class AppModule(appModuleHandler.AppModule):
 			):
 				obj.name = obj.firstChild.name
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if isinstance(obj, IAccessible):
 			try:
 				# #5288: Never use ContentGenericClient, as this uses displayModel
@@ -89,7 +89,7 @@ class AppModule(appModuleHandler.AppModule):
 
 	def isBadUIAWindow(self, hwnd: int) -> bool:
 		# #17951: Never use UIA for the Chromium document in the Start menu because
-		# SetFocus freezes. Without this explicit code, NVDA would try to use UIA:
+		# SetFocus freezes. Without this explicit code, Aslan would try to use UIA:
 		# 1. If we haven't injected yet. This can happen before focus is fired
 		# within the Chromium document. Since it is in a different process, it
 		# doesn't fire foreground and focus events as soon as the Start Menu opens.

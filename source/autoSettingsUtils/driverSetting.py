@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2019 NV Access Limited
@@ -55,7 +55,7 @@ class DriverSetting(AutoPropertyObject):
 		@param defaultVal: Specifies the default value for a driver setting.
 		@param displayName: the localized string used in synth settings ring or
 			None to use displayNameWithAccelerator
-		@param useConfig: Whether the value of this option is loaded from and saved to NVDA's configuration.
+		@param useConfig: Whether the value of this option is loaded from and saved to Aslan's configuration.
 			Set this to C{False} if the driver deals with loading and saving.
 		"""
 		self.id = id

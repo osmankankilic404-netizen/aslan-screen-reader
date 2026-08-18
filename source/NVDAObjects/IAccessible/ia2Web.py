@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2006-2022 NV Access Limited
@@ -27,14 +27,14 @@ import controlTypes
 from logHandler import log
 from documentBase import DocumentWithTableNavigation
 from IAccessibleHandler.utils import isMSAADebugLoggingEnabled
-from NVDAObjects.behaviors import Dialog, WebDialog
+from AslanObjects.behaviors import Dialog, WebDialog
 from . import IAccessible, Groupbox
 from .ia2TextMozilla import MozillaCompoundTextInfo
 import aria
 import api
 import speech
 import config
-import NVDAObjects
+import AslanObjects
 
 if TYPE_CHECKING:
 	from locationHelper import RectLTRB
@@ -110,12 +110,12 @@ class IA2WebAnnotation(AnnotationOrigin):
 class Ia2Web(IAccessible):
 	IAccessibleTableUsesTableCellIndexAttrib = True
 
-	def isDescendantOf(self, obj: "NVDAObjects.NVDAObject") -> bool:
+	def isDescendantOf(self, obj: "AslanObjects.AslanObject") -> bool:
 		if obj.windowHandle != self.windowHandle:
 			# Only supported on the same window.
 			raise NotImplementedError
 		if not isinstance(obj, Ia2Web):
-			# #4080: Input composition NVDAObjects are the same window but not IAccessible2!
+			# #4080: Input composition AslanObjects are the same window but not IAccessible2!
 			raise NotImplementedError
 		accId = obj.IA2UniqueID
 		try:
@@ -152,7 +152,7 @@ class Ia2Web(IAccessible):
 
 	def _get_detailsSummary(self) -> Optional[str]:
 		log.warning(
-			"NVDAObject.detailsSummary is deprecated. Use NVDAObject.annotations instead.",
+			"AslanObject.detailsSummary is deprecated. Use AslanObject.annotations instead.",
 			stack_info=True,
 		)
 		# just take the first for now.
@@ -161,14 +161,14 @@ class Ia2Web(IAccessible):
 	@property
 	def hasDetails(self) -> bool:
 		log.warning(
-			"NVDAObject.hasDetails is deprecated. Use NVDAObject.annotations instead.",
+			"AslanObject.hasDetails is deprecated. Use AslanObject.annotations instead.",
 			stack_info=True,
 		)
 		return bool(self.annotations)
 
 	def _get_detailsRole(self) -> Optional[controlTypes.Role]:
 		log.warning(
-			"NVDAObject.detailsRole is deprecated. Use NVDAObject.annotations instead.",
+			"AslanObject.detailsRole is deprecated. Use AslanObject.annotations instead.",
 			stack_info=True,
 		)
 		# just take the first for now.
@@ -215,7 +215,7 @@ class Ia2Web(IAccessible):
 		if self.IA2Attributes.get("goog-editable") == "false":
 			states.discard(controlTypes.State.EDITABLE)
 		if controlTypes.State.HASPOPUP in states:
-			popupState = aria.ariaHaspopupValuesToNVDAStates.get(
+			popupState = aria.ariaHaspopupValuesToAslanStates.get(
 				self.IA2Attributes.get("haspopup"),
 			)
 			if popupState:
@@ -292,7 +292,7 @@ class Editor(Ia2Web, DocumentWithTableNavigation):
 
 	def _getTableCellAt(self, tableID, startPos, destRow, destCol):
 		# Locate the table in the object ancestry of the given document position.
-		obj = startPos.NVDAObjectAtStart
+		obj = startPos.AslanObjectAtStart
 		while not obj.table and obj != self:
 			obj = obj.parent
 		if not obj.table:
@@ -336,7 +336,7 @@ class EditorChunk(Ia2Web):
 
 
 class Math(Ia2Web):
-	def _getMathElementChildren(self, obj: NVDAObjects.NVDAObject) -> tuple[IAccessible, ...]:
+	def _getMathElementChildren(self, obj: AslanObjects.AslanObject) -> tuple[IAccessible, ...]:
 		return tuple(
 			child
 			for child in obj.children
@@ -424,7 +424,7 @@ class Math(Ia2Web):
 			if self.IA2Attributes.get("tag") != "math":
 				# Could be a <span> (etc) that has role = math -- check the child
 				# If there is a single <math> child, recurse on the assumption that is what was the intended math
-				mathObjs: list["NVDAObjects.NVDAObject"] = [
+				mathObjs: list["AslanObjects.AslanObject"] = [
 					child for child in self.children if child.IA2Attributes.get("tag") == "math"
 				]
 				if len(mathObjs) == 1:

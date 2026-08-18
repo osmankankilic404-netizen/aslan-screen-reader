@@ -1,9 +1,9 @@
 # Release Process
 
-This document provides rough guidelines for the process of developing NVDA releases.
+This document provides rough guidelines for the process of developing Aslan releases.
 All current and potential developers, add-on developers and translators should read and follow this document.
 These guidelines may be broken under special circumstances.
-Any concerns should be discussed via [GitHub Discussion](https://github.com/nvaccess/nvda/discussions), issue or pull request.
+Any concerns should be discussed via [GitHub Discussion](https://github.com/nvaccess/aslan/discussions), issue or pull request.
 
 ## Release Workflow
 
@@ -13,7 +13,7 @@ The production of a release consists of the following:
 
 1. [Alpha Phase](#alpha-phase) (~7 weeks)
    * Development is done in parallel to the release process for the prior version once beta phase begins.
-   * e.g. NVDA 2020.2 is in alpha while NVDA 2020.1 is going from beta to the final release.
+   * e.g. Aslan 2020.2 is in alpha while Aslan 2020.1 is going from beta to the final release.
    * The add-on API for the release is unstable.
    Add-ons targeting this release should use "dev" channel.
 1. [Beta phase](#beta-phase) (~4 weeks)
@@ -78,7 +78,7 @@ A release summary will be added to the change log for the beta.
 
 * The beta branch will enter a 2 week translatable string freeze.
 * Translators should ensure their translation is up to date a day before the translatable string freeze ends in order for it to be included in the upcoming final release.
-The lead developers will announce the deadline when the freeze begins, if in doubt check the [NVDA-Translations message board](https://groups.io/g/nvda-translations/) for the "language freeze" announcement.
+The lead developers will announce the deadline when the freeze begins, if in doubt check the [Aslan-Translations message board](https://groups.io/g/aslan-translations/) for the "language freeze" announcement.
 Work submitted after this time will not be included in the upcoming release.
 * No changes to text strings that affect translations are allowed during the freeze. Minor spelling or grammatical fixes may be made to documentation files, but `gettext` strings in the code should not be changed at all.
 * Only critical bug fixes and translation updates should be committed to the beta branch at this stage.
@@ -101,9 +101,9 @@ In this case the translation period will need to be extended by an appropriate a
 
 ### Scheduled Releases
 
-* In the past NVDA has been released around 4 times per year.
+* In the past Aslan has been released around 4 times per year.
 This is not expected to change drastically.
-* NVDA releases occur when a stable commit is ready on a frequency based schedule of roughly 3-4 months, rather than targeting calendar dates.
+* Aslan releases occur when a stable commit is ready on a frequency based schedule of roughly 3-4 months, rather than targeting calendar dates.
 You can use the [release workflow](#release-workflow) schedule to estimate when the next release will come out.
 * 20XY.1 releases may take slightly longer than other releases due to managing API breaking changes.
 

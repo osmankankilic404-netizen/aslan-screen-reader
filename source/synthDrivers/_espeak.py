@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2026 NV Access Limited, Peter Vágner
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -372,7 +372,7 @@ def initialize(indexCallback=None):
 		AUDIO_OUTPUT_SYNCHRONOUS,
 		300,
 		os.fsencode(eSpeakPath),
-		# #10607: ensure espeak does not exit NVDA's process on errors such as the espeak path being invalid.
+		# #10607: ensure espeak does not exit Aslan's process on errors such as the espeak path being invalid.
 		espeakINITIALIZE_DONT_EXIT,
 	)
 	if sampleRate <= 0:

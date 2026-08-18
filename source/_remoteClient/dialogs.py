@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2025 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton and others.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -20,7 +20,7 @@ from gui.contextHelp import ContextHelpMixin
 from logHandler import log
 from gui.guiHelper import alwaysCallAfter, BoxSizerHelper
 from gui import guiHelper
-from gui.nvdaControls import SelectOnFocusSpinCtrl
+from gui.aslanControls import SelectOnFocusSpinCtrl
 from gui.persistenceHandler import EnumeratedChoiceHandler
 from config.configFlags import RemoteConnectionMode, RemoteServerType
 
@@ -244,7 +244,7 @@ class ServerPanel(ContextHelpMixin, wx.Panel):
 	def doPortcheck(self, port: int) -> None:
 		tempServer = server.LocalRelayServer(port=port, password=None)
 		try:
-			req = request.urlopen("https://portcheck.nvdaremote.com/port/%s" % port)
+			req = request.urlopen("https://portcheck.aslanremote.com/port/%s" % port)
 			data = req.read()
 			result = json.loads(data)
 

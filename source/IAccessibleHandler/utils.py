@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020-2021 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -70,5 +70,5 @@ def getWinEventLogInfo(window, objectID, childID, eventID=None, threadID=None):
 
 
 def isMSAADebugLoggingEnabled():
-	"""Whether the user has configured NVDA to log extra information about MSAA events."""
+	"""Whether the user has configured Aslan to log extra information about MSAA events."""
 	return config.conf["debugLog"]["MSAA"]

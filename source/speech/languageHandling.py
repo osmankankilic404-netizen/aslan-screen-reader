@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025 NV Access Limited, Noelia Ruiz Martínez
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 import languageHandler
 import synthDriverHandler
@@ -58,12 +58,12 @@ def shouldSwitchVoice() -> bool:
 
 
 def shouldMakeLangChangeCommand() -> bool:
-	"""Determines if NVDA should get the language of the text been read."""
+	"""Determines if Aslan should get the language of the text been read."""
 	return config.conf["speech"]["autoLanguageSwitching"] or config.conf["speech"]["reportLanguage"]
 
 
 def shouldReportNotSupported() -> bool:
-	"""Determines if NVDA should report if the language is not supported by the synthesizer."""
+	"""Determines if Aslan should report if the language is not supported by the synthesizer."""
 	return (
 		config.conf["speech"]["autoLanguageSwitching"]
 		and config.conf["speech"]["reportNotSupportedLanguage"] != ReportNotSupportedLanguage.OFF.value
@@ -71,7 +71,7 @@ def shouldReportNotSupported() -> bool:
 
 
 def getLangToReport(lang: str) -> str:
-	"""Gets the language to report by NVDA, according to speech settings.
+	"""Gets the language to report by Aslan, according to speech settings.
 
 	:param lang: A language code corresponding to the text been read.
 	:return: A language code corresponding to the language to be reported.

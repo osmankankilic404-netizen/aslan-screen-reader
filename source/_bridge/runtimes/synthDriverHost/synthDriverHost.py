@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2025 NV Access Limited.
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from __future__ import annotations
 import typing
@@ -14,7 +14,7 @@ from _bridge.components.services.synthDriver import SynthDriverService
 
 
 if typing.TYPE_CHECKING:
-	from _bridge.clients.synthDriverHost32.launcher import NVDAService
+	from _bridge.clients.synthDriverHost32.launcher import AslanService
 from _bridge.base import Connection
 from logHandler import log
 from _bridge.base import Service
@@ -22,7 +22,7 @@ from _bridge.base import Service
 
 # Monkeypatch RPYC to force it to use builtins for its exceptions module.
 # On Python 3 it normally would, but
-# as we have an `exceptions` module in NVDA, it picks that up instead,
+# as we have an `exceptions` module in Aslan, it picks that up instead,
 # thinking it is the old Python 2 exceptions module
 # and causing remote exceptions to fail deserialization.
 import builtins
@@ -39,11 +39,11 @@ class HostService(Service):
 		super().__init__()
 
 	@Service.exposed
-	def installProxies(self, remoteService: NVDAService, brokerAudio: bool = False):
-		"""Install and bind proxy objects from the parent NVDA process.
+	def installProxies(self, remoteService: AslanService, brokerAudio: bool = False):
+		"""Install and bind proxy objects from the parent Aslan process.
 
 		This exposed RPYC service method configures the local runtime to use
-		proxies provided by the parent NVDA process. It performs a set of
+		proxies provided by the parent Aslan process. It performs a set of
 		side-effects required so local synth drivers can initialize and use the
 		remote implementations.
 		:param remoteService: A remote service proxy exposing the required components.
@@ -52,20 +52,20 @@ class HostService(Service):
 		    attributes.
 		:returns: None
 		"""
-		log.debug("Installing proxies from remote NVDAService")
-		import NVDAState
+		log.debug("Installing proxies from remote AslanService")
+		import AslanState
 
 		isRunningAsSource = remoteService.isRunningAsSource()
-		NVDAState.isRunningAsSource = lambda: isRunningAsSource
+		AslanState.isRunningAsSource = lambda: isRunningAsSource
 
-		class _ReadPaths(NVDAState._ReadPaths):
+		class _ReadPaths(AslanState._ReadPaths):
 			@property
 			def versionedLibPath(self) -> str:
 				if not hasattr(self, "_versionedLibPath"):
 					self._versionedLibPath = remoteService.getVersionedLibPath()
 				return self._versionedLibPath
 
-		NVDAState.ReadPaths = _ReadPaths()
+		AslanState.ReadPaths = _ReadPaths()
 		import globalVars
 
 		globalVars.appDir = remoteService.getAppDir()

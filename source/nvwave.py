@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2025 NV Access Limited, Aleksey Sadovoy, Cyrille Bougot, Peter Vágner, Babbage B.V.,
 # Leonard de Ruijter, James Teh
 # This file is covered by the GNU General Public License.
@@ -280,7 +280,7 @@ class WavePlayer(garbageHandler.TrackedObject):
 			# This instance failed to construct properly. Let it die gracefully.
 			return
 		if not wasapi:
-			# This instance is dying after NVDAHelper was terminated. We can't
+			# This instance is dying after AslanHelper was terminated. We can't
 			# destroy it in that case, but we're probably exiting anyway.
 			return
 		if self._player:
@@ -352,7 +352,7 @@ class WavePlayer(garbageHandler.TrackedObject):
 			)
 		except WindowsError:
 			# #16722: This might occur on a Remote Desktop server when a client session
-			# disconnects without exiting NVDA. That will cause audio to become
+			# disconnects without exiting Aslan. That will cause audio to become
 			# unavailable with an unexpected error code. In any case, the C++
 			# WasapiPlayer code will reopen the device when we next try to feed, so
 			# just log the error here and return without raising it. Otherwise, we
@@ -476,7 +476,7 @@ class WavePlayer(garbageHandler.TrackedObject):
 					cls._IDLE_CHECK_INTERVAL,
 					cls._idleCheck,
 				)
-			except core.NVDANotInitializedError:
+			except core.AslanNotInitializedError:
 				# This can happen when playing the start sound. We close the stream after
 				# playing a sound anyway, so it's okay that this first idle check doesn't
 				# run.
@@ -514,7 +514,7 @@ class WavePlayer(garbageHandler.TrackedObject):
 				except OSError:
 					# #16125: IAudioClock::GetPosition sometimes fails with an access
 					# violation on a device which has been invalidated. This shouldn't happen
-					# and suggests a bug somewhere in NVDA's C++ WASAPI code. Nevertheless,
+					# and suggests a bug somewhere in Aslan's C++ WASAPI code. Nevertheless,
 					# we want to catch this because otherwise, we'll just keep trying to call
 					# this every few seconds, which is pointless and annoying. Hopefully, a
 					# proper fix for this bug can be found eventually.

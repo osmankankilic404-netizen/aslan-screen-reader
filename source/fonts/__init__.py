@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2019 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -12,7 +12,7 @@ from utils import _deprecate
 
 
 """
-Loads custom fonts for use in NVDA.
+Loads custom fonts for use in Aslan.
 """
 
 fontsDir = os.path.join(globalVars.appDir, "fonts")

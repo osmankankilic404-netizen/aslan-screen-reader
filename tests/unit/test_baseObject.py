@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2018-2025 NV Access Limited, Babbage B.V.
@@ -7,11 +7,11 @@
 
 import unittest
 from baseObject import AutoPropertyObject
-from .objectProvider import PlaceholderNVDAObject
+from .objectProvider import PlaceholderAslanObject
 from scriptHandler import script
 
 
-class NVDAObjectWithDecoratedScript(PlaceholderNVDAObject):
+class AslanObjectWithDecoratedScript(PlaceholderAslanObject):
 	"""An object with a decorated script."""
 
 	@script(gestures=["kb:a"])
@@ -19,7 +19,7 @@ class NVDAObjectWithDecoratedScript(PlaceholderNVDAObject):
 		return
 
 
-class NVDAObjectWithGesturesDictionary(PlaceholderNVDAObject):
+class AslanObjectWithGesturesDictionary(PlaceholderAslanObject):
 	"""An object with a script that is bound to a gesture in a L{__gestures} dictionary."""
 
 	def script_bravo(self, gesture):
@@ -30,7 +30,7 @@ class NVDAObjectWithGesturesDictionary(PlaceholderNVDAObject):
 	}
 
 
-class NVDAObjectWithDecoratedScriptAndGesturesDictionary(PlaceholderNVDAObject):
+class AslanObjectWithDecoratedScriptAndGesturesDictionary(PlaceholderAslanObject):
 	"""An object with a decorated script
 	and a script that is bound to a gesture in a L{__gestures} dictionary.
 	"""
@@ -47,10 +47,10 @@ class NVDAObjectWithDecoratedScriptAndGesturesDictionary(PlaceholderNVDAObject):
 	}
 
 
-class SubclassedNVDAObjectWithDecoratedScriptAndGesturesDictionary(
-	NVDAObjectWithDecoratedScript,
-	NVDAObjectWithGesturesDictionary,
-	NVDAObjectWithDecoratedScriptAndGesturesDictionary,
+class SubclassedAslanObjectWithDecoratedScriptAndGesturesDictionary(
+	AslanObjectWithDecoratedScript,
+	AslanObjectWithGesturesDictionary,
+	AslanObjectWithDecoratedScriptAndGesturesDictionary,
 ):
 	"""An object with decorated scripts and L{__gestures} dictionaries, based on subclassing."""
 
@@ -66,16 +66,16 @@ class SubclassedNVDAObjectWithDecoratedScriptAndGesturesDictionary(
 	}
 
 
-class DynamicNVDAObjectWithDecoratedScriptAndGesturesDictionary(PlaceholderNVDAObject):
+class DynamicAslanObjectWithDecoratedScriptAndGesturesDictionary(PlaceholderAslanObject):
 	"""An object with decorated scripts and L{__gestures} dictionaries,
 	using the chooseOverlayClasses logic to construct a dynamic object."""
 
 	def findOverlayClasses(self, clsList):
 		clsList.extend(
 			[
-				NVDAObjectWithDecoratedScript,
-				NVDAObjectWithGesturesDictionary,
-				NVDAObjectWithDecoratedScriptAndGesturesDictionary,
+				AslanObjectWithDecoratedScript,
+				AslanObjectWithGesturesDictionary,
+				AslanObjectWithDecoratedScriptAndGesturesDictionary,
 			],
 		)
 
@@ -95,25 +95,25 @@ class TestScriptableObject(unittest.TestCase):
 	"""A test that verifies whether scripts are properly bound to associated gestures."""
 
 	def test_decoratedScript(self):
-		obj = NVDAObjectWithDecoratedScript()
+		obj = AslanObjectWithDecoratedScript()
 		self.assertIn("kb:a", obj._gestureMap)
 
 	def test_gesturesDictionary(self):
-		obj = NVDAObjectWithGesturesDictionary()
+		obj = AslanObjectWithGesturesDictionary()
 		self.assertIn("kb:b", obj._gestureMap)
 
 	def test_decoratedScriptAndGesturesDictionary(self):
-		obj = NVDAObjectWithDecoratedScriptAndGesturesDictionary()
+		obj = AslanObjectWithDecoratedScriptAndGesturesDictionary()
 		self.assertIn("kb:c", obj._gestureMap)
 		self.assertIn("kb:d", obj._gestureMap)
 
 	def test_decoratedScriptsAndGestureDictionariesIfSubclassed(self):
-		obj = SubclassedNVDAObjectWithDecoratedScriptAndGesturesDictionary()
+		obj = SubclassedAslanObjectWithDecoratedScriptAndGesturesDictionary()
 		for key in ("a", "b", "c", "d", "e", "f"):
 			self.assertIn("kb:%s" % key, obj._gestureMap)
 
 	def test_decoratedScriptsAndGestureDictionariesIfDynamic(self):
-		obj = DynamicNVDAObjectWithDecoratedScriptAndGesturesDictionary()
+		obj = DynamicAslanObjectWithDecoratedScriptAndGesturesDictionary()
 		for key in ("a", "b", "c", "d", "g", "h"):
 			self.assertIn("kb:%s" % key, obj._gestureMap)
 

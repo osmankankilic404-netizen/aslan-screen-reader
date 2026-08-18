@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2016-2026 NV Access Limited, Derek Riemer, Cyrille Bougot, Luke Davis, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -169,7 +169,7 @@ class CustomCheckListBox(wx.CheckListBox):
 
 	def notifyIAccessible(self, evt):
 		# Notify winEvent that something changed.
-		# We must do this, so that NVDA receives a stateChange.
+		# We must do this, so that Aslan receives a stateChange.
 		evt.Skip()
 		winUser.NotifyWinEvent(
 			winUser.EVENT_OBJECT_STATECHANGE,
@@ -262,7 +262,7 @@ class AutoWidthColumnCheckListCtrl(AutoWidthColumnListCtrl, listmix.CheckListCtr
 
 	def notifyIAccessible(self, index):
 		# Notify winEvent that something changed.
-		# We must do this, so that NVDA receives a stateChange.
+		# We must do this, so that Aslan receives a stateChange.
 		winUser.NotifyWinEvent(winUser.EVENT_OBJECT_STATECHANGE, self.Handle, winUser.OBJID_CLIENT, index + 1)
 
 	def sendCheckListBoxEvent(self, index):
@@ -319,7 +319,7 @@ class MessageDialog(gui.message.MessageDialog):
 
 	def __new__(cls, *args, **kwargs):
 		warnings.warn(
-			"gui.nvdaControls.MessageDialog is deprecated. Use gui.message.MessageDialog instead.",
+			"gui.aslanControls.MessageDialog is deprecated. Use gui.message.MessageDialog instead.",
 			DeprecationWarning,
 		)
 		return super().__new__(cls, *args, **kwargs)
@@ -347,9 +347,9 @@ class MessageDialog(gui.message.MessageDialog):
 
 class _ContinueCancelDialog(MessageDialog):
 	"""
-	This implementation of a `gui.nvdaControls.MessageDialog`, provides `Continue` and `Cancel` buttons as its controls.
+	This implementation of a `gui.aslanControls.MessageDialog`, provides `Continue` and `Cancel` buttons as its controls.
 	These serve the same functions as `OK` and `Cancel` in other dialogs, but may be more desirable in some situations.
-	It also supports NVDA's context sensitive help.
+	It also supports Aslan's context sensitive help.
 	"""
 
 	def __init__(
@@ -370,7 +370,7 @@ class _ContinueCancelDialog(MessageDialog):
 		:param continueButtonFirst: If True, the Continue button will appear first, and be selected when the dialog
 			opens; if False, the Cancel button will. Defaults to True.
 		:param helpId: a helpId, as used with the `gui.contextHelp` module, enabling the help key (`F1`)
-			to open a browser to a specific heading in the NVDA user guide.
+			to open a browser to a specific heading in the Aslan user guide.
 		"""
 		self.continueButtonFirst: bool = continueButtonFirst
 		if helpId is not None:
@@ -383,13 +383,13 @@ class _ContinueCancelDialog(MessageDialog):
 	def _addButtons(self, buttonHelper: guiHelper.ButtonHelper) -> None:
 		"""Override to add Continue and Cancel buttons."""
 		self.addOkButton(
-			# Translators: The label for the Continue button in an NVDA dialog.
+			# Translators: The label for the Continue button in an Aslan dialog.
 			label=_("&Continue"),
 			returnCode=wx.OK,
 			defaultFocus=self.continueButtonFirst,
 		)
 		self.addCancelButton(
-			# Translators: The label for the Cancel button in an NVDA dialog.
+			# Translators: The label for the Cancel button in an Aslan dialog.
 			label=_("Cancel"),
 			returnCode=wx.CANCEL,
 			defaultFocus=not self.continueButtonFirst,
@@ -408,7 +408,7 @@ class EnhancedInputSlider(wx.Slider):
 		self.ProcessEvent(evt)
 		# HACK: Win events don't seem to be sent for certain explicitly set values,
 		# so send our own win event.
-		# This will cause duplicates in some cases, but NVDA will filter them out.
+		# This will cause duplicates in some cases, but Aslan will filter them out.
 		user32.NotifyWinEvent(
 			winUser.EVENT_OBJECT_VALUECHANGE,
 			self.Handle,
@@ -567,7 +567,7 @@ class FeatureFlagCombo(wx.Choice):
 		# Such as, in the Advanced settings panel option, 'Load Chromium virtual buffer when document busy.'.
 		# e.g. "Default (Yes)".
 		# The placeholder {default} is replaced with the label of the option which describes current default behavior
-		# in NVDA.
+		# in Aslan.
 		defaultOptionLabel: str = _("Default ({default})").format(
 			default=translatedStringForBehaviorOfDefault,
 		)

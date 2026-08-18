@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2012-2026 NV Access Limited, Rui Batista, Noelia Ruiz Martínez, Joseph Lee, Babbage B.V.,
 # Arnold Loubriat, Łukasz Golonka, Leonard de Ruijter, Julien Cochuyt, Cyrille Bougot
 # This file is covered by the GNU General Public License.
@@ -35,8 +35,8 @@ from utils.security import isRunningOnSecureDesktop
 import winBindings.kernel32
 import addonAPIVersion
 import importlib
-import NVDAState
-from NVDAState import WritePaths
+import AslanState
+from AslanState import WritePaths
 from types import ModuleType
 
 from addonStore.models.status import AddonStateCategory, SupportsAddonState
@@ -69,7 +69,7 @@ __getattr__ = handleDeprecations(
 		"ADDON_BUNDLE_EXTENSION",
 	),
 	MovedSymbol(
-		"NVDA_ADDON_PROG_ID",
+		"Aslan_ADDON_PROG_ID",
 		"config.registry",
 	),
 	MovedSymbol(
@@ -95,12 +95,12 @@ _OLD_STATE_FILENAME: Final[str] = "addonsState.pickle"
 # 1MiB is still enough space for a state file containing
 # (1024 * 1024) / (4 + 4 * 100) ~= 2594 add-ons.
 _MAX_STATE_FILESIZE_BYTES = 1024 * 1024  # 1MiB
-BUNDLE_MIMETYPE: Final[str] = "application/x-nvda-addon"
+BUNDLE_MIMETYPE: Final[str] = "application/x-aslan-addon"
 ADDON_PENDINGINSTALL_SUFFIX: Final[str] = ".pendingInstall"
 DELETEDIR_SUFFIX: Final[str] = ".delete"
 
 
-# Allows add-ons to process additional command line arguments when NVDA starts.
+# Allows add-ons to process additional command line arguments when Aslan starts.
 # Each handler is called with one keyword argument `cliArgument`
 # and should return `False` if it is not interested in it, `True` otherwise.
 # For more details see appropriate section of the developer guide.
@@ -184,7 +184,7 @@ class AddonsState(collections.UserDict[AddonStateCategory, CaseInsensitiveSet[st
 		if self.manualOverridesAPIVersion != addonAPIVersion.BACK_COMPAT_TO:
 			log.debug(
 				"BACK_COMPAT_TO API version for manual compatibility overrides has changed. "
-				f"NVDA API has been upgraded: from {self.manualOverridesAPIVersion} to {addonAPIVersion.BACK_COMPAT_TO}",
+				f"Aslan API has been upgraded: from {self.manualOverridesAPIVersion} to {addonAPIVersion.BACK_COMPAT_TO}",
 			)
 		if self.manualOverridesAPIVersion < addonAPIVersion.BACK_COMPAT_TO:
 			# Reset compatibility overrides as the API version has upgraded.
@@ -192,7 +192,7 @@ class AddonsState(collections.UserDict[AddonStateCategory, CaseInsensitiveSet[st
 			# Portable/temporary copies will write this on the first run.
 			# Mark overridden compatible add-ons as blocked.
 			self[AddonStateCategory.BLOCKED].update(self[AddonStateCategory.OVERRIDE_COMPATIBILITY])
-			# Reset overridden compatibility for add-ons that were overridden by older versions of NVDA.
+			# Reset overridden compatibility for add-ons that were overridden by older versions of Aslan.
 			self[AddonStateCategory.OVERRIDE_COMPATIBILITY].clear()
 			self[AddonStateCategory.PENDING_OVERRIDE_COMPATIBILITY].clear()
 		self.manualOverridesAPIVersion = MajorMinorPatch(*addonAPIVersion.BACK_COMPAT_TO)
@@ -242,10 +242,10 @@ class AddonsState(collections.UserDict[AddonStateCategory, CaseInsensitiveSet[st
 				except Exception:
 					log.error("Failed to load pickled add-ons state.", exc_info=True)
 				else:
-					if NVDAState.shouldWriteToDisk():
+					if AslanState.shouldWriteToDisk():
 						self.save()
 				finally:
-					if NVDAState.shouldWriteToDisk():
+					if AslanState.shouldWriteToDisk():
 						log.debug("Backing up pickled add-ons state.")
 						try:
 							os.replace(WritePaths._oldAddonStateFile, WritePaths._oldAddonStateFile + ".bak")
@@ -253,8 +253,8 @@ class AddonsState(collections.UserDict[AddonStateCategory, CaseInsensitiveSet[st
 							log.debug("Unable to backup old add-ons state pickle file.", exc_info=True)
 
 	def removeStateFile(self) -> None:
-		if not NVDAState.shouldWriteToDisk():
-			log.debugWarning("NVDA should not write to disk from secure mode or launcher", stack_info=True)
+		if not AslanState.shouldWriteToDisk():
+			log.debugWarning("Aslan should not write to disk from secure mode or launcher", stack_info=True)
 			return
 		try:
 			os.remove(self.statePath)
@@ -265,8 +265,8 @@ class AddonsState(collections.UserDict[AddonStateCategory, CaseInsensitiveSet[st
 
 	def save(self) -> None:
 		"""Saves content of the state to a file unless state is empty in which case this would be pointless."""
-		if not NVDAState.shouldWriteToDisk():
-			log.error("NVDA should not write to disk from secure mode or launcher", stack_info=True)
+		if not AslanState.shouldWriteToDisk():
+			log.error("Aslan should not write to disk from secure mode or launcher", stack_info=True)
 			return
 
 		if not self._save(self.statePath):
@@ -284,9 +284,9 @@ class AddonsState(collections.UserDict[AddonStateCategory, CaseInsensitiveSet[st
 
 		:param statePath: Location at which to write the state file.
 		:return: ``True`` if an attempt was made to save the state file (regardless of whether it succeded or not); ``False`` otherwise.
-		:raises RuntimeError: If NVDA should not write to disk.
+		:raises RuntimeError: If Aslan should not write to disk.
 		"""
-		if not NVDAState.shouldWriteToDisk():
+		if not AslanState.shouldWriteToDisk():
 			raise RuntimeError("Should not write to disk.")
 		if any(self.values()):
 			try:
@@ -298,7 +298,7 @@ class AddonsState(collections.UserDict[AddonStateCategory, CaseInsensitiveSet[st
 		return False
 
 	def cleanupRemovedDisabledAddons(self) -> None:
-		"""Versions of NVDA before #12792 failed to remove add-on from list of disabled add-ons
+		"""Versions of Aslan before #12792 failed to remove add-on from list of disabled add-ons
 		during uninstallation. As a result after reinstalling add-on with the same name it was disabled
 		by default confusing users. Fix this by removing all add-ons no longer present in the config
 		from the list of disabled add-ons in the state."""
@@ -355,7 +355,7 @@ def getIncompatibleAddons(
 			and (
 				# Add-ons that override incompatibility are not considered incompatible.
 				not addon.overrideIncompatibility
-				# If we are upgrading NVDA API versions,
+				# If we are upgrading Aslan API versions,
 				# then the add-on compatibility override will be reset
 				or backCompatToAPIVersion > addonAPIVersion.BACK_COMPAT_TO
 			)
@@ -414,7 +414,7 @@ def initialize():
 			f"{', '.join(missingPendingOverrideCompat)}",
 		)
 		state[AddonStateCategory.PENDING_OVERRIDE_COMPATIBILITY] -= missingPendingOverrideCompat
-	if NVDAState.shouldWriteToDisk():
+	if AslanState.shouldWriteToDisk():
 		state.save()
 	initializeModulePackagePaths()
 
@@ -445,7 +445,7 @@ def _getAvailableAddonsFromPath(
 	log.debug("Listing add-ons from %s", path)
 	for p in os.listdir(path):
 		if p.endswith(DELETEDIR_SUFFIX):
-			if isFirstLoad and NVDAState.shouldWriteToDisk():
+			if isFirstLoad and AslanState.shouldWriteToDisk():
 				removeFailedDeletion(os.path.join(path, p))
 			continue
 		addon_path = os.path.join(path, p)
@@ -459,7 +459,7 @@ def _getAvailableAddonsFromPath(
 					name = a.manifest["name"]
 					if (
 						isFirstLoad
-						and NVDAState.shouldWriteToDisk()
+						and AslanState.shouldWriteToDisk()
 						and name in state[AddonStateCategory.PENDING_REMOVE]
 						and not a.path.endswith(ADDON_PENDINGINSTALL_SUFFIX)
 					):
@@ -471,7 +471,7 @@ def _getAvailableAddonsFromPath(
 							_failedPendingRemovals.add(name)
 					if (
 						isFirstLoad
-						and NVDAState.shouldWriteToDisk()
+						and AslanState.shouldWriteToDisk()
 						and (
 							name in state[AddonStateCategory.PENDING_INSTALL]
 							or a.path.endswith(ADDON_PENDINGINSTALL_SUFFIX)
@@ -491,8 +491,8 @@ def _getAvailableAddonsFromPath(
 						state[AddonStateCategory.PENDING_OVERRIDE_COMPATIBILITY].remove(name)
 					log.debug(
 						"Found add-on {name} - {a.version}."
-						" Requires API: {a.minimumNVDAVersion}."
-						" Last-tested API: {a.lastTestedNVDAVersion}".format(
+						" Requires API: {a.minimumAslanVersion}."
+						" Last-tested API: {a.lastTestedAslanVersion}".format(
 							name=name,
 							a=a,
 						),
@@ -535,7 +535,7 @@ def getAvailableAddons(
 
 def installAddonBundle(bundle: AddonBundle) -> Addon | None:
 	"""Extracts an Addon bundle in to a unique subdirectory of the user addons directory,
-	marking the addon as needing 'install completion' on NVDA restart.
+	marking the addon as needing 'install completion' on Aslan restart.
 
 	:param bundle: The add-on bundle to install.
 	The bundle._installExceptions property is modified to store any raised exceptions
@@ -597,12 +597,12 @@ class AddonBase(SupportsAddonState, SupportsVersionCheck, ABC):
 		return self.manifest["version"]
 
 	@property
-	def minimumNVDAVersion(self) -> addonAPIVersion.AddonApiVersionT:
-		return self.manifest.get("minimumNVDAVersion")
+	def minimumAslanVersion(self) -> addonAPIVersion.AddonApiVersionT:
+		return self.manifest.get("minimumAslanVersion")
 
 	@property
-	def lastTestedNVDAVersion(self) -> addonAPIVersion.AddonApiVersionT:
-		return self.manifest.get("lastTestedNVDAVersion")
+	def lastTestedAslanVersion(self) -> addonAPIVersion.AddonApiVersionT:
+		return self.manifest.get("lastTestedAslanVersion")
 
 	@property
 	@abstractmethod
@@ -665,7 +665,7 @@ class Addon(AddonBase):
 			return None
 
 	def requestRemove(self):
-		"""Marks this addon for removal on NVDA restart."""
+		"""Marks this addon for removal on Aslan restart."""
 		if self.isPendingInstall and not self.isInstalled:
 			# Handle removal of an add-on not yet installed
 			self.completeRemove()
@@ -705,7 +705,7 @@ class Addon(AddonBase):
 			raise RuntimeError("Cannot rename add-on path for deletion")
 		shutil.rmtree(tempPath, ignore_errors=True)
 		if os.path.exists(tempPath):
-			log.error("Error removing addon directory %s, deferring until next NVDA restart" % self.path)
+			log.error("Error removing addon directory %s, deferring until next Aslan restart" % self.path)
 		# clean up the addons state. If an addon with the same name is installed, it should not be automatically
 		# disabled / blocked.
 		log.debug(f"removing addon {self.name} from the list of disabled / blocked add-ons")
@@ -753,17 +753,17 @@ class Addon(AddonBase):
 
 	def enable(self, shouldEnable: bool) -> None:
 		"""
-		Sets this add-on to be disabled or enabled when NVDA restarts.
+		Sets this add-on to be disabled or enabled when Aslan restarts.
 		@raises: AddonError on failure.
 		"""
 		if shouldEnable:
 			if not self._canBeEnabled:
 				raise AddonError(
 					"Add-on is not compatible:"
-					" minimum NVDA version {}, last tested version {},"
-					" NVDA current {}, NVDA backwards compatible to {}".format(
-						self.manifest["minimumNVDAVersion"],
-						self.manifest["lastTestedNVDAVersion"],
+					" minimum Aslan version {}, last tested version {},"
+					" Aslan current {}, Aslan backwards compatible to {}".format(
+						self.manifest["minimumAslanVersion"],
+						self.manifest["lastTestedAslanVersion"],
 						addonAPIVersion.CURRENT,
 						addonAPIVersion.BACK_COMPAT_TO,
 					),
@@ -784,7 +784,7 @@ class Addon(AddonBase):
 			if not self.isCompatible:
 				state[AddonStateCategory.BLOCKED].add(self.name)
 				state[AddonStateCategory.OVERRIDE_COMPATIBILITY].discard(self.name)
-		# Record enable/disable flags as a way of preparing for disaster such as sudden NVDA crash.
+		# Record enable/disable flags as a way of preparing for disaster such as sudden Aslan crash.
 		state.save()
 
 	def _getPathForInclusionInPackage(self, package):
@@ -846,11 +846,11 @@ class Addon(AddonBase):
 		self._importedAddonModules.append(fullName)
 		return importedMod
 
-	def getTranslationsInstance(self, domain="nvda"):
+	def getTranslationsInstance(self, domain="aslan"):
 		"""Gets the gettext translation instance for this add-on.
 		<addon-path>\\locale will be used to find .mo files, if exists.
 		If a translation file is not found the default fallback null translation is returned.
-		@param domain: the translation domain to retrieve. The 'nvda' default should be used in most cases.
+		@param domain: the translation domain to retrieve. The 'aslan' default should be used in most cases.
 		@returns: the gettext translation class.
 		"""
 		localedir = os.path.join(self.path, "locale")
@@ -964,7 +964,7 @@ def getCodeAddon(obj=None, frameDist=1):
 
 def initTranslation():
 	"""Initializes the translation of an add-on so that the Gettext functions (_, ngettext, npgettext and
-	pgettext) point to the add-on's translation rather than to NVDA's one.
+	pgettext) point to the add-on's translation rather than to Aslan's one.
 	This function should be called at the top of any module containing translatable strings and belonging to
 	an add-on. It cannot be called in a module that does not belong to an add-on (e.g. in a subdirectory of the
 	scratchpad).
@@ -1001,7 +1001,7 @@ def _translatedManifestPaths(lang=None, forBundle=False):
 
 
 class AddonBundle(AddonBase):
-	"""Represents the contents of an NVDA addon suitable for distribution.
+	"""Represents the contents of an Aslan addon suitable for distribution.
 	The bundle is compressed using the zip file format. Manifest information
 	is available without the need for extraction."""
 
@@ -1099,12 +1099,12 @@ def _report_manifest_errors(manifest):
 
 
 class AddonManifest(ConfigObj):
-	"""Add-on manifest file. It contains metadata about an NVDA add-on package."""
+	"""Add-on manifest file. It contains metadata about an Aslan add-on package."""
 
 	configspec = ConfigObj(
 		StringIO(
 			"""
-# NVDA Add-on Manifest configuration specification
+# Aslan Add-on Manifest configuration specification
 # Add-on unique name
 # Suggested convention is lowerCamelCase.
 name = string()
@@ -1126,12 +1126,12 @@ version = string()
 # Document changes between the previous and the current versions.
 changelog = string(default=None)
 
-# The minimum required NVDA version for this add-on to work correctly.
-# Should be less than or equal to lastTestedNVDAVersion
-minimumNVDAVersion = apiVersion(default="0.0.0")
+# The minimum required Aslan version for this add-on to work correctly.
+# Should be less than or equal to lastTestedAslanVersion
+minimumAslanVersion = apiVersion(default="0.0.0")
 
-# Must be greater than or equal to minimumNVDAVersion
-lastTestedNVDAVersion = apiVersion(default="0.0.0")
+# Must be greater than or equal to minimumAslanVersion
+lastTestedAslanVersion = apiVersion(default="0.0.0")
 
 # URL for more information about the add-on, e.g. a homepage.
 # Should begin with https://
@@ -1187,9 +1187,9 @@ docFileName = string(default=None)
 		if result != True:  # noqa: E712
 			self._errors = result
 		elif True != self._validateApiVersionRange():  # noqa: E712
-			self._errors = "Constraint not met: minimumNVDAVersion ({}) <= lastTestedNVDAVersion ({})".format(
-				self.get("minimumNVDAVersion"),
-				self.get("lastTestedNVDAVersion"),
+			self._errors = "Constraint not met: minimumAslanVersion ({}) <= lastTestedAslanVersion ({})".format(
+				self.get("minimumAslanVersion"),
+				self.get("lastTestedAslanVersion"),
 			)
 		self._translatedConfig = None
 		if translatedInput is not None:
@@ -1216,8 +1216,8 @@ docFileName = string(default=None)
 		return self._errors
 
 	def _validateApiVersionRange(self):
-		lastTested = self.get("lastTestedNVDAVersion")
-		minRequiredVersion = self.get("minimumNVDAVersion")
+		lastTested = self.get("lastTestedAslanVersion")
+		minRequiredVersion = self.get("minimumAslanVersion")
 		return minRequiredVersion <= lastTested
 
 

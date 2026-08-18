@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2025 NV Access Limited, Peter Vágner, Leonard de Ruijter, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -9,7 +9,7 @@ import ctypes
 from ctypes.wintypes import *  # noqa: F403
 from comtypes import BSTR
 from enum import IntFlag
-import NVDAHelper
+import AslanHelper
 import watchdog
 import controlTypes
 import api
@@ -17,7 +17,7 @@ import eventHandler
 import winKernel
 from . import IAccessible, List
 from ..window import Window
-from NVDAObjects.behaviors import RowWithoutCellObjects, RowWithFakeNavigation
+from AslanObjects.behaviors import RowWithoutCellObjects, RowWithFakeNavigation
 import config
 from config.configFlags import ReportTableHeaders
 from locationHelper import RectLTRB
@@ -233,7 +233,7 @@ class List(List):
 		state = c_int()  # noqa: F405
 		if (
 			watchdog.cancellableExecute(
-				NVDAHelper.localLib.nvdaInProcUtils_sysListView32_getGroupInfo,
+				AslanHelper.localLib.aslanInProcUtils_sysListView32_getGroupInfo,
 				self.appModule.helperLocalBindingHandle,
 				self.windowHandle,
 				groupIndex,
@@ -265,7 +265,7 @@ class List(List):
 						self.event_focusEntered()
 					groupingObj = GroupingItem(
 						windowHandle=self.windowHandle,
-						parentNVDAObject=self,
+						parentAslanObject=self,
 						groupInfo=info,
 					)
 					return eventHandler.queueEvent("gainFocus", groupingObj)
@@ -300,12 +300,12 @@ class List(List):
 	def _getColumnOrderArrayRawInProc(self, columnCount: int) -> Optional[ctypes.Array]:
 		"""Retrieves a list of column indexes for a given list control.
 		See `_getColumnOrderArrayRaw` for more comments.
-		Note that this method operates in process and cannot be used in situations where NVDA cannot inject
+		Note that this method operates in process and cannot be used in situations where Aslan cannot inject
 		i.e when running as a Windows Store application or when no focus event was received on startup.
 		"""
 		columnOrderArray = (ctypes.c_int * columnCount)()
 		res = watchdog.cancellableExecute(
-			NVDAHelper.localLib.nvdaInProcUtils_sysListView32_getColumnOrderArray,
+			AslanHelper.localLib.aslanInProcUtils_sysListView32_getColumnOrderArray,
 			self.appModule.helperLocalBindingHandle,
 			self.windowHandle,
 			columnCount,
@@ -395,9 +395,9 @@ class List(List):
 
 
 class GroupingItem(Window):
-	def __init__(self, windowHandle=None, parentNVDAObject=None, groupInfo=None):
+	def __init__(self, windowHandle=None, parentAslanObject=None, groupInfo=None):
 		super(GroupingItem, self).__init__(windowHandle=windowHandle)
-		self.parent = parentNVDAObject
+		self.parent = parentAslanObject
 		self.groupInfo = groupInfo
 
 	def _isEqual(self, other):
@@ -476,7 +476,7 @@ class ListItem(RowWithFakeNavigation, RowWithoutCellObjects, ListItemWithoutColu
 
 	def _getColumnLocationRawInProc(self, index: int) -> ctypes.wintypes.RECT:
 		"""Retrieves rectangle containing coordinates for a given column.
-		Note that this method operates in process and cannot be used in situations where NVDA cannot inject
+		Note that this method operates in process and cannot be used in situations where Aslan cannot inject
 		i.e when running as a Windows Store application or when no focus event was received on startup.
 		"""
 		item = self.IAccessibleChildID - 1
@@ -484,7 +484,7 @@ class ListItem(RowWithFakeNavigation, RowWithoutCellObjects, ListItemWithoutColu
 		rect = ctypes.wintypes.RECT()
 		if (
 			watchdog.cancellableExecute(
-				NVDAHelper.localLib.nvdaInProcUtils_sysListView32_getColumnLocation,
+				AslanHelper.localLib.aslanInProcUtils_sysListView32_getColumnLocation,
 				self.appModule.helperLocalBindingHandle,
 				self.windowHandle,
 				item,
@@ -577,7 +577,7 @@ class ListItem(RowWithFakeNavigation, RowWithoutCellObjects, ListItemWithoutColu
 
 	def _getColumnContentRawInProc(self, index: int) -> Optional[str]:
 		"""Retrieves text for a given column.
-		Note that this method operates in process and cannot be used in situations where NVDA cannot inject
+		Note that this method operates in process and cannot be used in situations where Aslan cannot inject
 		i.e when running as a Windows Store application or when no focus event was received on startup.
 		"""
 		item = self.IAccessibleChildID - 1
@@ -585,7 +585,7 @@ class ListItem(RowWithFakeNavigation, RowWithoutCellObjects, ListItemWithoutColu
 		text = AutoFreeBSTR()
 		if (
 			watchdog.cancellableExecute(
-				NVDAHelper.localLib.nvdaInProcUtils_sysListView32_getColumnContent,
+				AslanHelper.localLib.aslanInProcUtils_sysListView32_getColumnContent,
 				self.appModule.helperLocalBindingHandle,
 				self.windowHandle,
 				item,
@@ -761,14 +761,14 @@ class ListItem(RowWithFakeNavigation, RowWithoutCellObjects, ListItemWithoutColu
 
 	def _getColumnHeaderRawInProc(self, index: int) -> Optional[str]:
 		"""Retrieves text of the header for the given column.
-		Note that this method operates in process and cannot be used in situations where NVDA cannot inject
+		Note that this method operates in process and cannot be used in situations where Aslan cannot inject
 		i.e when running as a Windows Store application or when no focus event was received on startup.
 		"""
 		subItem = index
 		text = AutoFreeBSTR()
 		if (
 			watchdog.cancellableExecute(
-				NVDAHelper.localLib.nvdaInProcUtils_sysListView32_getColumnHeader,
+				AslanHelper.localLib.aslanInProcUtils_sysListView32_getColumnHeader,
 				self.appModule.helperLocalBindingHandle,
 				self.windowHandle,
 				subItem,

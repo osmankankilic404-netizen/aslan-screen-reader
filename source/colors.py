@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2006-2021 NV Access Limited, Babbage B.V., Joseph Lee, Mesar Hameed, kvark128
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -12,7 +12,7 @@ from typing import Union
 
 #: Flag to indicate color being decoded from displayModelFormatColor_t
 # is transparent.
-# See (displayModel.cpp in nvdaHelper) displayModelFormatColor_t::TRANSPARENT_BIT
+# See (displayModel.cpp in aslanHelper) displayModelFormatColor_t::TRANSPARENT_BIT
 TRANSPARENT_BITFLAG = 0x01 << 24
 ALPHA_OPAQUE: int = 0xFF  # no transparency.
 ALPHA_TRANSPARENT: int = 0x00  # completely transparent

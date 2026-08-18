@@ -1,13 +1,13 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2018-2026 NV Access Limited, Luke Davis (Open Source Systems, Ltd.)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""Utilities to re-register particular system COM interfaces needed by NVDA.
+"""Utilities to re-register particular system COM interfaces needed by Aslan.
 Relevant discussions of DLLs, registry keys, and paths, can be found on these issues:
-https://github.com/nvaccess/nvda/issues/2807#issuecomment-320149243
-https://github.com/nvaccess/nvda/issues/9039
-https://github.com/nvaccess/nvda/issues/12560
+https://github.com/nvaccess/aslan/issues/2807#issuecomment-320149243
+https://github.com/nvaccess/aslan/issues/9039
+https://github.com/nvaccess/aslan/issues/12560
 """
 
 import os
@@ -31,7 +31,7 @@ def register32bitServer(fileName: str) -> None:
 
 	:param fileName: The 32 bit path to the DLL
 	"""
-	# NVDA is 64 bit and runs on 64-bit Windows.
+	# Aslan is 64 bit and runs on 64-bit Windows.
 	# The 32-bit version of regsvr32.exe is in SysWOW64.
 	regsvr32 = os.path.join(SYSTEM_ROOT, "SysWOW64", "regsvr32.exe")
 	# Make sure a console window doesn't show when running regsvr32.exe
@@ -51,7 +51,7 @@ def register64bitServer(fileName: str) -> None:
 
 	:param fileName: The 64 bit path to the DLL
 	"""
-	# NVDA is 64 bit. On 64-bit systems, the 64-bit version of regsvr32.exe is in System32.
+	# Aslan is 64 bit. On 64-bit systems, the 64-bit version of regsvr32.exe is in System32.
 	regsvr32 = os.path.join(SYSTEM_ROOT, "system32", "regsvr32.exe")
 	# Make sure a console window doesn't show when running regsvr32.exe
 	startupInfo = subprocess.STARTUPINFO()
@@ -72,7 +72,7 @@ def apply32bitRegistryPatch(fileName: str) -> None:
 	"""
 	if not os.path.isfile(fileName):
 		raise FileNotFoundError(f"Cannot apply 32-bit registry patch: {fileName} not found.")
-	# NVDA is 64 bit and runs on 64-bit Windows.
+	# Aslan is 64 bit and runs on 64-bit Windows.
 	# The 32-bit version of reg.exe is in SysWOW64.
 	regExe = os.path.join(SYSTEM_ROOT, "SysWOW64", "reg.exe")
 	# Make sure a console window doesn't show when running reg.exe
@@ -94,7 +94,7 @@ def apply64bitRegistryPatch(fileName: str) -> None:
 	"""
 	if not os.path.isfile(fileName):
 		raise FileNotFoundError(f"Cannot apply 64-bit registry patch: {fileName} not found.")
-	# NVDA is 64 bit. On 64-bit systems, the 64-bit version of reg.exe is in System32.
+	# Aslan is 64 bit. On 64-bit systems, the 64-bit version of reg.exe is in System32.
 	regExe = os.path.join(SYSTEM_ROOT, "system32", "reg.exe")
 	# Make sure a console window doesn't show when running reg.exe
 	startupInfo = subprocess.STARTUPINFO()

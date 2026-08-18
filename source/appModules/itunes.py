@@ -1,5 +1,5 @@
 # appModules/itunes.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2009-2018 NV Access Limited, Leonard de Ruijter
@@ -15,14 +15,14 @@ import speech
 import treeInterceptorHandler
 import api
 import eventHandler
-import NVDAObjects.IAccessible
-import NVDAObjects.UIA
-from NVDAObjects.IAccessible import webKit
+import AslanObjects.IAccessible
+import AslanObjects.UIA
+from AslanObjects.IAccessible import webKit
 
 
 class AppModule(appModuleHandler.AppModule):
-	def event_NVDAObject_init(self, obj):
-		if isinstance(obj, NVDAObjects.IAccessible.IAccessible):
+	def event_AslanObject_init(self, obj):
+		if isinstance(obj, AslanObjects.IAccessible.IAccessible):
 			if obj.windowClassName == "WebViewWindowClass":
 				if obj.IAccessibleRole == oleacc.ROLE_SYSTEM_WINDOW:
 					# Disable a safety mechonism in our IAccessible support as in iTunes it causes an infinit ancestry.
@@ -38,8 +38,8 @@ class AppModule(appModuleHandler.AppModule):
 				obj.shouldAllowIAccessibleFocusEvent = False
 				obj.presentationType = obj.presType_layout
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
-		if isinstance(obj, NVDAObjects.UIA.UIA):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
+		if isinstance(obj, AslanObjects.UIA.UIA):
 			# iTunes 12.9 implements UIA for many controls.
 			# Just leave them untouched for now.
 			return
@@ -56,7 +56,7 @@ class AppModule(appModuleHandler.AppModule):
 			clsList.insert(0, TopLevelClient)
 
 
-class ITunesItem(NVDAObjects.IAccessible.IAccessible):
+class ITunesItem(AslanObjects.IAccessible.IAccessible):
 	"""Retreaves position information encoded in the accDescription"""
 
 	hasEncodedAccDescription = True
@@ -71,7 +71,7 @@ class ITunesItem(NVDAObjects.IAccessible.IAccessible):
 		except COMError:
 			parentChildCount = 0
 		if self.IAccessibleChildID > 0 and self.IAccessibleChildID < parentChildCount:
-			return NVDAObjects.IAccessible.IAccessible(
+			return AslanObjects.IAccessible.IAccessible(
 				windowHandle=self.windowHandle,
 				IAccessibleObject=self.IAccessibleObject,
 				IAccessibleChildID=self.IAccessibleChildID + 1,
@@ -81,7 +81,7 @@ class ITunesItem(NVDAObjects.IAccessible.IAccessible):
 	def _get_previous(self):
 		previous = super(ITunesItem, self).previous
 		if not previous and self.IAccessibleChildID > 1:
-			previous = NVDAObjects.IAccessible.IAccessible(
+			previous = AslanObjects.IAccessible.IAccessible(
 				windowHandle=self.windowHandle,
 				IAccessibleObject=self.IAccessibleObject,
 				IAccessibleChildID=self.IAccessibleChildID - 1,
@@ -103,8 +103,8 @@ class WebKitDocument(webKit.Document):
 		focus = api.getFocusObject()
 		if self.windowHandle != focus.windowHandle:
 			return
-		# The new page has the same event params, so we must bypass NVDA's IAccessible caching.
-		obj = NVDAObjects.IAccessible.getNVDAObjectFromEvent(focus.windowHandle, winUser.OBJID_CLIENT, 0)
+		# The new page has the same event params, so we must bypass Aslan's IAccessible caching.
+		obj = AslanObjects.IAccessible.getAslanObjectFromEvent(focus.windowHandle, winUser.OBJID_CLIENT, 0)
 		if not obj:
 			return
 		if focus.treeInterceptor:
@@ -113,7 +113,7 @@ class WebKitDocument(webKit.Document):
 		eventHandler.queueEvent("gainFocus", obj)
 
 
-class TopLevelClient(NVDAObjects.IAccessible.IAccessible):
+class TopLevelClient(AslanObjects.IAccessible.IAccessible):
 	def _isEqual(self, other):
 		# The location seems to be reported differently depending on how you get to this object.
 		# This causes the focus ancestry to change when it really hasn't,

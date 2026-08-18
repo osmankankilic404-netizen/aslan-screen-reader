@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2020-2023 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -18,7 +18,7 @@ from logHandler import log
 class TrackedObject:
 	"""
 	An object that notifies garbageHandler when it is destructed,
-	so that NVDA can log when important unreachable objects are being deleted
+	so that Aslan can log when important unreachable objects are being deleted
 	by Python's cyclic garbage collector.
 	"""
 
@@ -35,7 +35,7 @@ _reportCountDuringCollection = 0
 
 
 def initialize():
-	"""Initializes NVDA's garbage handler."""
+	"""Initializes Aslan's garbage handler."""
 	# Instruct Python to keep all unreachable objects for later inspection
 	# gc.set_debug(gc.DEBUG_SAVEALL)
 	# Register a callback with Python's garbage collector
@@ -75,5 +75,5 @@ def notifyObjectDeletion(obj):
 
 
 def terminate():
-	"""Terminates NVDA's garbage handler."""
+	"""Terminates Aslan's garbage handler."""
 	gc.callbacks.remove(_collectionCallback)

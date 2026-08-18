@@ -1,14 +1,14 @@
-# NVDA system tests
+# Aslan system tests
 
 ## Dependencies
 
 This build system uses the Robot test framework to execute the system tests.
-Dependencies such as Robot are automatically installed for you when NVDA's build system Python virtual environment is set up, when running any of the high-level commands such as runsystemtests.bat, thus a developer should usually not have to worry about dependencies.
+Dependencies such as Robot are automatically installed for you when Aslan's build system Python virtual environment is set up, when running any of the high-level commands such as runsystemtests.bat, thus a developer should usually not have to worry about dependencies.
 
 ## Running the tests
 
 You can run the tests with `runsystemtests.bat --include <TAG>`.
-This will run against the source copy of NVDA.
+This will run against the source copy of Aslan.
 Any extra arguments provided to this script are forwarded on to Robot.
 **Note:** For tests to run the [tags to include **must** be specified](#tags-are-required).
 Include can be specified multiple times, acting as a logical OR.
@@ -43,7 +43,7 @@ This is to prevent accidental running of the installer tests.
 Instead, the tags should be explicitly included, to run all (except installer) tests.
 Examples:
 
-* All tests tagged with NVDA: `runsystemtests.bat --include NVDA`
+* All tests tagged with Aslan: `runsystemtests.bat --include Aslan`
 * All Chrome tests: `runsystemtests.bat --include chrome`
 
 This is implemented by supplying an unused tag `fakeTagToEnforceUsageOfInclude` to RobotFramework via the
@@ -51,9 +51,9 @@ This is implemented by supplying an unused tag `fakeTagToEnforceUsageOfInclude` 
 
 ## Getting the results
 
-The process is displayed in the command prompt, for more information consider the [Robot report and NVDA logs](#logs)
+The process is displayed in the command prompt, for more information consider the [Robot report and Aslan logs](#logs)
 `report.html`, `log.html`, and `output.xml` files.
-The logs from NVDA are saved to the `nvdaTestRunLogs` folder
+The logs from Aslan are saved to the `aslanTestRunLogs` folder
 
 ## Excluding tests
 
@@ -76,19 +76,19 @@ See [description of test args](#test-args)
 
 Common arguments are kept in the `tests\system\robotArgs.robot` file.
 
-The `whichNVDA` argument allows the tests to be run against an installed copy of NVDA (first ensure it is compatible with the tests).
+The `whichAslan` argument allows the tests to be run against an installed copy of Aslan (first ensure it is compatible with the tests).
 Note valid values are:
 
-* "installed" - when running against the installed version of NVDA, you are likely to get errors in the log unless the tests are run from an administrator command prompt.
+* "installed" - when running against the installed version of Aslan, you are likely to get errors in the log unless the tests are run from an administrator command prompt.
 * "source"
 
-The `installDir` argument performs a smoke test on the installation process given a path to the installer exe. For example `--variable installDir:".\path\to\nvda_installer.exe"`.
-This should be used with `--variable whichNVDA:installed --include installer`.
+The `installDir` argument performs a smoke test on the installation process given a path to the installer exe. For example `--variable installDir:".\path\to\aslan_installer.exe"`.
+This should be used with `--variable whichAslan:installed --include installer`.
 
 ## Overview
 
 Robot Framework loads and parses the test files and their libraries.
-In our case, generally in the 'setup', NVDA is started as a new process.
+In our case, generally in the 'setup', Aslan is started as a new process.
 It uses a sand box profile, and communication with the test code occurs via a global plugin and synth driver.
  The system test should, as much as possible, interact like a user would.
  For example, wait for the speech to confirm that an expected dialog is open before taking the next action to interact.
@@ -97,8 +97,8 @@ Test declarations go in robot files, these should just specify the name and meta
 Several issues with the robot language mean it's easier to write the test logic in an accompanying python file.
 
 The `libraries` directory contains files providing "robot keyword" libraries.
-Most notably, the NvdaLib library contains methods for starting NVDA and speech can be retrieved via the `NVDASpyLib` returned by the module function `getSpyLib()` which is a remote library.
-The `nvdaSettingsFiles` directory contains various NVDA config files that are used to construct the NVDA profile in the `%TEMP%` directory.
+Most notably, the NvdaLib library contains methods for starting Aslan and speech can be retrieved via the `AslanSpyLib` returned by the module function `getSpyLib()` which is a remote library.
+The `aslanSettingsFiles` directory contains various Aslan config files that are used to construct the Aslan profile in the `%TEMP%` directory.
 
 ## How the test setup works
 
@@ -107,14 +107,14 @@ these have their own documentation.
 An overview of the files:
 
 * The `SystemTestSpy` package is responsible for setting up the global plugin and synth driver.
-* `libraries/NvdaLib` abstracts the setup and running / exiting of NVDA.
+* `libraries/NvdaLib` abstracts the setup and running / exiting of Aslan.
 * `speechSpyGlobalPlugin` module creates a RobotFramework Remote Server which gets connected to via the `NvdaLib` library.
 To make running remote functions easier, methods are created on the remote spy instance which wrap calls to `run_keyword`.
 
-An NVDA sandbox profile is setup in the `%TEMP%` directory like so:
+An Aslan sandbox profile is setup in the `%TEMP%` directory like so:
 
-* `nvdaProfile/`
-  * `nvda.ini` copied from `nvdaSettingsFiles`
+* `aslanProfile/`
+  * `aslan.ini` copied from `aslanSettingsFiles`
   * `scratchpad/`
     * `globalPlugins/speechSpyGlobalPlugin/`
       * `__init__.py` copied from `speechSpyGlobalPlugin.py`
@@ -126,37 +126,37 @@ An NVDA sandbox profile is setup in the `%TEMP%` directory like so:
     * `synthDrivers/`
       * `speechSpySynthDriver.py`
 
-For each test, the NVDA configuration file is overwritten.
-NVDA is started with the `-c` option to specify this profile directory to be used for config.
+For each test, the Aslan configuration file is overwritten.
+Aslan is started with the `-c` option to specify this profile directory to be used for config.
 
 ## Logs
 
-Both Robot Framework and NVDA logs are captured in the `testOutput` directory in the repo root.
-NVDA logs (NVDA log, stdOut, and stdErr for each test) are under the `nvdaTestRunLogs` directory.
+Both Robot Framework and Aslan logs are captured in the `testOutput` directory in the repo root.
+Aslan logs (Aslan log, stdOut, and stdErr for each test) are under the `aslanTestRunLogs` directory.
 The log files are named by suite and test name.
 
-## Comparing changes to NVDA Settings
+## Comparing changes to Aslan Settings
 
 `.\runsettingsdiff.bat` is a tool used to compare the settings dialog by reading text and generating screenshots for comparison.  The default behaviour is to run using the source code and output to `.\tests\system\settingsCache\source`.
 
 ### Usage
 
-To check for unreleased changes to the settings dialogs, one can use this tool to compare against two copies of NVDA.
+To check for unreleased changes to the settings dialogs, one can use this tool to compare against two copies of Aslan.
 
 The following arguments should be used with the script.
 
 Default arguments used are stored  in `.\tests\system\guiDiff.robot`
 
-* `--variable whichNVDA:[installed|source]` to decide where to run NVDA from
+* `--variable whichAslan:[installed|source]` to decide where to run Aslan from
 * `--variable cacheFolder:[filePath]` screenshots and text files of each settings panel are generated in `$cacheFolder\$currentVersion`
-* `--variable currentVersion:[nvdaVersion]` where `[nvdaVersion]` is used to name the generated screenshot and cache folder
-* `--variable compareVersion:[nvdaVersion]` using a `$nvdaVersion` that this script has already been run against, run the system tests and fail if there are differences between the read text. This generates a multiline diff.
+* `--variable currentVersion:[aslanVersion]` where `[aslanVersion]` is used to name the generated screenshot and cache folder
+* `--variable compareVersion:[aslanVersion]` using a `$aslanVersion` that this script has already been run against, run the system tests and fail if there are differences between the read text. This generates a multiline diff.
 
-#### Example usage to compare settings between NVDA 2020.4 and the current source
+#### Example usage to compare settings between Aslan 2020.4 and the current source
 
-1. Install NVDA 2020.4
-1. Run `.\runsettingsdiff.bat -v whichNVDA:installed -v currentVersion:2020.4`
-1. Run `.\runsettingsdiff.bat -v whichNVDA:source -v currentVersion:source -v compareVersion:2020.4`
+1. Install Aslan 2020.4
+1. Run `.\runsettingsdiff.bat -v whichAslan:installed -v currentVersion:2020.4`
+1. Run `.\runsettingsdiff.bat -v whichAslan:source -v currentVersion:source -v compareVersion:2020.4`
    * The test will fail and display a diff of any read changes
 1. Use a diff tool to compare folders:
    * `diff ./tests/system/settingsCache/2020.4 ./tests/system/settingsCache/source`

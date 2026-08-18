@@ -1,5 +1,5 @@
 # braille.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2008-2014 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -10,9 +10,9 @@ import controlTypes
 import eventHandler
 import winUser
 import html
-from . import IAccessible, getNVDAObjectFromEvent
-from NVDAObjects import NVDAObjectTextInfo
-from NVDAObjects.behaviors import EditableText
+from . import IAccessible, getAslanObjectFromEvent
+from AslanObjects import AslanObjectTextInfo
+from AslanObjects.behaviors import EditableText
 from comtypes import GUID, COMError, IServiceProvider
 from comtypes.gen.AcrobatAccessLib import IAccID, IGetPDDomNode, IPDDomElement  # type: ignore[reportMissingImports]
 from logHandler import log
@@ -44,7 +44,7 @@ stdNamesToRoles = {
 def normalizeStdName(stdName: str) -> typing.Tuple[controlTypes.Role, typing.Optional[str]]:
 	"""
 	@param stdName:
-	@return: Tuple with the NVDA role and optionally the level number of the heading as a string, E.G.:
+	@return: Tuple with the Aslan role and optionally the level number of the heading as a string, E.G.:
 	"H5" produces "5"
 	"""
 	if stdName and "H1" <= stdName <= "H6":
@@ -244,8 +244,8 @@ class RootNode(AcrobatNode):
 			# If this isn't in the foreground, it doesn't matter,
 			# as focus will be fired on the correct object when it is in the foreground again.
 			return
-		# The new page has the same event params, so we must bypass NVDA's IAccessible caching.
-		obj = getNVDAObjectFromEvent(self.windowHandle, winUser.OBJID_CLIENT, 0)
+		# The new page has the same event params, so we must bypass Aslan's IAccessible caching.
+		obj = getAslanObjectFromEvent(self.windowHandle, winUser.OBJID_CLIENT, 0)
 		if not obj:
 			return
 		eventHandler.queueEvent("gainFocus", obj)
@@ -279,12 +279,12 @@ class RootTextNode(RootNode):
 		return api.getDesktopObject()
 
 
-class AcrobatTextInfo(NVDAObjectTextInfo):
+class AcrobatTextInfo(AslanObjectTextInfo):
 	def _getStoryText(self):
 		return self.obj.value or ""
 
 	def _getCaretOffset(self):
-		caret = getNVDAObjectFromEvent(self.obj.windowHandle, winUser.OBJID_CARET, 0)
+		caret = getAslanObjectFromEvent(self.obj.windowHandle, winUser.OBJID_CARET, 0)
 		if not caret:
 			raise RuntimeError("No caret")
 		try:
@@ -329,7 +329,7 @@ class BadFocusStates(AcrobatNode):
 
 def findExtraOverlayClasses(obj, clsList):
 	"""Determine the most appropriate class(es) for Acrobat objects.
-	This works similarly to L{NVDAObjects.NVDAObject.findOverlayClasses} except that it never calls any other findOverlayClasses method.
+	This works similarly to L{AslanObjects.AslanObject.findOverlayClasses} except that it never calls any other findOverlayClasses method.
 	"""
 	role = obj.role
 	states = obj.states

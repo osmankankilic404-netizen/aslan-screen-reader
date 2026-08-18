@@ -52,14 +52,14 @@ Add-ons can be filtered by display name, publisher and description.
 1. Change to the "Available add-ons" tab and enable the "Include incompatible add-ons" filter, to get a long list.
 1. Tab to the list of add-ons.
 1. Hold down the arrow keys to move through the list quickly, then release.
-1. Ensure NVDA stays responsive and does not freeze.
+1. Ensure Aslan stays responsive and does not freeze.
 1. After stopping, tab to the details view.
 1. Ensure the details update to show the currently selected add-on.
 
 ### Failure to fetch add-ons available for download
 
 1. Disable your internet connection
-1. Go to your [NVDA user configuration folder](#editing-user-configuration)
+1. Go to your [Aslan user configuration folder](#editing-user-configuration)
 1. To delete the current cache of available add-on store add-ons, delete the file: `addonStore\_cachedCompatibleAddons.json`
 1. Open the Add-on Store
 1. Ensure a warning is displayed: "Unable to fetch latest compatible add-ons"
@@ -74,7 +74,7 @@ Add-ons can be filtered by display name, publisher and description.
 1. Select an add-on.
 1. Using the context menu, install the add-on.
 1. Exit the dialog
-1. Restart NVDA as prompted.
+1. Restart Aslan as prompted.
 1. Confirm the add-ons are listed in the installed add-ons tab of the add-ons store.
 
 ### Batch install add-ons
@@ -84,14 +84,14 @@ Add-ons can be filtered by display name, publisher and description.
 1. Select multiple add-ons using `shift` and `ctrl`.
 1. Using the context menu, install the add-ons.
 1. Exit the dialog
-1. Restart NVDA as prompted.
+1. Restart Aslan as prompted.
 1. Confirm the add-ons are listed in the installed add-ons tab of the add-ons store.
 
 ### Install add-on from external source
 
 1. Open the add-on store.
 1. Jump to the install from external source button (`alt+x`)
-1. Find an `*.nvda-addon` file, and open it
+1. Find an `*.aslan-addon` file, and open it
 1. Proceed with the installation
 
 ### Install and override incompatible add-on
@@ -106,7 +106,7 @@ Add-ons can be filtered by display name, publisher and description.
 
 1. Start the install of an incompatible add-on bundle.
 You can do this by:
-    * opening an `.nvda-addon` file while NVDA is running
+    * opening an `.aslan-addon` file while Aslan is running
     * using the "install from external source" button
 1. Confirm the warning message about add-on compatibility.
 1. Proceed with the installation.
@@ -117,7 +117,7 @@ You can do this by:
 1. Press enable on a disabled add-on
 1. Confirm the warning message about add-on compatibility.
 1. Exit the add-on store dialog
-1. You should be prompted for restart, restart NVDA
+1. You should be prompted for restart, restart Aslan
 1. Confirm the add-on is enabled in the add-ons store
 
 ### Failure to download add-on
@@ -139,7 +139,7 @@ This process allows you to mock an update for an add-on.
 
 1. [Install an add-on from the Add-on Store](#install-add-on)
 For example: "Clock".
-1. Go to the "addons" folder in your [NVDA user configuration folder](#editing-user-configuration)
+1. Go to the "addons" folder in your [Aslan user configuration folder](#editing-user-configuration)
 1. To mock an old release, we need to edit 2 files:
     * Add-on Store JSON metadata
         * Example: `source\userConfig\addons\clock.json`
@@ -153,11 +153,11 @@ For example: "Clock".
 1. [Install an add-on from the Add-on Store](#install-add-on)
 For example: "Clock".
 1. From PowerShell, call the following script to make the add-on updatable.
-   * `tests\manual\nvdaUI\createUpdatableAddons.ps1 $addonName $configPath`
-   * Replace `$configPath` with your [NVDA user configuration folder](#editing-user-configuration).
+   * `tests\manual\aslanUI\createUpdatableAddons.ps1 $addonName $configPath`
+   * Replace `$configPath` with your [Aslan user configuration folder](#editing-user-configuration).
    This script defaults to using the installed user config folder in `%APPDATA%`.
-   * Example when running from source: `tests\manual\nvdaUI\createUpdatableAddons.ps1 clock source\userConfig`
-   * Example when running an installed copy: `tests\manual\nvdaUI\createUpdatableAddons.ps1 clock`
+   * Example when running from source: `tests\manual\aslanUI\createUpdatableAddons.ps1 clock source\userConfig`
+   * Example when running an installed copy: `tests\manual\aslanUI\createUpdatableAddons.ps1 clock`
    * Note this script sets the add-on version to 0.0.0.
 
 ### Updating from add-on originally installed via Add-on Store
@@ -171,7 +171,7 @@ For example: "Clock".
 
 1. [Install an add-on from the Add-on Store](#install-add-on)
 For example: "Clock".
-1. Go to the "addons" folder in your [NVDA user configuration folder](#editing-user-configuration)
+1. Go to the "addons" folder in your [Aslan user configuration folder](#editing-user-configuration)
 1. To mock an externally loaded older release, we need to edit 2 files:
    * Add-on Store JSON metadata
      * Example: `source\userConfig\addons\clock.json`
@@ -190,7 +190,7 @@ This means using the latest add-on store version might be a downgrade or sidegra
 
 1. [Install an add-on from the add-on store](#install-add-on)
 For example: "Clock".
-1. Go to the "addons" folder in your [NVDA user configuration folder](#editing-user-configuration)
+1. Go to the "addons" folder in your [Aslan user configuration folder](#editing-user-configuration)
 1. To mock an externally loaded release, with an invalid version, we need to edit 2 files:
     * Add-on Store JSON metadata
         * Example: `source\userConfig\addons\clock.json`
@@ -210,16 +210,16 @@ For example: "Clock".
 1. Select multiple add-ons using `shift` and `ctrl`.
 1. Using the context menu, install the add-ons.
 1. Exit the dialog
-1. Restart NVDA when prompted.
+1. Restart Aslan when prompted.
 1. Confirm the up-to-date add-ons are listed in the installed add-ons tab of the Add-ons Store.
 
 ### Automatic update notifications
 
 1. Repeatedly [create updatable add-ons](#simulate-creating-an-updatable-add-on).
-1. Start NVDA
+1. Start Aslan
 1. Ensure Automatic update notifications are enabled in the Add-on Store panel
 1. Trigger the update notification manually, or alternatively wait for the notification to occur
-    1. From the NVDA Python console, find the scheduled thread
+    1. From the Aslan Python console, find the scheduled thread
 
         ```py
         import schedule
@@ -233,9 +233,9 @@ For example: "Clock".
         ```
 
 1. Test various buttons:
-    * Press "Update All": Ensure NVDA installs the add-ons.
-    * Press "Close": Ensure that NVDA prompts for restart if any add-ons have been installed, enabled, disabled or removed
-    * Press "Open Add-on Store": Ensure NVDA opens to the Updatable tab in the Add-on Store
+    * Press "Update All": Ensure Aslan installs the add-ons.
+    * Press "Close": Ensure that Aslan prompts for restart if any add-ons have been installed, enabled, disabled or removed
+    * Press "Open Add-on Store": Ensure Aslan opens to the Updatable tab in the Add-on Store
 
 ### Automatic updating
 
@@ -248,7 +248,7 @@ Full automatic updating is not currently supported.
 1. Find a running add-on in the add-on store
 1. Press the disable button
 1. Exit the add-on store dialog
-1. You should be prompted for restart, restart NVDA
+1. You should be prompted for restart, restart Aslan
 1. Confirm the add-on is disabled in the add-ons store
 
 ### Enabling an add-on
@@ -256,7 +256,7 @@ Full automatic updating is not currently supported.
 1. Find a disabled add-on in the add-on store
 1. Press the enable button
 1. Exit the add-on store dialog
-1. You should be prompted for restart, restart NVDA
+1. You should be prompted for restart, restart Aslan
 1. Confirm the add-on is disabled in the add-ons store
 
 ### Removing an add-on
@@ -264,7 +264,7 @@ Full automatic updating is not currently supported.
 1. Find an installed add-on in the add-on store
 1. Press the remove button
 1. Exit the add-on store dialog
-1. You should be prompted for restart, restart NVDA
+1. You should be prompted for restart, restart Aslan
 1. Confirm the add-on is removed in the add-ons store
 
 ### Browse an add-ons help
@@ -294,13 +294,13 @@ For "Action" button and "Other details" text field controls:
 1. From another control tab to the control and check that `alt+<letter>` is reported.
 1. In the control, check that `shift+numpad2` reports the shortcut key.
 
-## Updating NVDA
+## Updating Aslan
 
-### Updating NVDA with incompatible add-ons
+### Updating Aslan with incompatible add-ons
 
-There are several scenarios which need to be tested for updating NVDA with incompatible add-ons.
-This is an advanced test scenario which requires 3 versions of NVDA to test with.
-Typically, this requires a contributor creating 3 different versions of the same patch of NVDA, with different versions of `addonAPIVersion.CURRENT` and `addonAPIVersion.BACK_COMPAT_TO`
+There are several scenarios which need to be tested for updating Aslan with incompatible add-ons.
+This is an advanced test scenario which requires 3 versions of Aslan to test with.
+Typically, this requires a contributor creating 3 different versions of the same patch of Aslan, with different versions of `addonAPIVersion.CURRENT` and `addonAPIVersion.BACK_COMPAT_TO`
 
 * X.1 e.g `CURRENT=2023.1`, `BACK_COMPAT_TO=2023.1`
 * X.2 e.g `CURRENT=2023.2`, `BACK_COMPAT_TO=2023.1`
@@ -308,7 +308,7 @@ Typically, this requires a contributor creating 3 different versions of the same
 
 | Test Name | Upgrade from | Upgrade to | Test notes |
 | --- | --- | --- | --- |
-| Upgrade to different NVDA version in the same API breaking release cycle | X.1 | X.1 | Add-ons which remain incompatible are listed as incompatible on upgrading. Preserves state of enabled incompatible add-ons |
+| Upgrade to different Aslan version in the same API breaking release cycle | X.1 | X.1 | Add-ons which remain incompatible are listed as incompatible on upgrading. Preserves state of enabled incompatible add-ons |
 | Upgrade to a different but compatible API version | X.1 | X.2 | Add-ons which remain incompatible are listed as incompatible on upgrading. Preserves state of enabled incompatible add-ons |
 | Downgrade to a different but compatible API version | X.2 | X.1 | Add-ons which remain incompatible are listed as incompatible on upgrading. Preserves state of enabled incompatible add-ons |
 | Upgrade to an API breaking version | X.1 | (X+1).1 | All incompatible add-ons are listed as incompatible on upgrading, overridden compatibility is reset. |
@@ -318,8 +318,8 @@ Typically, this requires a contributor creating 3 different versions of the same
 
 ## Editing User Configuration
 
-Where you can find your NVDA user configuration folder:
+Where you can find your Aslan user configuration folder:
 
-* For installed copies: `%APPDATA%\nvda`
+* For installed copies: `%APPDATA%\aslan`
 * For source copies: `source\userConfig`
 * Inside a portable copy directory: `userConfig`

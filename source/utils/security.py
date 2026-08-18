@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited, Cyrille Bougot
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -30,15 +30,15 @@ import winUser
 
 if TYPE_CHECKING:
 	import scriptHandler  # noqa: F401, use for typing
-	import NVDAObjects  # noqa: F401, use for typing
+	import AslanObjects  # noqa: F401, use for typing
 	import treeInterceptorHandler  # noqa: F401, use for typing
 
 
 def __getattr__(attrName: str) -> Any:
 	"""Module level `__getattr__` used to preserve backward compatibility."""
-	import NVDAState
+	import AslanState
 
-	if NVDAState._allowDeprecatedAPI():
+	if AslanState._allowDeprecatedAPI():
 		if attrName == "isObjectAboveLockScreen":
 			log.warning(
 				"isObjectAboveLockScreen(obj) is deprecated. Instead use obj.isBelowLockScreen. ",
@@ -100,7 +100,7 @@ def getSafeScripts() -> Set["scriptHandler._ScriptFunctionT"]:
 		commands.script_moveNavigatorObjectToMouse,
 		# Mouse click events are harmless.
 		# Mouse clicks are already exposed by Windows, and these scripts emulate those mouse clicks,
-		# rather than passing a click event to an NVDAObject / HWND.
+		# rather than passing a click event to an AslanObject / HWND.
 		commands.script_leftMouseClick,
 		commands.script_rightMouseClick,
 		# Braille commands are safe, and required to interact
@@ -156,7 +156,7 @@ def getSafeScripts() -> Set["scriptHandler._ScriptFunctionT"]:
 
 
 def objectBelowLockScreenAndWindowsIsLocked(
-	obj: "NVDAObjects.NVDAObject | treeInterceptorHandler.TreeInterceptor",
+	obj: "AslanObjects.AslanObject | treeInterceptorHandler.TreeInterceptor",
 	shouldLog: bool = True,
 ) -> bool:
 	"""
@@ -170,9 +170,9 @@ def objectBelowLockScreenAndWindowsIsLocked(
 	An object below the lock screen should only be accessible when Windows is unlocked,
 	as it may contain sensitive information.
 
-	As such, NVDA must prevent accessing and reading objects below the lock screen when Windows is locked.
+	As such, Aslan must prevent accessing and reading objects below the lock screen when Windows is locked.
 
-	Some callers pass a TreeInterceptor rather than an NVDAObject.
+	Some callers pass a TreeInterceptor rather than an AslanObject.
 	As TreeInterceptors do not implement isBelowLockScreen, their root object is checked instead.
 
 	:return: True if the Windows 10/11 lockscreen is active and obj is below the lock screen.
@@ -181,10 +181,10 @@ def objectBelowLockScreenAndWindowsIsLocked(
 		if not isLockScreenModeActive():
 			return False
 
-		import NVDAObjects
+		import AslanObjects
 
-		if not isinstance(obj, NVDAObjects.NVDAObject):
-			rootObj = getattr(obj, "rootNVDAObject", None)
+		if not isinstance(obj, AslanObjects.AslanObject):
+			rootObj = getattr(obj, "rootAslanObject", None)
 			if rootObj is None:
 				if shouldLog:
 					log.debug(f"Unhandled object type {type(obj)}, considering object as safe.")
@@ -204,14 +204,14 @@ def objectBelowLockScreenAndWindowsIsLocked(
 	return False
 
 
-def _isObjectAboveLockScreen(obj: "NVDAObjects.NVDAObject") -> bool:
+def _isObjectAboveLockScreen(obj: "AslanObjects.AslanObject") -> bool:
 	log.error(
 		"This function is deprecated. Instead use obj.isBelowLockScreen. ",
 	)
 	return not obj.isBelowLockScreen
 
 
-def _isObjectBelowLockScreen(obj: "NVDAObjects.NVDAObject") -> bool:
+def _isObjectBelowLockScreen(obj: "AslanObjects.AslanObject") -> bool:
 	"""
 	While Windows is locked, the current user session is still running, and below the lockscreen
 	exists the current user's desktop.
@@ -224,11 +224,11 @@ def _isObjectBelowLockScreen(obj: "NVDAObjects.NVDAObject") -> bool:
 	An object below the lockscreen should only be accessible when Windows is unlocked,
 	as it may contain sensitive information.
 	"""
-	from NVDAObjects.IAccessible import TaskListIcon
+	from AslanObjects.IAccessible import TaskListIcon
 	import systemUtils
 
 	if not systemUtils.hasUiAccess():
-		# If NVDA does not have UIAccess, it cannot read below the lock screen
+		# If Aslan does not have UIAccess, it cannot read below the lock screen
 		return False
 
 	foregroundWindow = winUser.getForegroundWindow()
@@ -245,13 +245,13 @@ def _isObjectBelowLockScreen(obj: "NVDAObjects.NVDAObject") -> bool:
 	):
 		return False
 
-	from NVDAObjects.window import Window
+	from AslanObjects.window import Window
 
 	if not isinstance(obj, Window):
 		log.debug(
 			"Cannot detect if object is below lock app, considering object as safe. ",
 		)
-		# Must be a window instance to get the HWNDVal, other NVDAObjects do not support this.
+		# Must be a window instance to get the HWNDVal, other AslanObjects do not support this.
 		return False
 
 	topLevelWindowHandle = winUser.getAncestor(obj.windowHandle, winUser.GA_ROOT)
@@ -265,7 +265,7 @@ def _isObjectBelowLockScreenCheckZOrder(objWindowHandle: int) -> bool:
 	secure information may become accessible.
 
 	If these functions fail, where possible,
-	NVDA should make NVDA objects accessible.
+	Aslan should make Aslan objects accessible.
 	"""
 
 	def _isWindowLockScreen(hwnd: winUser.HWNDVal) -> bool:
@@ -286,7 +286,7 @@ def _isObjectBelowLockScreenCheckZOrder(objWindowHandle: int) -> bool:
 		return _isWindowBelowWindowMatchesCond(objWindowHandle, _isWindowLockScreen)
 	except _UnexpectedWindowCountError:
 		log.debugWarning(
-			"Couldn't determine lock screen and NVDA object relative z-order",
+			"Couldn't determine lock screen and Aslan object relative z-order",
 			exc_info=True,
 		)
 		return False
@@ -313,16 +313,16 @@ def _isWindowBelowWindowMatchesCond(
 	If the first window is not found, but the second window is,
 	it is assumed that the first window is above the second window.
 
-	In the context of _isObjectBelowLockScreenCheckZOrder, NVDA starts at the lowest window,
+	In the context of _isObjectBelowLockScreenCheckZOrder, Aslan starts at the lowest window,
 	and searches up towards the closest/lowest lock screen window.
-	If the lock screen window is found before the NVDAObject,
-	then the NVDAObject is above the lock screen,
+	If the lock screen window is found before the AslanObject,
+	then the AslanObject is above the lock screen,
 	or not present at all,
-	and therefore the NVDAObject should be made accessible.
-	This is because if the NVDAObject is not present, we want to make it accessible by default.
-	If the lock screen window is not present at all, we also want to make the NVDAObject accessible,
+	and therefore the AslanObject should be made accessible.
+	This is because if the AslanObject is not present, we want to make it accessible by default.
+	If the lock screen window is not present at all, we also want to make the AslanObject accessible,
 	so the lock screen window must be comprehensively searched for.
-	If the NVDAObject is found, and then a lock screen window,
+	If the AslanObject is found, and then a lock screen window,
 	the object is not made accessible as it is below the lock screen.
 	Edge cases and failures should be handled by making the object accessible.
 
@@ -364,7 +364,7 @@ _hasSessionLockStateUnknownWarningBeenGiven = False
 
 def warnSessionLockStateUnknown() -> None:
 	"""Warn the user that the lock state of the computer can not be determined.
-	NVDA will not be able to determine if Windows is on the lock screen
+	Aslan will not be able to determine if Windows is on the lock screen
 	(LockApp on Windows 10/11), and will not be able to ensure privacy/security
 	of the signed-in user against unauthenticated users.
 	@note Only warn the user once.
@@ -375,18 +375,18 @@ def warnSessionLockStateUnknown() -> None:
 	_hasSessionLockStateUnknownWarningBeenGiven = True
 
 	log.warning(
-		"NVDA is unable to determine if Windows is locked."
-		" While this instance of NVDA is running,"
+		"Aslan is unable to determine if Windows is locked."
+		" While this instance of Aslan is running,"
 		" your desktop will not be secure when Windows is locked."
 		" Restarting Windows may address this."
 		" If this error is ongoing then disabling the Windows lock screen is recommended.",
 	)
 
 	unableToDetermineSessionLockStateMsg = _(
-		# Translators: This is the message for a warning shown if NVDA cannot determine if
+		# Translators: This is the message for a warning shown if Aslan cannot determine if
 		# Windows is locked.
-		"NVDA is unable to determine if Windows is locked."
-		" While this instance of NVDA is running,"
+		"Aslan is unable to determine if Windows is locked."
+		" While this instance of Aslan is running,"
 		" your desktop will not be secure when Windows is locked."
 		" Restarting Windows may address this."
 		" If this error is ongoing then disabling the Windows lock screen is recommended.",
@@ -398,9 +398,9 @@ def warnSessionLockStateUnknown() -> None:
 	log.debug("Presenting session lock tracking failure warning.")
 	gui.messageBox(
 		unableToDetermineSessionLockStateMsg,
-		# Translators: This is the title for a warning dialog, shown if NVDA cannot determine if
+		# Translators: This is the title for a warning dialog, shown if Aslan cannot determine if
 		# Windows is locked.
-		caption=_("Lock screen not secure while using NVDA"),
+		caption=_("Lock screen not secure while using Aslan"),
 		style=wx.ICON_ERROR | wx.OK,
 	)
 
@@ -425,11 +425,11 @@ def sha256_checksum(binaryReadModeFile: BinaryIO, blockSize: int = SHA_BLOCK_SIZ
 
 def isRunningOnSecureDesktop() -> bool:
 	"""
-	When NVDA is running on a secure screen,
+	When Aslan is running on a secure screen,
 	it is running on the secure desktop.
 	When the serviceDebug parameter is not set,
-	NVDA should run in secure mode when on the secure desktop.
-	globalVars.appArgs.secure being set to True means NVDA is running in secure mode.
+	Aslan should run in secure mode when on the secure desktop.
+	globalVars.appArgs.secure being set to True means Aslan is running in secure mode.
 
 	For more information, refer to projectDocs/design/technicalDesignOverview.md 'Logging in secure mode'
 	and the following userGuide sections:
@@ -441,16 +441,16 @@ def isRunningOnSecureDesktop() -> bool:
 
 def isRunningElevated() -> bool:
 	"""
-	Determine whether NVDA is running as an elevated administrator.
+	Determine whether Aslan is running as an elevated administrator.
 
 	When UAC is enabled and a user with administrator privileges signs in,
 	they get a "split token", in which the administrative powers in their token are disabled.
 	When the user elevates their token, those administrative powers are enabled.
 
-	:return: ``True`` if NVDA is being run by an elevated administrator; ``False`` otherwise.
+	:return: ``True`` if Aslan is being run by an elevated administrator; ``False`` otherwise.
 
 	.. note::
-		A return of ``False`` does not guarantee that NVDA is being run as a standard user;
+		A return of ``False`` does not guarantee that Aslan is being run as a standard user;
 		we may be an administrator on a machine with UAC disabled.
 	"""
 	elevationType = DWORD()

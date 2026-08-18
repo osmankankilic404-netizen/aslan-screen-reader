@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2025 NV Access Limited, Cyrille Bougot, łukasz Golonka
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -131,7 +131,7 @@ class AddonStoreDialog(SettingsDialog):
 	def _makeBanner(self):
 		self.banner = BannerWindow(self, dir=wx.TOP)
 		# Translators: Banner notice that is displayed in the Add-on Store.
-		bannerText = pgettext("addonStore", "Note: NVDA was started with add-ons disabled")
+		bannerText = pgettext("addonStore", "Note: Aslan was started with add-ons disabled")
 		self.banner.SetText(
 			bannerText,
 			"",
@@ -441,8 +441,8 @@ class AddonStoreDialog(SettingsDialog):
 		self._storeVM.listVM.applyFilter(filterText)
 
 	def openExternalInstall(self, evt: wx.EVT_BUTTON):
-		# Translators: the label for the NVDA add-on package file type in the Choose add-on dialog.
-		fileTypeLabel = pgettext("addonStore", "NVDA Add-on Package (*.{ext})")
+		# Translators: the label for the Aslan add-on package file type in the Choose add-on dialog.
+		fileTypeLabel = pgettext("addonStore", "Aslan Add-on Package (*.{ext})")
 		fd = wx.FileDialog(
 			self,
 			# Translators: The message displayed in the dialog that

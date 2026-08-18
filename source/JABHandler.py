@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2007-2026 NV Access Limited, Peter Vágner, Renaud Paquay, Babbage B.V.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -37,10 +37,10 @@ import winUser
 import api
 import eventHandler
 import controlTypes
-import NVDAObjects.JAB
+import AslanObjects.JAB
 import core
 import textUtils
-import NVDAState
+import AslanState
 import config
 from utils.security import isRunningOnSecureDesktop
 
@@ -533,7 +533,7 @@ def _fixBridgeFuncs():
 	)
 
 
-# NVDA specific code
+# Aslan specific code
 
 isRunning = False
 # Cache of the last active window handle for a given JVM ID. In theory, this
@@ -985,9 +985,9 @@ def event_gainFocus(vmID, accContext, hwnd):
 	if not winUser.isDescendantWindow(winUser.getForegroundWindow(), jabContext.hwnd):
 		return
 	focus = eventHandler.lastQueuedFocusObject
-	if isinstance(focus, NVDAObjects.JAB.JAB) and focus.jabContext == jabContext:
+	if isinstance(focus, AslanObjects.JAB.JAB) and focus.jabContext == jabContext:
 		return
-	obj = NVDAObjects.JAB.JAB(jabContext=jabContext)
+	obj = AslanObjects.JAB.JAB(jabContext=jabContext)
 	if obj.role == controlTypes.Role.UNKNOWN:
 		return
 	eventHandler.queueEvent("gainFocus", obj)
@@ -1013,10 +1013,10 @@ def internal_event_activeDescendantChange(
 
 def internal_hasFocus(sourceContext):
 	focus = api.getFocusObject()
-	if isinstance(focus, NVDAObjects.JAB.JAB) and focus.jabContext == sourceContext:
+	if isinstance(focus, AslanObjects.JAB.JAB) and focus.jabContext == sourceContext:
 		return True
 	ancestors = reversed(api.getFocusAncestors())
-	return any((isinstance(x, NVDAObjects.JAB.JAB) and x.jabContext == sourceContext for x in ancestors))
+	return any((isinstance(x, AslanObjects.JAB.JAB) and x.jabContext == sourceContext for x in ancestors))
 
 
 @AccessBridge_PropertyNameChangeFP
@@ -1037,8 +1037,8 @@ def event_nameChange(vmID: int, accContext: int) -> None:
 		focus = api.getFocusObject()
 		obj = (
 			focus
-			if (isinstance(focus, NVDAObjects.JAB.JAB) and focus.jabContext == jabContext)
-			else NVDAObjects.JAB.JAB(jabContext=jabContext)
+			if (isinstance(focus, AslanObjects.JAB.JAB) and focus.jabContext == jabContext)
+			else AslanObjects.JAB.JAB(jabContext=jabContext)
 		)
 		if obj:
 			eventHandler.queueEvent("nameChange", obj)
@@ -1064,8 +1064,8 @@ def event_descriptionChange(vmID: int, accContext: int) -> None:
 		focus = api.getFocusObject()
 		obj = (
 			focus
-			if (isinstance(focus, NVDAObjects.JAB.JAB) and focus.jabContext == jabContext)
-			else NVDAObjects.JAB.JAB(jabContext=jabContext)
+			if (isinstance(focus, AslanObjects.JAB.JAB) and focus.jabContext == jabContext)
+			else AslanObjects.JAB.JAB(jabContext=jabContext)
 		)
 		if obj:
 			eventHandler.queueEvent("descriptionChange", obj)
@@ -1091,8 +1091,8 @@ def event_valueChange(vmID: int, accContext: int) -> None:
 		focus = api.getFocusObject()
 		obj = (
 			focus
-			if (isinstance(focus, NVDAObjects.JAB.JAB) and focus.jabContext == jabContext)
-			else NVDAObjects.JAB.JAB(jabContext=jabContext)
+			if (isinstance(focus, AslanObjects.JAB.JAB) and focus.jabContext == jabContext)
+			else AslanObjects.JAB.JAB(jabContext=jabContext)
 		)
 		if obj:
 			eventHandler.queueEvent("valueChange", obj)
@@ -1115,7 +1115,7 @@ def event_stateChange(vmID, accContext, oldState, newState):
 	# For broken tabs and menus, we need to watch for things being selected and pretend its a focus change
 	stateList = newState.split(",")
 	if "focused" in stateList or "selected" in stateList:
-		obj = NVDAObjects.JAB.JAB(jabContext=jabContext)
+		obj = AslanObjects.JAB.JAB(jabContext=jabContext)
 		if not obj:
 			return
 		if (
@@ -1127,8 +1127,8 @@ def event_stateChange(vmID, accContext, oldState, newState):
 			return
 	obj = (
 		focus
-		if (isinstance(focus, NVDAObjects.JAB.JAB) and focus.jabContext == jabContext)
-		else NVDAObjects.JAB.JAB(jabContext=jabContext)
+		if (isinstance(focus, AslanObjects.JAB.JAB) and focus.jabContext == jabContext)
+		else AslanObjects.JAB.JAB(jabContext=jabContext)
 	)
 	if obj:
 		eventHandler.queueEvent("stateChange", obj)
@@ -1150,8 +1150,8 @@ def event_caret(vmID, accContext, hwnd):
 		focus = api.getFocusObject()
 		obj = (
 			focus
-			if (isinstance(focus, NVDAObjects.JAB.JAB) and focus.jabContext == jabContext)
-			else NVDAObjects.JAB.JAB(jabContext=jabContext)
+			if (isinstance(focus, AslanObjects.JAB.JAB) and focus.jabContext == jabContext)
+			else AslanObjects.JAB.JAB(jabContext=jabContext)
 		)
 		if obj:
 			eventHandler.queueEvent("caret", obj)
@@ -1183,7 +1183,7 @@ def enterJavaWindow_helper(hwnd):
 	vmID = vmID.value
 	vmIDsToWindowHandles[vmID] = hwnd
 	lastFocus = eventHandler.lastQueuedFocusObject
-	if isinstance(lastFocus, NVDAObjects.JAB.JAB) and lastFocus.windowHandle == hwnd:
+	if isinstance(lastFocus, AslanObjects.JAB.JAB) and lastFocus.windowHandle == hwnd:
 		return
 	event_gainFocus(vmID, accContext, hwnd)
 
@@ -1214,7 +1214,7 @@ def enableBridge():
 def initialize():
 	global bridgeDll, isRunning
 	try:
-		bridgeDll = cdll.LoadLibrary(NVDAState.ReadPaths.javaAccessBridgeDLL)
+		bridgeDll = cdll.LoadLibrary(AslanState.ReadPaths.javaAccessBridgeDLL)
 	except WindowsError:
 		raise NotImplementedError("dll not available")
 	_fixBridgeFuncs()

@@ -1,10 +1,10 @@
-# NVDAObjects/IAccessible/hh.py
-# A part of NonVisual Desktop Access (NVDA)
-# Copyright (C) 2006-2009 NVDA Contributors <http://www.nvda-project.org/>
+# AslanObjects/IAccessible/hh.py
+# A part of NonVisual Desktop Access (Aslan)
+# Copyright (C) 2006-2009 Aslan Contributors <http://www.aslan-project.org/>
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
-"""NVDAObjects for Microsoft HTML Help."""
+"""AslanObjects for Microsoft HTML Help."""
 
 import IAccessibleHandler
 from . import IAccessible
@@ -49,6 +49,6 @@ class KeywordList(IAccessible):
 			self.event_focusEntered()
 			# Redirect the focus to the active child.
 			# We do this at the IAccessibleHandler level so that duplicate focus event checks will work properly.
-			IAccessibleHandler.processFocusNVDAEvent(child)
+			IAccessibleHandler.processFocusAslanEvent(child)
 		else:
 			super(KeywordList, self).event_gainFocus()

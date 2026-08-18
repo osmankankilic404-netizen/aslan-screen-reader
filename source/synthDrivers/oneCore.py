@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2016-2025 Tyler Spivey, NV Access Limited, James Teh, Leonard de Ruijter
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -38,7 +38,7 @@ import queueHandler
 from speech.types import SpeechSequence
 import speechXml
 import languageHandler
-import NVDAHelper
+import AslanHelper
 
 from speech.commands import (
 	IndexCommand,
@@ -224,7 +224,7 @@ class OneCoreSynthDriver(SynthDriver):
 
 	def __init__(self):
 		super().__init__()
-		self._dll = NVDAHelper.getHelperLocalWin10Dll()
+		self._dll = AslanHelper.getHelperLocalWin10Dll()
 		self._dll.ocSpeech_initialize.restype = HANDLE
 		self._dll.ocSpeech_getCurrentVoiceLanguage.restype = ctypes.c_wchar_p
 		self._dll.ocSpeech_supportsProsodyOptions.restype = ctypes.c_bool
@@ -516,7 +516,7 @@ class OneCoreSynthDriver(SynthDriver):
 
 	def _getVoiceInfoFromOnecoreVoiceString(self, voiceStr: str):
 		"""
-		Produces an NVDA VoiceInfo object representing the given voice string from Onecore speech.
+		Produces an Aslan VoiceInfo object representing the given voice string from Onecore speech.
 		"""
 		# The voice string is made up of the ID, the language, and the display name.
 		ID, language, name = voiceStr.split(":")
@@ -546,7 +546,7 @@ class OneCoreSynthDriver(SynthDriver):
 		:returns: True if the voice is valid, False otherwise.
 
 		OneCore keeps specific registry caches of OneCore for AT applications.
-		Installed copies of NVDA have a OneCore cache in:
+		Installed copies of Aslan have a OneCore cache in:
 		`HKEY_CURRENT_USER\Software\Microsoft\Speech_OneCore\Isolated\Ny37kw9G-o42UiJ1z6Qc_sszEKkCNywTlrTOG0QKVB4`.
 		The caches contain a subtree which is meant to mirror the path:
 		`HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech_OneCore\*`.
@@ -556,15 +556,15 @@ class OneCoreSynthDriver(SynthDriver):
 		HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech_OneCore\Voices\Tokens\MSTTS_V110_enUS_MarkM`
 		refers to `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech_OneCore\Voices\Tokens\MSTTS_V110_enUS_MarkM`.
 
-		Languages which have been used by an installed copy of NVDA,
+		Languages which have been used by an installed copy of Aslan,
 		but uninstalled from the system are kept in the cache.
-		For installed copies of NVDA, OneCore will still attempt to use these languages,
+		For installed copies of Aslan, OneCore will still attempt to use these languages,
 		so we must check if they are valid first.
 		For portable copies, the cache is bypassed and `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Speech_OneCore\`
 		is read directly.
 
 		For more information, refer to:
-		https://github.com/nvaccess/nvda/issues/13732#issuecomment-1149386711
+		https://github.com/nvaccess/aslan/issues/13732#issuecomment-1149386711
 		"""
 		IDParts = ID.split("\\")
 		rootKey = getattr(winreg, IDParts[0])
@@ -613,7 +613,7 @@ class OneCoreSynthDriver(SynthDriver):
 	def _getDefaultVoice(self, pickAny: bool = True) -> str:
 		"""
 		Finds the best available voice that can be used as a default.
-		It first tries finding a voice with the same language as the user's configured NVDA language
+		It first tries finding a voice with the same language as the user's configured Aslan language
 		else one that matches the system language.
 		else any voice if pickAny is True.
 		Uses the Windows locale (eg en_AU) to provide country information for the voice where possible.
@@ -622,21 +622,21 @@ class OneCoreSynthDriver(SynthDriver):
 		voices = self.availableVoices
 		fullWindowsLanguage = languageHandler.getWindowsLanguage()
 		baseWindowsLanguage = fullWindowsLanguage.split("_")[0]
-		NVDALanguage = languageHandler.getLanguage()
-		if NVDALanguage.startswith(baseWindowsLanguage):
+		AslanLanguage = languageHandler.getLanguage()
+		if AslanLanguage.startswith(baseWindowsLanguage):
 			# add country information if it matches
-			NVDALanguage = fullWindowsLanguage
-		# Try matching to the NVDA language
+			AslanLanguage = fullWindowsLanguage
+		# Try matching to the Aslan language
 		for voice in voices.values():
-			if voice.language.startswith(NVDALanguage):
+			if voice.language.startswith(AslanLanguage):
 				return voice.id
 		# Try matching to the system language and country
-		if fullWindowsLanguage != NVDALanguage:
+		if fullWindowsLanguage != AslanLanguage:
 			for voice in voices.values():
 				if voice.language == fullWindowsLanguage:
 					return voice.id
 		# Try matching to the system language
-		if baseWindowsLanguage not in {fullWindowsLanguage, NVDALanguage}:
+		if baseWindowsLanguage not in {fullWindowsLanguage, AslanLanguage}:
 			for voice in voices.values():
 				if voice.language.startswith(baseWindowsLanguage):
 					return voice.id

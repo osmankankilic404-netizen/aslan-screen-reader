@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2025 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -20,7 +20,7 @@ def setDPIAwareness() -> None:
 	Different versions of Windows inconsistently support different styles of DPI Awareness.
 	This function attempts to set process DPI awareness using the most modern Windows API method available.
 
-	Only call this function once per instance of NVDA.
+	Only call this function once per instance of Aslan.
 
 	Only call this function when running from source.
 	It is recommended that you set the process-default DPI awareness via application manifest.
@@ -51,7 +51,7 @@ def setDPIAwareness() -> None:
 				# The DPI awareness is already set,
 				# either by calling this API previously or through the application (.exe) manifest.
 				# This is unexpected as we should only set DPI awareness once.
-				# NVDA sets DPI awareness from the manifest,
+				# Aslan sets DPI awareness from the manifest,
 				# however this function should only be called when running from source.
 				log.error("DPI Awareness already set.")
 				return
@@ -80,7 +80,7 @@ def setDPIAwareness() -> None:
 			# The DPI awareness is already set,
 			# either by calling this API previously or through the application (.exe) manifest.
 			# This is unexpected as we should only set DPI awareness once.
-			# NVDA sets DPI awareness from the manifest,
+			# Aslan sets DPI awareness from the manifest,
 			# however this function should only be called when running from source.
 			log.error("DPI Awareness already set.")
 			return

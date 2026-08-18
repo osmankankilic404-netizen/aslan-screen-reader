@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2018-2023 NV Access Limited, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -16,8 +16,8 @@ def hasAddonGotRequiredSupport(
 	addon: "SupportsVersionCheck",
 	currentAPIVersion: addonAPIVersion.AddonApiVersionT = addonAPIVersion.CURRENT,
 ) -> bool:
-	"""True if NVDA provides the add-on with an API version high enough to meet the add-on's minimum requirements"""
-	minVersion = addon.minimumNVDAVersion
+	"""True if Aslan provides the add-on with an API version high enough to meet the add-on's minimum requirements"""
+	minVersion = addon.minimumAslanVersion
 	return minVersion <= currentAPIVersion
 
 
@@ -26,9 +26,9 @@ def isAddonTested(
 	backwardsCompatToVersion: addonAPIVersion.AddonApiVersionT = addonAPIVersion.BACK_COMPAT_TO,
 ) -> bool:
 	"""True if this add-on is tested for the given API version.
-	By default, the current version of NVDA is evaluated.
+	By default, the current version of Aslan is evaluated.
 	"""
-	return addon.lastTestedNVDAVersion >= backwardsCompatToVersion
+	return addon.lastTestedAslanVersion >= backwardsCompatToVersion
 
 
 def isAddonCompatible(
@@ -37,8 +37,8 @@ def isAddonCompatible(
 	backwardsCompatToVersion: addonAPIVersion.AddonApiVersionT = addonAPIVersion.BACK_COMPAT_TO,
 ) -> bool:
 	"""Tests if the addon is compatible.
-	The compatibility is defined by having the required features in NVDA, and by having been tested / built against
-	an API version that is still supported by this version of NVDA.
+	The compatibility is defined by having the required features in Aslan, and by having been tested / built against
+	an API version that is still supported by this version of Aslan.
 	"""
 	return hasAddonGotRequiredSupport(addon, currentAPIVersion) and isAddonTested(
 		addon,

@@ -1,7 +1,7 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2026 NV Access Limited, Neil Soiffer, Ryan McCleary
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
 from collections.abc import Callable
 from dataclasses import dataclass
@@ -14,7 +14,7 @@ import wx
 
 from languageHandler import getLanguageDescription
 from logHandler import log
-from NVDAState import ReadPaths
+from AslanState import ReadPaths
 
 from . import rulesUtils
 
@@ -41,7 +41,7 @@ def pathToLanguagesFolder() -> str:
 	r"""Returns the full path to the Languages rules folder.
 
 	The language rules are stored in:
-	..\..\..\include\nvda-mathcat\assets\Rules\Languages,
+	..\..\..\include\aslan-mathcat\assets\Rules\Languages,
 	relative to the location of this file.
 
 	:return: Absolute path to the Languages folder as a string.

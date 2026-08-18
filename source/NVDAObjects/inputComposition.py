@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2012-2025 NV Access Limited, Cary-Rowen
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -10,7 +10,7 @@ from config.configFlags import TypingEcho
 import characterProcessing
 import speech
 import config
-from NVDAObjects.window import Window
+from AslanObjects.window import Window
 from .behaviors import EditableTextWithAutoSelectDetection, CandidateItem as CandidateItemBehavior
 from textInfos.offsets import OffsetsTextInfo
 

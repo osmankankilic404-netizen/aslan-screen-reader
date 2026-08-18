@@ -1,6 +1,6 @@
 # appModules/msimn.py - Outlook Express appModule
-# A part of NonVisual Desktop Access (NVDA)
-# Copyright (C) 2006-2012 NVDA Contributors
+# A part of NonVisual Desktop Access (Aslan)
+# Copyright (C) 2006-2012 Aslan Contributors
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
@@ -11,8 +11,8 @@ import textInfos
 import api
 import appModuleHandler
 from keyboardHandler import KeyboardInputGesture
-from NVDAObjects.window import Window
-from NVDAObjects.IAccessible import IAccessible, sysListView32
+from AslanObjects.window import Window
+from AslanObjects.IAccessible import IAccessible, sysListView32
 import watchdog
 
 messageListImageLabels = {
@@ -56,7 +56,7 @@ envelopeNames = {
 
 
 class AppModule(appModuleHandler.AppModule):
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		if not isinstance(obj, Window):
 			return
 		controlID = obj.windowControlID
@@ -75,7 +75,7 @@ class AppModule(appModuleHandler.AppModule):
 			obj.useITextDocumentSupport = True
 			obj.editValueUnit = textInfos.UNIT_STORY
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		if (
 			obj.windowClassName == "SysListView32"
 			and obj.windowControlID in (128, 129, 130)

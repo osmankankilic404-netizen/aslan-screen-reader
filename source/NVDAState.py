@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2025 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
@@ -68,11 +68,11 @@ class _WritePaths:
 		return os.path.join(self.configDir, "updates")
 
 	@property
-	def nvdaConfigFile(self) -> str:
-		return os.path.join(self.configDir, "nvda.ini")
+	def aslanConfigFile(self) -> str:
+		return os.path.join(self.configDir, "aslan.ini")
 
 	@property
-	def nvdaCustomSectionsFile(self) -> str:
+	def aslanCustomSectionsFile(self) -> str:
 		return os.path.join(self.configDir, "customSections.yaml")
 
 	@property
@@ -119,7 +119,7 @@ class _WritePaths:
 		from config.registry import RegistryKey
 
 		try:
-			with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, RegistryKey.NVDA.value) as k:
+			with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, RegistryKey.Aslan.value) as k:
 				return winreg.QueryValueEx(k, "Start Menu Folder")[0]
 		except WindowsError:
 			return None
@@ -133,7 +133,7 @@ class _WritePaths:
 		try:
 			with winreg.OpenKey(
 				winreg.HKEY_LOCAL_MACHINE,
-				RegistryKey.NVDA.value,
+				RegistryKey.Aslan.value,
 				access=winreg.KEY_WOW64_32KEY,
 			) as k:
 				return winreg.QueryValueEx(k, "Start Menu Folder")[0]
@@ -248,16 +248,16 @@ class _ReadPaths:
 				raise RuntimeError("Unsupported platform")
 
 	@property
-	def nvdaHelperRemoteDll(self) -> str:
-		return os.path.join(self.coreArchLibPath, "nvdaHelperRemote.dll")
+	def aslanHelperRemoteDll(self) -> str:
+		return os.path.join(self.coreArchLibPath, "aslanHelperRemote.dll")
 
 	@property
-	def nvdaHelperLocalDll(self) -> str:
-		return os.path.join(self.coreArchLibPath, "nvdaHelperLocal.dll")
+	def aslanHelperLocalDll(self) -> str:
+		return os.path.join(self.coreArchLibPath, "aslanHelperLocal.dll")
 
 	@property
-	def nvdaHelperLocalWin10Dll(self) -> str:
-		return os.path.join(self.coreArchLibPath, "nvdaHelperLocalWin10.dll")
+	def aslanHelperLocalWin10Dll(self) -> str:
+		return os.path.join(self.coreArchLibPath, "aslanHelperLocalWin10.dll")
 
 	@property
 	def cppjiebaDll(self) -> str:
@@ -279,7 +279,7 @@ class _ReadPaths:
 		return os.path.join(
 			base,
 			"include",
-			"nvda-mathcat",
+			"aslan-mathcat",
 			"assets",
 		)
 
@@ -298,7 +298,7 @@ ReadPaths = _ReadPaths()
 
 def isRunningAsSource() -> bool:
 	"""
-	True if NVDA is running as a source copy.
+	True if Aslan is running as a source copy.
 	When running as an installed copy, py2exe sets sys.frozen to 'windows_exe'.
 	"""
 	return getattr(sys, "frozen", None) is None
@@ -343,28 +343,28 @@ def shouldWriteToDisk() -> bool:
 	return not (globalVars.appArgs.secure or globalVars.appArgs.launcher)
 
 
-class _TrackNVDAInitialization:
+class _TrackAslanInitialization:
 	"""
-	During NVDA initialization,
+	During Aslan initialization,
 	core._initializeObjectCaches needs to cache the desktop object,
 	regardless of lock state.
-	Security checks may cause the desktop object to not be set if NVDA starts on the lock screen.
-	As such, during initialization, NVDA should behave as if Windows is unlocked,
+	Security checks may cause the desktop object to not be set if Aslan starts on the lock screen.
+	As such, during initialization, Aslan should behave as if Windows is unlocked,
 	i.e. winAPI.sessionTracking.isLockScreenModeActive should return False.
 	"""
 
-	_isNVDAInitialized = False
+	_isAslanInitialized = False
 	"""When False, isLockScreenModeActive is forced to return False.
 	"""
 
 	@staticmethod
 	def markInitializationComplete():
-		assert not _TrackNVDAInitialization._isNVDAInitialized
-		_TrackNVDAInitialization._isNVDAInitialized = True
+		assert not _TrackAslanInitialization._isAslanInitialized
+		_TrackAslanInitialization._isAslanInitialized = True
 
 	@staticmethod
 	def isInitializationComplete() -> bool:
-		return _TrackNVDAInitialization._isNVDAInitialized
+		return _TrackAslanInitialization._isAslanInitialized
 
 
 def _forceSecureModeEnabled() -> bool:
@@ -372,7 +372,7 @@ def _forceSecureModeEnabled() -> bool:
 	from config.registry import RegistryKey
 
 	try:
-		with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, RegistryKey.NVDA.value) as k:
+		with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, RegistryKey.Aslan.value) as k:
 			return bool(winreg.QueryValueEx(k, RegistryKey.FORCE_SECURE_MODE_SUBKEY.value)[0])
 	except WindowsError:
 		# Expected state by default, forceSecureMode parameter not set
@@ -384,7 +384,7 @@ def _serviceDebugEnabled() -> bool:
 	from config.registry import RegistryKey
 
 	try:
-		with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, RegistryKey.NVDA.value) as k:
+		with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, RegistryKey.Aslan.value) as k:
 			return bool(winreg.QueryValueEx(k, RegistryKey.SERVICE_DEBUG_SUBKEY.value)[0])
 	except WindowsError:
 		# Expected state by default, serviceDebug parameter not set
@@ -397,7 +397,7 @@ def _configInLocalAppDataEnabled() -> bool:
 	from logHandler import log
 
 	try:
-		with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, RegistryKey.NVDA.value) as k:
+		with winreg.OpenKey(winreg.HKEY_LOCAL_MACHINE, RegistryKey.Aslan.value) as k:
 			return bool(winreg.QueryValueEx(k, RegistryKey.CONFIG_IN_LOCAL_APPDATA_SUBKEY.value)[0])
 	except FileNotFoundError:
 		log.debug("Installed user config is not in local app data")

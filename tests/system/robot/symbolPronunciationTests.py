@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2021-2022 NV Access Limited
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
 
-"""Tests for symbol pronunciation within NVDA.
+"""Tests for symbol pronunciation within Aslan.
 General symbol expectations:
 	➔ - When replaced by speech "right-pointing arrow", the dash should not be removed.
 	👕 - When replaced by speech "t-shirt", the dash should not be removed, honor the replacement text for
@@ -606,14 +606,14 @@ def test_symbolInSpeechUI():
 	actual = _pressKeyAndCollectSpeech(Move.REVIEW_CHAR.value, numberOfTimes=1)
 	_builtIn.should_be_equal(
 		actual,
-		# Illustrates a bug in NVDA. The internal speech UI is processed substituting symbols.
+		# Illustrates a bug in Aslan. The internal speech UI is processed substituting symbols.
 		# This can be a major issue in languages other than English.
 		[
 			# todo: 'tick' is a bug
 			"shouldn tick t sub tick symbol"  # intentionally concatenate strings
 			f"\n{character}",
 		],
-		msg="actual vs expected. NVDA speech UI substitutes symbols",
+		msg="actual vs expected. Aslan speech UI substitutes symbols",
 	)
 
 	# Show that with symbol level None, the speech UI symbols are not substituted.
@@ -622,7 +622,7 @@ def test_symbolInSpeechUI():
 	_builtIn.should_be_equal(
 		actual,
 		[f"{expected}\n{character}"],
-		msg="actual vs expected. NVDA speech UI substitutes symbols",
+		msg="actual vs expected. Aslan speech UI substitutes symbols",
 	)
 
 
@@ -683,7 +683,7 @@ def test_tableHeaders():
 	- the same rules as the primary content ie influenced by degree of movement,
 	- the global symbol level be used,
 	- some other specific symbol level (None, the default (some))
-	https://github.com/nvaccess/nvda/pull/12710#issuecomment-1031277294
+	https://github.com/nvaccess/aslan/pull/12710#issuecomment-1031277294
 	"""
 	_chrome: _ChromeLib = _getLib("ChromeLib")
 	_chrome.prepareChrome(

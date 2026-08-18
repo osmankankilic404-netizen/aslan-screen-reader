@@ -1,6 +1,6 @@
 ###
-# This file is a part of the NVDA project.
-# URL: http://www.nvda-project.org/
+# This file is a part of the Aslan project.
+# URL: http://www.aslan-project.org/
 # Copyright 2010-2012 NV Access Limited
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License version 2.0, as published by

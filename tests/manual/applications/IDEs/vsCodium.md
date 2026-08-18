@@ -2,7 +2,7 @@
 
 ## Objective
 
-To ensure NVDA functions correctly with VS Code or other VSCodium derivatives across typical user workflows.
+To ensure Aslan functions correctly with VS Code or other VSCodium derivatives across typical user workflows.
 This plan focuses on basic navigation, file operations, editor accessibility, and common development tasks.
 VSCodium is based on Electron and as such smoke testing can reveal issues with the framework.
 
@@ -20,7 +20,7 @@ VSCodium is based on Electron and as such smoke testing can reveal issues with t
 ### Steps
 
 1. Launch VSCodium
-1. Verify NVDA announces the VSCodium window title
+1. Verify Aslan announces the VSCodium window title
 1. Use `control+shift+p` to open the command palette
 1. Use `f1` to open the command palette (alternative)
 1. Use `control+b` to toggle the sidebar
@@ -29,7 +29,7 @@ VSCodium is based on Electron and as such smoke testing can reveal issues with t
 
 ### Expected Results
 
-* NVDA announces window title and major UI regions
+* Aslan announces window title and major UI regions
 * Navigation between panels and tabs is clear and consistent
 
 ## File Operations
@@ -47,7 +47,7 @@ VSCodium is based on Electron and as such smoke testing can reveal issues with t
 
 ### Expected Results
 
-* NVDA announces file dialogs and file actions
+* Aslan announces file dialogs and file actions
 * File operations are accessible and confirmed by speech
 
 ## Editor Operations
@@ -64,7 +64,7 @@ VSCodium is based on Electron and as such smoke testing can reveal issues with t
 
 ### Expected Results
 
-* NVDA announces text and search results
+* Aslan announces text and search results
 * Editing and navigation are accessible
 
 ## Command Palette
@@ -78,7 +78,7 @@ VSCodium is based on Electron and as such smoke testing can reveal issues with t
 
 ### Expected Results
 
-* NVDA announces command palette, search results, and command execution
+* Aslan announces command palette, search results, and command execution
 * All command palette features are accessible
 
 ## Search Panel
@@ -91,7 +91,7 @@ VSCodium is based on Electron and as such smoke testing can reveal issues with t
 
 ### Expected Results
 
-* NVDA announces search results and search fields
+* Aslan announces search results and search fields
 
 ## Extensions
 
@@ -105,7 +105,7 @@ VSCodium is based on Electron and as such smoke testing can reveal issues with t
 
 ### Expected Results
 
-* NVDA announces extension names, details, and actions
+* Aslan announces extension names, details, and actions
 * Installing and managing extensions is accessible
 
 ## Terminal
@@ -120,5 +120,5 @@ VSCodium is based on Electron and as such smoke testing can reveal issues with t
 
 ### Expected Results
 
-* NVDA announces terminal focus and output
+* Aslan announces terminal focus and output
 * Terminal operations are accessible

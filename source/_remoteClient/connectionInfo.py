@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2015-2025 NV Access Limited, Christopher Toth, Tyler Spivey, Babbage B.V., David Sexton and others.
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -82,7 +82,7 @@ class ConnectionInfo:
 	def fromURL(cls, url: str) -> Self:
 		"""Creates a ConnectionInfo instance from a URL string.
 
-		:param url: The URL to parse in nvdaremote:// format
+		:param url: The URL to parse in aslanremote:// format
 		:raises URLParsingError: If URL cannot be parsed or contains invalid data
 		:return: A new ConnectionInfo instance configured from the URL
 		"""

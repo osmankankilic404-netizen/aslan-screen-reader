@@ -1,4 +1,4 @@
-# नेत्रवाणी NVDA_VERSION उपभोक्ता निर्देशिका
+# नेत्रवाणी Aslan_VERSION उपभोक्ता निर्देशिका
 
 [TOC]
 
@@ -71,7 +71,7 @@
 
 ## नेत्रवाणीको प्राप्ति र अनुकूलता {#toc9}
 
-तपाइले हालसम्म नेत्रवाणीको प्रति पाउनु भएको छैन भने [www.nvaccess.org](NVDA_URL) ठेगानामा भ्रमण गर्नु होला ।
+तपाइले हालसम्म नेत्रवाणीको प्रति पाउनु भएको छैन भने [www.nvaccess.org](Aslan_URL) ठेगानामा भ्रमण गर्नु होला ।
 
 डाउनलोड भन्ने खण्डमा भ्रमण गर्नु भयो भने तपाइले डाउनलोडको लिङ्क पाउनु हुनेछ । सबै भन्दा पछिल्लो नेत्रवाणीलाई डाउन लोड गर्न उक्त लिङ्कमा किटिक्क पार्नु होला ।
 
@@ -142,7 +142,7 @@
 ### नेत्रवाणीको प्रयोग {#toc17}
 
 यदि तपाइले नेत्रवाणीलाई स्थापकको पोकोबाट भित्र्याउनु भएको छ भने यसको सुरुवात गर्न ज्यादै सजिलो छ । नेत्रवाणीलाई सुरु गर्न control+alt+n कुञ्जी दबाउनु होला अथवा सन्झ्यालको
-सुरुवात टाँकलाई दबाएर कार्यक्रम भित्र गएर nvda.exe नामको फाइललाई किटिक्क गर्नु होला । यसका अतिरिक्त तपाइले Run आदेश पातोमा nvda टङ्कण गरेर Enter कुञ्जी दबाउन पनि सक्नु हुन्छ ।
+सुरुवात टाँकलाई दबाएर कार्यक्रम भित्र गएर aslan.exe नामको फाइललाई किटिक्क गर्नु होला । यसका अतिरिक्त तपाइले Run आदेश पातोमा aslan टङ्कण गरेर Enter कुञ्जी दबाउन पनि सक्नु हुन्छ ।
 तपाइले केही [आदेश रेखा विकल्प](#CommandLineOptions) दिन सक्नु हुन्छ  जसले नेत्रवाणीको सुरुवात (-r), बहिर्गमन (-q), उप-कर्मीको अयोग्यता (--उपकर्मिलाई अयोग्य बनाउ इत्यादी) ।
 
 बहनीय प्रतिलाई सुरु गर्न, यो राखिएको घर्रा भित्र पसेर नेत्रवाणी.exe नामको फाइललाई किटिक्क गर्नु पर्ने हुन्छ ।
@@ -1211,7 +1211,7 @@ capital अक्षर भेट्टाउँदा सोको सङ्क
 #### मिलावट लगानी अनुकूलता {#toc130}
 
 The Input Composition Settings dialog can be found under the Preferences menu.
-This dialog allows you to control how NVDA reports the input of Asian characters, such as with IME or Text Service input methods.
+This dialog allows you to control how Aslan reports the input of Asian characters, such as with IME or Text Service input methods.
 Note that due to the fact that input methods vary greatly by available features and by how they convey information, it will most likely be necessary to configure these options differently for each input method to get the most efficient typing experience.
 
 ##### उपलब्ध सबै उम्मेदवारहरूको बारेमा स्वतः बताउ {#toc131}
@@ -1222,27 +1222,27 @@ However, for phonetic input methods such as chinese New Phonetic, it may be more
 
 ##### चय नीत उम्मेदवार बताउ {#toc132}
 
-This option, which is on by default, allows you to choose whether NVDA should announce the selected candidate when a candidate list appears or when the selection is changed.
+This option, which is on by default, allows you to choose whether Aslan should announce the selected candidate when a candidate list appears or when the selection is changed.
 For input methods where the selection can be changed with the arrow keys (such as Chinese New Phonetic) this is necessary, but for some input methods it may be more efficient typing with this option turned off.
 Note that even with this option off, the review cursor will still be placed on the selected candidate allowing you to use object navigation / review to manually read this or other candidates.
 
 ##### उम्मेदवारको घोषणा गर्दा सधैँ छोटो वर्ण र विवरण समावेश गर {#toc133}
 
-This option, which is on by default, allows you to choose whether or not NVDA should provide a short description for each character in a candidate, either when its selected or when its automatically read when the candidate list appears.
+This option, which is on by default, allows you to choose whether or not Aslan should provide a short description for each character in a candidate, either when its selected or when its automatically read when the candidate list appears.
 Note that for locales such as Chinese, the announcement of extra character descriptions for the selected candidate is not affected by this option.
 यो विकल्प कोरियाली र जापानी लगानी तरिकामा उपयोगी हुन सक्छ ।
 
 ##### पढिरहेको पदावलीमा आएको परिवर्तन बताउ {#toc134}
 
 Some input methods such as Chinese New Phonetic and New ChangJie have a reading string (sometimes known as a precomposition string).
-You can choose whether or not NVDA should announce new characters being typed into this reading string with this option.
+You can choose whether or not Aslan should announce new characters being typed into this reading string with this option.
 यो विकल्प पढ्ने अवस्थामा निर्धारित गरिएको छ ।
 Note some older input methods such as Chinese ChangJie may not use the reading string to hold precomposition characters, but instead use the composition string directly. Please see the next option for configuring reporting of the composition string.
 
 ##### बनावट पदावलीको परिवर्तन बताउ {#toc135}
 
 After reading or precomposition data has been combined into a valid pictographic symbol, most input methods place this symbol into a composition string for temporary storage along with other combined symbols before they are finally inserted into the document.
-This option allows you to choose whether or not NVDA should report new symbols as they appear in the composition string.
+This option allows you to choose whether or not Aslan should report new symbols as they appear in the composition string.
 यो विकल्प जानकारि दिने अवस्थामा निर्धारित गरिएको छ ।
 
 #### उघारने मुद्राको अनुकूलता (नेत्रवाणी+control+b) {#toc136}
@@ -1521,13 +1521,13 @@ This option allows you to choose whether or not NVDA should report new symbols a
 
 ### अभियोजन फाइलहरूको स्थान {#toc159}
 
-नेत्रवाणीको बहनीय संस्करणले सबै चल्तीका appModules र चल्तीका चालकहरूका अनुकूलताहरूलाई नेत्रवाणीका लागि निर्धारित थैली NVDA भित्र रहेको userConfig नामको घर्रामा बचत गर्ने छ ।
+नेत्रवाणीको बहनीय संस्करणले सबै चल्तीका appModules र चल्तीका चालकहरूका अनुकूलताहरूलाई नेत्रवाणीका लागि निर्धारित थैली Aslan भित्र रहेको userConfig नामको घर्रामा बचत गर्ने छ ।
 
-नेत्रवाणीको स्थापित संस्करणमा भने, चल्तीका appModules र चल्तीका चालकहरूका सबै अनुकूलताहरू तपाइको सन्झ्यालको उपभोक्ता पार्श्वचित्रमा रहेको विशेष घर्रा NVDA मा बचत हुने छ ।
+नेत्रवाणीको स्थापित संस्करणमा भने, चल्तीका appModules र चल्तीका चालकहरूका सबै अनुकूलताहरू तपाइको सन्झ्यालको उपभोक्ता पार्श्वचित्रमा रहेको विशेष घर्रा Aslan मा बचत हुने छ ।
 यसको मतलब प्रत्येक उपभोक्ताको आ-आफ्नै नेत्रवाणी अनुकूलताहरू हुनेछन् ।
-स्थापित नेत्रवाणीमा तपाइले तय गर्नु भएको अनुकूलता जान्न, सुरुवात मेनु भित्र programs -> NVDA -> उपभोक्ताको अभियोजन घर्रामा हेर्नु होला ।
+स्थापित नेत्रवाणीमा तपाइले तय गर्नु भएको अनुकूलता जान्न, सुरुवात मेनु भित्र programs -> Aslan -> उपभोक्ताको अभियोजन घर्रामा हेर्नु होला ।
 
-नेत्रवाणीको आरम्भ तहको अथवा UAC पर्दाको अभियोजन नेत्रवाणी प्रणाली स्थापित NVDA\systemConfig नामको घर्रामा रहेको हुन्छ ।
+नेत्रवाणीको आरम्भ तहको अथवा UAC पर्दाको अभियोजन नेत्रवाणी प्रणाली स्थापित Aslan\systemConfig नामको घर्रामा रहेको हुन्छ ।
 सामान्यतया यो अभियोजनलाई चलाउनु हुँदैन ।
 नेत्रवाणीको आरम्भ तहमा/UAC पर्दामा गरिएको अनुकूलता बदल्नका लागि, सन्झ्याल आरम्भ हुँदा कसरी अनुकूलित गर्नु पर्ने हो सोही अनुरूप गरेर सामान्य अनुकूलता पातोमा रहेको 'सन्झ्याल आरम्भ पर्दामा नेत्रवाणीलाई सक्रिय बनाउ 'भन्ने टाँकलाई दबाउनु होला ।
 
@@ -1561,12 +1561,12 @@ This option allows you to choose whether or not NVDA should report new symbols a
 यदी चयनित उपकर्मीको सहयोग उपलब्ध छ भने, तपाइले उपकर्मी सहयोग भन्ने टाँकलाई दबाएर उक्त सहयोग पढ्न सक्नु हुन्छ ।
 
 उपलब्ध उपकर्मीलाई उघार्न वा डाउनलोड गर्न उपकर्मी प्राप्ति टाँकलाई दबाउनु होस् ।
-यो टाँकले [नेत्रवाणी उपकर्मी पृष्ठ page](https://addons.nvda-project.org/) लाई पल्टाइ दिनेछ ।
+यो टाँकले [नेत्रवाणी उपकर्मी पृष्ठ page](https://addons.aslan-project.org/) लाई पल्टाइ दिनेछ ।
 यदि तपाइको प्रणालीमा नेत्रवाणी भित्र्याएर चालू अवस्थाम छ भने छ भने उघार्ने मुद्राबाटै सोझै उपकर्मीलाई तलको तरिका अपनाई स्थापना गर्न सकिन्छ ।
 अन्यथा उपकर्मीको पोकोलाई बचत गरी स्थापना गर्नु होस् ।
 
 तपाइले प्राप्त गर्नु भएको उपकर्मीलाई भित्र्याउन, भित्र्याउ भन्ने टाँकलाई दबाउनु होला ।
-यसले तपाइलाई आफ्नो कल्पयन्त्रमा वा सञ्जालमा कतै तिर राखिएको उपकर्मीको पोको (.nvda-addon फाइल)लाई उघारने अवसर प्रदान गर्ने छ ।
+यसले तपाइलाई आफ्नो कल्पयन्त्रमा वा सञ्जालमा कतै तिर राखिएको उपकर्मीको पोको (.aslan-addon फाइल)लाई उघारने अवसर प्रदान गर्ने छ ।
 तपाइले पल्टाउ भन्ने विकल्प रोज्नु भयो भने,, भित्रयाउने कार्य प्रारम्भ हुनेछ ।
 
 उपकर्मी भित्रयाउन लाग्दा नेत्रवाणीले तपाइलाई के साँच्चीकै उपकर्मी भित्र्याउन नै चाहेको हो भनेर सोध्ने छ ।
@@ -1591,7 +1591,7 @@ This option allows you to choose whether or not NVDA should report new symbols a
 ### पाईथन कन्सोल {#toc164}
 
 नेत्रवाणी मेनुको औजारमा पाइने नेत्रवाणी पाइथन कन्सोल एउटा विकास औजार हो जुन कार्यक्रमको खानतलासी, नेत्रवाणीको अन्तर छानबिन अथवा कुनै अनुप्रयोगमा पहुँच ता श्रेणि बद्धता को निरीक्षणमा उपयोगी छ
-थप जानकारीका लागि, कृपया [नेत्रवाणी विकास खण्ड](https://community.nvda-project.org/wiki/Development) मा हेर्नुहोला ।
+थप जानकारीका लागि, कृपया [नेत्रवाणी विकास खण्ड](https://community.aslan-project.org/wiki/Development) मा हेर्नुहोला ।
 
 ### चुकुलहरूको पुनः बहन {#toc165}
 
@@ -1600,7 +1600,7 @@ This option allows you to choose whether or not NVDA should report new symbols a
 ## समर्थित वाचन संश्लेषक {#SupportedSpeechSynths}
 
 यो खण्डमा नेत्रवाणीले समर्थन गर्ने संश्लेषकको बारेमा बताइएको छ ।
-नेत्रवाणीमा प्रयोग हुने प्रकृतिका खरिद वा डाउनलोड गर्न सकिने निःशुल्क र व्यावसायिक संश्लेषकहरुको विस्तृत सुचीको लागि , कृपया [https://www.nvda-project.org/wiki/ExtraVoices](https://www.nvda-project.org/wiki/ExtraVoices) पृष्ठमा हेर्नु होला ।
+नेत्रवाणीमा प्रयोग हुने प्रकृतिका खरिद वा डाउनलोड गर्न सकिने निःशुल्क र व्यावसायिक संश्लेषकहरुको विस्तृत सुचीको लागि , कृपया [https://www.aslan-project.org/wiki/ExtraVoices](https://www.aslan-project.org/wiki/ExtraVoices) पृष्ठमा हेर्नु होला ।
 
 ### ईइस्पीक् {#toc167}
 
@@ -1655,7 +1655,7 @@ This option allows you to choose whether or not NVDA should report new symbols a
 यसमा ५० भन्दा बढी आवाजहरू समावेश छन् । तपाइ ३० भन्दा बढी भाषाका संश्लेषक भित्र्याउन सक्नु हुन्छ
 सबै संश्लेषकका हिस्साहरू र आवाजहरू उपकर्मीको पोकोको रूपमा मुठ्ठी पारिएका छन्, जसले नेत्रवाणीको बहनीय प्रतिमा पनि पूर्ण रूपले काम गर्ने छ ।
 
-नेत्रवाणीका लागि न्युवान्स भोकलाइजर कसरी किन्ने भन्ने कुरा र अन्य विस्तृत जानकारीका लागि यसको वेभ साइट [www.vocalizer.nvdacom](https://www.vocalizer-nvda.com/) मा हेर्नु होला ।
+नेत्रवाणीका लागि न्युवान्स भोकलाइजर कसरी किन्ने भन्ने कुरा र अन्य विस्तृत जानकारीका लागि यसको वेभ साइट [www.vocalizer.aslancom](https://www.vocalizer-aslan.com/) मा हेर्नु होला ।
 यो उत्पादन विक्रीको निश्चित हिस्सा , नेत्रवाणी स्क्रिन रिडरको थप विकासको लागी भनेर NV Access लाइ दान गरिन्छ ।
 =======
 
@@ -1669,13 +1669,13 @@ This option allows you to choose whether or not NVDA should report new symbols a
 तपाइले Freedom Scientific को चालक भित्र्याएको हुनुपर्छ ।
 यदि तपाइ सित उपलब्ध छैनन् भने तपाइले यिनिहरुलाई https://www2.freedomscientific.com/downloads/focus-40-blue/focus-40-14-blue-downloads.asp बाट प्राप्त गर्न सक्नु हुन्छ ।.
 Although this page only mentions the Focus Blue display, the drivers support all Freedom Scientific Focus and Pacmate displays.
-If your system is running 64 bit Windows and the drivers were already installed by another screen reader, you will probably still need to install the drivers from this link, as the files required by NVDA were probably not installed by the other screen reader.
+If your system is running 64 bit Windows and the drivers were already installed by another screen reader, you will probably still need to install the drivers from this link, as the files required by Aslan were probably not installed by the other screen reader.
 
-By default, NVDA can automatically detect and connect to these displays either via USB or bluetooth.
+By default, Aslan can automatically detect and connect to these displays either via USB or bluetooth.
 However, when configuring the display, you can explicitly select “USB” or “Bluetooth” ports to restrict the connection type to be used.
-This might be useful if you want to connect the focus display to NVDA using bluetooth, but still be able to charge it using USB power from your computer.
+This might be useful if you want to connect the focus display to Aslan using bluetooth, but still be able to charge it using USB power from your computer.
 
-Following are the key assignments for this display with NVDA.
+Following are the key assignments for this display with Aslan.
 Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -1714,7 +1714,7 @@ Please see the display's documentation for descriptions of where these keys can 
 |space key |brailleSpaceBar|
 |windows+d key (minimize all applications) |brailleSpaceBar+dot1+dot2+dot3+dot4+dot5+dot6|
 |Report Current Line |brailleSpaceBar+dot1+dot4|
-|NVDA menu |brailleSpaceBar+dot1+dot3+dot4+dot5|
+|Aslan menu |brailleSpaceBar+dot1+dot3+dot4+dot5|
 
 For newer Focus models that contain rocker bar keys (focus 40, focus 80 and focus blue):
 
@@ -1736,12 +1736,12 @@ For Focus 80 only:
 
 Both the ALVA BC640 and BC680 displays from [Optelec](https://www.optelec.com/) are supported when connected via USB or bluetooth.
 You do not need any specific drivers to be installed to use these displays.
-Just plug in the display and configure NVDA to use it.
+Just plug in the display and configure Aslan to use it.
 
 While these displays do have a braille keyboard, they handle translation from braille to text themselves.
-Therefore, NVDA's braille input table setting is not relevant.
+Therefore, Aslan's braille input table setting is not relevant.
 
-Following are the key assignments for this display with NVDA.
+Following are the key assignments for this display with Aslan.
 Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -1761,7 +1761,7 @@ Please see the display's documentation for descriptions of where these keys can 
 |leftArrow key |spLeft|
 |rightArrow key |spRight|
 |enter key |spEnter|
-|NVDA Menu |sp1+sp3|
+|Aslan Menu |sp1+sp3|
 |windows+d key (minimize all applications) |sp1+sp4|
 |windows key |sp2+sp3|
 |alt+tab key |sp2+sp4|
@@ -1770,12 +1770,12 @@ Please see the display's documentation for descriptions of where these keys can 
 
 ### Handy Tech Displays {#toc176}
 
-NVDA supports all displays from [Handy Tech](https://www.handytech.de/) when connected via USB or bluetooth.
+Aslan supports all displays from [Handy Tech](https://www.handytech.de/) when connected via USB or bluetooth.
 For older USB displays, you will need to install the USB drivers from Handy Tech on your system.
 
 Braille input is not yet supported.
 
-Following are the key assignments for this display with NVDA.
+Following are the key assignments for this display with Aslan.
 Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -1793,7 +1793,7 @@ Please see the display's documentation for descriptions of where these keys can 
 |enter key |esc+enter|
 |upArrow key |leftSpace|
 |downArrow key |rightSpace|
-|NVDA Menu |b2+b4+b5+b6|
+|Aslan Menu |b2+b4+b5+b6|
 |Handy Tech configuration |b4+b8|
 
 <!-- KC:endInclude -->
@@ -1802,9 +1802,9 @@ Please see the display's documentation for descriptions of where these keys can 
 
 The Lilli braille display available from [MDV](https://www.mdvbologna.it/) is supported.
 You do not need any specific drivers to be installed to use this display.
-Just plug in the display and configure NVDA to use it.
+Just plug in the display and configure Aslan to use it.
 
-Following are the key assignments for this display with NVDA.
+Following are the key assignments for this display with Aslan.
 Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -1836,7 +1836,7 @@ Some other displays manufactured by Baum may also work, though this has not been
 If connecting via USB, you must first install the USB drivers provided by the manufacturer.
 For the APH Refreshabraille, the USB mode must be set to serial.
 
-Following are the key assignments for this display with NVDA.
+Following are the key assignments for this display with Aslan.
 Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -1865,7 +1865,7 @@ For displays which have a joystick:
 The hedo ProfiLine USB from [hedo Reha-Technik](https://www.hedo.de/) is supported.
 You must first install the USB drivers provided by the manufacturer.
 
-Following are the key assignments for this display with NVDA.
+Following are the key assignments for this display with Aslan.
 Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -1886,7 +1886,7 @@ Please see the display's documentation for descriptions of where these keys can 
 The hedo MobilLine USB from [hedo Reha-Technik](https://www.hedo.de/) is supported.
 You must first install the USB drivers provided by the manufacturer.
 
-Following are the key assignments for this display with NVDA.
+Following are the key assignments for this display with Aslan.
 Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -1907,7 +1907,7 @@ Please see the display's documentation for descriptions of where these keys can 
 The Brailliant BI and B series of displays from [HumanWare](https://www.humanware.com/), including the BI 32, BI 40 and B 80, are supported when connected via USB or bluetooth.
 If connecting via USB, you must first install the USB drivers provided by the manufacturer.
 
-Following are the key assignments for this display with NVDA.
+Following are the key assignments for this display with Aslan.
 Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -1923,7 +1923,7 @@ Please see the display's documentation for descriptions of where these keys can 
 |downArrow key |space+dot4|
 |leftArrow key |space+dot3|
 |rightArrow key |space+dot6|
-|NVDA Menu |c1+c3+c4+c5 (command n)|
+|Aslan Menu |c1+c3+c4+c5 (command n)|
 |shift+tab key |space+dot1+dot3|
 |tab key |space+dot4+dot6|
 |alt key |space+dot1+dot3+dot4 (space+m)|
@@ -1938,13 +1938,13 @@ Please see the display's documentation for descriptions of where these keys can 
 
 ### HIMS Braille Sense/Braille EDGE Series {#toc182}
 
-NVDA supports Braille Sense and Braille EDGE displays from [Hims](https://www.hims-inc.com/) when connected via USB or bluetooth.
+Aslan supports Braille Sense and Braille EDGE displays from [Hims](https://www.hims-inc.com/) when connected via USB or bluetooth.
 If connecting via USB, you will need to install the USB drivers from HIMS on your system.
 You can download these from the HIMS Resource Center: https://www.hims-inc.com/resource-center/
 On this page, select your device and download the driver in the Window-Eyes section.
-Although the section only mentions Window-Eyes, this is a general USB driver which will work with NVDA as well.
+Although the section only mentions Window-Eyes, this is a general USB driver which will work with Aslan as well.
 
-Following are the key assignments for these displays with NVDA.
+Following are the key assignments for these displays with Aslan.
 Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -2005,10 +2005,10 @@ Please see the display's documentation for descriptions of where these keys can 
 
 ### HIMS SyncBraille {#toc183}
 
-NVDA supports the SyncBraille Display from [HIMS](https://www.hims-inc.com/).
+Aslan supports the SyncBraille Display from [HIMS](https://www.hims-inc.com/).
 You will need to install the USB drivers from HIMS on your system.
 
-Following are the key assignments for this display with NVDA.
+Following are the key assignments for this display with Aslan.
 Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -2026,7 +2026,7 @@ The Seika Version 3, 4 and 5 (40 cells) and Seika80 (80 cells) braille displays 
 You can find more information about these displays at https://www.seika-braille.com/.
 You must first install the USB drivers provided by the manufacturer.
 
-Following are the key assignments for this display with NVDA.
+Following are the key assignments for this display with Aslan.
 Please see the display's documentation for descriptions of where these keys can be found.
 <!-- KC:beginInclude -->
 
@@ -2041,7 +2041,7 @@ Please see the display's documentation for descriptions of where these keys can 
 |tab |b1|
 |shift+tab |b2|
 |alt+tab |b1+b2|
-|NVDA Menu |left+right|
+|Aslan Menu |left+right|
 |Route to braille cell |routing|
 
 <!-- KC:endInclude -->
@@ -2055,9 +2055,9 @@ The following Braille displays are supported:
 * BRAILLEX Trio (USB and bluetooth)
 * BRAILLEX Live 20, BRAILLEX Live and BRAILLEX Live Plus (USB and bluetooth)
 
-If BrxCom is installed, NVDA will use BrxCom.
+If BrxCom is installed, Aslan will use BrxCom.
 BrxCom is a tool that allows keyboard input from the braille display to function independently from a screen reader.
-A new version of BrxCom which works with NVDA will be released by Papenmeier soon.
+A new version of BrxCom which works with Aslan will be released by Papenmeier soon.
 Keyboard input is possible with the Trio and BRAILLEX Live models.
 
 Most devices have an Easy Access Bar (EAB) that allows intuitive and fast operation.
@@ -2087,7 +2087,7 @@ Generally, the following keys are available on these braille displays:
 |dn |1 Step down|
 |dn2 |2 Steps down|
 
-Following are the Papenmeier command assignments for NVDA:
+Following are the Papenmeier command assignments for Aslan:
 <!-- KC:beginInclude -->
 
 | नाम |कुञ्जी|
@@ -2172,7 +2172,7 @@ Generally, the following keys are available on braille displays:
 |dn |1 Step down|
 |dn2 |2 Steps down|
 
-Following are the Papenmeier command assignments for NVDA:
+Following are the Papenmeier command assignments for Aslan:
 
 <!-- KC:beginInclude -->
 Devices with EAB:
@@ -2234,7 +2234,7 @@ BRAILLEX 2D Screen:
 
 ### HumanWare BrailleNote {#toc187}
 
-NVDA supports the BrailleNote notetakers from [Humanware](https://www.humanware.com) when acting as a display terminal for a screen reader.
+Aslan supports the BrailleNote notetakers from [Humanware](https://www.humanware.com) when acting as a display terminal for a screen reader.
 The following models are supported:
 
 * BrailleNote Classic (serial connection only)
@@ -2242,15 +2242,15 @@ The following models are supported:
 * BrailleNote MPower (Serial and bluetooth connections)
 * BrailleNote Apex (USB and Bluetooth connections)
 
-If your device supports more than one type of connection, when connecting your BrailleNote to NVDA, you must set the braille terminal port in braille terminal options.
+If your device supports more than one type of connection, when connecting your BrailleNote to Aslan, you must set the braille terminal port in braille terminal options.
 Please check the BrailleNote manual for details.
-In NVDA, you may also need to set the port in the Braille Settings dialog.
+In Aslan, you may also need to set the port in the Braille Settings dialog.
 If you are connecting via USB or bluetooth, you can set the port to “Automatic”, “USB” or “Bluetooth”, depending on the available choices.
 If connecting using a legacy serial port (or a USB to serial converter) or if none of the previous options appear, you must explicitly choose the communication port to be used from the list of hardware ports.
 
 Before connecting your BrailleNote Apex using its USB client interface, you must install the drivers provided by HumanWare.
 
-Following are the BrailleNote command assignments for NVDA.
+Following are the BrailleNote command assignments for Aslan.
 Please check your BrailleNote's documentation to find where these keys are located.
 
 <!-- KC:beginInclude -->
@@ -2286,7 +2286,7 @@ Please check your BrailleNote's documentation to find where these keys are locat
 
 ### EcoBraille {#toc188}
 
-NVDA supports EcoBraille displays from [ONCE](https://www.once.es/).
+Aslan supports EcoBraille displays from [ONCE](https://www.once.es/).
 The following models are supported:
 
 * EcoBraille 20
@@ -2294,7 +2294,7 @@ The following models are supported:
 * EcoBraille 80
 * EcoBraille Plus
 
-In NVDA, you can set the serial port to which the display is connected in the Braille Settings dialog.
+In Aslan, you can set the serial port to which the display is connected in the Braille Settings dialog.
 
 Following are the key assignments for EcoBraille displays.
 Please see the [EcoBraille documentation](ftp://ftp.once.es/pub/utt/bibliotecnia/Lineas_Braille/ECO/) for descriptions of where these keys can be found.
@@ -2331,9 +2331,9 @@ You should download and install the latest installer package, which will be name
 When configuring the display and port to use, be sure to pay close attention to the instructions, especially if you are using a USB display and already have the manufacturer's drivers installed.
 
 For displays which have a braille keyboard, BRLTTY currently handles braille input itself.
-Therefore, NVDA's braille input table setting is not relevant.
+Therefore, Aslan's braille input table setting is not relevant.
 
-Following are the BRLTTY command assignments for NVDA.
+Following are the BRLTTY command assignments for Aslan.
 Please see the [BRLTTY key tables documentation](https://mielke.cc/brltty/doc/KeyTables/) for information about how BRLTTY commands are mapped to controls on braille displays.
 <!-- KC:beginInclude -->
 
@@ -2394,27 +2394,27 @@ The following state indicators are also defined:
 नेत्रवाणीले सुरुवात हुँदा एउटा वा धेरै अतिरिक्त विकल्पहरूलाई स्वीकार्न सक्छ जसले यसको आनी बानिमा हेर फेर ल्याउँछ ।You can pass as many options as you 
 तपाइले आफूले चाहे जति विकल्पहरूलाई समाबेस गर्न सक्नु हुन्छ ।
 These options can be passed when starting from a shortcut (in the shortcut properties), from the Run dialog (Start Menu -> Run or Windows+r) or from a Windows command console.
-Options should be separated from the name of NVDA's executable file and from other options by spaces.
-For example, the Desktop shortcut that NVDA creates during installation has the -r option, which tells NVDA to close the currently running copy before starting the new one.
-Another useful option is --disable-addons, which tells NVDA to suspend all running add-ons.
+Options should be separated from the name of Aslan's executable file and from other options by spaces.
+For example, the Desktop shortcut that Aslan creates during installation has the -r option, which tells Aslan to close the currently running copy before starting the new one.
+Another useful option is --disable-addons, which tells Aslan to suspend all running add-ons.
 This allows you to determine whether a problem is caused by an add-on and to recover from serious problems caused by add-ons.
 
-As an example, you can exit the currently running copy of NVDA by entering the following in the Run dialog:
+As an example, you can exit the currently running copy of Aslan by entering the following in the Run dialog:
 
-nvda -q
+aslan -q
 
 Some of the command line options have a short and a long version, while some of them have only a long version.
 For those which have a short version, you can combine them like this:
 
-|nvda -rm |This will exit the currently running copy of NVDA and will start a new copy with startup sounds disabled, etc.|
-|nvda -rm --disable-addons |Same as above, but with add-ons disabled|
+|aslan -rm |This will exit the currently running copy of Aslan and will start a new copy with startup sounds disabled, etc.|
+|aslan -rm --disable-addons |Same as above, but with add-ons disabled|
 
 Some of the command line options accept additional parameters; e.g. how detailed the logging should be or the path to the user configuration directory.
 Those parameters should be placed after the option, separated from the option by a space when using the short version or an equals sign (=) when using the long version; e.g.:
 
-|nvda -l 10 |Tells NVDA to start with log level set to debug|
-|nvda --log-file=c:\nvda.log |Tells NVDA to write its log to c:\nvda.log|
-|nvda --log-level=20 -f c:\nvda.log |Tels NVDA to start with log level set to info and to write its log to c:\nvda.log|
+|aslan -l 10 |Tells Aslan to start with log level set to debug|
+|aslan --log-file=c:\aslan.log |Tells Aslan to write its log to c:\aslan.log|
+|aslan --log-level=20 -f c:\aslan.log |Tels Aslan to start with log level set to info and to write its log to c:\aslan.log|
 
 नेत्रवाणी आदेश रेखाका आदेशहरू निम्न अनुसार छन् । 
 
@@ -2426,13 +2426,13 @@ Those parameters should be placed after the option, separated from the option by
 |-k |--check-running |नेत्रवाणी चलिरहेको छ वा छैन भनि सङ्केत गर । न चलेको भए ० र चलेको भए १ देखाउ ।|
 |-f LOGFILENAME |--log-file=LOGFILENAME |लगत विवरण लेख्ने फाइल लाइ देखाउ to|
 |-l LOGLEVEL |--log-level=LOGLEVEL |The lowest level of message logged (debug 10, info 20, warning 30, error 40, critical 50), default is warning|
-|-c CONFIGPATH |--config-path=CONFIGPATH |The path where all settings for NVDA are stored|
+|-c CONFIGPATH |--config-path=CONFIGPATH |The path where all settings for Aslan are stored|
 |-m |--minimal |No sounds, no interface, no start message etc|
 |-s |--secure |Secure mode (disable Python console)|
 |None |--disable-addons |Addons will have no effect|
 |None |--no-sr-flag |Don't change the global system screen reader flag|
-|None |--install |Installs NVDA (starting the newly installed copy)|
-|None |--install-silent |Silently installs NVDA (does not start the newly installed copy)|
+|None |--install |Installs Aslan (starting the newly installed copy)|
+|None |--install-silent |Silently installs Aslan (does not start the newly installed copy)|
 
 ### चिन्हहरूको उच्चारणको समृद्ध अनुकूलता {#toc193}
 
@@ -2441,12 +2441,12 @@ Those parameters should be placed after the option, separated from the option by
 
 यसका लागि, तपाइले आफ्नो नेत्रवाणी अभियोजन घर्रामा रहेको चिन्ह उच्चारण जानकारी फाइललाई सम्पादन गर्नु पर्छ ।
 यो फाइललाई symbols-xx.dic नाम दिइएको छ, यहाँ xx को अर्थ भाषाको संहिता हो ।
-यो फाइलको स्वरूप 'नेत्रवाणी विकास निर्देशिका' को चिन्ह उच्चारण खण्डमा वर्णन गरिएको छ, जसलाई [नेत्रवाणीको विकास खण्ड सम्बन्धी वेभ पृष्ठ](https://community.nvda-project.org/wiki/Development) मा पाउन सकिन्छ ।
+यो फाइलको स्वरूप 'नेत्रवाणी विकास निर्देशिका' को चिन्ह उच्चारण खण्डमा वर्णन गरिएको छ, जसलाई [नेत्रवाणीको विकास खण्ड सम्बन्धी वेभ पृष्ठ](https://community.aslan-project.org/wiki/Development) मा पाउन सकिन्छ ।
 तर उपभोक्ता आफै ले जटिल चिन्हहरूलाई परिभाषित गर्न भने सम्भव हुने छैन ।
 
 ## थप जानकारी {#toc194}
 
-यदी तपाइ नेत्रवाणीको बारेमा यस भन्दा थप जानकारी वा सहयोग चाहनु हुन्छ भने कृपया नेत्रवाणी को वेभ साइट NVDA_URL को भ्रमण गर्नु होला ।
+यदी तपाइ नेत्रवाणीको बारेमा यस भन्दा थप जानकारी वा सहयोग चाहनु हुन्छ भने कृपया नेत्रवाणी को वेभ साइट Aslan_URL को भ्रमण गर्नु होला ।
 यहाँ तपाइले अतिरिक्त कागजातहरू, प्राविधिक सहयोग र समुदायका श्रोतहरू पाउन सक्नु हुनेछ ।
 यो साइटले नेत्रवाणीको विकास सम्बन्धी जानकारी र सामाग्रीहरू उपलब्ध गराउने छ ।
 

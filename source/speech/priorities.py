@@ -1,5 +1,5 @@
 # -*- coding: UTF-8 -*-
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2017-2019 NV Access Limited, Babbage B.V.
@@ -11,8 +11,8 @@ from enum import IntEnum
 
 class SpeechPriority(IntEnum):
 	"""Facilitates the ability to prioritize speech.
-	Note: This enum has its counterpart in the NVDAController RPC interface (nvdaController.idl).
-	Additions to this enum should also be reflected in nvdaController.idl.
+	Note: This enum has its counterpart in the AslanController RPC interface (aslanController.idl).
+	Additions to this enum should also be reflected in aslanController.idl.
 	"""
 
 	#: Indicates that a speech sequence should have normal priority.

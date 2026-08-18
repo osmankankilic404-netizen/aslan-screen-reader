@@ -1,13 +1,13 @@
-# NVDA License
+# Aslan License
 
-NVDA is available under the GNU General Public License version 2 or later, with two special exceptions.
+Aslan is available under the GNU General Public License version 2 or later, with two special exceptions.
 
-This file contains the authoritative licensing information for the NVDA project.
+This file contains the authoritative licensing information for the Aslan project.
 In the case of any discrepancy between the license information in this file and license headers in individual source code files, the terms outlined in this document take precedence.
 
 The exceptions are outlined in the sections "Non-GPL Components in Plugins and Drivers" and "Microsoft Distributable Code".
-NVDA also includes and uses components which are made available under different free and open source licenses.
-Information about how to obtain and build the code for yourself is available at <https://github.com/nvaccess/nvda/blob/master/projectDocs/dev/contributing.md>.
+Aslan also includes and uses components which are made available under different free and open source licenses.
+Information about how to obtain and build the code for yourself is available at <https://github.com/nvaccess/aslan/blob/master/projectDocs/dev/contributing.md>.
 All applicable licenses are included below.
 
 ## GNU GENERAL PUBLIC LICENSE v2
@@ -975,14 +975,14 @@ please read <https://www.gnu.org/licenses/why-not-lgpl.html>.
 
 ## Non-GPL Components in Plugins and Drivers
 
-Plugins and drivers, including those provided by third parties, are considered derivative works of NVDA and must therefore be licensed under the terms of the GNU General Public License version 2 or later.
-As a special exception, an NVDA plugin or driver (as defined in the NVDA Developer Guide) may use components under other licenses provided that:
+Plugins and drivers, including those provided by third parties, are considered derivative works of Aslan and must therefore be licensed under the terms of the GNU General Public License version 2 or later.
+As a special exception, an Aslan plugin or driver (as defined in the Aslan Developer Guide) may use components under other licenses provided that:
 
-a. Any such component does not prevent the NVDA plugin or driver from being licensed under the terms of the GNU General Public License version 2 or later; and
+a. Any such component does not prevent the Aslan plugin or driver from being licensed under the terms of the GNU General Public License version 2 or later; and
 
-b. Any such component does not directly use and is not directly used by any portion of NVDA outside of that plugin or driver.
+b. Any such component does not directly use and is not directly used by any portion of Aslan outside of that plugin or driver.
 For example, a speech synthesizer driver may use a speech synthesiser under a proprietary license.
-In contrast, in a plugin providing support for an application, the code which implements any interface provided by NVDA must be licensed under the GNU General Public License version 2 or later.
+In contrast, in a plugin providing support for an application, the code which implements any interface provided by Aslan must be licensed under the GNU General Public License version 2 or later.
 
 ## Microsoft Distributable Code
 
@@ -992,7 +992,7 @@ This applies to the following files:
 * `Microsoft.VC*.manifest`
 * `msvc*.dll`
 
-As a special exception to the GNU General Public License version 2 or later, these components may be included with binary distributions of NVDA without being subject to the terms of that license.
+As a special exception to the GNU General Public License version 2 or later, these components may be included with binary distributions of Aslan without being subject to the terms of that license.
 
 Microsoft Distributable Code is covered by the following terms:
 
@@ -1015,10 +1015,10 @@ An Excluded License is one that requires, as a condition of use, modification or
 
 ## Third-Party Dependencies
 
-NVDA includes various third-party dependencies, each with its own license terms.
+Aslan includes various third-party dependencies, each with its own license terms.
 Python pip modules with acceptable licences are automatically limited by our build system to include only BSD, MIT, Python, LGPLV3+ and Apache.
 
-In addition to these dependencies, the following are also included in NVDA:
+In addition to these dependencies, the following are also included in Aslan:
 
 * eSpeak: GPL-3
 * LibLouis: LGPL-3
@@ -1029,6 +1029,6 @@ In addition to these dependencies, the following are also included in NVDA:
 * NSIS: zlib/libpng
 * cppjieba: MIT
 
-Furthermore, NVDA also utilises some static/binary dependencies, details of which can be found at the following URL:
+Furthermore, Aslan also utilises some static/binary dependencies, details of which can be found at the following URL:
 
-<https://github.com/nvaccess/nvda-misc-deps/>
+<https://github.com/nvaccess/aslan-misc-deps/>

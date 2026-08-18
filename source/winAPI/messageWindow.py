@@ -1,12 +1,12 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
 """
-A submodule for NVDA's message window, used for handling Window Messages.
+A submodule for Aslan's message window, used for handling Window Messages.
 
-Message windows can be used to handle communications from other processes, new NVDA instances and Windows.
+Message windows can be used to handle communications from other processes, new Aslan instances and Windows.
 """
 
 from enum import IntEnum
@@ -27,7 +27,7 @@ __all__ = ["pre_handleWindowMessage", "WindowMessage", "_MessageWindow"]
 
 pre_handleWindowMessage = extensionPoints.Action()
 """
-Notifies when a window message has been received by NVDA.
+Notifies when a window message has been received by Aslan.
 This allows components to perform an action when certain system events occur,
 such as power, screen orientation and hardware changes.
 
@@ -77,8 +77,8 @@ class _MessageWindow(windowUtils.CustomWindow):
 	className = "wxWindowClassNR"
 	"""
 	#3763: In wxPython 3, the class name of frame windows changed from wxWindowClassNR to wxWindowNR.
-	NVDA uses the main frame to check for and quit another instance of NVDA.
-	To remain compatible with older versions of NVDA, create our own wxWindowClassNR.
+	Aslan uses the main frame to check for and quit another instance of Aslan.
+	To remain compatible with older versions of Aslan, create our own wxWindowClassNR.
 	We don't need to do anything else because wx handles WM_QUIT for all windows.
 	"""
 

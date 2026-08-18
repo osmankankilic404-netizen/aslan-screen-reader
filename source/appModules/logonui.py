@@ -1,5 +1,5 @@
 # appModules/logonui.py
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 # Copyright (C) 2009-2016 NV Access Limited, Joseph Lee
@@ -9,12 +9,12 @@ import api
 import braille
 import braille.regions.focus
 import controlTypes
-from NVDAObjects.IAccessible import IAccessible
-from NVDAObjects.behaviors import Dialog
+from AslanObjects.IAccessible import IAccessible
+from AslanObjects.behaviors import Dialog
 import appModuleHandler
 import eventHandler
 import UIAHandler
-from NVDAObjects.UIA import UIA
+from AslanObjects.UIA import UIA
 
 """App module for the Windows Logon screen
 """
@@ -66,7 +66,7 @@ class XPPasswordField(IAccessible):
 			return super(XPPasswordField, self).name
 
 	def script_changeUser(self, gesture):
-		# The up and down arrow keys change the selected user, but there's no reliable NVDA event for detecting this.
+		# The up and down arrow keys change the selected user, but there's no reliable Aslan event for detecting this.
 		oldName = self.name
 		gesture.send()
 		self.invalidateCache()
@@ -76,13 +76,13 @@ class XPPasswordField(IAccessible):
 
 
 class AppModule(appModuleHandler.AppModule):
-	def event_NVDAObject_init(self, obj):
+	def event_AslanObject_init(self, obj):
 		if obj.windowClassName == "NativeHWNDHost" and obj.parent and not obj.parent.parent:
 			# This is the top level pane of the XP logon screen.
 			# Make sure it is always presented.
 			obj.isPresentableFocusAncestor = True
 
-	def chooseNVDAObjectOverlayClasses(self, obj, clsList):
+	def chooseAslanObjectOverlayClasses(self, obj, clsList):
 		windowClass = obj.windowClassName
 
 		if UIAHandler.handler:

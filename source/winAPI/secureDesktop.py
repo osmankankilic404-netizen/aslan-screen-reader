@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022 NV Access Limited
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -11,11 +11,11 @@ Used to indicate that the user has switched to/from the secure desktop.
 This is triggered when Windows notification EVENT_SYSTEM_DESKTOPSWITCH
 notifies that the desktop has changed.
 
-This occurs when NVDA is running on a user profile, then enters a secure screen,
+This occurs when Aslan is running on a user profile, then enters a secure screen,
 such as the sign-in screen or UAC dialog.
-If NVDA is installed and allowed to run on these screens, a new instance of NVDA will start.
-A user instance of NVDA cannot read the contents of the secure screen,
-so NVDA should enter sleep mode while it is active.
+If Aslan is installed and allowed to run on these screens, a new instance of Aslan will start.
+A user instance of Aslan cannot read the contents of the secure screen,
+so Aslan should enter sleep mode while it is active.
 
 Usage:
 ```
@@ -35,7 +35,7 @@ post_secureDesktopStateChange.unregister(onSecureDesktopChange)
 def _handleSecureDesktopChange():
 	import api
 	import keyboardHandler
-	from NVDAObjects import NVDAObject
+	from AslanObjects import AslanObject
 	from speech.priorities import SpeechPriority
 	from speech.speech import cancelSpeech
 	import ui
@@ -45,27 +45,27 @@ def _handleSecureDesktopChange():
 	keyboardHandler.currentModifiers.clear()
 
 	# Before entering sleep mode,
-	# cancel speech so that speech does not overlap with the new instance of NVDA
+	# cancel speech so that speech does not overlap with the new instance of Aslan
 	# started on the secure desktop.
 	cancelSpeech()
 
 	# Translators: Message to indicate User Account Control (UAC) or other secure desktop screen is active.
 	ui.message(_("Secure Desktop"), speechPriority=SpeechPriority.NOW)
 
-	class _SecureDesktopNVDAObject(NVDAObject):
+	class _SecureDesktopAslanObject(AslanObject):
 		"""
-		An NVDAObject must be focused to enable sleep mode while the secure desktop is active.
-		For security purposes, it is ideal we use a fake NVDAObject, that is not tied to any real window.
+		An AslanObject must be focused to enable sleep mode while the secure desktop is active.
+		For security purposes, it is ideal we use a fake AslanObject, that is not tied to any real window.
 		"""
 
 		# Must be implemented to instantiate.
 		processID = None
 
-		# NVDA should sleep while the secure desktop is active.
+		# Aslan should sleep while the secure desktop is active.
 		# If the desktop changes again, a new object will be focused,
 		# ending sleep mode.
-		sleepMode = NVDAObject.SLEEP_FULL
+		sleepMode = AslanObject.SLEEP_FULL
 
-	secureDesktopObject = _SecureDesktopNVDAObject()
+	secureDesktopObject = _SecureDesktopAslanObject()
 	api.setFocusObject(secureDesktopObject)
 	post_secureDesktopStateChange.notify(isSecureDesktop=True)

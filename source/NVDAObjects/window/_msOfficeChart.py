@@ -1,5 +1,5 @@
-# A part of NonVisual Desktop Access (NVDA)
-# Copyright (C) 2014-2022 NV Access Limited, NVDA India, dineshkaushal
+# A part of NonVisual Desktop Access (Aslan)
+# Copyright (C) 2014-2022 NV Access Limited, Aslan India, dineshkaushal
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
 
@@ -490,8 +490,8 @@ class OfficeChartElementBase(Window):
 		return self.ELEMENT_IDS[ElementID]
 
 	__gestures = {
-		"kb:NVDA+d": "reportCurrentChartElementWithExtraInfo",
-		"kb:NVDA+f": "reportCurrentChartElementColor",
+		"kb:Aslan+d": "reportCurrentChartElementWithExtraInfo",
+		"kb:Aslan+f": "reportCurrentChartElementColor",
 	}
 
 
@@ -810,7 +810,7 @@ class OfficeChartElementSeries(OfficeChartElementList):
 			)
 
 	__gestures = {
-		"kb:NVDA+5": "reportColor",
+		"kb:Aslan+5": "reportColor",
 	}
 
 

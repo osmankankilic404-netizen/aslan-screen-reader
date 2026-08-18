@@ -1,11 +1,11 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2018-2025 NV Access Limited, Leonard de Ruijter
 # This file may be used under the terms of the GNU General Public License, version 2 or later.
 # For more details see: https://www.gnu.org/licenses/gpl-2.0.html
 
-"""This module provides an NVDA global plugin which creates a and robot library remote server.
-It allows tests to get information out of NVDA.
-It is copied into the (system test specific) NVDA profile directory. It becomes the '__init__.py' file as part
+"""This module provides an Aslan global plugin which creates a and robot library remote server.
+It allows tests to get information out of Aslan.
+It is copied into the (system test specific) Aslan profile directory. It becomes the '__init__.py' file as part
 of a package.
 """
 
@@ -41,7 +41,7 @@ def _importRobotRemoteServer() -> typing.Type:
 	log.debug(f"before path mod: {sys.path}")
 	# Get the path to the top of the package
 	TOP_DIR = os.path.abspath(os.path.dirname(__file__))
-	# imports that require libraries not distributed with an install of NVDA
+	# imports that require libraries not distributed with an install of Aslan
 	sys.path.append(os.path.join(TOP_DIR, "libs"))
 	log.debug(f"after path mod: {sys.path}")
 	from robotremoteserver import RobotRemoteServer
@@ -49,9 +49,9 @@ def _importRobotRemoteServer() -> typing.Type:
 	return RobotRemoteServer
 
 
-class NVDASpyLib:
-	"""Robot Framework Library to spy on NVDA during system tests.
-	Used to determine if NVDA has finished starting, and various ways of getting speech output.
+class AslanSpyLib:
+	"""Robot Framework Library to spy on Aslan during system tests.
+	Used to determine if Aslan has finished starting, and various ways of getting speech output.
 	All public methods are part of the Robot Library
 	"""
 
@@ -60,7 +60,7 @@ class NVDASpyLib:
 
 	def __init__(self):
 		# speech cache is ordered temporally, oldest at low indexes, most recent at highest index.
-		self._nvdaSpeech_requiresLock = [  # requires thread locking before read/write
+		self._aslanSpeech_requiresLock = [  # requires thread locking before read/write
 			[
 				"",
 			],  # initialise with an empty string, this allows for access via [-1]. This is equiv to no speech.
@@ -71,7 +71,7 @@ class NVDASpyLib:
 		self._lastRawText = ""
 		# braille raw text (not dots) cache is ordered temporally,
 		# oldest at low indexes, most recent at highest index.
-		self._nvdaBraille_requiresLock = [  # requires thread locking before read/write
+		self._aslanBraille_requiresLock = [  # requires thread locking before read/write
 			"",  # initialise with an empty string, this allows for access via [-1]. This is equiv to no braille.
 		]
 		#: Lock to protect members that are written to in _onNvdaBraille.
@@ -100,9 +100,9 @@ class NVDASpyLib:
 
 	ConfKeyPath = typing.List[str]
 	ConfKeyVal = typing.Union[str, bool, int]
-	NVDAConfMods = typing.List[typing.Tuple[ConfKeyPath, ConfKeyVal]]
+	AslanConfMods = typing.List[typing.Tuple[ConfKeyPath, ConfKeyVal]]
 
-	def modifyNVDAConfig(self, confMods: NVDAConfMods):
+	def modifyAslanConfig(self, confMods: AslanConfMods):
 		for keyPath, keyVal in confMods:
 			self.set_configValue(keyPath, keyVal)
 
@@ -178,20 +178,20 @@ class NVDASpyLib:
 		langDesc = languageHandler.getLanguageDescription(lang)
 		return langDesc
 
-	def queueNVDAMainThreadCrash(self):
+	def queueAslanMainThreadCrash(self):
 		from queueHandler import queueFunction, eventQueue
 
-		queueFunction(eventQueue, _crashNVDA)
+		queueFunction(eventQueue, _crashAslan)
 
-	def queueNVDAIoThreadCrash(self):
+	def queueAslanIoThreadCrash(self):
 		from hwIo import bgThread
 
-		bgThread.queueAsApc(_crashNVDA)
+		bgThread.queueAsApc(_crashAslan)
 
-	def queueNVDAUIAHandlerThreadCrash(self):
+	def queueAslanUIAHandlerThreadCrash(self):
 		from UIAHandler import handler
 
-		handler.MTAThreadQueue.put(_crashNVDA)
+		handler.MTAThreadQueue.put(_crashAslan)
 
 	# callbacks for extension points
 	def _onNvdaStartupComplete(self):
@@ -212,16 +212,16 @@ class NVDASpyLib:
 			return
 		self._lastRawText = rawText
 		with self._brailleLock:
-			log.debug(f"Appending to braille spy at index {len(self._nvdaBraille_requiresLock)}")
-			self._nvdaBraille_requiresLock.append(rawText)
+			log.debug(f"Appending to braille spy at index {len(self._aslanBraille_requiresLock)}")
+			self._aslanBraille_requiresLock.append(rawText)
 
 	def _onNvdaSpeech(self, speechSequence=None):
 		if not speechSequence:
 			return
 		with self._speechLock:
 			self._lastSpeechTime_requiresLock = _timer()
-			log.debug(f"Appending to speech spy at index {len(self._nvdaSpeech_requiresLock)}")
-			self._nvdaSpeech_requiresLock.append(speechSequence)
+			log.debug(f"Appending to speech spy at index {len(self._aslanSpeech_requiresLock)}")
+			self._aslanSpeech_requiresLock.append(speechSequence)
 
 	@staticmethod
 	def _getJoinedBaseStringsFromCommands(speechCommandArray) -> str:
@@ -230,7 +230,7 @@ class NVDASpyLib:
 
 	def _getSpeechAtIndex(self, speechIndex):
 		with self._speechLock:
-			return self._getJoinedBaseStringsFromCommands(self._nvdaSpeech_requiresLock[speechIndex])
+			return self._getJoinedBaseStringsFromCommands(self._aslanSpeech_requiresLock[speechIndex])
 
 	def get_speech_at_index_until_now(self, speechIndex: int) -> str:
 		"""All speech from (and including) the index until now.
@@ -239,13 +239,13 @@ class NVDASpyLib:
 		"""
 		with self._speechLock:
 			speechCommands = [
-				self._getJoinedBaseStringsFromCommands(x) for x in self._nvdaSpeech_requiresLock[speechIndex:]
+				self._getJoinedBaseStringsFromCommands(x) for x in self._aslanSpeech_requiresLock[speechIndex:]
 			]
 			return "\n".join(x for x in speechCommands if x and not x.isspace())
 
 	def get_last_speech_index(self) -> int:
 		with self._speechLock:
-			return len(self._nvdaSpeech_requiresLock) - 1
+			return len(self._aslanSpeech_requiresLock) - 1
 
 	def _getIndexOfSpeech(self, speech, searchAfterIndex: Optional[int] = None):
 		if searchAfterIndex is None:
@@ -253,7 +253,7 @@ class NVDASpyLib:
 		else:
 			firstIndexToCheck = 1 + searchAfterIndex
 		with self._speechLock:
-			for index, commands in enumerate(self._nvdaSpeech_requiresLock[firstIndexToCheck:]):
+			for index, commands in enumerate(self._aslanSpeech_requiresLock[firstIndexToCheck:]):
 				index = index + firstIndexToCheck
 				baseStrings = [c.strip() for c in commands if isinstance(c, str)]
 				if any(speech in x for x in baseStrings):
@@ -281,7 +281,7 @@ class NVDASpyLib:
 
 	def _getBrailleAtIndex(self, brailleIndex: int) -> str:
 		with self._brailleLock:
-			return self._nvdaBraille_requiresLock[brailleIndex]
+			return self._aslanBraille_requiresLock[brailleIndex]
 
 	def get_braille_at_index_until_now(self, brailleIndex: int) -> str:
 		"""All raw braille text from (and including) the index until now.
@@ -289,12 +289,12 @@ class NVDASpyLib:
 		@return: The raw text, each update on a new line
 		"""
 		with self._brailleLock:
-			rangeOfInterest = self._nvdaBraille_requiresLock[brailleIndex:]
+			rangeOfInterest = self._aslanBraille_requiresLock[brailleIndex:]
 			return "\n".join(rangeOfInterest)
 
 	def get_last_braille_index(self) -> int:
 		with self._brailleLock:
-			return len(self._nvdaBraille_requiresLock) - 1
+			return len(self._aslanBraille_requiresLock) - 1
 
 	def _devInfoToLog(self):
 		"""Should only be called on main thread"""
@@ -319,7 +319,7 @@ class NVDASpyLib:
 			except Exception:
 				log.error("Unable to log dev info")
 			try:
-				log.debug(f"All speech:\n{repr(self._nvdaSpeech_requiresLock)}")
+				log.debug(f"All speech:\n{repr(self._aslanSpeech_requiresLock)}")
 			except Exception:
 				log.error("Unable to log speech")
 
@@ -330,7 +330,7 @@ class NVDASpyLib:
 		log.debug("dump_braille_to_log.")
 		with self._brailleLock:
 			try:
-				log.debug(f"All braille:\n{repr(self._nvdaBraille_requiresLock)}")
+				log.debug(f"All braille:\n{repr(self._aslanBraille_requiresLock)}")
 			except Exception:
 				log.error("Unable to log braille")
 
@@ -350,16 +350,16 @@ class NVDASpyLib:
 		"""This should only be called once, immediately after importing the library.
 		@param maxSeconds: Should match the 'timeout' value given to the `robot.libraries.Remote` instance. If
 		this value is greater than the value for the `robot.libraries.Remote` instance it may mean that the test
-		is failed, and NVDA is never exited, requiring manual intervention.
+		is failed, and Aslan is never exited, requiring manual intervention.
 		Should be set to a large value like '30' (seconds).
 		"""
 		self._maxKeywordDuration = maxSeconds - 1
 
-	def wait_for_NVDA_startup_to_complete(self):
+	def wait_for_Aslan_startup_to_complete(self):
 		_blockUntilConditionMet(
 			getValue=lambda: self._isNvdaStartupComplete,
 			giveUpAfterSeconds=self._minTimeout(10),
-			errorMessage="Unable to connect to nvdaSpy",
+			errorMessage="Unable to connect to aslanSpy",
 		)
 		self.reset_all_speech_index()
 
@@ -447,7 +447,7 @@ class NVDASpyLib:
 			self.dump_speech_to_log()
 			raise AssertionError(
 				f"Specific speech did not occur before timeout: {speech}\n"
-				"See NVDA log for dump of all speech.",
+				"See Aslan log for dump of all speech.",
 			)
 		return speechIndex
 
@@ -476,7 +476,7 @@ class NVDASpyLib:
 			self.dump_speech_to_log()
 			raise AssertionError(
 				f"Specific speech occurred unexpectedly before timeout: {speech}\n"
-				"See NVDA log for dump of all speech.",
+				"See Aslan log for dump of all speech.",
 			)
 
 	def wait_for_speech_to_finish(
@@ -518,14 +518,14 @@ class NVDASpyLib:
 
 	def emulateKeyPress(self, kbIdentifier: str, blockUntilProcessed=True):
 		"""
-		Emulates a key press using NVDA's input gesture framework.
+		Emulates a key press using Aslan's input gesture framework.
 		The key press will either result in a script being executed, or the key being sent on to the OS.
 		By default this method will block until any script resulting from this key has been executed,
-		and the NVDA core has again gone back to sleep.
-		@param kbIdentifier: an NVDA keyboard gesture identifier.
+		and the Aslan core has again gone back to sleep.
+		@param kbIdentifier: an Aslan keyboard gesture identifier.
 		0 or more modifier keys followed by a main key, all separated by a plus (+) symbol.
 		E.g. control+shift+downArrow.
-		See vkCodes.py in the NVDA source directory for valid key names.
+		See vkCodes.py in the Aslan source directory for valid key names.
 		"""
 		log.debug(f"Sending gesture {kbIdentifier}")
 		gesture = KeyboardInputGesture.fromName(kbIdentifier)
@@ -567,7 +567,7 @@ class SystemTestSpyServer(globalPluginHandler.GlobalPlugin):
 
 	def _start(self):
 		log.debug("SystemTestSpyServer started")
-		spyLibrary = NVDASpyLib()  # spies on NVDA
+		spyLibrary = AslanSpyLib()  # spies on Aslan
 		RobotRemoteServer = _importRobotRemoteServer()
 		server = self._server = RobotRemoteServer(
 			spyLibrary,  # provides library behaviour
@@ -587,7 +587,7 @@ class SystemTestSpyServer(globalPluginHandler.GlobalPlugin):
 		self._server.stop()
 
 
-def _crashNVDA(param: Optional[int] = None):
+def _crashAslan(param: Optional[int] = None):
 	# Causes a breakpoint exception to occur in the current process.
 	# This allows the calling thread to signal the debugger to handle the exception.
 	#

@@ -1,4 +1,4 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2022-2025 NV Access Limited, Cyrille Bougot
 # This file is covered by the GNU General Public License.
 # See the file COPYING for more details.
@@ -17,7 +17,7 @@ from typing import (
 
 import globalVars
 from logHandler import log
-from NVDAState import WritePaths
+from AslanState import WritePaths
 from utils.displayString import DisplayStringEnum
 
 from .version import MajorMinorPatch, SupportsVersionCheck
@@ -47,7 +47,7 @@ class EnabledStatus(DisplayStringEnum):
 @enum.unique
 # TODO refactor rename from AvailableAddonStatus to AddonStatus
 class AvailableAddonStatus(DisplayStringEnum):
-	"""Values to represent the status of add-ons within the NVDA add-on store.
+	"""Values to represent the status of add-ons within the Aslan add-on store.
 	Although related, these are independent of the states in L{addonHandler}
 	"""
 
@@ -160,7 +160,7 @@ class AddonStateCategory(str, enum.Enum):
 
 
 class _StatusFilterKey(DisplayStringEnum):
-	"""Keys for filtering by status in the NVDA add-on store."""
+	"""Keys for filtering by status in the Aslan add-on store."""
 
 	INSTALLED = enum.auto()
 	UPDATE = enum.auto()

@@ -1,9 +1,9 @@
-# A part of NonVisual Desktop Access (NVDA)
+# A part of NonVisual Desktop Access (Aslan)
 # Copyright (C) 2026 NV Access Limited, Cary-rowen
-# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the NVDA license.
-# For full terms and any additional permissions, see the NVDA license file: https://github.com/nvaccess/nvda/blob/master/copying.txt
+# This file may be used under the terms of the GNU General Public License, version 2 or later, as modified by the Aslan license.
+# For full terms and any additional permissions, see the Aslan license file: https://github.com/nvaccess/aslan/blob/master/copying.txt
 
-"""Unit tests for NVDAObjects.UIA."""
+"""Unit tests for AslanObjects.UIA."""
 
 import unittest
 from unittest.mock import Mock, patch
@@ -11,7 +11,7 @@ from unittest.mock import Mock, patch
 import api
 import controlTypes
 import eventHandler
-from NVDAObjects.UIA import ListItem, MenuItem, UIA, _NetFrameworkWinFormsComboBox
+from AslanObjects.UIA import ListItem, MenuItem, UIA, _NetFrameworkWinFormsComboBox
 import oleacc
 import UIAHandler
 from winBindings import user32
