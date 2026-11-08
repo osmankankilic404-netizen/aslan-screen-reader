@@ -1,0 +1,10 @@
+*.jks
+*.keystore
+key.properties
+.env
+.env.*
+!.env.example
+build/
+.dart_tool/
+.gradle/
+android/.gradle/

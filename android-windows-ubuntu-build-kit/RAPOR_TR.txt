@@ -1,0 +1,84 @@
+ANDROID APK + WINDOWS + UBUNTU/LINUX UYGULAMA GELİŞTİRME PAKETİ RAPORU
+Tarih: 2026-11-08
+Paket adı: android-windows-build-kit-2026-11-08
+
+1. KAPSAM
+
+Bu özel geliştirme kiti, tek bir Flutter projesinden Android APK/AAB, Windows masaüstü uygulaması ve Ubuntu/Linux masaüstü uygulaması üretmek için gereken araç kurulumlarını, derleme komutlarını, kalite değerlendirme kontrollerini ve CI workflow'larını içerir. Kit; Android SDK command-line tools, sdkmanager, platform-tools, Android API 35, build-tools 35.0.0, OpenJDK 17, Flutter stable, Ubuntu masaüstü bağımlılıkları, Windows Visual Studio Build Tools/Windows SDK yönlendirmeleri, GitHub Actions ve yayın güvenliği belgelerini kapsar.
+
+2. BÜYÜK KAPALI KAYNAK ARAÇLARIN DURUMU
+
+Android SDK, Android Studio, Flutter SDK, Visual Studio Build Tools ve Windows SDK çok büyük olabilir. Bazıları kendi lisansıyla dağıtılır ve GitHub normal dosya sınırlarına takılabilir. Bu nedenle arşivde bu araçların ikili dosyalarını izinsiz yeniden dağıtmıyorum. Arşive resmi kaynaktan indirip kuran scriptler, sürüm hedefleri ve doğrulama komutları eklenmiştir. Bu yöntem kapalı GitHub deposunda da lisans yükümlülüklerini ortadan kaldırmaz; resmi lisanslara uyulmalıdır.
+
+3. UBUNTU/LINUX ORTAMI
+
+`install-ubuntu-full.sh` Ubuntu'da Android ve Linux masaüstü için gerekli ortamı kurar. OpenJDK 17, curl, unzip, git, xz-utils, zip, clang, cmake, ninja-build, pkg-config, GTK 3, GLU, ALSA/Pulse ve X11 geliştirme paketlerini kurar. Android command-line tools Google'ın resmi adresinden alınır. sdkmanager ile platform-tools, android-35, build-tools 35.0.0 ve cmdline-tools latest kurulur. Flutter stable indirilir/güncellenir; Android ve Linux desktop hedefleri etkinleştirilir; flutter doctor çalıştırılır.
+
+Kurulum:
+chmod +x scripts/*.sh
+./scripts/install-ubuntu-full.sh
+source ~/.bashrc
+./scripts/check-ubuntu-android.sh
+
+Linux Flutter derlemesi:
+./scripts/build-linux.sh
+
+Linux çıktısı:
+build/linux/x64/release/bundle/
+
+Bu bundle'ı Ubuntu'da test etmek gerekir. AppImage, deb veya Snap üretimi bu kitte zorunlu tutulmamıştır; hedef dağıtım seçildikten sonra ayrıca paketlenmelidir.
+
+4. ANDROID APK/AAB ORTAMI
+
+Android için JDK 17, Android SDK, platform-tools, API 35 ve build-tools 35.0.0 hedeflenmiştir. `build-apk.sh` Flutter proje kökünde `pubspec.yaml` arar, clean/pub get/analyze çalıştırır ve release APK ile AAB üretir.
+
+APK: build/app/outputs/flutter-apk/app-release.apk
+AAB: build/app/outputs/bundle/release/app-release.aab
+
+Android cihaz testi için adb kullanılabilir. Emulator kurulumu istenirse Android Studio/SDK Manager ile system image ve AVD ayrıca oluşturulmalıdır. Release keystore ve `key.properties` arşive veya Git'e konulmamalıdır.
+
+5. WINDOWS ORTAMI
+
+`install-windows-build-tools.ps1` winget ile Git, 7-Zip, OpenJDK 17, Android Studio, Visual Studio 2022 Build Tools ve Node.js LTS kurmayı dener. Windows native Flutter derlemesi için Visual Studio C++ workload ve Windows SDK gerekir. Flutter resmi Windows kurulumu PATH'te yoksa script resmi adresi bildirir.
+
+`build-windows.ps1` clean/pub get/analyze/test akışından sonra Windows release üretir.
+
+Windows çıktısı:
+build\\windows\\x64\\runner\\Release\\
+
+Bu çıktı kurulum sihirbazı değildir. MSIX, Inno Setup veya WiX ile dağıtım paketi yapılması hedefe göre ayrıca seçilmelidir.
+
+6. DEĞERLENDİRME VE TEST
+
+`evaluate-project.sh` Flutter doctor, bağımlılık kurulumu, static analyze, test ve cihaz listesini kontrol eder. `EVALUATION_CHECKLIST_TR.md` Android, Windows ve Ubuntu/Linux için açılış, ağ, dosya erişimi, paketleme, release imzası, temiz makinede çalışma ve güvenlik değerlendirme maddelerini içerir.
+
+Android'de gerçek cihazda kurulum, yönlendirme, geri düğmesi, ekran döndürme, izinler, ağ ve release imzası kontrol edilir. Windows'ta temiz makinede açılış, Visual C++ runtime, dosya yolları ve SmartScreen/imza durumu kontrol edilir. Ubuntu'da GTK/GLib/OpenGL/ses bağımlılıkları, ekran ölçekleme, dosya ve ağ davranışı kontrol edilir.
+
+7. CI/CD
+
+`.github/workflows/android-build.yml` Android APK/AAB üretir. `.github/workflows/multi-platform-build.yml` Linux, Windows ve Android için ayrı runner'larda Flutter kurar, analyze/test çalıştırır, hedef çıktıyı artifact olarak yükler. Release imzası intentionally eklenmedi; signing secrets kullanıcı hesabının GitHub Secrets alanında tutulmalıdır.
+
+8. RESMİ İNDİRME ADRESLERİ
+
+Android Studio: https://developer.android.com/studio
+Android command-line tools: https://developer.android.com/studio#command-tools
+sdkmanager: https://developer.android.com/tools/sdkmanager
+platform-tools: https://developer.android.com/tools/releases/platform-tools
+build-tools: https://developer.android.com/tools/releases/build-tools
+Flutter Linux: https://docs.flutter.dev/get-started/install/linux
+Flutter Windows: https://docs.flutter.dev/get-started/install/windows
+Flutter Android: https://docs.flutter.dev/platform-integration/android/setup
+Flutter Windows desktop: https://docs.flutter.dev/platform-integration/windows/setup
+Visual Studio Build Tools: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+Windows SDK: https://developer.microsoft.com/windows/downloads/windows-sdk/
+Git for Windows: https://git-scm.com/download/win
+Node.js: https://nodejs.org/en/download
+Rust: https://www.rust-lang.org/tools/install
+Tauri prerequisites: https://tauri.app/start/prerequisites/
+GitHub Actions: https://docs.github.com/actions
+
+9. GÜVENLİK VE ÖZEL REPO
+
+GitHub tokenı korumalı secret alanında tutulmalıdır; rapora, arşive, scriptlere veya Git geçmişine yazılmamalıdır. Sohbette açık paylaşılmış token güvenlik açısından iptal edilip yenilenmelidir. Keystore, signing certificate, `.env`, API anahtarları ve parolalar kaynak repoya konulmamalıdır. Özel repo erişim kontrolü sağlar ama üçüncü taraf SDK lisanslarını değiştirmez.
+
+Repo URL'si henüz verilmediği için paket GitHub'a push edilmedi. Mevcut arşiv sandbox'ta doğrulandı ve ZIP bütünlük testi başarılıdır. Repo URL'si verildiğinde private repo'ya uygun klasör/release düzeniyle eklenebilir.

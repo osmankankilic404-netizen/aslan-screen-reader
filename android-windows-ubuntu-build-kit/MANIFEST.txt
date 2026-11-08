@@ -1,0 +1,13 @@
+PACKAGE_NAME=android-windows-build-kit
+PACKAGE_DATE=2026-11-08
+PRIMARY_TARGET=Ubuntu Linux Android APK/AAB + Windows Flutter desktop
+SDK_POLICY=official-download-at-install-time
+BUNDLED_BINARY_SDKS=no
+BUNDLED_SECRETS=no
+ANDROID_JAVA=OpenJDK 17
+ANDROID_BUILD_TOOLS=35.0.0
+ANDROID_PLATFORM=android-35
+FLUTTER_CHANNEL=stable
+WINDOWS_TOOLCHAIN=Visual Studio 2022 Build Tools + Windows SDK
+PACKAGE_FILES=README_TR.md DOWNLOADS.md ENVIRONMENT.md scripts/* .github/workflows/android-build.yml MANIFEST.txt
+PUSH_STATUS=waiting-for-repository-url
