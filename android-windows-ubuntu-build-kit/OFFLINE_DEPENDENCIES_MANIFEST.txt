@@ -1,0 +1,25 @@
+OFFLINE GITHUB-ONLY DEPENDENCY MANIFEST
+
+Bu manifest, internetsiz/GitHub-only kurulumu için beklenen yerel dosyaları tanımlar.
+
+vendor/flutter-sdk/
+  Flutter stable SDK. Yalnızca dağıtım hakkınız olan kopyayı koyun.
+
+vendor/jdk-17/
+  Java 17 runtime/JDK. Lisans ve dağıtım hakkını doğrulayın.
+
+vendor/android-sdk-tools.zip
+  Android command-line tools. Google Android SDK lisansını kabul edin ve yeniden dağıtım hakkını kontrol edin.
+
+vendor/android-platforms/
+  Android platform/build-tools paketleri veya kurum içi SDK cache'i.
+
+vendor/windows-build-tools/
+  Visual Studio/Windows Build Tools offline layout. Microsoft lisansını ve boyut gereksinimini kontrol edin.
+
+vendor/windows-sdk/
+  Windows SDK. Microsoft lisans ve offline layout şartlarına uyun.
+
+GITHUB_ONLY=true
+NON_GITHUB_NETWORK_CALLS=disabled-by-script
+PUBLIC_REPO_BINARY_POLICY=only-with-redistribution-rights
