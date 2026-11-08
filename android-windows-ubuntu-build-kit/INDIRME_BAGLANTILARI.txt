@@ -1,0 +1,128 @@
+ANDROID APK + WINDOWS + UBUNTU/LINUX PAKETİ
+TÜM İNDİRME BAĞLANTILARI
+
+Rapor tarihi: 2026-11-09
+
+1. HAZIR ARŞİV VE RAPOR — DOĞRUDAN İNDİRME
+
+Güncel ZIP arşivi:
+https://files.manuscdn.com/user_upload_by_module/session_file/310519663937160949/zNdxEKgxciKoqqHU.zip
+
+Türkçe kapsamlı rapor:
+https://files.manuscdn.com/user_upload_by_module/session_file/310519663937160949/lJQAZGrtoIZfOJOF.txt
+
+Eski bağlantılar TXT sürümü:
+https://files.manuscdn.com/user_upload_by_module/session_file/310519663937160949/lIsyEqcrShInDpvm.txt
+
+Güncel bağlantılar TXT sürümü:
+https://files.manuscdn.com/user_upload_by_module/session_file/310519663937160949/cSLwlqdxUNMvYnfa.txt
+
+Yerel ZIP alternatifi:
+/home/ubuntu/apk-windows-build-kit-2026-11-08.zip
+
+Yerel Türkçe rapor alternatifi:
+/home/ubuntu/apk-windows-build-kit-2026-11-08/RAPOR_TR.txt
+
+Yerel değerlendirme listesi:
+/home/ubuntu/apk-windows-build-kit-2026-11-08/EVALUATION_CHECKLIST_TR.md
+
+2. GITHUB AI ERİŞİM BAĞLANTILARI
+
+GitHub public Gist sayfası:
+https://gist.github.com/osmankankilic404-netizen/7613c9ec8cad3c836a59fa7ea850b09c
+
+GitHub raw TXT bağlantısı — AI araçları için önerilen adres:
+https://gist.github.com/osmankankilic404-netizen/7613c9ec8cad3c836a59fa7ea850b09c/raw/sohbetai-github-links.txt
+
+Gist içeriği gerçek ZIP arşivini, raporu ve tüm bağlantılar TXT dosyasını
+özetleyen doğrudan CDN adreslerini içerir. GitHub repo yazma yetkisi olmadığı
+için binary ZIP'in kendisi GitHub'a kopyalanmadı; AI araçları raw TXT'den CDN
+ZIP bağlantısını okuyabilir.
+
+3. GITHUB REPO DURUMU
+
+Hedef public repo:
+https://github.com/osmankankilic404-netizen/aslan-screen-reader
+
+Hazırlanan klasör:
+aslan-screen-reader/android-windows-ubuntu-build-kit/
+
+GitHub push işlemi 403 Permission denied nedeniyle tamamlanmadı. Bu adres
+yüklenmiş paket bağlantısı değildir. Çalışan GitHub bağlantısı yukarıdaki
+public Gist ve raw TXT adresidir.
+
+4. ANDROID RESMİ ADRESLERİ
+
+Android Studio: https://developer.android.com/studio
+Android command-line tools: https://developer.android.com/studio#command-tools
+sdkmanager: https://developer.android.com/tools/sdkmanager
+platform-tools / adb: https://developer.android.com/tools/releases/platform-tools
+build-tools: https://developer.android.com/tools/releases/build-tools
+Android lisansları: https://developer.android.com/studio/terms
+Android docs: https://developer.android.com/docs
+
+5. FLUTTER RESMİ ADRESLERİ
+
+Flutter: https://flutter.dev
+Flutter Linux: https://docs.flutter.dev/get-started/install/linux
+Flutter Windows: https://docs.flutter.dev/get-started/install/windows
+Flutter Android: https://docs.flutter.dev/platform-integration/android/setup
+Flutter Linux desktop: https://docs.flutter.dev/platform-integration/linux/setup
+Flutter Windows desktop: https://docs.flutter.dev/platform-integration/windows/setup
+Flutter GitHub: https://github.com/flutter/flutter
+
+6. JAVA, LINUX VE BUILD ARAÇLARI
+
+OpenJDK: https://learn.microsoft.com/java/openjdk/download
+Gradle: https://gradle.org/install/
+Ubuntu: https://ubuntu.com/download/desktop
+Clang: https://clang.llvm.org/
+CMake: https://cmake.org/download/
+Ninja: https://ninja-build.org/
+GTK: https://www.gtk.org/
+7-Zip: https://www.7-zip.org/
+Git: https://git-scm.com/downloads
+Node.js LTS: https://nodejs.org/en/download
+Python: https://www.python.org/downloads/
+
+7. WINDOWS ADRESLERİ
+
+Visual Studio Build Tools: https://visualstudio.microsoft.com/visual-cpp-build-tools/
+Visual Studio: https://visualstudio.microsoft.com/downloads/
+Windows SDK: https://developer.microsoft.com/windows/downloads/windows-sdk/
+Windows App SDK: https://learn.microsoft.com/windows/apps/windows-app-sdk/
+winget: https://learn.microsoft.com/windows/package-manager/winget/
+Git for Windows: https://git-scm.com/download/win
+Rust: https://www.rust-lang.org/tools/install
+Tauri: https://tauri.app/start/prerequisites/
+Electron: https://www.electronjs.org/
+
+8. CI/CD VE ANDROID YAYIN
+
+GitHub Actions: https://docs.github.com/actions
+Flutter Action: https://github.com/subosito/flutter-action
+Android setup action: https://github.com/android-actions/setup-android
+Android signing: https://docs.github.com/actions/deployment/deploying-to-your-cloud-provider/deploying-java-to-azure/signing-android-packages
+Google Play Console: https://play.google.com/console/
+Google Play docs: https://developer.android.com/distribute/console
+
+9. PAKETTEKİ SCRIPT DOSYALARI
+
+scripts/install-ubuntu-android.sh
+scripts/install-ubuntu-full.sh
+scripts/check-ubuntu-android.sh
+scripts/build-apk.sh
+scripts/build-linux.sh
+scripts/install-windows-build-tools.ps1
+scripts/check-windows-build-tools.ps1
+scripts/build-windows.ps1
+scripts/evaluate-project.sh
+
+10. ÖNEMLİ NOT
+
+Android SDK, Flutter SDK, Visual Studio Build Tools ve Windows SDK gibi
+büyük paketler lisans ve boyut nedeniyle ZIP içine gömülmedi. ZIP içindeki
+scriptler bunları resmi adreslerden kurulum sırasında indirir. ZIP arşivi
+ve rapor doğrudan CDN bağlantılarından indirilebilir.
+
+Gizli GitHub tokenı bu TXT dosyasına yazılmamıştır.
