@@ -1,1 +1,1 @@
-Android APK + Windows + Ubuntu/Linux build kit, offline GitHub-only flow and technical report.
+Android APK + Windows + Ubuntu/Linux build kit with online/offline network modes.
